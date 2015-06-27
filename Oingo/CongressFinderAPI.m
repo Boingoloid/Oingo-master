@@ -115,6 +115,11 @@ NSString *sunlightLabsAPIKey = @"ed7f6bb54edc4577943dcc588664c89f";
         [congressionalMessageItem setValue:[congresspersonObject valueForKey:@"last_name"] forKey:@"lastName"];
         congressionalMessageItem.fullName = [NSString stringWithFormat:@"%@ %@",congressionalMessageItem.firstName,congressionalMessageItem.lastName];
         
+        //load dummy images
+        congressionalMessageItem.messageImageString = [NSString stringWithFormat:@"%@.png",[congressionalMessageItem.lastName lowercaseString]];
+        NSLog(@"congress message item string image:%@", [congressionalMessageItem valueForKey:@"messageImageString"]);
+
+        
         //Senator, CA District 12
         congressionalMessageItem.state = [congresspersonObject valueForKey:@"state"];
         

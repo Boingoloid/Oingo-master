@@ -526,7 +526,6 @@ NSInteger footerHeight = 6;
                 }];
             }
             self.zipCode = zipCode;
-            NSLog(@"zip.code %@",self.zipCode);
             // if a current user entered zip, then save it.
             if(self.currentUser) {
                 [self.currentUser setValue:zipCode forKey:@"zipCode"]; //no user
@@ -619,8 +618,6 @@ NSInteger footerHeight = 6;
     NSArray *rowIndecesInSection = [self.sections objectForKey:category];
     NSNumber *rowIndex = [rowIndecesInSection objectAtIndex:indexPath.row]; //pulling the row indece from array above
     NSLog(@"category: %@",category);
-    
-    
     
     if([category isEqualToString:@"Local Representative"] && !self.zipCode) { //user has no zip
         [cell configMessageCellNoZip:indexPath];

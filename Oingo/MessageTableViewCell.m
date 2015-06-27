@@ -77,9 +77,14 @@ CongressPhotoFinderAPI *congressPhotoFinderAPI;
     self.leadershipRole = [self.congressionalMessageItem valueForKey:@"twitterID"];
     
     //add image
-    NSString *bioguideID = [congressionalMessageItem valueForKey:@"bioguide_id"];
-    [congressPhotoFinderAPI getPhotos:bioguideID];
-    congressPhotoFinderAPI.tableViewCell = self;
+//    NSString *bioguideID = [congressionalMessageItem valueForKey:@"bioguide_id"];
+//    [congressPhotoFinderAPI getPhotos:bioguideID];
+//    congressPhotoFinderAPI.tableViewCell = self;
+    NSString *fileString = [NSString stringWithFormat:@"pelosi.png"];
+    NSString *imageString = self.congressionalMessageItem.messageImageString;
+    NSLog(@"imagestring::%@",imageString);
+    self.messageImage.image = [UIImage imageNamed:imageString];
+    NSLog(@"messageImagestring:%@",fileString);
 }
 
 
