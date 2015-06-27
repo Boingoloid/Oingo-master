@@ -7,17 +7,71 @@
 //
 
 #import "AppDelegate.h"
+#import <Parse/Parse.h>
+#import "PFTwitterUtils+NativeTwitter.h"
+#import <TwitterKit/TwitterKit.h>
+#import <Fabric/Fabric.h>
+#import <Crashlytics/Crashlytics.h>
+#import <FBSDKCoreKit/FBSDKCoreKit.h>
+#import <FBSDKLoginKit/FBSDKLoginKit.h>
+#import <ParseFacebookUtilsV4/PFFacebookUtils.h>
+
 
 @interface AppDelegate ()
+
 
 @end
 
 @implementation AppDelegate
 
+- (id)initWithCoder:(NSCoder *)aDecoder {
+    
+   [Fabric with:@[CrashlyticsKit]];
+    
+    return self;
+}
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
-    return YES;
+
+    
+//    [NSThread sleepForTimeInterval:5];
+
+    // Initialize Parse.
+    [Parse enableLocalDatastore];
+    [Parse setApplicationId:@"lzb0o0wZHxbgyIHSyZLlooijAK9afoyN8RV4XwcM"
+                  clientKey:@"x1qJNyQejiaA7q7TskzsiZrWC2OhWCAlRGpVHcxd"];
+    [PFFacebookUtils initializeFacebookWithApplicationLaunchOptions:launchOptions];
+    [PFTwitterUtils initializeWithConsumerKey:@"wFbOMUhdXSwU7WCGzW4V6a9Rn" consumerSecret:@"Y4zH1qR55icmp5eiDhZKbgg3sC7TEvxPxrlKpd7y6NSzzsqfP1"];
+
+    //Initialize Twitter
+    [[Twitter sharedInstance] startWithConsumerKey:@"wFbOMUhdXSwU7WCGzW4V6a9Rn" consumerSecret:@"Y4zH1qR55icmp5eiDhZKbgg3sC7TEvxPxrlKpd7y6NSzzsqfP1"];
+    [Fabric with:@[[Twitter sharedInstance]]];
+    [Fabric with:@[TwitterKit, CrashlyticsKit]];
+
+
+    // [Optional] Track statistics around application opens.
+    //[PFAnalytics trackAppOpenedWithLaunchOptions:launchOptions];
+    
+    //Initialize Facebook
+    [FBSDKAppEvents activateApp];
+    return [[FBSDKApplicationDelegate sharedInstance] application:application didFinishLaunchingWithOptions:launchOptions];
+    
+    
+    
+
+}
+
+
+//Method added for facebook integration
+- (BOOL)application:(UIApplication *)application
+            openURL:(NSURL *)url
+  sourceApplication:(NSString *)sourceApplication
+         annotation:(id)annotation {
+    return [[FBSDKApplicationDelegate sharedInstance] application:application
+                                                          openURL:url
+                                                sourceApplication:sourceApplication
+                                                       annotation:annotation];
 }
 
 - (void)applicationWillResignActive:(UIApplication *)application {
@@ -36,6 +90,7 @@
 
 - (void)applicationDidBecomeActive:(UIApplication *)application {
     // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
+    [FBSDKAppEvents activateApp];
 }
 
 - (void)applicationWillTerminate:(UIApplication *)application {
