@@ -116,7 +116,7 @@ NSString *sunlightLabsAPIKey = @"ed7f6bb54edc4577943dcc588664c89f";
         congressionalMessageItem.fullName = [NSString stringWithFormat:@"%@ %@",congressionalMessageItem.firstName,congressionalMessageItem.lastName];
         
         //load dummy images
-        congressionalMessageItem.messageImageString = [NSString stringWithFormat:@"%@.png",[congressionalMessageItem.lastName lowercaseString]];
+        [congressionalMessageItem setValue:[NSString stringWithFormat:@"%@.png",[congressionalMessageItem.lastName lowercaseString]] forKey:@"messageImageString"];
         NSLog(@"congress message item string image:%@", [congressionalMessageItem valueForKey:@"messageImageString"]);
 
         

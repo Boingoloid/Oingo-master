@@ -80,11 +80,10 @@ CongressPhotoFinderAPI *congressPhotoFinderAPI;
 //    NSString *bioguideID = [congressionalMessageItem valueForKey:@"bioguide_id"];
 //    [congressPhotoFinderAPI getPhotos:bioguideID];
 //    congressPhotoFinderAPI.tableViewCell = self;
-    NSString *fileString = [NSString stringWithFormat:@"pelosi.png"];
-    NSString *imageString = self.congressionalMessageItem.messageImageString;
+
+    NSString *imageString = [self.congressionalMessageItem valueForKey:@"messageImageString"];
     NSLog(@"imagestring::%@",imageString);
     self.messageImage.image = [UIImage imageNamed:imageString];
-    NSLog(@"messageImagestring:%@",fileString);
 }
 
 

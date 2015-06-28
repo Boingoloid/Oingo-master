@@ -29,7 +29,6 @@
 		CE29AA981B3F2BBD00676563 /* feinstein.png in Resources */ = {isa = PBXBuildFile; fileRef = CE29AA971B3F2BBD00676563 /* feinstein.png */; };
 		CE29AA9A1B3F2BC900676563 /* pelosi.png in Resources */ = {isa = PBXBuildFile; fileRef = CE29AA991B3F2BC900676563 /* pelosi.png */; };
 		CE2BD37D1B007FB30053A1B3 /* monsantocorngrenade.png in Resources */ = {isa = PBXBuildFile; fileRef = CE2BD37C1B007FB30053A1B3 /* monsantocorngrenade.png */; };
-		CE2BF96C1B3E2CCC00AB15AC /* TempUser.m in Sources */ = {isa = PBXBuildFile; fileRef = CE2BF96B1B3E2CCC00AB15AC /* TempUser.m */; };
 		CE2BF96F1B3E517700AB15AC /* MakePhoneCallAPI.m in Sources */ = {isa = PBXBuildFile; fileRef = CE2BF96E1B3E517700AB15AC /* MakePhoneCallAPI.m */; };
 		CE2BF9741B3E595000AB15AC /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CE2BF9731B3E595000AB15AC /* MessageUI.framework */; };
 		CE2BF9771B3E5A1700AB15AC /* EmailComposerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CE2BF9761B3E5A1700AB15AC /* EmailComposerViewController.m */; };
@@ -145,8 +144,6 @@
 		CE29AA971B3F2BBD00676563 /* feinstein.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = feinstein.png; path = Images/feinstein.png; sourceTree = "<group>"; };
 		CE29AA991B3F2BC900676563 /* pelosi.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = pelosi.png; path = Images/pelosi.png; sourceTree = "<group>"; };
 		CE2BD37C1B007FB30053A1B3 /* monsantocorngrenade.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = monsantocorngrenade.png; path = Images/monsantocorngrenade.png; sourceTree = "<group>"; };
-		CE2BF96A1B3E2CCC00AB15AC /* TempUser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TempUser.h; sourceTree = "<group>"; };
-		CE2BF96B1B3E2CCC00AB15AC /* TempUser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TempUser.m; sourceTree = "<group>"; };
 		CE2BF96D1B3E517700AB15AC /* MakePhoneCallAPI.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MakePhoneCallAPI.h; sourceTree = "<group>"; };
 		CE2BF96E1B3E517700AB15AC /* MakePhoneCallAPI.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MakePhoneCallAPI.m; sourceTree = "<group>"; };
 		CE2BF9731B3E595000AB15AC /* MessageUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MessageUI.framework; path = System/Library/Frameworks/MessageUI.framework; sourceTree = SDKROOT; };
@@ -447,8 +444,6 @@
 		CE6F71F11B2A5A670067E4DA /* objects */ = {
 			isa = PBXGroup;
 			children = (
-				CE2BF96A1B3E2CCC00AB15AC /* TempUser.h */,
-				CE2BF96B1B3E2CCC00AB15AC /* TempUser.m */,
 				CE87CACA1AFABA920084C666 /* Program.h */,
 				CE87CACB1AFABA920084C666 /* Program.m */,
 				CE87CABC1AF977120084C666 /* Campaign.h */,
@@ -792,7 +787,6 @@
 				CEA79FD61AEC7C0D00535B06 /* ProgramsTableViewController.m in Sources */,
 				CE82943D1B38DB7C00B596E6 /* CongressionalMessageItem.m in Sources */,
 				CEEF250E1B017BAA00EFB257 /* MessageItem.m in Sources */,
-				CE2BF96C1B3E2CCC00AB15AC /* TempUser.m in Sources */,
 				CE2BF96F1B3E517700AB15AC /* MakePhoneCallAPI.m in Sources */,
 				CEEF25071B015ACA00EFB257 /* MessageTableViewController.m in Sources */,
 				CE14A8B31B22D20B0032664C /* TweetTableViewDemoTableViewController.m in Sources */,
