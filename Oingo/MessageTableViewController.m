@@ -145,7 +145,8 @@ NSInteger footerHeight = 6;
     self.tableHeaderView.clipsToBounds = YES;
     
     NSString* padding = @"  "; // # of spaces
-    self.tableHeaderLabel.text = [NSString stringWithFormat:@"%@%@/%@ %@", padding,[self.selectedProgram valueForKey:@"programTitle"],[self.selectedCampaign valueForKey:@"topicTitle"], padding];
+    self.tableHeaderLabel.text = [NSString stringWithFormat:@"%@%@%@", padding,[self.selectedCampaign valueForKey:@"topicTitle"], padding];
+        self.tableHeaderSubLabel.text = [NSString stringWithFormat:@"%@%@%@", padding,[self.selectedProgram valueForKey:@"programTitle"], padding];
 
     //Create gesture recognizer
     UITapGestureRecognizer *tapRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(respondToTapGesture:)]; //connect recognizer to action method.

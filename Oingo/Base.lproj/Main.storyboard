@@ -348,24 +348,14 @@
                         <color key="tintColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                         <color key="separatorColor" red="0.90196079019999997" green="0.90196079019999997" blue="0.90196079019999997" alpha="1" colorSpace="calibratedRGB"/>
                         <view key="tableHeaderView" contentMode="scaleToFill" id="tGq-0D-kLc">
-                            <rect key="frame" x="0.0" y="64" width="600" height="74"/>
+                            <rect key="frame" x="0.0" y="64" width="600" height="84"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <subviews>
                                 <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="nQE-7w-YL6">
-                                    <rect key="frame" x="8" y="8" width="359" height="60"/>
+                                    <rect key="frame" x="8" y="8" width="359" height="48"/>
                                     <subviews>
-                                        <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hXw-8E-YQq">
-                                            <rect key="frame" x="268" y="25" width="30" height="30"/>
-                                            <color key="backgroundColor" red="0.08421843004" green="0.49431999360000001" blue="0.038772465169999999" alpha="1" colorSpace="calibratedRGB"/>
-                                            <state key="normal" title="Button" image="facebookButtonIconGray.png">
-                                                <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                            </state>
-                                            <connections>
-                                                <action selector="shareSegmentFacebook:" destination="cd8-qO-3PC" eventType="touchUpInside" id="Byy-oM-j1a"/>
-                                            </connections>
-                                        </button>
                                         <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="IUN-dR-MPR">
-                                            <rect key="frame" x="314" y="25" width="30" height="30"/>
+                                            <rect key="frame" x="309" y="5" width="40" height="40"/>
                                             <color key="backgroundColor" red="0.08421843004" green="0.49431999360000001" blue="0.038772465169999999" alpha="1" colorSpace="calibratedRGB"/>
                                             <state key="normal" title="Button" image="tweetButtonIconGray.png">
                                                 <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
@@ -375,20 +365,43 @@
                                             </connections>
                                         </button>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lpR-4U-16n">
-                                            <rect key="frame" x="0.0" y="19" width="222" height="41"/>
-                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                            <rect key="frame" x="0.0" y="-8" width="247" height="41"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                             <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="share segment" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rGI-Ui-apa">
-                                            <rect key="frame" x="250" y="2" width="113" height="21"/>
-                                            <fontDescription key="fontDescription" type="system" pointSize="12"/>
-                                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rPx-Fx-oD0">
+                                            <rect key="frame" x="4" y="24" width="247" height="21"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="11"/>
+                                            <color key="textColor" white="0.5" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                                             <nil key="highlightedColor"/>
                                         </label>
+                                        <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hXw-8E-YQq">
+                                            <rect key="frame" x="261" y="5" width="40" height="40"/>
+                                            <color key="backgroundColor" red="0.08421843004" green="0.49431999360000001" blue="0.038772465169999999" alpha="1" colorSpace="calibratedRGB"/>
+                                            <state key="normal" title="Button" image="facebookButtonIconGray.png">
+                                                <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                            </state>
+                                            <connections>
+                                                <action selector="shareSegmentFacebook:" destination="cd8-qO-3PC" eventType="touchUpInside" id="Byy-oM-j1a"/>
+                                            </connections>
+                                        </button>
                                     </subviews>
                                     <color key="backgroundColor" white="0.94029425182481752" alpha="1" colorSpace="calibratedWhite"/>
                                 </view>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="1,245 " textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6wf-GD-Qtr">
+                                    <rect key="frame" x="440" y="28" width="86" height="21"/>
+                                    <fontDescription key="fontDescription" name="HelveticaNeue-ThinItalic" family="Helvetica Neue" pointSize="10"/>
+                                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                    <nil key="highlightedColor"/>
+                                </label>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="(or share below with message)" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rGI-Ui-apa">
+                                    <rect key="frame" x="54" y="63" width="267" height="21"/>
+                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                    <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                                    <color key="textColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                    <nil key="highlightedColor"/>
+                                </label>
                             </subviews>
                         </view>
                         <prototypes>
@@ -568,6 +581,7 @@
                     </navigationItem>
                     <connections>
                         <outlet property="tableHeaderLabel" destination="lpR-4U-16n" id="lor-9N-Hbe"/>
+                        <outlet property="tableHeaderSubLabel" destination="rPx-Fx-oD0" id="98w-lU-njK"/>
                         <outlet property="tableHeaderView" destination="nQE-7w-YL6" id="fFa-fv-uBo"/>
                     </connections>
                 </tableViewController>

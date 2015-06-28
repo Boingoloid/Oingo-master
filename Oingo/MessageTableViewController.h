@@ -20,6 +20,8 @@
 @property(nonatomic) NSString *selectedLink;
 @property(nonatomic) Program *selectedProgram;
 @property (weak, nonatomic) IBOutlet UILabel *tableHeaderLabel;
+@property (weak, nonatomic) IBOutlet UILabel *tableHeaderSubLabel;
+
 @property (weak, nonatomic) IBOutlet UIView *tableHeaderView;
 @property(nonatomic) PFUser *currentUser;
 @property(nonatomic) NSString *zipCode;
