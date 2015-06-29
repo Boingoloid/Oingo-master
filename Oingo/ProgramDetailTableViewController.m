@@ -27,12 +27,8 @@
 Campaign *campaign;
 
 - (void) viewWillAppear:(BOOL)animated {
-
-
-    
 //Separator style for tableview
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
-    
     
     //Pulling data for tablecell from Parse (filtered by selected program i.e. List of all associated with the Daily Show.)
     PFQuery *query = [PFQuery queryWithClassName:@"Campaigns"];
@@ -70,6 +66,7 @@ Campaign *campaign;
     }
     return NO;
 }
+
 
 - (void)respondToTapGesture:(UITapGestureRecognizer *)tap
 {

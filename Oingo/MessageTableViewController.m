@@ -29,10 +29,13 @@
 #import "EmailComposerViewController.h"
 
 
+
 @interface MessageTableViewController () <UIGestureRecognizerDelegate,CLLocationManagerDelegate>
 @property (nonatomic, retain) NSMutableDictionary *sections;
 @property (nonatomic, retain) NSMutableDictionary *sectionToCategoryMap;
 @property(nonatomic) CLLocationManager *locationManager;
+@property(nonatomic) UILabel *longitudeLabel;
+@property(nonatomic) UILabel *latitudeLabel;
 @end
 
 @implementation MessageTableViewController
@@ -42,6 +45,7 @@
 MessageItem *messageItem;
 CongressionalMessageItem *congressionalMessageItem;
 
+
 NSInteger section;
 NSInteger sectionHeaderHeight = 16;
 NSInteger headerHeight = 48;
@@ -50,19 +54,42 @@ NSInteger footerHeight = 6;
 
 -(void)viewWillAppear:(BOOL)animated {
     
-
-    //if current user has zip, load it and set as NSDefault,
-    if([[PFUser currentUser] valueForKey:@"zipCode"]) {
-        [[NSUserDefaults standardUserDefaults] setObject:[[PFUser currentUser] valueForKey:@"zipCode"] forKey:@"zipCode"];
-        [[NSUserDefaults standardUserDefaults] synchronize];
-        self.zipCode =[[PFUser currentUser] valueForKey:@"zipCode"];
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    
+    // If a registered user then set default zip and location if available
+    if([PFUser currentUser]){
+        if([[PFUser currentUser] valueForKey:@"location"]) {
+            [[NSUserDefaults standardUserDefaults] setObject:[[PFUser currentUser] valueForKey:@"location"] forKey:@"location"];
+            self.location = [defaults objectForKey:@"location"];
+            NSLog(@"location user:%@", self.location);
+            [[NSUserDefaults standardUserDefaults] synchronize];
+        }
+        
+        if ([[PFUser currentUser] valueForKey:@"zipCode"]) {
+            [[NSUserDefaults standardUserDefaults] setObject:[[PFUser currentUser] valueForKey:@"zipCode"] forKey:@"zipCode"];
+            self.zipCode= [defaults stringForKey:@"zipCode"];
+            NSLog(@"zip user:%@", self.zipCode);
+            [[NSUserDefaults standardUserDefaults] synchronize];
+        }
+    } else {    // not user
+        // Now check user defaults to see if zip or location in cache
+        if([[NSUserDefaults standardUserDefaults] stringForKey:@"latitude"] && [[NSUserDefaults standardUserDefaults] stringForKey:@"longitude"]){
+            CLLocation *location = [[CLLocation alloc]initWithLatitude:[[defaults objectForKey:@"latitude"] doubleValue] longitude:[[[NSUserDefaults standardUserDefaults] stringForKey:@"longitude"] doubleValue]];
+            self.location = location;
+            NSLog(@"location default:%@", self.location);
+            
+        }
+        if([[NSUserDefaults standardUserDefaults] stringForKey:@"zipCode"]){
+            self.zipCode= [defaults stringForKey:@"zipCode"];
+            NSLog(@"zip default:%@",[[NSUserDefaults standardUserDefaults] stringForKey:@"zipCode"]);
+        }
     }
     
-    if([[NSUserDefaults standardUserDefaults] stringForKey:@"zipCode"]) {
-        NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-        self.zipCode= [defaults stringForKey:@"zipCode"];
+    
+    // Location data present, load with local reps
+    if(self.zipCode || self.location) {
+
         // zip here, fill in reps
-        
         PFQuery *query = [PFQuery queryWithClassName:@"Messages"];
         [query whereKey:@"campaignID" equalTo:[self.selectedCampaign valueForKey:@"campaignID"]];
         [query orderByDescending:@"messageCategory"];
@@ -70,11 +97,15 @@ NSInteger footerHeight = 6;
             if (!error) {
                 self.messageList = (NSMutableArray*)objects;  //messageList has everything ordered by category
                 //add congress people to list
-                CongressFinderAPI *congressFinderAPI = [[CongressFinderAPI alloc]init];
-                congressFinderAPI.messageTableViewController = self;
-                [congressFinderAPI getCongress:self.zipCode addToMessageList:self.messageList];
-                // Sections already being prepped in congressFinderAPI
-                //[self prepSections:self.messageList];
+                if(self.location){ //based on coordinate location
+                    CongressFinderAPI *congressFinder = [[CongressFinderAPI alloc]init];
+                    congressFinder.messageTableViewController = self;
+                    [congressFinder getCongressWithLocation:self.location addToMessageList:(NSMutableArray*)self.messageList];
+                } else { //or based on zipCode
+                    CongressFinderAPI *congressFinder = [[CongressFinderAPI alloc]init];
+                    congressFinder.messageTableViewController = self;
+                    [congressFinder getCongress:self.zipCode addToMessageList:self.messageList];
+                }
                 [self.tableView reloadData];
             } else {
                 NSLog(@"Error: %@ %@", error, [error userInfo]);
@@ -82,7 +113,8 @@ NSInteger footerHeight = 6;
         }];
         
     } else {
-        //zip not here, load without
+        
+        // No location data, load without it
         PFQuery *query = [PFQuery queryWithClassName:@"Messages"];
         [query whereKey:@"campaignID" equalTo:[self.selectedCampaign valueForKey:@"campaignID"]];
         [query orderByDescending:@"messageCategory"];
@@ -126,18 +158,8 @@ NSInteger footerHeight = 6;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-
-
     
-    self.locationManager = [[CLLocationManager alloc] init];
-    self.locationManager.delegate = self;
-    
-    if ([self.locationManager
-         respondsToSelector:@selector(requestWhenInUseAuthorization)]) {
-        [self.locationManager requestWhenInUseAuthorization];
-    } 
     //Format table header
-    
     self.tableHeaderView.layer.borderColor = [[UIColor whiteColor] CGColor];
     self.tableHeaderView.layer.borderWidth = .5;
     self.tableHeaderView.layer.backgroundColor = [[UIColor whiteColor] CGColor];
@@ -160,6 +182,7 @@ NSInteger footerHeight = 6;
     UIBarButtonItem *logOutButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemBookmarks target:self action:@selector(logout)];
     self.navigationItem.rightBarButtonItem = logOutButton;
 }
+
 
 
 - (void)respondToTapGesture:(UITapGestureRecognizer *)tap {
@@ -190,7 +213,7 @@ NSInteger footerHeight = 6;
             NSLog(@"touch in zipCodeButton area");
             [self lookUpZip];
         } else if (CGRectContainsPoint(cell.locationButton.frame, pointInCell)) {
-            NSLog(@"touch in getLocation area");
+            NSLog(@"touch in getUserLocation area");
             [self getUserLocation];
         } else if (CGRectContainsPoint(cell.phoneButton.frame, pointInCell)) {
             NSLog(@"touch in phone area");
@@ -439,6 +462,7 @@ NSInteger footerHeight = 6;
 -(void)logout {
     //removes zip default
     [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"zipCode"];
+    [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"location"];
     [[NSUserDefaults standardUserDefaults] synchronize];
     [PFUser logOut];
     NSLog(@"user logged out");
@@ -473,15 +497,59 @@ NSInteger footerHeight = 6;
 
 -(void) getUserLocation {
     NSLog(@"see if selector works = yes");
-    PFUser *currentUser = [PFUser currentUser];
-    PFGeoPoint *userGeoPoint = currentUser[@"location"];
-    [PFGeoPoint geoPointForCurrentLocationInBackground:^(PFGeoPoint *geoPoint, NSError *error) {
-        if (!error) {
-            NSLog(@"geopoint %@", userGeoPoint);
+    
+    self.locationManager = [[CLLocationManager alloc] init];
+    self.locationManager.delegate = self;
+    
+    NSUInteger code = [CLLocationManager authorizationStatus];
+    if (code == kCLAuthorizationStatusNotDetermined && ([self.locationManager respondsToSelector:@selector(requestAlwaysAuthorization)] || [self.locationManager respondsToSelector:@selector(requestWhenInUseAuthorization)])) {
+        // choose one request according to your business.
+        if([[NSBundle mainBundle] objectForInfoDictionaryKey:@"NSLocationWhenInUseUsageDescription"]){
+            [self.locationManager requestWhenInUseAuthorization];
         } else {
-            NSLog(@"error");
+            NSLog(@"Info.plist does not contain NSLocationAlwaysUsageDescription or NSLocationWhenInUseUsageDescription");
         }
-    }];
+    }
+    [self.locationManager startUpdatingLocation];
+}
+
+#pragma mark - CLLocationManagerDelegate
+- (void)locationManager:(CLLocationManager *)manager didFailWithError:(NSError *)error
+{
+    NSLog(@"didFailWithError: %@", error);
+    UIAlertView *errorAlert = [[UIAlertView alloc]
+                               initWithTitle:@"Error" message:@"Failed to Get Your Location" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
+    [errorAlert show];
+}
+
+- (void)locationManager:(CLLocationManager *)manager didUpdateToLocation:(CLLocation *)newLocation fromLocation:(CLLocation *)oldLocation
+{
+    [self.locationManager stopUpdatingLocation];
+    
+    [[NSUserDefaults standardUserDefaults] setObject:[NSString stringWithFormat:@"%f",newLocation.coordinate.latitude] forKey:@"latitude"];
+    [[NSUserDefaults standardUserDefaults] setObject:[NSString stringWithFormat:@"%f",newLocation.coordinate.longitude] forKey:@"longitude"];
+    
+    // if a current user entered location, then save it to self and to user.
+    self.location = newLocation;
+    //[[NSUserDefaults standardUserDefaults] setObject:newLocation forKey:@"location"];
+    [[NSUserDefaults standardUserDefaults] synchronize];
+    
+    //if currently a user then save location info to account.
+    if([PFUser currentUser]) {
+        [[PFUser currentUser] setValue:newLocation forKey:@"location"]; //no user
+        [[PFUser currentUser] saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
+            if(error) {
+                NSLog(@"error UPDATING COORDINATES!!");
+            } else{
+                NSLog(@"UPDATING COORDINATES!!");
+            }
+        }];
+    }
+    
+    CongressFinderAPI *congressFinder = [[CongressFinderAPI alloc]init];
+    congressFinder.messageTableViewController = self;
+    [congressFinder getCongressWithLocation:newLocation addToMessageList:(NSMutableArray*)self.messageList];
+
 }
 
 -(void)lookUpZip {
@@ -517,7 +585,7 @@ NSInteger footerHeight = 6;
             [[NSUserDefaults standardUserDefaults] setObject:zipCode forKey:@"zipCode"];
             [[NSUserDefaults standardUserDefaults] synchronize];
             
-            //If user update the user current zip
+            //If user, update the user current zip
             if([PFUser currentUser]) {
                 [[PFUser currentUser] setValue:zipCode forKey:@"zipCode"];
                 [[PFUser currentUser] saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
@@ -527,11 +595,6 @@ NSInteger footerHeight = 6;
                 }];
             }
             self.zipCode = zipCode;
-            // if a current user entered zip, then save it.
-            if(self.currentUser) {
-                [self.currentUser setValue:zipCode forKey:@"zipCode"]; //no user
-                [self.currentUser saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {}];
-            }
 
             CongressFinderAPI *congressFinderAPI = [[CongressFinderAPI alloc]init];
             congressFinderAPI.messageTableViewController = self;
@@ -579,7 +642,7 @@ NSInteger footerHeight = 6;
             //set user default so zip stays if user goes off table
             [[NSUserDefaults standardUserDefaults] setObject:zipCode forKey:@"zipCode"];
             [[NSUserDefaults standardUserDefaults] synchronize];
-            
+
             //If user update the user current zip
             if([PFUser currentUser]) {
                 [[PFUser currentUser] setValue:zipCode forKey:@"zipCode"];
@@ -590,7 +653,6 @@ NSInteger footerHeight = 6;
                 }];
             }
             self.zipCode = zipCode;
-            NSLog(@"zip.code %@",self.zipCode);
             // if a current user entered zip, then save it.
             if(self.currentUser) {
                 [self.currentUser setValue:zipCode forKey:@"zipCode"]; //no user
@@ -599,7 +661,8 @@ NSInteger footerHeight = 6;
             
             CongressFinderAPI *congressFinderAPI = [[CongressFinderAPI alloc]init];
             congressFinderAPI.messageTableViewController = self;
-            [congressFinderAPI getCongress:zipCode addToMessageList:self.messageList];        }
+            [congressFinderAPI getCongress:zipCode addToMessageList:self.messageList];
+        }
     }];
     [alertController addAction:lookUpAction];
     
@@ -620,7 +683,7 @@ NSInteger footerHeight = 6;
     NSNumber *rowIndex = [rowIndecesInSection objectAtIndex:indexPath.row]; //pulling the row indece from array above
     NSLog(@"category: %@",category);
     
-    if([category isEqualToString:@"Local Representative"] && !self.zipCode) { //user has no zip
+    if([category isEqualToString:@"Local Representative"] && !self.zipCode && !self.location) { //user has no zip or location
         [cell configMessageCellNoZip:indexPath];
     } else if([category isEqualToString:@"Local Representative"]) {
         NSLog(@"new loading of local rep");
@@ -635,7 +698,7 @@ NSInteger footerHeight = 6;
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     NSString *category= [self categoryForSection:indexPath.section];
-    if([category isEqualToString:@"Local Representative"] && !self.zipCode) {
+    if([category isEqualToString:@"Local Representative"] && !self.zipCode && !self.location) {
         return 30;
     } else if([category isEqualToString:@"Local Representative"]) {
         return 115;

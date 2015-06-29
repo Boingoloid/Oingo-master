@@ -34,7 +34,7 @@
                                                           delegate:self
                                                      delegateQueue:nil];
     //Use task to get congress photo
-    NSURLSessionDownloadTask *downloadPhotoTask = [[NSURLSession sharedSession] downloadTaskWithURL:modeSet completionHandler:^(NSURL *location, NSURLResponse *response, NSError *error) {
+    NSURLSessionDownloadTask *downloadPhotoTask = [session downloadTaskWithURL:modeSet completionHandler:^(NSURL *location, NSURLResponse *response, NSError *error) {
         UIImage *downloadedImage = [UIImage imageWithData:[NSData dataWithContentsOfURL:location]];
         self.tableViewCell.messageImage.image = downloadedImage;
     }];

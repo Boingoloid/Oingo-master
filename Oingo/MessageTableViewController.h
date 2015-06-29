@@ -21,10 +21,10 @@
 @property(nonatomic) Program *selectedProgram;
 @property (weak, nonatomic) IBOutlet UILabel *tableHeaderLabel;
 @property (weak, nonatomic) IBOutlet UILabel *tableHeaderSubLabel;
-
 @property (weak, nonatomic) IBOutlet UIView *tableHeaderView;
 @property(nonatomic) PFUser *currentUser;
 @property(nonatomic) NSString *zipCode;
+@property(nonatomic) CLLocation *location;
 @property(nonatomic) BOOL isRepsLoaded;
 - (IBAction)shareSegmentTwitter:(id)sender;
 - (IBAction)shareSegmentFacebook:(id)sender;

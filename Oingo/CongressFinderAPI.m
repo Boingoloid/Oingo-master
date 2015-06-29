@@ -11,46 +11,57 @@
 
 
 @interface CongressFinderAPI () <NSURLSessionDelegate>
-@property (nonatomic) NSString *userid;
-@property (nonatomic) NSString *password;
 @property(nonatomic) NSString *messageText;
 @property(nonatomic) NSString *campaignID;
-
 @end
 
 @implementation CongressFinderAPI
 
-NSString *sunlightLabsAPIKey = @"ed7f6bb54edc4577943dcc588664c89f";
+
 
 -(void) getCongress:zipCode addToMessageList:(NSMutableArray*)messageList {
-    //creates url and creates NSURLSession task
+    // Method called when finding representatives by zipCode
     self.messageList = messageList;
-    //create url string
+    NSString *sunlightLabsAPIKey = @"ed7f6bb54edc4577943dcc588664c89f";
     NSString *baseURL = @"https://congress.api.sunlightfoundation.com";
     NSString *method = @"/legislators/locate?zip=";
-    NSString *url = [NSString stringWithFormat:@"%@%@%@&apikey=%@", baseURL,method,zipCode,sunlightLabsAPIKey];
-    NSLog(@"%@",url);
-    NSString *modeSetString = [url stringByReplacingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
-    NSURL *modeSet = [NSURL URLWithString:modeSetString];
+    NSString *urlString = [NSString stringWithFormat:@"%@%@%@&apikey=%@", baseURL,method,zipCode,sunlightLabsAPIKey];
+    [self getCongressData:urlString];
+    
+}
+
+-(void)getCongressWithLocation:location addToMessageList:(NSMutableArray*)messageList {
+    // Method called when finding representatives by Lat/Long
+    self.messageList = messageList;
+    NSString *sunlightLabsAPIKey = @"ed7f6bb54edc4577943dcc588664c89f";
+    NSString *baseURL = @"https://congress.api.sunlightfoundation.com";
+    CLLocationDegrees degreeLatitude = +37.78735890;
+    CLLocationDegrees degreeLongitude = -122.40822700;
+    NSString *method =@"/legislators/locate?";
+    NSString *urlString = [NSString stringWithFormat:@"%@%@latitude=%%2B%f&longitude=%f&apikey=%@",baseURL,method,degreeLatitude,degreeLongitude,sunlightLabsAPIKey];
+    [self getCongressData:urlString];
+}
+
+-(void)getCongressData:(NSString*)urlString {
+    
+    NSLog(@"%@",urlString);
+    NSString *urlEncodedString = [urlString stringByReplacingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+    NSURL *url = [NSURL URLWithString:urlEncodedString];
+    
     //configure the session
     NSURLSessionConfiguration *sessionConfig = [NSURLSessionConfiguration defaultSessionConfiguration];
     [sessionConfig setHTTPAdditionalHeaders: @{@"Accept": @"application/json"}];
     sessionConfig.timeoutIntervalForRequest = 30.0;
     sessionConfig.timeoutIntervalForResource = 60.0;
     sessionConfig.HTTPMaximumConnectionsPerHost = 1;
+    
     //create session with configuration
     NSURLSession *session = [NSURLSession sessionWithConfiguration:sessionConfig
                                                           delegate:self
                                                      delegateQueue:nil];
     //get congress data using url
-    NSURLSessionDataTask *dataTask = [session dataTaskWithURL:modeSet];
+    NSURLSessionDataTask *dataTask = [session dataTaskWithURL:url];
     [dataTask resume];
-    
-    //completionHandler:^(NSData *data,NSURLResponse *response, NSError *error) {
-    //    dispatch_async(dispatch_get_main_queue(), ^{
-    //
-    //        NSLog(@"HERE!!!!!!!");
-    //    });
 }
 
 
