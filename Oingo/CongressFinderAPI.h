@@ -12,7 +12,9 @@
 
 @interface CongressFinderAPI : NSObject 
 @property(nonatomic) NSMutableArray *messageList;
+
 @property(nonatomic) NSMutableArray *messageListWithCongress;
+
 @property(nonatomic) MessageTableViewController *messageTableViewController;
 -(void)getCongress:zipCode addToMessageList:messageList;
 -(void)getCongressWithLocation:location addToMessageList:(NSMutableArray*)messageList;

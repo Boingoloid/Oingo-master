@@ -21,7 +21,19 @@
 
 -(void) getCongress:zipCode addToMessageList:(NSMutableArray*)messageList {
     // Method called when finding representatives by zipCode
+
+    
+    //delete rep line
+    //grab the rep message text for user in menu
+    NSUInteger index = [messageList indexOfObjectPassingTest:
+                        ^BOOL(NSDictionary *dict, NSUInteger idx, BOOL *stop) {
+                            return [[dict objectForKey:@"messageCategory"] isEqual:@"Local Representative"];
+                        }];
+    self.messageTableViewController.repMessageText = [[messageList objectAtIndex:index] valueForKey:@"messageText"];
+    [messageList removeObjectAtIndex:index];
+    
     self.messageList = messageList;
+    
     NSString *sunlightLabsAPIKey = @"ed7f6bb54edc4577943dcc588664c89f";
     NSString *baseURL = @"https://congress.api.sunlightfoundation.com";
     NSString *method = @"/legislators/locate?zip=";
@@ -29,10 +41,23 @@
     [self getCongressData:urlString];
     
 }
-
--(void)getCongressWithLocation:location addToMessageList:(NSMutableArray*)messageList {
     // Method called when finding representatives by Lat/Long
+-(void)getCongressWithLocation:location addToMessageList:(NSMutableArray*)messageList {
+
+
+    
+    //delete rep line
+    //grab the rep message text for user in menu
+    NSUInteger index = [messageList indexOfObjectPassingTest:
+                        ^BOOL(NSDictionary *dict, NSUInteger idx, BOOL *stop) {
+                            return [[dict objectForKey:@"messageCategory"] isEqual:@"Local Representative"];
+                        }];
+    self.messageTableViewController.repMessageText = [[messageList objectAtIndex:index] valueForKey:@"messageText"];
+    [messageList removeObjectAtIndex:index];
+    
     self.messageList = messageList;
+    
+    NSLog(@"message list in get congress with location%@",self.messageList);
     NSString *sunlightLabsAPIKey = @"ed7f6bb54edc4577943dcc588664c89f";
     NSString *baseURL = @"https://congress.api.sunlightfoundation.com";
     CLLocationDegrees degreeLatitude = +37.78735890;
@@ -44,7 +69,6 @@
 
 -(void)getCongressData:(NSString*)urlString {
     
-    NSLog(@"%@",urlString);
     NSString *urlEncodedString = [urlString stringByReplacingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
     NSURL *url = [NSURL URLWithString:urlEncodedString];
     
@@ -62,6 +86,9 @@
     //get congress data using url
     NSURLSessionDataTask *dataTask = [session dataTaskWithURL:url];
     [dataTask resume];
+    
+    NSLog(@"session created");
+    NSLog(@"url:%@",url);
 }
 
 
@@ -73,6 +100,9 @@
     id countOfReps = [returnedData valueForKey:@"count"];
     //results array is 3 dictionaries
     NSLog(@"count of reps %@",countOfReps);
+    
+    
+    //combine the lists
     self.messageListWithCongress = [self combine:resultsArray withMessageList:self.messageList];
     
     NSSortDescriptor *messageCategory = [[NSSortDescriptor alloc] initWithKey:@"messageCategory" ascending:NO];
@@ -81,8 +111,10 @@
     
     self.messageTableViewController.messageList = sortedArray;
     self.messageTableViewController.isRepsLoaded = YES;
-    [self.messageTableViewController prepSections:self.messageTableViewController.messageList];
+    
+
     dispatch_async(dispatch_get_main_queue(), ^{
+        [self.messageTableViewController prepSections:sortedArray];
         [self.messageTableViewController.tableView reloadData];
     });
 }
@@ -91,22 +123,27 @@
 -(NSMutableArray*)combine:(NSArray*)resultsArray withMessageList:(NSMutableArray*)messageList  {
     
     
-    NSUInteger index = [messageList indexOfObjectPassingTest:
-                       ^BOOL(NSDictionary *dict, NSUInteger idx, BOOL *stop) {
-                           return [[dict objectForKey:@"messageCategory"] isEqual:@"Local Representative"];
-                       }];
-   
-    //if no name, then dummy line, so store values and remove
-    if(![[messageList objectAtIndex:index] valueForKey:@"targetName"]) {
-        NSLog(@"dummy line being deleted");
-        self.messageText = [[messageList objectAtIndex:index] valueForKey:@"messageText"];
-        self.campaignID = [[messageList objectAtIndex:index] valueForKey:@"campaignID"];
-        [messageList removeObjectAtIndex:index];
-    } else {
-        NSLog(@"no dummy to delete!");
-    }
+//    NSUInteger index = [messageList indexOfObjectPassingTest:
+//                       ^BOOL(NSDictionary *dict, NSUInteger idx, BOOL *stop) {
+//                           return [[dict objectForKey:@"messageCategory"] isEqual:@"Local Representative"];
+//                       }];
+//    
+//    self.messageTableViewController.repMessageText = [[messageList objectAtIndex:index] valueForKey:@"messageText"];
+//    NSLog(@"message list before delete%@",messageList);
+//   
+//    //if no name, then dummy line, so store values and remove
+//    if(![[messageList objectAtIndex:index] valueForKey:@"targetName"]) {
+//        NSLog(@"dummy line being deleted");
+//        self.messageText = [[messageList objectAtIndex:index] valueForKey:@"messageText"];
+//        self.campaignID = [[messageList objectAtIndex:index] valueForKey:@"campaignID"];
+//        [messageList removeObjectAtIndex:index];
+//    } else {
+//        NSLog(@"no dummy to delete!");
+//    }
     
     NSMutableArray *congressMessageList = [NSMutableArray array];
+    
+    //for every congressperson in the results array
     for(NSMutableDictionary *congresspersonObject in resultsArray){ //array of dictionaries
         //first dictionary, what to do with the 1st dictionary
         //pull out the values in message item

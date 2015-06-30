@@ -32,6 +32,7 @@
 		CE2BF96F1B3E517700AB15AC /* MakePhoneCallAPI.m in Sources */ = {isa = PBXBuildFile; fileRef = CE2BF96E1B3E517700AB15AC /* MakePhoneCallAPI.m */; };
 		CE2BF9741B3E595000AB15AC /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CE2BF9731B3E595000AB15AC /* MessageUI.framework */; };
 		CE2BF9771B3E5A1700AB15AC /* EmailComposerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CE2BF9761B3E5A1700AB15AC /* EmailComposerViewController.m */; };
+		CE31B1A01B420C670048A5B1 /* MessageTableViewRepresentativeCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CE31B19F1B420C670048A5B1 /* MessageTableViewRepresentativeCell.m */; };
 		CE395D881AED5790006786C0 /* twittericon320.png in Resources */ = {isa = PBXBuildFile; fileRef = CE395D871AED5790006786C0 /* twittericon320.png */; };
 		CE46B1381B043A8000A4D671 /* blue_arrow_png_by_maddielovesselly-d4ys3ti (1).png in Resources */ = {isa = PBXBuildFile; fileRef = CE46B1371B043A8000A4D671 /* blue_arrow_png_by_maddielovesselly-d4ys3ti (1).png */; };
 		CE46B13A1B044D5F00A4D671 /* greyarrow.png in Resources */ = {isa = PBXBuildFile; fileRef = CE46B1391B044D5F00A4D671 /* greyarrow.png */; };
@@ -149,6 +150,8 @@
 		CE2BF9731B3E595000AB15AC /* MessageUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MessageUI.framework; path = System/Library/Frameworks/MessageUI.framework; sourceTree = SDKROOT; };
 		CE2BF9751B3E5A1700AB15AC /* EmailComposerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EmailComposerViewController.h; sourceTree = "<group>"; };
 		CE2BF9761B3E5A1700AB15AC /* EmailComposerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EmailComposerViewController.m; sourceTree = "<group>"; };
+		CE31B19E1B420C670048A5B1 /* MessageTableViewRepresentativeCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MessageTableViewRepresentativeCell.h; sourceTree = "<group>"; };
+		CE31B19F1B420C670048A5B1 /* MessageTableViewRepresentativeCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MessageTableViewRepresentativeCell.m; sourceTree = "<group>"; };
 		CE395D851AED5422006786C0 /* Accounts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accounts.framework; path = System/Library/Frameworks/Accounts.framework; sourceTree = SDKROOT; };
 		CE395D871AED5790006786C0 /* twittericon320.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = twittericon320.png; path = Images/twittericon320.png; sourceTree = "<group>"; };
 		CE40D7FF1AF382A5006F2D2E /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
@@ -352,6 +355,8 @@
 				CEEF25061B015ACA00EFB257 /* MessageTableViewController.m */,
 				CEEF250F1B017C8200EFB257 /* MessageTableViewCell.h */,
 				CEEF25101B017C8200EFB257 /* MessageTableViewCell.m */,
+				CE31B19E1B420C670048A5B1 /* MessageTableViewRepresentativeCell.h */,
+				CE31B19F1B420C670048A5B1 /* MessageTableViewRepresentativeCell.m */,
 				CE241A4F1AEAE45A00F22144 /* Images.xcassets */,
 				CE241A511AEAE45A00F22144 /* LaunchScreen.xib */,
 				CE241A461AEAE45A00F22144 /* Oingo.xcdatamodeld */,
@@ -775,6 +780,7 @@
 				CE87CABE1AF977120084C666 /* Campaign.m in Sources */,
 				CEB4ED8E1AF8305E0055D547 /* ProgramDetailTableViewController.m in Sources */,
 				CE5B5D0E1AF95A740033A668 /* ProgramDetailTableViewCell.m in Sources */,
+				CE31B1A01B420C670048A5B1 /* MessageTableViewRepresentativeCell.m in Sources */,
 				CEB187911B18F8C400C86955 /* MessageOptionsTableTableViewController.m in Sources */,
 				CE2029721B363D51005C079B /* CongressFinderAPI.m in Sources */,
 				CE6073331B3AD475007B567C /* CongressPhotoFinderAPI.m in Sources */,

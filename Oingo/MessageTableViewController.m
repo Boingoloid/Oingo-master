@@ -10,6 +10,7 @@
 #import <Parse/Parse.h>
 #import "MessageItem.h"
 #import "MessageTableViewCell.h"
+#import "MessageTableViewRepresentativeCell.h"
 #import <QuartzCore/QuartzCore.h>
 #import "PFTwitterUtils+NativeTwitter.h"
 #import <Accounts/Accounts.h>
@@ -59,45 +60,51 @@ NSInteger footerHeight = 6;
     // If a registered user then set default zip and location if available
     if([PFUser currentUser]){
         if([[PFUser currentUser] valueForKey:@"location"]) {
-            [[NSUserDefaults standardUserDefaults] setObject:[[PFUser currentUser] valueForKey:@"location"] forKey:@"location"];
+            [defaults setObject:[[PFUser currentUser] valueForKey:@"location"] forKey:@"location"];
             self.location = [defaults objectForKey:@"location"];
-            NSLog(@"location user:%@", self.location);
-            [[NSUserDefaults standardUserDefaults] synchronize];
+            [defaults synchronize];
+            NSLog(@"user already has value for location");
         }
         
         if ([[PFUser currentUser] valueForKey:@"zipCode"]) {
             [[NSUserDefaults standardUserDefaults] setObject:[[PFUser currentUser] valueForKey:@"zipCode"] forKey:@"zipCode"];
             self.zipCode= [defaults stringForKey:@"zipCode"];
-            NSLog(@"zip user:%@", self.zipCode);
             [[NSUserDefaults standardUserDefaults] synchronize];
+            NSLog(@"user already has value for zip");
         }
     } else {    // not user
+        
         // Now check user defaults to see if zip or location in cache
         if([[NSUserDefaults standardUserDefaults] stringForKey:@"latitude"] && [[NSUserDefaults standardUserDefaults] stringForKey:@"longitude"]){
             CLLocation *location = [[CLLocation alloc]initWithLatitude:[[defaults objectForKey:@"latitude"] doubleValue] longitude:[[[NSUserDefaults standardUserDefaults] stringForKey:@"longitude"] doubleValue]];
             self.location = location;
-            NSLog(@"location default:%@", self.location);
+            NSLog(@"not user, but has location ");
             
         }
         if([[NSUserDefaults standardUserDefaults] stringForKey:@"zipCode"]){
             self.zipCode= [defaults stringForKey:@"zipCode"];
-            NSLog(@"zip default:%@",[[NSUserDefaults standardUserDefaults] stringForKey:@"zipCode"]);
+                        NSLog(@"not user, but has zipcode ");
         }
     }
     
     
-    // Location data present, load with local reps
+    // if location data present, load with local reps
     if(self.zipCode || self.location) {
-
+        NSLog(@"user has either zip or location %@,%@",self.location, self.zipCode);
         // zip here, fill in reps
         PFQuery *query = [PFQuery queryWithClassName:@"Messages"];
+        NSLog(@"selected campaign%@",self.selectedCampaign);
         [query whereKey:@"campaignID" equalTo:[self.selectedCampaign valueForKey:@"campaignID"]];
         [query orderByDescending:@"messageCategory"];
         [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
             if (!error) {
                 self.messageList = (NSMutableArray*)objects;  //messageList has everything ordered by category
+                NSLog(@"messagelist location present:%@",self.messageList);
                 //add congress people to list
                 if(self.location){ //based on coordinate location
+                    NSLog(@"got location, initiating congressfinder");
+                    NSLog(@"initiating get congresswithlocation method:%@ and location %@",self.messageList, self.location);
+                    
                     CongressFinderAPI *congressFinder = [[CongressFinderAPI alloc]init];
                     congressFinder.messageTableViewController = self;
                     [congressFinder getCongressWithLocation:self.location addToMessageList:(NSMutableArray*)self.messageList];
@@ -106,7 +113,7 @@ NSInteger footerHeight = 6;
                     congressFinder.messageTableViewController = self;
                     [congressFinder getCongress:self.zipCode addToMessageList:self.messageList];
                 }
-                [self.tableView reloadData];
+             //   [self.tableView reloadData];
             } else {
                 NSLog(@"Error: %@ %@", error, [error userInfo]);
             }
@@ -132,7 +139,6 @@ NSInteger footerHeight = 6;
 }
 
 - (void)prepSections:(id)array {
-        NSLog(@"flag prepsections");
 
     [self.sections removeAllObjects];
     [self.sectionToCategoryMap removeAllObjects];
@@ -180,6 +186,7 @@ NSInteger footerHeight = 6;
     
     //create logout button
     UIBarButtonItem *logOutButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemBookmarks target:self action:@selector(logout)];
+     [[NSUserDefaults standardUserDefaults] synchronize];
     self.navigationItem.rightBarButtonItem = logOutButton;
 }
 
@@ -254,7 +261,6 @@ NSInteger footerHeight = 6;
     if(!currentUser) {  //if user not logged in, then go to signUpInScreen
         UIViewController *controller = [self.storyboard instantiateViewControllerWithIdentifier:@"signInViewController"];
         [self.navigationController pushViewController:controller animated:YES];
-        NSLog(@"send user to signup");
         
      //if logged in but not linked
     } else if(![PFTwitterUtils isLinkedWithUser:currentUser]){
@@ -308,12 +314,10 @@ NSInteger footerHeight = 6;
 
 
 - (IBAction)shareSegmentTwitter:(id)sender {
-    NSLog(@"ok Twitter is happening");
     PFUser *currentUser = [PFUser currentUser];
     if(!currentUser) {  //if user not logged in, then go to signUpInScreen
         UIViewController *controller = [self.storyboard instantiateViewControllerWithIdentifier:@"signInViewController"];
         [self.navigationController pushViewController:controller animated:YES];
-        NSLog(@"send user to signup");
         
         //if logged in but not linked
     } else if(![PFTwitterUtils isLinkedWithUser:currentUser]){
@@ -369,13 +373,13 @@ NSInteger footerHeight = 6;
 }
 
 - (IBAction)shareSegmentFacebook:(id)sender {
-    NSLog(@"ok FB post is happening");
     //Check if user logged in
     PFUser *currentUser = [PFUser currentUser];
     if(!currentUser) {  //if user not logged in, then go to signUpInScreen
         UIViewController *controller = [self.storyboard instantiateViewControllerWithIdentifier:@"signInViewController"];
         [self.navigationController pushViewController:controller animated:YES];
-        NSLog(@"send user to signup");
+
+    
         
         //if logged in but not linked
     } else if(![PFFacebookUtils isLinkedWithUser:currentUser]){
@@ -404,7 +408,6 @@ NSInteger footerHeight = 6;
         content.contentURL = [NSURL URLWithString:self.selectedLink];
         content.contentTitle = [self.selectedProgram valueForKey:@"programTitle"];
         content.contentDescription = [self.selectedCampaign valueForKey:@"purposeSummary"];
-        NSLog(@"%@",[self.selectedCampaign valueForKey:@"purposeSummary"]);
         FBSDKShareDialog *shareDialog = [FBSDKShareDialog new];
         [shareDialog setMode:FBSDKShareDialogModeAutomatic];
         [shareDialog setShareContent:content];
@@ -415,7 +418,6 @@ NSInteger footerHeight = 6;
 
 
 - (void)postToFacebook:(MessageTableViewCell *)cell {
-    NSLog(@"ok FB post is happening");
     //Check if user logged in
     PFUser *currentUser = [PFUser currentUser];
     if(!currentUser) {  //if user not logged in, then go to signUpInScreen
@@ -496,7 +498,6 @@ NSInteger footerHeight = 6;
 
 
 -(void) getUserLocation {
-    NSLog(@"see if selector works = yes");
     
     self.locationManager = [[CLLocationManager alloc] init];
     self.locationManager.delegate = self;
@@ -580,7 +581,6 @@ NSInteger footerHeight = 6;
         if(count != 5) {
             [self retryZipCode:zipCode count:count];
         } else {
-            NSLog(@"Yes, it is a good zip");
             //set user default so zip stays if user goes off table
             [[NSUserDefaults standardUserDefaults] setObject:zipCode forKey:@"zipCode"];
             [[NSUserDefaults standardUserDefaults] synchronize];
@@ -599,6 +599,7 @@ NSInteger footerHeight = 6;
             CongressFinderAPI *congressFinderAPI = [[CongressFinderAPI alloc]init];
             congressFinderAPI.messageTableViewController = self;
             [congressFinderAPI getCongress:zipCode addToMessageList:self.messageList];
+            NSLog(@"zip%@ messagelist%@",zipCode, self.messageList);
         }
     }];
     [alertController addAction:lookUpAction];
@@ -624,10 +625,8 @@ NSInteger footerHeight = 6;
     [alertController addAction:cancelAction];
     
     UIAlertAction *lookUpAction = [UIAlertAction actionWithTitle:NSLocalizedString(@"Look up", @"Look up") style:UIAlertActionStyleDefault handler:^(UIAlertAction *action){
-        NSLog(@"Look up");
         //get value entered
         NSString *zipCode = [alertController.textFields.firstObject valueForKey:@"text"];
-        NSLog(@"zipCode:%@",zipCode);
         
         __block NSUInteger count = 0;
         [zipCode enumerateSubstringsInRange:NSMakeRange(0, [zipCode length])
@@ -638,7 +637,6 @@ NSInteger footerHeight = 6;
         if(count != 5) {
             [self retryZipCode:zipCode count:count];
         } else {
-            NSLog(@"Yes, it is a good zip");
             //set user default so zip stays if user goes off table
             [[NSUserDefaults standardUserDefaults] setObject:zipCode forKey:@"zipCode"];
             [[NSUserDefaults standardUserDefaults] synchronize];
@@ -674,26 +672,37 @@ NSInteger footerHeight = 6;
 #pragma mark - Table view data source
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath*)indexPath {
-    MessageTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"Cell" forIndexPath:indexPath];
-    cell.layer.cornerRadius = 3;
-    [self.tableView addSubview:cell];
-    
     NSString *category= [self categoryForSection:indexPath.section];
     NSArray *rowIndecesInSection = [self.sections objectForKey:category];
     NSNumber *rowIndex = [rowIndecesInSection objectAtIndex:indexPath.row]; //pulling the row indece from array above
     NSLog(@"category: %@",category);
     
-    if([category isEqualToString:@"Local Representative"] && !self.zipCode && !self.location) { //user has no zip or location
+    if([category isEqualToString:@"Local Representative"] && !self.zipCode && !self.location) {
+        //user has no zip or location
+        NSLog(@"user no zip or loaction local rep cell");
+        MessageTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"Cell" forIndexPath:indexPath];
+        cell.layer.cornerRadius = 3;
+        [self.tableView addSubview:cell];
         [cell configMessageCellNoZip:indexPath];
+        return cell;
+        
     } else if([category isEqualToString:@"Local Representative"]) {
-        NSLog(@"new loading of local rep");
+        MessageTableViewRepresentativeCell *cell = [tableView dequeueReusableCellWithIdentifier:@"CellRep" forIndexPath:indexPath];
+        NSLog(@"user has loaction local rep cell");
+        cell.layer.cornerRadius = 3;
+        [self.tableView addSubview:cell];
         congressionalMessageItem = [self.messageList objectAtIndex:[rowIndex intValue]];
         [cell configMessageCellLocalRep:congressionalMessageItem indexPath:indexPath];
-    } else {    
+        return cell;
+        
+    } else {
+        MessageTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"Cell" forIndexPath:indexPath];
+        cell.layer.cornerRadius = 3;
+        [self.tableView addSubview:cell];
         messageItem = [self.messageList objectAtIndex:[rowIndex intValue]];
         [cell configMessageCell:messageItem indexPath:indexPath];
+        return cell;
     }
-    return cell;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -701,7 +710,7 @@ NSInteger footerHeight = 6;
     if([category isEqualToString:@"Local Representative"] && !self.zipCode && !self.location) {
         return 30;
     } else if([category isEqualToString:@"Local Representative"]) {
-        return 115;
+        return 70;
     } else {
         return 115;
     }
@@ -725,7 +734,16 @@ NSInteger footerHeight = 6;
 #pragma mark - Header and Footers
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
-    return sectionHeaderHeight;
+
+    NSString *category= [self categoryForSection:section];
+    if([category isEqualToString:@"Local Representative"] && !self.zipCode && !self.location) {
+        return sectionHeaderHeight;
+    } else if([category isEqualToString:@"Local Representative"]) {
+        return sectionHeaderHeight +62;
+    } else {
+        return sectionHeaderHeight;
+    }
+
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section {
@@ -735,20 +753,67 @@ NSInteger footerHeight = 6;
 -(UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
 {
 
-    UIView *view = [[UIView alloc] initWithFrame:CGRectMake(7, 0, tableView.frame.size.width -14 , sectionHeaderHeight )];
-    UILabel *sectionLabel = [[UILabel alloc] init];
-    sectionLabel.frame = CGRectMake(7, 0, tableView.frame.size.width -14, sectionHeaderHeight);
-    sectionLabel.backgroundColor = [UIColor colorWithRed:.96 green:.96 blue:.96 alpha:1];
-    sectionLabel.layer.borderWidth = .5;
-    sectionLabel.layer.borderColor = [[UIColor blackColor] CGColor];
-    sectionLabel.font = [UIFont boldSystemFontOfSize:11];
-    sectionLabel.textColor = [UIColor blackColor];
-    sectionLabel.layer.cornerRadius = 3;
-    sectionLabel.clipsToBounds = YES;
-    NSString* padding = @"  "; // # of spaces
-    sectionLabel.text = [NSString stringWithFormat:@"%@%@%@", padding, [self categoryForSection:section], padding];
-    [view addSubview:sectionLabel];
-    return view;
+    NSString *category= [self categoryForSection:section];
+
+    if([category isEqualToString:@"Local Representative"] && !self.zipCode && !self.location) {
+        //do nothing
+        UIView *view = [[UIView alloc] initWithFrame:CGRectMake(7, 0, tableView.frame.size.width -14 , sectionHeaderHeight)];
+        UILabel *sectionLabel = [[UILabel alloc] init];
+        sectionLabel.frame = CGRectMake(7, 0, tableView.frame.size.width -14, sectionHeaderHeight);
+        sectionLabel.backgroundColor = [UIColor colorWithRed:.96 green:.96 blue:.96 alpha:1];
+        sectionLabel.layer.borderWidth = .5;
+        sectionLabel.layer.borderColor = [[UIColor blackColor] CGColor];
+        sectionLabel.font = [UIFont boldSystemFontOfSize:11];
+        sectionLabel.textColor = [UIColor blackColor];
+        sectionLabel.layer.cornerRadius = 3;
+        sectionLabel.clipsToBounds = YES;
+        NSString* padding = @"  "; // # of spaces
+        sectionLabel.text = [NSString stringWithFormat:@"%@%@%@", padding, [self categoryForSection:section], padding];
+        [view addSubview:sectionLabel];
+        return view;
+        
+    } else if([category isEqualToString:@"Local Representative"]) {
+        UIView *view = [[UIView alloc] initWithFrame:CGRectMake(7, 0, tableView.frame.size.width -14 , sectionHeaderHeight +100)];
+        UILabel *sectionLabel = [[UILabel alloc] init];
+        sectionLabel.frame = CGRectMake(7, 0, tableView.frame.size.width -14, sectionHeaderHeight);
+        sectionLabel.backgroundColor = [UIColor colorWithRed:.96 green:.96 blue:.96 alpha:1];
+        sectionLabel.layer.borderWidth = .5;
+        sectionLabel.layer.borderColor = [[UIColor blackColor] CGColor];
+        sectionLabel.font = [UIFont boldSystemFontOfSize:11];
+        sectionLabel.textColor = [UIColor blackColor];
+        sectionLabel.layer.cornerRadius = 3;
+        sectionLabel.clipsToBounds = YES;
+        NSString* padding = @"  "; // # of spaces
+        sectionLabel.text = [NSString stringWithFormat:@"%@%@%@", padding, [self categoryForSection:section], padding];
+        [view addSubview:sectionLabel];
+        
+        
+        UILabel *messageLabelForReps = [[UILabel alloc]initWithFrame:CGRectMake(10, 16,tableView.frame.size.width -20  , 61)];
+        messageLabelForReps.text = [NSString stringWithFormat:@"\"%@\"", self.repMessageText];
+//        messageLabelForReps.font = [UIFont boldSystemFontOfSize:12];
+        messageLabelForReps.font = [UIFont fontWithName:@"HelveticaNeue" size:12.0f];
+        messageLabelForReps.textColor = [UIColor blackColor];
+        messageLabelForReps.textAlignment = NSTextAlignmentCenter;
+        messageLabelForReps.backgroundColor = [UIColor whiteColor];
+        [view addSubview:messageLabelForReps];
+        
+        return view;
+    } else {
+        UIView *view = [[UIView alloc] initWithFrame:CGRectMake(7, 0, tableView.frame.size.width -14 , sectionHeaderHeight +70)];
+        UILabel *sectionLabel = [[UILabel alloc] init];
+        sectionLabel.frame = CGRectMake(7, 0, tableView.frame.size.width -14, sectionHeaderHeight);
+        sectionLabel.backgroundColor = [UIColor colorWithRed:.96 green:.96 blue:.96 alpha:1];
+        sectionLabel.layer.borderWidth = .5;
+        sectionLabel.layer.borderColor = [[UIColor blackColor] CGColor];
+        sectionLabel.font = [UIFont boldSystemFontOfSize:11];
+        sectionLabel.textColor = [UIColor blackColor];
+        sectionLabel.layer.cornerRadius = 3;
+        sectionLabel.clipsToBounds = YES;
+        NSString* padding = @"  "; // # of spaces
+        sectionLabel.text = [NSString stringWithFormat:@"%@%@%@", padding, [self categoryForSection:section], padding];
+        [view addSubview:sectionLabel];
+        return view;
+    }
 }
 
 //-(UIView *) tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section {

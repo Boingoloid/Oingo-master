@@ -34,73 +34,32 @@
 
 CongressPhotoFinderAPI *congressPhotoFinderAPI;
 
-- (void) configMessageCellLocalRep:congressionalMessageItem indexPath:(NSIndexPath*)indexPath {
-        NSLog(@"rep cell");
-    
-    //Assign message item
-    self.congressionalMessageItem = congressionalMessageItem;
-    
-    //Hide all other fields
-    self.locationButton.hidden = YES;
-    self.zipCodeButton.hidden = YES;
-    self.zipLabel.hidden = YES;
-    
-    self.messageText.hidden = NO;
-    self.targetName.hidden = NO;
-    self.targetTitleLabel.hidden = NO;
-    self.messageImage.hidden = NO;
-    self.sendCount.hidden = YES;
-    self.tweetButton.hidden = NO;
-    
-    self.emailButton.hidden = NO;
-    self.phoneButton.hidden = NO;
-    self.webFormButton.hidden = NO;
-    
-    //add information
-    self.messageText.text = [congressionalMessageItem valueForKey:@"messageText"];
-    self.targetName.text = [NSString stringWithFormat:@"%@ /",[congressionalMessageItem valueForKey:@"fullName"]];
-    self.targetTitleLabel.text = [congressionalMessageItem valueForKey:@"title"];
-    self.contantForm = [self.congressionalMessageItem valueForKey:@"contactForm"];
-    self.phone = [self.congressionalMessageItem valueForKey:@"phone"];
-    self.website = [self.congressionalMessageItem valueForKey:@"website"];
-    self.openCongressEmail = [self.congressionalMessageItem valueForKey:@"openCongressEmail"];
-    self.youtubeID = [self.congressionalMessageItem valueForKey:@"youtubeID"];
-    self.facebookID = [self.congressionalMessageItem valueForKey:@"facebookID"];
-    self.twitterID = [self.congressionalMessageItem valueForKey:@"twitterID"];
-    self.inOffice = [self.congressionalMessageItem valueForKey:@"inOffice"];
-    self.gender = [self.congressionalMessageItem valueForKey:@"gender"];
-    self.birthday = [self.congressionalMessageItem valueForKey:@"birthday"];
-    self.chamber = [self.congressionalMessageItem valueForKey:@"chamber"];
-    self.district = [self.congressionalMessageItem valueForKey:@"district"];
-    self.stateName = [self.congressionalMessageItem valueForKey:@"stateName"];
-    self.state = [self.congressionalMessageItem valueForKey:@"state"];
-    self.leadershipRole = [self.congressionalMessageItem valueForKey:@"twitterID"];
-    
-    //add image
-//    NSString *bioguideID = [congressionalMessageItem valueForKey:@"bioguide_id"];
-//    [congressPhotoFinderAPI getPhotos:bioguideID];
-//    congressPhotoFinderAPI.tableViewCell = self;
-
-    NSString *imageString = [self.congressionalMessageItem valueForKey:@"messageImageString"];
-    NSLog(@"imagestring::%@",imageString);
-    self.messageImage.image = [UIImage imageNamed:imageString];
-}
 
 
 - (void) configMessageCell:messageItem indexPath:(NSIndexPath*)indexPath {
-    NSLog(@"normal cell");
+    NSLog(@"normal cell %@",messageItem);
     
     //Assign message item
     self.messageItem = messageItem;
     
+    //unhide fields
+    self.messageText.hidden = NO;
+    self.targetName.hidden = NO;
+    self.targetTitleLabel.hidden = NO;
+    self.messageImage.hidden = NO;
+    self.sendCount.hidden = NO;
+    self.tweetButton.hidden = NO;
+    
     //Hide fields
     self.zipCodeButton.hidden = YES;
+    self.locationButton.hidden = YES;
+    self.zipLabel.hidden = YES;
     self.emailButton.hidden = YES;
     self.phoneButton.hidden = YES;
     self.webFormButton.hidden = YES;
     
     //add information
-    self.messageText.text = [messageItem valueForKey:@"messageText"];
+    self.messageText.text = [NSString stringWithFormat:@"\"%@\"",[messageItem valueForKey:@"messageText"]];
     self.targetName.text = [NSString stringWithFormat:@"%@ /",[messageItem valueForKey:@"targetName"]];
     self.targetTitleLabel.text = [messageItem valueForKey:@"targetTitle"];
     
@@ -118,6 +77,8 @@ CongressPhotoFinderAPI *congressPhotoFinderAPI;
 - (void) configMessageCellNoZip:(NSIndexPath*)indexPath {
     NSLog(@"no zip cell");
     self.zipCodeButton.hidden = NO;
+    self.locationButton.hidden = NO;
+    self.zipLabel.hidden = NO;
     
     //Hide all other fields
     self.messageText.hidden = YES;
@@ -129,6 +90,7 @@ CongressPhotoFinderAPI *congressPhotoFinderAPI;
     self.emailButton.hidden = YES;
     self.phoneButton.hidden = YES;
     self.webFormButton.hidden = YES;
+
     
     //Create Zip look up UI
     //Add current location look up button

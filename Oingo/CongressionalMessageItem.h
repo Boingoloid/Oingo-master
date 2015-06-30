@@ -11,6 +11,7 @@
 
 @interface CongressionalMessageItem : NSObject;
 
+
 @property (nonatomic, retain) NSString *messageImageString;
 @property (nonatomic, retain) NSString *bioguide_id;
 //@property (nonatomic) NSTimeInterval date;

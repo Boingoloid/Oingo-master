@@ -1,8 +1,8 @@
 //
-//  MessageTableViewCell.h
+//  MessageTableViewRepresentativeCell.h
 //  Oingo
 //
-//  Created by Matthew Acalin on 5/11/15.
+//  Created by Matthew Acalin on 6/29/15.
 //  Copyright (c) 2015 Oingo Inc. All rights reserved.
 //
 
@@ -10,8 +10,7 @@
 #import "MessageItem.h"
 #import "CongressionalMessageItem.h"
 
-@interface MessageTableViewCell : UITableViewCell
-
+@interface MessageTableViewRepresentativeCell : UITableViewCell
 @property (assign, nonatomic) NSInteger cellIndex;
 @property(nonatomic) MessageItem *messageItem;
 @property(nonatomic) CongressionalMessageItem *congressionalMessageItem;
@@ -48,8 +47,8 @@
 @property(nonatomic) UILabel *zipLabel;
 
 
+- (void) configMessageCellLocalRep:congressionalMessageItem indexPath:(NSIndexPath*)indexPath;
 
-- (void) configMessageCellNoZip:(NSIndexPath*)indexPath;
-- (void) configMessageCell:messageItem indexPath:(NSIndexPath*)indexPath;
+
 
 @end
