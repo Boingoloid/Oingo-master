@@ -13,7 +13,6 @@
 #import <Parse/Parse.h>
 
 
-@class CongressFinderAPI;
 @interface MessageTableViewController : UITableViewController
 
 @property (nonatomic, retain) NSMutableDictionary *sections;

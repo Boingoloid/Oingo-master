@@ -9,6 +9,7 @@
 #import "MessageTableViewController.h"
 #import <Parse/Parse.h>
 #import "MessageItem.h"
+#import "CongressionalMessageItem.h"
 #import "MessageTableViewCell.h"
 #import "MessageTableViewRepresentativeCell.h"
 #import <QuartzCore/QuartzCore.h>
@@ -23,7 +24,6 @@
 #import <FBSDKShareKit/FBSDKShareKit.h>
 #import <FBSDKCoreKit/FBSDKCoreKit.h>
 #import <FBSDKLoginKit/FBSDKLoginKit.h>
-#import "CongressionalMessageItem.h"
 #import <UIKit/UIKit.h>
 #import "MakePhoneCallAPI.h"
 #import "EmailComposerViewController.h"
@@ -31,8 +31,7 @@
 #import "CongressFinderAPI.h"
 #import "TwitterAPITweet.h"
 #import "FacebookAPIPost.h"
-
-
+#import "LocationFinderAPI.h"
 
 
 @interface MessageTableViewController () <UIGestureRecognizerDelegate,CLLocationManagerDelegate>
@@ -252,6 +251,10 @@ NSInteger localRepSectionHeaderHeight = 50;
 
 
 -(void) getUserLocation {
+//    LocationFinderAPI *locationFinderAPI = [[LocationFinderAPI alloc]init];
+//    locationFinderAPI.messageTableViewController = self;
+//    [locationFinderAPI findUserLocation];
+    
     
     self.locationManager = [[CLLocationManager alloc] init];
     self.locationManager.delegate = self;
@@ -285,8 +288,6 @@ NSInteger localRepSectionHeaderHeight = 50;
     
     //Set the location default
     
-    
-    
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     [defaults setObject:[NSString stringWithFormat:@"%f",newLocation.coordinate.latitude] forKey:@"latitude"];
     [defaults setObject:[NSString stringWithFormat:@"%f",newLocation.coordinate.longitude] forKey:@"longitude"];
@@ -318,6 +319,7 @@ NSInteger localRepSectionHeaderHeight = 50;
 }
 
 -(void)lookUpZip {
+    
     NSString *alertTitle = @"Let's get your Local Representatives";
     NSString *alertMessage = [NSString stringWithFormat:@"Enter you Zipcode"];
     UIAlertController *alertController = [UIAlertController alertControllerWithTitle:alertTitle message:alertMessage preferredStyle:UIAlertControllerStyleAlert];
