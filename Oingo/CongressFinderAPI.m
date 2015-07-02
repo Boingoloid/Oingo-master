@@ -8,6 +8,7 @@
 
 #import "CongressFinderAPI.h"
 #import "CongressionalMessageItem.h"
+#import "ParseAPI.h"
 
 
 @interface CongressFinderAPI () <NSURLSessionDelegate>
@@ -42,12 +43,10 @@
     
 }
     // Method called when finding representatives by Lat/Long
--(void)getCongressWithLocation:location addToMessageList:(NSMutableArray*)messageList {
+-(void)getCongressWithLatitude:(double)latitude andLongitude:(double)longitude addToMessageList:(NSMutableArray*)messageList {
 
 
-    
-    //delete rep line
-    //grab the rep message text for user in menu
+    //grab the rep message text for user in menu and then delete
     NSUInteger index = [messageList indexOfObjectPassingTest:
                         ^BOOL(NSDictionary *dict, NSUInteger idx, BOOL *stop) {
                             return [[dict objectForKey:@"messageCategory"] isEqual:@"Local Representative"];
@@ -60,10 +59,10 @@
     NSLog(@"message list in get congress with location%@",self.messageList);
     NSString *sunlightLabsAPIKey = @"ed7f6bb54edc4577943dcc588664c89f";
     NSString *baseURL = @"https://congress.api.sunlightfoundation.com";
-    CLLocationDegrees degreeLatitude = +37.78735890;
-    CLLocationDegrees degreeLongitude = -122.40822700;
+//    CLLocationDegrees degreeLatitude = latitude;
+//    CLLocationDegrees degreeLongitude = longitude;
     NSString *method =@"/legislators/locate?";
-    NSString *urlString = [NSString stringWithFormat:@"%@%@latitude=%%2B%f&longitude=%f&apikey=%@",baseURL,method,degreeLatitude,degreeLongitude,sunlightLabsAPIKey];
+    NSString *urlString = [NSString stringWithFormat:@"%@%@latitude=%%2B%f&longitude=%f&apikey=%@",baseURL,method,latitude,longitude,sunlightLabsAPIKey];
     [self getCongressData:urlString];
 }
 
@@ -114,8 +113,8 @@
     
 
     dispatch_async(dispatch_get_main_queue(), ^{
-        [self.messageTableViewController prepSections:sortedArray];
-        [self.messageTableViewController.tableView reloadData];
+        [self.parseAPI prepSections:sortedArray];
+        NSLog(@"sortedArray%@",sortedArray);
     });
 }
 

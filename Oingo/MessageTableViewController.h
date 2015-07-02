@@ -12,9 +12,12 @@
 #import <Foundation/Foundation.h>
 #import <Parse/Parse.h>
 
+
+@class CongressFinderAPI;
 @interface MessageTableViewController : UITableViewController
 
-
+@property (nonatomic, retain) NSMutableDictionary *sections;
+@property (nonatomic, retain) NSMutableDictionary *sectionToCategoryMap;
 @property(nonatomic) Campaign *selectedCampaign;
 @property(nonatomic) NSArray *messageList;
 @property(nonatomic) NSMutableArray *messageListIncludingReps;
@@ -25,14 +28,12 @@
 @property (weak, nonatomic) IBOutlet UILabel *tableHeaderSubLabel;
 @property (weak, nonatomic) IBOutlet UIView *tableHeaderView;
 @property(nonatomic) PFUser *currentUser;
-@property(nonatomic) NSString *zipCode;
-@property(nonatomic) CLLocation *location;
 @property(nonatomic) BOOL isRepsLoaded;
 - (IBAction)shareSegmentTwitter:(id)sender;
 - (IBAction)shareSegmentFacebook:(id)sender;
 - (void)lookUpZip;
 - (void)getUserLocation;
+//-(void)assignSectionHelpers:(NSMutableDictionary*)sections categoryMap:(NSMutableDictionary*)sectionToCategoryMap;
 
--(void)prepSections:array;
 -(NSString *) categoryForSection:(NSInteger)section;
 @end

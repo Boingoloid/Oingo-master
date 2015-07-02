@@ -33,6 +33,9 @@
 		CE2BF9741B3E595000AB15AC /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CE2BF9731B3E595000AB15AC /* MessageUI.framework */; };
 		CE2BF9771B3E5A1700AB15AC /* EmailComposerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CE2BF9761B3E5A1700AB15AC /* EmailComposerViewController.m */; };
 		CE31B1A01B420C670048A5B1 /* MessageTableViewRepresentativeCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CE31B19F1B420C670048A5B1 /* MessageTableViewRepresentativeCell.m */; };
+		CE31B1A31B4361770048A5B1 /* MessageTableViewHeaderCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CE31B1A21B4361770048A5B1 /* MessageTableViewHeaderCell.m */; };
+		CE31B1A61B448D6C0048A5B1 /* SessionDefaults.m in Sources */ = {isa = PBXBuildFile; fileRef = CE31B1A51B448D6C0048A5B1 /* SessionDefaults.m */; };
+		CE31B1A91B44923B0048A5B1 /* ParseAPI.m in Sources */ = {isa = PBXBuildFile; fileRef = CE31B1A81B44923B0048A5B1 /* ParseAPI.m */; };
 		CE395D881AED5790006786C0 /* twittericon320.png in Resources */ = {isa = PBXBuildFile; fileRef = CE395D871AED5790006786C0 /* twittericon320.png */; };
 		CE46B1381B043A8000A4D671 /* blue_arrow_png_by_maddielovesselly-d4ys3ti (1).png in Resources */ = {isa = PBXBuildFile; fileRef = CE46B1371B043A8000A4D671 /* blue_arrow_png_by_maddielovesselly-d4ys3ti (1).png */; };
 		CE46B13A1B044D5F00A4D671 /* greyarrow.png in Resources */ = {isa = PBXBuildFile; fileRef = CE46B1391B044D5F00A4D671 /* greyarrow.png */; };
@@ -152,6 +155,12 @@
 		CE2BF9761B3E5A1700AB15AC /* EmailComposerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EmailComposerViewController.m; sourceTree = "<group>"; };
 		CE31B19E1B420C670048A5B1 /* MessageTableViewRepresentativeCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MessageTableViewRepresentativeCell.h; sourceTree = "<group>"; };
 		CE31B19F1B420C670048A5B1 /* MessageTableViewRepresentativeCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MessageTableViewRepresentativeCell.m; sourceTree = "<group>"; };
+		CE31B1A11B4361770048A5B1 /* MessageTableViewHeaderCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MessageTableViewHeaderCell.h; sourceTree = "<group>"; };
+		CE31B1A21B4361770048A5B1 /* MessageTableViewHeaderCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MessageTableViewHeaderCell.m; sourceTree = "<group>"; };
+		CE31B1A41B448D6C0048A5B1 /* SessionDefaults.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SessionDefaults.h; sourceTree = "<group>"; };
+		CE31B1A51B448D6C0048A5B1 /* SessionDefaults.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SessionDefaults.m; sourceTree = "<group>"; };
+		CE31B1A71B44923B0048A5B1 /* ParseAPI.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ParseAPI.h; sourceTree = "<group>"; };
+		CE31B1A81B44923B0048A5B1 /* ParseAPI.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ParseAPI.m; sourceTree = "<group>"; };
 		CE395D851AED5422006786C0 /* Accounts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accounts.framework; path = System/Library/Frameworks/Accounts.framework; sourceTree = SDKROOT; };
 		CE395D871AED5790006786C0 /* twittericon320.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = twittericon320.png; path = Images/twittericon320.png; sourceTree = "<group>"; };
 		CE40D7FF1AF382A5006F2D2E /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
@@ -355,6 +364,8 @@
 				CEEF25061B015ACA00EFB257 /* MessageTableViewController.m */,
 				CEEF250F1B017C8200EFB257 /* MessageTableViewCell.h */,
 				CEEF25101B017C8200EFB257 /* MessageTableViewCell.m */,
+				CE31B1A11B4361770048A5B1 /* MessageTableViewHeaderCell.h */,
+				CE31B1A21B4361770048A5B1 /* MessageTableViewHeaderCell.m */,
 				CE31B19E1B420C670048A5B1 /* MessageTableViewRepresentativeCell.h */,
 				CE31B19F1B420C670048A5B1 /* MessageTableViewRepresentativeCell.m */,
 				CE241A4F1AEAE45A00F22144 /* Images.xcassets */,
@@ -525,6 +536,10 @@
 				CE6073321B3AD475007B567C /* CongressPhotoFinderAPI.m */,
 				CE2BF9751B3E5A1700AB15AC /* EmailComposerViewController.h */,
 				CE2BF9761B3E5A1700AB15AC /* EmailComposerViewController.m */,
+				CE31B1A41B448D6C0048A5B1 /* SessionDefaults.h */,
+				CE31B1A51B448D6C0048A5B1 /* SessionDefaults.m */,
+				CE31B1A71B44923B0048A5B1 /* ParseAPI.h */,
+				CE31B1A81B44923B0048A5B1 /* ParseAPI.m */,
 			);
 			name = Methods;
 			sourceTree = "<group>";
@@ -770,12 +785,15 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CE31B1A31B4361770048A5B1 /* MessageTableViewHeaderCell.m in Sources */,
 				CE241A481AEAE45A00F22144 /* Oingo.xcdatamodeld in Sources */,
 				CEF1C9011B0E7B79003EFAD1 /* WebViewController.m in Sources */,
 				CE87CACC1AFABA920084C666 /* Program.m in Sources */,
+				CE31B1A61B448D6C0048A5B1 /* SessionDefaults.m in Sources */,
 				CE2BF9771B3E5A1700AB15AC /* EmailComposerViewController.m in Sources */,
 				CE241A451AEAE45A00F22144 /* AppDelegate.m in Sources */,
 				CE14A8AA1B211B7B0032664C /* SignUpViewController.m in Sources */,
+				CE31B1A91B44923B0048A5B1 /* ParseAPI.m in Sources */,
 				CED419DD1AED690100885470 /* CampaignViewController.m in Sources */,
 				CE87CABE1AF977120084C666 /* Campaign.m in Sources */,
 				CEB4ED8E1AF8305E0055D547 /* ProgramDetailTableViewController.m in Sources */,

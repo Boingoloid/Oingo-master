@@ -1,0 +1,23 @@
+//
+//  MessageTableViewHeaderCell.m
+//  Oingo
+//
+//  Created by Matthew Acalin on 6/30/15.
+//  Copyright (c) 2015 Oingo Inc. All rights reserved.
+//
+
+#import "MessageTableViewHeaderCell.h"
+
+@implementation MessageTableViewHeaderCell
+
+- (void)awakeFromNib {
+    // Initialization code
+}
+
+- (void)setSelected:(BOOL)selected animated:(BOOL)animated {
+    [super setSelected:selected animated:animated];
+
+    // Configure the view for the selected state
+}
+
+@end

@@ -8,15 +8,16 @@
 
 #import <Foundation/Foundation.h>
 #import "MessageTableViewController.h"
+#import "ParseAPI.h"
 
 
 @interface CongressFinderAPI : NSObject 
 @property(nonatomic) NSMutableArray *messageList;
-
 @property(nonatomic) NSMutableArray *messageListWithCongress;
-
+@property(nonatomic) ParseAPI *parseAPI;
 @property(nonatomic) MessageTableViewController *messageTableViewController;
+
 -(void)getCongress:zipCode addToMessageList:messageList;
--(void)getCongressWithLocation:location addToMessageList:(NSMutableArray*)messageList;
+-(void)getCongressWithLatitude:(double)latitude andLongitude:(double)longitude addToMessageList:(NSMutableArray*)messageList;
 
 @end

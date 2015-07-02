@@ -13,4 +13,5 @@
 @interface CongressPhotoFinderAPI : NSObject
 @property(nonatomic) MessageTableViewCell *tableViewCell;
 -(void)getPhotos:bioguideID;
+
 @end

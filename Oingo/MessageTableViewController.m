@@ -23,25 +23,24 @@
 #import <FBSDKShareKit/FBSDKShareKit.h>
 #import <FBSDKCoreKit/FBSDKCoreKit.h>
 #import <FBSDKLoginKit/FBSDKLoginKit.h>
-#import "CongressFinderAPI.h"
 #import "CongressionalMessageItem.h"
 #import <UIKit/UIKit.h>
 #import "MakePhoneCallAPI.h"
 #import "EmailComposerViewController.h"
+#import "ParseAPI.h"
+#import "CongressFinderAPI.h"
+
 
 
 
 @interface MessageTableViewController () <UIGestureRecognizerDelegate,CLLocationManagerDelegate>
-@property (nonatomic, retain) NSMutableDictionary *sections;
-@property (nonatomic, retain) NSMutableDictionary *sectionToCategoryMap;
+
 @property(nonatomic) CLLocationManager *locationManager;
 @property(nonatomic) UILabel *longitudeLabel;
 @property(nonatomic) UILabel *latitudeLabel;
 @end
 
 @implementation MessageTableViewController
-@synthesize sections = _sections;
-@synthesize sectionToCategoryMap = _sectionToCategoryMap;
 
 MessageItem *messageItem;
 CongressionalMessageItem *congressionalMessageItem;
@@ -51,116 +50,43 @@ NSInteger section;
 NSInteger sectionHeaderHeight = 16;
 NSInteger headerHeight = 48;
 NSInteger footerHeight = 6;
+NSInteger localRepSectionHeaderHeight = 50;
 
 
 -(void)viewWillAppear:(BOOL)animated {
     
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-    
+    PFUser *currentUser = [PFUser currentUser];
+
     // If a registered user then set default zip and location if available
-    if([PFUser currentUser]){
-        if([[PFUser currentUser] valueForKey:@"location"]) {
-            [defaults setObject:[[PFUser currentUser] valueForKey:@"location"] forKey:@"location"];
-            self.location = [defaults objectForKey:@"location"];
+    //? do I need to check if a sessionDefaults object already exists?
+    if(currentUser){
+        if([currentUser valueForKey:@"locationLatitude"] && [currentUser valueForKey:@"locationLongitude"]) {
+            [defaults setObject:[currentUser valueForKey:@"locationLatitude"] forKey:@"latitude"];
+            [defaults setObject:[currentUser valueForKey:@"locationLongitude"] forKey:@"longitude"];
             [defaults synchronize];
             NSLog(@"user already has value for location");
         }
         
-        if ([[PFUser currentUser] valueForKey:@"zipCode"]) {
-            [[NSUserDefaults standardUserDefaults] setObject:[[PFUser currentUser] valueForKey:@"zipCode"] forKey:@"zipCode"];
-            self.zipCode= [defaults stringForKey:@"zipCode"];
-            [[NSUserDefaults standardUserDefaults] synchronize];
+        if ([currentUser valueForKey:@"zipCode"]) {
+            [defaults setObject:[currentUser valueForKey:@"zipCode"] forKey:@"zipCode"];
+            [defaults synchronize];
             NSLog(@"user already has value for zip");
         }
-    } else {    // not user
-        
-        // Now check user defaults to see if zip or location in cache
-        if([[NSUserDefaults standardUserDefaults] stringForKey:@"latitude"] && [[NSUserDefaults standardUserDefaults] stringForKey:@"longitude"]){
-            CLLocation *location = [[CLLocation alloc]initWithLatitude:[[defaults objectForKey:@"latitude"] doubleValue] longitude:[[[NSUserDefaults standardUserDefaults] stringForKey:@"longitude"] doubleValue]];
-            self.location = location;
-            NSLog(@"not user, but has location ");
-            
-        }
-        if([[NSUserDefaults standardUserDefaults] stringForKey:@"zipCode"]){
-            self.zipCode= [defaults stringForKey:@"zipCode"];
-                        NSLog(@"not user, but has zipcode ");
-        }
     }
     
-    
-    // if location data present, load with local reps
-    if(self.zipCode || self.location) {
-        NSLog(@"user has either zip or location %@,%@",self.location, self.zipCode);
-        // zip here, fill in reps
-        PFQuery *query = [PFQuery queryWithClassName:@"Messages"];
-        NSLog(@"selected campaign%@",self.selectedCampaign);
-        [query whereKey:@"campaignID" equalTo:[self.selectedCampaign valueForKey:@"campaignID"]];
-        [query orderByDescending:@"messageCategory"];
-        [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
-            if (!error) {
-                self.messageList = (NSMutableArray*)objects;  //messageList has everything ordered by category
-                NSLog(@"messagelist location present:%@",self.messageList);
-                //add congress people to list
-                if(self.location){ //based on coordinate location
-                    NSLog(@"got location, initiating congressfinder");
-                    NSLog(@"initiating get congresswithlocation method:%@ and location %@",self.messageList, self.location);
-                    
-                    CongressFinderAPI *congressFinder = [[CongressFinderAPI alloc]init];
-                    congressFinder.messageTableViewController = self;
-                    [congressFinder getCongressWithLocation:self.location addToMessageList:(NSMutableArray*)self.messageList];
-                } else { //or based on zipCode
-                    CongressFinderAPI *congressFinder = [[CongressFinderAPI alloc]init];
-                    congressFinder.messageTableViewController = self;
-                    [congressFinder getCongress:self.zipCode addToMessageList:self.messageList];
-                }
-             //   [self.tableView reloadData];
-            } else {
-                NSLog(@"Error: %@ %@", error, [error userInfo]);
-            }
-        }];
-        
-    } else {
-        
-        // No location data, load without it
-        PFQuery *query = [PFQuery queryWithClassName:@"Messages"];
-        [query whereKey:@"campaignID" equalTo:[self.selectedCampaign valueForKey:@"campaignID"]];
-        [query orderByDescending:@"messageCategory"];
-        [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
-            if (!error) {
-                self.messageList = (NSMutableArray*)objects;  //messageList has everything ordered by category
-                [self prepSections:self.messageList];
-                [self.tableView reloadData];
-            } else {
-                NSLog(@"Error: %@ %@", error, [error userInfo]);
-            }
-        }];
-    }
-    
+    ParseAPI *parseAPI = [[ParseAPI alloc]init];
+    parseAPI.messageTableViewController = self;
+    [parseAPI getParseMessageData:self.selectedCampaign];
 }
 
-- (void)prepSections:(id)array {
 
-    [self.sections removeAllObjects];
-    [self.sectionToCategoryMap removeAllObjects];
-    self.sections = [NSMutableDictionary dictionary];
-    self.sectionToCategoryMap = [NSMutableDictionary dictionary];
-    //Loops through every messageItem in the messageList and creates 2 dictionaries with index values and categories.
-    NSInteger section = 0;
-    NSInteger rowIndex = 0; //now 1
-    for (MessageItem  *messageItem in self.messageList) {
-        NSString *category = [messageItem valueForKey:@"messageCategory"]; //retrieves category for each message -1st regulator
-        NSMutableArray *objectsInSection = [self.sections objectForKey:category]; //assigns objectsInSection value of sections for current category
-        if (!objectsInSection) {
-            objectsInSection = [NSMutableArray array];  //if new create array
-            // this is the first time we see this category - increment the section index
-            // sectionToCategoryMap literally it ends up (Regulator = 0)
-            [self.sectionToCategoryMap setObject:category forKey:[NSNumber numberWithInt:(int)section++]]; // zero
-        }
-        [objectsInSection addObject:[NSNumber numberWithInt:(int)rowIndex++]]; //adds index number to objectsInSection temp array.
-        [self.sections setObject:objectsInSection forKey:category]; //overwrite 1st object with new objects (2 regulatory objects).
-    }
-}
-
+//-(void)assignSectionHelpers:(NSMutableDictionary*)sections categoryMap:(NSMutableDictionary*)sectionToCategoryMap {
+//    self.sections = sections;
+//    self.sectionToCategoryMap = sectionToCategoryMap;
+//        NSLog(@"tableview self.sections%@",self.sections);
+//    
+//}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -463,9 +389,12 @@ NSInteger footerHeight = 6;
 
 -(void)logout {
     //removes zip default
-    [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"zipCode"];
-    [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"location"];
-    [[NSUserDefaults standardUserDefaults] synchronize];
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    [defaults removeObjectForKey:@"zipCode"];
+    [defaults removeObjectForKey:@"latitude"];
+    [defaults removeObjectForKey:@"longitude"];
+    [defaults synchronize];
+    
     [PFUser logOut];
     NSLog(@"user logged out");
 }
@@ -523,21 +452,28 @@ NSInteger footerHeight = 6;
     [errorAlert show];
 }
 
+
+
 - (void)locationManager:(CLLocationManager *)manager didUpdateToLocation:(CLLocation *)newLocation fromLocation:(CLLocation *)oldLocation
 {
     [self.locationManager stopUpdatingLocation];
     
-    [[NSUserDefaults standardUserDefaults] setObject:[NSString stringWithFormat:@"%f",newLocation.coordinate.latitude] forKey:@"latitude"];
-    [[NSUserDefaults standardUserDefaults] setObject:[NSString stringWithFormat:@"%f",newLocation.coordinate.longitude] forKey:@"longitude"];
+    //Set the location default
     
-    // if a current user entered location, then save it to self and to user.
-    self.location = newLocation;
-    //[[NSUserDefaults standardUserDefaults] setObject:newLocation forKey:@"location"];
-    [[NSUserDefaults standardUserDefaults] synchronize];
+    
+    
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    [defaults setObject:[NSString stringWithFormat:@"%f",newLocation.coordinate.latitude] forKey:@"latitude"];
+    [defaults setObject:[NSString stringWithFormat:@"%f",newLocation.coordinate.longitude] forKey:@"longitude"];
+    [defaults synchronize];
+    NSLog(@"UPDATING DEFAULTS!!%@,%@",[defaults valueForKey:@"latitude"],[defaults valueForKey:@"longitude"]);
     
     //if currently a user then save location info to account.
     if([PFUser currentUser]) {
-        [[PFUser currentUser] setValue:newLocation forKey:@"location"]; //no user
+        NSString *latitudeString = [NSString stringWithFormat:@"%f",newLocation.coordinate.latitude];
+        NSString *longitudeString =[NSString stringWithFormat:@"%f",newLocation.coordinate.longitude];
+        [[PFUser currentUser] setValue:latitudeString forKey:@"locationLatitude"];
+        [[PFUser currentUser] setValue:longitudeString forKey:@"locationLongitude"];
         [[PFUser currentUser] saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
             if(error) {
                 NSLog(@"error UPDATING COORDINATES!!");
@@ -547,9 +483,12 @@ NSInteger footerHeight = 6;
         }];
     }
     
+    ParseAPI *parseAPI = [[ParseAPI alloc]init];
+    parseAPI.MessageTableViewController = self;
     CongressFinderAPI *congressFinder = [[CongressFinderAPI alloc]init];
     congressFinder.messageTableViewController = self;
-    [congressFinder getCongressWithLocation:newLocation addToMessageList:(NSMutableArray*)self.messageList];
+    congressFinder.parseAPI = parseAPI;
+    [congressFinder getCongressWithLatitude:newLocation.coordinate.latitude andLongitude:newLocation.coordinate.longitude addToMessageList:(NSMutableArray*)self.messageList];
 
 }
 
@@ -582,8 +521,9 @@ NSInteger footerHeight = 6;
             [self retryZipCode:zipCode count:count];
         } else {
             //set user default so zip stays if user goes off table
-            [[NSUserDefaults standardUserDefaults] setObject:zipCode forKey:@"zipCode"];
-            [[NSUserDefaults standardUserDefaults] synchronize];
+            NSUserDefaults *defaults = [[NSUserDefaults alloc]init];
+            [defaults setObject:zipCode forKey:@"zipCode"];
+            [defaults synchronize];
             
             //If user, update the user current zip
             if([PFUser currentUser]) {
@@ -594,11 +534,13 @@ NSInteger footerHeight = 6;
                     }
                 }];
             }
-            self.zipCode = zipCode;
-
-            CongressFinderAPI *congressFinderAPI = [[CongressFinderAPI alloc]init];
-            congressFinderAPI.messageTableViewController = self;
-            [congressFinderAPI getCongress:zipCode addToMessageList:self.messageList];
+            
+            ParseAPI *parseAPI = [[ParseAPI alloc]init];
+            parseAPI.MessageTableViewController = self;
+            CongressFinderAPI *congressFinder = [[CongressFinderAPI alloc]init];
+            congressFinder.messageTableViewController = self;
+            congressFinder.parseAPI = parseAPI;
+            [congressFinder getCongress:zipCode addToMessageList:self.messageList];
             NSLog(@"zip%@ messagelist%@",zipCode, self.messageList);
         }
     }];
@@ -638,10 +580,11 @@ NSInteger footerHeight = 6;
             [self retryZipCode:zipCode count:count];
         } else {
             //set user default so zip stays if user goes off table
-            [[NSUserDefaults standardUserDefaults] setObject:zipCode forKey:@"zipCode"];
-            [[NSUserDefaults standardUserDefaults] synchronize];
-
-            //If user update the user current zip
+            NSUserDefaults *defaults = [[NSUserDefaults alloc]init];
+            [defaults setObject:zipCode forKey:@"zipCode"];
+            [defaults synchronize];
+            
+            //If user, update the user current zip
             if([PFUser currentUser]) {
                 [[PFUser currentUser] setValue:zipCode forKey:@"zipCode"];
                 [[PFUser currentUser] saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
@@ -650,16 +593,14 @@ NSInteger footerHeight = 6;
                     }
                 }];
             }
-            self.zipCode = zipCode;
-            // if a current user entered zip, then save it.
-            if(self.currentUser) {
-                [self.currentUser setValue:zipCode forKey:@"zipCode"]; //no user
-                [self.currentUser saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {}];
-            }
             
-            CongressFinderAPI *congressFinderAPI = [[CongressFinderAPI alloc]init];
-            congressFinderAPI.messageTableViewController = self;
-            [congressFinderAPI getCongress:zipCode addToMessageList:self.messageList];
+            ParseAPI *parseAPI = [[ParseAPI alloc]init];
+            parseAPI.MessageTableViewController = self;
+            CongressFinderAPI *congressFinder = [[CongressFinderAPI alloc]init];
+            congressFinder.messageTableViewController = self;
+            congressFinder.parseAPI = parseAPI;
+            [congressFinder getCongress:zipCode addToMessageList:self.messageList];
+            NSLog(@"zip%@ messagelist%@",zipCode, self.messageList);
         }
     }];
     [alertController addAction:lookUpAction];
@@ -675,9 +616,10 @@ NSInteger footerHeight = 6;
     NSString *category= [self categoryForSection:indexPath.section];
     NSArray *rowIndecesInSection = [self.sections objectForKey:category];
     NSNumber *rowIndex = [rowIndecesInSection objectAtIndex:indexPath.row]; //pulling the row indece from array above
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     NSLog(@"category: %@",category);
     
-    if([category isEqualToString:@"Local Representative"] && !self.zipCode && !self.location) {
+    if([category isEqualToString:@"Local Representative"] && ![defaults valueForKey:@"zipCode"] && ![defaults valueForKey:@"latitude"]) {
         //user has no zip or location
         NSLog(@"user no zip or loaction local rep cell");
         MessageTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"Cell" forIndexPath:indexPath];
@@ -707,7 +649,9 @@ NSInteger footerHeight = 6;
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     NSString *category= [self categoryForSection:indexPath.section];
-    if([category isEqualToString:@"Local Representative"] && !self.zipCode && !self.location) {
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    
+    if([category isEqualToString:@"Local Representative"] && ![defaults valueForKey:@"zipCode"] && ![defaults valueForKey:@"latitude"]) {
         return 30;
     } else if([category isEqualToString:@"Local Representative"]) {
         return 70;
@@ -734,16 +678,15 @@ NSInteger footerHeight = 6;
 #pragma mark - Header and Footers
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
-
     NSString *category= [self categoryForSection:section];
-    if([category isEqualToString:@"Local Representative"] && !self.zipCode && !self.location) {
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    if([category isEqualToString:@"Local Representative"] && ![defaults valueForKey:@"zipCode"] && ![defaults valueForKey:@"latitude"]) {
         return sectionHeaderHeight;
     } else if([category isEqualToString:@"Local Representative"]) {
-        return sectionHeaderHeight +62;
+        return localRepSectionHeaderHeight + 3;
     } else {
         return sectionHeaderHeight;
     }
-
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section {
@@ -752,10 +695,10 @@ NSInteger footerHeight = 6;
 
 -(UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
 {
-
     NSString *category= [self categoryForSection:section];
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
 
-    if([category isEqualToString:@"Local Representative"] && !self.zipCode && !self.location) {
+    if([category isEqualToString:@"Local Representative"] && ![defaults valueForKey:@"zipCode"] && ![defaults valueForKey:@"latitude"]) {
         //do nothing
         UIView *view = [[UIView alloc] initWithFrame:CGRectMake(7, 0, tableView.frame.size.width -14 , sectionHeaderHeight)];
         UILabel *sectionLabel = [[UILabel alloc] init];
@@ -773,7 +716,7 @@ NSInteger footerHeight = 6;
         return view;
         
     } else if([category isEqualToString:@"Local Representative"]) {
-        UIView *view = [[UIView alloc] initWithFrame:CGRectMake(7, 0, tableView.frame.size.width -14 , sectionHeaderHeight +100)];
+        UIView *view = [[UIView alloc] initWithFrame:CGRectMake(7, 0, tableView.frame.size.width -14 , localRepSectionHeaderHeight)];
         UILabel *sectionLabel = [[UILabel alloc] init];
         sectionLabel.frame = CGRectMake(7, 0, tableView.frame.size.width -14, sectionHeaderHeight);
         sectionLabel.backgroundColor = [UIColor colorWithRed:.96 green:.96 blue:.96 alpha:1];
@@ -788,9 +731,10 @@ NSInteger footerHeight = 6;
         [view addSubview:sectionLabel];
         
         
-        UILabel *messageLabelForReps = [[UILabel alloc]initWithFrame:CGRectMake(10, 16,tableView.frame.size.width -20  , 61)];
+        UILabel *messageLabelForReps = [[UILabel alloc]initWithFrame:CGRectMake(10, 20,tableView.frame.size.width -20  , localRepSectionHeaderHeight - 20)];
         messageLabelForReps.text = [NSString stringWithFormat:@"\"%@\"", self.repMessageText];
-//        messageLabelForReps.font = [UIFont boldSystemFontOfSize:12];
+        messageLabelForReps.lineBreakMode = NSLineBreakByWordWrapping;
+        messageLabelForReps.numberOfLines = 0;
         messageLabelForReps.font = [UIFont fontWithName:@"HelveticaNeue" size:12.0f];
         messageLabelForReps.textColor = [UIColor blackColor];
         messageLabelForReps.textAlignment = NSTextAlignmentCenter;
