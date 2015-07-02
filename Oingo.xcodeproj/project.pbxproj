@@ -64,6 +64,7 @@
 		CEA79FD61AEC7C0D00535B06 /* ProgramsTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CEA79FD51AEC7C0D00535B06 /* ProgramsTableViewController.m */; };
 		CEB187911B18F8C400C86955 /* MessageOptionsTableTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CEB187901B18F8C400C86955 /* MessageOptionsTableTableViewController.m */; };
 		CEB187941B18FAD600C86955 /* MessageOptionsTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CEB187931B18FAD600C86955 /* MessageOptionsTableViewCell.m */; };
+		CEB292501B4528CE00A4E8E0 /* TwitterAPITweet.m in Sources */ = {isa = PBXBuildFile; fileRef = CEB2924F1B4528CE00A4E8E0 /* TwitterAPITweet.m */; };
 		CEB4ED8E1AF8305E0055D547 /* ProgramDetailTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CEB4ED8D1AF8305E0055D547 /* ProgramDetailTableViewController.m */; };
 		CED419DD1AED690100885470 /* CampaignViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CED419DC1AED690100885470 /* CampaignViewController.m */; };
 		CEE04B9A1B34B9EC00AAF8EA /* lightGrayButtonBackground.png in Resources */ = {isa = PBXBuildFile; fileRef = CEE04B991B34B9EC00AAF8EA /* lightGrayButtonBackground.png */; };
@@ -216,6 +217,8 @@
 		CEB187901B18F8C400C86955 /* MessageOptionsTableTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MessageOptionsTableTableViewController.m; sourceTree = "<group>"; };
 		CEB187921B18FAD600C86955 /* MessageOptionsTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MessageOptionsTableViewCell.h; sourceTree = "<group>"; };
 		CEB187931B18FAD600C86955 /* MessageOptionsTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MessageOptionsTableViewCell.m; sourceTree = "<group>"; };
+		CEB2924E1B4528CE00A4E8E0 /* TwitterAPITweet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TwitterAPITweet.h; sourceTree = "<group>"; };
+		CEB2924F1B4528CE00A4E8E0 /* TwitterAPITweet.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TwitterAPITweet.m; sourceTree = "<group>"; };
 		CEB4ED8C1AF8305E0055D547 /* ProgramDetailTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProgramDetailTableViewController.h; sourceTree = "<group>"; };
 		CEB4ED8D1AF8305E0055D547 /* ProgramDetailTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProgramDetailTableViewController.m; sourceTree = "<group>"; };
 		CED419DB1AED690100885470 /* CampaignViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CampaignViewController.h; sourceTree = "<group>"; };
@@ -540,6 +543,8 @@
 				CE31B1A51B448D6C0048A5B1 /* SessionDefaults.m */,
 				CE31B1A71B44923B0048A5B1 /* ParseAPI.h */,
 				CE31B1A81B44923B0048A5B1 /* ParseAPI.m */,
+				CEB2924E1B4528CE00A4E8E0 /* TwitterAPITweet.h */,
+				CEB2924F1B4528CE00A4E8E0 /* TwitterAPITweet.m */,
 			);
 			name = Methods;
 			sourceTree = "<group>";
@@ -785,6 +790,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CEB292501B4528CE00A4E8E0 /* TwitterAPITweet.m in Sources */,
 				CE31B1A31B4361770048A5B1 /* MessageTableViewHeaderCell.m in Sources */,
 				CE241A481AEAE45A00F22144 /* Oingo.xcdatamodeld in Sources */,
 				CEF1C9011B0E7B79003EFAD1 /* WebViewController.m in Sources */,
