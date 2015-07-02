@@ -17,31 +17,20 @@
 @implementation TwitterAPITweet
 
 -(void)shareSegmentTwitterAPI {
+    //if statement below
+    //1) logged in?, if not send to sign up screen
+    //2) else if logged in, link account to twitter account, then send tweet
+    //3) else send tweet b/c signed up and linked already.
     PFUser *currentUser = [PFUser currentUser];
-    if(!currentUser) {  //if user not logged in, then go to signUpInScreen
+    if(!currentUser) {
         [self pushToSignIn];
-    } else if(![PFTwitterUtils isLinkedWithUser:currentUser]){     //if logged in but not linked
+    } else if(![PFTwitterUtils isLinkedWithUser:currentUser]){
         NSLog(@"user account not linked to twitter");
-        [PFTwitterUtils linkUser:currentUser block:^(BOOL succeeded, NSError *error) {
-            if(error){
-                NSLog(@"There was an issue linking your twitter account. Please try again.");
-            }
-            else {
-                NSLog(@"twitter account was linked successfully");
-                [self shareSegmentWithTwitterComposer];
-            }
-        }];
+        [self linkUserToTwitter:currentUser];
     } else {
-        //Send the tweet
         [self shareSegmentWithTwitterComposer];
     }
 }
-
--(void) pushToSignIn {
-    UIViewController *controller = [self.messageTableViewController.storyboard instantiateViewControllerWithIdentifier:@"signInViewController"];
-    [self.messageTableViewController.navigationController pushViewController:controller animated:YES];
-}
-
 
 -(void)shareSegmentWithTwitterComposer{
     NSString *tweetText = [NSString stringWithFormat:@"%@: %@",[self.selectedProgram valueForKey:@"programTitle"],[self.selectedCampaign valueForKey:@"topicTitle"]];
@@ -59,6 +48,24 @@
             NSLog(@"Tweet composition cancelled");
         } else {
             NSLog(@"Tweet is sent.");
+        }
+    }];
+}
+
+
+-(void) pushToSignIn {
+    UIViewController *controller = [self.messageTableViewController.storyboard instantiateViewControllerWithIdentifier:@"signInViewController"];
+    [self.messageTableViewController.navigationController pushViewController:controller animated:YES];
+}
+
+-(void)linkUserToTwitter:currentUser{
+    [PFTwitterUtils linkUser:currentUser block:^(BOOL succeeded, NSError *error) {
+        if(error){
+            NSLog(@"There was an issue linking your twitter account. Please try again.");
+        }
+        else {
+            [self shareSegmentWithTwitterComposer];
+            
         }
     }];
 }

@@ -30,6 +30,7 @@
 #import "ParseAPI.h"
 #import "CongressFinderAPI.h"
 #import "TwitterAPITweet.h"
+#import "FacebookAPIPost.h"
 
 
 
@@ -182,67 +183,10 @@ NSInteger localRepSectionHeaderHeight = 50;
     twitterAPITweet.selectedCampaign = self.selectedCampaign;
     twitterAPITweet.selectedProgram = self.selectedProgram;
     [twitterAPITweet shareMessageTwitterAPI:cell];
-    
-    
-//    //Check if user logged in
-//    PFUser *currentUser = [PFUser currentUser];
-//    if(!currentUser) {  //if user not logged in, then go to signUpInScreen
-//        UIViewController *controller = [self.storyboard instantiateViewControllerWithIdentifier:@"signInViewController"];
-//        [self.navigationController pushViewController:controller animated:YES];
-//        
-//     //if logged in but not linked
-//    } else if(![PFTwitterUtils isLinkedWithUser:currentUser]){
-//        NSLog(@"user account not linked to twitter");
-//        [PFTwitterUtils linkUser:currentUser block:^(BOOL succeeded, NSError *error) {
-//            if(error){
-//                NSLog(@"There was an issue linking your twitter account. Please try again.");
-//            }
-//            else {
-//                NSLog(@"twitter account is linked");
-//                
-//                //Send the tweet
-//                NSString *tweetText = [NSString stringWithFormat:@"%@: %@",[self.selectedProgram valueForKey:@"programTitle"],[self.selectedCampaign valueForKey:@"topicTitle"]];
-//                NSURL *tweetURL = [NSURL URLWithString:[self.selectedCampaign valueForKey:@"linkToContent"]];
-//                PFFile *theImage = [self.selectedCampaign valueForKey:@"campaignImage"];
-//                NSData *imageData = [theImage getData];
-//                UIImage *image = [UIImage imageWithData:imageData];
-//                TWTRComposer *composer = [[TWTRComposer alloc] init];
-//                [composer setText:tweetText];
-//                [composer setURL:tweetURL];
-//                [composer setImage:image];
-//                [composer showWithCompletion:^(TWTRComposerResult result) {
-//                    if (result == TWTRComposerResultCancelled) {
-//                        NSLog(@"Tweet composition cancelled");
-//                    } else {
-//                        NSLog(@"Tweet is sent.");
-//                    }
-//                }];
-//            }
-//        }];
-//    } else {
-//        //Send the tweet
-//        NSString *tweetText = [NSString stringWithFormat:@"%@: %@",[self.selectedProgram valueForKey:@"programTitle"],[self.selectedCampaign valueForKey:@"topicTitle"]];
-//        NSURL *tweetURL = [NSURL URLWithString:[self.selectedCampaign valueForKey:@"linkToContent"]];
-//        PFFile *theImage = [self.selectedCampaign valueForKey:@"campaignImage"];
-//        NSData *imageData = [theImage getData];
-//        UIImage *image = [UIImage imageWithData:imageData];
-//        TWTRComposer *composer = [[TWTRComposer alloc] init];
-//        [composer setText:tweetText];
-//        [composer setURL:tweetURL];
-//        [composer setImage:image];
-//        [composer showWithCompletion:^(TWTRComposerResult result) {
-//            if (result == TWTRComposerResultCancelled) {
-//                NSLog(@"Tweet composition cancelled");
-//            } else {
-//                NSLog(@"Tweet is sent.");
-//            }
-//        }];
-//    }
 }
 
 
 - (IBAction)shareSegmentTwitter:(id)sender {
-    
     TwitterAPITweet *twitterAPITweet = [[TwitterAPITweet alloc]init];
     twitterAPITweet.messageTableViewController = self;
     twitterAPITweet.selectedCampaign = self.selectedCampaign;
@@ -251,91 +195,21 @@ NSInteger localRepSectionHeaderHeight = 50;
 }
 
 - (IBAction)shareSegmentFacebook:(id)sender {
-    //Check if user logged in
-    PFUser *currentUser = [PFUser currentUser];
-    if(!currentUser) {  //if user not logged in, then go to signUpInScreen
-        UIViewController *controller = [self.storyboard instantiateViewControllerWithIdentifier:@"signInViewController"];
-        [self.navigationController pushViewController:controller animated:YES];
-
-    
-        
-        //if logged in but not linked
-    } else if(![PFFacebookUtils isLinkedWithUser:currentUser]){
-        NSLog(@"user account not linked to facebook");
-        [PFFacebookUtils linkUserInBackground:currentUser withPublishPermissions:@[@"publish_actions"] block:^(BOOL succeeded, NSError *error) {
-            if(error){
-                NSLog(@"There was an issue linking your facebook account. Please try again.");
-            }
-            else {
-                NSLog(@"facebook account is linked");
-                //Send the facebook status update
-                FBSDKShareLinkContent *content = [FBSDKShareLinkContent new];
-                content.contentURL = [NSURL URLWithString:self.selectedLink];
-                content.contentTitle = [self.selectedCampaign valueForKey:@"programTitle"];
-                content.contentDescription = [self.selectedCampaign valueForKey:@"purposeSummary"];
-                FBSDKShareDialog *shareDialog = [FBSDKShareDialog new];
-                [shareDialog setMode:FBSDKShareDialogModeAutomatic];
-                [shareDialog setShareContent:content];
-                [shareDialog setFromViewController:self];
-                [shareDialog show];
-            }
-        }];
-    } else {  //logged in and linked already
-        
-        FBSDKShareLinkContent *content = [FBSDKShareLinkContent new];
-        content.contentURL = [NSURL URLWithString:self.selectedLink];
-        content.contentTitle = [self.selectedProgram valueForKey:@"programTitle"];
-        content.contentDescription = [self.selectedCampaign valueForKey:@"purposeSummary"];
-        FBSDKShareDialog *shareDialog = [FBSDKShareDialog new];
-        [shareDialog setMode:FBSDKShareDialogModeAutomatic];
-        [shareDialog setShareContent:content];
-        [shareDialog setFromViewController:self];
-        [shareDialog show];
-    }
+    FacebookAPIPost *facebookAPIPost = [[FacebookAPIPost alloc]init];
+    facebookAPIPost.messageTableViewController = self;
+    facebookAPIPost.selectedCampaign = self.selectedCampaign;
+    facebookAPIPost.selectedProgram = self.selectedProgram;
+    [facebookAPIPost shareSegmentFacebookAPI];
 }
 
 
 - (void)postToFacebook:(MessageTableViewCell *)cell {
-    //Check if user logged in
-    PFUser *currentUser = [PFUser currentUser];
-    if(!currentUser) {  //if user not logged in, then go to signUpInScreen
-        UIViewController *controller = [self.storyboard instantiateViewControllerWithIdentifier:@"signInViewController"];
-        [self.navigationController pushViewController:controller animated:YES];
-        NSLog(@"send user to signup");
 
-        //if logged in but not linked
-    } else if(![PFFacebookUtils isLinkedWithUser:currentUser]){
-        NSLog(@"user account not linked to facebook");
-        [PFFacebookUtils linkUserInBackground:currentUser withPublishPermissions:@[@"publish_actions"] block:^(BOOL succeeded, NSError *error) {
-            if(error){
-                NSLog(@"There was an issue linking your facebook account. Please try again.");
-            } else {
-                NSLog(@"facebook account is linked");
-                
-                //Send the facebook status update
-                FBSDKShareLinkContent *content = [FBSDKShareLinkContent new];
-                content.contentURL = [NSURL URLWithString:self.selectedLink];
-                content.contentTitle = @"Test Post!";
-                content.contentDescription = @"Content Description";
-                FBSDKShareDialog *shareDialog = [FBSDKShareDialog new];
-                [shareDialog setMode:FBSDKShareDialogModeAutomatic];
-                [shareDialog setShareContent:content];
-                [shareDialog setFromViewController:self];
-                [shareDialog show];
-            }
-        }];
-    } else {  //logged in and linked already
-        
-        FBSDKShareLinkContent *content = [FBSDKShareLinkContent new];
-        content.contentURL = [NSURL URLWithString:self.selectedLink];
-        content.contentTitle = @"Test Post!";
-        content.contentDescription = @"Content Description";
-        FBSDKShareDialog *shareDialog = [FBSDKShareDialog new];
-        [shareDialog setMode:FBSDKShareDialogModeAutomatic];
-        [shareDialog setShareContent:content];
-        [shareDialog setFromViewController:self];
-        [shareDialog show];
-    }
+    FacebookAPIPost *facebookAPIPost = [[FacebookAPIPost alloc]init];
+    facebookAPIPost.messageTableViewController = self;
+    facebookAPIPost.selectedCampaign = self.selectedCampaign;
+    facebookAPIPost.selectedProgram = self.selectedProgram;
+    [facebookAPIPost shareSegmentFacebookAPI];
 }
 
 
@@ -357,7 +231,6 @@ NSInteger localRepSectionHeaderHeight = 50;
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
 }
 
 
