@@ -188,7 +188,6 @@ BOOL isMenuWithCustomOrdering = NO;
     self.messageTableViewController.sectionToCategoryMap = (NSMutableDictionary*)self.sectionToCategoryMap;
     self.messageTableViewController.messageList = self.menuList;
     
-      NSLog(@"messageList right after sections are created%@",messageList);
       NSLog(@"sections right after sections are created%@",self.sections);
       NSLog(@"categorymap after before sections are created%@",self.sectionToCategoryMap);
     [self.messageTableViewController.tableView reloadData];

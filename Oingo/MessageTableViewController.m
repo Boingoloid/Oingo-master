@@ -85,6 +85,8 @@ NSInteger footerHeight = 1;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    self.tableView.estimatedRowHeight = 68.0;
+    self.tableView.rowHeight = UITableViewAutomaticDimension;
     
     //Format table header
     self.tableHeaderView.layer.borderColor = [[UIColor whiteColor] CGColor];
@@ -147,6 +149,7 @@ NSInteger footerHeight = 1;
         
         if(isMessageBool){
             NSLog(@"touch in message cell, don't worry about it for now.");
+            
         //If touch on tweetButton, then
         } else if (CGRectContainsPoint(cell.tweetButton.frame, pointInCell)) {
             NSLog(@"touch in tweet button area");
@@ -534,7 +537,7 @@ NSInteger footerHeight = 1;
     NSLog(@"MESSAGE BOOL%d",isMessageBool);
     
     if(isMessageBool) {
-        return 30;
+        return 50;
     } else if(isGetLocationBool) {
         return 60;
     } else if([category isEqualToString:@"Local Representative"]) {
