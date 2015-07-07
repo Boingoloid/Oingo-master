@@ -18,7 +18,7 @@
 @property (nonatomic, retain) NSMutableDictionary *sections;
 @property (nonatomic, retain) NSMutableDictionary *sectionToCategoryMap;
 @property(nonatomic) Campaign *selectedCampaign;
-@property(nonatomic) NSArray *messageList;
+@property(nonatomic) NSMutableArray *messageList;
 @property(nonatomic) NSMutableArray *messageListIncludingReps;
 @property(nonatomic) NSString *repMessageText;
 @property(nonatomic) NSString *selectedLink;

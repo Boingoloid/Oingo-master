@@ -37,7 +37,6 @@ CongressPhotoFinderAPI *congressPhotoFinderAPI;
 
 
 - (void) configMessageCell:messageItem indexPath:(NSIndexPath*)indexPath {
-    NSLog(@"normal cell %@",messageItem);
     
     //Assign message item
     self.messageItem = messageItem;
@@ -96,6 +95,7 @@ CongressPhotoFinderAPI *congressPhotoFinderAPI;
     //Add current location look up button
     self.locationButton = [[UIButton alloc]initWithFrame:CGRectMake(110, 5, 20, 20)];
     [self.locationButton setBackgroundImage:[UIImage imageNamed:@"location-gray.png"] forState:UIControlStateNormal];
+    
     [self.contentView addSubview:self.locationButton];
     
     //Add label accompanying text entry

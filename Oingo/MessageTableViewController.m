@@ -11,6 +11,7 @@
 #import "MessageItem.h"
 #import "CongressionalMessageItem.h"
 #import "MessageTableViewCell.h"
+#import "MessageTableViewMessageCell.h"
 #import "MessageTableViewRepresentativeCell.h"
 #import <QuartzCore/QuartzCore.h>
 #import "PFTwitterUtils+NativeTwitter.h"
@@ -50,8 +51,7 @@ CongressionalMessageItem *congressionalMessageItem;
 NSInteger section;
 NSInteger sectionHeaderHeight = 16;
 NSInteger headerHeight = 48;
-NSInteger footerHeight = 6;
-NSInteger localRepSectionHeaderHeight = 50;
+NSInteger footerHeight = 1;
 
 
 -(void)viewWillAppear:(BOOL)animated {
@@ -127,12 +127,30 @@ NSInteger localRepSectionHeaderHeight = 50;
         [tableView deselectRowAtIndexPath:indexPath animated:NO];
         MessageTableViewCell *cell = (MessageTableViewCell *)[tableView cellForRowAtIndexPath:indexPath];
         CGPoint pointInCell = [tap locationInView:cell];
+        NSLog(@"coordinates pointp%@",NSStringFromCGPoint(p));
+        NSLog(@"coordinates indexpath%@",indexPath);
+      
+        NSString *category= [self categoryForSection:indexPath.section];
+        NSArray *rowIndecesInSection = [self.sections objectForKey:category];
+        NSNumber *rowIndex = [rowIndecesInSection objectAtIndex:indexPath.row]; //pulling the row indece from array above
+        
+        
+        NSDictionary *dictionary = [self.messageList objectAtIndex:[rowIndex intValue]];
+        NSNumber *isMessageNumber = [dictionary valueForKey:@"isMessage"];
+        bool isMessageBool = [isMessageNumber boolValue];
+        NSLog(@"is message: %d",isMessageBool);
+//        NSNumber *isGetLocationNumber = [dictionary valueForKey:@"isGetLocationCell"];
+//        bool isGetLocationBool = [isGetLocationNumber boolValue];
+        NSLog(@"category: %@",category);
+        NSLog(@"category from dictionary%@",[dictionary valueForKey:@"messageCategory"]);
 
+        
+        if(isMessageBool){
+            NSLog(@"touch in message cell, don't worry about it for now.");
         //If touch on tweetButton, then
-        if (CGRectContainsPoint(cell.tweetButton.frame, pointInCell)) {
+        } else if (CGRectContainsPoint(cell.tweetButton.frame, pointInCell)) {
             NSLog(@"touch in tweet button area");
             [self tweet:cell];
-        
         //if touch on postToFacebookButton, then
         } else if(CGRectContainsPoint(cell.postToFacebookButton.frame, pointInCell)) {
             NSLog(@"touch in facebook button area");
@@ -311,11 +329,13 @@ NSInteger localRepSectionHeaderHeight = 50;
     
     ParseAPI *parseAPI = [[ParseAPI alloc]init];
     parseAPI.MessageTableViewController = self;
-    CongressFinderAPI *congressFinder = [[CongressFinderAPI alloc]init];
-    congressFinder.messageTableViewController = self;
-    congressFinder.parseAPI = parseAPI;
-    [congressFinder getCongressWithLatitude:newLocation.coordinate.latitude andLongitude:newLocation.coordinate.longitude addToMessageList:(NSMutableArray*)self.messageList];
-
+    [parseAPI getParseMessageData:self.selectedCampaign];
+    
+//Note: if going directly to congressFinderAPI you must check that they isGetLocationCell does not exist.  Delete it if it does.
+//    CongressFinderAPI *congressFinder = [[CongressFinderAPI alloc]init];
+//    congressFinder.messageTableViewController = self;
+//    congressFinder.parseAPI = parseAPI;
+//    [congressFinder getCongressWithLatitude:newLocation.coordinate.latitude andLongitude:newLocation.coordinate.longitude addToMessageList:(NSMutableArray*)self.messageList];
 }
 
 -(void)lookUpZip {
@@ -364,11 +384,11 @@ NSInteger localRepSectionHeaderHeight = 50;
             
             ParseAPI *parseAPI = [[ParseAPI alloc]init];
             parseAPI.MessageTableViewController = self;
-            CongressFinderAPI *congressFinder = [[CongressFinderAPI alloc]init];
-            congressFinder.messageTableViewController = self;
-            congressFinder.parseAPI = parseAPI;
-            [congressFinder getCongress:zipCode addToMessageList:self.messageList];
-            NSLog(@"zip%@ messagelist%@",zipCode, self.messageList);
+            [parseAPI getParseMessageData:self.selectedCampaign];
+//            CongressFinderAPI *congressFinder = [[CongressFinderAPI alloc]init];
+//            congressFinder.messageTableViewController = self;
+//            congressFinder.parseAPI = parseAPI;
+//            [congressFinder getCongress:zipCode addToMessageList:self.messageList];
         }
     }];
     [alertController addAction:lookUpAction];
@@ -423,11 +443,12 @@ NSInteger localRepSectionHeaderHeight = 50;
             
             ParseAPI *parseAPI = [[ParseAPI alloc]init];
             parseAPI.MessageTableViewController = self;
-            CongressFinderAPI *congressFinder = [[CongressFinderAPI alloc]init];
-            congressFinder.messageTableViewController = self;
-            congressFinder.parseAPI = parseAPI;
-            [congressFinder getCongress:zipCode addToMessageList:self.messageList];
-            NSLog(@"zip%@ messagelist%@",zipCode, self.messageList);
+            [parseAPI getParseMessageData:self.selectedCampaign];
+//            CongressFinderAPI *congressFinder = [[CongressFinderAPI alloc]init];
+//            congressFinder.messageTableViewController = self;
+//            congressFinder.parseAPI = parseAPI;
+//            [congressFinder getCongress:zipCode addToMessageList:self.messageList];
+//            NSLog(@"zip%@ messagelist%@",zipCode, self.messageList);
         }
     }];
     [alertController addAction:lookUpAction];
@@ -443,12 +464,34 @@ NSInteger localRepSectionHeaderHeight = 50;
     NSString *category= [self categoryForSection:indexPath.section];
     NSArray *rowIndecesInSection = [self.sections objectForKey:category];
     NSNumber *rowIndex = [rowIndecesInSection objectAtIndex:indexPath.row]; //pulling the row indece from array above
-    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-    NSLog(@"category: %@",category);
+
+
     
-    if([category isEqualToString:@"Local Representative"] && ![defaults valueForKey:@"zipCode"] && ![defaults valueForKey:@"latitude"]) {
+
+    // Get bool value from current index on list.
+    NSDictionary *dictionary = [self.messageList objectAtIndex:[rowIndex intValue]];
+    NSNumber *isMessageNumber = [dictionary valueForKey:@"isMessage"];
+    bool isMessageBool = [isMessageNumber boolValue];
+        NSLog(@"is message: %d",isMessageBool);
+    NSNumber *isGetLocationNumber = [dictionary valueForKey:@"isGetLocationCell"];
+    bool isGetLocationBool = [isGetLocationNumber boolValue];
+        NSLog(@"category: %@",category);
+    NSLog(@"category from dictionary%@",[dictionary valueForKey:@"messageCategory"]);
+
+
+    
+    if(isMessageBool){
+        MessageTableViewMessageCell *cell = [tableView dequeueReusableCellWithIdentifier:@"CellCategoryMessage" forIndexPath:indexPath];
+        NSLog(@"loading message cell");
+        cell.layer.cornerRadius = 3;
+        [self.tableView addSubview:cell];
+        messageItem = [self.messageList objectAtIndex:[rowIndex intValue]];
+        [cell configMessageCell:messageItem indexPath:indexPath];
+        return cell;
+        
+    } else if (isGetLocationBool) {
         //user has no zip or location
-        NSLog(@"user no zip or loaction local rep cell");
+        NSLog(@"loading no location cell");
         MessageTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"Cell" forIndexPath:indexPath];
         cell.layer.cornerRadius = 3;
         [self.tableView addSubview:cell];
@@ -457,7 +500,7 @@ NSInteger localRepSectionHeaderHeight = 50;
         
     } else if([category isEqualToString:@"Local Representative"]) {
         MessageTableViewRepresentativeCell *cell = [tableView dequeueReusableCellWithIdentifier:@"CellRep" forIndexPath:indexPath];
-        NSLog(@"user has loaction local rep cell");
+        NSLog(@"loading local rep cell");
         cell.layer.cornerRadius = 3;
         [self.tableView addSubview:cell];
         congressionalMessageItem = [self.messageList objectAtIndex:[rowIndex intValue]];
@@ -466,24 +509,38 @@ NSInteger localRepSectionHeaderHeight = 50;
         
     } else {
         MessageTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"Cell" forIndexPath:indexPath];
+        NSLog(@"loading civilian");
         cell.layer.cornerRadius = 3;
         [self.tableView addSubview:cell];
         messageItem = [self.messageList objectAtIndex:[rowIndex intValue]];
         [cell configMessageCell:messageItem indexPath:indexPath];
         return cell;
+
     }
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     NSString *category= [self categoryForSection:indexPath.section];
-    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    NSArray *rowIndecesInSection = [self.sections objectForKey:category];
+    NSNumber *rowIndex = [rowIndecesInSection objectAtIndex:indexPath.row]; //pulling the row indece from array above
     
-    if([category isEqualToString:@"Local Representative"] && ![defaults valueForKey:@"zipCode"] && ![defaults valueForKey:@"latitude"]) {
+    // Get bool value from current index on list.
+    NSDictionary *dictionary = [self.messageList objectAtIndex:[rowIndex intValue]];
+    NSNumber *isMessageNumber = [dictionary valueForKey:@"isMessage"];
+    bool isMessageBool = [isMessageNumber boolValue];
+
+    NSNumber *isGetLocationNumber = [dictionary valueForKey:@"isGetLocationCell"];
+    bool isGetLocationBool = [isGetLocationNumber boolValue];
+    NSLog(@"MESSAGE BOOL%d",isMessageBool);
+    
+    if(isMessageBool) {
         return 30;
+    } else if(isGetLocationBool) {
+        return 60;
     } else if([category isEqualToString:@"Local Representative"]) {
-        return 70;
+        return 65;
     } else {
-        return 115;
+        return 90;
     }
 }
 
@@ -505,15 +562,15 @@ NSInteger localRepSectionHeaderHeight = 50;
 #pragma mark - Header and Footers
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
-    NSString *category= [self categoryForSection:section];
-    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-    if([category isEqualToString:@"Local Representative"] && ![defaults valueForKey:@"zipCode"] && ![defaults valueForKey:@"latitude"]) {
+//    NSString *category= [self categoryForSection:section];
+//    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+//    if([category isEqualToString:@"Local Representative"] && ![defaults valueForKey:@"zipCode"] && ![defaults valueForKey:@"latitude"]) {
+//        return sectionHeaderHeight;
+//    } else if([category isEqualToString:@"Local Representative"]) {
+//        return localRepSectionHeaderHeight + 3;
+//    } else {
         return sectionHeaderHeight;
-    } else if([category isEqualToString:@"Local Representative"]) {
-        return localRepSectionHeaderHeight + 3;
-    } else {
-        return sectionHeaderHeight;
-    }
+//    }
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section {
@@ -522,10 +579,10 @@ NSInteger localRepSectionHeaderHeight = 50;
 
 -(UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
 {
-    NSString *category= [self categoryForSection:section];
-    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+//    NSString *category= [self categoryForSection:section];
+//    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
 
-    if([category isEqualToString:@"Local Representative"] && ![defaults valueForKey:@"zipCode"] && ![defaults valueForKey:@"latitude"]) {
+//    if([category isEqualToString:@"Local Representative"] && ![defaults valueForKey:@"zipCode"] && ![defaults valueForKey:@"latitude"]) {
         //do nothing
         UIView *view = [[UIView alloc] initWithFrame:CGRectMake(7, 0, tableView.frame.size.width -14 , sectionHeaderHeight)];
         UILabel *sectionLabel = [[UILabel alloc] init];
@@ -541,50 +598,50 @@ NSInteger localRepSectionHeaderHeight = 50;
         sectionLabel.text = [NSString stringWithFormat:@"%@%@%@", padding, [self categoryForSection:section], padding];
         [view addSubview:sectionLabel];
         return view;
-        
-    } else if([category isEqualToString:@"Local Representative"]) {
-        UIView *view = [[UIView alloc] initWithFrame:CGRectMake(7, 0, tableView.frame.size.width -14 , localRepSectionHeaderHeight)];
-        UILabel *sectionLabel = [[UILabel alloc] init];
-        sectionLabel.frame = CGRectMake(7, 0, tableView.frame.size.width -14, sectionHeaderHeight);
-        sectionLabel.backgroundColor = [UIColor colorWithRed:.96 green:.96 blue:.96 alpha:1];
-        sectionLabel.layer.borderWidth = .5;
-        sectionLabel.layer.borderColor = [[UIColor blackColor] CGColor];
-        sectionLabel.font = [UIFont boldSystemFontOfSize:11];
-        sectionLabel.textColor = [UIColor blackColor];
-        sectionLabel.layer.cornerRadius = 3;
-        sectionLabel.clipsToBounds = YES;
-        NSString* padding = @"  "; // # of spaces
-        sectionLabel.text = [NSString stringWithFormat:@"%@%@%@", padding, [self categoryForSection:section], padding];
-        [view addSubview:sectionLabel];
-        
-        
-        UILabel *messageLabelForReps = [[UILabel alloc]initWithFrame:CGRectMake(10, 20,tableView.frame.size.width -20  , localRepSectionHeaderHeight - 20)];
-        messageLabelForReps.text = [NSString stringWithFormat:@"\"%@\"", self.repMessageText];
-        messageLabelForReps.lineBreakMode = NSLineBreakByWordWrapping;
-        messageLabelForReps.numberOfLines = 0;
-        messageLabelForReps.font = [UIFont fontWithName:@"HelveticaNeue" size:12.0f];
-        messageLabelForReps.textColor = [UIColor blackColor];
-        messageLabelForReps.textAlignment = NSTextAlignmentCenter;
-        messageLabelForReps.backgroundColor = [UIColor whiteColor];
-        [view addSubview:messageLabelForReps];
-        
-        return view;
-    } else {
-        UIView *view = [[UIView alloc] initWithFrame:CGRectMake(7, 0, tableView.frame.size.width -14 , sectionHeaderHeight +70)];
-        UILabel *sectionLabel = [[UILabel alloc] init];
-        sectionLabel.frame = CGRectMake(7, 0, tableView.frame.size.width -14, sectionHeaderHeight);
-        sectionLabel.backgroundColor = [UIColor colorWithRed:.96 green:.96 blue:.96 alpha:1];
-        sectionLabel.layer.borderWidth = .5;
-        sectionLabel.layer.borderColor = [[UIColor blackColor] CGColor];
-        sectionLabel.font = [UIFont boldSystemFontOfSize:11];
-        sectionLabel.textColor = [UIColor blackColor];
-        sectionLabel.layer.cornerRadius = 3;
-        sectionLabel.clipsToBounds = YES;
-        NSString* padding = @"  "; // # of spaces
-        sectionLabel.text = [NSString stringWithFormat:@"%@%@%@", padding, [self categoryForSection:section], padding];
-        [view addSubview:sectionLabel];
-        return view;
-    }
+//        
+//    } else if([category isEqualToString:@"Local Representative"]) {
+//        UIView *view = [[UIView alloc] initWithFrame:CGRectMake(7, 0, tableView.frame.size.width -14 , localRepSectionHeaderHeight)];
+//        UILabel *sectionLabel = [[UILabel alloc] init];
+//        sectionLabel.frame = CGRectMake(7, 0, tableView.frame.size.width -14, sectionHeaderHeight);
+//        sectionLabel.backgroundColor = [UIColor colorWithRed:.96 green:.96 blue:.96 alpha:1];
+//        sectionLabel.layer.borderWidth = .5;
+//        sectionLabel.layer.borderColor = [[UIColor blackColor] CGColor];
+//        sectionLabel.font = [UIFont boldSystemFontOfSize:11];
+//        sectionLabel.textColor = [UIColor blackColor];
+//        sectionLabel.layer.cornerRadius = 3;
+//        sectionLabel.clipsToBounds = YES;
+//        NSString* padding = @"  "; // # of spaces
+//        sectionLabel.text = [NSString stringWithFormat:@"%@%@%@", padding, [self categoryForSection:section], padding];
+//        [view addSubview:sectionLabel];
+//        
+//        
+//        UILabel *messageLabelForReps = [[UILabel alloc]initWithFrame:CGRectMake(10, 20,tableView.frame.size.width -20  , localRepSectionHeaderHeight - 20)];
+//        messageLabelForReps.text = [NSString stringWithFormat:@"\"%@\"", self.repMessageText];
+//        messageLabelForReps.lineBreakMode = NSLineBreakByWordWrapping;
+//        messageLabelForReps.numberOfLines = 0;
+//        messageLabelForReps.font = [UIFont fontWithName:@"HelveticaNeue" size:12.0f];
+//        messageLabelForReps.textColor = [UIColor blackColor];
+//        messageLabelForReps.textAlignment = NSTextAlignmentCenter;
+//        messageLabelForReps.backgroundColor = [UIColor whiteColor];
+//        [view addSubview:messageLabelForReps];
+//        
+//        return view;
+//    } else {
+//        UIView *view = [[UIView alloc] initWithFrame:CGRectMake(7, 0, tableView.frame.size.width -14 , sectionHeaderHeight +70)];
+//        UILabel *sectionLabel = [[UILabel alloc] init];
+//        sectionLabel.frame = CGRectMake(7, 0, tableView.frame.size.width -14, sectionHeaderHeight);
+//        sectionLabel.backgroundColor = [UIColor colorWithRed:.96 green:.96 blue:.96 alpha:1];
+//        sectionLabel.layer.borderWidth = .5;
+//        sectionLabel.layer.borderColor = [[UIColor blackColor] CGColor];
+//        sectionLabel.font = [UIFont boldSystemFontOfSize:11];
+//        sectionLabel.textColor = [UIColor blackColor];
+//        sectionLabel.layer.cornerRadius = 3;
+//        sectionLabel.clipsToBounds = YES;
+//        NSString* padding = @"  "; // # of spaces
+//        sectionLabel.text = [NSString stringWithFormat:@"%@%@%@", padding, [self categoryForSection:section], padding];
+//        [view addSubview:sectionLabel];
+//        return view;
+//    }
 }
 
 //-(UIView *) tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section {

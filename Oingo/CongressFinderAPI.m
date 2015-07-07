@@ -23,16 +23,6 @@
 -(void) getCongress:zipCode addToMessageList:(NSMutableArray*)messageList {
     // Method called when finding representatives by zipCode
 
-    
-    //delete rep line
-    //grab the rep message text for user in menu
-    NSUInteger index = [messageList indexOfObjectPassingTest:
-                        ^BOOL(NSDictionary *dict, NSUInteger idx, BOOL *stop) {
-                            return [[dict objectForKey:@"messageCategory"] isEqual:@"Local Representative"];
-                        }];
-    self.messageTableViewController.repMessageText = [[messageList objectAtIndex:index] valueForKey:@"messageText"];
-    [messageList removeObjectAtIndex:index];
-    
     self.messageList = messageList;
     
     NSString *sunlightLabsAPIKey = @"ed7f6bb54edc4577943dcc588664c89f";
@@ -44,23 +34,27 @@
 }
     // Method called when finding representatives by Lat/Long
 -(void)getCongressWithLatitude:(double)latitude andLongitude:(double)longitude addToMessageList:(NSMutableArray*)messageList {
-
-
-    //grab the rep message text for user in menu and then delete
+    
+    
     NSUInteger index = [messageList indexOfObjectPassingTest:
                         ^BOOL(NSDictionary *dict, NSUInteger idx, BOOL *stop) {
-                            return [[dict objectForKey:@"messageCategory"] isEqual:@"Local Representative"];
+                            return [[dict objectForKey:@"isGetLocationCell"] isEqual:@YES];
                         }];
-    self.messageTableViewController.repMessageText = [[messageList objectAtIndex:index] valueForKey:@"messageText"];
-    [messageList removeObjectAtIndex:index];
+    if(index == NSNotFound){
+        NSLog(@"did not find line");
+
+    } else {
+        NSLog(@"did find line and deleted it");
+        [messageList removeObjectAtIndex:index];
+    }
     
     self.messageList = messageList;
+    
+    
     
     NSLog(@"message list in get congress with location%@",self.messageList);
     NSString *sunlightLabsAPIKey = @"ed7f6bb54edc4577943dcc588664c89f";
     NSString *baseURL = @"https://congress.api.sunlightfoundation.com";
-//    CLLocationDegrees degreeLatitude = latitude;
-//    CLLocationDegrees degreeLongitude = longitude;
     NSString *method =@"/legislators/locate?";
     NSString *urlString = [NSString stringWithFormat:@"%@%@latitude=%%2B%f&longitude=%f&apikey=%@",baseURL,method,latitude,longitude,sunlightLabsAPIKey];
     [self getCongressData:urlString];
@@ -97,24 +91,19 @@
     NSMutableDictionary *returnedData = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableContainers error:&error];
     NSArray *resultsArray = [returnedData valueForKey:@"results"];
     id countOfReps = [returnedData valueForKey:@"count"];
-    //results array is 3 dictionaries
     NSLog(@"count of reps %@",countOfReps);
     
     
-    //combine the lists
+    //combine the lists: add congress people to the message list
     self.messageListWithCongress = [self combine:resultsArray withMessageList:self.messageList];
     
-    NSSortDescriptor *messageCategory = [[NSSortDescriptor alloc] initWithKey:@"messageCategory" ascending:NO];
-    NSArray *sortDescriptors = [NSArray arrayWithObject:messageCategory];
-    NSArray *sortedArray = [self.messageListWithCongress sortedArrayUsingDescriptors:sortDescriptors];
-    
-    self.messageTableViewController.messageList = sortedArray;
+
     self.messageTableViewController.isRepsLoaded = YES;
     
 
     dispatch_async(dispatch_get_main_queue(), ^{
-        [self.parseAPI prepSections:sortedArray];
-        NSLog(@"sortedArray%@",sortedArray);
+        [self.parseAPI prepSections:self.messageListWithCongress];
+        NSLog(@"message list with congress%@",self.messageListWithCongress);
     });
 }
 
@@ -194,6 +183,9 @@
         congressionalMessageItem.facebookID = [congresspersonObject valueForKey:@"facebook_id"];
         congressionalMessageItem.twitterID = [congresspersonObject valueForKey:@"twitter_id"];
         congressionalMessageItem.contactForm = [congresspersonObject valueForKey:@"contact_form"];
+
+        congressionalMessageItem.isGetLocationCell = 0;
+        congressionalMessageItem.isMessage = 0;
 
         
         //now I have message item with all the data.  add object to the array

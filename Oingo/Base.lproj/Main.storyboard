@@ -405,13 +405,13 @@
                             </subviews>
                         </view>
                         <prototypes>
-                            <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="Cell" rowHeight="115" id="noR-Lv-KB1" customClass="MessageTableViewCell">
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="Cell" rowHeight="84" id="noR-Lv-KB1" customClass="MessageTableViewCell">
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="noR-Lv-KB1" id="z0f-nP-wDJ">
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Nancy Pelozi /" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="10F-0X-Niq">
-                                            <rect key="frame" x="9" y="5" width="84" height="16"/>
+                                            <rect key="frame" x="67" y="25" width="84" height="16"/>
                                             <constraints>
                                                 <constraint firstAttribute="height" constant="16" id="07w-FE-QWb"/>
                                                 <constraint firstAttribute="width" constant="42" id="JEl-Xc-Jsz"/>
@@ -438,26 +438,8 @@
                                                 <constraint firstAttribute="width" constant="50" id="kY0-UI-KT7"/>
                                             </constraints>
                                         </imageView>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="TopLeft" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HrW-f2-40j">
-                                            <rect key="frame" x="67" y="16" width="279" height="61"/>
-                                            <constraints>
-                                                <constraint firstAttribute="height" constant="61" id="WFk-r1-595"/>
-                                                <constraint firstAttribute="width" constant="279" id="aUb-4f-VOk"/>
-                                            </constraints>
-                                            <attributedString key="attributedText">
-                                                <fragment>
-                                                    <string key="content">@NancyPelozi, this &lt;VICE episode link&gt; argues that your products, policies, and interests are harmful to farmers, consumers, and our global food system.</string>
-                                                    <attributes>
-                                                        <color key="NSColor" red="0.015686275437474251" green="0.011764707043766975" blue="0.0039215688593685627" alpha="1" colorSpace="deviceRGB"/>
-                                                        <font key="NSFont" size="12" name="HelveticaNeue"/>
-                                                        <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural"/>
-                                                    </attributes>
-                                                </fragment>
-                                            </attributedString>
-                                            <nil key="highlightedColor"/>
-                                        </label>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Representative, CA 12th district" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="G6z-jT-fiW">
-                                            <rect key="frame" x="95" y="5" width="247" height="17"/>
+                                            <rect key="frame" x="153" y="25" width="247" height="17"/>
                                             <constraints>
                                                 <constraint firstAttribute="width" constant="247" id="eIA-aC-Dgf"/>
                                             </constraints>
@@ -466,21 +448,21 @@
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="CIH-Ex-lbw">
-                                            <rect key="frame" x="304" y="73" width="40" height="42"/>
+                                            <rect key="frame" x="274" y="40" width="40" height="42"/>
                                             <state key="normal" title="Button" image="tweetButtonIconGray.png">
                                                 <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                             </state>
                                             <state key="selected" image="Web-frame2.png"/>
                                         </button>
                                         <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pSU-k7-vaY">
-                                            <rect key="frame" x="260" y="79" width="29" height="31"/>
+                                            <rect key="frame" x="221" y="45" width="29" height="31"/>
                                             <state key="normal" title="Button" image="mail-icon-gray.png">
                                                 <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                             </state>
                                             <state key="selected" image="Web-frame2.png"/>
                                         </button>
                                         <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Non-Vu-3jy">
-                                            <rect key="frame" x="220" y="82" width="24" height="26"/>
+                                            <rect key="frame" x="181" y="48" width="24" height="26"/>
                                             <state key="normal" title="Button" image="phone-gray.png">
                                                 <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                             </state>
@@ -493,7 +475,7 @@
                                             </state>
                                         </button>
                                         <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zgT-Wr-Ywq">
-                                            <rect key="frame" x="179" y="84" width="25" height="22"/>
+                                            <rect key="frame" x="140" y="50" width="25" height="22"/>
                                             <state key="normal" title="Button" image="document-xxl.png">
                                                 <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                             </state>
@@ -515,28 +497,46 @@
                                                 <segue destination="pMd-EZ-Xws" kind="show" identifier="showSettings" id="bBR-qO-Oux"/>
                                             </connections>
                                         </button>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="TopLeft" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" usesAttributedText="YES" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HrW-f2-40j">
+                                            <rect key="frame" x="446" y="8" width="279" height="61"/>
+                                            <constraints>
+                                                <constraint firstAttribute="height" constant="61" id="WFk-r1-595"/>
+                                                <constraint firstAttribute="width" constant="279" id="aUb-4f-VOk"/>
+                                            </constraints>
+                                            <attributedString key="attributedText">
+                                                <fragment>
+                                                    <string key="content">@NancyPelozi, this &lt;VICE episode link&gt; argues that your products, policies, and interests are harmful to farmers, consumers, and our global food system.</string>
+                                                    <attributes>
+                                                        <color key="NSColor" red="0.015686275437474251" green="0.011764707043766975" blue="0.0039215688593685627" alpha="1" colorSpace="deviceRGB"/>
+                                                        <font key="NSFont" size="12" name="HelveticaNeue"/>
+                                                        <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural"/>
+                                                    </attributes>
+                                                </fragment>
+                                            </attributedString>
+                                            <nil key="highlightedColor"/>
+                                        </label>
                                     </subviews>
                                     <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                     <constraints>
                                         <constraint firstItem="10F-0X-Niq" firstAttribute="top" secondItem="z0f-nP-wDJ" secondAttribute="topMargin" constant="5" id="1eO-Qp-Y7G"/>
-                                        <constraint firstItem="HrW-f2-40j" firstAttribute="leading" secondItem="SFl-0P-juu" secondAttribute="trailing" constant="8" id="1kM-Ub-HUi"/>
-                                        <constraint firstItem="10F-0X-Niq" firstAttribute="top" secondItem="z0f-nP-wDJ" secondAttribute="topMargin" constant="-3" id="4fa-sK-6pX"/>
+                                        <constraint firstItem="HrW-f2-40j" firstAttribute="leading" secondItem="SFl-0P-juu" secondAttribute="trailing" constant="404" id="1kM-Ub-HUi"/>
+                                        <constraint firstItem="10F-0X-Niq" firstAttribute="top" secondItem="z0f-nP-wDJ" secondAttribute="topMargin" constant="17" id="4fa-sK-6pX"/>
                                         <constraint firstItem="G6z-jT-fiW" firstAttribute="leading" secondItem="10F-0X-Niq" secondAttribute="trailing" constant="12" id="688-qM-3NZ"/>
                                         <constraint firstItem="10F-0X-Niq" firstAttribute="leading" secondItem="z0f-nP-wDJ" secondAttribute="leadingMargin" constant="10" id="A69-bD-pkQ"/>
-                                        <constraint firstItem="HrW-f2-40j" firstAttribute="top" secondItem="G6z-jT-fiW" secondAttribute="bottom" constant="-6" id="E9V-xY-AUu"/>
+                                        <constraint firstItem="HrW-f2-40j" firstAttribute="top" secondItem="G6z-jT-fiW" secondAttribute="bottom" constant="-34" id="E9V-xY-AUu"/>
                                         <constraint firstAttribute="bottomMargin" secondItem="10F-0X-Niq" secondAttribute="bottom" constant="13" id="FPK-Jr-Odl"/>
-                                        <constraint firstItem="SFl-0P-juu" firstAttribute="top" secondItem="10F-0X-Niq" secondAttribute="bottom" constant="3" id="LuK-Vz-ow4"/>
-                                        <constraint firstItem="10F-0X-Niq" firstAttribute="leading" secondItem="SFl-0P-juu" secondAttribute="leading" id="Op4-8F-XPU"/>
+                                        <constraint firstItem="SFl-0P-juu" firstAttribute="top" secondItem="10F-0X-Niq" secondAttribute="bottom" constant="-17" id="LuK-Vz-ow4"/>
+                                        <constraint firstItem="10F-0X-Niq" firstAttribute="leading" secondItem="SFl-0P-juu" secondAttribute="leading" constant="58" id="Op4-8F-XPU"/>
                                         <constraint firstItem="10F-0X-Niq" firstAttribute="centerY" secondItem="G6z-jT-fiW" secondAttribute="centerY" id="R9k-yw-6Cy"/>
                                         <constraint firstAttribute="trailingMargin" secondItem="10F-0X-Niq" secondAttribute="trailing" constant="532" id="Sf3-a3-RJg"/>
                                         <constraint firstItem="G6z-jT-fiW" firstAttribute="leading" secondItem="10F-0X-Niq" secondAttribute="trailing" constant="2" id="Yh8-iC-zYo"/>
-                                        <constraint firstItem="G6z-jT-fiW" firstAttribute="top" secondItem="z0f-nP-wDJ" secondAttribute="topMargin" constant="-3" id="a0L-Xg-X8S"/>
+                                        <constraint firstItem="G6z-jT-fiW" firstAttribute="top" secondItem="z0f-nP-wDJ" secondAttribute="topMargin" constant="17" id="a0L-Xg-X8S"/>
                                         <constraint firstItem="HrW-f2-40j" firstAttribute="top" secondItem="G6z-jT-fiW" secondAttribute="bottom" constant="-6" id="aib-6R-ZZM"/>
                                         <constraint firstItem="G6z-jT-fiW" firstAttribute="centerY" secondItem="10F-0X-Niq" secondAttribute="centerY" id="bOo-0p-I80"/>
-                                        <constraint firstItem="10F-0X-Niq" firstAttribute="leading" secondItem="z0f-nP-wDJ" secondAttribute="leadingMargin" constant="1" id="bbp-hU-PH9"/>
+                                        <constraint firstItem="10F-0X-Niq" firstAttribute="leading" secondItem="z0f-nP-wDJ" secondAttribute="leadingMargin" constant="59" id="bbp-hU-PH9"/>
                                         <constraint firstItem="SFl-0P-juu" firstAttribute="leading" secondItem="z0f-nP-wDJ" secondAttribute="leadingMargin" constant="1" id="bh5-8r-vuz"/>
                                         <constraint firstItem="G6z-jT-fiW" firstAttribute="leading" secondItem="10F-0X-Niq" secondAttribute="trailing" constant="12" id="d4F-Ca-Z58"/>
-                                        <constraint firstItem="SFl-0P-juu" firstAttribute="top" secondItem="10F-0X-Niq" secondAttribute="bottom" constant="3" id="dbU-bR-5Jm"/>
+                                        <constraint firstItem="SFl-0P-juu" firstAttribute="top" secondItem="10F-0X-Niq" secondAttribute="bottom" constant="-17" id="dbU-bR-5Jm"/>
                                         <constraint firstItem="G6z-jT-fiW" firstAttribute="bottom" secondItem="10F-0X-Niq" secondAttribute="bottom" constant="1" id="oyg-xX-Ggv"/>
                                     </constraints>
                                     <variation key="default">
@@ -546,10 +546,10 @@
                                             <exclude reference="FPK-Jr-Odl"/>
                                             <exclude reference="R9k-yw-6Cy"/>
                                             <exclude reference="Sf3-a3-RJg"/>
-                                            <exclude reference="aib-6R-ZZM"/>
                                             <exclude reference="688-qM-3NZ"/>
                                             <exclude reference="bOo-0p-I80"/>
                                             <exclude reference="d4F-Ca-Z58"/>
+                                            <exclude reference="aib-6R-ZZM"/>
                                         </mask>
                                     </variation>
                                 </tableViewCellContentView>
@@ -568,79 +568,42 @@
                                     <outlet property="webFormButton" destination="zgT-Wr-Ywq" id="OaN-TQ-9hI"/>
                                 </connections>
                             </tableViewCell>
-                            <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="CellRepHeader" rowHeight="65" id="boJ-HR-9a7" customClass="MessageTableViewRepresentativeCell">
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="CellCategoryMessage" rowHeight="77" id="boJ-HR-9a7" customClass="MessageTableViewMessageCell">
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="boJ-HR-9a7" id="C1f-Ie-wjl">
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Nancy Pelozi /" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qjw-2v-Mkp">
-                                            <rect key="frame" x="67" y="9" width="84" height="16"/>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="TopLeft" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" usesAttributedText="YES" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zCX-6N-C1q">
+                                            <rect key="frame" x="29" y="3" width="279" height="61"/>
                                             <constraints>
-                                                <constraint firstAttribute="width" constant="89" id="V5e-Kn-mUC"/>
-                                                <constraint firstAttribute="height" constant="16" id="aSD-jz-5t8"/>
-                                                <constraint firstAttribute="height" constant="21" id="ceV-Qe-kgs"/>
-                                                <constraint firstAttribute="height" constant="19" id="d9o-iE-Jk2"/>
-                                                <constraint firstAttribute="width" constant="42" id="qOK-wr-hsL"/>
+                                                <constraint firstAttribute="width" constant="279" id="wWD-3F-QKR"/>
                                             </constraints>
-                                            <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="13"/>
-                                            <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                            <nil key="highlightedColor"/>
-                                            <variation key="default">
-                                                <mask key="constraints">
-                                                    <exclude reference="V5e-Kn-mUC"/>
-                                                    <exclude reference="ceV-Qe-kgs"/>
-                                                    <exclude reference="d9o-iE-Jk2"/>
-                                                    <exclude reference="qOK-wr-hsL"/>
-                                                </mask>
-                                            </variation>
-                                        </label>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Representative, CA 12th district" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xSf-HK-zBW">
-                                            <rect key="frame" x="153" y="9" width="247" height="17"/>
-                                            <constraints>
-                                                <constraint firstAttribute="width" constant="247" id="LEo-BH-hCD"/>
-                                            </constraints>
-                                            <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="11"/>
-                                            <color key="textColor" white="0.5" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                                            <attributedString key="attributedText">
+                                                <fragment>
+                                                    <string key="content">@NancyPelozi, this &lt;VICE episode link&gt; argues that your products, policies, and interests are harmful to farmers, consumers, and our global food system.</string>
+                                                    <attributes>
+                                                        <color key="NSColor" red="0.015686275437474251" green="0.011764707043766975" blue="0.0039215688593685627" alpha="1" colorSpace="deviceRGB"/>
+                                                        <font key="NSFont" size="12" name="HelveticaNeue"/>
+                                                        <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural"/>
+                                                    </attributes>
+                                                </fragment>
+                                            </attributedString>
                                             <nil key="highlightedColor"/>
                                         </label>
                                     </subviews>
                                     <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                     <constraints>
-                                        <constraint firstItem="xSf-HK-zBW" firstAttribute="leading" secondItem="qjw-2v-Mkp" secondAttribute="trailing" constant="2" id="1Bb-Q9-VBQ"/>
-                                        <constraint firstItem="xSf-HK-zBW" firstAttribute="leading" secondItem="qjw-2v-Mkp" secondAttribute="trailing" constant="12" id="CrA-XQ-rdR"/>
-                                        <constraint firstItem="qjw-2v-Mkp" firstAttribute="top" secondItem="C1f-Ie-wjl" secondAttribute="topMargin" constant="1" id="Elc-II-jZ7"/>
-                                        <constraint firstItem="qjw-2v-Mkp" firstAttribute="leading" secondItem="C1f-Ie-wjl" secondAttribute="leadingMargin" constant="10" id="KJo-CP-pd8"/>
-                                        <constraint firstItem="qjw-2v-Mkp" firstAttribute="leading" secondItem="C1f-Ie-wjl" secondAttribute="leadingMargin" constant="59" id="Kbg-aS-kPY"/>
-                                        <constraint firstItem="xSf-HK-zBW" firstAttribute="bottom" secondItem="qjw-2v-Mkp" secondAttribute="bottom" constant="1" id="bX5-5P-3c5"/>
-                                        <constraint firstItem="qjw-2v-Mkp" firstAttribute="top" secondItem="C1f-Ie-wjl" secondAttribute="topMargin" constant="5" id="e9X-PK-m8X"/>
-                                        <constraint firstAttribute="trailingMargin" secondItem="qjw-2v-Mkp" secondAttribute="trailing" constant="532" id="f2E-DS-fz8"/>
-                                        <constraint firstItem="qjw-2v-Mkp" firstAttribute="centerY" secondItem="xSf-HK-zBW" secondAttribute="centerY" id="jbO-6g-vk3"/>
-                                        <constraint firstAttribute="bottomMargin" secondItem="qjw-2v-Mkp" secondAttribute="bottom" constant="13" id="pGe-o4-eUh"/>
-                                        <constraint firstItem="xSf-HK-zBW" firstAttribute="top" secondItem="C1f-Ie-wjl" secondAttribute="topMargin" constant="1" id="pUM-ag-zeB"/>
-                                        <constraint firstItem="xSf-HK-zBW" firstAttribute="centerY" secondItem="qjw-2v-Mkp" secondAttribute="centerY" id="qze-oN-9yy"/>
-                                        <constraint firstItem="xSf-HK-zBW" firstAttribute="leading" secondItem="qjw-2v-Mkp" secondAttribute="trailing" constant="12" id="xBf-2V-KkY"/>
+                                        <constraint firstAttribute="centerX" secondItem="zCX-6N-C1q" secondAttribute="centerX" id="17S-Wl-Jfi"/>
+                                        <constraint firstAttribute="centerY" secondItem="zCX-6N-C1q" secondAttribute="centerY" id="fuR-kY-Gnp"/>
                                     </constraints>
-                                    <variation key="default">
-                                        <mask key="constraints">
-                                            <exclude reference="KJo-CP-pd8"/>
-                                            <exclude reference="e9X-PK-m8X"/>
-                                            <exclude reference="f2E-DS-fz8"/>
-                                            <exclude reference="jbO-6g-vk3"/>
-                                            <exclude reference="pGe-o4-eUh"/>
-                                            <exclude reference="CrA-XQ-rdR"/>
-                                            <exclude reference="qze-oN-9yy"/>
-                                            <exclude reference="xBf-2V-KkY"/>
-                                        </mask>
-                                    </variation>
                                 </tableViewCellContentView>
                                 <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <inset key="separatorInset" minX="10" minY="0.0" maxX="10" maxY="0.0"/>
                                 <connections>
-                                    <outlet property="targetName" destination="qjw-2v-Mkp" id="trY-hh-g83"/>
-                                    <outlet property="targetTitleLabel" destination="xSf-HK-zBW" id="CfS-AX-ENs"/>
+                                    <outlet property="messageText" destination="zCX-6N-C1q" id="AOZ-KM-gSG"/>
                                 </connections>
                             </tableViewCell>
-                            <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="CellRep" rowHeight="73" id="hSg-ik-YTq" customClass="MessageTableViewRepresentativeCell">
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="CellRep" rowHeight="77" id="hSg-ik-YTq" customClass="MessageTableViewRepresentativeCell">
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="hSg-ik-YTq" id="j8a-NV-gD6">
                                     <autoresizingMask key="autoresizingMask"/>

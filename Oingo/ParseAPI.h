@@ -12,9 +12,13 @@
 
 @interface ParseAPI : NSObject
 
-@property(nonatomic) NSArray *messageListFromParse;
+@property(nonatomic) NSMutableArray *messageListFromParseWithContacts;
 @property (nonatomic, retain) NSMutableDictionary *sections;
 @property (nonatomic, retain) NSMutableDictionary *sectionToCategoryMap;
+@property (nonatomic, retain) NSMutableDictionary *noZipDictionary;
+@property (nonatomic) NSMutableArray *messageTextList;
+@property (nonatomic) NSMutableArray *contactList;
+@property (nonatomic) NSMutableArray *menuList;
 @property(nonatomic) MessageTableViewController *messageTableViewController;
 
 -(void)getParseMessageData:(Campaign*)selectedCampaign;

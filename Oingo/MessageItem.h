@@ -17,5 +17,8 @@
 @property (nonatomic, retain) NSString *messageImage;
 @property (nonatomic, retain) NSString *messageTarget;
 @property (nonatomic, retain) NSString *messageCategory;
+@property (nonatomic, retain) NSString *firstName;
+@property (nonatomic, retain) NSString *isGetLocationCell;
+
 
 @end

@@ -45,6 +45,7 @@ static CLLocationManager *locationManager;
     [self.cLLocationManager startUpdatingLocation];
 }
 
+
 #pragma mark - CLLocationManagerDelegate
 - (void)locationManager:(CLLocationManager *)manager didFailWithError:(NSError *)error
 {

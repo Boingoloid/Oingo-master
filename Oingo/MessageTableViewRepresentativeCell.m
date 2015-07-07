@@ -33,7 +33,6 @@
 CongressPhotoFinderAPI *congressPhotoFinderAPI;
 
 - (void) configMessageCellLocalRep:congressionalMessageItem indexPath:(NSIndexPath*)indexPath {
-    NSLog(@"rep cell %@",congressionalMessageItem);
     
     //Assign message item
     self.congressionalMessageItem = congressionalMessageItem;
@@ -43,19 +42,20 @@ CongressPhotoFinderAPI *congressPhotoFinderAPI;
     self.zipCodeButton.hidden = YES;
     self.zipLabel.hidden = YES;
     
-    self.messageText.hidden = NO;
+
     self.targetName.hidden = NO;
     self.targetTitleLabel.hidden = NO;
     self.messageImage.hidden = NO;
     self.sendCount.hidden = YES;
     self.tweetButton.hidden = NO;
     
+    self.tweetButton.hidden = NO;
     self.emailButton.hidden = NO;
     self.phoneButton.hidden = NO;
     self.webFormButton.hidden = NO;
     
     //add information
-    self.messageText.text = [congressionalMessageItem valueForKey:@"messageText"];
+
     self.targetName.text = [NSString stringWithFormat:@"%@ /",[congressionalMessageItem valueForKey:@"fullName"]];
     self.targetTitleLabel.text = [congressionalMessageItem valueForKey:@"title"];
     self.contantForm = [self.congressionalMessageItem valueForKey:@"contactForm"];
