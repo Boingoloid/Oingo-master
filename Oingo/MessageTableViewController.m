@@ -33,6 +33,7 @@
 #import "TwitterAPITweet.h"
 #import "FacebookAPIPost.h"
 #import "LocationFinderAPI.h"
+#import "MessageOptionsTableTableViewController.h"
 
 
 @interface MessageTableViewController () <UIGestureRecognizerDelegate,CLLocationManagerDelegate>
@@ -52,7 +53,6 @@ NSInteger section;
 NSInteger sectionHeaderHeight = 16;
 NSInteger headerHeight = 48;
 NSInteger footerHeight = 1;
-
 
 -(void)viewWillAppear:(BOOL)animated {
     
@@ -75,18 +75,21 @@ NSInteger footerHeight = 1;
             NSLog(@"user already has value for zip");
         }
     }
-    
-    ParseAPI *parseAPI = [[ParseAPI alloc]init];
-    parseAPI.messageTableViewController = self;
-    [parseAPI getParseMessageData:self.selectedCampaign];
 }
 
 
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.tableView.estimatedRowHeight = 68.0;
-    self.tableView.rowHeight = UITableViewAutomaticDimension;
+    
+    ParseAPI *parseAPI = [[ParseAPI alloc]init];
+    parseAPI.messageTableViewController = self;
+    [parseAPI getParseMessageData:self.selectedCampaign];
+    
+    
+    NSLog(@"flagging view did load");
+//    self.tableView.estimatedRowHeight = 68.0;
+//    self.tableView.rowHeight = UITableViewAutomaticDimension;
     
     //Format table header
     self.tableHeaderView.layer.borderColor = [[UIColor whiteColor] CGColor];
@@ -149,6 +152,23 @@ NSInteger footerHeight = 1;
         
         if(isMessageBool){
             NSLog(@"touch in message cell, don't worry about it for now.");
+            MessageOptionsTableTableViewController *messageOptionsViewController = [[MessageOptionsTableTableViewController alloc]init];
+            messageOptionsViewController.category = category;
+            messageOptionsViewController.messageTableViewController = self;
+            messageOptionsViewController.originIndexPath = indexPath;
+            messageOptionsViewController.originRowIndex = rowIndex;
+            messageOptionsViewController.messageOptionsList = self.messageOptionsList;
+            self.menuList = self.messageList;
+            messageOptionsViewController.menuList = self.menuList;
+            [self.navigationController pushViewController:messageOptionsViewController animated:YES];
+
+            
+//            [[self.messageList objectAtIndex:0] setValue:@"TESTTESTTESTTESTTESTTEST" forKey:@"messageText"];
+            NSLog(@"self.menulist first object %@",[self.menuList firstObject]);
+            NSLog(@"self.menulist 2nd object %@",[self.menuList objectAtIndex:1]);
+            NSLog(@"messageoptions first object %@",[self.messageOptionsList firstObject]);
+            NSLog(@"messageOptions second object %@",[self.messageOptionsList objectAtIndex:1]);
+            
             
         //If touch on tweetButton, then
         } else if (CGRectContainsPoint(cell.tweetButton.frame, pointInCell)) {
@@ -469,8 +489,6 @@ NSInteger footerHeight = 1;
     NSNumber *rowIndex = [rowIndecesInSection objectAtIndex:indexPath.row]; //pulling the row indece from array above
 
 
-    
-
     // Get bool value from current index on list.
     NSDictionary *dictionary = [self.messageList objectAtIndex:[rowIndex intValue]];
     NSNumber *isMessageNumber = [dictionary valueForKey:@"isMessage"];
@@ -479,10 +497,8 @@ NSInteger footerHeight = 1;
     NSNumber *isGetLocationNumber = [dictionary valueForKey:@"isGetLocationCell"];
     bool isGetLocationBool = [isGetLocationNumber boolValue];
         NSLog(@"category: %@",category);
-    NSLog(@"category from dictionary%@",[dictionary valueForKey:@"messageCategory"]);
+//    NSLog(@"category from dictionary%@",[dictionary valueForKey:@"messageCategory"]);
 
-
-    
     if(isMessageBool){
         MessageTableViewMessageCell *cell = [tableView dequeueReusableCellWithIdentifier:@"CellCategoryMessage" forIndexPath:indexPath];
         NSLog(@"loading message cell");
@@ -518,7 +534,6 @@ NSInteger footerHeight = 1;
         messageItem = [self.messageList objectAtIndex:[rowIndex intValue]];
         [cell configMessageCell:messageItem indexPath:indexPath];
         return cell;
-
     }
 }
 
@@ -534,7 +549,6 @@ NSInteger footerHeight = 1;
 
     NSNumber *isGetLocationNumber = [dictionary valueForKey:@"isGetLocationCell"];
     bool isGetLocationBool = [isGetLocationNumber boolValue];
-    NSLog(@"MESSAGE BOOL%d",isMessageBool);
     
     if(isMessageBool) {
         return 50;

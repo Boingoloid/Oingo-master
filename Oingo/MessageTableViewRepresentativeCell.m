@@ -80,7 +80,6 @@ CongressPhotoFinderAPI *congressPhotoFinderAPI;
     //    congressPhotoFinderAPI.tableViewCell = self;
     
     NSString *imageString = [self.congressionalMessageItem valueForKey:@"messageImageString"];
-    NSLog(@"imagestring::%@",imageString);
     self.messageImage.image = [UIImage imageNamed:imageString];
 }
 

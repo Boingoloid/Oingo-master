@@ -56,6 +56,7 @@
 -(void) pushToSignIn {
     UIViewController *controller = [self.messageTableViewController.storyboard instantiateViewControllerWithIdentifier:@"signInViewController"];
     [self.messageTableViewController.navigationController pushViewController:controller animated:YES];
+    
 }
 
 -(void)linkUserToTwitter:currentUser{

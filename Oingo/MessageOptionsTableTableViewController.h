@@ -7,7 +7,14 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "MessageTableViewController.h"
 
 @interface MessageOptionsTableTableViewController : UITableViewController
-
+@property (nonatomic) NSArray *menuList;
+@property (nonatomic) NSArray *messageOptionsList;
+@property(nonatomic) NSMutableArray *messageOptionsListFiltered;
+@property (nonatomic) NSString *category;
+@property(nonatomic) MessageTableViewController *messageTableViewController;
+@property(nonatomic) NSIndexPath *originIndexPath;
+@property(nonatomic) NSNumber *originRowIndex;
 @end

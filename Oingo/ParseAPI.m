@@ -15,8 +15,8 @@
 
 
 
-@interface ParseAPI ()
-
+@interface ParseAPI () <NSCoding>
+-(id)copyWithZone:(NSZone *)zone;
 @end
 
 @implementation ParseAPI
@@ -24,9 +24,72 @@
 BOOL isMenuWithCustomOrdering = NO;
 
 
+-(id)copyWithZone:(NSZone *)zone
+{
+    NSArray *tempArray= [[NSArray allocWithZone:zone]init];
+    
+    return tempArray;
+}
 
 
+-(void)createDeepCopyOfData:objects {
+    
+    NSLog(@"objects!!!%@",objects);
+    NSMutableArray *tempArray = [[NSMutableArray alloc]init];
 
+    for (NSDictionary *dictionary in objects) {
+        NSNumber *isMessageNumber = [dictionary valueForKey:@"isMessage"];
+        bool isMessageBool = [isMessageNumber boolValue];
+        
+        if (isMessageBool) {
+            NSString *messageText = [dictionary valueForKey:@"messageText"];
+            NSString *category = [dictionary valueForKey:@"messageCategory"];
+            
+            NSDictionary *tempDic = [[NSDictionary alloc]initWithObjectsAndKeys:category,@"messageCategory",messageText ,@"messageText", @YES ,@"isMessage", nil];
+            [tempArray addObject:(NSDictionary*)tempDic];
+        }
+    }
+    NSLog(@"temp array%@",tempArray);
+    
+    
+    NSArray* deepCopyArray = [NSKeyedUnarchiver unarchiveObjectWithData:[NSKeyedArchiver archivedDataWithRootObject:tempArray]];
+    
+    NSLog(@"objects first object%@",[objects firstObject]);
+    NSLog(@"self.tempArray%@",[self.tempArray firstObject]);
+    NSLog(@"print out the first deep copy object%@",[deepCopyArray firstObject]);
+    
+    //[[self.tempArray firstObject] setValue:@"TESTING" forKey:@"messageText"];
+    [[objects firstObject] setValue:@"TESTING" forKey:@"messageText"];
+    
+    NSLog(@"SECONDobjects first object%@",[objects firstObject]);
+    NSLog(@"self.tempArray%@",[self.tempArray firstObject]);
+    NSLog(@"print out the first deep copy object after deleting temparray%@",[deepCopyArray firstObject]);
+
+    
+    NSLog(@"true deep copy%@",deepCopyArray);
+    self.messageOptionsList = deepCopyArray;
+
+    
+//    NSLog(@"temparray%@",[tempArray firstObject]);
+
+    
+}
+
+- (void)encodeWithCoder:(NSCoder *)coder
+{
+        NSLog(@"encode is firing");
+    [coder encodeObject:self.messageOptionsList];
+}
+
+- (instancetype)initWithCoder:(NSCoder *)coder
+{
+    self = [super init];
+    if (self) {
+        self.messageOptionsList = [coder decodeObjectForKey:@"messageOptionList"];
+        NSLog(@"initwithcoder firing");
+    }
+    return self;
+}
 
 -(void)getParseMessageData:(Campaign*)selectedCampaign{  //get parse messge data for selectedCampaign
     PFQuery *query = [PFQuery queryWithClassName:@"Messages"];
@@ -40,9 +103,11 @@ BOOL isMenuWithCustomOrdering = NO;
             NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
             if(![defaults valueForKey:@"latitude"] && ![defaults valueForKey:@"zipCode"]) { //if no location info, then just prep and load it.
                 NSLog(@"Loading parse data with no congress peoeple");
+                self.tempArray = objects;
+                [self createDeepCopyOfData:objects];
                 [self prepSections:objects];
-                
             } else {
+                [self createDeepCopyOfData:objects];
                 CongressFinderAPI *congressFinder = [[CongressFinderAPI alloc]init];
                 congressFinder.messageTableViewController = self.messageTableViewController;
                 congressFinder.parseAPI = self;
@@ -62,6 +127,7 @@ BOOL isMenuWithCustomOrdering = NO;
     //now have sorted list
     //now separate them
     
+    
     NSMutableArray *messageTextList = [[NSMutableArray alloc]init];
     NSMutableArray *contactList = [[NSMutableArray alloc]init];
     
@@ -75,11 +141,9 @@ BOOL isMenuWithCustomOrdering = NO;
         }
     }
     self.messageTextList = messageTextList;
+    
     self.contactList = contactList;
-    
-    
     NSLog(@"contactlist:%@ messageList: %@",contactList,messageTextList);
-    
 }
 
 
@@ -88,7 +152,7 @@ BOOL isMenuWithCustomOrdering = NO;
     if(self.menuList) {
         [self.menuList removeAllObjects];
     } else {
-    self.menuList = [[NSMutableArray alloc]init];
+        self.menuList = [[NSMutableArray alloc]init];
     }
 
     NSString *category = @"";
@@ -114,14 +178,10 @@ BOOL isMenuWithCustomOrdering = NO;
         
     contactIndex++;
     }
-    NSLog(@"menulist:%@",self.menuList);
 }
 
 
 -(void) addLocalRepLocationCaptureCell:menuList{
-    
-    
-    
     
     //add local rep message and no zip cell b/c no contacts in list.
     NSUInteger index = [self.menuList indexOfObjectPassingTest:
@@ -187,10 +247,17 @@ BOOL isMenuWithCustomOrdering = NO;
     self.messageTableViewController.sections = (NSMutableDictionary*)self.sections;
     self.messageTableViewController.sectionToCategoryMap = (NSMutableDictionary*)self.sectionToCategoryMap;
     self.messageTableViewController.messageList = self.menuList;
+    self.messageTableViewController.messageOptionsList = self.messageOptionsList;
     
       NSLog(@"sections right after sections are created%@",self.sections);
       NSLog(@"categorymap after before sections are created%@",self.sectionToCategoryMap);
+    NSLog(@"self.menulist first object %@",[self.menuList firstObject]);
+        NSLog(@"self.menulist 2nd object %@",[self.menuList objectAtIndex:1]);
+    NSLog(@"messageoptions first object %@",[self.messageOptionsList firstObject]);
+        NSLog(@"messageOptions second object %@",[self.messageOptionsList objectAtIndex:1]);
+    
     [self.messageTableViewController.tableView reloadData];
+    
 }
 
 -(NSMutableArray*)sortMessageListWithContacts:(NSMutableArray*)messageListWithContacts {

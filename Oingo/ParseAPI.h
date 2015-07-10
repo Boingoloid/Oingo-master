@@ -16,10 +16,13 @@
 @property (nonatomic, retain) NSMutableDictionary *sections;
 @property (nonatomic, retain) NSMutableDictionary *sectionToCategoryMap;
 @property (nonatomic, retain) NSMutableDictionary *noZipDictionary;
-@property (nonatomic) NSMutableArray *messageTextList;
 @property (nonatomic) NSMutableArray *contactList;
+@property(nonatomic) NSArray *dataImmutable;
 @property (nonatomic) NSMutableArray *menuList;
 @property(nonatomic) MessageTableViewController *messageTableViewController;
+@property(nonatomic) NSArray *messageOptionsList;
+@property(nonatomic) NSArray *messageTextList;
+@property(nonatomic) NSArray *tempArray;
 
 -(void)getParseMessageData:(Campaign*)selectedCampaign;
 -(void)prepSections:messageList;

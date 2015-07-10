@@ -7,6 +7,8 @@
 //
 
 #import "MessageOptionsTableTableViewController.h"
+#import "MessageTableViewController.h"
+#import "MessageTableViewCell.h"
 
 @interface MessageOptionsTableTableViewController ()
 
@@ -14,44 +16,105 @@
 
 @implementation MessageOptionsTableTableViewController
 
+
+
+-(void) viewWillAppear:(BOOL)animated {
+    
+//    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"messageCategory == %@", self.category ];
+//    self.messageTextListFiltered  = (NSMutableArray*)[self.messageTextList filteredArrayUsingPredicate:predicate];
+
+}
+
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    // Uncomment the following line to preserve selection between presentations.
-    // self.clearsSelectionOnViewWillAppear = NO;
+    NSLog(@"self.menulist%@",self.menuList);
+    [self.tableView registerClass:[UITableViewCell class] forCellReuseIdentifier:@"Cell1"];
+    NSLog(@"self.messageOptionsList:%@",self.messageOptionsList);
     
-    // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-    // self.navigationItem.rightBarButtonItem = self.editButtonItem;
+    NSString *selectedCategory= [self.messageTableViewController categoryForSection:self.originIndexPath.section];
+    NSMutableArray *messageTextList = [[NSMutableArray alloc]init];
+
+
+    for (NSDictionary *dictionary in self.messageOptionsList) {
+        NSString *messageCategory = [dictionary valueForKey:@"messageCategory"];
+        if([messageCategory isEqualToString:selectedCategory]) {
+            [messageTextList addObject:dictionary];
+        }
+    }
+
+    self.messageOptionsListFiltered = messageTextList;
+    
+    NSLog(@"data as it's coming in index:%@, category:%@,  message text list Filtered%@",self.originIndexPath, self.category,messageTextList);
+    
+
+
+    self.tableView.estimatedRowHeight = 50.0;
+    self.tableView.rowHeight = UITableViewAutomaticDimension;
+
+    
+    NSLog(@"self.menulist first object %@",[self.menuList firstObject]);
+    NSLog(@"self.menulist 2nd object %@",[self.menuList objectAtIndex:1]);
+    NSLog(@"messageoptions first object %@",[self.messageOptionsList firstObject]);
+    NSLog(@"messageOptions second object %@",[self.messageOptionsList objectAtIndex:1]);
+
+    
 }
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
+
 }
 
 #pragma mark - Table view data source
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-
     // Return the number of sections.
-    return 0;
+    return 1;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-
     // Return the number of rows in the section.
-    return 0;
+    return [self.messageOptionsListFiltered count];
 }
 
-/*
+
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:<#@"reuseIdentifier"#> forIndexPath:indexPath];
-    
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"Cell1" forIndexPath:indexPath];
     // Configure the cell...
-    
+    NSString *messageText = [[self.messageOptionsListFiltered objectAtIndex:[indexPath row]] valueForKey:@"messageText"];
+    cell.textLabel.text = messageText;
     return cell;
 }
-*/
+
+
+
+-(void)tableView:(UITableView *)tableView  didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    
+    NSString *selectedMessage = [[self.messageOptionsListFiltered objectAtIndex:[indexPath row]] valueForKey:@"messageText"];
+    NSString *oldMessage = [[self.messageOptionsListFiltered firstObject] valueForKey:@"messageText"];
+    NSDictionary *unloadMessage = [self.messageTableViewController.messageList  objectAtIndex:[self.originRowIndex intValue]];
+//    
+//    NSLog(@"self.originrowindex:%@",self.originRowIndex);
+//    NSLog(@"unload message%@",unloadMessage);
+//    NSLog(@"old messagee%@",oldMessage);
+//    NSLog(@"message options%@",self.messageOptionsListFiltered);
+    
+    [self.messageOptionsListFiltered insertObject:unloadMessage atIndex:1];
+    [[self.messageTableViewController.messageList objectAtIndex:[self.originRowIndex intValue]] setValue:selectedMessage forKey:@"messageText"];
+    NSLog(@"showing the indexpath selected:%@, to be changed:%@, and the selected message:%@",indexPath,self.originIndexPath,selectedMessage);
+    
+//    NSLog(@"self.messageOptionFiltered %@",self.messageOptionsListFiltered);
+//    NSLog(@"self.menulist first object %@",[self.menuList firstObject]);
+//    NSLog(@"self.menulist 2nd object %@",[self.menuList objectAtIndex:1]);
+//    NSLog(@"messageoptions first object %@",[self.messageOptionsList firstObject]);
+//    NSLog(@"messageOptions second object %@",[self.messageOptionsList objectAtIndex:1]);
+    
+
+    [self.navigationController popViewControllerAnimated:YES];
+[self.messageTableViewController.tableView reloadData];
+}
 
 /*
 // Override to support conditional editing of the table view.

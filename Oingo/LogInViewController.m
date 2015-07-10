@@ -156,6 +156,8 @@ BOOL isNewAccount = NO;
 -(void)popToMessagesController {
     int viewsToPopAfterLogin = 2; //Pop 2 views (signup and login)  Remember index starts at 0.
  [self.navigationController popToViewController:[self.navigationController.viewControllers objectAtIndex: self.navigationController.viewControllers.count-viewsToPopAfterLogin-1] animated:YES];
+    MessageTableViewController *messageTableViewController = [self.navigationController.viewControllers objectAtIndex: self.navigationController.viewControllers.count-viewsToPopAfterLogin-1];
+    
 }
 
 - (IBAction)facebooklogin:(id)sender {

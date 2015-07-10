@@ -18,7 +18,12 @@
 @property (nonatomic, retain) NSMutableDictionary *sections;
 @property (nonatomic, retain) NSMutableDictionary *sectionToCategoryMap;
 @property(nonatomic) Campaign *selectedCampaign;
-@property(nonatomic) NSMutableArray *messageList;
+@property(nonatomic,copy) NSMutableArray *messageList;
+@property(nonatomic,copy) NSArray *menuList;
+@property(nonatomic,copy) NSMutableArray *messageTextList;
+@property (nonatomic,copy) NSArray *messageTextListNonMutable;
+@property(nonatomic,copy) NSArray *messageOptionsList;
+@property (nonatomic) NSArray *dataImmutable;
 @property(nonatomic) NSMutableArray *messageListIncludingReps;
 @property(nonatomic) NSString *repMessageText;
 @property(nonatomic) NSString *selectedLink;
@@ -32,7 +37,7 @@
 - (IBAction)shareSegmentFacebook:(id)sender;
 - (void)lookUpZip;
 - (void)getUserLocation;
-//-(void)assignSectionHelpers:(NSMutableDictionary*)sections categoryMap:(NSMutableDictionary*)sectionToCategoryMap;
+
 
 -(NSString *) categoryForSection:(NSInteger)section;
 @end
