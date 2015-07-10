@@ -13,6 +13,8 @@
 #import <Fabric/Fabric.h>
 #import "PFTwitterUtils+NativeTwitter.h"
 #import <Accounts/Accounts.h>
+#import "SignUpViewController.h"
+#import "LogInViewController.h"
 
 @implementation TwitterAPITweet
 
@@ -54,8 +56,9 @@
 
 
 -(void) pushToSignIn {
-    UIViewController *controller = [self.messageTableViewController.storyboard instantiateViewControllerWithIdentifier:@"signInViewController"];
-    [self.messageTableViewController.navigationController pushViewController:controller animated:YES];
+    SignUpViewController *signUpViewController = [self.messageTableViewController.storyboard instantiateViewControllerWithIdentifier:@"signInViewController"];
+    signUpViewController.messageTableViewController = self.messageTableViewController;
+    [self.messageTableViewController.navigationController pushViewController:signUpViewController animated:YES];
     
 }
 

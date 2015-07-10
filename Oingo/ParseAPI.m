@@ -101,12 +101,13 @@ BOOL isMenuWithCustomOrdering = NO;
 
             //Loads parse data.  If there location, it load congress by coordinates first, then its tries zipCode
             NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+            NSLog(@"defaults%@",defaults);
             if(![defaults valueForKey:@"latitude"] && ![defaults valueForKey:@"zipCode"]) { //if no location info, then just prep and load it.
                 NSLog(@"Loading parse data with no congress peoeple");
-                self.tempArray = objects;
+                self.tempArray = objects; //take out candidate
                 [self createDeepCopyOfData:objects];
                 [self prepSections:objects];
-            } else {
+            } else { //user has location info
                 [self createDeepCopyOfData:objects];
                 CongressFinderAPI *congressFinder = [[CongressFinderAPI alloc]init];
                 congressFinder.messageTableViewController = self.messageTableViewController;

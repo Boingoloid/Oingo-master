@@ -11,6 +11,7 @@
 #import "Program.h"
 #import <Foundation/Foundation.h>
 #import <Parse/Parse.h>
+#import "UpdateDefaults.h"
 
 
 @interface MessageTableViewController : UITableViewController
@@ -33,6 +34,7 @@
 @property (weak, nonatomic) IBOutlet UIView *tableHeaderView;
 @property(nonatomic) PFUser *currentUser;
 @property(nonatomic) BOOL isRepsLoaded;
+@property(nonatomic) UpdateDefaults *updateDefaults;
 - (IBAction)shareSegmentTwitter:(id)sender;
 - (IBAction)shareSegmentFacebook:(id)sender;
 - (void)lookUpZip;

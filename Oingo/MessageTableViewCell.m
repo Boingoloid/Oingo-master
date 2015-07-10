@@ -36,13 +36,12 @@ CongressPhotoFinderAPI *congressPhotoFinderAPI;
 
 
 
-- (void) configMessageCell:messageItem indexPath:(NSIndexPath*)indexPath {
+- (void) configMessageContactCell:messageItem indexPath:(NSIndexPath*)indexPath {
     
     //Assign message item
     self.messageItem = messageItem;
     
     //unhide fields
-    self.messageText.hidden = NO;
     self.targetName.hidden = NO;
     self.targetTitleLabel.hidden = NO;
     self.messageImage.hidden = NO;
@@ -58,9 +57,10 @@ CongressPhotoFinderAPI *congressPhotoFinderAPI;
     self.webFormButton.hidden = YES;
     
     //add information
-    self.messageText.text = [NSString stringWithFormat:@"\"%@\"",[messageItem valueForKey:@"messageText"]];
     self.targetName.text = [NSString stringWithFormat:@"%@ /",[messageItem valueForKey:@"targetName"]];
     self.targetTitleLabel.text = [messageItem valueForKey:@"targetTitle"];
+    
+
     
     //load program image from Parse and format
     PFFile *theImage = [messageItem objectForKey:@"messageImage"];
@@ -71,7 +71,31 @@ CongressPhotoFinderAPI *congressPhotoFinderAPI;
     self.messageImage.layer.borderColor = [[UIColor blackColor] CGColor];
     self.messageImage.layer.cornerRadius = 3.0;
     self.messageImage.clipsToBounds = YES;
+    
+
+    
+ //   int lineCount = (int)[self lineCount];
+//    NSLog(@"line count: %d",lineCount);
+    
+    
+    
 }
+
+//- (NSInteger)lineCount
+//{
+//    // Calculate height text according to font
+//    NSInteger lineCount = 0;
+//    CGSize labelSize = (CGSize){self.messageText.frame.size.width, FLT_MAX};
+//  CGRect requiredSize = [self.messageText.text boundingRectWithSize:labelSize  options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName: self.messageText.font} context:nil];
+//    
+//    // Calculate number of lines
+//    int charSize = self.messageText.font.leading;
+//    int rHeight = requiredSize.size.height;
+//    lineCount = rHeight/charSize;
+//    
+//    return lineCount;
+//}
+
 
 - (void) configMessageCellNoZip:(NSIndexPath*)indexPath {
     NSLog(@"no zip cell");
@@ -80,7 +104,6 @@ CongressPhotoFinderAPI *congressPhotoFinderAPI;
     self.zipLabel.hidden = NO;
     
     //Hide all other fields
-    self.messageText.hidden = YES;
     self.targetName.hidden = YES;
     self.targetTitleLabel.hidden = YES;
     self.messageImage.hidden = YES;

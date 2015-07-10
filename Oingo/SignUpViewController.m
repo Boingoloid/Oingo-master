@@ -12,6 +12,10 @@
 #import <FBSDKCoreKit/FBSDKCoreKit.h>
 #import <FBSDKLoginKit/FBSDKLoginKit.h>
 #import <ParseFacebookUtilsV4/PFFacebookUtils.h>
+#import "LogInViewController.h"
+#import "ParseAPI.h"
+#import "CongressFinderAPI.h"
+
 
 @interface SignUpViewController ()
 @property (weak, nonatomic) IBOutlet UITextField *emailField;
@@ -168,13 +172,16 @@ BOOL isNewAccountSignup = NO;
 //        [self.passwordField becomeFirstResponder];
     }];
     [alertController addAction:okAction];
-    
     [self presentViewController:alertController animated:YES completion:nil];
 }
 
 -(void)popToMessagesController {
     int viewsToPopAfterSignUp = 1; //Pop 1 views (signup)  Remember index starts at 0.
     [self.navigationController popToViewController:[self.navigationController.viewControllers objectAtIndex: self.navigationController.viewControllers.count-viewsToPopAfterSignUp-1] animated:YES];
+    self.updateDefaults = [[UpdateDefaults alloc]init];
+    [self.updateDefaults updateLocationDefaults];
+
+    [self.messageTableViewController.tableView reloadData];
 }
 
 
@@ -188,6 +195,12 @@ BOOL isNewAccountSignup = NO;
 
 // In a storyboard-based application, you will often want to do a little preparation before navigation
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+    if([segue.identifier isEqualToString:@"showLogin"]){
+        LogInViewController *logInViewController = [segue destinationViewController];
+        logInViewController.messageTableViewController = self.messageTableViewController;
+        
+        
+    }
     // Get the new view controller using [segue destinationViewController].
     // Pass the selected object to the new view controller.
 }

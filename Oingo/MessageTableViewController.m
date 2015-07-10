@@ -36,6 +36,7 @@
 #import "MessageOptionsTableTableViewController.h"
 
 
+
 @interface MessageTableViewController () <UIGestureRecognizerDelegate,CLLocationManagerDelegate>
 
 @property(nonatomic) CLLocationManager *locationManager;
@@ -55,26 +56,8 @@ NSInteger headerHeight = 48;
 NSInteger footerHeight = 1;
 
 -(void)viewWillAppear:(BOOL)animated {
-    
-    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-    PFUser *currentUser = [PFUser currentUser];
-
-    // If a registered user then set default zip and location if available
-    //? do I need to check if a sessionDefaults object already exists?
-    if(currentUser){
-        if([currentUser valueForKey:@"locationLatitude"] && [currentUser valueForKey:@"locationLongitude"]) {
-            [defaults setObject:[currentUser valueForKey:@"locationLatitude"] forKey:@"latitude"];
-            [defaults setObject:[currentUser valueForKey:@"locationLongitude"] forKey:@"longitude"];
-            [defaults synchronize];
-            NSLog(@"user already has value for location");
-        }
-        
-        if ([currentUser valueForKey:@"zipCode"]) {
-            [defaults setObject:[currentUser valueForKey:@"zipCode"] forKey:@"zipCode"];
-            [defaults synchronize];
-            NSLog(@"user already has value for zip");
-        }
-    }
+    self.updateDefaults = [[UpdateDefaults alloc]init];
+    [self.updateDefaults updateLocationDefaults];
 }
 
 
@@ -163,11 +146,6 @@ NSInteger footerHeight = 1;
             [self.navigationController pushViewController:messageOptionsViewController animated:YES];
 
             
-//            [[self.messageList objectAtIndex:0] setValue:@"TESTTESTTESTTESTTESTTEST" forKey:@"messageText"];
-            NSLog(@"self.menulist first object %@",[self.menuList firstObject]);
-            NSLog(@"self.menulist 2nd object %@",[self.menuList objectAtIndex:1]);
-            NSLog(@"messageoptions first object %@",[self.messageOptionsList firstObject]);
-            NSLog(@"messageOptions second object %@",[self.messageOptionsList objectAtIndex:1]);
             
             
         //If touch on tweetButton, then
@@ -192,7 +170,7 @@ NSInteger footerHeight = 1;
         } else if (CGRectContainsPoint(cell.emailButton.frame, pointInCell)) {
             NSLog(@"touch in email area");
             EmailComposerViewController *emailComposer = [[EmailComposerViewController alloc] init];
-            [emailComposer showMailPicker:cell.openCongressEmail withMessage:cell.messageText.text];
+//            [emailComposer showMailPicker:cell.openCongressEmail withMessage:cell.messageText.text];
             [self presentViewController:emailComposer animated:YES completion:NULL];
         } else if (CGRectContainsPoint(cell.webFormButton.frame, pointInCell)) {
             NSLog(@"touch in webForm area");
@@ -532,7 +510,7 @@ NSInteger footerHeight = 1;
         cell.layer.cornerRadius = 3;
         [self.tableView addSubview:cell];
         messageItem = [self.messageList objectAtIndex:[rowIndex intValue]];
-        [cell configMessageCell:messageItem indexPath:indexPath];
+        [cell configMessageContactCell:messageItem indexPath:indexPath];
         return cell;
     }
 }
@@ -546,18 +524,39 @@ NSInteger footerHeight = 1;
     NSDictionary *dictionary = [self.messageList objectAtIndex:[rowIndex intValue]];
     NSNumber *isMessageNumber = [dictionary valueForKey:@"isMessage"];
     bool isMessageBool = [isMessageNumber boolValue];
-
+    
     NSNumber *isGetLocationNumber = [dictionary valueForKey:@"isGetLocationCell"];
     bool isGetLocationBool = [isGetLocationNumber boolValue];
+
+    
+    
     
     if(isMessageBool) {
-        return 50;
+
+        
+        NSString *messageText = [dictionary valueForKey:@"messageText"];
+        double charCount = messageText.length;
+        NSLog(@"character count in height calc if is message:%f",charCount);
+        
+        int rowHeight = 50;
+            if (charCount < 50){
+                rowHeight = 25;
+                NSLog(@"making height 25");
+            } else if (charCount < 100) {
+                rowHeight = 35;
+                NSLog(@"making height 35");
+            } else {
+                NSLog(@"making height 50");
+                rowHeight = 50;
+            }
+        
+        return rowHeight;
     } else if(isGetLocationBool) {
-        return 60;
+        return 55;
     } else if([category isEqualToString:@"Local Representative"]) {
         return 65;
-    } else {
-        return 90;
+    } else { // normal contact cell
+        return 65;
     }
 }
 

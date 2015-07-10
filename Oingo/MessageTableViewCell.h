@@ -16,7 +16,6 @@
 @property(nonatomic) MessageItem *messageItem;
 @property(nonatomic) CongressionalMessageItem *congressionalMessageItem;
 @property(nonatomic) NSString *messageImageString;
-@property (weak, nonatomic) IBOutlet UILabel *messageText;
 @property (weak, nonatomic) IBOutlet UILabel *targetName;
 @property (weak, nonatomic) IBOutlet UILabel *sendCount;
 @property (weak, nonatomic) IBOutlet UIImageView *messageImage;
@@ -50,6 +49,6 @@
 
 
 - (void) configMessageCellNoZip:(NSIndexPath*)indexPath;
-- (void) configMessageCell:messageItem indexPath:(NSIndexPath*)indexPath;
+- (void) configMessageContactCell:messageItem indexPath:(NSIndexPath*)indexPath;
 
 @end

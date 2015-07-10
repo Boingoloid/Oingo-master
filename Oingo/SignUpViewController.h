@@ -7,7 +7,12 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "MessageTableViewController.h"
+#import "UpdateDefaults.h"
 
 @interface SignUpViewController : UIViewController
+
+@property(nonatomic) MessageTableViewController *messageTableViewController;
+@property(nonatomic) UpdateDefaults *updateDefaults;
 
 @end

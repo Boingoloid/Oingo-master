@@ -60,6 +60,7 @@
 		CEA79FCE1AEB94D900535B06 /* brainwash58.png in Resources */ = {isa = PBXBuildFile; fileRef = CEA79FCD1AEB94D900535B06 /* brainwash58.png */; };
 		CEA79FD01AEB954200535B06 /* brainwash40.png in Resources */ = {isa = PBXBuildFile; fileRef = CEA79FCF1AEB954200535B06 /* brainwash40.png */; };
 		CEA79FD61AEC7C0D00535B06 /* ProgramsTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CEA79FD51AEC7C0D00535B06 /* ProgramsTableViewController.m */; };
+		CEACE5921B4F4BCC007B7D2D /* UpdateDefaults.m in Sources */ = {isa = PBXBuildFile; fileRef = CEACE5911B4F4BCC007B7D2D /* UpdateDefaults.m */; };
 		CEB187911B18F8C400C86955 /* MessageOptionsTableTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CEB187901B18F8C400C86955 /* MessageOptionsTableTableViewController.m */; };
 		CEB187941B18FAD600C86955 /* MessageOptionsTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CEB187931B18FAD600C86955 /* MessageOptionsTableViewCell.m */; };
 		CEB292501B4528CE00A4E8E0 /* TwitterAPITweet.m in Sources */ = {isa = PBXBuildFile; fileRef = CEB2924F1B4528CE00A4E8E0 /* TwitterAPITweet.m */; };
@@ -210,6 +211,8 @@
 		CEA92FB51AF377050042D0EE /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		CEA92FB71AF3771B0042D0EE /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = usr/lib/libz.dylib; sourceTree = SDKROOT; };
 		CEA92FB91AF377350042D0EE /* libsqlite3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.dylib; path = usr/lib/libsqlite3.dylib; sourceTree = SDKROOT; };
+		CEACE5901B4F4BCC007B7D2D /* UpdateDefaults.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UpdateDefaults.h; sourceTree = "<group>"; };
+		CEACE5911B4F4BCC007B7D2D /* UpdateDefaults.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UpdateDefaults.m; sourceTree = "<group>"; };
 		CEB1878F1B18F8C400C86955 /* MessageOptionsTableTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MessageOptionsTableTableViewController.h; sourceTree = "<group>"; };
 		CEB187901B18F8C400C86955 /* MessageOptionsTableTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MessageOptionsTableTableViewController.m; sourceTree = "<group>"; };
 		CEB187921B18FAD600C86955 /* MessageOptionsTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MessageOptionsTableViewCell.h; sourceTree = "<group>"; };
@@ -534,6 +537,8 @@
 		CEE04BA01B3501B000AAF8EA /* Methods */ = {
 			isa = PBXGroup;
 			children = (
+				CEACE5901B4F4BCC007B7D2D /* UpdateDefaults.h */,
+				CEACE5911B4F4BCC007B7D2D /* UpdateDefaults.m */,
 				CE2BF96D1B3E517700AB15AC /* MakePhoneCallAPI.h */,
 				CE2BF96E1B3E517700AB15AC /* MakePhoneCallAPI.m */,
 				CE2029701B363D51005C079B /* CongressFinderAPI.h */,
@@ -801,6 +806,7 @@
 				CE87CACC1AFABA920084C666 /* Program.m in Sources */,
 				CE2BF9771B3E5A1700AB15AC /* EmailComposerViewController.m in Sources */,
 				CE241A451AEAE45A00F22144 /* AppDelegate.m in Sources */,
+				CEACE5921B4F4BCC007B7D2D /* UpdateDefaults.m in Sources */,
 				CE14A8AA1B211B7B0032664C /* SignUpViewController.m in Sources */,
 				CE31B1A91B44923B0048A5B1 /* ParseAPI.m in Sources */,
 				CED419DD1AED690100885470 /* CampaignViewController.m in Sources */,

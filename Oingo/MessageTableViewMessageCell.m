@@ -13,7 +13,10 @@
 
 - (void) configMessageCell:messageItem indexPath:(NSIndexPath*)indexPath{
     
-    self.messageText.text = [NSString stringWithFormat:@"\"%@\"",[messageItem valueForKey:@"messageText"]];
+    NSString *messageText = [NSString stringWithFormat:@"\"%@\"",[messageItem valueForKey:@"messageText"]];
+    self.messageText.text = messageText;
+//    long charCount = messageText.length;
+//    NSLog(@"character count%ld",charCount);
     self.messageText.preferredMaxLayoutWidth = 300;
     
     

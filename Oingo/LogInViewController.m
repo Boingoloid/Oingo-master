@@ -11,7 +11,7 @@
 #import <FBSDKCoreKit/FBSDKCoreKit.h>
 #import <FBSDKLoginKit/FBSDKLoginKit.h>
 #import <ParseFacebookUtilsV4/PFFacebookUtils.h>
-
+#import "ParseAPI.h"
 
 @interface LogInViewController ()
 @property (weak, nonatomic) IBOutlet UITextField *emailField;
@@ -153,10 +153,19 @@ BOOL isNewAccount = NO;
     }
 }
 
+
 -(void)popToMessagesController {
     int viewsToPopAfterLogin = 2; //Pop 2 views (signup and login)  Remember index starts at 0.
- [self.navigationController popToViewController:[self.navigationController.viewControllers objectAtIndex: self.navigationController.viewControllers.count-viewsToPopAfterLogin-1] animated:YES];
-    MessageTableViewController *messageTableViewController = [self.navigationController.viewControllers objectAtIndex: self.navigationController.viewControllers.count-viewsToPopAfterLogin-1];
+    [self.navigationController popToViewController:[self.navigationController.viewControllers objectAtIndex: self.navigationController.viewControllers.count-viewsToPopAfterLogin-1] animated:YES];
+    self.updateDefaults = [[UpdateDefaults alloc]init];
+    [self.updateDefaults updateLocationDefaults];
+    
+    ParseAPI *parseAPI = [[ParseAPI alloc]init];
+    parseAPI.messageTableViewController = self.messageTableViewController;
+    [parseAPI getParseMessageData:self.messageTableViewController.selectedCampaign];
+    
+    [self.messageTableViewController.tableView reloadData];
+    
     
 }
 
@@ -235,8 +244,8 @@ BOOL isNewAccount = NO;
             [self popToMessagesController];
         }
     }];
-
 }
+
 
 -(void) showDuplicateEmailAlert:(NSString *)email {
     if(isNewAccount) {
