@@ -18,16 +18,10 @@
 
 
 
--(void) viewWillAppear:(BOOL)animated {
-    
-//    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"messageCategory == %@", self.category ];
-//    self.messageTextListFiltered  = (NSMutableArray*)[self.messageTextList filteredArrayUsingPredicate:predicate];
-
-}
-
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
     
     NSLog(@"self.menulist%@",self.menuList);
     [self.tableView registerClass:[UITableViewCell class] forCellReuseIdentifier:@"Cell1"];
@@ -93,12 +87,10 @@
 -(void)tableView:(UITableView *)tableView  didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     
     NSString *selectedMessage = [[self.messageOptionsListFiltered objectAtIndex:[indexPath row]] valueForKey:@"messageText"];
-    NSString *oldMessage = [[self.messageOptionsListFiltered firstObject] valueForKey:@"messageText"];
     NSDictionary *unloadMessage = [self.messageTableViewController.messageList  objectAtIndex:[self.originRowIndex intValue]];
 //    
 //    NSLog(@"self.originrowindex:%@",self.originRowIndex);
 //    NSLog(@"unload message%@",unloadMessage);
-//    NSLog(@"old messagee%@",oldMessage);
 //    NSLog(@"message options%@",self.messageOptionsListFiltered);
     
     [self.messageOptionsListFiltered insertObject:unloadMessage atIndex:1];

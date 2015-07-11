@@ -76,6 +76,7 @@
     //1) logged in?, if not send to sign up screen
     //2) else if logged in, link account to facebook account, then send post
     //3) else send post b/c signed up and linked already.
+    //You cannot pre-populate on facebook so this is just like sharing the segment.
     PFUser *currentUser = [PFUser currentUser];
     if(!currentUser) {
         [self pushToSignIn];

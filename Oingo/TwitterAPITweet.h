@@ -17,6 +17,8 @@
 @property (nonatomic) MessageTableViewController *messageTableViewController;
 @property (nonatomic) Campaign *selectedCampaign;
 @property (nonatomic) Program *selectedProgram;
+@property (nonatomic) NSString *messageText;
+@property (nonatomic) NSArray *menuList;
 -(void)shareSegmentTwitterAPI;
 -(void)shareMessageTwitterAPI:(MessageTableViewCell*)cell;
 @end

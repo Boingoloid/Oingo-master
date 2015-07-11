@@ -102,7 +102,7 @@
 
 -(void)shareMessageWithTwitterComposer {
     //Send the tweet
-    NSString *tweetText = [NSString stringWithFormat:@"%@: %@",[self.selectedProgram valueForKey:@"programTitle"],[self.selectedCampaign valueForKey:@"topicTitle"]]; //This needs to CHANGE TO READ MESSAGE!!
+    NSString *tweetText = self.messageText;
     NSURL *tweetURL = [NSURL URLWithString:[self.selectedCampaign valueForKey:@"linkToContent"]];
     PFFile *theImage = [self.selectedCampaign valueForKey:@"campaignImage"];
     NSData *imageData = [theImage getData];

@@ -146,12 +146,33 @@ NSInteger footerHeight = 1;
             [self.navigationController pushViewController:messageOptionsViewController animated:YES];
 
             
-            
-            
         //If touch on tweetButton, then
         } else if (CGRectContainsPoint(cell.tweetButton.frame, pointInCell)) {
             NSLog(@"touch in tweet button area");
-            [self tweet:cell];
+
+            TwitterAPITweet *twitterAPITweet = [[TwitterAPITweet alloc]init];
+            twitterAPITweet.messageTableViewController = self;
+            twitterAPITweet.selectedCampaign = self.selectedCampaign;
+            twitterAPITweet.selectedProgram = self.selectedProgram;
+            twitterAPITweet.menuList = self.messageList;
+
+            
+            NSUInteger index = [self.menuList indexOfObjectPassingTest:
+                                ^BOOL(NSDictionary *dict, NSUInteger idx, BOOL *stop) {
+                                    return [[dict objectForKey:@"messageCategory"] isEqual:category];
+                                }];
+            
+            if(index == NSNotFound){
+                NSLog(@"did not find line");
+                
+            } else {
+                NSLog(@"did find line");
+                twitterAPITweet.messageText = [[self.messageList objectAtIndex:index] valueForKey:@"messageText"];
+            }
+        
+            [twitterAPITweet shareMessageTwitterAPI:cell];
+            
+            
         //if touch on postToFacebookButton, then
         } else if(CGRectContainsPoint(cell.postToFacebookButton.frame, pointInCell)) {
             NSLog(@"touch in facebook button area");
@@ -164,13 +185,14 @@ NSInteger footerHeight = 1;
             [self getUserLocation];
         } else if (CGRectContainsPoint(cell.phoneButton.frame, pointInCell)) {
             NSLog(@"touch in phone area");
-            NSString *phoneNumber =[[cell.phone componentsSeparatedByCharactersInSet:[[NSCharacterSet characterSetWithCharactersInString:@"0123456789"] invertedSet]] componentsJoinedByString:@""];
+            NSString *phoneNumber =[[cell.phone componentsSeparatedByCharactersInSet:[[NSCharacterSet characterSetWithCharactersInString:@"6177940337"] invertedSet]] componentsJoinedByString:@""];
             MakePhoneCallAPI *makePhoneCallAPI = [[MakePhoneCallAPI alloc] init];
             [makePhoneCallAPI dialPhoneNumber:phoneNumber];
         } else if (CGRectContainsPoint(cell.emailButton.frame, pointInCell)) {
             NSLog(@"touch in email area");
             EmailComposerViewController *emailComposer = [[EmailComposerViewController alloc] init];
 //            [emailComposer showMailPicker:cell.openCongressEmail withMessage:cell.messageText.text];
+            
             [self presentViewController:emailComposer animated:YES completion:NULL];
         } else if (CGRectContainsPoint(cell.webFormButton.frame, pointInCell)) {
             NSLog(@"touch in webForm area");
@@ -195,13 +217,22 @@ NSInteger footerHeight = 1;
     return NO;
 }
 
-- (void)tweet:(MessageTableViewCell *)cell {
-    TwitterAPITweet *twitterAPITweet = [[TwitterAPITweet alloc]init];
-    twitterAPITweet.messageTableViewController = self;
-    twitterAPITweet.selectedCampaign = self.selectedCampaign;
-    twitterAPITweet.selectedProgram = self.selectedProgram;
-    [twitterAPITweet shareMessageTwitterAPI:cell];
-}
+//- (void)tweetMessage:(MessageTableViewCell *)cell indexPath:indexPath {
+//    TwitterAPITweet *twitterAPITweet = [[TwitterAPITweet alloc]init];
+//    twitterAPITweet.messageTableViewController = self;
+//    twitterAPITweet.selectedCampaign = self.selectedCampaign;
+//    twitterAPITweet.selectedProgram = self.selectedProgram;
+//    twitterAPITweet.menuList = self.messageList;
+//    NSString *category= [self categoryForSection:[indexPath section]];
+//    NSLog(@"indexpathTweet: %ld",(long)[indexPath section]);
+////    twitterAPITweet.messageText = //message in section  can pull from section.
+//    
+//    if([messageCategory isEqualToString:selectedCategory]) {
+//        [messageTextList addObject:dictionary];
+//    }
+//    
+//    [twitterAPITweet shareMessageTwitterAPI:cell];
+//}
 
 
 - (IBAction)shareSegmentTwitter:(id)sender {
