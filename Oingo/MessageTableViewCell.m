@@ -63,38 +63,14 @@ CongressPhotoFinderAPI *congressPhotoFinderAPI;
 
     
     //load program image from Parse and format
-    PFFile *theImage = [messageItem objectForKey:@"messageImage"];
-    NSData *imageData = [theImage getData];
-    UIImage *image = [UIImage imageWithData:imageData];
-    self.messageImage.image = image;
-    self.messageImage.layer.borderWidth = 1.0;
+    self.messageImage.image = [messageItem objectForKey:@"messageImage"];
+    self.messageImage.layer.borderWidth = .5;
     self.messageImage.layer.borderColor = [[UIColor blackColor] CGColor];
     self.messageImage.layer.cornerRadius = 3.0;
     self.messageImage.clipsToBounds = YES;
-    
 
-    
- //   int lineCount = (int)[self lineCount];
-//    NSLog(@"line count: %d",lineCount);
-    
-    
     
 }
-
-//- (NSInteger)lineCount
-//{
-//    // Calculate height text according to font
-//    NSInteger lineCount = 0;
-//    CGSize labelSize = (CGSize){self.messageText.frame.size.width, FLT_MAX};
-//  CGRect requiredSize = [self.messageText.text boundingRectWithSize:labelSize  options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName: self.messageText.font} context:nil];
-//    
-//    // Calculate number of lines
-//    int charSize = self.messageText.font.leading;
-//    int rHeight = requiredSize.size.height;
-//    lineCount = rHeight/charSize;
-//    
-//    return lineCount;
-//}
 
 
 - (void) configMessageCellNoZip:(NSIndexPath*)indexPath {

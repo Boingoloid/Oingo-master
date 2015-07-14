@@ -7,12 +7,12 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		CA747D5F10B48B3A880C7651 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = DC06CC7A94234D9E16E26D1C /* libPods.a */; };
 		CE06A2001B31F7C5000D3210 /* Bolts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CE06A1FA1B31F7C5000D3210 /* Bolts.framework */; };
 		CE06A2011B31F7C5000D3210 /* Parse.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CE06A1FB1B31F7C5000D3210 /* Parse.framework */; };
 		CE06A2021B31F7C5000D3210 /* ParseCrashReporting.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CE06A1FC1B31F7C5000D3210 /* ParseCrashReporting.framework */; };
 		CE06A2041B31F7C5000D3210 /* ParseFacebookUtilsV4.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CE06A1FE1B31F7C5000D3210 /* ParseFacebookUtilsV4.framework */; };
 		CE06A2051B31F7C5000D3210 /* ParseUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CE06A1FF1B31F7C5000D3210 /* ParseUI.framework */; };
+		CE13AE021B51EA5900B36783 /* Fabric.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CE13AE011B51EA5900B36783 /* Fabric.framework */; };
 		CE14A8AA1B211B7B0032664C /* SignUpViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CE14A8A91B211B7A0032664C /* SignUpViewController.m */; };
 		CE14A8AD1B2227C60032664C /* LogInViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CE14A8AC1B2227C60032664C /* LogInViewController.m */; };
 		CE14A8B31B22D20B0032664C /* TweetTableViewDemoTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CE14A8B21B22D20B0032664C /* TweetTableViewDemoTableViewController.m */; };
@@ -101,7 +101,6 @@
 		CEF14C0C1B23B72C00EC95A4 /* FBSDKCoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CEF14C0B1B23B72C00EC95A4 /* FBSDKCoreKit.framework */; };
 		CEF14C0E1B23BE5A00EC95A4 /* FBSDKLoginKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CEF14C0D1B23BE5A00EC95A4 /* FBSDKLoginKit.framework */; };
 		CEF1C9011B0E7B79003EFAD1 /* WebViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CEF1C9001B0E7B79003EFAD1 /* WebViewController.m */; };
-		CEFFDD951B141232005EEC86 /* Fabric.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CEFFDD911B141232005EEC86 /* Fabric.framework */; };
 		CEFFDD961B141232005EEC86 /* TwitterKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CEFFDD921B141232005EEC86 /* TwitterKit.framework */; };
 		CEFFDD971B141232005EEC86 /* TwitterKitResources.bundle in Resources */ = {isa = PBXBuildFile; fileRef = CEFFDD931B141232005EEC86 /* TwitterKitResources.bundle */; };
 		CEFFDD981B141232005EEC86 /* TwitterCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CEFFDD941B141232005EEC86 /* TwitterCore.framework */; };
@@ -119,13 +118,12 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		5CE63C3D6F3FE7E1F15E9983 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
-		780012AA1BFB60E0EDD2FF35 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
 		CE06A1FA1B31F7C5000D3210 /* Bolts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Bolts.framework; sourceTree = "<group>"; };
 		CE06A1FB1B31F7C5000D3210 /* Parse.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Parse.framework; sourceTree = "<group>"; };
 		CE06A1FC1B31F7C5000D3210 /* ParseCrashReporting.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = ParseCrashReporting.framework; sourceTree = "<group>"; };
 		CE06A1FE1B31F7C5000D3210 /* ParseFacebookUtilsV4.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = ParseFacebookUtilsV4.framework; sourceTree = "<group>"; };
 		CE06A1FF1B31F7C5000D3210 /* ParseUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = ParseUI.framework; sourceTree = "<group>"; };
+		CE13AE011B51EA5900B36783 /* Fabric.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Fabric.framework; sourceTree = "<group>"; };
 		CE14A8A81B211B7A0032664C /* SignUpViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SignUpViewController.h; sourceTree = "<group>"; };
 		CE14A8A91B211B7A0032664C /* SignUpViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SignUpViewController.m; sourceTree = "<group>"; };
 		CE14A8AB1B2227C60032664C /* LogInViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LogInViewController.h; sourceTree = "<group>"; };
@@ -261,12 +259,10 @@
 		CEF14C0D1B23BE5A00EC95A4 /* FBSDKLoginKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FBSDKLoginKit.framework; path = ../../../Documents/FacebookSDK/FBSDKLoginKit.framework; sourceTree = "<group>"; };
 		CEF1C8FF1B0E7B79003EFAD1 /* WebViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WebViewController.h; path = ../WebViewController.h; sourceTree = "<group>"; };
 		CEF1C9001B0E7B79003EFAD1 /* WebViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = WebViewController.m; path = ../WebViewController.m; sourceTree = "<group>"; };
-		CEFFDD911B141232005EEC86 /* Fabric.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Fabric.framework; path = "../../../Downloads/PFTwitterUtils-NativeTwitter-master/PFTwitterUtils+NativeTwitter/Fabric.framework"; sourceTree = "<group>"; };
 		CEFFDD921B141232005EEC86 /* TwitterKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = TwitterKit.framework; path = "../../../Downloads/PFTwitterUtils-NativeTwitter-master/PFTwitterUtils+NativeTwitter/TwitterKit.framework"; sourceTree = "<group>"; };
 		CEFFDD931B141232005EEC86 /* TwitterKitResources.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; name = TwitterKitResources.bundle; path = "../../../Downloads/PFTwitterUtils-NativeTwitter-master/PFTwitterUtils+NativeTwitter/TwitterKitResources.bundle"; sourceTree = "<group>"; };
 		CEFFDD941B141232005EEC86 /* TwitterCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = TwitterCore.framework; path = "../../../Downloads/PFTwitterUtils-NativeTwitter-master/PFTwitterUtils+NativeTwitter/TwitterCore.framework"; sourceTree = "<group>"; };
 		CEFFDD9C1B151346005EEC86 /* Crashlytics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Crashlytics.framework; path = Oingo/Crashlytics.framework; sourceTree = "<group>"; };
-		DC06CC7A94234D9E16E26D1C /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -301,11 +297,10 @@
 				CEFFDD9D1B151346005EEC86 /* Crashlytics.framework in Frameworks */,
 				CEED9BE31AF4169100402BC2 /* Twitter.framework in Frameworks */,
 				CEED9BE01AF4168E00402BC2 /* QuartzCore.framework in Frameworks */,
-				CEFFDD951B141232005EEC86 /* Fabric.framework in Frameworks */,
 				CEF14C0C1B23B72C00EC95A4 /* FBSDKCoreKit.framework in Frameworks */,
 				CEFFDD961B141232005EEC86 /* TwitterKit.framework in Frameworks */,
 				CEFFDD981B141232005EEC86 /* TwitterCore.framework in Frameworks */,
-				CA747D5F10B48B3A880C7651 /* libPods.a in Frameworks */,
+				CE13AE021B51EA5900B36783 /* Fabric.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -324,7 +319,6 @@
 			children = (
 				CE2BF9731B3E595000AB15AC /* MessageUI.framework */,
 				CE20296E1B363668005C079B /* libstdc++.6.0.9.dylib */,
-				DC06CC7A94234D9E16E26D1C /* libPods.a */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -337,7 +331,6 @@
 				CE241A3D1AEAE45A00F22144 /* Products */,
 				CEA92FBB1AF377600042D0EE /* frameworks */,
 				CE241A6A1AEAF0D300F22144 /* Images */,
-				D2BEDF8417F0880722285E96 /* Pods */,
 				461A3BA50F675DAFB84D6483 /* Frameworks */,
 			);
 			sourceTree = "<group>";
@@ -497,6 +490,7 @@
 		CEA92FBB1AF377600042D0EE /* frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				CE13AE011B51EA5900B36783 /* Fabric.framework */,
 				CE06A1FA1B31F7C5000D3210 /* Bolts.framework */,
 				CE06A1FB1B31F7C5000D3210 /* Parse.framework */,
 				CE06A1FC1B31F7C5000D3210 /* ParseCrashReporting.framework */,
@@ -507,7 +501,6 @@
 				CEF14C0D1B23BE5A00EC95A4 /* FBSDKLoginKit.framework */,
 				CEFFDD9C1B151346005EEC86 /* Crashlytics.framework */,
 				CEF14C0B1B23B72C00EC95A4 /* FBSDKCoreKit.framework */,
-				CEFFDD911B141232005EEC86 /* Fabric.framework */,
 				CEFFDD921B141232005EEC86 /* TwitterKit.framework */,
 				CEFFDD931B141232005EEC86 /* TwitterKitResources.bundle */,
 				CEFFDD941B141232005EEC86 /* TwitterCore.framework */,
@@ -608,15 +601,6 @@
 				CEED9C031AF41A7300402BC2 /* TWSignedRequest.m */,
 			);
 			path = TwitterReverseAuth;
-			sourceTree = "<group>";
-		};
-		D2BEDF8417F0880722285E96 /* Pods */ = {
-			isa = PBXGroup;
-			children = (
-				5CE63C3D6F3FE7E1F15E9983 /* Pods.debug.xcconfig */,
-				780012AA1BFB60E0EDD2FF35 /* Pods.release.xcconfig */,
-			);
-			name = Pods;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -762,7 +746,8 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			shellScript = "
+";
 			showEnvVarsInLog = 0;
 		};
 		970CD2995E5E7EF175036530 /* Copy Pods Resources */ = {
@@ -777,7 +762,8 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods/Pods-resources.sh\"\n";
+			shellScript = "
+";
 			showEnvVarsInLog = 0;
 		};
 		CEFFDD901B140E9A005EEC86 /* ShellScript */ = {
@@ -951,7 +937,6 @@
 		};
 		CE241A631AEAE45A00F22144 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 5CE63C3D6F3FE7E1F15E9983 /* Pods.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
@@ -975,7 +960,6 @@
 		};
 		CE241A641AEAE45A00F22144 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 780012AA1BFB60E0EDD2FF35 /* Pods.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";

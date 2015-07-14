@@ -65,27 +65,22 @@ NSInteger footerHeight = 1;
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    // Get menu data from parse
     ParseAPI *parseAPI = [[ParseAPI alloc]init];
     parseAPI.messageTableViewController = self;
     [parseAPI getParseMessageData:self.selectedCampaign];
     
-    
-    NSLog(@"flagging view did load");
-//    self.tableView.estimatedRowHeight = 68.0;
-//    self.tableView.rowHeight = UITableViewAutomaticDimension;
-    
-    //Format table header
+    // Format table header
     self.tableHeaderView.layer.borderColor = [[UIColor whiteColor] CGColor];
     self.tableHeaderView.layer.borderWidth = .5;
     self.tableHeaderView.layer.backgroundColor = [[UIColor whiteColor] CGColor];
     self.tableHeaderView.layer.cornerRadius = 3;
     self.tableHeaderView.clipsToBounds = YES;
-    
     NSString* padding = @"  "; // # of spaces
     self.tableHeaderLabel.text = [NSString stringWithFormat:@"%@%@%@", padding,[self.selectedCampaign valueForKey:@"topicTitle"], padding];
-        self.tableHeaderSubLabel.text = [NSString stringWithFormat:@"%@%@%@", padding,[self.selectedProgram valueForKey:@"programTitle"], padding];
+    self.tableHeaderSubLabel.text = [NSString stringWithFormat:@"%@%@%@", padding,[self.selectedProgram valueForKey:@"programTitle"], padding];
 
-    //Create gesture recognizer
+    // Create gesture recognizer
     UITapGestureRecognizer *tapRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(respondToTapGesture:)]; //connect recognizer to action method.
     tapRecognizer.delegate = self;
     tapRecognizer.numberOfTapsRequired = 1;
@@ -93,7 +88,7 @@ NSInteger footerHeight = 1;
     [tapRecognizer setCancelsTouchesInView:NO];
     [self.tableView addGestureRecognizer:tapRecognizer];
     
-    //create logout button
+    // Create logout button
     UIBarButtonItem *logOutButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemBookmarks target:self action:@selector(logout)];
      [[NSUserDefaults standardUserDefaults] synchronize];
     self.navigationItem.rightBarButtonItem = logOutButton;
@@ -102,76 +97,87 @@ NSInteger footerHeight = 1;
 
 
 - (void)respondToTapGesture:(UITapGestureRecognizer *)tap {
-   
-    //This is what we use for touches in the cells
+    //*******
+    //This is what we use for user touches in the cells
     //It grabs point coordinate of touch as finger lifted
-    //Pulls the indexPath of the of the touch
-    //Testing result is below
+    //**********
+
     if (UIGestureRecognizerStateEnded == tap.state) {
+        
+        // Collect data about tap location
         UITableView *tableView = (UITableView *)tap.view;
         CGPoint p = [tap locationInView:tap.view];
-        NSLog(@"%@",NSStringFromCGPoint(p));
         NSIndexPath* indexPath = [tableView indexPathForRowAtPoint:p];
-        [tableView deselectRowAtIndexPath:indexPath animated:NO];
         MessageTableViewCell *cell = (MessageTableViewCell *)[tableView cellForRowAtIndexPath:indexPath];
         CGPoint pointInCell = [tap locationInView:cell];
-        NSLog(@"coordinates pointp%@",NSStringFromCGPoint(p));
-        NSLog(@"coordinates indexpath%@",indexPath);
-      
         NSString *category= [self categoryForSection:indexPath.section];
+        
+        
         NSArray *rowIndecesInSection = [self.sections objectForKey:category];
         NSNumber *rowIndex = [rowIndecesInSection objectAtIndex:indexPath.row]; //pulling the row indece from array above
         
-        
-        NSDictionary *dictionary = [self.messageList objectAtIndex:[rowIndex intValue]];
+        // Deselect the row
+        [tableView deselectRowAtIndexPath:indexPath animated:NO];
+ 
+        // Create dictionary = selected menu object (could be message or contact)
+        NSDictionary *dictionary = [self.menuList objectAtIndex:[rowIndex intValue]];
+       
+        //Get the isMessage Bool from Parse backend
         NSNumber *isMessageNumber = [dictionary valueForKey:@"isMessage"];
         bool isMessageBool = [isMessageNumber boolValue];
+
+        // Print helpful data to log
+        NSLog(@"coordinates pointp%@",NSStringFromCGPoint(p));
+        NSLog(@"coordinates indexpath%@",indexPath);
         NSLog(@"is message: %d",isMessageBool);
-//        NSNumber *isGetLocationNumber = [dictionary valueForKey:@"isGetLocationCell"];
-//        bool isGetLocationBool = [isGetLocationNumber boolValue];
-        NSLog(@"category: %@",category);
         NSLog(@"category from dictionary%@",[dictionary valueForKey:@"messageCategory"]);
+        NSLog(@"category using section lookup: %@",category);
+
+        
+        // Lines of code to get the Location Cell bool
+        // NSNumber *isGetLocationNumber = [dictionary valueForKey:@"isGetLocationCell"];
+        // bool isGetLocationBool = [isGetLocationNumber boolValue];
 
         
         if(isMessageBool){
-            NSLog(@"touch in message cell, don't worry about it for now.");
+            NSLog(@"touch in message cell");
+            
+            // Create & Push MessageOptionsVC and assign properties: self.menuList and touch location info.
             MessageOptionsTableTableViewController *messageOptionsViewController = [[MessageOptionsTableTableViewController alloc]init];
             messageOptionsViewController.category = category;
             messageOptionsViewController.messageTableViewController = self;
             messageOptionsViewController.originIndexPath = indexPath;
             messageOptionsViewController.originRowIndex = rowIndex;
             messageOptionsViewController.messageOptionsList = self.messageOptionsList;
-            self.menuList = self.messageList;
             messageOptionsViewController.menuList = self.menuList;
             [self.navigationController pushViewController:messageOptionsViewController animated:YES];
-
             
-        //If touch on tweetButton, then
         } else if (CGRectContainsPoint(cell.tweetButton.frame, pointInCell)) {
             NSLog(@"touch in tweet button area");
-
+            
+            // Create Tweet API object, Properties passed: -menuList -selection info
             TwitterAPITweet *twitterAPITweet = [[TwitterAPITweet alloc]init];
             twitterAPITweet.messageTableViewController = self;
             twitterAPITweet.selectedCampaign = self.selectedCampaign;
             twitterAPITweet.selectedProgram = self.selectedProgram;
-            twitterAPITweet.menuList = self.messageList;
+            twitterAPITweet.menuList = self.menuList;
 
             
+            //Look u
             NSUInteger index = [self.menuList indexOfObjectPassingTest:
                                 ^BOOL(NSDictionary *dict, NSUInteger idx, BOOL *stop) {
-                                    return [[dict objectForKey:@"messageCategory"] isEqual:category];
+                                    return [[dict valueForKey:@"messageCategory"] isEqualToString:category];
                                 }];
-            
             if(index == NSNotFound){
                 NSLog(@"did not find line");
                 
             } else {
-                NSLog(@"did find line");
-                twitterAPITweet.messageText = [[self.messageList objectAtIndex:index] valueForKey:@"messageText"];
+                NSLog(@"index was found:%ld",index);
+                NSLog(@"did find line:%@",[self.menuList objectAtIndex:index]);
+                twitterAPITweet.messageText = [[self.menuList objectAtIndex:index] valueForKey:@"messageText"];
+                
             }
-        
             [twitterAPITweet shareMessageTwitterAPI:cell];
-            
             
         //if touch on postToFacebookButton, then
         } else if(CGRectContainsPoint(cell.postToFacebookButton.frame, pointInCell)) {
@@ -499,21 +505,25 @@ NSInteger footerHeight = 1;
 
 
     // Get bool value from current index on list.
-    NSDictionary *dictionary = [self.messageList objectAtIndex:[rowIndex intValue]];
+    NSDictionary *dictionary = [self.menuList objectAtIndex:[rowIndex intValue]];
+    
+    // Get the isMesssage bool
     NSNumber *isMessageNumber = [dictionary valueForKey:@"isMessage"];
     bool isMessageBool = [isMessageNumber boolValue];
-        NSLog(@"is message: %d",isMessageBool);
+    NSLog(@"is message: %d",isMessageBool);
+
+    // Get the isGetLocation bool
     NSNumber *isGetLocationNumber = [dictionary valueForKey:@"isGetLocationCell"];
     bool isGetLocationBool = [isGetLocationNumber boolValue];
-        NSLog(@"category: %@",category);
-//    NSLog(@"category from dictionary%@",[dictionary valueForKey:@"messageCategory"]);
 
+    // Decide which type of cell to load
+    
     if(isMessageBool){
         MessageTableViewMessageCell *cell = [tableView dequeueReusableCellWithIdentifier:@"CellCategoryMessage" forIndexPath:indexPath];
         NSLog(@"loading message cell");
         cell.layer.cornerRadius = 3;
         [self.tableView addSubview:cell];
-        messageItem = [self.messageList objectAtIndex:[rowIndex intValue]];
+        messageItem = [self.menuList objectAtIndex:[rowIndex intValue]];
         [cell configMessageCell:messageItem indexPath:indexPath];
         return cell;
         
@@ -531,7 +541,7 @@ NSInteger footerHeight = 1;
         NSLog(@"loading local rep cell");
         cell.layer.cornerRadius = 3;
         [self.tableView addSubview:cell];
-        congressionalMessageItem = [self.messageList objectAtIndex:[rowIndex intValue]];
+        congressionalMessageItem = [self.menuList objectAtIndex:[rowIndex intValue]];
         [cell configMessageCellLocalRep:congressionalMessageItem indexPath:indexPath];
         return cell;
         
@@ -540,7 +550,7 @@ NSInteger footerHeight = 1;
         NSLog(@"loading civilian");
         cell.layer.cornerRadius = 3;
         [self.tableView addSubview:cell];
-        messageItem = [self.messageList objectAtIndex:[rowIndex intValue]];
+        messageItem = [self.menuList objectAtIndex:[rowIndex intValue]];
         [cell configMessageContactCell:messageItem indexPath:indexPath];
         return cell;
     }
@@ -552,7 +562,7 @@ NSInteger footerHeight = 1;
     NSNumber *rowIndex = [rowIndecesInSection objectAtIndex:indexPath.row]; //pulling the row indece from array above
     
     // Get bool value from current index on list.
-    NSDictionary *dictionary = [self.messageList objectAtIndex:[rowIndex intValue]];
+    NSDictionary *dictionary = [self.menuList objectAtIndex:[rowIndex intValue]];
     NSNumber *isMessageNumber = [dictionary valueForKey:@"isMessage"];
     bool isMessageBool = [isMessageNumber boolValue];
     

@@ -94,7 +94,7 @@
 //    NSLog(@"message options%@",self.messageOptionsListFiltered);
     
     [self.messageOptionsListFiltered insertObject:unloadMessage atIndex:1];
-    [[self.messageTableViewController.messageList objectAtIndex:[self.originRowIndex intValue]] setValue:selectedMessage forKey:@"messageText"];
+    [[self.messageTableViewController.menuList objectAtIndex:[self.originRowIndex intValue]] setValue:selectedMessage forKey:@"messageText"];
     NSLog(@"showing the indexpath selected:%@, to be changed:%@, and the selected message:%@",indexPath,self.originIndexPath,selectedMessage);
     
 //    NSLog(@"self.messageOptionFiltered %@",self.messageOptionsListFiltered);

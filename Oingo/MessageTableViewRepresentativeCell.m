@@ -81,6 +81,10 @@ CongressPhotoFinderAPI *congressPhotoFinderAPI;
     
     NSString *imageString = [self.congressionalMessageItem valueForKey:@"messageImageString"];
     self.messageImage.image = [UIImage imageNamed:imageString];
+    self.messageImage.layer.borderWidth = .5;
+    self.messageImage.layer.borderColor = [[UIColor blackColor] CGColor];
+    self.messageImage.clipsToBounds = YES;
+    self.messageImage.layer.cornerRadius = 3;
 }
 
 

@@ -26,58 +26,129 @@ BOOL isMenuWithCustomOrdering = NO;
 
 -(id)copyWithZone:(NSZone *)zone
 {
-    NSArray *tempArray= [[NSArray allocWithZone:zone]init];
+    NSMutableArray *tempArray= [[NSMutableArray allocWithZone:zone]init];
     
     return tempArray;
 }
 
 
--(void)createDeepCopyOfData:objects {
-    
-    NSLog(@"objects!!!%@",objects);
-    NSMutableArray *tempArray = [[NSMutableArray alloc]init];
 
+
+-(void)getParseMessageData:(Campaign*)selectedCampaign{  //get parse messge data for selectedCampaign
+    PFQuery *query = [PFQuery queryWithClassName:@"Messages"];
+    [query whereKey:@"campaignID" equalTo:[selectedCampaign valueForKey:@"campaignID"]];
+    [query orderByDescending:@"messageCategory"];
+    [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
+        if (!error) {
+//            self.messageListFromParseWithContacts = (NSMutableArray*)objects;  //messageList has everything ordered by category
+            self.messageListFromParseWithContacts = (NSMutableArray*)[self createDeepCopyOfData:objects];
+            
+            //Loads parse data.  If there location, it load congress by coordinates first, then its tries zipCode
+            NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+            NSLog(@"defaults%@",defaults);
+            
+            if(![defaults valueForKey:@"latitude"] && ![defaults valueForKey:@"zipCode"]) { //if no location info, then just prep and load it.
+                NSLog(@"Loading parse data with no congress peoeple");
+                [self prepSections:self.messageListFromParseWithContacts];
+                
+            } else { //user has location info
+                CongressFinderAPI *congressFinder = [[CongressFinderAPI alloc]init];
+                congressFinder.messageTableViewController = self.messageTableViewController;
+                congressFinder.parseAPI = self;
+                if([defaults valueForKey:@"latitude"] && [defaults valueForKey:@"longitude"]) {
+                    [congressFinder getCongressWithLatitude:[defaults doubleForKey:@"latitude"] andLongitude:[defaults doubleForKey:@"longitude"] addToMessageList:(NSMutableArray*)self.messageListFromParseWithContacts];
+                } else {
+                    [congressFinder getCongress:[defaults valueForKey:@"zipCode"] addToMessageList:self.messageListFromParseWithContacts];
+                }
+            }
+        }
+    }];
+}
+
+
+
+
+
+
+-(NSArray*)createDeepCopyOfData:objects {
+    
+    // Separate messages out into tempArrays
+    NSMutableArray *messagesTempArray = [[NSMutableArray alloc]init];
+    NSMutableArray *contactsTempArray = [[NSMutableArray alloc]init];
+    NSMutableArray *allDataTempArray = [[NSMutableArray alloc]init];
+
+    // Cycle through objects, create 3 temp arrays initialized above (Message Only, Contact Only, Both("allDataTempArray"))
     for (NSDictionary *dictionary in objects) {
-        NSNumber *isMessageNumber = [dictionary valueForKey:@"isMessage"];
+     
+        // In every case
+        NSDictionary *tempDicToAddFull = dictionary;
+        NSMutableArray *allKeys = (NSMutableArray*)[tempDicToAddFull allKeys];
+        int count = (int)[[tempDicToAddFull allKeys]count];
+        
+        NSMutableDictionary *dictionaryToAddAggregator = [[NSMutableDictionary alloc]init];
+        for (int i=0; i<count; i++){
+            NSString *keyString = [allKeys objectAtIndex:i];
+            //            NSLog(@"keyvalue: %@",keyString);
+            NSObject *getObject = [tempDicToAddFull objectForKey:keyString];
+            //            NSLog(@"getObject: %@",getObject);
+            
+            
+            NSMutableDictionary *insertDicTemp = [[NSMutableDictionary alloc]initWithObjects:@[getObject] forKeys:@[keyString]];
+            
+            // Change PFFile to image file
+            if([keyString isEqualToString:@"messageImage"]) {
+                PFFile *theImage = [insertDicTemp objectForKey:@"messageImage"];
+                NSData *imageData = [theImage getData];
+                UIImage *image = [UIImage imageWithData:imageData];
+                [insertDicTemp setObject:image forKey:@"messageImage"];
+            }
+            
+            [dictionaryToAddAggregator addEntriesFromDictionary:insertDicTemp];
+        }
+        
+        NSNumber *isMessageNumber = [dictionaryToAddAggregator valueForKey:@"isMessage"];
         bool isMessageBool = [isMessageNumber boolValue];
         
+        // If it's a message, add to messagesTempArray
         if (isMessageBool) {
-            NSString *messageText = [dictionary valueForKey:@"messageText"];
-            NSString *category = [dictionary valueForKey:@"messageCategory"];
             
-            NSDictionary *tempDic = [[NSDictionary alloc]initWithObjectsAndKeys:category,@"messageCategory",messageText ,@"messageText", @YES ,@"isMessage", nil];
-            [tempArray addObject:(NSDictionary*)tempDic];
+            
+            
+            
+//            NSString *messageText = [dictionaryToAddAggregator valueForKey:@"messageText"];
+//            NSString *messageCategory = [dictionaryToAddAggregator valueForKey:@"messageCategory"];
+//            NSDictionary *tempMessageDicToAdd = [[NSDictionary alloc]initWithObjectsAndKeys:messageCategory,@"messageCategory",messageText ,@"messageText", @YES ,@"isMessage", nil];
+            [messagesTempArray addObject:(NSDictionary*)dictionaryToAddAggregator];
+        } else {
+        
+            // If it's NOT a message, add to contactsTempArray
+            [contactsTempArray addObject:(NSDictionary*)dictionaryToAddAggregator];
+        
+
         }
+
+
+
+        
+        
+        [allDataTempArray addObject:(NSDictionary*)dictionaryToAddAggregator];
     }
-    NSLog(@"temp array%@",tempArray);
     
     
-    NSArray* deepCopyArray = [NSKeyedUnarchiver unarchiveObjectWithData:[NSKeyedArchiver archivedDataWithRootObject:tempArray]];
     
-    NSLog(@"objects first object%@",[objects firstObject]);
-    NSLog(@"self.tempArray%@",[self.tempArray firstObject]);
-    NSLog(@"print out the first deep copy object%@",[deepCopyArray firstObject]);
-    
-    //[[self.tempArray firstObject] setValue:@"TESTING" forKey:@"messageText"];
-    [[objects firstObject] setValue:@"TESTING" forKey:@"messageText"];
-    
-    NSLog(@"SECONDobjects first object%@",[objects firstObject]);
-    NSLog(@"self.tempArray%@",[self.tempArray firstObject]);
-    NSLog(@"print out the first deep copy object after deleting temparray%@",[deepCopyArray firstObject]);
 
+    NSMutableArray* messagesDeepCopyArray = [NSKeyedUnarchiver unarchiveObjectWithData:[NSKeyedArchiver archivedDataWithRootObject:messagesTempArray]];
+    NSMutableArray* allDataDeepCopyArray = [NSKeyedUnarchiver unarchiveObjectWithData:[NSKeyedArchiver archivedDataWithRootObject:allDataTempArray]];
     
-    NSLog(@"true deep copy%@",deepCopyArray);
-    self.messageOptionsList = deepCopyArray;
-
-    
-//    NSLog(@"temparray%@",[tempArray firstObject]);
-
+    self.messageOptionsList = messagesDeepCopyArray;
+    return allDataDeepCopyArray;
     
 }
 
+
 - (void)encodeWithCoder:(NSCoder *)coder
 {
-        NSLog(@"encode is firing");
+    NSLog(@"encode is firing");
     [coder encodeObject:self.messageOptionsList];
 }
 
@@ -91,36 +162,6 @@ BOOL isMenuWithCustomOrdering = NO;
     return self;
 }
 
--(void)getParseMessageData:(Campaign*)selectedCampaign{  //get parse messge data for selectedCampaign
-    PFQuery *query = [PFQuery queryWithClassName:@"Messages"];
-    [query whereKey:@"campaignID" equalTo:[selectedCampaign valueForKey:@"campaignID"]];
-    [query orderByDescending:@"messageCategory"];
-    [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
-        if (!error) {
-            self.messageListFromParseWithContacts = (NSMutableArray*)objects;  //messageList has everything ordered by category
-
-            //Loads parse data.  If there location, it load congress by coordinates first, then its tries zipCode
-            NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-            NSLog(@"defaults%@",defaults);
-            if(![defaults valueForKey:@"latitude"] && ![defaults valueForKey:@"zipCode"]) { //if no location info, then just prep and load it.
-                NSLog(@"Loading parse data with no congress peoeple");
-                self.tempArray = objects; //take out candidate
-                [self createDeepCopyOfData:objects];
-                [self prepSections:objects];
-            } else { //user has location info
-                [self createDeepCopyOfData:objects];
-                CongressFinderAPI *congressFinder = [[CongressFinderAPI alloc]init];
-                congressFinder.messageTableViewController = self.messageTableViewController;
-                congressFinder.parseAPI = self;
-                if([defaults valueForKey:@"latitude"] && [defaults valueForKey:@"longitude"]) {
-                    [congressFinder getCongressWithLatitude:[defaults doubleForKey:@"latitude"] andLongitude:[defaults doubleForKey:@"longitude"] addToMessageList:(NSMutableArray*)self.messageListFromParseWithContacts];
-                } else {
-                    [congressFinder getCongress:[defaults valueForKey:@"zipCode"] addToMessageList:self.messageListFromParseWithContacts];
-                }
-            }
-        }
-    }];
-}
 
 -(void) separateMessagesFromContacts:(NSMutableArray*)messageList {
     
@@ -242,20 +283,20 @@ BOOL isMenuWithCustomOrdering = NO;
         [self.sections setObject:objectsInSection forKey:category]; //overwrite 1st object with new objects (2 regulatory objects).
     }
     
-    
-    
-    //assign prep section variables back to view controller
+    // Assign prep section variables back to view controller
     self.messageTableViewController.sections = (NSMutableDictionary*)self.sections;
     self.messageTableViewController.sectionToCategoryMap = (NSMutableDictionary*)self.sectionToCategoryMap;
     self.messageTableViewController.messageList = self.menuList;
+    self.messageTableViewController.menuList = self.menuList;
     self.messageTableViewController.messageOptionsList = self.messageOptionsList;
     
-      NSLog(@"sections right after sections are created%@",self.sections);
-      NSLog(@"categorymap after before sections are created%@",self.sectionToCategoryMap);
+    // Print items to Logs
+    NSLog(@"sections right after sections are created%@",self.sections);
+    NSLog(@"categorymap after before sections are created%@",self.sectionToCategoryMap);
     NSLog(@"self.menulist first object %@",[self.menuList firstObject]);
-        NSLog(@"self.menulist 2nd object %@",[self.menuList objectAtIndex:1]);
+    NSLog(@"self.menulist 2nd object %@",[self.menuList objectAtIndex:1]);
     NSLog(@"messageoptions first object %@",[self.messageOptionsList firstObject]);
-        NSLog(@"messageOptions second object %@",[self.messageOptionsList objectAtIndex:1]);
+    NSLog(@"messageOptions second object %@",[self.messageOptionsList objectAtIndex:1]);
     
     [self.messageTableViewController.tableView reloadData];
     
