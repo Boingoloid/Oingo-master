@@ -8,14 +8,14 @@
 
 #import <UIKit/UIKit.h>
 #import "Program.h"
-#import "Campaign.h"
+#import "Segment.h"
 
 @interface ProgramDetailTableViewController : UITableViewController
 
 
 @property (nonatomic,strong) Program *selectedProgram;
-@property (nonatomic) NSArray *campaignList;
-@property (nonatomic) Campaign *selectedCampaign;
+@property (nonatomic) NSArray *segmentList;
+@property (nonatomic) Segment *selectedSegment;
 @property (nonatomic) NSString *selectedLink;
 
 

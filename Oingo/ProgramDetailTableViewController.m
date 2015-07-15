@@ -11,7 +11,7 @@
 #import <Parse/Parse.h>
 #import "PFTwitterUtils+NativeTwitter.h"
 #import "ProgramDetailTableViewCell.h"
-#import "Campaign.h"
+#import "Segment.h"
 #import "Program.h"
 #import "MessageTableViewController.h"
 #import <UIKit/UIKit.h>
@@ -24,19 +24,18 @@
 
 @implementation ProgramDetailTableViewController
 
-Campaign *campaign;
+Segment *segment;
 
 - (void) viewWillAppear:(BOOL)animated {
 //Separator style for tableview
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
-    
+
     //Pulling data for tablecell from Parse (filtered by selected program i.e. List of all associated with the Daily Show.)
-    PFQuery *query = [PFQuery queryWithClassName:@"Campaigns"];
-    
+    PFQuery *query = [PFQuery queryWithClassName:@"Segments"];
     [query whereKey:@"programTitle" equalTo:[self.selectedProgram valueForKey:@"programTitle"]];
     [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
         if (!error) {
-            self.campaignList = objects;
+            self.segmentList = objects;
             [self.tableView reloadData];
         } else {
             NSLog(@"Error: %@ %@", error, [error userInfo]);
@@ -164,14 +163,14 @@ Campaign *campaign;
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     // Return the number of rows in the section.
-        return self.campaignList.count;
+        return self.segmentList.count;
 }
 
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     ProgramDetailTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"Cell" forIndexPath:indexPath];
-    campaign = [self.campaignList objectAtIndex:indexPath.row];
-    [cell configCampaignCell:campaign];
+    segment = [self.segmentList objectAtIndex:indexPath.row];
+    [cell configSegmentCell:segment];
     return cell;
 }
 
@@ -224,9 +223,9 @@ Campaign *campaign;
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {  
     if ([segue.identifier isEqualToString:@"showMessages"]){
         NSIndexPath *indexPath = [self.tableView indexPathForSelectedRow];
-        campaign = self.campaignList[indexPath.row];
+        segment = self.segmentList[indexPath.row];
         MessageTableViewController *viewController = [segue destinationViewController];
-        viewController.selectedCampaign = campaign;
+        viewController.selectedSegment = segment;
         viewController.selectedLink = self.selectedLink;
         viewController.selectedProgram = self.selectedProgram;
         

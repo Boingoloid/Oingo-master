@@ -1,5 +1,5 @@
 //
-//  Campaign.h
+//  Segment.h
 //  Oingo
 //
 //  Created by Matthew Acalin on 5/5/15.
@@ -8,14 +8,14 @@
 
 #import <Foundation/Foundation.h>
 
-@interface Campaign : NSObject
+@interface Segment : NSObject
 
 @property (nonatomic) NSTimeInterval date;
 @property (nonatomic, retain) NSString *programTitle;
 @property (nonatomic) int16_t mood;
 @property (nonatomic, retain) NSString *purposeSummary;
 @property (nonatomic) NSString *linkToContent;
-@property (nonatomic, retain) NSString *campaignImage;
+@property (nonatomic, retain) NSString *segmentImage;
 
 
 @end

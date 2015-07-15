@@ -24,7 +24,7 @@
 @property(nonatomic) NSArray *messageTextList;
 @property(nonatomic) NSArray *tempArray;
 
--(void)getParseMessageData:(Campaign*)selectedCampaign;
+-(void)getParseMessageData:(Segment*)selectedSegment;
 -(void)prepSections:messageList;
 
 

@@ -48,7 +48,7 @@
 		CE6F71F41B2BCA9E0067E4DA /* SettingsTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CE6F71F31B2BCA9E0067E4DA /* SettingsTableViewController.m */; };
 		CE80B5D61AFC0EFB007D69FB /* dailyshow6cover.png in Resources */ = {isa = PBXBuildFile; fileRef = CE80B5D51AFC0EFB007D69FB /* dailyshow6cover.png */; };
 		CE82943D1B38DB7C00B596E6 /* CongressionalMessageItem.m in Sources */ = {isa = PBXBuildFile; fileRef = CE82943C1B38DB7C00B596E6 /* CongressionalMessageItem.m */; };
-		CE87CABE1AF977120084C666 /* Campaign.m in Sources */ = {isa = PBXBuildFile; fileRef = CE87CABD1AF977120084C666 /* Campaign.m */; };
+		CE87CABE1AF977120084C666 /* Segment.m in Sources */ = {isa = PBXBuildFile; fileRef = CE87CABD1AF977120084C666 /* Segment.m */; };
 		CE87CAC01AF9945B0084C666 /* last-night-660x330.png in Resources */ = {isa = PBXBuildFile; fileRef = CE87CABF1AF9945B0084C666 /* last-night-660x330.png */; };
 		CE87CAC21AF9B2570084C666 /* vicegasmask.png in Resources */ = {isa = PBXBuildFile; fileRef = CE87CAC11AF9B2570084C666 /* vicegasmask.png */; };
 		CE87CAC41AF9B5DE0084C666 /* vicecoverphoto.png in Resources */ = {isa = PBXBuildFile; fileRef = CE87CAC31AF9B5DE0084C666 /* vicecoverphoto.png */; };
@@ -178,8 +178,8 @@
 		CE80B5D51AFC0EFB007D69FB /* dailyshow6cover.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = dailyshow6cover.png; path = Images/dailyshow6cover.png; sourceTree = "<group>"; };
 		CE82943B1B38DB7C00B596E6 /* CongressionalMessageItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CongressionalMessageItem.h; sourceTree = "<group>"; };
 		CE82943C1B38DB7C00B596E6 /* CongressionalMessageItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CongressionalMessageItem.m; sourceTree = "<group>"; };
-		CE87CABC1AF977120084C666 /* Campaign.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Campaign.h; sourceTree = "<group>"; };
-		CE87CABD1AF977120084C666 /* Campaign.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Campaign.m; sourceTree = "<group>"; };
+		CE87CABC1AF977120084C666 /* Segment.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Segment.h; sourceTree = "<group>"; };
+		CE87CABD1AF977120084C666 /* Segment.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Segment.m; sourceTree = "<group>"; };
 		CE87CABF1AF9945B0084C666 /* last-night-660x330.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "last-night-660x330.png"; path = "Images/last-night-660x330.png"; sourceTree = "<group>"; };
 		CE87CAC11AF9B2570084C666 /* vicegasmask.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = vicegasmask.png; path = Images/vicegasmask.png; sourceTree = "<group>"; };
 		CE87CAC31AF9B5DE0084C666 /* vicecoverphoto.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = vicecoverphoto.png; path = Images/vicecoverphoto.png; sourceTree = "<group>"; };
@@ -459,8 +459,8 @@
 			children = (
 				CE87CACA1AFABA920084C666 /* Program.h */,
 				CE87CACB1AFABA920084C666 /* Program.m */,
-				CE87CABC1AF977120084C666 /* Campaign.h */,
-				CE87CABD1AF977120084C666 /* Campaign.m */,
+				CE87CABC1AF977120084C666 /* Segment.h */,
+				CE87CABD1AF977120084C666 /* Segment.m */,
 				CEEF250C1B017BAA00EFB257 /* MessageItem.h */,
 				CEEF250D1B017BAA00EFB257 /* MessageItem.m */,
 				CE82943B1B38DB7C00B596E6 /* CongressionalMessageItem.h */,
@@ -790,7 +790,7 @@
 				CEACE5921B4F4BCC007B7D2D /* UpdateDefaults.m in Sources */,
 				CE14A8AA1B211B7B0032664C /* SignUpViewController.m in Sources */,
 				CE31B1A91B44923B0048A5B1 /* ParseAPI.m in Sources */,
-				CE87CABE1AF977120084C666 /* Campaign.m in Sources */,
+				CE87CABE1AF977120084C666 /* Segment.m in Sources */,
 				CEB4ED8E1AF8305E0055D547 /* ProgramDetailTableViewController.m in Sources */,
 				CE5B5D0E1AF95A740033A668 /* ProgramDetailTableViewCell.m in Sources */,
 				CE31B1A01B420C670048A5B1 /* MessageTableViewRepresentativeCell.m in Sources */,

@@ -9,6 +9,8 @@
 #import "ProgramDetailTableViewCell.h"
 #import <CoreGraphics/CoreGraphics.h>
 #import <Foundation/Foundation.h>
+#import <Parse/Parse.h>
+
 
 @interface ProgramDetailTableViewCell () <UIGestureRecognizerDelegate>
 
@@ -21,11 +23,19 @@
 
 @implementation ProgramDetailTableViewCell
 
-- (void) configCampaignCell:campaign {
+- (void) configSegmentCell:segment {
     
-    self.dateLabel = [campaign valueForKey:@"date"];
-    self.purposeSummary.text = [campaign valueForKey:@"purposeSummary"];
-    self.linkToContentButton.titleLabel.text = [campaign valueForKey:@"linkToContent"];
+    self.dateLabel = [segment valueForKey:@"date"];
+    self.purposeSummary.text = [segment valueForKey:@"purposeSummary"];
+    self.linkToContentButton.titleLabel.text = [segment valueForKey:@"linkToContent"];
+    
+    
+    PFFile *theImage = [segment objectForKey:@"segmentImage"];
+    NSData *imageData = [theImage getData];
+    UIImage *image = [UIImage imageWithData:imageData];
+
+
+    self.segmentImage.image = image;
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {

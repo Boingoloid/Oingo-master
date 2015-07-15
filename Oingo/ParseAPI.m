@@ -8,7 +8,7 @@
 
 #import "ParseAPI.h"
 #import <Parse/Parse.h>
-#import "Campaign.h"
+#import "Segment.h"
 #import "MessageItem.h"
 #import "CongressionalMessageItem.h"
 #import "CongressFinderAPI.h"
@@ -34,9 +34,9 @@ BOOL isMenuWithCustomOrdering = NO;
 
 
 
--(void)getParseMessageData:(Campaign*)selectedCampaign{  //get parse messge data for selectedCampaign
+-(void)getParseMessageData:(Segment*)selectedSegment{  //get parse messge data for selectedSegment
     PFQuery *query = [PFQuery queryWithClassName:@"Messages"];
-    [query whereKey:@"campaignID" equalTo:[selectedCampaign valueForKey:@"campaignID"]];
+    [query whereKey:@"segmentID" equalTo:[selectedSegment valueForKey:@"segmentID"]];
     [query orderByDescending:@"messageCategory"];
     [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
         if (!error) {

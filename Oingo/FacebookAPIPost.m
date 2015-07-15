@@ -61,9 +61,9 @@
 -(void)shareSegmentWithFacebookComposer{
     
     FBSDKShareLinkContent *content = [FBSDKShareLinkContent new];
-    content.contentURL = [NSURL URLWithString:[self.selectedCampaign valueForKey:@"linkToContent"]];
+    content.contentURL = [NSURL URLWithString:[self.selectedSegment valueForKey:@"linkToContent"]];
     content.contentTitle = [self.selectedProgram valueForKey:@"programTitle"];
-    content.contentDescription = [self.selectedCampaign valueForKey:@"purposeSummary"];
+    content.contentDescription = [self.selectedSegment valueForKey:@"purposeSummary"];
     FBSDKShareDialog *shareDialog = [FBSDKShareDialog new];
     [shareDialog setMode:FBSDKShareDialogModeAutomatic];
     [shareDialog setShareContent:content];

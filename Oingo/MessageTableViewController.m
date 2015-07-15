@@ -68,7 +68,8 @@ NSInteger footerHeight = 1;
     // Get menu data from parse
     ParseAPI *parseAPI = [[ParseAPI alloc]init];
     parseAPI.messageTableViewController = self;
-    [parseAPI getParseMessageData:self.selectedCampaign];
+    [parseAPI getParseMessageData:self.selectedSegment];
+    NSLog(@"selectedSegment:%@",self.selectedSegment);
     
     // Format table header
     self.tableHeaderView.layer.borderColor = [[UIColor whiteColor] CGColor];
@@ -77,7 +78,7 @@ NSInteger footerHeight = 1;
     self.tableHeaderView.layer.cornerRadius = 3;
     self.tableHeaderView.clipsToBounds = YES;
     NSString* padding = @"  "; // # of spaces
-    self.tableHeaderLabel.text = [NSString stringWithFormat:@"%@%@%@", padding,[self.selectedCampaign valueForKey:@"topicTitle"], padding];
+    self.tableHeaderLabel.text = [NSString stringWithFormat:@"%@%@%@", padding,[self.selectedSegment valueForKey:@"topicTitle"], padding];
     self.tableHeaderSubLabel.text = [NSString stringWithFormat:@"%@%@%@", padding,[self.selectedProgram valueForKey:@"programTitle"], padding];
 
     // Create gesture recognizer
@@ -158,7 +159,7 @@ NSInteger footerHeight = 1;
             // Create Tweet API object, Properties passed: -menuList -selection info
             TwitterAPITweet *twitterAPITweet = [[TwitterAPITweet alloc]init];
             twitterAPITweet.messageTableViewController = self;
-            twitterAPITweet.selectedCampaign = self.selectedCampaign;
+            twitterAPITweet.selectedSegment = self.selectedSegment;
             twitterAPITweet.selectedProgram = self.selectedProgram;
             twitterAPITweet.menuList = self.menuList;
 
@@ -226,7 +227,7 @@ NSInteger footerHeight = 1;
 //- (void)tweetMessage:(MessageTableViewCell *)cell indexPath:indexPath {
 //    TwitterAPITweet *twitterAPITweet = [[TwitterAPITweet alloc]init];
 //    twitterAPITweet.messageTableViewController = self;
-//    twitterAPITweet.selectedCampaign = self.selectedCampaign;
+//    twitterAPITweet.selectedSegment = self.selectedSegment;
 //    twitterAPITweet.selectedProgram = self.selectedProgram;
 //    twitterAPITweet.menuList = self.messageList;
 //    NSString *category= [self categoryForSection:[indexPath section]];
@@ -244,7 +245,7 @@ NSInteger footerHeight = 1;
 - (IBAction)shareSegmentTwitter:(id)sender {
     TwitterAPITweet *twitterAPITweet = [[TwitterAPITweet alloc]init];
     twitterAPITweet.messageTableViewController = self;
-    twitterAPITweet.selectedCampaign = self.selectedCampaign;
+    twitterAPITweet.selectedSegment = self.selectedSegment;
     twitterAPITweet.selectedProgram = self.selectedProgram;
     [twitterAPITweet shareSegmentTwitterAPI];
 }
@@ -252,7 +253,7 @@ NSInteger footerHeight = 1;
 - (IBAction)shareSegmentFacebook:(id)sender {
     FacebookAPIPost *facebookAPIPost = [[FacebookAPIPost alloc]init];
     facebookAPIPost.messageTableViewController = self;
-    facebookAPIPost.selectedCampaign = self.selectedCampaign;
+    facebookAPIPost.selectedSegment = self.selectedSegment;
     facebookAPIPost.selectedProgram = self.selectedProgram;
     [facebookAPIPost shareSegmentFacebookAPI];
 }
@@ -262,7 +263,7 @@ NSInteger footerHeight = 1;
 
     FacebookAPIPost *facebookAPIPost = [[FacebookAPIPost alloc]init];
     facebookAPIPost.messageTableViewController = self;
-    facebookAPIPost.selectedCampaign = self.selectedCampaign;
+    facebookAPIPost.selectedSegment = self.selectedSegment;
     facebookAPIPost.selectedProgram = self.selectedProgram;
     [facebookAPIPost shareSegmentFacebookAPI];
 }
@@ -367,7 +368,7 @@ NSInteger footerHeight = 1;
     
     ParseAPI *parseAPI = [[ParseAPI alloc]init];
     parseAPI.MessageTableViewController = self;
-    [parseAPI getParseMessageData:self.selectedCampaign];
+    [parseAPI getParseMessageData:self.selectedSegment];
     
 //Note: if going directly to congressFinderAPI you must check that they isGetLocationCell does not exist.  Delete it if it does.
 //    CongressFinderAPI *congressFinder = [[CongressFinderAPI alloc]init];
@@ -422,7 +423,7 @@ NSInteger footerHeight = 1;
             
             ParseAPI *parseAPI = [[ParseAPI alloc]init];
             parseAPI.MessageTableViewController = self;
-            [parseAPI getParseMessageData:self.selectedCampaign];
+            [parseAPI getParseMessageData:self.selectedSegment];
 //            CongressFinderAPI *congressFinder = [[CongressFinderAPI alloc]init];
 //            congressFinder.messageTableViewController = self;
 //            congressFinder.parseAPI = parseAPI;
@@ -481,7 +482,7 @@ NSInteger footerHeight = 1;
             
             ParseAPI *parseAPI = [[ParseAPI alloc]init];
             parseAPI.MessageTableViewController = self;
-            [parseAPI getParseMessageData:self.selectedCampaign];
+            [parseAPI getParseMessageData:self.selectedSegment];
 //            CongressFinderAPI *congressFinder = [[CongressFinderAPI alloc]init];
 //            congressFinder.messageTableViewController = self;
 //            congressFinder.parseAPI = parseAPI;

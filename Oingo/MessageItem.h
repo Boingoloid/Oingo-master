@@ -11,7 +11,7 @@
 @interface MessageItem : NSObject
 
 @property (nonatomic) NSTimeInterval date;
-@property (nonatomic, retain) NSString *campaignID;
+@property (nonatomic, retain) NSString *segmentID;
 @property (nonatomic) int16_t mood;
 @property (nonatomic, retain) NSString *messageText;
 @property (nonatomic, retain) NSString *messageImage;

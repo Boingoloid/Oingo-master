@@ -35,9 +35,9 @@
 }
 
 -(void)shareSegmentWithTwitterComposer{
-    NSString *tweetText = [NSString stringWithFormat:@"%@: %@",[self.selectedProgram valueForKey:@"programTitle"],[self.selectedCampaign valueForKey:@"topicTitle"]];
-    NSURL *tweetURL = [NSURL URLWithString:[self.selectedCampaign valueForKey:@"linkToContent"]];
-    PFFile *theImage = [self.selectedCampaign valueForKey:@"campaignImage"];
+    NSString *tweetText = [NSString stringWithFormat:@"%@: %@",[self.selectedProgram valueForKey:@"programTitle"],[self.selectedSegment valueForKey:@"topicTitle"]];
+    NSURL *tweetURL = [NSURL URLWithString:[self.selectedSegment valueForKey:@"linkToContent"]];
+    PFFile *theImage = [self.selectedSegment valueForKey:@"segmentImage"];
     NSData *imageData = [theImage getData];
     UIImage *image = [UIImage imageWithData:imageData];
     
@@ -103,8 +103,8 @@
 -(void)shareMessageWithTwitterComposer {
     //Send the tweet
     NSString *tweetText = self.messageText;
-    NSURL *tweetURL = [NSURL URLWithString:[self.selectedCampaign valueForKey:@"linkToContent"]];
-    PFFile *theImage = [self.selectedCampaign valueForKey:@"campaignImage"];
+    NSURL *tweetURL = [NSURL URLWithString:[self.selectedSegment valueForKey:@"linkToContent"]];
+    PFFile *theImage = [self.selectedSegment valueForKey:@"segmentImage"];
     NSData *imageData = [theImage getData];
     UIImage *image = [UIImage imageWithData:imageData];
     TWTRComposer *composer = [[TWTRComposer alloc] init];

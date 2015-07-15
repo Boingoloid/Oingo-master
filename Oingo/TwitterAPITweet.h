@@ -9,13 +9,13 @@
 #import <Foundation/Foundation.h>
 #import "MessageTableViewController.h"
 #import "Program.h"
-#import "Campaign.h"
+#import "Segment.h"
 #import "MessageTableViewCell.h"
 
 
 @interface TwitterAPITweet : NSObject
 @property (nonatomic) MessageTableViewController *messageTableViewController;
-@property (nonatomic) Campaign *selectedCampaign;
+@property (nonatomic) Segment *selectedSegment;
 @property (nonatomic) Program *selectedProgram;
 @property (nonatomic) NSString *messageText;
 @property (nonatomic) NSArray *menuList;

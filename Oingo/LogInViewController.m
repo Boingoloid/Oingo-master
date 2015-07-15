@@ -162,7 +162,7 @@ BOOL isNewAccount = NO;
     
     ParseAPI *parseAPI = [[ParseAPI alloc]init];
     parseAPI.messageTableViewController = self.messageTableViewController;
-    [parseAPI getParseMessageData:self.messageTableViewController.selectedCampaign];
+    [parseAPI getParseMessageData:self.messageTableViewController.selectedSegment];
     
     [self.messageTableViewController.tableView reloadData];
     
@@ -207,6 +207,7 @@ BOOL isNewAccount = NO;
     }
 }
 
+
 -(void)updateFacebookUserData {
     FBSDKGraphRequest *requestMe = [[FBSDKGraphRequest alloc]initWithGraphPath:@"me" parameters:nil];
     FBSDKGraphRequestConnection *connection = [[FBSDKGraphRequestConnection alloc] init];
@@ -221,6 +222,7 @@ BOOL isNewAccount = NO;
     }];
     [connection start];
 }
+
 
 -(void) updateAllFacebookFields:(id)result {
     PFUser *currentUser = [PFUser currentUser];

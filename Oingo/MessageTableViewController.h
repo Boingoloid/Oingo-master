@@ -7,7 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "Campaign.h"
+#import "Segment.h"
 #import "Program.h"
 #import <Foundation/Foundation.h>
 #import <Parse/Parse.h>
@@ -18,7 +18,7 @@
 
 @property (nonatomic, retain) NSMutableDictionary *sections;
 @property (nonatomic, retain) NSMutableDictionary *sectionToCategoryMap;
-@property(nonatomic) Campaign *selectedCampaign;
+@property(nonatomic) Segment *selectedSegment;
 @property(nonatomic,copy) NSMutableArray *messageList;
 @property(nonatomic,copy) NSArray *menuList;
 @property(nonatomic,copy) NSMutableArray *messageTextList;

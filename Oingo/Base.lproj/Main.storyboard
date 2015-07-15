@@ -234,6 +234,7 @@
                                     <outlet property="dateLabel" destination="3jQ-uc-33Q" id="xvW-hB-5Sh"/>
                                     <outlet property="linkToContentButton" destination="cDZ-re-iL0" id="APd-ol-aQC"/>
                                     <outlet property="purposeSummary" destination="nB2-f8-mN4" id="vLg-GD-Xvq"/>
+                                    <outlet property="segmentImage" destination="QWG-RJ-9hI" id="fV5-Ku-hKq"/>
                                 </connections>
                             </tableViewCell>
                         </prototypes>

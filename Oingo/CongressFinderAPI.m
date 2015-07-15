@@ -13,7 +13,7 @@
 
 @interface CongressFinderAPI () <NSURLSessionDelegate>
 @property(nonatomic) NSString *messageText;
-@property(nonatomic) NSString *campaignID;
+@property(nonatomic) NSString *segmentID;
 @end
 
 @implementation CongressFinderAPI
@@ -123,7 +123,7 @@
 //    if(![[messageList objectAtIndex:index] valueForKey:@"targetName"]) {
 //        NSLog(@"dummy line being deleted");
 //        self.messageText = [[messageList objectAtIndex:index] valueForKey:@"messageText"];
-//        self.campaignID = [[messageList objectAtIndex:index] valueForKey:@"campaignID"];
+//        self.segmentID = [[messageList objectAtIndex:index] valueForKey:@"segmentID"];
 //        [messageList removeObjectAtIndex:index];
 //    } else {
 //        NSLog(@"no dummy to delete!");
@@ -139,7 +139,7 @@
         
         [congressionalMessageItem setValue:@"Local Representative" forKey:@"messageCategory"];
         [congressionalMessageItem setValue:[congresspersonObject valueForKey:@"bioguide_id"] forKey:@"bioguide_id"];
-        [congressionalMessageItem setValue:self.campaignID forKey:@"campaignID"];
+        [congressionalMessageItem setValue:self.segmentID forKey:@"segmentID"];
         [congressionalMessageItem setValue:self.messageText forKey:@"messageText"];
         
         // Name, full name, nickname, use nickname for firstname if available.

@@ -15,7 +15,7 @@
 @property (nonatomic, retain) NSString *messageImageString;
 @property (nonatomic, retain) NSString *bioguide_id;
 //@property (nonatomic) NSTimeInterval date;
-@property (nonatomic, retain) NSString *campaignID;
+@property (nonatomic, retain) NSString *segmentID;
 @property (nonatomic, retain) NSString *messageCategory;
 @property (nonatomic, retain) NSString *messageText;
 @property (nonatomic, retain) NSString *firstName;

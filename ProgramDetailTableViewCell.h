@@ -13,7 +13,8 @@
 
 @property (nonatomic) IBOutlet UIButton *linkToContentButton;
 @property (weak, nonatomic) IBOutlet UILabel *dateLabel;
+@property (weak, nonatomic) IBOutlet UIImageView *segmentImage;
 
-- (void)configCampaignCell:campaign;
+- (void)configSegmentCell:segment;
 
 @end
