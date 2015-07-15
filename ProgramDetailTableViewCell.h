@@ -12,6 +12,7 @@
 @interface ProgramDetailTableViewCell : UITableViewCell
 
 @property (nonatomic) IBOutlet UIButton *linkToContentButton;
+@property (weak, nonatomic) IBOutlet UILabel *dateLabel;
 
 - (void)configCampaignCell:campaign;
 

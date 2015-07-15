@@ -46,7 +46,6 @@ Campaign *campaign;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
     //Create gesture recognizer,
     UITapGestureRecognizer *tapRocognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(respondToTapGesture:)]; //connect recognizer to action method.
     tapRocognizer.delegate = self;
@@ -73,7 +72,7 @@ Campaign *campaign;
     if (UIGestureRecognizerStateEnded == tap.state) {
         UITableView *tableView = (UITableView *)tap.view;
         CGPoint p = [tap locationInView:tap.view];
-//        NSLog(@"%@",NSStringFromCGPoint(p));
+        NSLog(@"%@",NSStringFromCGPoint(p));
         NSIndexPath* indexPath = [tableView indexPathForRowAtPoint:p];
         [tableView deselectRowAtIndexPath:indexPath animated:NO];
         ProgramDetailTableViewCell *cell = (ProgramDetailTableViewCell *)[tableView cellForRowAtIndexPath:indexPath];
@@ -88,6 +87,72 @@ Campaign *campaign;
         }
     }
 }
+
+//-(void)prepSections:messageList {
+//    NSLog(@"Prep sections triggered");
+//    
+//    //add message to this list
+//    [self separateMessagesFromContacts:messageList]; //create self.messageList and self.contactList
+//    [self createMenuList]; //creates self.menuList
+//    [self addLocalRepLocationCaptureCell: self.menuList]; //edits self.menuList
+//    
+//    self.menuList = [self sortMessageListWithContacts:self.menuList];
+//    NSLog(@"menu right before prep sections%@",self.menuList);
+//    
+//    if(self.sections){
+//        [self.sections removeAllObjects];
+//        [self.sectionToCategoryMap removeAllObjects];
+//    }else {
+//        self.sections = [NSMutableDictionary dictionary];
+//        self.sectionToCategoryMap = [NSMutableDictionary dictionary];
+//    }
+//    //Loops through every messageItem in the messageList and creates 2 dictionaries with index values and categories.
+//    NSInteger section = 0;
+//    NSInteger rowIndex = 0; //now 1
+//    for (MessageItem  *messageItem in self.menuList) {
+//        NSString *category = [messageItem valueForKey:@"messageCategory"]; //retrieves category for each message -1st regulator
+//        NSMutableArray *objectsInSection = [self.sections objectForKey:category]; //assigns objectsInSection value of sections for current category
+//        if (!objectsInSection) {
+//            objectsInSection = [NSMutableArray array];  //if new create array
+//            // this is the first time we see this category - increment the section index
+//            // sectionToCategoryMap literally it ends up (Regulator = 0)
+//            [self.sectionToCategoryMap setObject:category forKey:[NSNumber numberWithInt:(int)section++]]; // zero
+//        }
+//        [objectsInSection addObject:[NSNumber numberWithInt:(int)rowIndex++]]; //adds index number to objectsInSection temp array.
+//        [self.sections setObject:objectsInSection forKey:category]; //overwrite 1st object with new objects (2 regulatory objects).
+//    }
+//    
+//    // Assign prep section variables back to view controller
+//    self.messageTableViewController.sections = (NSMutableDictionary*)self.sections;
+//    self.messageTableViewController.sectionToCategoryMap = (NSMutableDictionary*)self.sectionToCategoryMap;
+//    self.messageTableViewController.messageList = self.menuList;
+//    self.messageTableViewController.menuList = self.menuList;
+//    self.messageTableViewController.messageOptionsList = self.messageOptionsList;
+//    
+//    [self.messageTableViewController.tableView reloadData];
+//    
+//}
+//
+//-(NSMutableArray*)sortMessageListWithContacts:(NSMutableArray*)messageListWithContacts {
+//    
+//    NSSortDescriptor *isMessage = [[NSSortDescriptor alloc] initWithKey:@"isMessage" ascending:NO];
+//    NSSortDescriptor *messageCategory = [[NSSortDescriptor alloc]initWithKey:@"messageCategory" ascending:NO];
+//    NSSortDescriptor *orderInCategory = [[NSSortDescriptor alloc]initWithKey:@"orderInCategory" ascending:YES];
+//    
+//    if([[messageListWithContacts firstObject] valueForKey:@"orderInCategory"]  ){
+//        isMenuWithCustomOrdering = YES;
+//        NSLog(@"custom ordering");
+//        NSArray *sortDescriptors = [NSArray arrayWithObjects:messageCategory, isMessage, orderInCategory, nil];
+//        NSArray *messageListWithContactsSorted = [messageListWithContacts sortedArrayUsingDescriptors:sortDescriptors];
+//        return (NSMutableArray*)messageListWithContactsSorted;
+//    } else {
+//        NSLog(@" NOT custom ordering");
+//        NSArray *sortDescriptors = [NSArray arrayWithObjects: messageCategory,isMessage, nil];
+//        NSArray *messageListWithContactsSorted = [messageListWithContacts sortedArrayUsingDescriptors:sortDescriptors];
+//        return (NSMutableArray*)messageListWithContactsSorted;
+//    }
+//}
+
 
 #pragma mark - Table view data source
 

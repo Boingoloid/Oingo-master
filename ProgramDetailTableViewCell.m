@@ -22,6 +22,8 @@
 @implementation ProgramDetailTableViewCell
 
 - (void) configCampaignCell:campaign {
+    
+    self.dateLabel = [campaign valueForKey:@"date"];
     self.purposeSummary.text = [campaign valueForKey:@"purposeSummary"];
     self.linkToContentButton.titleLabel.text = [campaign valueForKey:@"linkToContent"];
 }

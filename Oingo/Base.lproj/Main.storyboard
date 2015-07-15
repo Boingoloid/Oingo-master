@@ -214,6 +214,12 @@
                                             <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                             <nil key="highlightedColor"/>
                                         </label>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Date " lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3jQ-uc-33Q">
+                                            <rect key="frame" x="334" y="5" width="41" height="21"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
                                     </subviews>
                                     <constraints>
                                         <constraint firstItem="tlM-Jd-7yY" firstAttribute="leading" secondItem="jef-ur-wKC" secondAttribute="leadingMargin" constant="1" id="J4N-xF-qQI"/>
@@ -225,6 +231,7 @@
                                     </constraints>
                                 </tableViewCellContentView>
                                 <connections>
+                                    <outlet property="dateLabel" destination="3jQ-uc-33Q" id="xvW-hB-5Sh"/>
                                     <outlet property="linkToContentButton" destination="cDZ-re-iL0" id="APd-ol-aQC"/>
                                     <outlet property="purposeSummary" destination="nB2-f8-mN4" id="vLg-GD-Xvq"/>
                                 </connections>
@@ -348,14 +355,14 @@
                         <color key="tintColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                         <color key="separatorColor" red="0.90196079019999997" green="0.90196079019999997" blue="0.90196079019999997" alpha="1" colorSpace="calibratedRGB"/>
                         <view key="tableHeaderView" contentMode="scaleToFill" id="tGq-0D-kLc">
-                            <rect key="frame" x="0.0" y="64" width="600" height="84"/>
+                            <rect key="frame" x="0.0" y="64" width="600" height="104"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <subviews>
                                 <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="nQE-7w-YL6">
-                                    <rect key="frame" x="8" y="8" width="359" height="48"/>
+                                    <rect key="frame" x="8" y="8" width="359" height="67"/>
                                     <subviews>
                                         <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="IUN-dR-MPR">
-                                            <rect key="frame" x="309" y="5" width="40" height="40"/>
+                                            <rect key="frame" x="309" y="21" width="40" height="40"/>
                                             <color key="backgroundColor" red="0.08421843004" green="0.49431999360000001" blue="0.038772465169999999" alpha="1" colorSpace="calibratedRGB"/>
                                             <state key="normal" title="Button" image="tweetButtonIconGray.png">
                                                 <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
@@ -377,7 +384,7 @@
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hXw-8E-YQq">
-                                            <rect key="frame" x="261" y="5" width="40" height="40"/>
+                                            <rect key="frame" x="261" y="21" width="40" height="40"/>
                                             <color key="backgroundColor" red="0.08421843004" green="0.49431999360000001" blue="0.038772465169999999" alpha="1" colorSpace="calibratedRGB"/>
                                             <state key="normal" title="Button" image="facebookButtonIconGray.png">
                                                 <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
@@ -386,6 +393,12 @@
                                                 <action selector="shareSegmentFacebook:" destination="cd8-qO-3PC" eventType="touchUpInside" id="Byy-oM-j1a"/>
                                             </connections>
                                         </button>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="share segment" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2Ct-vP-rgu">
+                                            <rect key="frame" x="248" y="4" width="114" height="21"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="11"/>
+                                            <color key="textColor" white="0.5" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
                                     </subviews>
                                     <color key="backgroundColor" white="0.94029425182481752" alpha="1" colorSpace="calibratedWhite"/>
                                 </view>
@@ -396,7 +409,7 @@
                                     <nil key="highlightedColor"/>
                                 </label>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="(or share below with message . . .)" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rGI-Ui-apa">
-                                    <rect key="frame" x="54" y="63" width="267" height="21"/>
+                                    <rect key="frame" x="54" y="83" width="267" height="21"/>
                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                     <fontDescription key="fontDescription" type="system" pointSize="13"/>
                                     <color key="textColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>

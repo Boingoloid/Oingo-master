@@ -68,7 +68,6 @@
 		CEC0C7411B45C80100A9DD33 /* FacebookAPIPost.m in Sources */ = {isa = PBXBuildFile; fileRef = CEC0C7401B45C80100A9DD33 /* FacebookAPIPost.m */; };
 		CEC0C7441B45D6B400A9DD33 /* LocationFinderAPI.m in Sources */ = {isa = PBXBuildFile; fileRef = CEC0C7431B45D6B400A9DD33 /* LocationFinderAPI.m */; };
 		CEC0C7471B478E0500A9DD33 /* MessageTableViewMessageCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CEC0C7461B478E0500A9DD33 /* MessageTableViewMessageCell.m */; };
-		CED419DD1AED690100885470 /* CampaignViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CED419DC1AED690100885470 /* CampaignViewController.m */; };
 		CEE04B9A1B34B9EC00AAF8EA /* lightGrayButtonBackground.png in Resources */ = {isa = PBXBuildFile; fileRef = CEE04B991B34B9EC00AAF8EA /* lightGrayButtonBackground.png */; };
 		CEE04B9C1B34C43900AAF8EA /* location-gray.png in Resources */ = {isa = PBXBuildFile; fileRef = CEE04B9B1B34C43900AAF8EA /* location-gray.png */; };
 		CEED9BD41AF4160300402BC2 /* Accounts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CE395D851AED5422006786C0 /* Accounts.framework */; };
@@ -225,8 +224,6 @@
 		CEC0C7431B45D6B400A9DD33 /* LocationFinderAPI.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LocationFinderAPI.m; sourceTree = "<group>"; };
 		CEC0C7451B478E0500A9DD33 /* MessageTableViewMessageCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MessageTableViewMessageCell.h; sourceTree = "<group>"; };
 		CEC0C7461B478E0500A9DD33 /* MessageTableViewMessageCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MessageTableViewMessageCell.m; sourceTree = "<group>"; };
-		CED419DB1AED690100885470 /* CampaignViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CampaignViewController.h; sourceTree = "<group>"; };
-		CED419DC1AED690100885470 /* CampaignViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CampaignViewController.m; sourceTree = "<group>"; };
 		CEE04B991B34B9EC00AAF8EA /* lightGrayButtonBackground.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = lightGrayButtonBackground.png; path = Images/lightGrayButtonBackground.png; sourceTree = "<group>"; };
 		CEE04B9B1B34C43900AAF8EA /* location-gray.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "location-gray.png"; path = "Images/location-gray.png"; sourceTree = "<group>"; };
 		CEED9BB61AF40A4000402BC2 /* Twitter.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Twitter.framework; path = System/Library/Frameworks/Twitter.framework; sourceTree = SDKROOT; };
@@ -449,8 +446,6 @@
 				CEB187901B18F8C400C86955 /* MessageOptionsTableTableViewController.m */,
 				CEB187921B18FAD600C86955 /* MessageOptionsTableViewCell.h */,
 				CEB187931B18FAD600C86955 /* MessageOptionsTableViewCell.m */,
-				CED419DB1AED690100885470 /* CampaignViewController.h */,
-				CED419DC1AED690100885470 /* CampaignViewController.m */,
 				CEF1C8FF1B0E7B79003EFAD1 /* WebViewController.h */,
 				CEF1C9001B0E7B79003EFAD1 /* WebViewController.m */,
 				CE14A8B11B22D20B0032664C /* TweetTableViewDemoTableViewController.h */,
@@ -795,7 +790,6 @@
 				CEACE5921B4F4BCC007B7D2D /* UpdateDefaults.m in Sources */,
 				CE14A8AA1B211B7B0032664C /* SignUpViewController.m in Sources */,
 				CE31B1A91B44923B0048A5B1 /* ParseAPI.m in Sources */,
-				CED419DD1AED690100885470 /* CampaignViewController.m in Sources */,
 				CE87CABE1AF977120084C666 /* Campaign.m in Sources */,
 				CEB4ED8E1AF8305E0055D547 /* ProgramDetailTableViewController.m in Sources */,
 				CE5B5D0E1AF95A740033A668 /* ProgramDetailTableViewCell.m in Sources */,

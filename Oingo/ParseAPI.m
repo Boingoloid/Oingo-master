@@ -88,11 +88,10 @@ BOOL isMenuWithCustomOrdering = NO;
         NSMutableDictionary *dictionaryToAddAggregator = [[NSMutableDictionary alloc]init];
         for (int i=0; i<count; i++){
             NSString *keyString = [allKeys objectAtIndex:i];
-            //            NSLog(@"keyvalue: %@",keyString);
+
             NSObject *getObject = [tempDicToAddFull objectForKey:keyString];
-            //            NSLog(@"getObject: %@",getObject);
-            
-            
+
+    
             NSMutableDictionary *insertDicTemp = [[NSMutableDictionary alloc]initWithObjects:@[getObject] forKeys:@[keyString]];
             
             // Change PFFile to image file
@@ -111,32 +110,14 @@ BOOL isMenuWithCustomOrdering = NO;
         
         // If it's a message, add to messagesTempArray
         if (isMessageBool) {
-            
-            
-            
-            
-//            NSString *messageText = [dictionaryToAddAggregator valueForKey:@"messageText"];
-//            NSString *messageCategory = [dictionaryToAddAggregator valueForKey:@"messageCategory"];
-//            NSDictionary *tempMessageDicToAdd = [[NSDictionary alloc]initWithObjectsAndKeys:messageCategory,@"messageCategory",messageText ,@"messageText", @YES ,@"isMessage", nil];
             [messagesTempArray addObject:(NSDictionary*)dictionaryToAddAggregator];
         } else {
-        
             // If it's NOT a message, add to contactsTempArray
             [contactsTempArray addObject:(NSDictionary*)dictionaryToAddAggregator];
-        
-
         }
-
-
-
-        
-        
         [allDataTempArray addObject:(NSDictionary*)dictionaryToAddAggregator];
     }
     
-    
-    
-
     NSMutableArray* messagesDeepCopyArray = [NSKeyedUnarchiver unarchiveObjectWithData:[NSKeyedArchiver archivedDataWithRootObject:messagesTempArray]];
     NSMutableArray* allDataDeepCopyArray = [NSKeyedUnarchiver unarchiveObjectWithData:[NSKeyedArchiver archivedDataWithRootObject:allDataTempArray]];
     
@@ -290,14 +271,6 @@ BOOL isMenuWithCustomOrdering = NO;
     self.messageTableViewController.menuList = self.menuList;
     self.messageTableViewController.messageOptionsList = self.messageOptionsList;
     
-    // Print items to Logs
-    NSLog(@"sections right after sections are created%@",self.sections);
-    NSLog(@"categorymap after before sections are created%@",self.sectionToCategoryMap);
-    NSLog(@"self.menulist first object %@",[self.menuList firstObject]);
-    NSLog(@"self.menulist 2nd object %@",[self.menuList objectAtIndex:1]);
-    NSLog(@"messageoptions first object %@",[self.messageOptionsList firstObject]);
-    NSLog(@"messageOptions second object %@",[self.messageOptionsList objectAtIndex:1]);
-    
     [self.messageTableViewController.tableView reloadData];
     
 }
@@ -307,8 +280,6 @@ BOOL isMenuWithCustomOrdering = NO;
     NSSortDescriptor *isMessage = [[NSSortDescriptor alloc] initWithKey:@"isMessage" ascending:NO];
     NSSortDescriptor *messageCategory = [[NSSortDescriptor alloc]initWithKey:@"messageCategory" ascending:NO];
     NSSortDescriptor *orderInCategory = [[NSSortDescriptor alloc]initWithKey:@"orderInCategory" ascending:YES];
-    
-    
     
     if([[messageListWithContacts firstObject] valueForKey:@"orderInCategory"]  ){
         isMenuWithCustomOrdering = YES;
