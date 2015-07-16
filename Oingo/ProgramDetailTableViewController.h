@@ -18,6 +18,8 @@
 @property (nonatomic) Segment *selectedSegment;
 @property (nonatomic) NSString *selectedLink;
 @property (nonatomic) NSIndexPath *indexPath;
+@property (nonatomic, retain) NSMutableDictionary *sections;
+@property (nonatomic, retain) NSMutableDictionary *sectionToCategoryMap;
 
 
 

@@ -505,7 +505,7 @@ NSInteger footerHeight = 1;
     NSNumber *rowIndex = [rowIndecesInSection objectAtIndex:indexPath.row]; //pulling the row indece from array above
 
 
-    // Get bool value from current index on list.
+    // Get dictionary from current index on list.
     NSDictionary *dictionary = [self.menuList objectAtIndex:[rowIndex intValue]];
     
     // Get the isMesssage bool
@@ -570,12 +570,7 @@ NSInteger footerHeight = 1;
     NSNumber *isGetLocationNumber = [dictionary valueForKey:@"isGetLocationCell"];
     bool isGetLocationBool = [isGetLocationNumber boolValue];
 
-    
-    
-    
     if(isMessageBool) {
-
-        
         NSString *messageText = [dictionary valueForKey:@"messageText"];
         double charCount = messageText.length;
         NSLog(@"character count in height calc if is message:%f",charCount);

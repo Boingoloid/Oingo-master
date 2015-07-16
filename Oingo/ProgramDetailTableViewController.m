@@ -26,6 +26,7 @@
 
 Segment *segment;
 
+
 - (void) viewWillAppear:(BOOL)animated {
 //Separator style for tableview
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
@@ -36,6 +37,7 @@ Segment *segment;
     [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
         if (!error) {
             self.segmentList = objects;
+            [self prepSegmentSections:self.segmentList];
             NSLog(@"segment list on program detail:%@",self.segmentList);
             [self.tableView reloadData];
         } else {
@@ -76,115 +78,120 @@ Segment *segment;
         NSLog(@"%@",NSStringFromCGPoint(p));
         NSIndexPath* indexPath = [tableView indexPathForRowAtPoint:p];
         NSLog(@"index path from point p touch:%@",indexPath);
-//        [tableView deselectRowAtIndexPath:indexPath animated:NO];
+        
+        [tableView deselectRowAtIndexPath:indexPath animated:NO];
         ProgramDetailTableViewCell *cell = (ProgramDetailTableViewCell *)[tableView cellForRowAtIndexPath:indexPath];
              CGPoint pointInCell = [tap locationInView:cell];       
         if (CGRectContainsPoint(cell.linkToContentButton.frame, pointInCell)) {
-            // user tapped image
-            [self performSegueWithIdentifier:@"showWebViewController" sender:self];
+            // user tapped link
             self.selectedLink = cell.linkToContentButton.titleLabel.text; //capture the link
+            [self performSegueWithIdentifier:@"showWebViewController" sender:self];
+
         } else {
             // user tapped cell
-            self.indexPath = indexPath;
+            NSString *dateGroup = [self dateGroupForSection:indexPath.section];
+            NSArray *rowIndecesInSection = [self.sections objectForKey:dateGroup];
+            NSNumber *rowIndex = [rowIndecesInSection objectAtIndex:indexPath.row]; //pulling the row indece from array above
+            self.selectedSegment = [self.segmentList objectAtIndex:[rowIndex intValue]];
             [self performSegueWithIdentifier:@"showMessages" sender:self];
         }
     }
 }
 
-//-(void)prepSections:messageList {
-//    NSLog(@"Prep sections triggered");
-//    
-//    //add message to this list
-//    [self separateMessagesFromContacts:messageList]; //create self.messageList and self.contactList
-//    [self createMenuList]; //creates self.menuList
-//    [self addLocalRepLocationCaptureCell: self.menuList]; //edits self.menuList
-//    
-//    self.menuList = [self sortMessageListWithContacts:self.menuList];
-//    NSLog(@"menu right before prep sections%@",self.menuList);
-//    
-//    if(self.sections){
-//        [self.sections removeAllObjects];
-//        [self.sectionToCategoryMap removeAllObjects];
-//    }else {
-//        self.sections = [NSMutableDictionary dictionary];
-//        self.sectionToCategoryMap = [NSMutableDictionary dictionary];
-//    }
-//    //Loops through every messageItem in the messageList and creates 2 dictionaries with index values and categories.
-//    NSInteger section = 0;
-//    NSInteger rowIndex = 0; //now 1
-//    for (MessageItem  *messageItem in self.menuList) {
-//        NSString *category = [messageItem valueForKey:@"messageCategory"]; //retrieves category for each message -1st regulator
-//        NSMutableArray *objectsInSection = [self.sections objectForKey:category]; //assigns objectsInSection value of sections for current category
-//        if (!objectsInSection) {
-//            objectsInSection = [NSMutableArray array];  //if new create array
-//            // this is the first time we see this category - increment the section index
-//            // sectionToCategoryMap literally it ends up (Regulator = 0)
-//            [self.sectionToCategoryMap setObject:category forKey:[NSNumber numberWithInt:(int)section++]]; // zero
-//        }
-//        [objectsInSection addObject:[NSNumber numberWithInt:(int)rowIndex++]]; //adds index number to objectsInSection temp array.
-//        [self.sections setObject:objectsInSection forKey:category]; //overwrite 1st object with new objects (2 regulatory objects).
-//    }
-//    
-//    // Assign prep section variables back to view controller
-//    self.messageTableViewController.sections = (NSMutableDictionary*)self.sections;
-//    self.messageTableViewController.sectionToCategoryMap = (NSMutableDictionary*)self.sectionToCategoryMap;
-//    self.messageTableViewController.messageList = self.menuList;
-//    self.messageTableViewController.menuList = self.menuList;
-//    self.messageTableViewController.messageOptionsList = self.messageOptionsList;
-//    
-//    [self.messageTableViewController.tableView reloadData];
-//    
-//}
-//
-//-(NSMutableArray*)sortMessageListWithContacts:(NSMutableArray*)messageListWithContacts {
-//    
-//    NSSortDescriptor *isMessage = [[NSSortDescriptor alloc] initWithKey:@"isMessage" ascending:NO];
-//    NSSortDescriptor *messageCategory = [[NSSortDescriptor alloc]initWithKey:@"messageCategory" ascending:NO];
-//    NSSortDescriptor *orderInCategory = [[NSSortDescriptor alloc]initWithKey:@"orderInCategory" ascending:YES];
-//    
-//    if([[messageListWithContacts firstObject] valueForKey:@"orderInCategory"]  ){
-//        isMenuWithCustomOrdering = YES;
-//        NSLog(@"custom ordering");
-//        NSArray *sortDescriptors = [NSArray arrayWithObjects:messageCategory, isMessage, orderInCategory, nil];
-//        NSArray *messageListWithContactsSorted = [messageListWithContacts sortedArrayUsingDescriptors:sortDescriptors];
-//        return (NSMutableArray*)messageListWithContactsSorted;
-//    } else {
-//        NSLog(@" NOT custom ordering");
-//        NSArray *sortDescriptors = [NSArray arrayWithObjects: messageCategory,isMessage, nil];
-//        NSArray *messageListWithContactsSorted = [messageListWithContacts sortedArrayUsingDescriptors:sortDescriptors];
-//        return (NSMutableArray*)messageListWithContactsSorted;
-//    }
-//}
+-(void)prepSegmentSections:segmentList {
+    NSLog(@"Prep Segment sections triggered");
+    
+    if(self.sections){
+        [self.sections removeAllObjects];
+        [self.sectionToCategoryMap removeAllObjects];
+    }else {
+        self.sections = [NSMutableDictionary dictionary];
+        self.sectionToCategoryMap = [NSMutableDictionary dictionary];
+    }
+    //Loops through every messageItem in the messageList and creates 2 dictionaries with index values and categories.
+    NSInteger section = 0;
+    NSInteger rowIndex = 0; //now 1
+    for (NSDictionary *segmentItem in self.segmentList) {
+        NSString *dateGroup = [segmentItem valueForKey:@"dateGroup"]; //retrieves category for each message -1st regulator
+        NSMutableArray *objectsInSection = [self.sections objectForKey:dateGroup]; //assigns objectsInSection value of sections for current category
+        if (!objectsInSection) {
+            objectsInSection = [NSMutableArray array];  //if new create array
+            // this is the first time we see this category - increment the section index
+            // sectionToCategoryMap literally it ends up (Regulator = 0)
+            [self.sectionToCategoryMap setObject:dateGroup forKey:[NSNumber numberWithInt:(int)section++]]; // zero
+        }
+        [objectsInSection addObject:[NSNumber numberWithInt:(int)rowIndex++]]; //adds index number to objectsInSection temp array.
+        [self.sections setObject:objectsInSection forKey:dateGroup]; //overwrite 1st object with new objects (2 regulatory objects).
+    }
+    [self.tableView reloadData];
+}
+
+
+-(NSMutableArray*)sortSegmentList:(NSMutableArray*)messageListWithContacts {
+    
+        // Sorts array by dateReleased
+        NSSortDescriptor *dateReleased = [[NSSortDescriptor alloc]initWithKey:@"dateReleased" ascending:NO];
+        NSLog(@" NOT custom ordering");
+        NSArray *sortDescriptors = [NSArray arrayWithObjects: dateReleased, nil];
+        NSArray *segmentListSorted = [messageListWithContacts sortedArrayUsingDescriptors:sortDescriptors];
+        return (NSMutableArray*)segmentListSorted;
+}
+
 
 
 #pragma mark - Table view data source
 
-- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-
-    // Return the number of sections.
-    return 1;
-}
-
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    // Return the number of rows in the section.
-        return self.segmentList.count;
-}
-
-
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+    NSString *dateGroup= [self dateGroupForSection:indexPath.section];
+    NSArray *rowIndecesInSection = [self.sections objectForKey:dateGroup];
+    NSNumber *rowIndex = [rowIndecesInSection objectAtIndex:indexPath.row]; //pulling the row indece from array above
+    
+    
     ProgramDetailTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"Cell" forIndexPath:indexPath];
-    segment = [self.segmentList objectAtIndex:indexPath.row];
+    segment = [self.segmentList objectAtIndex:[rowIndex intValue]];
     [cell configSegmentCell:segment];
     return cell;
 }
 
--(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
-//    UITableViewCell *cell = [self.tableView cellForRowAtIndexPath:indexPath];
-    
-    
-//    if(CGRectContainsPoint(self.linkLabel.frame, theLocationOfTheTouch)){
-        //the subview has been touched, do what you want
+
+
+#pragma mark - Sections
+
+- (NSString *) dateGroupForSection:(NSInteger)section { //takes section # and returns name of section.
+    return [self.sectionToCategoryMap objectForKey:[NSNumber numberWithInt:(int)section]];
 }
+
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
+
+    // Return the number of sections.
+    return (unsigned long)self.sections.allKeys.count;
+}
+
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+    // Return the number of rows in the section.
+    NSString *dateGroup = [self dateGroupForSection:section];
+    NSArray *rowIndecesInSection = [self.sections objectForKey:dateGroup];
+    return [rowIndecesInSection count];
+}
+
+-(UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
+    UIView *view = [[UIView alloc] initWithFrame:CGRectMake(7, 0, tableView.frame.size.width -14 , 16)];
+    UILabel *sectionLabel = [[UILabel alloc] init];
+    sectionLabel.frame = CGRectMake(7, 0, tableView.frame.size.width -14, 16);
+    sectionLabel.backgroundColor = [UIColor colorWithRed:.96 green:.96 blue:.96 alpha:1];
+    sectionLabel.layer.borderWidth = .5;
+    sectionLabel.layer.borderColor = [[UIColor blackColor] CGColor];
+    sectionLabel.font = [UIFont boldSystemFontOfSize:11];
+    sectionLabel.textColor = [UIColor blackColor];
+    sectionLabel.layer.cornerRadius = 3;
+    sectionLabel.clipsToBounds = YES;
+    NSString* padding = @"  "; // # of spaces
+    sectionLabel.text = [NSString stringWithFormat:@"%@%@%@", padding, [self dateGroupForSection:section], padding];
+    [view addSubview:sectionLabel];
+    return view;
+}
+
+
 
 
 /*
@@ -227,13 +234,10 @@ Segment *segment;
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {  
     if ([segue.identifier isEqualToString:@"showMessages"]){
         
-//        NSIndexPath *indexPath = [self.tableView indexPathForSelectedRow];
-//        NSLog(@"indexpath:%@",indexPath);
         segment = self.segmentList[self.indexPath.row];
-        NSLog(@"printing out the segment%@",segment);
+        NSLog(@"printing out the selected segment%@",self.selectedSegment);
         MessageTableViewController *viewController = [segue destinationViewController];
-        viewController.selectedSegment = segment;
-        viewController.selectedLink = self.selectedLink;
+        viewController.selectedSegment = self.selectedSegment;
         viewController.selectedProgram = self.selectedProgram;
         
         

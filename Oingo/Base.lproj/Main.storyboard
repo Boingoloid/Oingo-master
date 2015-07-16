@@ -165,7 +165,7 @@
             </objects>
             <point key="canvasLocation" x="2477" y="-924"/>
         </scene>
-        <!--Topics-->
+        <!--Segments-->
         <scene sceneID="QU9-sq-cf1">
             <objects>
                 <tableViewController id="vic-Nv-Ulg" customClass="ProgramDetailTableViewController" sceneMemberID="viewController">
@@ -174,7 +174,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <view key="tableHeaderView" contentMode="scaleToFill" id="RtE-Ew-wy5">
-                            <rect key="frame" x="0.0" y="0.0" width="600" height="44"/>
+                            <rect key="frame" x="0.0" y="94" width="600" height="62"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         </view>
@@ -252,7 +252,7 @@
                             <outlet property="delegate" destination="vic-Nv-Ulg" id="FiB-WQ-syd"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="Topics" prompt="Choose a topic" id="O0A-uK-fGQ"/>
+                    <navigationItem key="navigationItem" title="Segments" prompt="Choose a segment" id="O0A-uK-fGQ"/>
                     <connections>
                         <segue destination="cd8-qO-3PC" kind="show" identifier="showMessages" id="0rT-qH-uy3"/>
                         <segue destination="IOi-Lw-YrC" kind="show" identifier="showWebViewController" id="Xre-gW-P64"/>
