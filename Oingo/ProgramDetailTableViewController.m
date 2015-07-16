@@ -75,15 +75,17 @@ Segment *segment;
         CGPoint p = [tap locationInView:tap.view];
         NSLog(@"%@",NSStringFromCGPoint(p));
         NSIndexPath* indexPath = [tableView indexPathForRowAtPoint:p];
-        [tableView deselectRowAtIndexPath:indexPath animated:NO];
+        NSLog(@"index path from point p touch:%@",indexPath);
+//        [tableView deselectRowAtIndexPath:indexPath animated:NO];
         ProgramDetailTableViewCell *cell = (ProgramDetailTableViewCell *)[tableView cellForRowAtIndexPath:indexPath];
-        self.selectedLink = cell.linkToContentButton.titleLabel.text; //capture the link
-        CGPoint pointInCell = [tap locationInView:cell];
+             CGPoint pointInCell = [tap locationInView:cell];       
         if (CGRectContainsPoint(cell.linkToContentButton.frame, pointInCell)) {
             // user tapped image
             [self performSegueWithIdentifier:@"showWebViewController" sender:self];
+            self.selectedLink = cell.linkToContentButton.titleLabel.text; //capture the link
         } else {
             // user tapped cell
+            self.indexPath = indexPath;
             [self performSegueWithIdentifier:@"showMessages" sender:self];
         }
     }
@@ -224,9 +226,10 @@ Segment *segment;
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {  
     if ([segue.identifier isEqualToString:@"showMessages"]){
-        NSIndexPath *indexPath = [self.tableView indexPathForSelectedRow];
-        NSLog(@"indexpath:%@",indexPath);
-        segment = self.segmentList[indexPath.row];
+        
+//        NSIndexPath *indexPath = [self.tableView indexPathForSelectedRow];
+//        NSLog(@"indexpath:%@",indexPath);
+        segment = self.segmentList[self.indexPath.row];
         NSLog(@"printing out the segment%@",segment);
         MessageTableViewController *viewController = [segue destinationViewController];
         viewController.selectedSegment = segment;

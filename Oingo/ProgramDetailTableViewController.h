@@ -17,6 +17,7 @@
 @property (nonatomic) NSArray *segmentList;
 @property (nonatomic) Segment *selectedSegment;
 @property (nonatomic) NSString *selectedLink;
+@property (nonatomic) NSIndexPath *indexPath;
 
 
 

@@ -22,6 +22,9 @@
 @implementation ParseAPI
 
 BOOL isMenuWithCustomOrdering = NO;
+BOOL isLocalRepIncluded = NO;
+BOOL isLocationInfoAvailable = NO;
+BOOL isCoordinateInfoAvailable = NO;
 
 
 -(id)copyWithZone:(NSZone *)zone
@@ -35,39 +38,62 @@ BOOL isMenuWithCustomOrdering = NO;
 
 
 -(void)getParseMessageData:(Segment*)selectedSegment{  //get parse messge data for selectedSegment
+    
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    NSLog(@"defaults%@",defaults);
+    
+    if(![defaults valueForKey:@"latitude"] && ![defaults valueForKey:@"zipCode"]) {
+        isLocationInfoAvailable = NO;
+    } else {
+        isLocationInfoAvailable = YES;
+    }
+    
+    if([defaults valueForKey:@"latitude"] && [defaults valueForKey:@"longitude"]){
+        isCoordinateInfoAvailable = YES;
+    }
+    
     NSLog(@"selected segment messageview%@",[selectedSegment valueForKey:@"segmentID"]);
     PFQuery *query = [PFQuery queryWithClassName:@"Messages"];
     [query whereKey:@"segmentID" equalTo:[selectedSegment valueForKey:@"segmentID"]];
     [query orderByDescending:@"messageCategory"];
     [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
         if (!error) {
-//            self.messageListFromParseWithContacts = (NSMutableArray*)objects;  //messageList has everything ordered by category
             self.messageListFromParseWithContacts = (NSMutableArray*)[self createDeepCopyOfData:objects];
+
             
-            //Loads parse data.  If there location, it load congress by coordinates first, then its tries zipCode
-            NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-            NSLog(@"defaults%@",defaults);
-            
-            if(![defaults valueForKey:@"latitude"] && ![defaults valueForKey:@"zipCode"]) { //if no location info, then just prep and load it.
-                NSLog(@"Loading parse data with no congress peoeple");
-                [self prepSections:self.messageListFromParseWithContacts];
+            //is there a messsage for Local Rep in table?  If yes, then load congress data, if no, then don't
+            //First, grab index of Local Rep.
+            NSUInteger indexLocalRep = [self.messageListFromParseWithContacts indexOfObjectPassingTest:
+                                               ^BOOL(NSDictionary *dict, NSUInteger idx, BOOL *stop) {
+                                                   return [[dict objectForKey:@"messageCategory"] isEqual:@"Local Representative"];
+                                               }];
+            // If index is found, then proceed, else do nothing (CongressFinder is bypassed)
+            if (indexLocalRep == NSNotFound){
+                NSLog(@"No Local Rep entry in table, therefore do not load Local Rep data");
+                isLocalRepIncluded = NO;
+            } else {
+                //If there location, it load congress by coordinates first, then its tries zipCode
+                isLocalRepIncluded = YES;
                 
-            } else { //user has location info
-                CongressFinderAPI *congressFinder = [[CongressFinderAPI alloc]init];
-                congressFinder.messageTableViewController = self.messageTableViewController;
-                congressFinder.parseAPI = self;
-                if([defaults valueForKey:@"latitude"] && [defaults valueForKey:@"longitude"]) {
-                    [congressFinder getCongressWithLatitude:[defaults doubleForKey:@"latitude"] andLongitude:[defaults doubleForKey:@"longitude"] addToMessageList:(NSMutableArray*)self.messageListFromParseWithContacts];
-                } else {
-                    [congressFinder getCongress:[defaults valueForKey:@"zipCode"] addToMessageList:self.messageListFromParseWithContacts];
+                // Index found for Local Rep entry: Now load Congress, if not, bypass
+                if(!isLocationInfoAvailable) { //if no location info, then just prep and load it.
+                    NSLog(@"Loading parse data with no congress peoeple");
+                    [self prepSections:self.messageListFromParseWithContacts];
+                } else { //user has location info
+                    CongressFinderAPI *congressFinder = [[CongressFinderAPI alloc]init];
+                    congressFinder.messageTableViewController = self.messageTableViewController;
+                    congressFinder.parseAPI = self;
+                   
+                    if(isCoordinateInfoAvailable) {
+                        [congressFinder getCongressWithLatitude:[defaults doubleForKey:@"latitude"] andLongitude:[defaults doubleForKey:@"longitude"] addToMessageList:(NSMutableArray*)self.messageListFromParseWithContacts];
+                    } else {
+                        [congressFinder getCongress:[defaults valueForKey:@"zipCode"] addToMessageList:self.messageListFromParseWithContacts];
+                    }
                 }
             }
         }
     }];
 }
-
-
-
 
 
 
@@ -205,29 +231,20 @@ BOOL isMenuWithCustomOrdering = NO;
 }
 
 
--(void) addLocalRepLocationCaptureCell:menuList{
-    
-    //add local rep message and no zip cell b/c no contacts in list.
-    NSUInteger index = [self.menuList indexOfObjectPassingTest:
-                        ^BOOL(NSDictionary *dict, NSUInteger idx, BOOL *stop) {
-                            return [[dict objectForKey:@"messageCategory"] isEqual:@"Local Representative"];
-                        }];
-    if(index == NSNotFound){
-        //add location capture cell reference for the tableview
-
-        NSMutableDictionary *noZipDictionary = [[NSMutableDictionary alloc]init];
-        [noZipDictionary setValue:@"Local Representative" forKey:@"messageCategory"];
-        [noZipDictionary setValue:@YES forKey:@"isGetLocationCell"];
-        NSLog(@"dictionary value for isGetLocationCell %@",[noZipDictionary valueForKey:@"isGetLocationCell"]);
-        [menuList addObject:noZipDictionary];
-        
-        
-        
-        NSUInteger indexLocalRepMessage = [self.messageTextList indexOfObjectPassingTest:
-                                           ^BOOL(NSDictionary *dict, NSUInteger idx, BOOL *stop) {
-                                               return [[dict objectForKey:@"messageCategory"] isEqual:@"Local Representative"];
-                                           }];
-        [self.menuList addObject:[self.messageTextList objectAtIndex:indexLocalRepMessage]];
+-(void) addLocalRepLocationCaptureCell{
+    if(!isLocalRepIncluded){
+        //bypass, no local rep info there
+    } else {
+        // Local Reps included, now test if location info, if no, load no zip cell
+        if(!isLocationInfoAvailable){
+            //load no zip cell
+            //add location capture cell reference for the tableview
+            NSMutableDictionary *noZipDictionary = [[NSMutableDictionary alloc]init];
+            [noZipDictionary setValue:@"Local Representative" forKey:@"messageCategory"];
+            [noZipDictionary setValue:@YES forKey:@"isGetLocationCell"];
+            // NSLog(@"dictionary value for isGetLocationCell %@",[noZipDictionary valueForKey:@"isGetLocationCell"]);
+            [self.menuList addObject:noZipDictionary];
+        }
     }
 }
 
@@ -237,7 +254,7 @@ BOOL isMenuWithCustomOrdering = NO;
     //add message to this list
     [self separateMessagesFromContacts:messageList]; //create self.messageList and self.contactList
     [self createMenuList]; //creates self.menuList
-    [self addLocalRepLocationCaptureCell: self.menuList]; //edits self.menuList
+    [self addLocalRepLocationCaptureCell]; //edits self.menuList
     
     self.menuList = [self sortMessageListWithContacts:self.menuList];
     

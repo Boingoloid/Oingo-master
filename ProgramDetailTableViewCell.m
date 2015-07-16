@@ -47,7 +47,8 @@
     PFFile *theImage = [segment objectForKey:@"segmentImage"];
     NSData *imageData = [theImage getData];
     UIImage *image = [UIImage imageWithData:imageData];
-
+//    [dateFormatter setDateFormat:@"EE MMM, dd"];
+//    NSString *todayString = [dateFormatter stringFromDate:today];
 
     self.segmentImage.image = image;
 }

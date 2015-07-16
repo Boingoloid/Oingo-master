@@ -145,6 +145,7 @@ NSUInteger numberOfRows = 0;
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     if ([segue.identifier isEqualToString:@"showProgramDetail"]){
         NSIndexPath *indexPath = [self.tableView indexPathForSelectedRow]; //get selected index#
+        NSLog(@"indexpath%@",indexPath);
         self.selectedProgram = self.programList[indexPath.row];
         ProgramDetailTableViewController *viewController = [segue destinationViewController];
         viewController.selectedProgram = self.selectedProgram;
