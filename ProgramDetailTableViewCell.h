@@ -17,6 +17,7 @@
 @property (weak, nonatomic) IBOutlet UILabel *purposeSummary;
 @property (weak, nonatomic) NSURLRequest *urlRequest;
 @property (weak, nonatomic) IBOutlet UIImageView *segmentTypeImage;
+@property (weak, nonatomic) IBOutlet UILabel *segmentTitleLabel;
 - (void)configSegmentCell:segment;
 
 @end

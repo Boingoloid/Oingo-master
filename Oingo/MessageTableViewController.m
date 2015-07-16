@@ -78,7 +78,7 @@ NSInteger footerHeight = 1;
     self.tableHeaderView.layer.cornerRadius = 3;
     self.tableHeaderView.clipsToBounds = YES;
     NSString* padding = @"  "; // # of spaces
-    self.tableHeaderLabel.text = [NSString stringWithFormat:@"%@%@%@", padding,[self.selectedSegment valueForKey:@"topicTitle"], padding];
+    self.tableHeaderLabel.text = [NSString stringWithFormat:@"%@%@%@", padding,[self.selectedSegment valueForKey:@"segmentTitle"], padding];
     self.tableHeaderSubLabel.text = [NSString stringWithFormat:@"%@%@%@", padding,[self.selectedProgram valueForKey:@"programTitle"], padding];
 
     // Create gesture recognizer

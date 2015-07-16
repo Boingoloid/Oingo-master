@@ -28,9 +28,16 @@ Segment *segment;
 
 
 - (void) viewWillAppear:(BOOL)animated {
-//Separator style for tableview
-    self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
 
+
+}
+
+- (void)viewDidLoad {
+    
+    
+    //Separator style for tableview
+    self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+    
     //Pulling data for tablecell from Parse (filtered by selected program i.e. List of all associated with the Daily Show.)
     PFQuery *query = [PFQuery queryWithClassName:@"Segments"];
     [query whereKey:@"programTitle" equalTo:[self.selectedProgram valueForKey:@"programTitle"]];
@@ -44,10 +51,16 @@ Segment *segment;
             NSLog(@"Error: %@ %@", error, [error userInfo]);
         }
     }];
-
-}
-
-- (void)viewDidLoad {
+    
+    // Format table header
+    self.tableHeaderView.layer.borderColor = [[UIColor whiteColor] CGColor];
+    self.tableHeaderView.layer.borderWidth = .5;
+    self.tableHeaderView.layer.backgroundColor = [[UIColor whiteColor] CGColor];
+    self.tableHeaderView.layer.cornerRadius = 3;
+    self.tableHeaderView.clipsToBounds = YES;
+    NSString* padding = @"  "; // # of spaces
+    self.programTitleHeaderLabel.text = [NSString stringWithFormat:@"%@%@%@", padding,[self.selectedProgram valueForKey:@"programTitle"], padding];
+    
     [super viewDidLoad];
     //Create gesture recognizer,
     UITapGestureRecognizer *tapRocognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(respondToTapGesture:)]; //connect recognizer to action method.
@@ -153,6 +166,9 @@ Segment *segment;
     return cell;
 }
 
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
+    return 112;
+}
 
 
 #pragma mark - Sections
@@ -192,7 +208,21 @@ Segment *segment;
 }
 
 
+- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
+    //    NSString *category= [self categoryForSection:section];
+    //    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    //    if([category isEqualToString:@"Local Representative"] && ![defaults valueForKey:@"zipCode"] && ![defaults valueForKey:@"latitude"]) {
+    //        return sectionHeaderHeight;
+    //    } else if([category isEqualToString:@"Local Representative"]) {
+    //        return localRepSectionHeaderHeight + 3;
+    //    } else {
+    return 16;
+    //    }
+}
 
+- (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section {
+    return 1;
+}
 
 /*
 // Override to support conditional editing of the table view.

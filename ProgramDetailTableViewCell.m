@@ -25,7 +25,7 @@
 
 - (void) configSegmentCell:segment {
     
-//    self.segmentTypeImage.image =
+    self.segmentTitleLabel.text = [segment valueForKey:@"segmentTitle"];
     self.purposeSummary.text = [segment valueForKey:@"purposeSummary"];
     self.linkToContentButton.titleLabel.text = [segment valueForKey:@"linkToContent"];
     
@@ -57,5 +57,11 @@
     [super setSelected:selected animated:animated];
 
 }
-
+- (void)setFrame:(CGRect)frame {
+    int inset = 10;
+    frame.origin.x += inset; //equal to saying originx = originx + inset
+    frame.size.width -= 2 * inset; //mult by 2 b/c taking from both sides
+    [super setFrame:frame];
+    
+}
 @end

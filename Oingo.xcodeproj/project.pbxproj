@@ -46,6 +46,7 @@
 		CE6073331B3AD475007B567C /* CongressPhotoFinderAPI.m in Sources */ = {isa = PBXBuildFile; fileRef = CE6073321B3AD475007B567C /* CongressPhotoFinderAPI.m */; };
 		CE6F71F01B2923380067E4DA /* FBSDKShareKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CE6F71EF1B2923380067E4DA /* FBSDKShareKit.framework */; };
 		CE6F71F41B2BCA9E0067E4DA /* SettingsTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CE6F71F31B2BCA9E0067E4DA /* SettingsTableViewController.m */; };
+		CE7B38581B584C77009107DD /* congressionalDishProgramCover.png in Resources */ = {isa = PBXBuildFile; fileRef = CE7B38571B584C77009107DD /* congressionalDishProgramCover.png */; };
 		CE80B5D61AFC0EFB007D69FB /* dailyshow6cover.png in Resources */ = {isa = PBXBuildFile; fileRef = CE80B5D51AFC0EFB007D69FB /* dailyshow6cover.png */; };
 		CE82943D1B38DB7C00B596E6 /* CongressionalMessageItem.m in Sources */ = {isa = PBXBuildFile; fileRef = CE82943C1B38DB7C00B596E6 /* CongressionalMessageItem.m */; };
 		CE87CABE1AF977120084C666 /* Segment.m in Sources */ = {isa = PBXBuildFile; fileRef = CE87CABD1AF977120084C666 /* Segment.m */; };
@@ -175,6 +176,7 @@
 		CE6F71EF1B2923380067E4DA /* FBSDKShareKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FBSDKShareKit.framework; path = ../../../Documents/FacebookSDK/FBSDKShareKit.framework; sourceTree = "<group>"; };
 		CE6F71F21B2BCA9E0067E4DA /* SettingsTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingsTableViewController.h; sourceTree = "<group>"; };
 		CE6F71F31B2BCA9E0067E4DA /* SettingsTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingsTableViewController.m; sourceTree = "<group>"; };
+		CE7B38571B584C77009107DD /* congressionalDishProgramCover.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = congressionalDishProgramCover.png; path = Images/congressionalDishProgramCover.png; sourceTree = "<group>"; };
 		CE80B5D51AFC0EFB007D69FB /* dailyshow6cover.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = dailyshow6cover.png; path = Images/dailyshow6cover.png; sourceTree = "<group>"; };
 		CE82943B1B38DB7C00B596E6 /* CongressionalMessageItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CongressionalMessageItem.h; sourceTree = "<group>"; };
 		CE82943C1B38DB7C00B596E6 /* CongressionalMessageItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CongressionalMessageItem.m; sourceTree = "<group>"; };
@@ -404,6 +406,7 @@
 		CE241A6A1AEAF0D300F22144 /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				CE7B38571B584C77009107DD /* congressionalDishProgramCover.png */,
 				CE29AA991B3F2BC900676563 /* pelosi.png */,
 				CE29AA971B3F2BBD00676563 /* feinstein.png */,
 				CE29AA951B3F2BB400676563 /* boxer.png */,
@@ -706,6 +709,7 @@
 				CE46B13A1B044D5F00A4D671 /* greyarrow.png in Resources */,
 				CEF14C081B23AD7600EC95A4 /* facebookButtonIconGray.png in Resources */,
 				CE2BD37D1B007FB30053A1B3 /* monsantocorngrenade.png in Resources */,
+				CE7B38581B584C77009107DD /* congressionalDishProgramCover.png in Resources */,
 				CE241A531AEAE45A00F22144 /* LaunchScreen.xib in Resources */,
 				CEE04B9C1B34C43900AAF8EA /* location-gray.png in Resources */,
 				CE395D881AED5790006786C0 /* twittericon320.png in Resources */,

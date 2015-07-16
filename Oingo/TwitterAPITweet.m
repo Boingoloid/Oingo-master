@@ -35,7 +35,7 @@
 }
 
 -(void)shareSegmentWithTwitterComposer{
-    NSString *tweetText = [NSString stringWithFormat:@"%@: %@",[self.selectedProgram valueForKey:@"programTitle"],[self.selectedSegment valueForKey:@"topicTitle"]];
+    NSString *tweetText = [NSString stringWithFormat:@"%@: %@",[self.selectedProgram valueForKey:@"programTitle"],[self.selectedSegment valueForKey:@"segmentTitle"]];
     NSURL *tweetURL = [NSURL URLWithString:[self.selectedSegment valueForKey:@"linkToContent"]];
     PFFile *theImage = [self.selectedSegment valueForKey:@"segmentImage"];
     NSData *imageData = [theImage getData];
