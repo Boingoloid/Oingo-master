@@ -35,6 +35,7 @@ BOOL isMenuWithCustomOrdering = NO;
 
 
 -(void)getParseMessageData:(Segment*)selectedSegment{  //get parse messge data for selectedSegment
+    NSLog(@"selected segment messageview%@",[selectedSegment valueForKey:@"segmentID"]);
     PFQuery *query = [PFQuery queryWithClassName:@"Messages"];
     [query whereKey:@"segmentID" equalTo:[selectedSegment valueForKey:@"segmentID"]];
     [query orderByDescending:@"messageCategory"];
@@ -239,7 +240,6 @@ BOOL isMenuWithCustomOrdering = NO;
     [self addLocalRepLocationCaptureCell: self.menuList]; //edits self.menuList
     
     self.menuList = [self sortMessageListWithContacts:self.menuList];
-    NSLog(@"menu right before prep sections%@",self.menuList);
     
         if(self.sections){
             [self.sections removeAllObjects];

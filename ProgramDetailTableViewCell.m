@@ -14,8 +14,8 @@
 
 @interface ProgramDetailTableViewCell () <UIGestureRecognizerDelegate>
 
-@property (weak, nonatomic) IBOutlet UILabel *purposeSummary;
-@property (weak, nonatomic) NSURLRequest *urlRequest;
+
+
 
 
 @end
@@ -25,11 +25,25 @@
 
 - (void) configSegmentCell:segment {
     
-    self.dateLabel = [segment valueForKey:@"date"];
+//    self.segmentTypeImage.image =
     self.purposeSummary.text = [segment valueForKey:@"purposeSummary"];
     self.linkToContentButton.titleLabel.text = [segment valueForKey:@"linkToContent"];
     
     
+    // Get the date
+    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+    [dateFormatter setDateStyle:NSDateFormatterShortStyle];
+    [dateFormatter setTimeStyle:NSDateFormatterNoStyle];
+    NSDate *date =[segment valueForKey:@"dateReleased"];
+    NSString *formattedDateString = [dateFormatter stringFromDate:date];
+    NSLog(@"formattedDateString: %@", formattedDateString);
+
+
+    self.dateLabel.text = formattedDateString;
+    
+    //[segment valueForKey:@"dateReleased"];
+    
+    // Get the image
     PFFile *theImage = [segment objectForKey:@"segmentImage"];
     NSData *imageData = [theImage getData];
     UIImage *image = [UIImage imageWithData:imageData];

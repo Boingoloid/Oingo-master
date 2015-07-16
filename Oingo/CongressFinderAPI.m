@@ -103,7 +103,6 @@
 
     dispatch_async(dispatch_get_main_queue(), ^{
         [self.parseAPI prepSections:self.messageListWithCongress];
-        NSLog(@"message list with congress%@",self.messageListWithCongress);
     });
 }
 

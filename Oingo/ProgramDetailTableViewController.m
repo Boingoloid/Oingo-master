@@ -36,11 +36,13 @@ Segment *segment;
     [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
         if (!error) {
             self.segmentList = objects;
+            NSLog(@"segment list on program detail:%@",self.segmentList);
             [self.tableView reloadData];
         } else {
             NSLog(@"Error: %@ %@", error, [error userInfo]);
         }
     }];
+
 }
 
 - (void)viewDidLoad {
@@ -180,7 +182,7 @@ Segment *segment;
     
 //    if(CGRectContainsPoint(self.linkLabel.frame, theLocationOfTheTouch)){
         //the subview has been touched, do what you want
-    }
+}
 
 
 /*
@@ -223,7 +225,9 @@ Segment *segment;
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {  
     if ([segue.identifier isEqualToString:@"showMessages"]){
         NSIndexPath *indexPath = [self.tableView indexPathForSelectedRow];
+        NSLog(@"indexpath:%@",indexPath);
         segment = self.segmentList[indexPath.row];
+        NSLog(@"printing out the segment%@",segment);
         MessageTableViewController *viewController = [segue destinationViewController];
         viewController.selectedSegment = segment;
         viewController.selectedLink = self.selectedLink;
