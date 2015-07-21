@@ -16,6 +16,7 @@
 @property (nonatomic) MessageTableViewController *messageTableViewController;
 @property (nonatomic) Segment *selectedSegment;
 @property (nonatomic) Program *selectedProgram;
+@property (nonatomic) NSDictionary *selectedContact;
 -(void)shareSegmentFacebookAPI;
 -(void)shareMessageFacebookAPI:(MessageTableViewCell*)cell;
 @end

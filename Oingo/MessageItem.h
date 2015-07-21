@@ -19,6 +19,7 @@
 @property (nonatomic, retain) NSString *messageCategory;
 @property (nonatomic, retain) NSString *firstName;
 @property (nonatomic, retain) NSString *isGetLocationCell;
+@property (nonatomic, retain) NSString *contactID;
 
 
 @end

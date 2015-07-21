@@ -29,6 +29,7 @@
 @property(nonatomic) NSString *repMessageText;
 @property(nonatomic) NSString *selectedLink;
 @property(nonatomic) Program *selectedProgram;
+@property(nonatomic) NSDictionary *selectedContact;
 @property (weak, nonatomic) IBOutlet UILabel *tableHeaderLabel;
 @property (weak, nonatomic) IBOutlet UILabel *tableHeaderSubLabel;
 @property (weak, nonatomic) IBOutlet UIView *tableHeaderView;

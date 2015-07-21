@@ -19,6 +19,8 @@
 @property (nonatomic) Program *selectedProgram;
 @property (nonatomic) NSString *messageText;
 @property (nonatomic) NSArray *menuList;
+@property (nonatomic) NSDictionary *selectedContact;
 -(void)shareSegmentTwitterAPI;
 -(void)shareMessageTwitterAPI:(MessageTableViewCell*)cell;
+//-(void)shareTwitterAPIForSegment:(Segment*)selectedSegment fromCell:(UITableViewCell*)cell;
 @end

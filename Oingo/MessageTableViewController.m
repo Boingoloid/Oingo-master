@@ -95,7 +95,16 @@ NSInteger footerHeight = 1;
     self.navigationItem.rightBarButtonItem = logOutButton;
 }
 
-
+- (BOOL)gestureRecognizerShouldBegin:(UIGestureRecognizer *)gestureRecognizer
+{
+    UITableView *tableView = (UITableView *)gestureRecognizer.view;
+    CGPoint p = [gestureRecognizer locationInView:gestureRecognizer.view];
+    //if point is in the tableview then return YES
+    if ([tableView indexPathForRowAtPoint:p]) {
+        return YES;
+    }
+    return NO;
+}
 
 - (void)respondToTapGesture:(UITapGestureRecognizer *)tap {
     //*******
@@ -112,8 +121,6 @@ NSInteger footerHeight = 1;
         MessageTableViewCell *cell = (MessageTableViewCell *)[tableView cellForRowAtIndexPath:indexPath];
         CGPoint pointInCell = [tap locationInView:cell];
         NSString *category= [self categoryForSection:indexPath.section];
-        
-        
         NSArray *rowIndecesInSection = [self.sections objectForKey:category];
         NSNumber *rowIndex = [rowIndecesInSection objectAtIndex:indexPath.row]; //pulling the row indece from array above
         
@@ -122,6 +129,7 @@ NSInteger footerHeight = 1;
  
         // Create dictionary = selected menu object (could be message or contact)
         NSDictionary *dictionary = [self.menuList objectAtIndex:[rowIndex intValue]];
+        self.selectedContact = dictionary;
        
         //Get the isMessage Bool from Parse backend
         NSNumber *isMessageNumber = [dictionary valueForKey:@"isMessage"];
@@ -156,15 +164,19 @@ NSInteger footerHeight = 1;
         } else if (CGRectContainsPoint(cell.tweetButton.frame, pointInCell)) {
             NSLog(@"touch in tweet button area");
             
+            
+            //instead of looking up message, see if you can pull by section.
+            
+            
             // Create Tweet API object, Properties passed: -menuList -selection info
             TwitterAPITweet *twitterAPITweet = [[TwitterAPITweet alloc]init];
             twitterAPITweet.messageTableViewController = self;
             twitterAPITweet.selectedSegment = self.selectedSegment;
             twitterAPITweet.selectedProgram = self.selectedProgram;
             twitterAPITweet.menuList = self.menuList;
-
+            twitterAPITweet.selectedContact = self.selectedContact;
             
-            //Look u
+            //Look up message
             NSUInteger index = [self.menuList indexOfObjectPassingTest:
                                 ^BOOL(NSDictionary *dict, NSUInteger idx, BOOL *stop) {
                                     return [[dict valueForKey:@"messageCategory"] isEqualToString:category];
@@ -176,7 +188,6 @@ NSInteger footerHeight = 1;
                 NSLog(@"index was found:%ld",index);
                 NSLog(@"did find line:%@",[self.menuList objectAtIndex:index]);
                 twitterAPITweet.messageText = [[self.menuList objectAtIndex:index] valueForKey:@"messageText"];
-                
             }
             [twitterAPITweet shareMessageTwitterAPI:cell];
             
@@ -213,34 +224,11 @@ NSInteger footerHeight = 1;
     }
 }
 
-- (BOOL)gestureRecognizerShouldBegin:(UIGestureRecognizer *)gestureRecognizer
-{
-    UITableView *tableView = (UITableView *)gestureRecognizer.view;
-    CGPoint p = [gestureRecognizer locationInView:gestureRecognizer.view];
-    //if point is in the tableview then return YES
-    if ([tableView indexPathForRowAtPoint:p]) {
-        return YES;
-    }
-    return NO;
+/*
+-(void)shareMessageTwitter{
+    
 }
-
-//- (void)tweetMessage:(MessageTableViewCell *)cell indexPath:indexPath {
-//    TwitterAPITweet *twitterAPITweet = [[TwitterAPITweet alloc]init];
-//    twitterAPITweet.messageTableViewController = self;
-//    twitterAPITweet.selectedSegment = self.selectedSegment;
-//    twitterAPITweet.selectedProgram = self.selectedProgram;
-//    twitterAPITweet.menuList = self.messageList;
-//    NSString *category= [self categoryForSection:[indexPath section]];
-//    NSLog(@"indexpathTweet: %ld",(long)[indexPath section]);
-////    twitterAPITweet.messageText = //message in section  can pull from section.
-//    
-//    if([messageCategory isEqualToString:selectedCategory]) {
-//        [messageTextList addObject:dictionary];
-//    }
-//    
-//    [twitterAPITweet shareMessageTwitterAPI:cell];
-//}
-
+*/
 
 - (IBAction)shareSegmentTwitter:(id)sender {
     TwitterAPITweet *twitterAPITweet = [[TwitterAPITweet alloc]init];
@@ -288,23 +276,6 @@ NSInteger footerHeight = 1;
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
 }
-
-
-//          SAVING MESSAGE DATA TO PARSE
-//            //------------------------- second table text
-//            PFObject *facebookUserData = [PFObject objectWithClassName:@"facebookUserData"];
-//
-//            [facebookUserData setObject:[result objectForKey:@"gender"] forKey:@"gender"];
-//            [facebookUserData setObject:[result objectForKey:@"email"] forKey:@"email"];
-//
-//            [facebookUserData saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) { //save currentUser to parse disk
-//                if(error){
-//                    [self showDuplicateEmailAlert:currentUser.email]; //Email already exists, show alert
-//                }
-//                else {
-//                    NSLog(@"no error, email was updated fine");
-//                }
-//            }];
 
 
 -(void) getUserLocation {
@@ -651,50 +622,7 @@ NSInteger footerHeight = 1;
         sectionLabel.text = [NSString stringWithFormat:@"%@%@%@", padding, [self categoryForSection:section], padding];
         [view addSubview:sectionLabel];
         return view;
-//        
-//    } else if([category isEqualToString:@"Local Representative"]) {
-//        UIView *view = [[UIView alloc] initWithFrame:CGRectMake(7, 0, tableView.frame.size.width -14 , localRepSectionHeaderHeight)];
-//        UILabel *sectionLabel = [[UILabel alloc] init];
-//        sectionLabel.frame = CGRectMake(7, 0, tableView.frame.size.width -14, sectionHeaderHeight);
-//        sectionLabel.backgroundColor = [UIColor colorWithRed:.96 green:.96 blue:.96 alpha:1];
-//        sectionLabel.layer.borderWidth = .5;
-//        sectionLabel.layer.borderColor = [[UIColor blackColor] CGColor];
-//        sectionLabel.font = [UIFont boldSystemFontOfSize:11];
-//        sectionLabel.textColor = [UIColor blackColor];
-//        sectionLabel.layer.cornerRadius = 3;
-//        sectionLabel.clipsToBounds = YES;
-//        NSString* padding = @"  "; // # of spaces
-//        sectionLabel.text = [NSString stringWithFormat:@"%@%@%@", padding, [self categoryForSection:section], padding];
-//        [view addSubview:sectionLabel];
-//        
-//        
-//        UILabel *messageLabelForReps = [[UILabel alloc]initWithFrame:CGRectMake(10, 20,tableView.frame.size.width -20  , localRepSectionHeaderHeight - 20)];
-//        messageLabelForReps.text = [NSString stringWithFormat:@"\"%@\"", self.repMessageText];
-//        messageLabelForReps.lineBreakMode = NSLineBreakByWordWrapping;
-//        messageLabelForReps.numberOfLines = 0;
-//        messageLabelForReps.font = [UIFont fontWithName:@"HelveticaNeue" size:12.0f];
-//        messageLabelForReps.textColor = [UIColor blackColor];
-//        messageLabelForReps.textAlignment = NSTextAlignmentCenter;
-//        messageLabelForReps.backgroundColor = [UIColor whiteColor];
-//        [view addSubview:messageLabelForReps];
-//        
-//        return view;
-//    } else {
-//        UIView *view = [[UIView alloc] initWithFrame:CGRectMake(7, 0, tableView.frame.size.width -14 , sectionHeaderHeight +70)];
-//        UILabel *sectionLabel = [[UILabel alloc] init];
-//        sectionLabel.frame = CGRectMake(7, 0, tableView.frame.size.width -14, sectionHeaderHeight);
-//        sectionLabel.backgroundColor = [UIColor colorWithRed:.96 green:.96 blue:.96 alpha:1];
-//        sectionLabel.layer.borderWidth = .5;
-//        sectionLabel.layer.borderColor = [[UIColor blackColor] CGColor];
-//        sectionLabel.font = [UIFont boldSystemFontOfSize:11];
-//        sectionLabel.textColor = [UIColor blackColor];
-//        sectionLabel.layer.cornerRadius = 3;
-//        sectionLabel.clipsToBounds = YES;
-//        NSString* padding = @"  "; // # of spaces
-//        sectionLabel.text = [NSString stringWithFormat:@"%@%@%@", padding, [self categoryForSection:section], padding];
-//        [view addSubview:sectionLabel];
-//        return view;
-//    }
+
 }
 
 //-(UIView *) tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section {

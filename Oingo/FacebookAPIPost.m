@@ -39,6 +39,65 @@
     }
 }
 
+
+
+-(void)shareMessageFacebookAPI:(MessageTableViewCell*)cell{
+    //1) logged in?, if not send to sign up screen
+    //2) else if logged in, link account to facebook account, then send post
+    //3) else send post b/c signed up and linked already.
+    //You cannot pre-populate on facebook so this is just like sharing the segment.
+    PFUser *currentUser = [PFUser currentUser];
+    if(!currentUser) {
+        [self pushToSignIn];
+    } else if(![PFFacebookUtils isLinkedWithUser:currentUser]){
+        [self linkUserToFacebook:currentUser];
+    } else {
+        [self shareSegmentWithFacebookComposer];
+    }
+    
+}
+
+-(void)shareSegmentWithFacebookComposer{
+    
+    FBSDKShareLinkContent *content = [FBSDKShareLinkContent new];
+    content.contentURL = [NSURL URLWithString:[self.selectedSegment valueForKey:@"linkToContent"]];
+    content.contentTitle = [self.selectedProgram valueForKey:@"programTitle"];
+    content.contentDescription = [self.selectedSegment valueForKey:@"purposeSummary"];
+    FBSDKShareDialog *shareDialog = [FBSDKShareDialog new];
+    [shareDialog setMode:FBSDKShareDialogModeAutomatic];
+    [shareDialog setShareContent:content];
+    [shareDialog setFromViewController:self.messageTableViewController];
+    [shareDialog show];
+    
+}
+
+// Figure out how to get success message from facebook.  May have to use REST API.
+//-(void) saveSentMessage{
+//    
+//    //  SAVING MESSAGE DATA TO PARSE
+//    PFUser *currentUser = [PFUser currentUser];
+//    
+//    PFObject *sentMessageItem = [PFObject objectWithClassName:@"sentMessages"];
+//    [sentMessageItem setObject:@"facebookSegment" forKey:@"messageType"];
+//    [sentMessageItem setObject:[self.selectedSegment valueForKey:@"segmentID"] forKey:@"segmentID"];
+//    [sentMessageItem setObject:[currentUser valueForKey:@"username"] forKey:@"username"];
+//    NSString *userObjectID = currentUser.objectId;
+//    [sentMessageItem setObject:userObjectID forKey:@"userObjectID"];
+//    
+//    NSLog(@"Got here in the save, should have segmentID:%@",sentMessageItem);
+//    
+//    [sentMessageItem saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) { //save currentUser to parse disk
+//        if(error){
+//            NSLog(@"error, message not saved");
+//        }
+//        else {
+//            NSLog(@"no error, message saved");
+//        }
+//    }];
+//    
+//    NSLog(@"Got here in the save 2:%@",sentMessageItem);
+//}
+
 -(void) pushToSignIn{
     UIViewController *controller = [self.messageTableViewController.storyboard instantiateViewControllerWithIdentifier:@"signInViewController"];
     [self.messageTableViewController.navigationController pushViewController:controller animated:YES];
@@ -57,38 +116,5 @@
         }
     }];
 }
-
--(void)shareSegmentWithFacebookComposer{
-    
-    FBSDKShareLinkContent *content = [FBSDKShareLinkContent new];
-    content.contentURL = [NSURL URLWithString:[self.selectedSegment valueForKey:@"linkToContent"]];
-    content.contentTitle = [self.selectedProgram valueForKey:@"programTitle"];
-    content.contentDescription = [self.selectedSegment valueForKey:@"purposeSummary"];
-    FBSDKShareDialog *shareDialog = [FBSDKShareDialog new];
-    [shareDialog setMode:FBSDKShareDialogModeAutomatic];
-    [shareDialog setShareContent:content];
-    [shareDialog setFromViewController:self.messageTableViewController];
-    [shareDialog show];
-    
-}
-
--(void)shareMessageFacebookAPI:(MessageTableViewCell*)cell{
-    //1) logged in?, if not send to sign up screen
-    //2) else if logged in, link account to facebook account, then send post
-    //3) else send post b/c signed up and linked already.
-    //You cannot pre-populate on facebook so this is just like sharing the segment.
-    PFUser *currentUser = [PFUser currentUser];
-    if(!currentUser) {
-        [self pushToSignIn];
-    } else if(![PFFacebookUtils isLinkedWithUser:currentUser]){
-        [self linkUserToFacebook:currentUser];
-    } else {
-        [self shareSegmentWithFacebookComposer];
-    }
-
-}
-
-
-
 
 @end
