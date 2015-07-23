@@ -12,6 +12,7 @@
 #import "MessageItem.h"
 #import "CongressionalMessageItem.h"
 #import "CongressFinderAPI.h"
+#import "MarkSentMessageAPI.h"
 
 
 
@@ -52,7 +53,6 @@ BOOL isCoordinateInfoAvailable = NO;
         isCoordinateInfoAvailable = YES;
     }
     
-    NSLog(@"selected segment messageview%@",[selectedSegment valueForKey:@"segmentID"]);
     PFQuery *query = [PFQuery queryWithClassName:@"Messages"];
     [query whereKey:@"segmentID" equalTo:[selectedSegment valueForKey:@"segmentID"]];
     [query orderByDescending:@"messageCategory"];
@@ -193,7 +193,7 @@ BOOL isCoordinateInfoAvailable = NO;
     self.messageTextList = messageTextList;
     
     self.contactList = contactList;
-    NSLog(@"contactlist:%@ messageList: %@",contactList,messageTextList);
+//    NSLog(@"contactlist:%@ messageList: %@",contactList,messageTextList);
 }
 
 
@@ -207,7 +207,13 @@ BOOL isCoordinateInfoAvailable = NO;
 
     NSString *category = @"";
     NSUInteger contactIndex = 0;
+    
+    // For every contact, goes to messageTextList and pulls first entry for display
     for (NSDictionary *contactRow in self.contactList) {
+        
+        //add "success" bools
+        [contactRow setValue:@NO forKey:@"isTweetSent"];
+        NSLog(@"tweet sent?:%@",[contactRow valueForKey:@"isTweetSent"]);
         if(category != [contactRow valueForKey:@"messageCategory"]){
             category = [contactRow valueForKey:@"messageCategory"];
             
@@ -216,10 +222,7 @@ BOOL isCoordinateInfoAvailable = NO;
                                     return [[dict objectForKey:@"messageCategory"] isEqual:category];
                                 }];
             
-            NSLog(@"index:%lu",(unsigned long)index);
-            NSLog(@"category:%@",category);
             MessageItem *messageToAdd = [self.messageTextList objectAtIndex:index];
-            NSLog(@"message to add:%@",messageToAdd);
             [self.menuList addObject:messageToAdd];
             [self.menuList addObject:contactRow];
         } else {
@@ -290,7 +293,14 @@ BOOL isCoordinateInfoAvailable = NO;
     
     [self.messageTableViewController.tableView reloadData];
     
+    MarkSentMessageAPI *markSentMessagesAPI = [[MarkSentMessageAPI alloc]init];
+    markSentMessagesAPI.messageTableViewController = self.messageTableViewController;
+    markSentMessagesAPI.parseAPI = self;
+    [markSentMessagesAPI markSentMessages];
+    
 }
+
+# pragma mark - Helper Methods
 
 -(NSMutableArray*)sortMessageListWithContacts:(NSMutableArray*)messageListWithContacts {
     

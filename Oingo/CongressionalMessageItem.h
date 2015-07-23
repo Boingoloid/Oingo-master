@@ -14,6 +14,7 @@
 
 @property (nonatomic, retain) NSString *messageImageString;
 @property (nonatomic, retain) NSString *bioguide_id;
+@property (nonatomic, retain) NSString *contactID;
 //@property (nonatomic) NSTimeInterval date;
 @property (nonatomic, retain) NSString *segmentID;
 @property (nonatomic, retain) NSString *messageCategory;
@@ -45,6 +46,8 @@
 @property (nonatomic, retain) NSString *twitterID;
 @property (nonatomic, retain) NSString *contactForm;
 //will be separated in a different call and load later
-//this should have a default photo
+
+
+@property (nonatomic) bool isTweetSent;
 
 @end

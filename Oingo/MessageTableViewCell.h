@@ -40,11 +40,14 @@
 @property (nonatomic, retain) NSString *stateName;
 @property (nonatomic, retain) NSString *state;
 @property (nonatomic, retain) NSString *leadershipRole;
+@property (weak, nonatomic) IBOutlet UIImageView *tweetSuccessImageView;
 
 
 @property(nonatomic) UIButton *locationButton;
 @property(nonatomic) UIButton *zipCodeButton;
 @property(nonatomic) UILabel *zipLabel;
+
+
 
 
 

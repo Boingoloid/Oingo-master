@@ -98,10 +98,12 @@
 //    NSLog(@"Got here in the save 2:%@",sentMessageItem);
 //}
 
+
 -(void) pushToSignIn{
     UIViewController *controller = [self.messageTableViewController.storyboard instantiateViewControllerWithIdentifier:@"signInViewController"];
     [self.messageTableViewController.navigationController pushViewController:controller animated:YES];
 }
+
 
 -(void)linkUserToFacebook:currentUser{
     

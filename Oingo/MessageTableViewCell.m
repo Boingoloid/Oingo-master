@@ -56,6 +56,18 @@ CongressPhotoFinderAPI *congressPhotoFinderAPI;
     self.phoneButton.hidden = YES;
     self.webFormButton.hidden = YES;
     
+    
+    // Success fields
+    NSNumber *sendTweetNumberBool = [messageItem valueForKey:@"isTweetSent"];
+    bool sendTweetBool = [sendTweetNumberBool boolValue];
+    if(sendTweetBool) {
+        self.tweetSuccessImageView.hidden = NO;
+    } else {
+        self.tweetSuccessImageView.hidden = YES;
+    }
+    
+    
+    
     //add information
     self.targetName.text = [NSString stringWithFormat:@"%@ /",[messageItem valueForKey:@"targetName"]];
     self.targetTitleLabel.text = [messageItem valueForKey:@"targetTitle"];

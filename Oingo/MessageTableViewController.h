@@ -36,6 +36,12 @@
 @property(nonatomic) PFUser *currentUser;
 @property(nonatomic) BOOL isRepsLoaded;
 @property(nonatomic) UpdateDefaults *updateDefaults;
+@property (weak, nonatomic) IBOutlet UIButton *segmentTweetButton;
+@property (weak, nonatomic) IBOutlet UIButton *segmentFacebookButton;
+@property (weak, nonatomic) IBOutlet UIImageView *segmentTweetButtonSuccessImageView;
+@property (nonatomic) NSString *isFromLogin;
+
+
 - (IBAction)shareSegmentTwitter:(id)sender;
 - (IBAction)shareSegmentFacebook:(id)sender;
 - (void)lookUpZip;

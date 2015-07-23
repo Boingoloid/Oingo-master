@@ -22,6 +22,9 @@
 bool isUserLinkedToTwitter;
 
 -(void)shareSegmentTwitterAPI {
+
+    
+    NSLog(@"Messageview controller share segment twitter api:%@",self.messageTableViewController);
     //if statement below
     //1) logged in?, if not send to sign up screen
     //2) else if logged in, link account to twitter account, then send tweet
@@ -94,7 +97,7 @@ bool isUserLinkedToTwitter;
     [composer setText:tweetText];
     [composer setURL:tweetURL];
     [composer setImage:image];
-    [composer showWithCompletion:^(TWTRComposerResult result) {
+    [composer showFromViewController:self.messageTableViewController completion:^(TWTRComposerResult result) {
         if (result == TWTRComposerResultCancelled) {
             NSLog(@"Tweet composition cancelled");
         } else {
@@ -116,12 +119,13 @@ bool isUserLinkedToTwitter;
     NSString *userObjectID = currentUser.objectId;
     [sentMessageItem setObject:userObjectID forKey:@"userObjectID"];
     
-    [sentMessageItem saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) { //save currentUser to parse disk
+    [sentMessageItem saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) { //save sent message to parse
         if(error){
             NSLog(@"error, message not saved");
         }
         else {
             NSLog(@"no error, message saved");
+            [self.messageTableViewController viewDidLoad];
         }
     }];
     
@@ -140,8 +144,6 @@ bool isUserLinkedToTwitter;
     [sentMessageItem setObject:[currentUser valueForKey:@"username"] forKey:@"username"];
         NSString *userObjectID = currentUser.objectId;
     [sentMessageItem setObject:userObjectID forKey:@"userObjectID"];
-
-NSLog(@"Got here in the save, should have segmentID:%@",sentMessageItem);
     
     //if segment then skip, else don't
     
@@ -152,9 +154,8 @@ NSLog(@"Got here in the save, should have segmentID:%@",sentMessageItem);
         [sentMessageItem setObject:bioguide_id forKey:@"contactID"];
         [sentMessageItem setObject:fullName forKey:@"contactName"];
     } else {
-        NSLog(@"Regular Message Item Class");
+        NSLog(@"Regular Contact Item Class");
         NSString *contactID = [self.selectedContact valueForKey:@"contactID"];
-                NSLog(@"selected contact:%@",self.selectedContact);
         NSString *targetName = [self.selectedContact valueForKey:@"targetName"];
         [sentMessageItem setObject:contactID forKey:@"contactID"];
         [sentMessageItem setObject:targetName forKey:@"contactName"];
@@ -170,6 +171,7 @@ NSLog(@"Got here in the save, should have segmentID:%@",sentMessageItem);
     }];
     
     NSLog(@"Got here in the save 2:%@",sentMessageItem);
+    [self.messageTableViewController viewDidLoad];
 }
 
 
@@ -177,6 +179,7 @@ NSLog(@"Got here in the save, should have segmentID:%@",sentMessageItem);
     SignUpViewController *signUpViewController = [self.messageTableViewController.storyboard instantiateViewControllerWithIdentifier:@"signInViewController"];
     signUpViewController.messageTableViewController = self.messageTableViewController;
     [self.messageTableViewController.navigationController pushViewController:signUpViewController animated:YES];
+    NSLog(@"message view controller as signup pushed:%@ and %@",self.messageTableViewController,signUpViewController.messageTableViewController);
 }
 
 -(void)linkUserToTwitter:currentUser{

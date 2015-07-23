@@ -56,20 +56,26 @@ NSInteger headerHeight = 48;
 NSInteger footerHeight = 1;
 
 -(void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    NSLog(@"viewWillApper");
     self.updateDefaults = [[UpdateDefaults alloc]init];
     [self.updateDefaults updateLocationDefaults];
+
+    
 }
 
 
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+        NSLog(@"viewDidLoad");
+    NSLog(@"hidding tweet success");
+    self.segmentTweetButtonSuccessImageView.hidden = YES;
     
     // Get menu data from parse
     ParseAPI *parseAPI = [[ParseAPI alloc]init];
     parseAPI.messageTableViewController = self;
     [parseAPI getParseMessageData:self.selectedSegment];
-    NSLog(@"selectedSegment:%@",self.selectedSegment);
     
     // Format table header
     self.tableHeaderView.layer.borderColor = [[UIColor whiteColor] CGColor];
@@ -80,6 +86,7 @@ NSInteger footerHeight = 1;
     NSString* padding = @"  "; // # of spaces
     self.tableHeaderLabel.text = [NSString stringWithFormat:@"%@%@%@", padding,[self.selectedSegment valueForKey:@"segmentTitle"], padding];
     self.tableHeaderSubLabel.text = [NSString stringWithFormat:@"%@%@%@", padding,[self.selectedProgram valueForKey:@"programTitle"], padding];
+
 
     // Create gesture recognizer
     UITapGestureRecognizer *tapRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(respondToTapGesture:)]; //connect recognizer to action method.
@@ -186,9 +193,9 @@ NSInteger footerHeight = 1;
                 
             } else {
                 NSLog(@"index was found:%ld",index);
-                NSLog(@"did find line:%@",[self.menuList objectAtIndex:index]);
                 twitterAPITweet.messageText = [[self.menuList objectAtIndex:index] valueForKey:@"messageText"];
             }
+            
             [twitterAPITweet shareMessageTwitterAPI:cell];
             
         //if touch on postToFacebookButton, then
@@ -235,6 +242,7 @@ NSInteger footerHeight = 1;
     twitterAPITweet.messageTableViewController = self;
     twitterAPITweet.selectedSegment = self.selectedSegment;
     twitterAPITweet.selectedProgram = self.selectedProgram;
+    NSLog(@"sharing segment on twitter, here is view controller%@",self);
     [twitterAPITweet shareSegmentTwitterAPI];
 }
 
@@ -267,6 +275,7 @@ NSInteger footerHeight = 1;
     
     [PFUser logOut];
     NSLog(@"user logged out");
+    [self viewDidLoad];
 }
     
 //    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"\u2699"  style:UIBarButtonItemStylePlain target:nil action:nil];
@@ -340,12 +349,7 @@ NSInteger footerHeight = 1;
     ParseAPI *parseAPI = [[ParseAPI alloc]init];
     parseAPI.MessageTableViewController = self;
     [parseAPI getParseMessageData:self.selectedSegment];
-    
-//Note: if going directly to congressFinderAPI you must check that they isGetLocationCell does not exist.  Delete it if it does.
-//    CongressFinderAPI *congressFinder = [[CongressFinderAPI alloc]init];
-//    congressFinder.messageTableViewController = self;
-//    congressFinder.parseAPI = parseAPI;
-//    [congressFinder getCongressWithLatitude:newLocation.coordinate.latitude andLongitude:newLocation.coordinate.longitude addToMessageList:(NSMutableArray*)self.messageList];
+
 }
 
 -(void)lookUpZip {
@@ -395,10 +399,6 @@ NSInteger footerHeight = 1;
             ParseAPI *parseAPI = [[ParseAPI alloc]init];
             parseAPI.MessageTableViewController = self;
             [parseAPI getParseMessageData:self.selectedSegment];
-//            CongressFinderAPI *congressFinder = [[CongressFinderAPI alloc]init];
-//            congressFinder.messageTableViewController = self;
-//            congressFinder.parseAPI = parseAPI;
-//            [congressFinder getCongress:zipCode addToMessageList:self.messageList];
         }
     }];
     [alertController addAction:lookUpAction];
@@ -454,11 +454,7 @@ NSInteger footerHeight = 1;
             ParseAPI *parseAPI = [[ParseAPI alloc]init];
             parseAPI.MessageTableViewController = self;
             [parseAPI getParseMessageData:self.selectedSegment];
-//            CongressFinderAPI *congressFinder = [[CongressFinderAPI alloc]init];
-//            congressFinder.messageTableViewController = self;
-//            congressFinder.parseAPI = parseAPI;
-//            [congressFinder getCongress:zipCode addToMessageList:self.messageList];
-//            NSLog(@"zip%@ messagelist%@",zipCode, self.messageList);
+
         }
     }];
     [alertController addAction:lookUpAction];
@@ -482,7 +478,6 @@ NSInteger footerHeight = 1;
     // Get the isMesssage bool
     NSNumber *isMessageNumber = [dictionary valueForKey:@"isMessage"];
     bool isMessageBool = [isMessageNumber boolValue];
-    NSLog(@"is message: %d",isMessageBool);
 
     // Get the isGetLocation bool
     NSNumber *isGetLocationNumber = [dictionary valueForKey:@"isGetLocationCell"];
@@ -492,6 +487,10 @@ NSInteger footerHeight = 1;
     
     if(isMessageBool){
         MessageTableViewMessageCell *cell = [tableView dequeueReusableCellWithIdentifier:@"CellCategoryMessage" forIndexPath:indexPath];
+//        if (cell == nil){
+//            NSLog(@"cell was nil");
+//            cell = [[MessageTableViewMessageCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"CellCategoryMessage"];
+//        }
         NSLog(@"loading message cell");
         cell.layer.cornerRadius = 3;
         [self.tableView addSubview:cell];
@@ -511,6 +510,12 @@ NSInteger footerHeight = 1;
     } else if([category isEqualToString:@"Local Representative"]) {
         MessageTableViewRepresentativeCell *cell = [tableView dequeueReusableCellWithIdentifier:@"CellRep" forIndexPath:indexPath];
         NSLog(@"loading local rep cell");
+        
+//        if (cell == nil){
+//            NSLog(@"cell was nil");
+//            cell = [[MessageTableViewRepresentativeCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"CellRep"];
+//        }
+//        
         cell.layer.cornerRadius = 3;
         [self.tableView addSubview:cell];
         congressionalMessageItem = [self.menuList objectAtIndex:[rowIndex intValue]];
@@ -544,17 +549,16 @@ NSInteger footerHeight = 1;
     if(isMessageBool) {
         NSString *messageText = [dictionary valueForKey:@"messageText"];
         double charCount = messageText.length;
-        NSLog(@"character count in height calc if is message:%f",charCount);
         
         int rowHeight = 50;
             if (charCount < 50){
                 rowHeight = 25;
-                NSLog(@"making height 25");
+
             } else if (charCount < 100) {
                 rowHeight = 35;
-                NSLog(@"making height 35");
+
             } else {
-                NSLog(@"making height 50");
+
                 rowHeight = 50;
             }
         

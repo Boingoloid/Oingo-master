@@ -87,25 +87,13 @@
 -(void)tableView:(UITableView *)tableView  didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     
     NSString *selectedMessage = [[self.messageOptionsListFiltered objectAtIndex:[indexPath row]] valueForKey:@"messageText"];
-    NSDictionary *unloadMessage = [self.messageTableViewController.messageList  objectAtIndex:[self.originRowIndex intValue]];
-//    
-//    NSLog(@"self.originrowindex:%@",self.originRowIndex);
-//    NSLog(@"unload message%@",unloadMessage);
-//    NSLog(@"message options%@",self.messageOptionsListFiltered);
-    
-    [self.messageOptionsListFiltered insertObject:unloadMessage atIndex:1];
+//    NSDictionary *messageBeingReplaced = [self.messageTableViewController.messageList  objectAtIndex:[self.originRowIndex intValue]];
+
     [[self.messageTableViewController.menuList objectAtIndex:[self.originRowIndex intValue]] setValue:selectedMessage forKey:@"messageText"];
     NSLog(@"showing the indexpath selected:%@, to be changed:%@, and the selected message:%@",indexPath,self.originIndexPath,selectedMessage);
-    
-//    NSLog(@"self.messageOptionFiltered %@",self.messageOptionsListFiltered);
-//    NSLog(@"self.menulist first object %@",[self.menuList firstObject]);
-//    NSLog(@"self.menulist 2nd object %@",[self.menuList objectAtIndex:1]);
-//    NSLog(@"messageoptions first object %@",[self.messageOptionsList firstObject]);
-//    NSLog(@"messageOptions second object %@",[self.messageOptionsList objectAtIndex:1]);
-    
 
     [self.navigationController popViewControllerAnimated:YES];
-[self.messageTableViewController.tableView reloadData];
+    [self.messageTableViewController.tableView reloadData];
 }
 
 /*

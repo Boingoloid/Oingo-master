@@ -195,11 +195,11 @@ BOOL isNewAccountSignup = NO;
 
 // In a storyboard-based application, you will often want to do a little preparation before navigation
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    if([segue.identifier isEqualToString:@"showLogin"]){
-        LogInViewController *logInViewController = [segue destinationViewController];
+    if([segue.identifier isEqualToString:@"showLogIn"]){
+        LogInViewController *logInViewController = [[LogInViewController alloc]init];
+        logInViewController = [segue destinationViewController];
         logInViewController.messageTableViewController = self.messageTableViewController;
-        
-        
+        NSLog(@"message table controller right before send to login:%@",logInViewController.messageTableViewController);
     }
     // Get the new view controller using [segue destinationViewController].
     // Pass the selected object to the new view controller.

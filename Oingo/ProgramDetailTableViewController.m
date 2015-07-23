@@ -45,7 +45,6 @@ Segment *segment;
         if (!error) {
             self.segmentList = objects;
             [self prepSegmentSections:self.segmentList];
-            NSLog(@"segment list on program detail:%@",self.segmentList);
             [self.tableView reloadData];
         } else {
             NSLog(@"Error: %@ %@", error, [error userInfo]);
@@ -265,7 +264,6 @@ Segment *segment;
     if ([segue.identifier isEqualToString:@"showMessages"]){
         
         segment = self.segmentList[self.indexPath.row];
-        NSLog(@"printing out the selected segment%@",self.selectedSegment);
         MessageTableViewController *viewController = [segue destinationViewController];
         viewController.selectedSegment = self.selectedSegment;
         viewController.selectedProgram = self.selectedProgram;

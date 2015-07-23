@@ -13,6 +13,9 @@
 
 - (void) configMessageCell:messageItem indexPath:(NSIndexPath*)indexPath{
     
+    
+    
+    
     NSString *messageText = [NSString stringWithFormat:@"\"%@\"",[messageItem valueForKey:@"messageText"]];
     self.messageText.text = messageText;
 //    long charCount = messageText.length;

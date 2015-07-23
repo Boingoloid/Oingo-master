@@ -383,6 +383,19 @@
                             <rect key="frame" x="0.0" y="64" width="600" height="104"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <subviews>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="1,245 " textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6wf-GD-Qtr">
+                                    <rect key="frame" x="440" y="28" width="86" height="21"/>
+                                    <fontDescription key="fontDescription" name="HelveticaNeue-ThinItalic" family="Helvetica Neue" pointSize="10"/>
+                                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                    <nil key="highlightedColor"/>
+                                </label>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="(or share below with message . . .)" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rGI-Ui-apa">
+                                    <rect key="frame" x="54" y="83" width="267" height="21"/>
+                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                    <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                                    <color key="textColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                    <nil key="highlightedColor"/>
+                                </label>
                                 <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="nQE-7w-YL6">
                                     <rect key="frame" x="8" y="8" width="359" height="67"/>
                                     <subviews>
@@ -424,22 +437,21 @@
                                                 <action selector="shareSegmentFacebook:" destination="cd8-qO-3PC" eventType="touchUpInside" id="Byy-oM-j1a"/>
                                             </connections>
                                         </button>
+                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="success.png" translatesAutoresizingMaskIntoConstraints="NO" id="gNm-Vi-E8j">
+                                            <rect key="frame" x="336" y="21" width="13" height="13"/>
+                                        </imageView>
+                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="success.png" translatesAutoresizingMaskIntoConstraints="NO" id="Edx-ae-Ccu">
+                                            <rect key="frame" x="6" y="47" width="13" height="13"/>
+                                        </imageView>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="= sent messages" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cX7-FA-BlG">
+                                            <rect key="frame" x="23" y="43" width="84" height="21"/>
+                                            <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="11"/>
+                                            <color key="textColor" white="0.5" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
                                     </subviews>
                                     <color key="backgroundColor" white="0.94029425182481752" alpha="1" colorSpace="calibratedWhite"/>
                                 </view>
-                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="1,245 " textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6wf-GD-Qtr">
-                                    <rect key="frame" x="440" y="28" width="86" height="21"/>
-                                    <fontDescription key="fontDescription" name="HelveticaNeue-ThinItalic" family="Helvetica Neue" pointSize="10"/>
-                                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                    <nil key="highlightedColor"/>
-                                </label>
-                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="(or share below with message . . .)" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rGI-Ui-apa">
-                                    <rect key="frame" x="54" y="83" width="267" height="21"/>
-                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                    <fontDescription key="fontDescription" type="system" pointSize="13"/>
-                                    <color key="textColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                    <nil key="highlightedColor"/>
-                                </label>
                             </subviews>
                         </view>
                         <prototypes>
@@ -486,21 +498,21 @@
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <button opaque="NO" tag="1" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="CIH-Ex-lbw">
-                                            <rect key="frame" x="274" y="23" width="40" height="42"/>
+                                            <rect key="frame" x="306" y="23" width="40" height="42"/>
                                             <state key="normal" title="Button" image="tweetButtonIconGray.png">
                                                 <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                             </state>
                                             <state key="selected" image="Web-frame2.png"/>
                                         </button>
                                         <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pSU-k7-vaY">
-                                            <rect key="frame" x="221" y="28" width="29" height="31"/>
+                                            <rect key="frame" x="238" y="28" width="29" height="31"/>
                                             <state key="normal" title="Button" image="mail-icon-gray.png">
                                                 <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                             </state>
                                             <state key="selected" image="Web-frame2.png"/>
                                         </button>
                                         <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Non-Vu-3jy">
-                                            <rect key="frame" x="181" y="31" width="24" height="26"/>
+                                            <rect key="frame" x="163" y="31" width="24" height="26"/>
                                             <state key="normal" title="Button" image="phone-gray.png">
                                                 <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                             </state>
@@ -511,13 +523,6 @@
                                             <state key="normal" title="Button" image="facebookButtonIconGray.png">
                                                 <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                             </state>
-                                        </button>
-                                        <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zgT-Wr-Ywq">
-                                            <rect key="frame" x="140" y="33" width="25" height="22"/>
-                                            <state key="normal" title="Button" image="document-xxl.png">
-                                                <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                            </state>
-                                            <state key="selected" image="Web-frame2.png"/>
                                         </button>
                                         <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="m5J-ER-VYA">
                                             <rect key="frame" x="483" y="17" width="46" height="30"/>
@@ -535,6 +540,9 @@
                                             <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                             <nil key="highlightedColor"/>
                                         </label>
+                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="success.png" translatesAutoresizingMaskIntoConstraints="NO" id="fbp-UY-wdl">
+                                            <rect key="frame" x="333" y="27" width="13" height="13"/>
+                                        </imageView>
                                     </subviews>
                                     <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                     <constraints>
@@ -580,7 +588,7 @@
                                     <outlet property="targetName" destination="10F-0X-Niq" id="rAu-2I-hBf"/>
                                     <outlet property="targetTitleLabel" destination="G6z-jT-fiW" id="h3L-aV-Ff2"/>
                                     <outlet property="tweetButton" destination="CIH-Ex-lbw" id="DqI-rw-kzp"/>
-                                    <outlet property="webFormButton" destination="zgT-Wr-Ywq" id="OaN-TQ-9hI"/>
+                                    <outlet property="tweetSuccessImageView" destination="fbp-UY-wdl" id="CN9-5P-dHQ"/>
                                 </connections>
                             </tableViewCell>
                             <tableViewCell contentMode="scaleToFill" horizontalHuggingPriority="1000" verticalHuggingPriority="1000" horizontalCompressionResistancePriority="200" verticalCompressionResistancePriority="200" selectionStyle="none" indentationWidth="10" reuseIdentifier="CellCategoryMessage" rowHeight="79" id="boJ-HR-9a7" customClass="MessageTableViewMessageCell">
@@ -733,6 +741,9 @@
                                                 <constraint firstAttribute="width" constant="50" id="xYe-xk-6Uy"/>
                                             </constraints>
                                         </imageView>
+                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="success.png" translatesAutoresizingMaskIntoConstraints="NO" id="sC8-x7-qgc">
+                                            <rect key="frame" x="334" y="25" width="13" height="13"/>
+                                        </imageView>
                                     </subviews>
                                     <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                     <constraints>
@@ -778,10 +789,15 @@
                                     <outlet property="targetName" destination="vLE-wG-CRT" id="6E0-o2-VmM"/>
                                     <outlet property="targetTitleLabel" destination="HsB-Qx-mao" id="bLq-u7-1b8"/>
                                     <outlet property="tweetButton" destination="D9u-qi-2aE" id="s3c-Y0-Xcm"/>
+                                    <outlet property="tweetSuccessImageView" destination="sC8-x7-qgc" id="dv5-e9-TPT"/>
                                     <outlet property="webFormButton" destination="ffs-S4-PQJ" id="VAU-Eq-rAJ"/>
                                 </connections>
                             </tableViewCell>
                         </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="cd8-qO-3PC" id="lUE-PV-KGM"/>
+                            <outlet property="delegate" destination="cd8-qO-3PC" id="MpJ-JM-HWE"/>
+                        </connections>
                     </tableView>
                     <navigationItem key="navigationItem" title="Message Menu" id="VjC-sO-yet">
                         <barButtonItem key="backBarButtonItem" title="Messages" id="EQZ-BE-GW2"/>
@@ -793,6 +809,9 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
+                        <outlet property="segmentFacebookButton" destination="hXw-8E-YQq" id="6M0-tl-0SG"/>
+                        <outlet property="segmentTweetButton" destination="IUN-dR-MPR" id="gOC-cZ-Qgr"/>
+                        <outlet property="segmentTweetButtonSuccessImageView" destination="gNm-Vi-E8j" id="xyr-qx-PGr"/>
                         <outlet property="tableHeaderLabel" destination="lpR-4U-16n" id="lor-9N-Hbe"/>
                         <outlet property="tableHeaderSubLabel" destination="rPx-Fx-oD0" id="98w-lU-njK"/>
                         <outlet property="tableHeaderView" destination="nQE-7w-YL6" id="fFa-fv-uBo"/>
@@ -1064,6 +1083,7 @@
         <image name="mail-icon-gray.png" width="256" height="256"/>
         <image name="monsanto gas apple.png" width="1065" height="1066"/>
         <image name="phone-gray.png" width="260" height="260"/>
+        <image name="success.png" width="254" height="181"/>
         <image name="tweetButtonIconGray.png" width="259" height="259"/>
     </resources>
 </document>

@@ -21,5 +21,7 @@
 @property (nonatomic, retain) NSString *isGetLocationCell;
 @property (nonatomic, retain) NSString *contactID;
 
+@property (nonatomic) bool isTweetSent;
+
 
 @end

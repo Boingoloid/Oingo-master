@@ -56,6 +56,7 @@
 		CE87CAC61AF9B5F30084C666 /* lastweektonightcoverphoto.png in Resources */ = {isa = PBXBuildFile; fileRef = CE87CAC51AF9B5F30084C666 /* lastweektonightcoverphoto.png */; };
 		CE87CAC91AFAB9B70084C666 /* ProgramsTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CE87CAC81AFAB9B70084C666 /* ProgramsTableViewCell.m */; };
 		CE87CACC1AFABA920084C666 /* Program.m in Sources */ = {isa = PBXBuildFile; fileRef = CE87CACB1AFABA920084C666 /* Program.m */; };
+		CE99E3871B5EF1ED00ED9D33 /* MarkSentMessageAPI.m in Sources */ = {isa = PBXBuildFile; fileRef = CE99E3861B5EF1ED00ED9D33 /* MarkSentMessageAPI.m */; };
 		CEA79FCA1AEB7CCC00535B06 /* brainwash80.png in Resources */ = {isa = PBXBuildFile; fileRef = CEA79FC91AEB7CCC00535B06 /* brainwash80.png */; };
 		CEA79FCC1AEB942E00535B06 /* brainwash120.png in Resources */ = {isa = PBXBuildFile; fileRef = CEA79FCB1AEB942E00535B06 /* brainwash120.png */; };
 		CEA79FCE1AEB94D900535B06 /* brainwash58.png in Resources */ = {isa = PBXBuildFile; fileRef = CEA79FCD1AEB94D900535B06 /* brainwash58.png */; };
@@ -71,6 +72,8 @@
 		CEC0C7471B478E0500A9DD33 /* MessageTableViewMessageCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CEC0C7461B478E0500A9DD33 /* MessageTableViewMessageCell.m */; };
 		CEE04B9A1B34B9EC00AAF8EA /* lightGrayButtonBackground.png in Resources */ = {isa = PBXBuildFile; fileRef = CEE04B991B34B9EC00AAF8EA /* lightGrayButtonBackground.png */; };
 		CEE04B9C1B34C43900AAF8EA /* location-gray.png in Resources */ = {isa = PBXBuildFile; fileRef = CEE04B9B1B34C43900AAF8EA /* location-gray.png */; };
+		CEE074421B5EFEE900245C56 /* success.png in Resources */ = {isa = PBXBuildFile; fileRef = CEE074411B5EFEE900245C56 /* success.png */; };
+		CEE074441B5F027E00245C56 /* success-icon.png in Resources */ = {isa = PBXBuildFile; fileRef = CEE074431B5F027E00245C56 /* success-icon.png */; };
 		CEED9BD41AF4160300402BC2 /* Accounts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CE395D851AED5422006786C0 /* Accounts.framework */; };
 		CEED9BD51AF4165400402BC2 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CE40D7FF1AF382A5006F2D2E /* AudioToolbox.framework */; };
 		CEED9BD61AF4166000402BC2 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CEA92FA11AF368590042D0EE /* CoreGraphics.framework */; };
@@ -190,6 +193,8 @@
 		CE87CAC81AFAB9B70084C666 /* ProgramsTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProgramsTableViewCell.m; sourceTree = "<group>"; };
 		CE87CACA1AFABA920084C666 /* Program.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Program.h; sourceTree = "<group>"; };
 		CE87CACB1AFABA920084C666 /* Program.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Program.m; sourceTree = "<group>"; };
+		CE99E3851B5EF1ED00ED9D33 /* MarkSentMessageAPI.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MarkSentMessageAPI.h; sourceTree = "<group>"; };
+		CE99E3861B5EF1ED00ED9D33 /* MarkSentMessageAPI.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MarkSentMessageAPI.m; sourceTree = "<group>"; };
 		CEA79FC91AEB7CCC00535B06 /* brainwash80.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = brainwash80.png; path = Images/brainwash80.png; sourceTree = "<group>"; };
 		CEA79FCB1AEB942E00535B06 /* brainwash120.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = brainwash120.png; path = Images/brainwash120.png; sourceTree = "<group>"; };
 		CEA79FCD1AEB94D900535B06 /* brainwash58.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = brainwash58.png; path = Images/brainwash58.png; sourceTree = "<group>"; };
@@ -228,6 +233,8 @@
 		CEC0C7461B478E0500A9DD33 /* MessageTableViewMessageCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MessageTableViewMessageCell.m; sourceTree = "<group>"; };
 		CEE04B991B34B9EC00AAF8EA /* lightGrayButtonBackground.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = lightGrayButtonBackground.png; path = Images/lightGrayButtonBackground.png; sourceTree = "<group>"; };
 		CEE04B9B1B34C43900AAF8EA /* location-gray.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "location-gray.png"; path = "Images/location-gray.png"; sourceTree = "<group>"; };
+		CEE074411B5EFEE900245C56 /* success.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = success.png; sourceTree = "<group>"; };
+		CEE074431B5F027E00245C56 /* success-icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "success-icon.png"; sourceTree = "<group>"; };
 		CEED9BB61AF40A4000402BC2 /* Twitter.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Twitter.framework; path = System/Library/Frameworks/Twitter.framework; sourceTree = SDKROOT; };
 		CEED9BF91AF41A7300402BC2 /* NSData+Base64.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "NSData+Base64.h"; sourceTree = "<group>"; };
 		CEED9BFA1AF41A7300402BC2 /* NSData+Base64.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "NSData+Base64.m"; sourceTree = "<group>"; };
@@ -406,6 +413,8 @@
 		CE241A6A1AEAF0D300F22144 /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				CEE074431B5F027E00245C56 /* success-icon.png */,
+				CEE074411B5EFEE900245C56 /* success.png */,
 				CE7B38571B584C77009107DD /* congressionalDishProgramCover.png */,
 				CE29AA991B3F2BC900676563 /* pelosi.png */,
 				CE29AA971B3F2BBD00676563 /* feinstein.png */,
@@ -540,6 +549,8 @@
 				CE2BF9761B3E5A1700AB15AC /* EmailComposerViewController.m */,
 				CE31B1A71B44923B0048A5B1 /* ParseAPI.h */,
 				CE31B1A81B44923B0048A5B1 /* ParseAPI.m */,
+				CE99E3851B5EF1ED00ED9D33 /* MarkSentMessageAPI.h */,
+				CE99E3861B5EF1ED00ED9D33 /* MarkSentMessageAPI.m */,
 				CEB2924E1B4528CE00A4E8E0 /* TwitterAPITweet.h */,
 				CEB2924F1B4528CE00A4E8E0 /* TwitterAPITweet.m */,
 				CEC0C73F1B45C80100A9DD33 /* FacebookAPIPost.h */,
@@ -688,6 +699,7 @@
 				CEEF250B1B0171BC00EFB257 /* Web-frame2.png in Resources */,
 				CEE04B9A1B34B9EC00AAF8EA /* lightGrayButtonBackground.png in Resources */,
 				CE46B13C1B044DF300A4D671 /* blackborder.png in Resources */,
+				CEE074441B5F027E00245C56 /* success-icon.png in Resources */,
 				CEA79FD01AEB954200535B06 /* brainwash40.png in Resources */,
 				CE80B5D61AFC0EFB007D69FB /* dailyshow6cover.png in Resources */,
 				CE29AA9A1B3F2BC900676563 /* pelosi.png in Resources */,
@@ -704,6 +716,7 @@
 				CE60732D1B3A8CAC007B567C /* document-xxl.png in Resources */,
 				CEEF25041B012FC600EFB257 /* robb frale profile.png in Resources */,
 				CEA79FCA1AEB7CCC00535B06 /* brainwash80.png in Resources */,
+				CEE074421B5EFEE900245C56 /* success.png in Resources */,
 				CE60732B1B3A88FD007B567C /* phone-gray.png in Resources */,
 				CEA79FCC1AEB942E00535B06 /* brainwash120.png in Resources */,
 				CE46B13A1B044D5F00A4D671 /* greyarrow.png in Resources */,
@@ -804,6 +817,7 @@
 				CE241A421AEAE45A00F22144 /* main.m in Sources */,
 				CEC0C7411B45C80100A9DD33 /* FacebookAPIPost.m in Sources */,
 				CEEF25111B017C8200EFB257 /* MessageTableViewCell.m in Sources */,
+				CE99E3871B5EF1ED00ED9D33 /* MarkSentMessageAPI.m in Sources */,
 				CE6F71F41B2BCA9E0067E4DA /* SettingsTableViewController.m in Sources */,
 				CE87CAC91AFAB9B70084C666 /* ProgramsTableViewCell.m in Sources */,
 				CEC0C7441B45D6B400A9DD33 /* LocationFinderAPI.m in Sources */,

@@ -37,25 +37,34 @@ CongressPhotoFinderAPI *congressPhotoFinderAPI;
     //Assign message item
     self.congressionalMessageItem = congressionalMessageItem;
     
-    //Hide all other fields
-    self.locationButton.hidden = YES;
-    self.zipCodeButton.hidden = YES;
-    self.zipLabel.hidden = YES;
     
 
     self.targetName.hidden = NO;
     self.targetTitleLabel.hidden = NO;
-    self.messageImage.hidden = NO;
-    self.sendCount.hidden = YES;
-    self.tweetButton.hidden = NO;
-    
     self.tweetButton.hidden = NO;
     self.emailButton.hidden = NO;
     self.phoneButton.hidden = NO;
     self.webFormButton.hidden = NO;
+    self.messageImage.hidden = NO;
     
-    //add information
+    // Hide all other fields
+    self.locationButton.hidden = YES;
+    self.zipCodeButton.hidden = YES;
+    self.zipLabel.hidden = YES;
+    self.sendCount.hidden = YES;
+    
 
+    // Success fields
+    NSNumber *sendTweetNumberBool = [congressionalMessageItem valueForKey:@"isTweetSent"];
+    bool sendTweetBool = [sendTweetNumberBool boolValue];
+    NSLog(@"is tweet sent:%@",[congressionalMessageItem valueForKey:@"isTweetSent"]);
+    if(sendTweetBool) {
+        self.tweetSuccessImageView.hidden = NO;
+    } else {
+        self.tweetSuccessImageView.hidden = YES;
+    }
+    
+    // Add information from congressional message iterm to properties of cell
     self.targetName.text = [NSString stringWithFormat:@"%@ /",[congressionalMessageItem valueForKey:@"fullName"]];
     self.targetTitleLabel.text = [congressionalMessageItem valueForKey:@"title"];
     self.contantForm = [self.congressionalMessageItem valueForKey:@"contactForm"];

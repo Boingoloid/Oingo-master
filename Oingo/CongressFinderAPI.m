@@ -97,10 +97,8 @@
     //combine the lists: add congress people to the message list
     self.messageListWithCongress = [self combine:resultsArray withMessageList:self.messageList];
     
-
     self.messageTableViewController.isRepsLoaded = YES;
     
-
     dispatch_async(dispatch_get_main_queue(), ^{
         [self.parseAPI prepSections:self.messageListWithCongress];
     });
@@ -138,6 +136,8 @@
         
         [congressionalMessageItem setValue:@"Local Representative" forKey:@"messageCategory"];
         [congressionalMessageItem setValue:[congresspersonObject valueForKey:@"bioguide_id"] forKey:@"bioguide_id"];
+        congressionalMessageItem.contactID = [congresspersonObject valueForKey:@"bioguide_id"];
+        NSLog(@"contactID on congrssfinder:%@",congressionalMessageItem.contactID);
         [congressionalMessageItem setValue:self.segmentID forKey:@"segmentID"];
         [congressionalMessageItem setValue:self.messageText forKey:@"messageText"];
         
