@@ -41,46 +41,68 @@ CongressPhotoFinderAPI *congressPhotoFinderAPI;
     //Assign message item
     self.messageItem = messageItem;
     
-    //unhide fields
-    self.targetName.hidden = NO;
-    self.targetTitleLabel.hidden = NO;
-    self.messageImage.hidden = NO;
-    self.sendCount.hidden = NO;
-    self.tweetButton.hidden = NO;
     
-    //Hide fields
-    self.zipCodeButton.hidden = YES;
-    self.locationButton.hidden = YES;
-    self.zipLabel.hidden = YES;
-    self.emailButton.hidden = YES;
-    self.phoneButton.hidden = YES;
-    self.webFormButton.hidden = YES;
-    
-    
-    // Success fields
-    NSNumber *sendTweetNumberBool = [messageItem valueForKey:@"isTweetSent"];
-    bool sendTweetBool = [sendTweetNumberBool boolValue];
-    if(sendTweetBool) {
-        self.tweetSuccessImageView.hidden = NO;
-    } else {
+    if([[self.messageItem valueForKey:@"isCollapsed"]  isEqual: @YES]){
+        
+        NSLog(@"isCollapsed contact cell:%@",[self.messageItem valueForKey:@"isCollapsed"]);
+        //hide everything bc row height is zero
+        self.targetName.hidden = YES;
+        self.targetTitleLabel.hidden = YES;
+        self.messageImage.hidden = YES;
+        self.sendCount.hidden = YES;
+        
+        self.tweetButton.hidden = YES;
         self.tweetSuccessImageView.hidden = YES;
+        self.emailButton.hidden = YES;
+        self.phoneButton.hidden = YES;
+        self.webFormButton.hidden = YES;
+        
+        self.zipCodeButton.hidden = YES;
+        self.locationButton.hidden = YES;
+        self.zipLabel.hidden = YES;
+        
+    } else {
+    
+        //unhide fields
+        self.targetName.hidden = NO;
+        self.targetTitleLabel.hidden = NO;
+        self.messageImage.hidden = NO;
+        self.sendCount.hidden = NO;
+        self.tweetButton.hidden = NO;
+        
+        //Hide fields
+        self.zipCodeButton.hidden = YES;
+        self.locationButton.hidden = YES;
+        self.zipLabel.hidden = YES;
+        self.emailButton.hidden = YES;
+        self.phoneButton.hidden = YES;
+        self.webFormButton.hidden = YES;
+        
+        
+        // Success fields
+        NSNumber *sendTweetNumberBool = [messageItem valueForKey:@"isTweetSent"];
+        bool sendTweetBool = [sendTweetNumberBool boolValue];
+        if(sendTweetBool) {
+            self.tweetSuccessImageView.hidden = NO;
+        } else {
+            self.tweetSuccessImageView.hidden = YES;
+        }
+        
+        
+        
+        //add information
+        self.targetName.text = [NSString stringWithFormat:@"%@ /",[messageItem valueForKey:@"targetName"]];
+        self.targetTitleLabel.text = [messageItem valueForKey:@"targetTitle"];
+        
+
+        
+        //load program image from Parse and format
+        self.messageImage.image = [messageItem objectForKey:@"messageImage"];
+        self.messageImage.layer.borderWidth = .5;
+        self.messageImage.layer.borderColor = [[UIColor blackColor] CGColor];
+        self.messageImage.layer.cornerRadius = 3.0;
+        self.messageImage.clipsToBounds = YES;
     }
-    
-    
-    
-    //add information
-    self.targetName.text = [NSString stringWithFormat:@"%@ /",[messageItem valueForKey:@"targetName"]];
-    self.targetTitleLabel.text = [messageItem valueForKey:@"targetTitle"];
-    
-
-    
-    //load program image from Parse and format
-    self.messageImage.image = [messageItem objectForKey:@"messageImage"];
-    self.messageImage.layer.borderWidth = .5;
-    self.messageImage.layer.borderColor = [[UIColor blackColor] CGColor];
-    self.messageImage.layer.cornerRadius = 3.0;
-    self.messageImage.clipsToBounds = YES;
-
     
 }
 
@@ -95,8 +117,10 @@ CongressPhotoFinderAPI *congressPhotoFinderAPI;
     self.targetName.hidden = YES;
     self.targetTitleLabel.hidden = YES;
     self.messageImage.hidden = YES;
+    
     self.sendCount.hidden = YES;
     self.tweetButton.hidden = YES;
+    self.tweetSuccessImageView.hidden = YES;
     self.emailButton.hidden = YES;
     self.phoneButton.hidden = YES;
     self.webFormButton.hidden = YES;

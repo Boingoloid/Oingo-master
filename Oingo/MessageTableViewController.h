@@ -21,6 +21,7 @@
 @property(nonatomic) Segment *selectedSegment;
 @property(nonatomic,copy) NSMutableArray *messageList;
 @property(nonatomic,copy) NSArray *menuList;
+@property (nonatomic, retain) NSMutableArray *expandSectionsKeyList;
 @property(nonatomic,copy) NSMutableArray *messageTextList;
 @property (nonatomic,copy) NSArray *messageTextListNonMutable;
 @property(nonatomic,copy) NSArray *messageOptionsList;

@@ -19,10 +19,12 @@
 @property (nonatomic) NSMutableArray *contactList;
 @property(nonatomic) NSArray *dataImmutable;
 @property (nonatomic) NSMutableArray *menuList;
+@property (nonatomic, retain) NSMutableArray *expandSectionsKeyList;
 @property(nonatomic) MessageTableViewController *messageTableViewController;
 @property(nonatomic) NSArray *messageOptionsList;
 @property(nonatomic) NSArray *messageTextList;
 @property(nonatomic) NSArray *tempArray;
+
 
 -(void)getParseMessageData:(Segment*)selectedSegment;
 -(void)prepSections:messageList;

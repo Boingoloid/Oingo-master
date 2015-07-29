@@ -137,7 +137,6 @@
         [congressionalMessageItem setValue:@"Local Representative" forKey:@"messageCategory"];
         [congressionalMessageItem setValue:[congresspersonObject valueForKey:@"bioguide_id"] forKey:@"bioguide_id"];
         congressionalMessageItem.contactID = [congresspersonObject valueForKey:@"bioguide_id"];
-        NSLog(@"contactID on congrssfinder:%@",congressionalMessageItem.contactID);
         [congressionalMessageItem setValue:self.segmentID forKey:@"segmentID"];
         [congressionalMessageItem setValue:self.messageText forKey:@"messageText"];
         
@@ -152,8 +151,6 @@
         
         //load dummy images
         [congressionalMessageItem setValue:[NSString stringWithFormat:@"%@.png",[congressionalMessageItem.lastName lowercaseString]] forKey:@"messageImageString"];
-        NSLog(@"congress message item string image:%@", [congressionalMessageItem valueForKey:@"messageImageString"]);
-
         
         //Senator, CA District 12
         congressionalMessageItem.state = [congresspersonObject valueForKey:@"state"];
@@ -185,6 +182,7 @@
 
         congressionalMessageItem.isGetLocationCell = 0;
         congressionalMessageItem.isMessage = 0;
+        congressionalMessageItem.isCollapsed = 0;
 
         
         //now I have message item with all the data.  add object to the array

@@ -11,12 +11,16 @@
 #import "Program.h"
 #import "Segment.h"
 #import "MessageTableViewCell.h"
+#import <FBSDKShareKit/FBSDKShareKit.h>
+#import <FBSDKCoreKit/FBSDKCoreKit.h>
+#import <FBSDKLoginKit/FBSDKLoginKit.h>
 
 @interface FacebookAPIPost : NSObject
 @property (nonatomic) MessageTableViewController *messageTableViewController;
 @property (nonatomic) Segment *selectedSegment;
 @property (nonatomic) Program *selectedProgram;
 @property (nonatomic) NSDictionary *selectedContact;
+@property (strong, nonatomic) FBSDKShareDialog *shareCodeDialog;
 -(void)shareSegmentFacebookAPI;
 -(void)shareMessageFacebookAPI:(MessageTableViewCell*)cell;
 @end

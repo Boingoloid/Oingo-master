@@ -13,9 +13,7 @@
 #import "MessageItem.h"
 #import "CongressionalMessageItem.h"
 #import <ParseFacebookUtilsV4/PFFacebookUtils.h>
-#import <FBSDKShareKit/FBSDKShareKit.h>
-#import <FBSDKCoreKit/FBSDKCoreKit.h>
-#import <FBSDKLoginKit/FBSDKLoginKit.h>
+
 
 
 #import "MessageTableViewController.h"
@@ -69,7 +67,27 @@
     [shareDialog setFromViewController:self.messageTableViewController];
     [shareDialog show];
     
+    self.shareCodeDialog = [FBSDKShareDialog new];
+    [self.shareCodeDialog setDelegate:(id)self.messageTableViewController];
+    [self.shareCodeDialog setShareContent:content];
+    [self.shareCodeDialog setFromViewController:self.messageTableViewController];
+    [self.shareCodeDialog show];
 }
+- (void)sharer:(id<FBSDKSharing>)sharer didFailWithError:(NSError *)error
+{
+    NSLog(@"sharing error:%@", error);
+    NSString *message = error.userInfo[FBSDKErrorLocalizedDescriptionKey] ?:
+    @"There was a problem sharing, please try again later.";
+    NSString *title = error.userInfo[FBSDKErrorLocalizedTitleKey] ?: @"Oops!";
+    
+    [[[UIAlertView alloc] initWithTitle:title message:message delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil] show];
+}
+
+- (void)sharerDidCancel:(id<FBSDKSharing>)sharer
+{
+    NSLog(@"share cancelled");
+}
+
 
 // Figure out how to get success message from facebook.  May have to use REST API.
 //-(void) saveSentMessage{

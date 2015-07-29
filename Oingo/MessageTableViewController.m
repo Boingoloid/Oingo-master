@@ -106,6 +106,8 @@ NSInteger footerHeight = 1;
 {
     UITableView *tableView = (UITableView *)gestureRecognizer.view;
     CGPoint p = [gestureRecognizer locationInView:gestureRecognizer.view];
+    NSIndexPath* indexPath = [tableView indexPathForRowAtPoint:p];
+    MessageTableViewCell *cell = (MessageTableViewCell *)[tableView cellForRowAtIndexPath:indexPath];
     //if point is in the tableview then return YES
     if ([tableView indexPathForRowAtPoint:p]) {
         return YES;
@@ -117,7 +119,7 @@ NSInteger footerHeight = 1;
     //*******
     //This is what we use for user touches in the cells
     //It grabs point coordinate of touch as finger lifted
-    //**********
+    //******************
 
     if (UIGestureRecognizerStateEnded == tap.state) {
         
@@ -141,19 +143,6 @@ NSInteger footerHeight = 1;
         //Get the isMessage Bool from Parse backend
         NSNumber *isMessageNumber = [dictionary valueForKey:@"isMessage"];
         bool isMessageBool = [isMessageNumber boolValue];
-
-        // Print helpful data to log
-        NSLog(@"coordinates pointp%@",NSStringFromCGPoint(p));
-        NSLog(@"coordinates indexpath%@",indexPath);
-        NSLog(@"is message: %d",isMessageBool);
-        NSLog(@"category from dictionary%@",[dictionary valueForKey:@"messageCategory"]);
-        NSLog(@"category using section lookup: %@",category);
-
-        
-        // Lines of code to get the Location Cell bool
-        // NSNumber *isGetLocationNumber = [dictionary valueForKey:@"isGetLocationCell"];
-        // bool isGetLocationBool = [isGetLocationNumber boolValue];
-
         
         if(isMessageBool){
             NSLog(@"touch in message cell");
@@ -545,6 +534,9 @@ NSInteger footerHeight = 1;
     
     NSNumber *isGetLocationNumber = [dictionary valueForKey:@"isGetLocationCell"];
     bool isGetLocationBool = [isGetLocationNumber boolValue];
+    
+    NSNumber *isCollapsedNumber = [dictionary valueForKey:@"isCollapsed"];
+    bool isCollapsedBool = [isCollapsedNumber boolValue];
 
     if(isMessageBool) {
         NSString *messageText = [dictionary valueForKey:@"messageText"];
@@ -561,10 +553,11 @@ NSInteger footerHeight = 1;
 
                 rowHeight = 50;
             }
-        
         return rowHeight;
     } else if(isGetLocationBool) {
         return 55;
+    } else if(isCollapsedBool) {
+        return .0001;
     } else if([category isEqualToString:@"Local Representative"]) {
         return 65;
     } else { // normal contact cell

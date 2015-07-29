@@ -33,6 +33,7 @@
 @property (nonatomic, retain) NSString *state;
 @property (nonatomic, retain) NSString *leadershipRole;
 @property (nonatomic, retain) NSString *isMessage;
+@property (nonatomic, retain) NSString *isCollapsed;
 @property (nonatomic, retain) NSString *orderInCategory;
 @property (nonatomic, assign) NSString *isGetLocationCell;
 

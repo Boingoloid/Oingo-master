@@ -56,7 +56,7 @@ bool isUserLinkedToTwitter;
             NSLog(@"Tweet composition cancelled");
         } else {
             NSLog(@"Tweet is sent, segment only.");
-            [self saveSentMessageNoContact];
+            [self saveSentMessageSegment];
         }
     }];
 }
@@ -88,7 +88,11 @@ bool isUserLinkedToTwitter;
 
 -(void)shareMessageWithTwitterComposer {
     //Send the tweet
-    NSString *tweetText = self.messageText; //Everything is the same except for this line.
+
+    NSLog(@"selected contact print out:%@",self.selectedContact);
+    NSString *twitterId = [self.selectedContact valueForKey:@"twitterID"];
+    
+    NSString *tweetText = [NSString stringWithFormat:@"@%@, %@ #pushthought",twitterId,self.messageText];
     NSURL *tweetURL = [NSURL URLWithString:[self.selectedSegment valueForKey:@"linkToContent"]];
     PFFile *theImage = [self.selectedSegment valueForKey:@"segmentImage"];
     NSData *imageData = [theImage getData];
@@ -108,7 +112,7 @@ bool isUserLinkedToTwitter;
 }
 
 
--(void) saveSentMessageNoContact{
+-(void) saveSentMessageSegment{
     //  SAVING MESSAGE DATA TO PARSE
     PFUser *currentUser = [PFUser currentUser];
     

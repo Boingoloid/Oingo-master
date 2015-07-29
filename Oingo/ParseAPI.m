@@ -177,7 +177,6 @@ BOOL isCoordinateInfoAvailable = NO;
     //now have sorted list
     //now separate them
     
-    
     NSMutableArray *messageTextList = [[NSMutableArray alloc]init];
     NSMutableArray *contactList = [[NSMutableArray alloc]init];
     
@@ -190,6 +189,7 @@ BOOL isCoordinateInfoAvailable = NO;
             [contactList addObject:dictionary];
         }
     }
+
     self.messageTextList = messageTextList;
     
     self.contactList = contactList;
@@ -204,18 +204,32 @@ BOOL isCoordinateInfoAvailable = NO;
     } else {
         self.menuList = [[NSMutableArray alloc]init];
     }
+    
+    if(self.expandSectionsKeyList) {
+        [self.expandSectionsKeyList removeAllObjects];
+    } else {
+        self.expandSectionsKeyList = [[NSMutableArray alloc]init];
+    }
+    
 
     NSString *category = @"";
     NSUInteger contactIndex = 0;
+    NSUInteger localRepIndex = 0;
     
     // For every contact, goes to messageTextList and pulls first entry for display
-    for (NSDictionary *contactRow in self.contactList) {
+    for (NSMutableDictionary *contactRow in self.contactList) {
         
         //add "success" bools
         [contactRow setValue:@NO forKey:@"isTweetSent"];
-        NSLog(@"tweet sent?:%@",[contactRow valueForKey:@"isTweetSent"]);
+        
         if(category != [contactRow valueForKey:@"messageCategory"]){
             category = [contactRow valueForKey:@"messageCategory"];
+            
+            
+            // Keep a count here.  if local rep, increment
+            if ([category  isEqual: @"Local Representative"]) {
+                localRepIndex ++;
+            }
             
             NSUInteger index = [self.messageTextList indexOfObjectPassingTest:
                                 ^BOOL(NSDictionary *dict, NSUInteger idx, BOOL *stop) {
@@ -224,13 +238,35 @@ BOOL isCoordinateInfoAvailable = NO;
             
             MessageItem *messageToAdd = [self.messageTextList objectAtIndex:index];
             [self.menuList addObject:messageToAdd];
+            [contactRow setValue:@NO forKey:@"isCollapsed"];
             [self.menuList addObject:contactRow];
+            
+            // create another array to dictate whether they are all showing
+            //add when new category and set to not expanded
+            NSMutableDictionary *expandSectionTempDictionary = [[NSMutableDictionary alloc]init];
+            [expandSectionTempDictionary setValue:category forKey:@"Category"];
+            [expandSectionTempDictionary setValue:@YES forKey:@"isSectionExpanded"];  // makes sure at least one contact is expanded
+            [self.expandSectionsKeyList addObject:expandSectionTempDictionary];
+            
         } else {
+            
+            if ([category  isEqual: @"Local Representative"]) {
+                localRepIndex ++;
+            }
+            
+            if(localRepIndex >= 3){
+                [contactRow setValue:@YES forKey:@"isCollapsed"];
+            }
+            
             [self.menuList addObject:contactRow];
         }
         
     contactIndex++;
+    
     }
+    NSLog(@"menulist:%@",self.menuList);
+    NSLog(@"menulist:%@",self.expandSectionsKeyList);
+
 }
 
 
@@ -290,6 +326,7 @@ BOOL isCoordinateInfoAvailable = NO;
     self.messageTableViewController.messageList = self.menuList;
     self.messageTableViewController.menuList = self.menuList;
     self.messageTableViewController.messageOptionsList = self.messageOptionsList;
+    self.messageTableViewController.expandSectionsKeyList = self.expandSectionsKeyList;
     
     [self.messageTableViewController.tableView reloadData];
     
