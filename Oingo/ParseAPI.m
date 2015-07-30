@@ -238,25 +238,25 @@ BOOL isCoordinateInfoAvailable = NO;
             
             MessageItem *messageToAdd = [self.messageTextList objectAtIndex:index];
             [self.menuList addObject:messageToAdd];
-            [contactRow setValue:@NO forKey:@"isCollapsed"];
+//            [contactRow setValue:@NO forKey:@"isCollapsed"]; // makes sure at least one contact is expanded
             [self.menuList addObject:contactRow];
             
             // create another array to dictate whether they are all showing
             //add when new category and set to not expanded
             NSMutableDictionary *expandSectionTempDictionary = [[NSMutableDictionary alloc]init];
             [expandSectionTempDictionary setValue:category forKey:@"Category"];
-            [expandSectionTempDictionary setValue:@YES forKey:@"isSectionExpanded"];  // makes sure at least one contact is expanded
+            [expandSectionTempDictionary setValue:@YES forKey:@"isSectionExpanded"];
             [self.expandSectionsKeyList addObject:expandSectionTempDictionary];
             
         } else {
             
-            if ([category  isEqual: @"Local Representative"]) {
-                localRepIndex ++;
-            }
-            
-            if(localRepIndex >= 3){
-                [contactRow setValue:@YES forKey:@"isCollapsed"];
-            }
+//            if ([category  isEqual: @"Local Representative"]) {
+//                localRepIndex ++;
+//            }
+//            
+//            if(localRepIndex >= 3){
+//                [contactRow setValue:@YES forKey:@"isCollapsed"];
+//            }
             
             [self.menuList addObject:contactRow];
         }

@@ -78,7 +78,6 @@ CongressPhotoFinderAPI *congressPhotoFinderAPI;
         self.phoneButton.hidden = YES;
         self.webFormButton.hidden = YES;
         
-        
         // Success fields
         NSNumber *sendTweetNumberBool = [messageItem valueForKey:@"isTweetSent"];
         bool sendTweetBool = [sendTweetNumberBool boolValue];
@@ -88,13 +87,9 @@ CongressPhotoFinderAPI *congressPhotoFinderAPI;
             self.tweetSuccessImageView.hidden = YES;
         }
         
-        
-        
         //add information
         self.targetName.text = [NSString stringWithFormat:@"%@ /",[messageItem valueForKey:@"targetName"]];
         self.targetTitleLabel.text = [messageItem valueForKey:@"targetTitle"];
-        
-
         
         //load program image from Parse and format
         self.messageImage.image = [messageItem objectForKey:@"messageImage"];
@@ -103,7 +98,6 @@ CongressPhotoFinderAPI *congressPhotoFinderAPI;
         self.messageImage.layer.cornerRadius = 3.0;
         self.messageImage.clipsToBounds = YES;
     }
-    
 }
 
 
@@ -125,7 +119,6 @@ CongressPhotoFinderAPI *congressPhotoFinderAPI;
     self.phoneButton.hidden = YES;
     self.webFormButton.hidden = YES;
 
-    
     //Create Zip look up UI
     //Add current location look up button
     self.locationButton = [[UIButton alloc]initWithFrame:CGRectMake(110, 5, 20, 20)];

@@ -504,15 +504,8 @@
                                             </state>
                                             <state key="selected" image="Web-frame2.png"/>
                                         </button>
-                                        <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pSU-k7-vaY">
-                                            <rect key="frame" x="238" y="28" width="29" height="31"/>
-                                            <state key="normal" title="Button" image="mail-icon-gray.png">
-                                                <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                            </state>
-                                            <state key="selected" image="Web-frame2.png"/>
-                                        </button>
                                         <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Non-Vu-3jy">
-                                            <rect key="frame" x="163" y="31" width="24" height="26"/>
+                                            <rect key="frame" x="149" y="31" width="24" height="26"/>
                                             <state key="normal" title="Button" image="phone-gray.png">
                                                 <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                             </state>
@@ -543,6 +536,13 @@
                                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="success.png" translatesAutoresizingMaskIntoConstraints="NO" id="fbp-UY-wdl">
                                             <rect key="frame" x="333" y="27" width="13" height="13"/>
                                         </imageView>
+                                        <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pSU-k7-vaY">
+                                            <rect key="frame" x="230" y="28" width="29" height="31"/>
+                                            <state key="normal" title="Button" image="mail-icon-gray.png">
+                                                <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                            </state>
+                                            <state key="selected" image="Web-frame2.png"/>
+                                        </button>
                                     </subviews>
                                     <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                     <constraints>
@@ -625,6 +625,13 @@
                                                 </mask>
                                             </variation>
                                         </label>
+                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" image="40-menu-alt-512.png" translatesAutoresizingMaskIntoConstraints="NO" id="c35-RH-Xc3">
+                                            <rect key="frame" x="323" y="24" width="20" height="20"/>
+                                            <constraints>
+                                                <constraint firstAttribute="width" constant="20" id="2Oz-k5-zJI"/>
+                                                <constraint firstAttribute="height" constant="20" id="VTn-7U-Cqu"/>
+                                            </constraints>
+                                        </imageView>
                                     </subviews>
                                     <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                     <constraints>
@@ -634,7 +641,11 @@
                                         <constraint firstItem="zCX-6N-C1q" firstAttribute="leading" secondItem="C1f-Ie-wjl" secondAttribute="leadingMargin" constant="12" id="Ke2-Vb-sZ0"/>
                                         <constraint firstItem="zCX-6N-C1q" firstAttribute="leading" secondItem="C1f-Ie-wjl" secondAttribute="leadingMargin" constant="12" id="RvI-98-XeK"/>
                                         <constraint firstAttribute="centerY" secondItem="zCX-6N-C1q" secondAttribute="centerY" id="fuR-kY-Gnp"/>
+                                        <constraint firstItem="zCX-6N-C1q" firstAttribute="centerY" secondItem="c35-RH-Xc3" secondAttribute="centerY" constant="-0.5" id="gOJ-DW-TUx"/>
+                                        <constraint firstItem="c35-RH-Xc3" firstAttribute="leading" secondItem="zCX-6N-C1q" secondAttribute="trailing" constant="3" id="mDf-WL-VcD"/>
                                         <constraint firstAttribute="bottomMargin" secondItem="zCX-6N-C1q" secondAttribute="bottom" priority="100" constant="19" id="tgZ-hk-pli"/>
+                                        <constraint firstItem="zCX-6N-C1q" firstAttribute="centerY" secondItem="c35-RH-Xc3" secondAttribute="centerY" constant="10.5" id="utE-KX-bO3"/>
+                                        <constraint firstAttribute="centerY" secondItem="c35-RH-Xc3" secondAttribute="centerY" id="yp0-5f-wWX"/>
                                     </constraints>
                                     <variation key="default">
                                         <mask key="constraints">
@@ -643,6 +654,8 @@
                                             <exclude reference="RvI-98-XeK"/>
                                             <exclude reference="fuR-kY-Gnp"/>
                                             <exclude reference="tgZ-hk-pli"/>
+                                            <exclude reference="utE-KX-bO3"/>
+                                            <exclude reference="yp0-5f-wWX"/>
                                         </mask>
                                     </variation>
                                 </tableViewCellContentView>
@@ -650,6 +663,7 @@
                                 <inset key="separatorInset" minX="10" minY="0.0" maxX="10" maxY="0.0"/>
                                 <connections>
                                     <outlet property="messageText" destination="zCX-6N-C1q" id="AOZ-KM-gSG"/>
+                                    <segue destination="UVS-hS-LPJ" kind="show" identifier="showMessageOptions" id="cC6-J2-2VS"/>
                                 </connections>
                             </tableViewCell>
                             <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="CellRep" rowHeight="75" id="hSg-ik-YTq" customClass="MessageTableViewRepresentativeCell">
@@ -695,7 +709,7 @@
                                             <state key="selected" image="Web-frame2.png"/>
                                         </button>
                                         <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="EPa-bW-Y3O">
-                                            <rect key="frame" x="163" y="30" width="24" height="26"/>
+                                            <rect key="frame" x="157" y="30" width="24" height="26"/>
                                             <state key="normal" title="Button" image="phone-gray.png">
                                                 <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                             </state>
@@ -714,13 +728,6 @@
                                                 <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                             </state>
                                         </button>
-                                        <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ffs-S4-PQJ">
-                                            <rect key="frame" x="89" y="32" width="25" height="22"/>
-                                            <state key="normal" title="Button" image="document-xxl.png">
-                                                <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                            </state>
-                                            <state key="selected" image="Web-frame2.png"/>
-                                        </button>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="1,245 pushed" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eVg-zn-uLb">
                                             <rect key="frame" x="490" y="36" width="95" height="21"/>
                                             <fontDescription key="fontDescription" name="HelveticaNeue-ThinItalic" family="Helvetica Neue" pointSize="10"/>
@@ -728,7 +735,7 @@
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="VAA-aK-7Be">
-                                            <rect key="frame" x="238" y="27" width="29" height="31"/>
+                                            <rect key="frame" x="231" y="27" width="29" height="31"/>
                                             <state key="normal" title="Button" image="mail-icon-gray.png">
                                                 <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                             </state>
@@ -744,6 +751,13 @@
                                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="success.png" translatesAutoresizingMaskIntoConstraints="NO" id="sC8-x7-qgc">
                                             <rect key="frame" x="334" y="25" width="13" height="13"/>
                                         </imageView>
+                                        <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ffs-S4-PQJ">
+                                            <rect key="frame" x="84" y="32" width="25" height="22"/>
+                                            <state key="normal" title="Button" image="document-xxl.png">
+                                                <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                            </state>
+                                            <state key="selected" image="Web-frame2.png"/>
+                                        </button>
                                     </subviews>
                                     <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                     <constraints>
@@ -800,7 +814,7 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" title="Message Menu" id="VjC-sO-yet">
-                        <barButtonItem key="backBarButtonItem" title="Messages" id="EQZ-BE-GW2"/>
+                        <barButtonItem key="backBarButtonItem" title="Menu" id="EQZ-BE-GW2"/>
                         <barButtonItem key="rightBarButtonItem" style="plain" id="N2I-hc-C1r">
                             <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="detailDisclosure" lineBreakMode="middleTruncation" id="oo8-F7-puB">
                                 <rect key="frame" x="451" y="7" width="22" height="22"/>
@@ -951,7 +965,7 @@
                             <outlet property="delegate" destination="UVS-hS-LPJ" id="dlQ-7G-QRH"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="Message Options" id="Cm6-46-sQF"/>
+                    <navigationItem key="navigationItem" title="Message Options" id="L1r-a8-jhT"/>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="C2Y-Sh-7XT" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -1077,6 +1091,7 @@
         </scene>
     </scenes>
     <resources>
+        <image name="40-menu-alt-512.png" width="512" height="512"/>
         <image name="Web-frame2.png" width="2858" height="1950"/>
         <image name="document-xxl.png" width="256" height="256"/>
         <image name="facebookButtonIconGray.png" width="259" height="259"/>

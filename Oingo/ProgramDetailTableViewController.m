@@ -85,15 +85,17 @@ Segment *segment;
 - (void)respondToTapGesture:(UITapGestureRecognizer *)tap
 {
     if (UIGestureRecognizerStateEnded == tap.state) {
+        // Capture useful data and deselect row
         UITableView *tableView = (UITableView *)tap.view;
         CGPoint p = [tap locationInView:tap.view];
         NSLog(@"%@",NSStringFromCGPoint(p));
         NSIndexPath* indexPath = [tableView indexPathForRowAtPoint:p];
         NSLog(@"index path from point p touch:%@",indexPath);
-        
         [tableView deselectRowAtIndexPath:indexPath animated:NO];
+        
         ProgramDetailTableViewCell *cell = (ProgramDetailTableViewCell *)[tableView cellForRowAtIndexPath:indexPath];
-             CGPoint pointInCell = [tap locationInView:cell];       
+        CGPoint pointInCell = [tap locationInView:cell];
+        
         if (CGRectContainsPoint(cell.linkToContentButton.frame, pointInCell)) {
             // user tapped link
             self.selectedLink = cell.linkToContentButton.titleLabel.text; //capture the link

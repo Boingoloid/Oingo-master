@@ -146,17 +146,7 @@ NSInteger footerHeight = 1;
         
         if(isMessageBool){
             NSLog(@"touch in message cell");
-            
-            // Create & Push MessageOptionsVC and assign properties: self.menuList and touch location info.
-            MessageOptionsTableTableViewController *messageOptionsViewController = [[MessageOptionsTableTableViewController alloc]init];
-            messageOptionsViewController.category = category;
-            messageOptionsViewController.messageTableViewController = self;
-            messageOptionsViewController.originIndexPath = indexPath;
-            messageOptionsViewController.originRowIndex = rowIndex;
-            messageOptionsViewController.messageOptionsList = self.messageOptionsList;
-            messageOptionsViewController.menuList = self.menuList;
-            [self.navigationController pushViewController:messageOptionsViewController animated:YES];
-            
+         
         } else if (CGRectContainsPoint(cell.tweetButton.frame, pointInCell)) {
             NSLog(@"touch in tweet button area");
             
@@ -594,17 +584,11 @@ NSInteger footerHeight = 1;
 //    }
 }
 
-- (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section {
-    return footerHeight;
-}
+
 
 -(UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
 {
-//    NSString *category= [self categoryForSection:section];
-//    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
 
-//    if([category isEqualToString:@"Local Representative"] && ![defaults valueForKey:@"zipCode"] && ![defaults valueForKey:@"latitude"]) {
-        //do nothing
         UIView *view = [[UIView alloc] initWithFrame:CGRectMake(7, 0, tableView.frame.size.width -14 , sectionHeaderHeight)];
         UILabel *sectionLabel = [[UILabel alloc] init];
         sectionLabel.frame = CGRectMake(7, 0, tableView.frame.size.width -14, sectionHeaderHeight);
@@ -622,10 +606,33 @@ NSInteger footerHeight = 1;
 
 }
 
+- (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section {
+    //return footerHeight;
+    return 2;
+}
+
 //-(UIView *) tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section {
-//    UIView *view = [[UIView alloc] initWithFrame:CGRectMake(8, 0, tableView.frame.size.width -14 , footerHeight )];
-//    UILabel *footerLabel = [[UILabel alloc] init];
-//    [view addSubview:footerLabel];
+//    UIView *view = [[UIView alloc] initWithFrame:CGRectMake(9, 0, tableView.frame.size.width -14 , 13)];
+//    view.layer.backgroundColor = [[UIColor clearColor] CGColor];
+//    
+//    
+//    UIImageView *footerImageView = [[UIImageView alloc] initWithFrame:CGRectMake(110, 0, 30,25)];
+//    
+//    UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(150, 0, 75,16)];
+//    label.text = @"show more";
+//    label.font = [UIFont boldSystemFontOfSize:11];
+//    label.textColor = [UIColor grayColor];
+//    label.textAlignment = NSTextAlignmentCenter;
+//    label.layer.backgroundColor = [[UIColor whiteColor] CGColor];
+//    label.layer.cornerRadius = 3;
+////    footerImageView.image = [UIImage imageNamed:@"arrow-down-gray-hi.png"];
+////    footerImageView.layer.borderColor = [[UIColor blackColor] CGColor];
+////    footerImageView.layer.borderWidth = 1;
+////    footerImageView.layer.backgroundColor =[[UIColor whiteColor] CGColor];
+//    footerImageView.layer.cornerRadius = 3;
+//    footerImageView.clipsToBounds = YES;
+//    [view addSubview:label];
+//    [view addSubview:footerImageView];
 //    return view;
 //}
 
@@ -656,14 +663,33 @@ NSInteger footerHeight = 1;
 }
 */
 
-/*
+
 #pragma mark - Navigation
 
 // In a storyboard-based application, you will often want to do a little preparation before navigation
+
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+    
+    if([segue.identifier isEqualToString:@"showMessageOptions"]){
+        NSIndexPath *indexPath = [self.tableView indexPathForCell:sender];
+        NSLog(@"indexPath:%@",indexPath);
+        NSString *category= [self categoryForSection:indexPath.section];
+        NSArray *rowIndecesInSection = [self.sections objectForKey:category];
+        NSNumber *rowIndex = [rowIndecesInSection objectAtIndex:indexPath.row]; //pulling the row indece from array above
+       
+        MessageOptionsTableTableViewController *messageOptionsViewController = segue.destinationViewController;
+        
+        messageOptionsViewController.category = category;
+        messageOptionsViewController.messageTableViewController = self;
+        messageOptionsViewController.originIndexPath = indexPath;
+        messageOptionsViewController.originRowIndex = rowIndex;
+        messageOptionsViewController.messageOptionsList = self.messageOptionsList;
+        messageOptionsViewController.menuList = self.menuList;
+    }
+    
     // Get the new view controller using [segue destinationViewController].
     // Pass the selected object to the new view controller.
-*/
+}
 
 
 

@@ -23,7 +23,7 @@
     [super viewDidLoad];
     
     
-    NSLog(@"self.menulist%@",self.menuList);
+
     [self.tableView registerClass:[UITableViewCell class] forCellReuseIdentifier:@"Cell1"];
     NSLog(@"self.messageOptionsList:%@",self.messageOptionsList);
     
@@ -40,18 +40,18 @@
 
     self.messageOptionsListFiltered = messageTextList;
     
-    NSLog(@"data as it's coming in index:%@, category:%@,  message text list Filtered%@",self.originIndexPath, self.category,messageTextList);
+//    NSLog(@"data as it's coming in index:%@, category:%@,  message text list Filtered%@",self.originIndexPath, self.category,messageTextList);
     
 
 
     self.tableView.estimatedRowHeight = 50.0;
     self.tableView.rowHeight = UITableViewAutomaticDimension;
 
-    
-    NSLog(@"self.menulist first object %@",[self.menuList firstObject]);
-    NSLog(@"self.menulist 2nd object %@",[self.menuList objectAtIndex:1]);
-    NSLog(@"messageoptions first object %@",[self.messageOptionsList firstObject]);
-    NSLog(@"messageOptions second object %@",[self.messageOptionsList objectAtIndex:1]);
+//    
+//    NSLog(@"self.menulist first object %@",[self.menuList firstObject]);
+//    NSLog(@"self.menulist 2nd object %@",[self.menuList objectAtIndex:1]);
+//    NSLog(@"messageoptions first object %@",[self.messageOptionsList firstObject]);
+//    NSLog(@"messageOptions second object %@",[self.messageOptionsList objectAtIndex:1]);
 
     
 }
@@ -90,7 +90,7 @@
 //    NSDictionary *messageBeingReplaced = [self.messageTableViewController.messageList  objectAtIndex:[self.originRowIndex intValue]];
 
     [[self.messageTableViewController.menuList objectAtIndex:[self.originRowIndex intValue]] setValue:selectedMessage forKey:@"messageText"];
-    NSLog(@"showing the indexpath selected:%@, to be changed:%@, and the selected message:%@",indexPath,self.originIndexPath,selectedMessage);
+//    NSLog(@"showing the indexpath selected:%@, to be changed:%@, and the selected message:%@",indexPath,self.originIndexPath,selectedMessage);
 
     [self.navigationController popViewControllerAnimated:YES];
     [self.messageTableViewController.tableView reloadData];
