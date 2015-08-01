@@ -68,11 +68,12 @@
     [shareDialog show];
     
     self.shareCodeDialog = [FBSDKShareDialog new];
-    [self.shareCodeDialog setDelegate:(id)self.messageTableViewController];
+    [self.shareCodeDialog setDelegate:(id)self];
     [self.shareCodeDialog setShareContent:content];
     [self.shareCodeDialog setFromViewController:self.messageTableViewController];
     [self.shareCodeDialog show];
 }
+
 - (void)sharer:(id<FBSDKSharing>)sharer didFailWithError:(NSError *)error
 {
     NSLog(@"sharing error:%@", error);

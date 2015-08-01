@@ -106,8 +106,8 @@ NSInteger footerHeight = 1;
 {
     UITableView *tableView = (UITableView *)gestureRecognizer.view;
     CGPoint p = [gestureRecognizer locationInView:gestureRecognizer.view];
-    NSIndexPath* indexPath = [tableView indexPathForRowAtPoint:p];
-    MessageTableViewCell *cell = (MessageTableViewCell *)[tableView cellForRowAtIndexPath:indexPath];
+//    NSIndexPath* indexPath = [tableView indexPathForRowAtPoint:p];
+//    MessageTableViewCell *cell = (MessageTableViewCell *)[tableView cellForRowAtIndexPath:indexPath];
     //if point is in the tableview then return YES
     if ([tableView indexPathForRowAtPoint:p]) {
         return YES;
@@ -146,37 +146,33 @@ NSInteger footerHeight = 1;
         
         if(isMessageBool){
             NSLog(@"touch in message cell");
-         
+            // triggers segue to message options
         } else if (CGRectContainsPoint(cell.tweetButton.frame, pointInCell)) {
             NSLog(@"touch in tweet button area");
-            
-            
-            //instead of looking up message, see if you can pull by section.
-            
-            
-            // Create Tweet API object, Properties passed: -menuList -selection info
-            TwitterAPITweet *twitterAPITweet = [[TwitterAPITweet alloc]init];
-            twitterAPITweet.messageTableViewController = self;
-            twitterAPITweet.selectedSegment = self.selectedSegment;
-            twitterAPITweet.selectedProgram = self.selectedProgram;
-            twitterAPITweet.menuList = self.menuList;
-            twitterAPITweet.selectedContact = self.selectedContact;
-            
-            //Look up message
-            NSUInteger index = [self.menuList indexOfObjectPassingTest:
-                                ^BOOL(NSDictionary *dict, NSUInteger idx, BOOL *stop) {
-                                    return [[dict valueForKey:@"messageCategory"] isEqualToString:category];
-                                }];
-            if(index == NSNotFound){
-                NSLog(@"did not find line");
+            if(!cell.tweetButton.hidden){
+                // Create Tweet API object, Properties passed: -menuList -selection info
+                TwitterAPITweet *twitterAPITweet = [[TwitterAPITweet alloc]init];
+                twitterAPITweet.messageTableViewController = self;
+                twitterAPITweet.selectedSegment = self.selectedSegment;
+                twitterAPITweet.selectedProgram = self.selectedProgram;
+                twitterAPITweet.menuList = self.menuList;
+                twitterAPITweet.selectedContact = self.selectedContact;
                 
-            } else {
-                NSLog(@"index was found:%ld",index);
-                twitterAPITweet.messageText = [[self.menuList objectAtIndex:index] valueForKey:@"messageText"];
+                //Look up message - note this works b/c message is first item in section.
+                NSUInteger index = [self.menuList indexOfObjectPassingTest:
+                                    ^BOOL(NSDictionary *dict, NSUInteger idx, BOOL *stop) {
+                                        return [[dict valueForKey:@"messageCategory"] isEqualToString:category];
+                                    }];
+                if(index == NSNotFound){
+                    NSLog(@"did not find line");
+                    
+                } else {
+                    NSLog(@"index was found:%ld",index);
+                    twitterAPITweet.messageText = [[self.menuList objectAtIndex:index] valueForKey:@"messageText"];
+                }
+                
+                [twitterAPITweet shareMessageTwitterAPI:cell];
             }
-            
-            [twitterAPITweet shareMessageTwitterAPI:cell];
-            
         //if touch on postToFacebookButton, then
         } else if(CGRectContainsPoint(cell.postToFacebookButton.frame, pointInCell)) {
             NSLog(@"touch in facebook button area");
