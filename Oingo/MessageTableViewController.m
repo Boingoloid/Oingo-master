@@ -180,30 +180,43 @@ NSInteger footerHeight = 1;
         //if touch on postToFacebookButton, then
         } else if(CGRectContainsPoint(cell.postToFacebookButton.frame, pointInCell)) {
             NSLog(@"touch in facebook button area");
-            [self postToFacebook:cell];
+            if(!cell.postToFacebookButton.hidden){
+                [self postToFacebook:cell];
+            }
         } else if(CGRectContainsPoint(cell.zipCodeButton.frame, pointInCell)) {
             NSLog(@"touch in zipCodeButton area");
-            [self lookUpZip];
+            if(!cell.zipCodeButton.hidden){
+                [self lookUpZip];
+            }
         } else if (CGRectContainsPoint(cell.locationButton.frame, pointInCell)) {
             NSLog(@"touch in getUserLocation area");
-            [self getUserLocation];
+            if(!cell.locationButton.hidden){
+                [self getUserLocation];
+            }
         } else if (CGRectContainsPoint(cell.phoneButton.frame, pointInCell)) {
             NSLog(@"touch in phone area");
-            NSString *phoneNumber =[[cell.phone componentsSeparatedByCharactersInSet:[[NSCharacterSet characterSetWithCharactersInString:@"6177940337"] invertedSet]] componentsJoinedByString:@""];
-            MakePhoneCallAPI *makePhoneCallAPI = [[MakePhoneCallAPI alloc] init];
-            [makePhoneCallAPI dialPhoneNumber:phoneNumber];
+            if(!cell.phoneButton.hidden){
+                NSString *phoneNumber =[[cell.phone componentsSeparatedByCharactersInSet:[[NSCharacterSet characterSetWithCharactersInString:@"6177940337"] invertedSet]] componentsJoinedByString:@""];
+                MakePhoneCallAPI *makePhoneCallAPI = [[MakePhoneCallAPI alloc] init];
+                [makePhoneCallAPI dialPhoneNumber:phoneNumber];
+            }
         } else if (CGRectContainsPoint(cell.emailButton.frame, pointInCell)) {
-            NSLog(@"touch in email area");
-            EmailComposerViewController *emailComposer = [[EmailComposerViewController alloc] init];
+            NSLog(@"touch in email button area");
+            if(!cell.emailButton.hidden){
+                EmailComposerViewController *emailComposer = [[EmailComposerViewController alloc] init];
 //            [emailComposer showMailPicker:cell.openCongressEmail withMessage:cell.messageText.text];
-            
             [self presentViewController:emailComposer animated:YES completion:NULL];
+            }
         } else if (CGRectContainsPoint(cell.webFormButton.frame, pointInCell)) {
             NSLog(@"touch in webForm area");
-            NSString *url = cell.contantForm;
-            [[UIApplication sharedApplication] openURL:[NSURL URLWithString:url]];
+            if(!cell.webFormButton.hidden){
+                NSString *url = cell.contantForm;
+                [[UIApplication sharedApplication] openURL:[NSURL URLWithString:url]];
+            }
         } else if (CGRectContainsPoint(cell.messageImage.frame, pointInCell)) {
             NSLog(@"touch in image area");
+            if(!cell.messageImage.hidden){
+            }
         } else {
             NSLog(@"touch in outer area");
         }
