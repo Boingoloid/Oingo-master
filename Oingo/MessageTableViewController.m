@@ -324,10 +324,11 @@ NSInteger footerHeight = 1;
             }
         }];
     }
-    
-    ParseAPI *parseAPI = [[ParseAPI alloc]init];
-    parseAPI.MessageTableViewController = self;
-    [parseAPI getParseMessageData:self.selectedSegment];
+
+    [self viewDidLoad];
+//    ParseAPI *parseAPI = [[ParseAPI alloc]init];
+//    parseAPI.MessageTableViewController = self;
+//    [parseAPI getParseMessageData:self.selectedSegment];
 
 }
 
@@ -375,9 +376,11 @@ NSInteger footerHeight = 1;
                 }];
             }
             
-            ParseAPI *parseAPI = [[ParseAPI alloc]init];
-            parseAPI.MessageTableViewController = self;
-            [parseAPI getParseMessageData:self.selectedSegment];
+//            ParseAPI *parseAPI = [[ParseAPI alloc]init];
+//            parseAPI.MessageTableViewController = self;
+//            [parseAPI getParseMessageData:self.selectedSegment];
+            [self viewDidLoad];
+            
         }
     }];
     [alertController addAction:lookUpAction];
@@ -430,12 +433,13 @@ NSInteger footerHeight = 1;
                 }];
             }
             
-            ParseAPI *parseAPI = [[ParseAPI alloc]init];
-            parseAPI.MessageTableViewController = self;
-            [parseAPI getParseMessageData:self.selectedSegment];
-
+//            ParseAPI *parseAPI = [[ParseAPI alloc]init];
+//            parseAPI.MessageTableViewController = self;
+//            [parseAPI getParseMessageData:self.selectedSegment];
+            [self viewDidLoad];
         }
     }];
+    
     [alertController addAction:lookUpAction];
     
     [self presentViewController:alertController animated:YES completion:nil];
@@ -466,10 +470,11 @@ NSInteger footerHeight = 1;
     
     if(isMessageBool){
         MessageTableViewMessageCell *cell = [tableView dequeueReusableCellWithIdentifier:@"CellCategoryMessage" forIndexPath:indexPath];
-//        if (cell == nil){
-//            NSLog(@"cell was nil");
-//            cell = [[MessageTableViewMessageCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"CellCategoryMessage"];
-//        }
+        if (cell == nil){
+            NSLog(@"cell was nil");
+            cell = [[MessageTableViewMessageCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"CellCategoryMessage"];
+        }
+        
         NSLog(@"loading message cell");
         cell.layer.cornerRadius = 3;
         [self.tableView addSubview:cell];
@@ -490,11 +495,11 @@ NSInteger footerHeight = 1;
         MessageTableViewRepresentativeCell *cell = [tableView dequeueReusableCellWithIdentifier:@"CellRep" forIndexPath:indexPath];
         NSLog(@"loading local rep cell");
         
-//        if (cell == nil){
-//            NSLog(@"cell was nil");
-//            cell = [[MessageTableViewRepresentativeCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"CellRep"];
-//        }
-//        
+        if (cell == nil){
+            NSLog(@"cell was nil");
+            cell = [[MessageTableViewRepresentativeCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"CellRep"];
+        }
+        
         cell.layer.cornerRadius = 3;
         [self.tableView addSubview:cell];
         congressionalMessageItem = [self.menuList objectAtIndex:[rowIndex intValue]];
@@ -504,6 +509,12 @@ NSInteger footerHeight = 1;
     } else {
         MessageTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"Cell" forIndexPath:indexPath];
         NSLog(@"loading civilian");
+        
+        if (cell == nil){
+            NSLog(@"cell was nil");
+            cell = [[MessageTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"Cell"];
+        }
+        
         cell.layer.cornerRadius = 3;
         [self.tableView addSubview:cell];
         messageItem = [self.menuList objectAtIndex:[rowIndex intValue]];

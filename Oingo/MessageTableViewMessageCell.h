@@ -10,6 +10,9 @@
 
 @interface MessageTableViewMessageCell : UITableViewCell
 @property (weak, nonatomic) IBOutlet UILabel *messageText;
+@property(nonatomic) UIButton *locationButton;
+@property(nonatomic) UIButton *zipCodeButton;
+@property(nonatomic) UILabel *zipLabel;
 //@property (weak, nonatomic) IBOutlet UILabel *targetName;
 //@property (weak, nonatomic) IBOutlet UILabel *sendCount;
 //@property (weak, nonatomic) IBOutlet UIImageView *messageImage;

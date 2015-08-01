@@ -42,26 +42,26 @@ CongressPhotoFinderAPI *congressPhotoFinderAPI;
     self.messageItem = messageItem;
     
     
-    if([[self.messageItem valueForKey:@"isCollapsed"]  isEqual: @YES]){
-        
-        NSLog(@"isCollapsed contact cell:%@",[self.messageItem valueForKey:@"isCollapsed"]);
-        //hide everything bc row height is zero
-        self.targetName.hidden = YES;
-        self.targetTitleLabel.hidden = YES;
-        self.messageImage.hidden = YES;
-        self.sendCount.hidden = YES;
-        
-        self.tweetButton.hidden = YES;
-        self.tweetSuccessImageView.hidden = YES;
-        self.emailButton.hidden = YES;
-        self.phoneButton.hidden = YES;
-        self.webFormButton.hidden = YES;
-        
-        self.zipCodeButton.hidden = YES;
-        self.locationButton.hidden = YES;
-        self.zipLabel.hidden = YES;
-        
-    } else {
+//    if([[self.messageItem valueForKey:@"isCollapsed"]  isEqual: @YES]){
+//        
+//        NSLog(@"isCollapsed contact cell:%@",[self.messageItem valueForKey:@"isCollapsed"]);
+//        //hide everything bc row height is zero
+//        self.targetName.hidden = YES;
+//        self.targetTitleLabel.hidden = YES;
+//        self.messageImage.hidden = YES;
+//        self.sendCount.hidden = YES;
+//        
+//        self.tweetButton.hidden = YES;
+//        self.tweetSuccessImageView.hidden = YES;
+//        self.emailButton.hidden = YES;
+//        self.phoneButton.hidden = YES;
+//        self.webFormButton.hidden = YES;
+//        
+//        self.zipCodeButton.hidden = YES;
+//        self.locationButton.hidden = YES;
+//        self.zipLabel.hidden = YES;
+//        
+//    } else {
     
         //unhide fields
         self.targetName.hidden = NO;
@@ -74,6 +74,7 @@ CongressPhotoFinderAPI *congressPhotoFinderAPI;
         self.zipCodeButton.hidden = YES;
         self.locationButton.hidden = YES;
         self.zipLabel.hidden = YES;
+    
         self.emailButton.hidden = YES;
         self.phoneButton.hidden = YES;
         self.webFormButton.hidden = YES;
@@ -97,7 +98,7 @@ CongressPhotoFinderAPI *congressPhotoFinderAPI;
         self.messageImage.layer.borderColor = [[UIColor blackColor] CGColor];
         self.messageImage.layer.cornerRadius = 3.0;
         self.messageImage.clipsToBounds = YES;
-    }
+//    }
 }
 
 
