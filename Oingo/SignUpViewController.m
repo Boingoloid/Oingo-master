@@ -78,44 +78,28 @@ BOOL isNewAccountSignup = NO;
 
 - (IBAction)signupwithfacebook:(id)sender {
     NSString *accessToken = [FBSDKAccessToken currentAccessToken].tokenString;
-    NSLog(@"token %@",accessToken);
-    if(![FBSDKAccessToken currentAccessToken]){
-        [PFFacebookUtils logInInBackgroundWithReadPermissions:@[@"public_profile",@"email"] block:^(PFUser *user, NSError *error) {
-            if (!user) {
-                NSLog(@"Uh oh. The user cancelled the Facebook login.");
-            } else if (user.isNew) {
-                NSLog(@"User signed up and logged in through Facebook!");
-                [self updateFacebookUserData];
-                isNewAccountSignup = YES;
-            } else {
-                NSLog(@"User logged in through Facebook!");
-                [self updateFacebookUserData];
-                [FBSDKProfile currentProfile];
-                [FBSDKProfile enableUpdatesOnAccessTokenChange:YES];
-            }
-        }];
-    }
-    else {
-        [PFFacebookUtils logInInBackgroundWithAccessToken:[FBSDKAccessToken currentAccessToken] block:^(PFUser *user, NSError *error) {
-            isNewAccountSignup = NO;
-            if (!user) {
-                NSLog(@"Uh oh. The user cancelled the Facebook login.");
-            } else if (user.isNew) {
-                NSLog(@"User signed up and logged in through Facebook!");
-                [self updateFacebookUserData];
-                isNewAccountSignup = YES;
-            } else {
-                NSLog(@"User logged in through Facebook!");
-                [self updateFacebookUserData];
-            }
-        }];
-    }
+    NSArray *permissionsArray = @[@"public_profile",@"email", @"user_birthday", @"user_location"];
     
+    NSLog(@"token %@",accessToken);
+        [PFFacebookUtils logInInBackgroundWithReadPermissions:permissionsArray block:^(PFUser *user, NSError *error) {
+            if (!user) {
+                NSLog(@"Uh oh. The user cancelled the Facebook login.");
+            } else if (user.isNew) {
+                NSLog(@"User signed up and logged in through Facebook!");
+                [self updateFacebookUserData];
+                isNewAccountSignup = YES;
+            } else {
+                NSLog(@"User logged in through Facebook!");
+                [self updateFacebookUserData];
+//                [FBSDKProfile currentProfile];
+//                [FBSDKProfile enableUpdatesOnAccessTokenChange:YES];
+            }
+        }];
 }
 
 
 -(void)updateFacebookUserData {
-    FBSDKGraphRequest *requestMe = [[FBSDKGraphRequest alloc]initWithGraphPath:@"me" parameters:nil];
+    FBSDKGraphRequest *requestMe = [[FBSDKGraphRequest alloc]initWithGraphPath:@"me" parameters:@{@"fields": @"id,name,link,first_name, last_name, picture.type(large), email, birthday,location ,hometown , gender, timezone, updated_time, verified"}];
     FBSDKGraphRequestConnection *connection = [[FBSDKGraphRequestConnection alloc] init];
     [connection addRequest:requestMe completionHandler:^(FBSDKGraphRequestConnection *connection, id result, NSError *error) {
         if(!result){
@@ -130,19 +114,28 @@ BOOL isNewAccountSignup = NO;
 
 -(void) updateAllFacebookFields:(id)result {
     PFUser *currentUser = [PFUser currentUser];
+        NSLog(@"result:%@",result);
     [currentUser setEmail:[result objectForKey:@"email"]];  // updating email in currentUser
     [currentUser setObject:[result objectForKey:@"gender"] forKey:@"genderfb"];
     [currentUser setObject:[result objectForKey:@"first_name"] forKey:@"first_namefb"];
     [currentUser setObject:[result objectForKey:@"last_name"] forKey:@"last_namefb"];
-    [currentUser setObject:[result objectForKey:@"link"] forKey:@"linkfb"];
-    [currentUser setObject:[result objectForKey:@"locale"] forKey:@"localefb"];
-    [currentUser setObject:[result objectForKey:@"timezone"] forKey:@"timezonefb"];
     [currentUser setObject:[result objectForKey:@"updated_time"] forKey:@"updated_timefb"];
     [currentUser setObject:[result objectForKey:@"verified"] forKey:@"Verifiedfb"];
     [currentUser setObject:[result objectForKey:@"id"] forKey:@"fbID"];
+    [currentUser setObject:[result objectForKey:@"link"] forKey:@"linkfb"];
+    [currentUser setObject:[result objectForKey:@"timezone"] forKey:@"timezonefb"];
     
-    [currentUser saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) { //save currentUser to parse disk
+    if([result objectForKey:@"hometown"]){
+        [currentUser setObject:[result objectForKey:@"hometown"] forKey:@"hometownfb"];
+    }
+    if([result objectForKey:@"birthday"]){
+        [currentUser setObject:[result objectForKey:@"birthday"] forKey:@"birthdayfb"];
+    }
+    if([result objectForKey:@"location"]){
+        [currentUser setObject:[result objectForKey:@"location"] forKey:@"locationfb"];
+    }
         
+    [currentUser saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) { //save currentUser to parse disk
         if(error){
             [self showDuplicateEmailAlert:currentUser.email]; //Email already exists, show alert
         }
@@ -178,10 +171,9 @@ BOOL isNewAccountSignup = NO;
 -(void)popToMessagesController {
     int viewsToPopAfterSignUp = 1; //Pop 1 views (signup)  Remember index starts at 0.
     [self.navigationController popToViewController:[self.navigationController.viewControllers objectAtIndex: self.navigationController.viewControllers.count-viewsToPopAfterSignUp-1] animated:YES];
-    self.updateDefaults = [[UpdateDefaults alloc]init];
+//    self.updateDefaults = [[UpdateDefaults alloc]init];
     [self.updateDefaults updateLocationDefaults];
-
-    [self.messageTableViewController.tableView reloadData];
+    [self.messageTableViewController viewDidLoad];
 }
 
 

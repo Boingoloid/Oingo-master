@@ -40,7 +40,6 @@
 @property (weak, nonatomic) IBOutlet UIButton *segmentTweetButton;
 @property (weak, nonatomic) IBOutlet UIButton *segmentFacebookButton;
 @property (weak, nonatomic) IBOutlet UIImageView *segmentTweetButtonSuccessImageView;
-@property (nonatomic) NSString *isFromLogin;
 
 
 - (IBAction)shareSegmentTwitter:(id)sender;

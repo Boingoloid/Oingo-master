@@ -84,14 +84,12 @@ BOOL isNewAccount = NO;
     if ([password length] == 0 || [email length] == 0) {
         UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Oops!" message:@"Make sure you enter an email address and password!" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
         [alertView show];
-    }
-    else {
+    } else {
         [PFUser logInWithUsernameInBackground:email password:password block:^(PFUser *user, NSError *error) {
             if (error) {
                 UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Sorry!" message:[error.userInfo objectForKey:@"error"] delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
                 [alertView show];
-            }
-            else {
+            } else {
                 [self popToMessagesController];
             }
         }];
@@ -138,36 +136,11 @@ BOOL isNewAccount = NO;
     }
 }
 
-
--(void)popToMessagesController {
-    int viewsToPopAfterLogin = 2; //Pop 2 views (signup and login)  Remember index starts at 0.
-    [self.navigationController popToViewController:[self.navigationController.viewControllers objectAtIndex: self.navigationController.viewControllers.count-viewsToPopAfterLogin-1] animated:YES];
-    self.updateDefaults = [[UpdateDefaults alloc]init];
-    [self.updateDefaults updateLocationDefaults];
-    
-    NSLog(@"asking for viewDidLoad in login pop%@",self.messageTableViewController);
-    
-    [self.messageTableViewController viewDidLoad];
-    
-//    ParseAPI *parseAPI = [[ParseAPI alloc]init];
-//    parseAPI.messageTableViewController = self.messageTableViewController;
-//    [parseAPI getParseMessageData:self.messageTableViewController.selectedSegment];
-////
-//    dispatch_async(dispatch_get_main_queue(), ^{
-//        [self.messageTableViewController viewDidLoad];
-//    });
-
-    
-    
-}
-
-
-
 -(void)updateFacebookUserData {
-    FBSDKGraphRequest *requestMe = [[FBSDKGraphRequest alloc]initWithGraphPath:@"me" parameters:nil];
+    FBSDKGraphRequest *requestMe = [[FBSDKGraphRequest alloc]initWithGraphPath:@"me" parameters:@{@"fields": @"id,name,link,first_name, last_name, picture.type(large), email, birthday,location ,hometown , gender, timezone, updated_time, verified"}];
     FBSDKGraphRequestConnection *connection = [[FBSDKGraphRequestConnection alloc] init];
     [connection addRequest:requestMe completionHandler:^(FBSDKGraphRequestConnection *connection, id result, NSError *error) {
-
+        
         if(!result){
             NSLog(@"There has been an error retrieving fb data for user");
         }
@@ -179,17 +152,29 @@ BOOL isNewAccount = NO;
 }
 
 -(void) updateAllFacebookFields:(id)result {
+    
     PFUser *currentUser = [PFUser currentUser];
-    [currentUser setEmail:[result objectForKey:@"email"]];  // Updating email in currentUser
+    NSLog(@"result:%@",result);
+    [currentUser setEmail:[result objectForKey:@"email"]];  // updating email in currentUser
     [currentUser setObject:[result objectForKey:@"gender"] forKey:@"genderfb"];
     [currentUser setObject:[result objectForKey:@"first_name"] forKey:@"first_namefb"];
     [currentUser setObject:[result objectForKey:@"last_name"] forKey:@"last_namefb"];
-    [currentUser setObject:[result objectForKey:@"link"] forKey:@"linkfb"];
-    [currentUser setObject:[result objectForKey:@"locale"] forKey:@"localefb"];
-    [currentUser setObject:[result objectForKey:@"timezone"] forKey:@"timezonefb"];
     [currentUser setObject:[result objectForKey:@"updated_time"] forKey:@"updated_timefb"];
     [currentUser setObject:[result objectForKey:@"verified"] forKey:@"Verifiedfb"];
     [currentUser setObject:[result objectForKey:@"id"] forKey:@"fbID"];
+    [currentUser setObject:[result objectForKey:@"link"] forKey:@"linkfb"];
+    
+    [currentUser setObject:[result objectForKey:@"timezone"] forKey:@"timezonefb"];
+    
+    if([result objectForKey:@"hometown"]){
+        [currentUser setObject:[result objectForKey:@"hometown"] forKey:@"hometownfb"];
+    }
+    if([result objectForKey:@"birthday"]){
+        [currentUser setObject:[result objectForKey:@"birthday"] forKey:@"birthdayfb"];
+    }
+    if([result objectForKey:@"location"]){
+        [currentUser setObject:[result objectForKey:@"location"] forKey:@"locationfb"];
+    }
     
     [currentUser saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) { //save currentUser to parse disk
         if(error){
@@ -198,14 +183,29 @@ BOOL isNewAccount = NO;
         }
         else {
             NSLog(@"no error, email was updated fine");
-
-                self.messageTableViewController.isFromLogin = @"YES";
-                NSLog(@"messagetable view isfromlog on Login:%@",self.messageTableViewController.isFromLogin);
-                [self popToMessagesController];
-
+            //            [self.messageTableViewController.tableView reloadData];
+            [self popToMessagesController];
+            
         }
     }];
 }
+
+
+-(void)popToMessagesController {
+    int viewsToPopAfterLogin = 2; //Pop 2 views (signup and login)  Remember index starts at 0.
+    [self.navigationController popToViewController:[self.navigationController.viewControllers objectAtIndex: self.navigationController.viewControllers.count-viewsToPopAfterLogin-1] animated:YES];
+//    self.updateDefaults = [[UpdateDefaults alloc]init];
+    [self.updateDefaults updateLocationDefaults];
+    
+    NSLog(@"asking for viewDidLoad in login pop%@",self.messageTableViewController);
+    
+    [self.messageTableViewController viewDidLoad];
+    
+    
+}
+
+
+
 
 -(BOOL)isValidEmail:(NSString*)email{
     BOOL stricterFilter = NO;

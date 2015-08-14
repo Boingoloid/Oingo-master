@@ -237,6 +237,8 @@ NSInteger footerHeight = 1;
 - (IBAction)shareSegmentFacebook:(id)sender {
     FacebookAPIPost *facebookAPIPost = [[FacebookAPIPost alloc]init];
     facebookAPIPost.messageTableViewController = self;
+        NSLog(@"sharing segment on fb, here is view controller%@",self);
+    NSLog(@" on message tableview before share facebook segment:%@",facebookAPIPost.messageTableViewController);
     facebookAPIPost.selectedSegment = self.selectedSegment;
     facebookAPIPost.selectedProgram = self.selectedProgram;
     [facebookAPIPost shareSegmentFacebookAPI];

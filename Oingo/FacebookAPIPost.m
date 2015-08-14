@@ -8,15 +8,23 @@
 
 #import "FacebookAPIPost.h"
 #import <Accounts/Accounts.h>
+#import <Social/Social.h>
 #import <Parse/Parse.h>
 #import <UIKit/UIKit.h>
 #import "MessageItem.h"
 #import "CongressionalMessageItem.h"
 #import <ParseFacebookUtilsV4/PFFacebookUtils.h>
+#import <FBSDKShareKit/FBSDKShareKit.h>
+#import <FBSDKCoreKit/FBSDKCoreKit.h>
+#import "SignUpViewController.h"
 
 
 
 #import "MessageTableViewController.h"
+
+@interface FacebookAPIPost () <FBSDKSharingDelegate>
+
+@end
 
 
 @implementation FacebookAPIPost
@@ -57,10 +65,30 @@
 
 -(void)shareSegmentWithFacebookComposer{
     
+//    if ([[FBSDKAccessToken currentAccessToken] hasGranted:@"publish_actions"]) {
+//    
+//    FBSDKShareLinkContent *content = [[FBSDKShareLinkContent alloc] init];
+//    content.contentURL = [NSURL URLWithString:@"https://developers.facebook.com"];
+//                          
+//        [[[FBSDKGraphRequest alloc]
+//          initWithGraphPath:@"me/feed"
+//          parameters: @{ @"message" : @"hello world"}
+//          HTTPMethod:@"POST"]
+//         
+//         
+//         startWithCompletionHandler:^(FBSDKGraphRequestConnection *connection, id result, NSError *error) {
+//             if (!error) {
+//                 NSLog(@"Post id:%@", result[@"id"]);
+//             }
+//         }];
+//    }
+    
+    
     FBSDKShareLinkContent *content = [FBSDKShareLinkContent new];
     content.contentURL = [NSURL URLWithString:[self.selectedSegment valueForKey:@"linkToContent"]];
     content.contentTitle = [self.selectedProgram valueForKey:@"programTitle"];
     content.contentDescription = [self.selectedSegment valueForKey:@"purposeSummary"];
+    
     FBSDKShareDialog *shareDialog = [FBSDKShareDialog new];
     [shareDialog setMode:FBSDKShareDialogModeAutomatic];
     [shareDialog setShareContent:content];
@@ -72,6 +100,13 @@
     [self.shareCodeDialog setShareContent:content];
     [self.shareCodeDialog setFromViewController:self.messageTableViewController];
     [self.shareCodeDialog show];
+}
+
+-(void)sharer:(id<FBSDKSharing>)sharer didCompleteWithResults:(NSDictionary *)results {
+    
+        // Your delegate code
+        NSLog(@"I'm going to go crazy if this doesn't work.");
+    
 }
 
 - (void)sharer:(id<FBSDKSharing>)sharer didFailWithError:(NSError *)error
@@ -88,6 +123,7 @@
 {
     NSLog(@"share cancelled");
 }
+
 
 
 // Figure out how to get success message from facebook.  May have to use REST API.
@@ -119,8 +155,11 @@
 
 
 -(void) pushToSignIn{
-    UIViewController *controller = [self.messageTableViewController.storyboard instantiateViewControllerWithIdentifier:@"signInViewController"];
-    [self.messageTableViewController.navigationController pushViewController:controller animated:YES];
+    SignUpViewController *signUpViewController = [self.messageTableViewController.storyboard instantiateViewControllerWithIdentifier:@"signInViewController"];
+    signUpViewController.messageTableViewController = self.messageTableViewController;
+    [self.messageTableViewController.navigationController pushViewController:signUpViewController animated:YES];
+    NSLog(@"message view controller as signup pushed:%@ and %@",self.messageTableViewController,signUpViewController.messageTableViewController);
+
 }
 
 
