@@ -31,6 +31,8 @@
 
 
 -(void)shareSegmentFacebookAPI {    //if statement below
+
+    
     //1) logged in?, if not send to sign up screen
     //2) else if logged in, link account to facebook account, then send post
     //3) else send post b/c signed up and linked already.
@@ -88,6 +90,11 @@
     content.contentURL = [NSURL URLWithString:[self.selectedSegment valueForKey:@"linkToContent"]];
     content.contentTitle = [self.selectedProgram valueForKey:@"programTitle"];
     content.contentDescription = [self.selectedSegment valueForKey:@"purposeSummary"];
+    
+    PFFile *theImage = [self.selectedSegment valueForKey:@"segmentImage"];
+    NSString *urlString = theImage.url;
+    NSURL *url = [NSURL URLWithString:urlString];
+    content.imageURL = url;
     
     FBSDKShareDialog *shareDialog = [FBSDKShareDialog new];
     [shareDialog setMode:FBSDKShareDialogModeAutomatic];

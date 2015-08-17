@@ -42,6 +42,7 @@ CongressPhotoFinderAPI *congressPhotoFinderAPI;
     self.messageItem = messageItem;
     
     
+    
 //    if([[self.messageItem valueForKey:@"isCollapsed"]  isEqual: @YES]){
 //        
 //        NSLog(@"isCollapsed contact cell:%@",[self.messageItem valueForKey:@"isCollapsed"]);
@@ -62,6 +63,8 @@ CongressPhotoFinderAPI *congressPhotoFinderAPI;
 //        self.zipLabel.hidden = YES;
 //        
 //    } else {
+    
+    
     
         //unhide fields
         self.targetName.hidden = NO;
@@ -98,6 +101,7 @@ CongressPhotoFinderAPI *congressPhotoFinderAPI;
         self.messageImage.layer.borderColor = [[UIColor blackColor] CGColor];
         self.messageImage.layer.cornerRadius = 3.0;
         self.messageImage.clipsToBounds = YES;
+    
 //    }
 }
 
@@ -124,7 +128,7 @@ CongressPhotoFinderAPI *congressPhotoFinderAPI;
     //Add current location look up button
     self.locationButton = [[UIButton alloc]initWithFrame:CGRectMake(110, 5, 20, 20)];
     [self.locationButton setBackgroundImage:[UIImage imageNamed:@"location-gray.png"] forState:UIControlStateNormal];
-    
+    self.locationButton.tag = 1111;
     [self.contentView addSubview:self.locationButton];
     
     //Add label accompanying text entry
@@ -132,6 +136,7 @@ CongressPhotoFinderAPI *congressPhotoFinderAPI;
     self.zipLabel.text = @"or";
     self.zipLabel.font = [UIFont boldSystemFontOfSize:13];
     self.zipLabel.textColor = [UIColor blackColor];
+    self.zipLabel.tag = 2222;
     [self.contentView addSubview:self.zipLabel];
     
     //Add button to look up local representatives
@@ -145,8 +150,8 @@ CongressPhotoFinderAPI *congressPhotoFinderAPI;
     [self.zipCodeButton.titleLabel setFont:[UIFont fontWithName:@"HelveticaNeue" size:13.0]];
     [self.zipCodeButton setBackgroundImage:[UIImage imageNamed:@"lightGrayButtonBackground.png"] forState:UIControlStateNormal];
     [self.zipCodeButton setTitle:@"Look up" forState:UIControlStateNormal];
+    self.zipCodeButton.tag = 3333;
     [self.contentView addSubview:self.zipCodeButton];
-    
 }
 
 

@@ -481,6 +481,10 @@ NSInteger footerHeight = 1;
     
     if(isMessageBool){
         MessageTableViewMessageCell *cell = [tableView dequeueReusableCellWithIdentifier:@"CellCategoryMessage" forIndexPath:indexPath];
+        // Remove noZip controls
+        [[cell.contentView viewWithTag:1111]removeFromSuperview];
+        [[cell.contentView viewWithTag:2222]removeFromSuperview];
+        [[cell.contentView viewWithTag:3333]removeFromSuperview];
         if (cell == nil){
             NSLog(@"cell was nil");
             cell = [[MessageTableViewMessageCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"CellCategoryMessage"];
@@ -504,8 +508,11 @@ NSInteger footerHeight = 1;
         
     } else if([category isEqualToString:@"Local Representative"]) {
         MessageTableViewRepresentativeCell *cell = [tableView dequeueReusableCellWithIdentifier:@"CellRep" forIndexPath:indexPath];
+        // Remove noZip controls
+        [[cell.contentView viewWithTag:1111]removeFromSuperview];
+        [[cell.contentView viewWithTag:2222]removeFromSuperview];
+        [[cell.contentView viewWithTag:3333]removeFromSuperview];
         NSLog(@"loading local rep cell");
-        
         if (cell == nil){
             NSLog(@"cell was nil");
             cell = [[MessageTableViewRepresentativeCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"CellRep"];
@@ -519,6 +526,13 @@ NSInteger footerHeight = 1;
         
     } else {
         MessageTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"Cell" forIndexPath:indexPath];
+        
+        // Remove noZip controls
+        [[cell.contentView viewWithTag:1111]removeFromSuperview];
+        [[cell.contentView viewWithTag:2222]removeFromSuperview];
+        [[cell.contentView viewWithTag:3333]removeFromSuperview];
+
+        //[cell.contentView.subviews makeObjectsPerformSelector:@selector(removeFromSuperview)];
         NSLog(@"loading civilian");
         
         if (cell == nil){
@@ -533,6 +547,8 @@ NSInteger footerHeight = 1;
         return cell;
     }
 }
+
+
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     NSString *category= [self categoryForSection:indexPath.section];
