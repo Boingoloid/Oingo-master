@@ -73,8 +73,8 @@ static CLLocationManager *locationManager;
     if([PFUser currentUser]) {
         NSString *latitudeString = [NSString stringWithFormat:@"%f",newLocation.coordinate.latitude];
         NSString *longitudeString =[NSString stringWithFormat:@"%f",newLocation.coordinate.longitude];
-        [[PFUser currentUser] setValue:latitudeString forKey:@"locationLatitude"];
-        [[PFUser currentUser] setValue:longitudeString forKey:@"locationLongitude"];
+        [[PFUser currentUser] setValue:latitudeString forKey:@"latitude"];
+        [[PFUser currentUser] setValue:longitudeString forKey:@"longitude"];
         [[PFUser currentUser] saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
             if(error) {
                 NSLog(@"error UPDATING COORDINATES!!");

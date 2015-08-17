@@ -14,13 +14,13 @@
 -(void)updateLocationDefaults {
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     PFUser *currentUser = [PFUser currentUser];
-
     // If a registered user then set default zip and location if available
     //? do I need to check if a sessionDefaults object already exists?
+    
     if(currentUser){
-        if([currentUser valueForKey:@"locationLatitude"] && [currentUser valueForKey:@"locationLongitude"]) {
-            [defaults setObject:[currentUser valueForKey:@"locationLatitude"] forKey:@"latitude"];
-            [defaults setObject:[currentUser valueForKey:@"locationLongitude"] forKey:@"longitude"];
+        if([currentUser valueForKey:@"latitude"] && [currentUser valueForKey:@"longitude"]) {
+            [defaults setObject:[currentUser valueForKey:@"latitude"] forKey:@"latitude"];
+            [defaults setObject:[currentUser valueForKey:@"longitude"] forKey:@"longitude"];
             [defaults synchronize];
             NSLog(@"user already has value for location");
         }
@@ -31,6 +31,6 @@
             NSLog(@"user already has value for zip");
         }
     }
-    NSLog(@"updating defaults!");
+    NSLog(@"updating defaults in with class!");
 }
 @end

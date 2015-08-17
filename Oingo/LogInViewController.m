@@ -184,7 +184,14 @@ BOOL isNewAccount = NO;
         else {
             NSLog(@"no error, email was updated fine");
             //            [self.messageTableViewController.tableView reloadData];
-            [self popToMessagesController];
+            
+            
+            
+    
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [self popToMessagesController];
+            });
+
             
         }
     }];
@@ -194,12 +201,10 @@ BOOL isNewAccount = NO;
 -(void)popToMessagesController {
     int viewsToPopAfterLogin = 2; //Pop 2 views (signup and login)  Remember index starts at 0.
     [self.navigationController popToViewController:[self.navigationController.viewControllers objectAtIndex: self.navigationController.viewControllers.count-viewsToPopAfterLogin-1] animated:YES];
-//    self.updateDefaults = [[UpdateDefaults alloc]init];
-    [self.updateDefaults updateLocationDefaults];
-    
-    NSLog(@"asking for viewDidLoad in login pop%@",self.messageTableViewController);
-    
+    [self.messageTableViewController.view setNeedsDisplay];
+    NSLog(@"reloading table from login");
     [self.messageTableViewController viewDidLoad];
+    
     
     
 }

@@ -85,7 +85,6 @@
                                 return [[dict objectForKey:@"messageType"] isEqual:@"twitterSegmentOnly"];
                             }];
         if(index == NSNotFound){
-            NSLog(@"index NOT FOUND in sentMessages so do nothing %lu",(unsigned long)index);
             // Do nothing
         } else {
             // Makes check mark visible on twitter button

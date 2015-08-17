@@ -58,8 +58,7 @@ NSInteger footerHeight = 1;
 -(void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     NSLog(@"viewWillApper");
-    self.updateDefaults = [[UpdateDefaults alloc]init];
-    [self.updateDefaults updateLocationDefaults];
+
 
     
 }
@@ -69,7 +68,11 @@ NSInteger footerHeight = 1;
 - (void)viewDidLoad {
     [super viewDidLoad];
         NSLog(@"viewDidLoad");
-    NSLog(@"hidding tweet success");
+    
+    self.updateDefaults = [[UpdateDefaults alloc]init];
+    [self.updateDefaults updateLocationDefaults];
+
+    //hidding tweet success
     self.segmentTweetButtonSuccessImageView.hidden = YES;
     
     // Get menu data from parse
@@ -325,8 +328,8 @@ NSInteger footerHeight = 1;
     if([PFUser currentUser]) {
         NSString *latitudeString = [NSString stringWithFormat:@"%f",newLocation.coordinate.latitude];
         NSString *longitudeString =[NSString stringWithFormat:@"%f",newLocation.coordinate.longitude];
-        [[PFUser currentUser] setValue:latitudeString forKey:@"locationLatitude"];
-        [[PFUser currentUser] setValue:longitudeString forKey:@"locationLongitude"];
+        [[PFUser currentUser] setValue:latitudeString forKey:@"latitude"];
+        [[PFUser currentUser] setValue:longitudeString forKey:@"longitude"];
         [[PFUser currentUser] saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
             if(error) {
                 NSLog(@"error UPDATING COORDINATES!!");
@@ -547,7 +550,6 @@ NSInteger footerHeight = 1;
         return cell;
     }
 }
-
 
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {

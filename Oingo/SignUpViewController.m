@@ -141,7 +141,9 @@ BOOL isNewAccountSignup = NO;
         }
         else {
             NSLog(@"no error, email was updated fine");
-            [self popToMessagesController];
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [self popToMessagesController];
+            });
         }
     }];
 }
@@ -171,9 +173,8 @@ BOOL isNewAccountSignup = NO;
 -(void)popToMessagesController {
     int viewsToPopAfterSignUp = 1; //Pop 1 views (signup)  Remember index starts at 0.
     [self.navigationController popToViewController:[self.navigationController.viewControllers objectAtIndex: self.navigationController.viewControllers.count-viewsToPopAfterSignUp-1] animated:YES];
-//    self.updateDefaults = [[UpdateDefaults alloc]init];
-    [self.updateDefaults updateLocationDefaults];
     [self.messageTableViewController viewDidLoad];
+
 }
 
 

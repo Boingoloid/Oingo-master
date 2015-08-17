@@ -41,9 +41,11 @@ BOOL isCoordinateInfoAvailable = NO;
 -(void)getParseMessageData:(Segment*)selectedSegment{  //get parse messge data for selectedSegment
     
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-    NSLog(@"defaults%@",defaults);
+    NSLog(@"defaults zip:%@ lat:%@",[defaults valueForKey:@"zipCode"],[defaults valueForKey:@"latitude"]);
+    
     
     if(![defaults valueForKey:@"latitude"] && ![defaults valueForKey:@"zipCode"]) {
+        NSLog(@"Default zipCode on parseAPI %@",[defaults valueForKey:@"zipCode"]);
         isLocationInfoAvailable = NO;
     } else {
         isLocationInfoAvailable = YES;
@@ -264,8 +266,6 @@ BOOL isCoordinateInfoAvailable = NO;
     contactIndex++;
     
     }
-    NSLog(@"menulist:%@",self.menuList);
-    NSLog(@"menulist:%@",self.expandSectionsKeyList);
 
 }
 
