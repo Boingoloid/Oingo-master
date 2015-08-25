@@ -56,10 +56,6 @@
     //Initialize Facebook
     [FBSDKAppEvents activateApp];
     return [[FBSDKApplicationDelegate sharedInstance] application:application didFinishLaunchingWithOptions:launchOptions];
-    
-    
-    
-
 }
 
 

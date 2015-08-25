@@ -440,6 +440,9 @@
                                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="success.png" translatesAutoresizingMaskIntoConstraints="NO" id="gNm-Vi-E8j">
                                             <rect key="frame" x="336" y="21" width="13" height="13"/>
                                         </imageView>
+                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="success.png" translatesAutoresizingMaskIntoConstraints="NO" id="cLR-gN-heU">
+                                            <rect key="frame" x="288" y="21" width="13" height="13"/>
+                                        </imageView>
                                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="success.png" translatesAutoresizingMaskIntoConstraints="NO" id="Edx-ae-Ccu">
                                             <rect key="frame" x="6" y="47" width="13" height="13"/>
                                         </imageView>
@@ -824,6 +827,7 @@
                     </navigationItem>
                     <connections>
                         <outlet property="segmentFacebookButton" destination="hXw-8E-YQq" id="6M0-tl-0SG"/>
+                        <outlet property="segmentFacebookButtonSuccessImageView" destination="cLR-gN-heU" id="xCL-eQ-bjg"/>
                         <outlet property="segmentTweetButton" destination="IUN-dR-MPR" id="gOC-cZ-Qgr"/>
                         <outlet property="segmentTweetButtonSuccessImageView" destination="gNm-Vi-E8j" id="xyr-qx-PGr"/>
                         <outlet property="tableHeaderLabel" destination="lpR-4U-16n" id="lor-9N-Hbe"/>

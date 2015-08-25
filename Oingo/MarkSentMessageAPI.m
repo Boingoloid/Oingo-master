@@ -22,23 +22,23 @@
         
         NSString *selectedSegmentID = [self.messageTableViewController.selectedSegment valueForKey:@"segmentID"];
         NSString *userObjectID = currentUser.objectId;
+        NSLog(@"selected segment ID %@",selectedSegmentID);
+        NSLog(@"user object ID:%@",currentUser.objectId);
+        
         
         //get message data for segment menu
         PFQuery *query = [PFQuery queryWithClassName:@"sentMessages"];
         [query whereKey:@"segmentID" equalTo:selectedSegmentID];
+
         [query whereKey:@"userObjectID" equalTo:userObjectID];
         [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
             if (!error) {
                 self.sentMessagesForSegment = objects;
-
+                NSLog(@"printing mark objects: %@",self.sentMessagesForSegment);
                 dispatch_async(dispatch_get_main_queue(), ^{
                     [self checkTwitterShareForSegment];
                     [self checkTwitterShareForContacts];
-                    NSLog(@"Mark sent is reloading tableview");
-                    
-                    
-//                  [self.messageTableViewController.view setNeedsDisplay];
-//                  [self.messageTableViewController.tableView reloadData];
+                    NSLog(@"MarkSentMessageAPI is reloading tableview");
 
                 });
             } else {
@@ -46,9 +46,6 @@
             }
         }];
     }
-
-
-
 }
 
 -(void)checkTwitterShareForContacts {
@@ -68,9 +65,11 @@
                                 }];
             
             if(index == NSNotFound){
+                NSLog(@"no index sent found");
                 // Do nothing
             } else {
                 // Makes check mark visible on twitter message button
+                NSLog(@"found: marking index that is found %lu",(unsigned long)index);
                 [[self.messageTableViewController.menuList objectAtIndex:index] setValue:@YES forKey:@"isTweetSent"];
             }
         }
@@ -90,12 +89,21 @@
             // Makes check mark visible on twitter button
             NSLog(@"INDEX FOUND, unhide segment tweet success");
             self.messageTableViewController.segmentTweetButtonSuccessImageView.hidden = NO;
-            
-            
         }
+}
 
-    
-    
+-(void)checkFacebookShareForSegment {
+    NSUInteger index = [self.sentMessagesForSegment indexOfObjectPassingTest:
+                        ^BOOL(NSDictionary *dict, NSUInteger idx, BOOL *stop) {
+                            return [[dict objectForKey:@"messageType"] isEqual:@"facebookSegmentOnly"];
+                        }];
+    if(index == NSNotFound){
+        // Do nothing
+    } else {
+        // Makes check mark visible on twitter button
+        NSLog(@"INDEX FOUND, unhide segment facebook success");
+        self.messageTableViewController.segmentFacebookButtonSuccessImageView.hidden = NO;
+    }
 }
 
 @end

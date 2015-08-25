@@ -40,6 +40,7 @@
 @property (weak, nonatomic) IBOutlet UIButton *segmentTweetButton;
 @property (weak, nonatomic) IBOutlet UIButton *segmentFacebookButton;
 @property (weak, nonatomic) IBOutlet UIImageView *segmentTweetButtonSuccessImageView;
+@property (weak, nonatomic) IBOutlet UIImageView *segmentFacebookButtonSuccessImageView;
 
 
 - (IBAction)shareSegmentTwitter:(id)sender;

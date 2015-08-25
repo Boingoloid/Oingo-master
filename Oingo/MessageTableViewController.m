@@ -74,6 +74,7 @@ NSInteger footerHeight = 1;
 
     //hidding tweet success
     self.segmentTweetButtonSuccessImageView.hidden = YES;
+    self.segmentFacebookButtonSuccessImageView.hidden = YES;
     
     // Get menu data from parse
     ParseAPI *parseAPI = [[ParseAPI alloc]init];

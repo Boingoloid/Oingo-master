@@ -16,10 +16,8 @@
 #import <ParseFacebookUtilsV4/PFFacebookUtils.h>
 #import <FBSDKShareKit/FBSDKShareKit.h>
 #import <FBSDKCoreKit/FBSDKCoreKit.h>
+#import <FBSDKLoginKit/FBSDKLoginKit.h>
 #import "SignUpViewController.h"
-
-
-
 #import "MessageTableViewController.h"
 
 @interface FacebookAPIPost () <FBSDKSharingDelegate>
@@ -32,7 +30,6 @@
 
 -(void)shareSegmentFacebookAPI {    //if statement below
 
-    
     //1) logged in?, if not send to sign up screen
     //2) else if logged in, link account to facebook account, then send post
     //3) else send post b/c signed up and linked already.
@@ -48,7 +45,6 @@
 }
 
 
-
 -(void)shareMessageFacebookAPI:(MessageTableViewCell*)cell{
     //1) logged in?, if not send to sign up screen
     //2) else if logged in, link account to facebook account, then send post
@@ -58,34 +54,47 @@
     if(!currentUser) {
         [self pushToSignIn];
     } else if(![PFFacebookUtils isLinkedWithUser:currentUser]){
+        NSLog(@"user account not linked to facebook");
         [self linkUserToFacebook:currentUser];
     } else {
         [self shareSegmentWithFacebookComposer];
     }
-    
 }
 
 -(void)shareSegmentWithFacebookComposer{
     
-//    if ([[FBSDKAccessToken currentAccessToken] hasGranted:@"publish_actions"]) {
-//    
-//    FBSDKShareLinkContent *content = [[FBSDKShareLinkContent alloc] init];
-//    content.contentURL = [NSURL URLWithString:@"https://developers.facebook.com"];
-//                          
-//        [[[FBSDKGraphRequest alloc]
-//          initWithGraphPath:@"me/feed"
-//          parameters: @{ @"message" : @"hello world"}
-//          HTTPMethod:@"POST"]
-//         
-//         
-//         startWithCompletionHandler:^(FBSDKGraphRequestConnection *connection, id result, NSError *error) {
-//             if (!error) {
-//                 NSLog(@"Post id:%@", result[@"id"]);
-//             }
-//         }];
-//    }
-    
-    
+    if ([[FBSDKAccessToken currentAccessToken] hasGranted:@"publish_actions"]) {
+        [self publishFBPost]; //publish
+    } else {
+        NSLog(@"no publish permissions"); // no publish permissions so get them, then post
+        
+        
+        [PFFacebookUtils linkUserInBackground:[PFUser currentUser]
+                       withPublishPermissions:@[ @"publish_actions"]
+                                        block:^(BOOL succeeded, NSError *error) {
+                                            if (succeeded) {
+                                                NSLog(@"User now has read and publish permissions!");
+                                                [self publishFBPost];
+                                            }
+        }];
+
+        
+//        FBSDKLoginManager *loginManager = [[FBSDKLoginManager alloc] init];
+//        [loginManager logInWithPublishPermissions:@[@"publish_actions"] handler:^(FBSDKLoginManagerLoginResult *result, NSError *error) {
+//            if(error){
+//                NSLog(@"publish permissions not working, not active");
+//            } else {
+//                NSLog(@"publish permissions now active");
+//                
+//                //save new permissions to parse
+//                
+//
+//            }
+//        }];
+    }
+}
+
+-(void) publishFBPost{
     FBSDKShareLinkContent *content = [FBSDKShareLinkContent new];
     content.contentURL = [NSURL URLWithString:[self.selectedSegment valueForKey:@"linkToContent"]];
     content.contentTitle = [self.selectedProgram valueForKey:@"programTitle"];
@@ -97,23 +106,42 @@
     content.imageURL = url;
     
     FBSDKShareDialog *shareDialog = [FBSDKShareDialog new];
+    
     [shareDialog setMode:FBSDKShareDialogModeAutomatic];
+//    [FBSDKShareDialog showFromViewController:self.messageTableViewController withContent:content delegate:self];
     [shareDialog setShareContent:content];
+    [shareDialog setDelegate:self];
     [shareDialog setFromViewController:self.messageTableViewController];
     [shareDialog show];
-    
-    self.shareCodeDialog = [FBSDKShareDialog new];
-    [self.shareCodeDialog setDelegate:(id)self];
-    [self.shareCodeDialog setShareContent:content];
-    [self.shareCodeDialog setFromViewController:self.messageTableViewController];
-    [self.shareCodeDialog show];
 }
 
--(void)sharer:(id<FBSDKSharing>)sharer didCompleteWithResults:(NSDictionary *)results {
-    
+//
+//    FBSDKShareLinkContent *content = [[FBSDKShareLinkContent alloc] init];
+//    content.contentURL = [NSURL URLWithString:@"https://developers.facebook.com"];
+//                          
+//        [[[FBSDKGraphRequest alloc]
+//          initWithGraphPath:@"me/feed"
+//          parameters: @{ @"message" : @"hello world"}
+//          HTTPMethod:@"POST"]
+//         //list of parameters: https://developers.facebook.com/docs/graph-api/reference/
+//         
+//         startWithCompletionHandler:^(FBSDKGraphRequestConnection *connection, id result, NSError *error) {
+//             if (!error) {
+//                 NSLog(@"Post id:%@", result[@"id"]);
+//             }
+//         }];
+
+
+#pragma mark - delegate methods
+
+- (void)sharer:(id<FBSDKSharing>)sharer didCompleteWithResults:(NSDictionary *)results {
+//    if ([sharer isEqual:self.shareDialog]) {
+    NSString *postID = [[NSString alloc]init];
+    saveSentMessageSegment(results valueForKey:@"ID");
+    NSLog(@"facebook post successful%@",results);
+        
         // Your delegate code
-        NSLog(@"I'm going to go crazy if this doesn't work.");
-    
+//    }
 }
 
 - (void)sharer:(id<FBSDKSharing>)sharer didFailWithError:(NSError *)error
@@ -160,6 +188,29 @@
 //    NSLog(@"Got here in the save 2:%@",sentMessageItem);
 //}
 
+-(void) saveSentMessageSegment:(NSString*)postID{
+    
+    //  SAVING MESSAGE DATA TO PARSE
+    PFUser *currentUser = [PFUser currentUser];
+    
+    PFObject *sentMessageItem = [PFObject objectWithClassName:@"sentMessages"];
+    [sentMessageItem setObject:@"facebookSegmentOnly" forKey:@"messageType"];
+    [sentMessageItem setObject:[self.selectedSegment valueForKey:@"segmentID"] forKey:@"segmentID"];
+    [sentMessageItem setObject:[currentUser valueForKey:@"username"] forKey:@"username"];
+    NSString *userObjectID = currentUser.objectId;
+    [sentMessageItem setObject:userObjectID forKey:@"userObjectID"];
+    
+    [sentMessageItem saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) { //save sent message to parse
+        if(error){
+            NSLog(@"error, message not saved");
+        }
+        else {
+            NSLog(@"no error, message saved");
+            [self.messageTableViewController viewDidLoad];
+        }
+    }];
+    
+}
 
 -(void) pushToSignIn{
     SignUpViewController *signUpViewController = [self.messageTableViewController.storyboard instantiateViewControllerWithIdentifier:@"signInViewController"];
