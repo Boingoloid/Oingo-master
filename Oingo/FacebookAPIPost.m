@@ -136,8 +136,8 @@
 
 - (void)sharer:(id<FBSDKSharing>)sharer didCompleteWithResults:(NSDictionary *)results {
 //    if ([sharer isEqual:self.shareDialog]) {
-    NSString *postID = [[NSString alloc]init];
-    saveSentMessageSegment(results valueForKey:@"ID");
+    NSString *facebookPostID = [results valueForKey:@"ID"];
+    [self saveSentMessageSegment:facebookPostID];
     NSLog(@"facebook post successful%@",results);
         
         // Your delegate code
@@ -199,6 +199,7 @@
     [sentMessageItem setObject:[currentUser valueForKey:@"username"] forKey:@"username"];
     NSString *userObjectID = currentUser.objectId;
     [sentMessageItem setObject:userObjectID forKey:@"userObjectID"];
+    [sentMessageItem setObject:postID forKey:@"facebookPostID"];
     
     [sentMessageItem saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) { //save sent message to parse
         if(error){

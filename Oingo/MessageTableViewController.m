@@ -58,9 +58,6 @@ NSInteger footerHeight = 1;
 -(void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     NSLog(@"viewWillApper");
-
-
-    
 }
 
 

@@ -200,8 +200,8 @@
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" alpha="0.84999999999999987" contentMode="center" tableViewCell="4JZ-B3-CcJ" id="jef-ur-wKC">
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Monsanto modifies plant genes so they can resist massive amounts of pesticides that end up in our soil and food supply." lineBreakMode="tailTruncation" numberOfLines="5" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="200" translatesAutoresizingMaskIntoConstraints="NO" id="nB2-f8-mN4">
-                                            <rect key="frame" x="67" y="13" width="279" height="61"/>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Monsanto modifies plant genes so they can resist massive amounts of pesticides that end up in our soil and food supply." lineBreakMode="tailTruncation" numberOfLines="5" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="200" translatesAutoresizingMaskIntoConstraints="NO" id="nB2-f8-mN4">
+                                            <rect key="frame" x="67" y="17" width="279" height="61"/>
                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                             <constraints>
                                                 <constraint firstAttribute="width" constant="279" id="RAs-Tg-NYa"/>
