@@ -26,10 +26,10 @@
                     <color key="textColor" red="1" green="0.98797424010000001" blue="0.9542948953" alpha="1" colorSpace="calibratedRGB"/>
                     <nil key="highlightedColor"/>
                 </label>
-                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="light_bulb_white.png" translatesAutoresizingMaskIntoConstraints="NO" id="lsy-24-dNk">
-                    <rect key="frame" x="203" y="135" width="75" height="72"/>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="light_bulb_icon120.png" translatesAutoresizingMaskIntoConstraints="NO" id="lsy-24-dNk">
+                    <rect key="frame" x="206" y="135" width="68" height="72"/>
                     <constraints>
-                        <constraint firstAttribute="width" constant="75" id="DiK-Nx-IQh"/>
+                        <constraint firstAttribute="width" constant="68" id="DiK-Nx-IQh"/>
                         <constraint firstAttribute="height" constant="72" id="KEt-mM-mh3"/>
                     </constraints>
                 </imageView>
@@ -50,6 +50,6 @@
         </view>
     </objects>
     <resources>
-        <image name="light_bulb_white.png" width="373" height="449"/>
+        <image name="light_bulb_icon120.png" width="120" height="120"/>
     </resources>
 </document>
