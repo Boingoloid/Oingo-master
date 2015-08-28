@@ -539,6 +539,9 @@
                                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="success.png" translatesAutoresizingMaskIntoConstraints="NO" id="fbp-UY-wdl">
                                             <rect key="frame" x="333" y="27" width="13" height="13"/>
                                         </imageView>
+                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="success.png" translatesAutoresizingMaskIntoConstraints="NO" id="H8O-ck-JiV">
+                                            <rect key="frame" x="255" y="27" width="13" height="13"/>
+                                        </imageView>
                                         <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pSU-k7-vaY">
                                             <rect key="frame" x="230" y="28" width="29" height="31"/>
                                             <state key="normal" title="Button" image="mail-icon-gray.png">
@@ -584,6 +587,7 @@
                                 <inset key="separatorInset" minX="10" minY="0.0" maxX="10" maxY="0.0"/>
                                 <connections>
                                     <outlet property="emailButton" destination="pSU-k7-vaY" id="Vmu-Hk-vQ0"/>
+                                    <outlet property="emailSuccessImageView" destination="H8O-ck-JiV" id="mah-He-zkt"/>
                                     <outlet property="messageImage" destination="SFl-0P-juu" id="cdw-XA-Vgo"/>
                                     <outlet property="phoneButton" destination="Non-Vu-3jy" id="acC-Zo-d1z"/>
                                     <outlet property="postToFacebookButton" destination="b0C-mD-AaX" id="SlB-vn-psZ"/>
@@ -754,6 +758,9 @@
                                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="success.png" translatesAutoresizingMaskIntoConstraints="NO" id="sC8-x7-qgc">
                                             <rect key="frame" x="334" y="25" width="13" height="13"/>
                                         </imageView>
+                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="success.png" translatesAutoresizingMaskIntoConstraints="NO" id="bGy-mQ-Fcd">
+                                            <rect key="frame" x="255" y="25" width="13" height="13"/>
+                                        </imageView>
                                         <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ffs-S4-PQJ">
                                             <rect key="frame" x="84" y="32" width="25" height="22"/>
                                             <state key="normal" title="Button" image="document-xxl.png">
@@ -799,6 +806,7 @@
                                 <inset key="separatorInset" minX="10" minY="0.0" maxX="10" maxY="0.0"/>
                                 <connections>
                                     <outlet property="emailButton" destination="VAA-aK-7Be" id="wvQ-bM-lS3"/>
+                                    <outlet property="emailSuccessImageView" destination="bGy-mQ-Fcd" id="tls-AZ-raL"/>
                                     <outlet property="messageImage" destination="G3W-t6-FYD" id="xvc-K2-l28"/>
                                     <outlet property="phoneButton" destination="EPa-bW-Y3O" id="lSP-5v-LOp"/>
                                     <outlet property="postToFacebookButton" destination="wpB-EZ-Xpg" id="g2s-qs-bKd"/>

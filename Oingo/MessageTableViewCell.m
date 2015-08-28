@@ -77,12 +77,16 @@ CongressPhotoFinderAPI *congressPhotoFinderAPI;
         self.zipCodeButton.hidden = YES;
         self.locationButton.hidden = YES;
         self.zipLabel.hidden = YES;
-    
+
         self.emailButton.hidden = YES;
         self.phoneButton.hidden = YES;
         self.webFormButton.hidden = YES;
-        
-        // Success fields
+        self.tweetSuccessImageView.hidden = YES;
+        self.emailSuccessImageView.hidden = YES;
+
+    
+    // Success fields
+        //Twitter
         NSNumber *sendTweetNumberBool = [messageItem valueForKey:@"isTweetSent"];
         bool sendTweetBool = [sendTweetNumberBool boolValue];
         if(sendTweetBool) {
@@ -90,7 +94,17 @@ CongressPhotoFinderAPI *congressPhotoFinderAPI;
         } else {
             self.tweetSuccessImageView.hidden = YES;
         }
-        
+    
+        //Email
+        NSNumber *sendEmailNumberBool = [messageItem valueForKey:@"isEmailSent"];
+        bool sendEmailBool = [sendEmailNumberBool boolValue];
+        if(sendEmailBool) {
+            self.emailSuccessImageView.hidden = NO;
+        } else {
+            self.emailSuccessImageView.hidden = YES;
+        }
+    
+    
         //add information
         self.targetName.text = [NSString stringWithFormat:@"%@ /",[messageItem valueForKey:@"targetName"]];
         self.targetTitleLabel.text = [messageItem valueForKey:@"targetTitle"];

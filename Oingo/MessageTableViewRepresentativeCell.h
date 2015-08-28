@@ -40,7 +40,7 @@
 @property (nonatomic, retain) NSString *state;
 @property (nonatomic, retain) NSString *leadershipRole;
 @property (weak, nonatomic) IBOutlet UIImageView *tweetSuccessImageView;
-
+@property (weak, nonatomic) IBOutlet UIImageView *emailSuccessImageView;
 
 
 @property(nonatomic) UIButton *locationButton;

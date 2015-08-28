@@ -50,5 +50,6 @@
 
 
 @property (nonatomic) bool isTweetSent;
+@property (nonatomic) bool isEmailSent;
 
 @end

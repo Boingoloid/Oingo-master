@@ -49,6 +49,7 @@ CongressPhotoFinderAPI *congressPhotoFinderAPI;
         self.tweetButton.hidden = YES;
         self.tweetSuccessImageView.hidden = YES;
         self.emailButton.hidden = YES;
+        self.emailSuccessImageView.hidden = YES;
         self.phoneButton.hidden = YES;
         self.webFormButton.hidden = YES;
         
@@ -74,6 +75,16 @@ CongressPhotoFinderAPI *congressPhotoFinderAPI;
         
 
         // Success fields
+        //Email
+        NSNumber *sendEmailNumberBool = [congressionalMessageItem valueForKey:@"isEmailSent"];
+        bool sendEmailBool = [sendEmailNumberBool boolValue];
+        if(sendEmailBool) {
+            self.emailSuccessImageView.hidden = NO;
+        } else {
+            self.emailSuccessImageView.hidden = YES;
+        }
+        
+        //Twitter
         NSNumber *sendTweetNumberBool = [congressionalMessageItem valueForKey:@"isTweetSent"];
         bool sendTweetBool = [sendTweetNumberBool boolValue];
         
