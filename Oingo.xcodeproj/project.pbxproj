@@ -12,7 +12,6 @@
 		CE06A2021B31F7C5000D3210 /* ParseCrashReporting.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CE06A1FC1B31F7C5000D3210 /* ParseCrashReporting.framework */; };
 		CE06A2041B31F7C5000D3210 /* ParseFacebookUtilsV4.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CE06A1FE1B31F7C5000D3210 /* ParseFacebookUtilsV4.framework */; };
 		CE06A2051B31F7C5000D3210 /* ParseUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CE06A1FF1B31F7C5000D3210 /* ParseUI.framework */; };
-		CE13AE021B51EA5900B36783 /* Fabric.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CE13AE011B51EA5900B36783 /* Fabric.framework */; };
 		CE14A8AA1B211B7B0032664C /* SignUpViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CE14A8A91B211B7A0032664C /* SignUpViewController.m */; };
 		CE14A8AD1B2227C60032664C /* LogInViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CE14A8AC1B2227C60032664C /* LogInViewController.m */; };
 		CE14A8B31B22D20B0032664C /* TweetTableViewDemoTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CE14A8B21B22D20B0032664C /* TweetTableViewDemoTableViewController.m */; };
@@ -28,6 +27,7 @@
 		CE29AA961B3F2BB400676563 /* boxer.png in Resources */ = {isa = PBXBuildFile; fileRef = CE29AA951B3F2BB400676563 /* boxer.png */; };
 		CE29AA981B3F2BBD00676563 /* feinstein.png in Resources */ = {isa = PBXBuildFile; fileRef = CE29AA971B3F2BBD00676563 /* feinstein.png */; };
 		CE29AA9A1B3F2BC900676563 /* pelosi.png in Resources */ = {isa = PBXBuildFile; fileRef = CE29AA991B3F2BC900676563 /* pelosi.png */; };
+		CE2BB67D1B8FEEB200568E16 /* light_bulb_white.png in Resources */ = {isa = PBXBuildFile; fileRef = CE2BB67C1B8FEEB200568E16 /* light_bulb_white.png */; };
 		CE2BD37D1B007FB30053A1B3 /* monsantocorngrenade.png in Resources */ = {isa = PBXBuildFile; fileRef = CE2BD37C1B007FB30053A1B3 /* monsantocorngrenade.png */; };
 		CE2BF96F1B3E517700AB15AC /* MakePhoneCallAPI.m in Sources */ = {isa = PBXBuildFile; fileRef = CE2BF96E1B3E517700AB15AC /* MakePhoneCallAPI.m */; };
 		CE2BF9741B3E595000AB15AC /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CE2BF9731B3E595000AB15AC /* MessageUI.framework */; };
@@ -46,6 +46,9 @@
 		CE6073331B3AD475007B567C /* CongressPhotoFinderAPI.m in Sources */ = {isa = PBXBuildFile; fileRef = CE6073321B3AD475007B567C /* CongressPhotoFinderAPI.m */; };
 		CE6F71F01B2923380067E4DA /* FBSDKShareKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CE6F71EF1B2923380067E4DA /* FBSDKShareKit.framework */; };
 		CE6F71F41B2BCA9E0067E4DA /* SettingsTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CE6F71F31B2BCA9E0067E4DA /* SettingsTableViewController.m */; };
+		CE705AD81B8D3C9200368735 /* Crashlytics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CE705AD71B8D3C9200368735 /* Crashlytics.framework */; };
+		CE705AD91B8D3E2300368735 /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = CEA92FB71AF3771B0042D0EE /* libz.dylib */; };
+		CE705ADB1B8D3EF400368735 /* Fabric.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CE705ADA1B8D3EF400368735 /* Fabric.framework */; };
 		CE7B38581B584C77009107DD /* congressionalDishProgramCover.png in Resources */ = {isa = PBXBuildFile; fileRef = CE7B38571B584C77009107DD /* congressionalDishProgramCover.png */; };
 		CE80B5D61AFC0EFB007D69FB /* dailyshow6cover.png in Resources */ = {isa = PBXBuildFile; fileRef = CE80B5D51AFC0EFB007D69FB /* dailyshow6cover.png */; };
 		CE82943D1B38DB7C00B596E6 /* CongressionalMessageItem.m in Sources */ = {isa = PBXBuildFile; fileRef = CE82943C1B38DB7C00B596E6 /* CongressionalMessageItem.m */; };
@@ -86,7 +89,6 @@
 		CEED9BDB1AF4168E00402BC2 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CEA92F9C1AF367FA0042D0EE /* Foundation.framework */; };
 		CEED9BDC1AF4168E00402BC2 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CEA92F9A1AF367EE0042D0EE /* UIKit.framework */; };
 		CEED9BDD1AF4168E00402BC2 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CEA92FB51AF377050042D0EE /* SystemConfiguration.framework */; };
-		CEED9BDE1AF4168E00402BC2 /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CEA92FB31AF376F00042D0EE /* StoreKit.framework */; };
 		CEED9BDF1AF4168E00402BC2 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CEA92FB11AF376E40042D0EE /* Security.framework */; };
 		CEED9BE01AF4168E00402BC2 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CEA92FAF1AF376DE0042D0EE /* QuartzCore.framework */; };
 		CEED9BE11AF4168E00402BC2 /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CEA92FAD1AF376CC0042D0EE /* MobileCoreServices.framework */; };
@@ -109,7 +111,6 @@
 		CEFFDD961B141232005EEC86 /* TwitterKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CEFFDD921B141232005EEC86 /* TwitterKit.framework */; };
 		CEFFDD971B141232005EEC86 /* TwitterKitResources.bundle in Resources */ = {isa = PBXBuildFile; fileRef = CEFFDD931B141232005EEC86 /* TwitterKitResources.bundle */; };
 		CEFFDD981B141232005EEC86 /* TwitterCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CEFFDD941B141232005EEC86 /* TwitterCore.framework */; };
-		CEFFDD9D1B151346005EEC86 /* Crashlytics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CEFFDD9C1B151346005EEC86 /* Crashlytics.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -128,7 +129,6 @@
 		CE06A1FC1B31F7C5000D3210 /* ParseCrashReporting.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = ParseCrashReporting.framework; sourceTree = "<group>"; };
 		CE06A1FE1B31F7C5000D3210 /* ParseFacebookUtilsV4.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = ParseFacebookUtilsV4.framework; sourceTree = "<group>"; };
 		CE06A1FF1B31F7C5000D3210 /* ParseUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = ParseUI.framework; sourceTree = "<group>"; };
-		CE13AE011B51EA5900B36783 /* Fabric.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Fabric.framework; sourceTree = "<group>"; };
 		CE14A8A81B211B7A0032664C /* SignUpViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SignUpViewController.h; sourceTree = "<group>"; };
 		CE14A8A91B211B7A0032664C /* SignUpViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SignUpViewController.m; sourceTree = "<group>"; };
 		CE14A8AB1B2227C60032664C /* LogInViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LogInViewController.h; sourceTree = "<group>"; };
@@ -153,6 +153,7 @@
 		CE29AA951B3F2BB400676563 /* boxer.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = boxer.png; path = Images/boxer.png; sourceTree = "<group>"; };
 		CE29AA971B3F2BBD00676563 /* feinstein.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = feinstein.png; path = Images/feinstein.png; sourceTree = "<group>"; };
 		CE29AA991B3F2BC900676563 /* pelosi.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = pelosi.png; path = Images/pelosi.png; sourceTree = "<group>"; };
+		CE2BB67C1B8FEEB200568E16 /* light_bulb_white.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = light_bulb_white.png; path = Images/light_bulb_white.png; sourceTree = "<group>"; };
 		CE2BD37C1B007FB30053A1B3 /* monsantocorngrenade.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = monsantocorngrenade.png; path = Images/monsantocorngrenade.png; sourceTree = "<group>"; };
 		CE2BF96D1B3E517700AB15AC /* MakePhoneCallAPI.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MakePhoneCallAPI.h; sourceTree = "<group>"; };
 		CE2BF96E1B3E517700AB15AC /* MakePhoneCallAPI.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MakePhoneCallAPI.m; sourceTree = "<group>"; };
@@ -181,6 +182,8 @@
 		CE6F71EF1B2923380067E4DA /* FBSDKShareKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FBSDKShareKit.framework; path = ../../../Documents/FacebookSDK/FBSDKShareKit.framework; sourceTree = "<group>"; };
 		CE6F71F21B2BCA9E0067E4DA /* SettingsTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingsTableViewController.h; sourceTree = "<group>"; };
 		CE6F71F31B2BCA9E0067E4DA /* SettingsTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingsTableViewController.m; sourceTree = "<group>"; };
+		CE705AD71B8D3C9200368735 /* Crashlytics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Crashlytics.framework; sourceTree = "<group>"; };
+		CE705ADA1B8D3EF400368735 /* Fabric.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Fabric.framework; sourceTree = "<group>"; };
 		CE7B38571B584C77009107DD /* congressionalDishProgramCover.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = congressionalDishProgramCover.png; path = Images/congressionalDishProgramCover.png; sourceTree = "<group>"; };
 		CE80B5D51AFC0EFB007D69FB /* dailyshow6cover.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = dailyshow6cover.png; path = Images/dailyshow6cover.png; sourceTree = "<group>"; };
 		CE82943B1B38DB7C00B596E6 /* CongressionalMessageItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CongressionalMessageItem.h; sourceTree = "<group>"; };
@@ -213,7 +216,6 @@
 		CEA92FAD1AF376CC0042D0EE /* MobileCoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = System/Library/Frameworks/MobileCoreServices.framework; sourceTree = SDKROOT; };
 		CEA92FAF1AF376DE0042D0EE /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		CEA92FB11AF376E40042D0EE /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
-		CEA92FB31AF376F00042D0EE /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
 		CEA92FB51AF377050042D0EE /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		CEA92FB71AF3771B0042D0EE /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = usr/lib/libz.dylib; sourceTree = SDKROOT; };
 		CEA92FB91AF377350042D0EE /* libsqlite3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.dylib; path = usr/lib/libsqlite3.dylib; sourceTree = SDKROOT; };
@@ -272,7 +274,6 @@
 		CEFFDD921B141232005EEC86 /* TwitterKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = TwitterKit.framework; path = "../../../Downloads/PFTwitterUtils-NativeTwitter-master/PFTwitterUtils+NativeTwitter/TwitterKit.framework"; sourceTree = "<group>"; };
 		CEFFDD931B141232005EEC86 /* TwitterKitResources.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; name = TwitterKitResources.bundle; path = "../../../Downloads/PFTwitterUtils-NativeTwitter-master/PFTwitterUtils+NativeTwitter/TwitterKitResources.bundle"; sourceTree = "<group>"; };
 		CEFFDD941B141232005EEC86 /* TwitterCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = TwitterCore.framework; path = "../../../Downloads/PFTwitterUtils-NativeTwitter-master/PFTwitterUtils+NativeTwitter/TwitterCore.framework"; sourceTree = "<group>"; };
-		CEFFDD9C1B151346005EEC86 /* Crashlytics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Crashlytics.framework; path = Oingo/Crashlytics.framework; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -280,6 +281,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CE705AD91B8D3E2300368735 /* libz.dylib in Frameworks */,
 				CE2BF9741B3E595000AB15AC /* MessageUI.framework in Frameworks */,
 				CE20296F1B363668005C079B /* libstdc++.6.0.9.dylib in Frameworks */,
 				CE06A2001B31F7C5000D3210 /* Bolts.framework in Frameworks */,
@@ -288,6 +290,7 @@
 				CEED9BD41AF4160300402BC2 /* Accounts.framework in Frameworks */,
 				CEED9BD51AF4165400402BC2 /* AudioToolbox.framework in Frameworks */,
 				CEED9BDB1AF4168E00402BC2 /* Foundation.framework in Frameworks */,
+				CE705AD81B8D3C9200368735 /* Crashlytics.framework in Frameworks */,
 				CE06A2011B31F7C5000D3210 /* Parse.framework in Frameworks */,
 				CEED9BDA1AF4168E00402BC2 /* CoreData.framework in Frameworks */,
 				CE06A2041B31F7C5000D3210 /* ParseFacebookUtilsV4.framework in Frameworks */,
@@ -297,20 +300,18 @@
 				CE06A2051B31F7C5000D3210 /* ParseUI.framework in Frameworks */,
 				CEED9BDF1AF4168E00402BC2 /* Security.framework in Frameworks */,
 				CEED9BD61AF4166000402BC2 /* CoreGraphics.framework in Frameworks */,
+				CE705ADB1B8D3EF400368735 /* Fabric.framework in Frameworks */,
 				CEED9BD71AF4166A00402BC2 /* CoreLocation.framework in Frameworks */,
-				CEED9BDE1AF4168E00402BC2 /* StoreKit.framework in Frameworks */,
 				CEF14C0E1B23BE5A00EC95A4 /* FBSDKLoginKit.framework in Frameworks */,
 				CEED9BDD1AF4168E00402BC2 /* SystemConfiguration.framework in Frameworks */,
 				CEED9BDC1AF4168E00402BC2 /* UIKit.framework in Frameworks */,
 				CEED9BE11AF4168E00402BC2 /* MobileCoreServices.framework in Frameworks */,
 				CE06A2021B31F7C5000D3210 /* ParseCrashReporting.framework in Frameworks */,
-				CEFFDD9D1B151346005EEC86 /* Crashlytics.framework in Frameworks */,
 				CEED9BE31AF4169100402BC2 /* Twitter.framework in Frameworks */,
 				CEED9BE01AF4168E00402BC2 /* QuartzCore.framework in Frameworks */,
 				CEF14C0C1B23B72C00EC95A4 /* FBSDKCoreKit.framework in Frameworks */,
 				CEFFDD961B141232005EEC86 /* TwitterKit.framework in Frameworks */,
 				CEFFDD981B141232005EEC86 /* TwitterCore.framework in Frameworks */,
-				CE13AE021B51EA5900B36783 /* Fabric.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -437,6 +438,7 @@
 				CE46B1371B043A8000A4D671 /* blue_arrow_png_by_maddielovesselly-d4ys3ti (1).png */,
 				CE46B13D1B044EA700A4D671 /* carousell-borderblack.png */,
 				CEEF250A1B0171BC00EFB257 /* Web-frame2.png */,
+				CE2BB67C1B8FEEB200568E16 /* light_bulb_white.png */,
 				CEEF25081B016D5400EFB257 /* tweet button.png */,
 				CEEF25031B012FC600EFB257 /* robb frale profile.png */,
 				CEEF25011B011A4B00EFB257 /* monsanto gas apple.png */,
@@ -503,7 +505,8 @@
 		CEA92FBB1AF377600042D0EE /* frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				CE13AE011B51EA5900B36783 /* Fabric.framework */,
+				CE705ADA1B8D3EF400368735 /* Fabric.framework */,
+				CE705AD71B8D3C9200368735 /* Crashlytics.framework */,
 				CE06A1FA1B31F7C5000D3210 /* Bolts.framework */,
 				CE06A1FB1B31F7C5000D3210 /* Parse.framework */,
 				CE06A1FC1B31F7C5000D3210 /* ParseCrashReporting.framework */,
@@ -512,7 +515,6 @@
 				CEED9BF61AF41A7300402BC2 /* PFTwitterUtils+NativeTwitter */,
 				CE6F71EF1B2923380067E4DA /* FBSDKShareKit.framework */,
 				CEF14C0D1B23BE5A00EC95A4 /* FBSDKLoginKit.framework */,
-				CEFFDD9C1B151346005EEC86 /* Crashlytics.framework */,
 				CEF14C0B1B23B72C00EC95A4 /* FBSDKCoreKit.framework */,
 				CEFFDD921B141232005EEC86 /* TwitterKit.framework */,
 				CEFFDD931B141232005EEC86 /* TwitterKitResources.bundle */,
@@ -529,7 +531,6 @@
 				CEA92F9C1AF367FA0042D0EE /* Foundation.framework */,
 				CEA92F9A1AF367EE0042D0EE /* UIKit.framework */,
 				CEA92FB51AF377050042D0EE /* SystemConfiguration.framework */,
-				CEA92FB31AF376F00042D0EE /* StoreKit.framework */,
 				CEA92FB11AF376E40042D0EE /* Security.framework */,
 				CEA92FAF1AF376DE0042D0EE /* QuartzCore.framework */,
 				CEA92FAD1AF376CC0042D0EE /* MobileCoreServices.framework */,
@@ -629,8 +630,8 @@
 				CE241A381AEAE45A00F22144 /* Sources */,
 				CE241A391AEAE45A00F22144 /* Frameworks */,
 				CE241A3A1AEAE45A00F22144 /* Resources */,
-				CEFFDD901B140E9A005EEC86 /* ShellScript */,
 				970CD2995E5E7EF175036530 /* Copy Pods Resources */,
+				CE705AD61B8D373200368735 /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -671,6 +672,11 @@
 					CE241A3B1AEAE45A00F22144 = {
 						CreatedOnToolsVersion = 6.2;
 						DevelopmentTeam = 26Q33Y52HW;
+						SystemCapabilities = {
+							com.apple.InAppPurchase = {
+								enabled = 0;
+							};
+						};
 					};
 					CE241A571AEAE45A00F22144 = {
 						CreatedOnToolsVersion = 6.2;
@@ -721,6 +727,7 @@
 				CE241A4E1AEAE45A00F22144 /* Main.storyboard in Resources */,
 				CE60732D1B3A8CAC007B567C /* document-xxl.png in Resources */,
 				CEEF25041B012FC600EFB257 /* robb frale profile.png in Resources */,
+				CE2BB67D1B8FEEB200568E16 /* light_bulb_white.png in Resources */,
 				CEA79FCA1AEB7CCC00535B06 /* brainwash80.png in Resources */,
 				CEE074421B5EFEE900245C56 /* success.png in Resources */,
 				CE60732B1B3A88FD007B567C /* phone-gray.png in Resources */,
@@ -786,7 +793,7 @@
 ";
 			showEnvVarsInLog = 0;
 		};
-		CEFFDD901B140E9A005EEC86 /* ShellScript */ = {
+		CE705AD61B8D373200368735 /* ShellScript */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -913,10 +920,11 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.4;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
+				VALIDATE_PRODUCT = YES;
 			};
 			name = Debug;
 		};
@@ -948,7 +956,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.4;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
 				VALIDATE_PRODUCT = YES;
@@ -960,7 +968,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=*]" = "iPhone Developer";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/parse-library-1.7.2",
@@ -970,7 +978,7 @@
 					/Users/matthewacalin/Documents/FacebookSDK,
 				);
 				INFOPLIST_FILE = Oingo/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.4;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
@@ -993,7 +1001,7 @@
 					/Users/matthewacalin/Documents/FacebookSDK,
 				);
 				INFOPLIST_FILE = Oingo/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.4;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";

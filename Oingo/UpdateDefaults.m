@@ -15,7 +15,6 @@
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     PFUser *currentUser = [PFUser currentUser];
     // If a registered user then set default zip and location if available
-    //? do I need to check if a sessionDefaults object already exists?
     
     if(currentUser){
         if([currentUser valueForKey:@"latitude"] && [currentUser valueForKey:@"longitude"]) {

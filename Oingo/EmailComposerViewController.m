@@ -8,13 +8,20 @@
 
 #import "EmailComposerViewController.h"
 #import <MessageUI/MessageUI.h>
+#import <Parse/Parse.h>
+#import "CongressionalMessageItem.h"
+#import "MessageItem.h"
 
-@interface EmailComposerViewController ()<MFMailComposeViewControllerDelegate, MFMessageComposeViewControllerDelegate, UINavigationControllerDelegate>
+@interface EmailComposerViewController ()<MFMailComposeViewControllerDelegate, UINavigationControllerDelegate>
+//MFMessageComposeViewControllerDelegate
 // UILabel for displaying the result of the sending the message.
 @property (nonatomic, weak) IBOutlet UILabel *feedbackMsg;
 @end
 
+
 @implementation EmailComposerViewController
+
+
 
 #pragma mark - Rotation
 
@@ -37,6 +44,12 @@
 //  IBAction for the Compose Mail button.
 // -------------------------------------------------------------------------------
 - (void)showMailPicker:(NSString*)email withMessage:(NSString *)message {
+    
+
+
+    
+    
+    
     // You must check that the current device can send email messages before you
     // attempt to create an instance of MFMailComposeViewController.  If the
     // device can not send email messages,
@@ -69,7 +82,10 @@
     MFMailComposeViewController *picker = [[MFMailComposeViewController alloc] init];
     picker.mailComposeDelegate = self;
     
-    [picker setSubject:@"Hello from California!"];
+
+
+    NSString *subject = [NSString stringWithFormat:@"Message from local voter re: %@",[self.selectedSegment valueForKey:@"segmentTitle"]];
+    [picker setSubject:subject];
     
     // Set up recipients
     NSArray *toRecipients = [NSArray arrayWithObject:email];
@@ -86,10 +102,19 @@
 //    [picker addAttachmentData:myData mimeType:@"image/jpeg" fileName:@"rainy"];
     
     // Fill out the email body text
+
+    
+    NSString *pushThoughtFooter = @"Sent via PushThought App!";
     NSString *emailBody = message;
-    [picker setMessageBody:emailBody isHTML:NO];
+    NSString *fullEmailBodyText =[NSString stringWithFormat:@"%@\n\nPlease check out this segment for background:%@\n\n%@",emailBody, [self.selectedSegment valueForKey:@"linkToContent"],pushThoughtFooter];
+    [picker setMessageBody:fullEmailBodyText isHTML:NO];
     
     [self presentViewController:picker animated:YES completion:NULL];
+    
+    
+    //Assign text values (subject and body) for saving in sent messages
+    self.sentEmailSubject = subject;
+    self.sentEmailBody = fullEmailBodyText;
 }
 
 #pragma mark - Delegate Methods
@@ -102,36 +127,103 @@
 - (void)mailComposeController:(MFMailComposeViewController*)controller
           didFinishWithResult:(MFMailComposeResult)result error:(NSError*)error
 {
-    self.feedbackMsg.hidden = NO;
+
     // Notifies users about errors associated with the interface
     switch (result)
     {
         case MFMailComposeResultCancelled:
-            self.feedbackMsg.text = @"Result: Mail sending canceled";
-            break;
+            [self dismissViewControllerAnimated:YES completion:NULL];
+            [self dismissViewControllerAnimated:YES completion:NULL];
+            NSLog(@"email canceled");
         case MFMailComposeResultSaved:
-            self.feedbackMsg.text = @"Result: Mail saved";
-            break;
-        case MFMailComposeResultSent:
-            self.feedbackMsg.text = @"Result: Mail sent";
-            break;
+//            self.feedbackMsg.text = @"Result: Mail saved";
+            [self dismissViewControllerAnimated:YES completion:NULL];
+            [self dismissViewControllerAnimated:YES completion:NULL];
+            NSLog(@"email saved");
+        case MFMailComposeResultSent:{
+//            self.feedbackMsg.text = @"Result: Mail sent";
+            [self dismissViewControllerAnimated:YES completion:NULL];
+            [self dismissViewControllerAnimated:YES completion:NULL];
+            
+            
+            //  SAVING MESSAGE DATA TO PARSE
+            PFUser *currentUser = [PFUser currentUser];
+            NSLog(@"printing current user:%@",currentUser);
+            
+            PFObject *sentMessageItem = [PFObject objectWithClassName:@"sentMessages"];
+            [sentMessageItem setObject:self.sentEmailBody forKey:@"messageText"];
+            [sentMessageItem setObject:@"email" forKey:@"messageType"];
+            [sentMessageItem setObject:[self.selectedSegment valueForKey:@"segmentID"] forKey:@"segmentID"];
+            [sentMessageItem setObject:[currentUser valueForKey:@"username"] forKey:@"username"];
+            NSString *userObjectID = currentUser.objectId;
+            [sentMessageItem setObject:userObjectID forKey:@"userObjectID"];
+            
+            //if segment then skip, else don't
+            
+            if ([self.selectedContact isKindOfClass:[CongressionalMessageItem class]]) {
+                NSLog(@"Congressional Message Item Class");
+                NSString *bioguide_id = [self.selectedContact valueForKey:@"bioguide_id"];
+                NSString *fullName = [self.selectedContact valueForKey:@"fullName"];
+                [sentMessageItem setObject:bioguide_id forKey:@"contactID"];
+                [sentMessageItem setObject:fullName forKey:@"contactName"];
+            } else {
+                NSLog(@"Regular Contact Item Class");
+                NSString *contactID = [self.selectedContact valueForKey:@"contactID"];
+                NSString *targetName = [self.selectedContact valueForKey:@"targetName"];
+                [sentMessageItem setObject:contactID forKey:@"contactID"];
+                [sentMessageItem setObject:targetName forKey:@"contactName"];
+            }
+            NSLog(@"printing save object:%@",sentMessageItem);
+            
+            [sentMessageItem saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) { //save currentUser to parse disk
+                if(error){
+                    NSLog(@"error, message not saved");
+                }
+                else {
+                    NSLog(@"no error, message saved");
+                }
+            }];
+            
+            NSLog(@"Got here in the save 2:%@",sentMessageItem);
+            [self.messageTableViewController viewDidLoad];
+            
+        }
+//            break;
         case MFMailComposeResultFailed:
-            self.feedbackMsg.text = @"Result: Mail sending failed";
-            break;
+//            self.feedbackMsg.text = @"Result: Mail sending failed";
+            [self dismissViewControllerAnimated:YES completion:NULL];
+            [self dismissViewControllerAnimated:YES completion:NULL];
+//            break;
         default:
-            self.feedbackMsg.text = @"Result: Mail not sent";
-            break;
+//            self.feedbackMsg.text = @"Result: Mail not sent";
+            [self dismissViewControllerAnimated:YES completion:NULL];
+            [self dismissViewControllerAnimated:YES completion:NULL];
+//            break;
     }
-    [self dismissViewControllerAnimated:YES completion:NULL];
+//    [self dismissViewControllerAnimated:YES completion:NULL];
 }
 
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+
+
+    //Add label accompanying text entry
+    //    self.feedbackMsg = [[UILabel alloc]initWithFrame:CGRectMake(159, 8, 150, 15)];
+    //    self.zipLabel.text = @"or";
+    //    self.zipLabel.font = [UIFont boldSystemFontOfSize:13];
+    //    self.zipLabel.textColor = [UIColor blackColor];
+    //    self.zipLabel.tag = 2222;
+    //    [self.contentView addSubview:self.zipLabel];
+    //    
+    
     // Do any additional setup after loading the view.
     
     
 }
+
+
+
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

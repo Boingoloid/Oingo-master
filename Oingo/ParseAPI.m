@@ -245,10 +245,10 @@ BOOL isCoordinateInfoAvailable = NO;
             
             // create another array to dictate whether they are all showing
             //add when new category and set to not expanded
-            NSMutableDictionary *expandSectionTempDictionary = [[NSMutableDictionary alloc]init];
-            [expandSectionTempDictionary setValue:category forKey:@"Category"];
-            [expandSectionTempDictionary setValue:@YES forKey:@"isSectionExpanded"];
-            [self.expandSectionsKeyList addObject:expandSectionTempDictionary];
+//            NSMutableDictionary *expandSectionTempDictionary = [[NSMutableDictionary alloc]init];
+//            [expandSectionTempDictionary setValue:category forKey:@"Category"];
+//            [expandSectionTempDictionary setValue:@YES forKey:@"isSectionExpanded"];
+//            [self.expandSectionsKeyList addObject:expandSectionTempDictionary];
             
         } else {
             

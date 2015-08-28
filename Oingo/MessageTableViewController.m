@@ -34,7 +34,7 @@
 #import "FacebookAPIPost.h"
 #import "LocationFinderAPI.h"
 #import "MessageOptionsTableTableViewController.h"
-
+#import "SignUpViewController.h"
 
 
 @interface MessageTableViewController () <UIGestureRecognizerDelegate,CLLocationManagerDelegate>
@@ -66,8 +66,8 @@ NSInteger footerHeight = 1;
     [super viewDidLoad];
         NSLog(@"viewDidLoad");
     
-    self.updateDefaults = [[UpdateDefaults alloc]init];
-    [self.updateDefaults updateLocationDefaults];
+//    self.updateDefaults = [[UpdateDefaults alloc]init];
+    [self.updateDefaults updateLocationDefaults]; // Checks if current user has location info, is so set defaults.
 
     //hidding tweet success
     self.segmentTweetButtonSuccessImageView.hidden = YES;
@@ -200,9 +200,34 @@ NSInteger footerHeight = 1;
         } else if (CGRectContainsPoint(cell.emailButton.frame, pointInCell)) {
             NSLog(@"touch in email button area");
             if(!cell.emailButton.hidden){
-                EmailComposerViewController *emailComposer = [[EmailComposerViewController alloc] init];
-//            [emailComposer showMailPicker:cell.openCongressEmail withMessage:cell.messageText.text];
-            [self presentViewController:emailComposer animated:YES completion:NULL];
+                
+                // Check if current user, otherwise send to login
+                PFUser *currentUser = [PFUser currentUser];
+                if(!currentUser) {
+                    [self pushToSignIn];
+                } else {
+                
+                    //Look up message - note this works b/c message is first item in section.
+                    NSUInteger index = [self.menuList indexOfObjectPassingTest:
+                                        ^BOOL(NSDictionary *dict, NSUInteger idx, BOOL *stop) {
+                                            return [[dict valueForKey:@"messageCategory"] isEqualToString:category];
+                                        }];
+                    if(index == NSNotFound){
+                        NSLog(@"did not find line");
+                        
+                    } else {
+                        NSLog(@"index was found:%ld",index);
+                        
+                        EmailComposerViewController *emailComposer = [[EmailComposerViewController alloc] init];
+                        emailComposer.selectedSegment = self.selectedSegment;
+                        emailComposer.selectedContact = self.selectedContact;
+                        emailComposer.messageTableViewController = self;
+                        
+                        [emailComposer showMailPicker:cell.openCongressEmail withMessage:[[self.menuList objectAtIndex:index] valueForKey:@"messageText"]];
+
+                        [self presentViewController:emailComposer animated:YES completion:NULL];
+                    }
+                }
             }
         } else if (CGRectContainsPoint(cell.webFormButton.frame, pointInCell)) {
             NSLog(@"touch in webForm area");
@@ -225,6 +250,13 @@ NSInteger footerHeight = 1;
     
 }
 */
+
+-(void) pushToSignIn {
+    SignUpViewController *signUpViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"signInViewController"];
+    signUpViewController.messageTableViewController = self;
+    [self.navigationController pushViewController:signUpViewController animated:YES];
+    NSLog(@"message view controller as signup pushed:%@ and %@",self,signUpViewController.messageTableViewController);
+}
 
 - (IBAction)shareSegmentTwitter:(id)sender {
     TwitterAPITweet *twitterAPITweet = [[TwitterAPITweet alloc]init];
@@ -374,6 +406,7 @@ NSInteger footerHeight = 1;
             [self retryZipCode:zipCode count:count];
         } else {
             //set user default so zip stays if user goes off table
+//            [self.updateDefaults updateLocationDefaults];
             NSUserDefaults *defaults = [[NSUserDefaults alloc]init];
             [defaults setObject:zipCode forKey:@"zipCode"];
             [defaults synchronize];
@@ -387,12 +420,7 @@ NSInteger footerHeight = 1;
                     }
                 }];
             }
-            
-//            ParseAPI *parseAPI = [[ParseAPI alloc]init];
-//            parseAPI.MessageTableViewController = self;
-//            [parseAPI getParseMessageData:self.selectedSegment];
             [self viewDidLoad];
-            
         }
     }];
     [alertController addAction:lookUpAction];
