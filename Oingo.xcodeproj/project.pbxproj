@@ -12,6 +12,7 @@
 		CE06A2021B31F7C5000D3210 /* ParseCrashReporting.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CE06A1FC1B31F7C5000D3210 /* ParseCrashReporting.framework */; };
 		CE06A2041B31F7C5000D3210 /* ParseFacebookUtilsV4.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CE06A1FE1B31F7C5000D3210 /* ParseFacebookUtilsV4.framework */; };
 		CE06A2051B31F7C5000D3210 /* ParseUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CE06A1FF1B31F7C5000D3210 /* ParseUI.framework */; };
+		CE0E80561B9129B80093453D /* MessageTableViewNoZipCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CE0E80551B9129B80093453D /* MessageTableViewNoZipCell.m */; };
 		CE14A8AA1B211B7B0032664C /* SignUpViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CE14A8A91B211B7A0032664C /* SignUpViewController.m */; };
 		CE14A8AD1B2227C60032664C /* LogInViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CE14A8AC1B2227C60032664C /* LogInViewController.m */; };
 		CE14A8B31B22D20B0032664C /* TweetTableViewDemoTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CE14A8B21B22D20B0032664C /* TweetTableViewDemoTableViewController.m */; };
@@ -132,6 +133,8 @@
 		CE06A1FC1B31F7C5000D3210 /* ParseCrashReporting.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = ParseCrashReporting.framework; sourceTree = "<group>"; };
 		CE06A1FE1B31F7C5000D3210 /* ParseFacebookUtilsV4.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = ParseFacebookUtilsV4.framework; sourceTree = "<group>"; };
 		CE06A1FF1B31F7C5000D3210 /* ParseUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = ParseUI.framework; sourceTree = "<group>"; };
+		CE0E80541B9129B80093453D /* MessageTableViewNoZipCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MessageTableViewNoZipCell.h; sourceTree = "<group>"; };
+		CE0E80551B9129B80093453D /* MessageTableViewNoZipCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MessageTableViewNoZipCell.m; sourceTree = "<group>"; };
 		CE14A8A81B211B7A0032664C /* SignUpViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SignUpViewController.h; sourceTree = "<group>"; };
 		CE14A8A91B211B7A0032664C /* SignUpViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SignUpViewController.m; sourceTree = "<group>"; };
 		CE14A8AB1B2227C60032664C /* LogInViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LogInViewController.h; sourceTree = "<group>"; };
@@ -383,6 +386,8 @@
 				CEEF25061B015ACA00EFB257 /* MessageTableViewController.m */,
 				CEEF250F1B017C8200EFB257 /* MessageTableViewCell.h */,
 				CEEF25101B017C8200EFB257 /* MessageTableViewCell.m */,
+				CE0E80541B9129B80093453D /* MessageTableViewNoZipCell.h */,
+				CE0E80551B9129B80093453D /* MessageTableViewNoZipCell.m */,
 				CEC0C7451B478E0500A9DD33 /* MessageTableViewMessageCell.h */,
 				CEC0C7461B478E0500A9DD33 /* MessageTableViewMessageCell.m */,
 				CE31B19E1B420C670048A5B1 /* MessageTableViewRepresentativeCell.h */,
@@ -693,7 +698,7 @@
 					};
 				};
 			};
-			buildConfigurationList = CE241A371AEAE45A00F22144 /* Build configuration list for PBXProject "Push Thought" */;
+			buildConfigurationList = CE241A371AEAE45A00F22144 /* Build configuration list for PBXProject "Oingo" */;
 			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
@@ -829,6 +834,7 @@
 				CE241A481AEAE45A00F22144 /* Oingo.xcdatamodeld in Sources */,
 				CEF1C9011B0E7B79003EFAD1 /* WebViewController.m in Sources */,
 				CE87CACC1AFABA920084C666 /* Program.m in Sources */,
+				CE0E80561B9129B80093453D /* MessageTableViewNoZipCell.m in Sources */,
 				CE2BF9771B3E5A1700AB15AC /* EmailComposerViewController.m in Sources */,
 				CE241A451AEAE45A00F22144 /* AppDelegate.m in Sources */,
 				CEACE5921B4F4BCC007B7D2D /* UpdateDefaults.m in Sources */,
@@ -1058,7 +1064,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		CE241A371AEAE45A00F22144 /* Build configuration list for PBXProject "Push Thought" */ = {
+		CE241A371AEAE45A00F22144 /* Build configuration list for PBXProject "Oingo" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				CE241A601AEAE45A00F22144 /* Debug */,

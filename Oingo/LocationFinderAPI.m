@@ -84,8 +84,9 @@ static CLLocationManager *locationManager;
         }];
     }
     
+    
     ParseAPI *parseAPI = [[ParseAPI alloc]init];
-    parseAPI.MessageTableViewController = self.messageTableViewController;
+    parseAPI.messageTableViewController = self.messageTableViewController;
     CongressFinderAPI *congressFinder = [[CongressFinderAPI alloc]init];
     congressFinder.messageTableViewController = self.messageTableViewController;
     congressFinder.parseAPI = parseAPI;

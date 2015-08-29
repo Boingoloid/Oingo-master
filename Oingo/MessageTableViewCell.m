@@ -120,54 +120,6 @@ CongressPhotoFinderAPI *congressPhotoFinderAPI;
 }
 
 
-- (void) configMessageCellNoZip:(NSIndexPath*)indexPath {
-    NSLog(@"no zip cell");
-    self.zipCodeButton.hidden = NO;
-    self.locationButton.hidden = NO;
-    self.zipLabel.hidden = NO;
-    
-    //Hide all other fields
-    self.targetName.hidden = YES;
-    self.targetTitleLabel.hidden = YES;
-    self.messageImage.hidden = YES;
-    
-    self.sendCount.hidden = YES;
-    self.tweetButton.hidden = YES;
-    self.tweetSuccessImageView.hidden = YES;
-    self.emailButton.hidden = YES;
-    self.phoneButton.hidden = YES;
-    self.webFormButton.hidden = YES;
-
-    //Create Zip look up UI
-    //Add current location look up button
-    self.locationButton = [[UIButton alloc]initWithFrame:CGRectMake(110, 5, 20, 20)];
-    [self.locationButton setBackgroundImage:[UIImage imageNamed:@"location-gray.png"] forState:UIControlStateNormal];
-    self.locationButton.tag = 1111;
-    [self.contentView addSubview:self.locationButton];
-    
-    //Add label accompanying text entry
-    self.zipLabel = [[UILabel alloc]initWithFrame:CGRectMake(159, 8, 150, 15)];
-    self.zipLabel.text = @"or";
-    self.zipLabel.font = [UIFont boldSystemFontOfSize:13];
-    self.zipLabel.textColor = [UIColor blackColor];
-    self.zipLabel.tag = 2222;
-    [self.contentView addSubview:self.zipLabel];
-    
-    //Add button to look up local representatives
-    self.zipCodeButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];  //must have! or won't show
-    self.zipCodeButton.frame = CGRectMake(200, 5, 63, 20);
-    self.zipCodeButton.layer.borderColor = [[UIColor blackColor] CGColor];
-    self.zipCodeButton.layer.borderWidth = .5;
-    self.zipCodeButton.layer.cornerRadius = 8;
-    self.zipCodeButton.clipsToBounds = YES;
-    [self.zipCodeButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
-    [self.zipCodeButton.titleLabel setFont:[UIFont fontWithName:@"HelveticaNeue" size:13.0]];
-    [self.zipCodeButton setBackgroundImage:[UIImage imageNamed:@"lightGrayButtonBackground.png"] forState:UIControlStateNormal];
-    [self.zipCodeButton setTitle:@"Look up" forState:UIControlStateNormal];
-    self.zipCodeButton.tag = 3333;
-    [self.contentView addSubview:self.zipCodeButton];
-}
-
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
     [super setSelected:selected animated:animated];

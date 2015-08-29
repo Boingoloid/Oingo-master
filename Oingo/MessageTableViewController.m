@@ -13,6 +13,7 @@
 #import "MessageTableViewCell.h"
 #import "MessageTableViewMessageCell.h"
 #import "MessageTableViewRepresentativeCell.h"
+#import "MessageTableViewNoZipCell.h"
 #import <QuartzCore/QuartzCore.h>
 #import "PFTwitterUtils+NativeTwitter.h"
 #import <Accounts/Accounts.h>
@@ -511,9 +512,6 @@ NSInteger footerHeight = 1;
     if(isMessageBool){
         MessageTableViewMessageCell *cell = [tableView dequeueReusableCellWithIdentifier:@"CellCategoryMessage" forIndexPath:indexPath];
         // Remove noZip controls
-        [[cell.contentView viewWithTag:1111]removeFromSuperview];
-        [[cell.contentView viewWithTag:2222]removeFromSuperview];
-        [[cell.contentView viewWithTag:3333]removeFromSuperview];
         if (cell == nil){
             NSLog(@"cell was nil");
             cell = [[MessageTableViewMessageCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"CellCategoryMessage"];
@@ -529,7 +527,7 @@ NSInteger footerHeight = 1;
     } else if (isGetLocationBool) {
         //user has no zip or location
         NSLog(@"loading no location cell");
-        MessageTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"Cell" forIndexPath:indexPath];
+        MessageTableViewNoZipCell *cell = [tableView dequeueReusableCellWithIdentifier:@"CellCategoryNoZip" forIndexPath:indexPath];
         cell.layer.cornerRadius = 3;
         [self.tableView addSubview:cell];
         [cell configMessageCellNoZip:indexPath];
@@ -537,10 +535,6 @@ NSInteger footerHeight = 1;
         
     } else if([category isEqualToString:@"Local Representative"]) {
         MessageTableViewRepresentativeCell *cell = [tableView dequeueReusableCellWithIdentifier:@"CellRep" forIndexPath:indexPath];
-        // Remove noZip controls
-        [[cell.contentView viewWithTag:1111]removeFromSuperview];
-        [[cell.contentView viewWithTag:2222]removeFromSuperview];
-        [[cell.contentView viewWithTag:3333]removeFromSuperview];
         NSLog(@"loading local rep cell");
         if (cell == nil){
             NSLog(@"cell was nil");
@@ -555,20 +549,11 @@ NSInteger footerHeight = 1;
         
     } else {
         MessageTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"Cell" forIndexPath:indexPath];
-        
-        // Remove noZip controls
-        [[cell.contentView viewWithTag:1111]removeFromSuperview];
-        [[cell.contentView viewWithTag:2222]removeFromSuperview];
-        [[cell.contentView viewWithTag:3333]removeFromSuperview];
-
-        //[cell.contentView.subviews makeObjectsPerformSelector:@selector(removeFromSuperview)];
         NSLog(@"loading civilian");
-        
         if (cell == nil){
             NSLog(@"cell was nil");
             cell = [[MessageTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"Cell"];
         }
-        
         cell.layer.cornerRadius = 3;
         [self.tableView addSubview:cell];
         messageItem = [self.menuList objectAtIndex:[rowIndex intValue]];

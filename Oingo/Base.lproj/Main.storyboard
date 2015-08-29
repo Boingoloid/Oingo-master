@@ -673,6 +673,47 @@
                                     <segue destination="UVS-hS-LPJ" kind="show" identifier="showMessageOptions" id="cC6-J2-2VS"/>
                                 </connections>
                             </tableViewCell>
+                            <tableViewCell contentMode="scaleToFill" horizontalHuggingPriority="1000" verticalHuggingPriority="1000" horizontalCompressionResistancePriority="200" verticalCompressionResistancePriority="200" selectionStyle="none" indentationWidth="10" reuseIdentifier="CellCategoryNoZip" rowHeight="79" id="I9y-TC-F2A" customClass="MessageTableViewNoZipCell">
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" horizontalHuggingPriority="1000" verticalHuggingPriority="1000" horizontalCompressionResistancePriority="200" verticalCompressionResistancePriority="200" tableViewCell="I9y-TC-F2A" id="POE-Dd-tX8">
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rAK-nU-xCd">
+                                            <rect key="frame" x="102" y="13" width="26" height="24"/>
+                                            <state key="normal" title="Button" image="location-gray.png">
+                                                <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                            </state>
+                                        </button>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Load by:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8nb-gC-ZpS">
+                                            <rect key="frame" x="23" y="15" width="87" height="21"/>
+                                            <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="13"/>
+                                            <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="or" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="x8u-k8-4Eh">
+                                            <rect key="frame" x="162" y="15" width="27" height="21"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                                            <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="C9A-cX-1zp">
+                                            <rect key="frame" x="204" y="16" width="68" height="21"/>
+                                            <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="13"/>
+                                            <state key="normal" title="Enter Zip">
+                                                <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                                <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                            </state>
+                                        </button>
+                                    </subviews>
+                                    <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                </tableViewCellContentView>
+                                <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <inset key="separatorInset" minX="10" minY="0.0" maxX="10" maxY="0.0"/>
+                                <connections>
+                                    <outlet property="locationButton" destination="rAK-nU-xCd" id="mYg-Tn-iOA"/>
+                                    <outlet property="zipCodeButton" destination="C9A-cX-1zp" id="syA-Dy-z7O"/>
+                                </connections>
+                            </tableViewCell>
                             <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="CellRep" rowHeight="75" id="hSg-ik-YTq" customClass="MessageTableViewRepresentativeCell">
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="hSg-ik-YTq" id="j8a-NV-gD6">
@@ -1107,6 +1148,7 @@
         <image name="Web-frame2.png" width="2858" height="1950"/>
         <image name="document-xxl.png" width="256" height="256"/>
         <image name="facebookButtonIconGray.png" width="259" height="259"/>
+        <image name="location-gray.png" width="228" height="228"/>
         <image name="mail-icon-gray.png" width="256" height="256"/>
         <image name="monsanto gas apple.png" width="1065" height="1066"/>
         <image name="phone-gray.png" width="260" height="260"/>
