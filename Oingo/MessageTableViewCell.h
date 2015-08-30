@@ -48,11 +48,6 @@
 @property(nonatomic) UIButton *zipCodeButton;
 @property(nonatomic) UILabel *zipLabel;
 
-
-
-
-
-- (void) configMessageCellNoZip:(NSIndexPath*)indexPath;
 - (void) configMessageContactCell:messageItem indexPath:(NSIndexPath*)indexPath;
 
 @end

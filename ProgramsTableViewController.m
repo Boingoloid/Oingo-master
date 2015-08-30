@@ -32,6 +32,12 @@ NSUInteger numberOfRows = 0;
 
 }
 
+- (NSUInteger)supportedInterfaceOrientations
+{
+    return UIInterfaceOrientationMaskPortrait;
+}
+
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     

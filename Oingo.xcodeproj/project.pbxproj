@@ -13,6 +13,8 @@
 		CE06A2041B31F7C5000D3210 /* ParseFacebookUtilsV4.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CE06A1FE1B31F7C5000D3210 /* ParseFacebookUtilsV4.framework */; };
 		CE06A2051B31F7C5000D3210 /* ParseUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CE06A1FF1B31F7C5000D3210 /* ParseUI.framework */; };
 		CE0E80561B9129B80093453D /* MessageTableViewNoZipCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CE0E80551B9129B80093453D /* MessageTableViewNoZipCell.m */; };
+		CE0E80581B9276600093453D /* light_bulb_icon87.png in Resources */ = {isa = PBXBuildFile; fileRef = CE0E80571B9276600093453D /* light_bulb_icon87.png */; };
+		CE0E805A1B9276690093453D /* light_bulb_icon58.png in Resources */ = {isa = PBXBuildFile; fileRef = CE0E80591B9276690093453D /* light_bulb_icon58.png */; };
 		CE14A8AA1B211B7B0032664C /* SignUpViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CE14A8A91B211B7A0032664C /* SignUpViewController.m */; };
 		CE14A8AD1B2227C60032664C /* LogInViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CE14A8AC1B2227C60032664C /* LogInViewController.m */; };
 		CE14A8B31B22D20B0032664C /* TweetTableViewDemoTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CE14A8B21B22D20B0032664C /* TweetTableViewDemoTableViewController.m */; };
@@ -60,10 +62,6 @@
 		CE87CAC91AFAB9B70084C666 /* ProgramsTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CE87CAC81AFAB9B70084C666 /* ProgramsTableViewCell.m */; };
 		CE87CACC1AFABA920084C666 /* Program.m in Sources */ = {isa = PBXBuildFile; fileRef = CE87CACB1AFABA920084C666 /* Program.m */; };
 		CE99E3871B5EF1ED00ED9D33 /* MarkSentMessageAPI.m in Sources */ = {isa = PBXBuildFile; fileRef = CE99E3861B5EF1ED00ED9D33 /* MarkSentMessageAPI.m */; };
-		CEA79FCA1AEB7CCC00535B06 /* brainwash80.png in Resources */ = {isa = PBXBuildFile; fileRef = CEA79FC91AEB7CCC00535B06 /* brainwash80.png */; };
-		CEA79FCC1AEB942E00535B06 /* brainwash120.png in Resources */ = {isa = PBXBuildFile; fileRef = CEA79FCB1AEB942E00535B06 /* brainwash120.png */; };
-		CEA79FCE1AEB94D900535B06 /* brainwash58.png in Resources */ = {isa = PBXBuildFile; fileRef = CEA79FCD1AEB94D900535B06 /* brainwash58.png */; };
-		CEA79FD01AEB954200535B06 /* brainwash40.png in Resources */ = {isa = PBXBuildFile; fileRef = CEA79FCF1AEB954200535B06 /* brainwash40.png */; };
 		CEA79FD61AEC7C0D00535B06 /* ProgramsTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CEA79FD51AEC7C0D00535B06 /* ProgramsTableViewController.m */; };
 		CEACE5921B4F4BCC007B7D2D /* UpdateDefaults.m in Sources */ = {isa = PBXBuildFile; fileRef = CEACE5911B4F4BCC007B7D2D /* UpdateDefaults.m */; };
 		CEB187911B18F8C400C86955 /* MessageOptionsTableTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CEB187901B18F8C400C86955 /* MessageOptionsTableTableViewController.m */; };
@@ -135,6 +133,8 @@
 		CE06A1FF1B31F7C5000D3210 /* ParseUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = ParseUI.framework; sourceTree = "<group>"; };
 		CE0E80541B9129B80093453D /* MessageTableViewNoZipCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MessageTableViewNoZipCell.h; sourceTree = "<group>"; };
 		CE0E80551B9129B80093453D /* MessageTableViewNoZipCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MessageTableViewNoZipCell.m; sourceTree = "<group>"; };
+		CE0E80571B9276600093453D /* light_bulb_icon87.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = light_bulb_icon87.png; path = Images/light_bulb_icon87.png; sourceTree = "<group>"; };
+		CE0E80591B9276690093453D /* light_bulb_icon58.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = light_bulb_icon58.png; path = Images/light_bulb_icon58.png; sourceTree = "<group>"; };
 		CE14A8A81B211B7A0032664C /* SignUpViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SignUpViewController.h; sourceTree = "<group>"; };
 		CE14A8A91B211B7A0032664C /* SignUpViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SignUpViewController.m; sourceTree = "<group>"; };
 		CE14A8AB1B2227C60032664C /* LogInViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LogInViewController.h; sourceTree = "<group>"; };
@@ -205,10 +205,6 @@
 		CE87CACB1AFABA920084C666 /* Program.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Program.m; sourceTree = "<group>"; };
 		CE99E3851B5EF1ED00ED9D33 /* MarkSentMessageAPI.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MarkSentMessageAPI.h; sourceTree = "<group>"; };
 		CE99E3861B5EF1ED00ED9D33 /* MarkSentMessageAPI.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MarkSentMessageAPI.m; sourceTree = "<group>"; };
-		CEA79FC91AEB7CCC00535B06 /* brainwash80.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = brainwash80.png; path = Images/brainwash80.png; sourceTree = "<group>"; };
-		CEA79FCB1AEB942E00535B06 /* brainwash120.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = brainwash120.png; path = Images/brainwash120.png; sourceTree = "<group>"; };
-		CEA79FCD1AEB94D900535B06 /* brainwash58.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = brainwash58.png; path = Images/brainwash58.png; sourceTree = "<group>"; };
-		CEA79FCF1AEB954200535B06 /* brainwash40.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = brainwash40.png; path = Images/brainwash40.png; sourceTree = "<group>"; };
 		CEA79FD41AEC7C0D00535B06 /* ProgramsTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ProgramsTableViewController.h; path = ../ProgramsTableViewController.h; sourceTree = "<group>"; };
 		CEA79FD51AEC7C0D00535B06 /* ProgramsTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ProgramsTableViewController.m; path = ../ProgramsTableViewController.m; sourceTree = "<group>"; };
 		CEA79FDA1AECA88C00535B06 /* Social.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Social.framework; path = System/Library/Frameworks/Social.framework; sourceTree = SDKROOT; };
@@ -429,9 +425,11 @@
 		CE241A6A1AEAF0D300F22144 /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				CE0E80591B9276690093453D /* light_bulb_icon58.png */,
 				CEEB51971B9122AC00B54228 /* light_bulb_icon60.png */,
 				CEEB51981B9122AC00B54228 /* light_bulb_icon90.png */,
 				CEEB519D1B91240B00B54228 /* light_bulb_icon80.png */,
+				CE0E80571B9276600093453D /* light_bulb_icon87.png */,
 				CEEB519F1B91247600B54228 /* light_bulb_icon120.png */,
 				CED68DCB1B69AE8B0087546D /* 40-menu-alt-512.png */,
 				CED68DC91B6973520087546D /* arrow-down-gray-hi.png */,
@@ -464,10 +462,6 @@
 				CE87CAC11AF9B2570084C666 /* vicegasmask.png */,
 				CE87CABF1AF9945B0084C666 /* last-night-660x330.png */,
 				CE395D871AED5790006786C0 /* twittericon320.png */,
-				CEA79FCB1AEB942E00535B06 /* brainwash120.png */,
-				CEA79FC91AEB7CCC00535B06 /* brainwash80.png */,
-				CEA79FCD1AEB94D900535B06 /* brainwash58.png */,
-				CEA79FCF1AEB954200535B06 /* brainwash40.png */,
 			);
 			name = Images;
 			path = Oingo;
@@ -726,7 +720,6 @@
 				CEE04B9A1B34B9EC00AAF8EA /* lightGrayButtonBackground.png in Resources */,
 				CE46B13C1B044DF300A4D671 /* blackborder.png in Resources */,
 				CEE074441B5F027E00245C56 /* success-icon.png in Resources */,
-				CEA79FD01AEB954200535B06 /* brainwash40.png in Resources */,
 				CE80B5D61AFC0EFB007D69FB /* dailyshow6cover.png in Resources */,
 				CE29AA9A1B3F2BC900676563 /* pelosi.png in Resources */,
 				CEFFDD971B141232005EEC86 /* TwitterKitResources.bundle in Resources */,
@@ -734,8 +727,9 @@
 				CEEF25001B0114C900EFB257 /* monsanto nutrition facts.png in Resources */,
 				CEEB51991B9122AC00B54228 /* light_bulb_icon60.png in Resources */,
 				CEEF25091B016D5400EFB257 /* tweet button.png in Resources */,
-				CEA79FCE1AEB94D900535B06 /* brainwash58.png in Resources */,
+				CE0E80581B9276600093453D /* light_bulb_icon87.png in Resources */,
 				CE46B13E1B044EA700A4D671 /* carousell-borderblack.png in Resources */,
+				CE0E805A1B9276690093453D /* light_bulb_icon58.png in Resources */,
 				CEEB519E1B91240B00B54228 /* light_bulb_icon80.png in Resources */,
 				CEEF25021B011A4B00EFB257 /* monsanto gas apple.png in Resources */,
 				CE6073291B3A85EB007B567C /* mail-icon-gray.png in Resources */,
@@ -744,10 +738,8 @@
 				CE60732D1B3A8CAC007B567C /* document-xxl.png in Resources */,
 				CEEF25041B012FC600EFB257 /* robb frale profile.png in Resources */,
 				CE2BB67D1B8FEEB200568E16 /* light_bulb_white.png in Resources */,
-				CEA79FCA1AEB7CCC00535B06 /* brainwash80.png in Resources */,
 				CEE074421B5EFEE900245C56 /* success.png in Resources */,
 				CE60732B1B3A88FD007B567C /* phone-gray.png in Resources */,
-				CEA79FCC1AEB942E00535B06 /* brainwash120.png in Resources */,
 				CEF14C081B23AD7600EC95A4 /* facebookButtonIconGray.png in Resources */,
 				CEEB51A01B91247600B54228 /* light_bulb_icon120.png in Resources */,
 				CED68DCC1B69AE8B0087546D /* 40-menu-alt-512.png in Resources */,

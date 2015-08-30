@@ -56,12 +56,19 @@ NSInteger sectionHeaderHeight = 16;
 NSInteger headerHeight = 48;
 NSInteger footerHeight = 1;
 
+
+
+
 -(void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     NSLog(@"viewWillApper");
+   
 }
-
-
+- (void)viewWillTransitionToSize:(CGSize)size withTransitionCoordinator:(id<UIViewControllerTransitionCoordinator>)coordinator
+{
+    [self.tableView reloadData];
+    [super viewWillTransitionToSize:size withTransitionCoordinator:coordinator];
+}
 
 - (void)viewDidLoad {
     [super viewDidLoad];

@@ -18,6 +18,10 @@
 @property (weak, nonatomic) IBOutlet UIButton *emailButton;
 @property (weak, nonatomic) IBOutlet UIButton *phoneButton;
 @property (weak, nonatomic) IBOutlet UIButton *webFormButton;
+@property (weak, nonatomic) IBOutlet UILabel *targetName;
+@property (weak, nonatomic) IBOutlet UILabel *sendCount;
+@property (weak, nonatomic) IBOutlet UIImageView *messageImage;
+@property (weak, nonatomic) IBOutlet UILabel *targetTitleLabel;
 
 - (void) configMessageCellNoZip:(NSIndexPath*)indexPath;
 
