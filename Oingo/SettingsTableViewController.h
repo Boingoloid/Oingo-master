@@ -13,5 +13,6 @@
 @property (weak, nonatomic) IBOutlet UISwitch *linkFacebookSwitch;
 - (IBAction)linktwitter:(id)sender;
 - (IBAction)linkfacebook:(id)sender;
+- (IBAction)logout:(id)sender;
 
 @end

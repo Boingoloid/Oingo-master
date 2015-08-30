@@ -106,9 +106,11 @@ NSInteger footerHeight = 1;
     [self.tableView addGestureRecognizer:tapRecognizer];
     
     // Create logout button
-    UIBarButtonItem *logOutButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemBookmarks target:self action:@selector(logout)];
-     [[NSUserDefaults standardUserDefaults] synchronize];
-    self.navigationItem.rightBarButtonItem = logOutButton;
+//    UIImage *image = [UIImage imageWithContentsOfFile:@"settings.png"];
+
+//    UIBarButtonItem *logOutButton = [[UIBarButtonItem alloc] initWithImage:image style:UIBarButtonItemStylePlain target:self action:@selector(logout)];
+//     [[NSUserDefaults standardUserDefaults] synchronize];
+
 }
 
 - (BOOL)gestureRecognizerShouldBegin:(UIGestureRecognizer *)gestureRecognizer
@@ -266,6 +268,9 @@ NSInteger footerHeight = 1;
     NSLog(@"message view controller as signup pushed:%@ and %@",self,signUpViewController.messageTableViewController);
 }
 
+- (IBAction)viewSettings:(id)sender {
+}
+
 - (IBAction)shareSegmentTwitter:(id)sender {
     TwitterAPITweet *twitterAPITweet = [[TwitterAPITweet alloc]init];
     twitterAPITweet.messageTableViewController = self;
@@ -296,19 +301,8 @@ NSInteger footerHeight = 1;
 }
 
 
--(void)logout {
-    //removes zip default
-    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-    [defaults removeObjectForKey:@"zipCode"];
-    [defaults removeObjectForKey:@"latitude"];
-    [defaults removeObjectForKey:@"longitude"];
-    [defaults synchronize];
-    
-    [PFUser logOut];
-    NSLog(@"user logged out");
-    [self viewDidLoad];
-}
-    
+
+
 //    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"\u2699"  style:UIBarButtonItemStylePlain target:nil action:nil];
 //    self.navigationItem.rightBarButtonItem.tintColor = [UIColor whiteColor];
 

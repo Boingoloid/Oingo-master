@@ -95,6 +95,21 @@
     // Dispose of any resources that can be recreated.
 }
 
+
+- (IBAction)logout:(id)sender {
+    //removes zip default
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    [defaults removeObjectForKey:@"zipCode"];
+    [defaults removeObjectForKey:@"latitude"];
+    [defaults removeObjectForKey:@"longitude"];
+    [defaults synchronize];
+    
+    [PFUser logOut];
+    NSLog(@"user logged out");
+    [self viewDidLoad];
+}
+
+
 #pragma mark - Table view data source
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
@@ -204,4 +219,5 @@
     }
     
 }
+
 @end

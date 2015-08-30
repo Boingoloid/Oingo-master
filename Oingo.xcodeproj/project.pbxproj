@@ -15,6 +15,7 @@
 		CE0E80561B9129B80093453D /* MessageTableViewNoZipCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CE0E80551B9129B80093453D /* MessageTableViewNoZipCell.m */; };
 		CE0E80581B9276600093453D /* light_bulb_icon87.png in Resources */ = {isa = PBXBuildFile; fileRef = CE0E80571B9276600093453D /* light_bulb_icon87.png */; };
 		CE0E805A1B9276690093453D /* light_bulb_icon58.png in Resources */ = {isa = PBXBuildFile; fileRef = CE0E80591B9276690093453D /* light_bulb_icon58.png */; };
+		CE0E805E1B9288070093453D /* settings.png in Resources */ = {isa = PBXBuildFile; fileRef = CE0E805D1B9288070093453D /* settings.png */; };
 		CE14A8AA1B211B7B0032664C /* SignUpViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CE14A8A91B211B7A0032664C /* SignUpViewController.m */; };
 		CE14A8AD1B2227C60032664C /* LogInViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CE14A8AC1B2227C60032664C /* LogInViewController.m */; };
 		CE14A8B31B22D20B0032664C /* TweetTableViewDemoTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CE14A8B21B22D20B0032664C /* TweetTableViewDemoTableViewController.m */; };
@@ -135,6 +136,7 @@
 		CE0E80551B9129B80093453D /* MessageTableViewNoZipCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MessageTableViewNoZipCell.m; sourceTree = "<group>"; };
 		CE0E80571B9276600093453D /* light_bulb_icon87.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = light_bulb_icon87.png; path = Images/light_bulb_icon87.png; sourceTree = "<group>"; };
 		CE0E80591B9276690093453D /* light_bulb_icon58.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = light_bulb_icon58.png; path = Images/light_bulb_icon58.png; sourceTree = "<group>"; };
+		CE0E805D1B9288070093453D /* settings.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = settings.png; path = Images/settings.png; sourceTree = "<group>"; };
 		CE14A8A81B211B7A0032664C /* SignUpViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SignUpViewController.h; sourceTree = "<group>"; };
 		CE14A8A91B211B7A0032664C /* SignUpViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SignUpViewController.m; sourceTree = "<group>"; };
 		CE14A8AB1B2227C60032664C /* LogInViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LogInViewController.h; sourceTree = "<group>"; };
@@ -425,6 +427,7 @@
 		CE241A6A1AEAF0D300F22144 /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				CE0E805D1B9288070093453D /* settings.png */,
 				CE0E80591B9276690093453D /* light_bulb_icon58.png */,
 				CEEB51971B9122AC00B54228 /* light_bulb_icon60.png */,
 				CEEB51981B9122AC00B54228 /* light_bulb_icon90.png */,
@@ -752,6 +755,7 @@
 				CE395D881AED5790006786C0 /* twittericon320.png in Resources */,
 				CE87CAC21AF9B2570084C666 /* vicegasmask.png in Resources */,
 				CE87CAC01AF9945B0084C666 /* last-night-660x330.png in Resources */,
+				CE0E805E1B9288070093453D /* settings.png in Resources */,
 				CE29AA961B3F2BB400676563 /* boxer.png in Resources */,
 				CE29AA981B3F2BBD00676563 /* feinstein.png in Resources */,
 				CE46B1381B043A8000A4D671 /* blue_arrow_png_by_maddielovesselly-d4ys3ti (1).png in Resources */,
