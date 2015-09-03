@@ -28,7 +28,7 @@ Segment *segment;
 
 
 - (void) viewWillAppear:(BOOL)animated {
-
+    [super viewWillAppear:YES];
 
 }
 

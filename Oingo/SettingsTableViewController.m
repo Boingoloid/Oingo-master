@@ -20,6 +20,8 @@
 @implementation SettingsTableViewController
 
 -(void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:YES];
+    
     NSLog(@"test will appear!!!!!!!!!!!!!");
     PFUser *currentUser = [PFUser currentUser];
     

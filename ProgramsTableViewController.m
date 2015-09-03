@@ -28,7 +28,7 @@ NSUInteger numberOfRows = 0;
 
 
 -(void)viewWillAppear:(BOOL)animated {
-    
+       [super viewWillAppear:YES]; 
 
 }
 
