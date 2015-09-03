@@ -22,7 +22,6 @@
 -(void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:YES];
     
-    NSLog(@"test will appear!!!!!!!!!!!!!");
     PFUser *currentUser = [PFUser currentUser];
     
     //Set twitter toggle
@@ -60,6 +59,7 @@
         
         //Add OK action button
         UIAlertAction *okAction = [UIAlertAction actionWithTitle:NSLocalizedString(@"OK", @"OK action") style:UIAlertActionStyleDefault handler:^(UIAlertAction *action){
+            [self.navigationController popViewControllerAnimated:YES];
             UIViewController *controller = [self.storyboard instantiateViewControllerWithIdentifier:@"signInViewController"];
             [self.navigationController pushViewController:controller animated:YES];
             NSLog(@"OK action");

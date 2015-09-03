@@ -13,8 +13,9 @@
 @implementation MakePhoneCallAPI
 
 -(void) dialPhoneNumber:(NSString*)phoneNumber {
-    NSURL *phoneUrl = [NSURL URLWithString:[NSString  stringWithFormat:@"telprompt:%@",phoneNumber]];
+    NSURL *phoneUrl = [NSURL URLWithString:[NSString  stringWithFormat:@"tel:%@",phoneNumber]];
     //code for making call, can't test in simulator
+    
     if ([[UIApplication sharedApplication] canOpenURL:phoneUrl]) {
         [[UIApplication sharedApplication] openURL:phoneUrl];
         UIAlertView *calert = [[UIAlertView alloc]initWithTitle:@"Alert" message:@"Fill in message for guidance on making phone call." delegate:nil cancelButtonTitle:@"ok" otherButtonTitles:nil, nil];

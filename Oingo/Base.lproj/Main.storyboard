@@ -182,7 +182,7 @@
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <subviews>
                                 <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="frI-oQ-CHl">
-                                    <rect key="frame" x="8" y="8" width="359" height="33"/>
+                                    <rect key="frame" x="8" y="8" width="584" height="33"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="70o-Qx-PhZ">
                                             <rect key="frame" x="4" y="6" width="322" height="21"/>
@@ -829,7 +829,7 @@
                         <barButtonItem key="rightBarButtonItem" image="settings.png" id="3dP-JS-goB">
                             <connections>
                                 <action selector="viewSettings:" destination="cd8-qO-3PC" id="4Jh-dp-aNZ"/>
-                                <segue destination="aI6-rx-Raw" kind="show" identifier="showSettings" id="pnK-oy-oiI"/>
+                                <segue destination="pMd-EZ-Xws" kind="show" identifier="showSettings" id="Hqv-tA-haT"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
@@ -994,13 +994,6 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" red="0.93725490196078431" green="0.93725490196078431" blue="0.95686274509803926" alpha="1" colorSpace="calibratedRGB"/>
                         <color key="tintColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                        <navigationBar key="tableHeaderView" contentMode="scaleToFill" id="87U-rh-HsB">
-                            <rect key="frame" x="0.0" y="0.0" width="600" height="44"/>
-                            <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
-                            <items>
-                                <navigationItem title="Title" id="KkH-d6-sZG"/>
-                            </items>
-                        </navigationBar>
                         <sections>
                             <tableViewSection id="yOJ-2A-gef">
                                 <cells>
@@ -1100,8 +1093,8 @@
                             <outlet property="delegate" destination="pMd-EZ-Xws" id="Tom-xn-8A7"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" id="Vmu-qp-QiI">
-                        <barButtonItem key="backBarButtonItem" title="back" id="ONw-9J-KjK"/>
+                    <navigationItem key="navigationItem" title="Settings" id="Vmu-qp-QiI">
+                        <barButtonItem key="backBarButtonItem" title="Back" id="ONw-9J-KjK"/>
                     </navigationItem>
                     <connections>
                         <outlet property="linkFacebookSwitch" destination="STs-0c-kRR" id="6US-a1-gPR"/>
@@ -1110,7 +1103,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Qn7-kN-gKn" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3674" y="620"/>
+            <point key="canvasLocation" x="3222" y="603"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="Jvj-7u-IbA">
@@ -1130,24 +1123,6 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="AfQ-h9-5Rl" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="644" y="106"/>
-        </scene>
-        <!--Navigation Controller-->
-        <scene sceneID="lZR-3c-skQ">
-            <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="aI6-rx-Raw" sceneMemberID="viewController">
-                    <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="fG7-Ln-433">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
-                        <autoresizingMask key="autoresizingMask"/>
-                    </navigationBar>
-                    <nil name="viewControllers"/>
-                    <connections>
-                        <segue destination="pMd-EZ-Xws" kind="relationship" relationship="rootViewController" id="ylT-qF-7pM"/>
-                    </connections>
-                </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="6FT-Ln-uRX" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="2862" y="620"/>
         </scene>
     </scenes>
     <resources>

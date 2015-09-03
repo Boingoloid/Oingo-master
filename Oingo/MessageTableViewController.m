@@ -203,7 +203,7 @@ NSInteger footerHeight = 1;
         } else if (CGRectContainsPoint(cell.phoneButton.frame, pointInCell)) {
             NSLog(@"touch in phone area");
             if(!cell.phoneButton.hidden){
-                NSString *phoneNumber =[[cell.phone componentsSeparatedByCharactersInSet:[[NSCharacterSet characterSetWithCharactersInString:@"6177940337"] invertedSet]] componentsJoinedByString:@""];
+                NSString *phoneNumber =[[cell.phone componentsSeparatedByCharactersInSet:[[NSCharacterSet characterSetWithCharactersInString:@"+916177940337"] invertedSet]] componentsJoinedByString:@""];
                 MakePhoneCallAPI *makePhoneCallAPI = [[MakePhoneCallAPI alloc] init];
                 [makePhoneCallAPI dialPhoneNumber:phoneNumber];
             }
