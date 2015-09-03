@@ -40,6 +40,7 @@
                     [self checkTwitterShareForContacts];
                     [self checkFacebookShareForSegment];
                     [self checkEmail];
+                    [self checkPhone];
                     [self.messageTableViewController.tableView reloadData];
                     NSLog(@"MarkSentMessageAPI is reloading tableview");
 
@@ -134,5 +135,35 @@
         }
     }
 }
+
+-(void)checkPhone{
+    for (NSDictionary *dictionary in self.sentMessagesForSegment) {
+        if ([[dictionary valueForKey:@"messageType"] isEqualToString:@"phoneCall"]){
+            
+            // if phone need to grab contact id and flag twitter icon on cell in menulist.
+            NSString *contactID = [dictionary valueForKey:@"contactID"];
+            NSArray *menuList = self.messageTableViewController.menuList;
+            
+            // find the index in menulist where contact is, change flag for twitter icon
+            NSUInteger index = [menuList indexOfObjectPassingTest:
+                                ^BOOL(NSDictionary *dict, NSUInteger idx, BOOL *stop) {
+                                    return [[dict valueForKey:@"contactID"] isEqualToString:contactID];  //but is it called contact id in menulist?
+                                }];
+            
+            if(index == NSNotFound){
+                NSLog(@"no index sent found");
+                // Do nothing
+            } else {
+                // Makes check mark visible on twitter message button
+                NSLog(@"found: marking index that is found %lu",(unsigned long)index);
+                [[self.messageTableViewController.menuList objectAtIndex:index] setValue:@YES forKey:@"isPhoneSent"];
+            }
+        }
+    }
+}
+
+
+
+
 
 @end

@@ -512,7 +512,7 @@
                                             <state key="selected" image="Web-frame2.png"/>
                                         </button>
                                         <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Non-Vu-3jy">
-                                            <rect key="frame" x="149" y="31" width="24" height="26"/>
+                                            <rect key="frame" x="158" y="30" width="24" height="26"/>
                                             <state key="normal" title="Button" image="phone-gray.png">
                                                 <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                             </state>
@@ -531,6 +531,9 @@
                                             </state>
                                             <state key="selected" image="Web-frame2.png"/>
                                         </button>
+                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="success.png" translatesAutoresizingMaskIntoConstraints="NO" id="BpZ-Ha-ny8">
+                                            <rect key="frame" x="173" y="27" width="13" height="13"/>
+                                        </imageView>
                                     </subviews>
                                     <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                     <constraints>
@@ -572,6 +575,7 @@
                                     <outlet property="emailSuccessImageView" destination="H8O-ck-JiV" id="mah-He-zkt"/>
                                     <outlet property="messageImage" destination="SFl-0P-juu" id="cdw-XA-Vgo"/>
                                     <outlet property="phoneButton" destination="Non-Vu-3jy" id="acC-Zo-d1z"/>
+                                    <outlet property="phoneSuccessImageView" destination="BpZ-Ha-ny8" id="4GS-oe-n89"/>
                                     <outlet property="targetName" destination="10F-0X-Niq" id="rAu-2I-hBf"/>
                                     <outlet property="targetTitleLabel" destination="G6z-jT-fiW" id="h3L-aV-Ff2"/>
                                     <outlet property="tweetButton" destination="CIH-Ex-lbw" id="DqI-rw-kzp"/>
@@ -737,7 +741,7 @@
                                             <state key="selected" image="Web-frame2.png"/>
                                         </button>
                                         <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="EPa-bW-Y3O">
-                                            <rect key="frame" x="157" y="30" width="24" height="26"/>
+                                            <rect key="frame" x="158" y="29" width="24" height="26"/>
                                             <state key="normal" title="Button" image="phone-gray.png">
                                                 <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                             </state>
@@ -770,6 +774,9 @@
                                             </state>
                                             <state key="selected" image="Web-frame2.png"/>
                                         </button>
+                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="success.png" translatesAutoresizingMaskIntoConstraints="NO" id="1Zo-o6-k9x">
+                                            <rect key="frame" x="173" y="27" width="13" height="13"/>
+                                        </imageView>
                                     </subviews>
                                     <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                     <constraints>
@@ -811,6 +818,7 @@
                                     <outlet property="emailSuccessImageView" destination="bGy-mQ-Fcd" id="tls-AZ-raL"/>
                                     <outlet property="messageImage" destination="G3W-t6-FYD" id="xvc-K2-l28"/>
                                     <outlet property="phoneButton" destination="EPa-bW-Y3O" id="lSP-5v-LOp"/>
+                                    <outlet property="phoneSuccessImageView" destination="1Zo-o6-k9x" id="IFs-Ek-VuD"/>
                                     <outlet property="targetName" destination="vLE-wG-CRT" id="6E0-o2-VmM"/>
                                     <outlet property="targetTitleLabel" destination="HsB-Qx-mao" id="bLq-u7-1b8"/>
                                     <outlet property="tweetButton" destination="D9u-qi-2aE" id="s3c-Y0-Xcm"/>

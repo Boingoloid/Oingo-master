@@ -21,8 +21,10 @@
 @property (nonatomic, retain) NSString *isGetLocationCell;
 @property (nonatomic, retain) NSString *contactID;
 
+//Success fields
 @property (nonatomic) bool isTweetSent;
 @property (nonatomic) bool isEmailSent;
+@property (nonatomic) bool isPhoneSent;
 
 
 @end

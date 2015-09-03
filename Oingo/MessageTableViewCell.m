@@ -104,6 +104,14 @@ CongressPhotoFinderAPI *congressPhotoFinderAPI;
             self.emailSuccessImageView.hidden = YES;
         }
     
+        //Phone call
+        NSNumber *sendPhoneNumberBool = [messageItem valueForKey:@"isPhoneSent"];
+        bool sendPhoneBool = [sendPhoneNumberBool boolValue];
+        if(sendPhoneBool) {
+            self.phoneSuccessImageView.hidden = NO;
+        } else {
+            self.phoneSuccessImageView.hidden = YES;
+        }
     
         //add information
         self.targetName.text = [NSString stringWithFormat:@"%@ /",[messageItem valueForKey:@"targetName"]];

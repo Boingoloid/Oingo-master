@@ -94,6 +94,18 @@ CongressPhotoFinderAPI *congressPhotoFinderAPI;
             self.tweetSuccessImageView.hidden = YES;
         }
         
+        //Phone call
+        NSNumber *sendPhoneNumberBool = [congressionalMessageItem valueForKey:@"isPhoneSent"];
+        NSLog(@"mark phone triggered");
+        bool sendPhoneBool = [sendPhoneNumberBool boolValue];
+        if(sendPhoneBool) {
+            self.phoneSuccessImageView.hidden = NO;
+        NSLog(@"mark phone no");
+        } else {
+            self.phoneSuccessImageView.hidden = YES;
+        NSLog(@"mark phone no");
+        }
+        
         // Add information from congressional message iterm to properties of cell
         self.targetName.text = [NSString stringWithFormat:@"%@ /",[congressionalMessageItem valueForKey:@"fullName"]];
         self.targetTitleLabel.text = [congressionalMessageItem valueForKey:@"title"];

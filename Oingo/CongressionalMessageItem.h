@@ -48,8 +48,10 @@
 @property (nonatomic, retain) NSString *contactForm;
 //will be separated in a different call and load later
 
-
+//Success fields
 @property (nonatomic) bool isTweetSent;
 @property (nonatomic) bool isEmailSent;
+@property (nonatomic) bool isPhoneSent;
+
 
 @end

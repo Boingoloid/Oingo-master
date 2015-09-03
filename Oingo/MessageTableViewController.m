@@ -225,9 +225,8 @@ NSInteger footerHeight = 1;
                     UIAlertAction *okAction = [UIAlertAction actionWithTitle:NSLocalizedString(@"OK", @"OK action") style:UIAlertActionStyleDefault handler:^(UIAlertAction *action){
 //                        MakePhoneCallAPI *makePhoneCallAPI = [[MakePhoneCallAPI alloc] init];
 //                        [makePhoneCallAPI dialPhoneNumber:phoneNumber];
-                        
-
                         [[UIApplication sharedApplication] openURL:phoneUrl];
+                        [self savePhoneCall:phoneUrl];
                         NSLog(@"OK action");
                     }];
                     [alertController addAction:okAction];
@@ -288,6 +287,48 @@ NSInteger footerHeight = 1;
         }
     }
 }
+
+
+-(void)savePhoneCall:(NSURL*)phoneURL{
+    //  SAVING MESSAGE DATA TO PARSE
+    PFUser *currentUser = [PFUser currentUser];
+    
+    PFObject *sentMessageItem = [PFObject objectWithClassName:@"sentMessages"];
+    [sentMessageItem setObject:@"phoneCall" forKey:@"messageType"];
+    [sentMessageItem setObject:[phoneURL absoluteString] forKey:@"phoneNumber"];
+    [sentMessageItem setObject:[self.selectedSegment valueForKey:@"segmentID"] forKey:@"segmentID"];
+    [sentMessageItem setObject:[currentUser valueForKey:@"username"] forKey:@"username"];
+    NSString *userObjectID = currentUser.objectId;
+    [sentMessageItem setObject:userObjectID forKey:@"userObjectID"];
+    
+    //if segment then skip, else don't
+    if ([self.selectedContact isKindOfClass:[CongressionalMessageItem class]]) {
+        NSLog(@"Saving congressional Message Item Class");
+        NSString *bioguide_id = [self.selectedContact valueForKey:@"bioguide_id"];
+        NSString *fullName = [self.selectedContact valueForKey:@"fullName"];
+        [sentMessageItem setObject:bioguide_id forKey:@"contactID"];
+        [sentMessageItem setObject:fullName forKey:@"contactName"];
+    } else {
+        NSLog(@"Regular Contact Item Class");
+        NSString *contactID = [self.selectedContact valueForKey:@"contactID"];
+        NSString *targetName = [self.selectedContact valueForKey:@"targetName"];
+        [sentMessageItem setObject:contactID forKey:@"contactID"];
+        [sentMessageItem setObject:targetName forKey:@"contactName"];
+    }
+    
+    
+    [sentMessageItem saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) { //save sent message to parse
+        if(error){
+            NSLog(@"error, message not saved");
+        }
+        else {
+            NSLog(@"no error, message saved");
+            [self viewDidLoad];
+        }
+    }];
+
+}
+
 
 /*
 -(void)shareMessageTwitter{

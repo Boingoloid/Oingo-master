@@ -158,7 +158,7 @@
             NSString *userObjectID = currentUser.objectId;
             [sentMessageItem setObject:userObjectID forKey:@"userObjectID"];
             
-            //if segment then skip, else don't
+            //if segment then skip
             
             if ([self.selectedContact isKindOfClass:[CongressionalMessageItem class]]) {
                 NSLog(@"Congressional Message Item Class");
