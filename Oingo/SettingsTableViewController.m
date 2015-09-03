@@ -46,7 +46,7 @@
     PFUser *currentUser = [PFUser currentUser];
     // if user not logged in, alert message send to login
     if(!currentUser){
-        NSString *alertTitle = @"You need to Log In";
+        NSString *alertTitle = @"Not Logged In";
         NSString *alertMessage = @"Would you like to go to Log In?";
         UIAlertController *alertController = [UIAlertController alertControllerWithTitle:alertTitle message:alertMessage preferredStyle:UIAlertControllerStyleAlert];
         

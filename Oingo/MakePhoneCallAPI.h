@@ -10,6 +10,8 @@
 
 @interface MakePhoneCallAPI : NSObject
 
+//@property(nonatomic) MessageTableViewController *messageTableViewController;
+
 -(void) dialPhoneNumber:(NSString*)phoneNumber;
 
 @end
