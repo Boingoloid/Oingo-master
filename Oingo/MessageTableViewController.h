@@ -27,6 +27,7 @@
 @property(nonatomic,copy) NSArray *messageOptionsList;
 @property (nonatomic) NSArray *dataImmutable;
 @property(nonatomic) NSMutableArray *messageListIncludingReps;
+@property(nonatomic) NSArray *congressMessageList;
 @property(nonatomic) NSString *repMessageText;
 @property(nonatomic) NSString *selectedLink;
 @property(nonatomic) Program *selectedProgram;
@@ -37,10 +38,17 @@
 @property(nonatomic) PFUser *currentUser;
 @property(nonatomic) BOOL isRepsLoaded;
 @property(nonatomic) UpdateDefaults *updateDefaults;
+
+
+// segment buttons
 @property (weak, nonatomic) IBOutlet UIButton *segmentTweetButton;
 @property (weak, nonatomic) IBOutlet UIButton *segmentFacebookButton;
+
+// success images
 @property (weak, nonatomic) IBOutlet UIImageView *segmentTweetButtonSuccessImageView;
 @property (weak, nonatomic) IBOutlet UIImageView *segmentFacebookButtonSuccessImageView;
+
+
 - (IBAction)viewSettings:(id)sender;
 
 - (IBAction)shareSegmentTwitter:(id)sender;

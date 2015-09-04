@@ -8,10 +8,18 @@
 
 #import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
+#import "MessageTableViewController.h"
 #import "MessageTableViewCell.h"
 
 @interface CongressPhotoFinderAPI : NSObject
+
 @property(nonatomic) MessageTableViewCell *tableViewCell;
--(void)getPhotos:bioguideID;
+@property(nonatomic) MessageTableViewController *messageTableViewController;
+
+-(void)getPhotos:(NSArray*)congressMessageList;
+
+
+
+
 
 @end

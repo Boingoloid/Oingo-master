@@ -100,10 +100,8 @@ CongressPhotoFinderAPI *congressPhotoFinderAPI;
         bool sendPhoneBool = [sendPhoneNumberBool boolValue];
         if(sendPhoneBool) {
             self.phoneSuccessImageView.hidden = NO;
-        NSLog(@"mark phone no");
         } else {
             self.phoneSuccessImageView.hidden = YES;
-        NSLog(@"mark phone no");
         }
         
         // Add information from congressional message iterm to properties of cell
@@ -126,17 +124,22 @@ CongressPhotoFinderAPI *congressPhotoFinderAPI;
         self.leadershipRole = [self.congressionalMessageItem valueForKey:@"twitterID"];
         
         //add image
-        //    NSString *bioguideID = [congressionalMessageItem valueForKey:@"bioguide_id"];
-        //    [congressPhotoFinderAPI getPhotos:bioguideID];
-        //    congressPhotoFinderAPI.tableViewCell = self;
+//        NSNumber *isNarrowImageNumber = [self.congressionalMessageItem valueForKey:@"isNarrowImage"];
+//        bool isNarrowImage = [isNarrowImageNumber boolValue];
         
+//        if(isNarrowImage){
+//            NSLog(@"narrow image");
+//            self.imageView.contentMode = UIViewContentModeRedraw;
+////            self.messageImage.layer.frame = CGRectMake(9,7,41,50);
+//            [self.messageImage.layer setNeedsDisplayInRect:CGRectMake(9,7,41,50)];
+//        }
         NSString *imageString = [self.congressionalMessageItem valueForKey:@"messageImageString"];
+        NSLog(@"imageString:%@",imageString);
         self.messageImage.image = [UIImage imageNamed:imageString];
         self.messageImage.layer.borderWidth = .5;
         self.messageImage.layer.borderColor = [[UIColor blackColor] CGColor];
         self.messageImage.clipsToBounds = YES;
         self.messageImage.layer.cornerRadius = 3;
-
     }
 }
 

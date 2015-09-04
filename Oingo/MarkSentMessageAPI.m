@@ -13,7 +13,7 @@
 
 
 -(void)markSentMessages{
-    
+    NSLog(@"Mark Sent Triggerd");
     PFUser *currentUser = [PFUser currentUser];
     
     if(!currentUser) {
@@ -34,7 +34,6 @@
         [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
             if (!error) {
                 self.sentMessagesForSegment = objects;
-                NSLog(@"printing mark objects: %@",self.sentMessagesForSegment);
                 dispatch_async(dispatch_get_main_queue(), ^{
                     [self checkTwitterShareForSegment];
                     [self checkTwitterShareForContacts];
@@ -42,7 +41,7 @@
                     [self checkEmail];
                     [self checkPhone];
                     [self.messageTableViewController.tableView reloadData];
-                    NSLog(@"MarkSentMessageAPI is reloading tableview");
+                    NSLog(@"reloading data from MarkSentMessages");
 
                 });
             } else {
@@ -67,18 +66,16 @@
                                 ^BOOL(NSDictionary *dict, NSUInteger idx, BOOL *stop) {
                                     return [[dict valueForKey:@"contactID"] isEqualToString:contactID];  //but is it called contact id in menulist?
                                 }];
-            
             if(index == NSNotFound){
-                NSLog(@"no index sent found");
+                NSLog(@"no index sent found, contactID:%@ / messageType:%@",[dictionary valueForKey:@"contactName"],[dictionary valueForKey:@"messageType"]);
                 // Do nothing
             } else {
                 // Makes check mark visible on twitter message button
-                NSLog(@"found: marking index that is found %lu",(unsigned long)index);
+                NSLog(@"found: marking index that is found, contactID:%@ / messageType:%@",[dictionary valueForKey:@"contactName"],[dictionary valueForKey:@"messageType"]);
                 [[self.messageTableViewController.menuList objectAtIndex:index] setValue:@YES forKey:@"isTweetSent"];
             }
         }
     }
-
 }
 
 -(void)checkTwitterShareForSegment {

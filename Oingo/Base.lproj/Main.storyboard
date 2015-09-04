@@ -754,11 +754,11 @@
                                             </state>
                                             <state key="selected" image="Web-frame2.png"/>
                                         </button>
-                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="G3W-t6-FYD">
-                                            <rect key="frame" x="9" y="7" width="50" height="50"/>
+                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="1000" verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" verticalCompressionResistancePriority="250" translatesAutoresizingMaskIntoConstraints="NO" id="G3W-t6-FYD">
+                                            <rect key="frame" x="9" y="7" width="41" height="50"/>
                                             <constraints>
                                                 <constraint firstAttribute="height" constant="50" id="sb6-kn-LwN"/>
-                                                <constraint firstAttribute="width" constant="50" id="xYe-xk-6Uy"/>
+                                                <constraint firstAttribute="width" constant="41" id="xYe-xk-6Uy"/>
                                             </constraints>
                                         </imageView>
                                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="success.png" translatesAutoresizingMaskIntoConstraints="NO" id="sC8-x7-qgc">
@@ -784,7 +784,7 @@
                                         <constraint firstItem="HsB-Qx-mao" firstAttribute="leading" secondItem="vLE-wG-CRT" secondAttribute="trailing" constant="12" id="8fH-X4-tyy"/>
                                         <constraint firstItem="vLE-wG-CRT" firstAttribute="leading" secondItem="G3W-t6-FYD" secondAttribute="leading" constant="58" id="8fj-9A-FvB"/>
                                         <constraint firstAttribute="trailingMargin" secondItem="vLE-wG-CRT" secondAttribute="trailing" constant="532" id="8rL-E1-Wwf"/>
-                                        <constraint firstItem="G3W-t6-FYD" firstAttribute="top" secondItem="vLE-wG-CRT" secondAttribute="bottom" constant="-16" id="Iba-L9-tQi"/>
+                                        <constraint firstItem="G3W-t6-FYD" firstAttribute="top" secondItem="vLE-wG-CRT" secondAttribute="bottom" constant="-18" id="Iba-L9-tQi"/>
                                         <constraint firstItem="HsB-Qx-mao" firstAttribute="leading" secondItem="vLE-wG-CRT" secondAttribute="trailing" constant="2" id="OWg-j6-8BV"/>
                                         <constraint firstItem="vLE-wG-CRT" firstAttribute="leading" secondItem="j8a-NV-gD6" secondAttribute="leadingMargin" constant="10" id="RzI-we-kmk"/>
                                         <constraint firstItem="HsB-Qx-mao" firstAttribute="bottom" secondItem="vLE-wG-CRT" secondAttribute="bottom" constant="1" id="XPT-px-heW"/>
@@ -792,7 +792,7 @@
                                         <constraint firstItem="vLE-wG-CRT" firstAttribute="top" secondItem="j8a-NV-gD6" secondAttribute="topMargin" constant="5" id="jKF-8i-G8m"/>
                                         <constraint firstItem="vLE-wG-CRT" firstAttribute="top" secondItem="j8a-NV-gD6" secondAttribute="topMargin" constant="1" id="lkU-Zv-GDm"/>
                                         <constraint firstItem="vLE-wG-CRT" firstAttribute="leading" secondItem="j8a-NV-gD6" secondAttribute="leadingMargin" constant="59" id="o3X-ph-fB7"/>
-                                        <constraint firstItem="G3W-t6-FYD" firstAttribute="top" secondItem="vLE-wG-CRT" secondAttribute="bottom" constant="-16" id="pGT-Xs-tDs"/>
+                                        <constraint firstItem="G3W-t6-FYD" firstAttribute="top" secondItem="vLE-wG-CRT" secondAttribute="bottom" constant="-18" id="pGT-Xs-tDs"/>
                                         <constraint firstItem="HsB-Qx-mao" firstAttribute="leading" secondItem="vLE-wG-CRT" secondAttribute="trailing" constant="12" id="ruU-SU-ZVM"/>
                                         <constraint firstItem="G3W-t6-FYD" firstAttribute="leading" secondItem="j8a-NV-gD6" secondAttribute="leadingMargin" constant="1" id="u8X-l1-nnc"/>
                                         <constraint firstItem="vLE-wG-CRT" firstAttribute="centerY" secondItem="HsB-Qx-mao" secondAttribute="centerY" id="vbW-zr-TxM"/>
@@ -800,6 +800,7 @@
                                     </constraints>
                                     <variation key="default">
                                         <mask key="constraints">
+                                            <exclude reference="pGT-Xs-tDs"/>
                                             <exclude reference="8rL-E1-Wwf"/>
                                             <exclude reference="RzI-we-kmk"/>
                                             <exclude reference="jKF-8i-G8m"/>

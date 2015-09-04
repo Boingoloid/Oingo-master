@@ -21,30 +21,20 @@
 
 -(void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:YES];
-    
-    PFUser *currentUser = [PFUser currentUser];
-    
-    //Set twitter toggle
-    if([PFTwitterUtils isLinkedWithUser:currentUser]){
-        [self.linkTwitterSwitch setOn:YES animated:NO];
-    } else {
-        [self.linkTwitterSwitch setOn:NO animated:NO];
-    }
-    
-    // Set facebook toggle
-    if([PFFacebookUtils isLinkedWithUser:currentUser]){
-        [self.linkFacebookSwitch setOn:YES animated:NO];
-    } else {
-        [self.linkFacebookSwitch setOn:NO animated:NO];
-    }
-    
 }
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    //Set twitter toggle to off
+    [self.linkTwitterSwitch setOn:NO animated:NO];
+    
+    // Set facebook toggle to off
+    [self.linkFacebookSwitch setOn:NO animated:NO];
+    
     PFUser *currentUser = [PFUser currentUser];
     // if user not logged in, alert message send to login
+    
     if(!currentUser){
         NSString *alertTitle = @"Not Logged In";
         NSString *alertMessage = @"Would you like to go to Log In?";
@@ -65,6 +55,7 @@
             NSLog(@"OK action");
         }];
         [alertController addAction:okAction];
+        [self.view addSubview:alertController.view];
         [self presentViewController:alertController animated:YES completion:nil];
     } else {
         
@@ -108,6 +99,8 @@
     
     [PFUser logOut];
     NSLog(@"user logged out");
+    
+    [self.navigationController popViewControllerAnimated:YES];
     [self viewDidLoad];
 }
 

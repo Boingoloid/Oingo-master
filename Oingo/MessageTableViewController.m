@@ -50,25 +50,10 @@
 MessageItem *messageItem;
 CongressionalMessageItem *congressionalMessageItem;
 
-
 NSInteger section;
 NSInteger sectionHeaderHeight = 16;
 NSInteger headerHeight = 48;
 NSInteger footerHeight = 1;
-
-
-
-
--(void)viewWillAppear:(BOOL)animated {
-    [super viewWillAppear:animated];
-    NSLog(@"viewWillApper");
-   
-}
-- (void)viewWillTransitionToSize:(CGSize)size withTransitionCoordinator:(id<UIViewControllerTransitionCoordinator>)coordinator
-{
-    [self.tableView reloadData];
-    [super viewWillTransitionToSize:size withTransitionCoordinator:coordinator];
-}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -80,11 +65,6 @@ NSInteger footerHeight = 1;
     //hidding tweet success
     self.segmentTweetButtonSuccessImageView.hidden = YES;
     self.segmentFacebookButtonSuccessImageView.hidden = YES;
-    
-    // Get menu data from parse
-    ParseAPI *parseAPI = [[ParseAPI alloc]init];
-    parseAPI.messageTableViewController = self;
-    [parseAPI getParseMessageData:self.selectedSegment];
     
     // Format table header
     self.tableHeaderView.layer.borderColor = [[UIColor whiteColor] CGColor];
@@ -105,12 +85,31 @@ NSInteger footerHeight = 1;
     [tapRecognizer setCancelsTouchesInView:NO];
     [self.tableView addGestureRecognizer:tapRecognizer];
     
-    // Create logout button
-//    UIImage *image = [UIImage imageWithContentsOfFile:@"settings.png"];
+    // Get menu data from parse
+    ParseAPI *parseAPI = [[ParseAPI alloc]init];
+    parseAPI.messageTableViewController = self;
+    [parseAPI getParseMessageData:self.selectedSegment];
+
 
 //    UIBarButtonItem *logOutButton = [[UIBarButtonItem alloc] initWithImage:image style:UIBarButtonItemStylePlain target:self action:@selector(logout)];
 //     [[NSUserDefaults standardUserDefaults] synchronize];
 
+}
+
+-(void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    NSLog(@"viewWillApper");
+    
+}
+- (void)viewWillTransitionToSize:(CGSize)size withTransitionCoordinator:(id<UIViewControllerTransitionCoordinator>)coordinator
+{
+    [self.tableView reloadData];
+    [super viewWillTransitionToSize:size withTransitionCoordinator:coordinator];
+}
+
+
+-(void)viewDidAppear:(BOOL)animated{
+    NSLog(@"viewDidAppear");
 }
 
 - (BOOL)gestureRecognizerShouldBegin:(UIGestureRecognizer *)gestureRecognizer
@@ -546,9 +545,6 @@ NSInteger footerHeight = 1;
                 }];
             }
             
-//            ParseAPI *parseAPI = [[ParseAPI alloc]init];
-//            parseAPI.MessageTableViewController = self;
-//            [parseAPI getParseMessageData:self.selectedSegment];
             [self viewDidLoad];
         }
     }];
@@ -789,13 +785,10 @@ NSInteger footerHeight = 1;
 
 #pragma mark - Navigation
 
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     
     if([segue.identifier isEqualToString:@"showMessageOptions"]){
         NSIndexPath *indexPath = [self.tableView indexPathForCell:sender];
-        NSLog(@"indexPath:%@",indexPath);
         NSString *category= [self categoryForSection:indexPath.section];
         NSArray *rowIndecesInSection = [self.sections objectForKey:category];
         NSNumber *rowIndex = [rowIndecesInSection objectAtIndex:indexPath.row]; //pulling the row indece from array above
@@ -810,8 +803,6 @@ NSInteger footerHeight = 1;
         messageOptionsViewController.menuList = self.menuList;
     }
     
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
 }
 
 

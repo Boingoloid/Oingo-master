@@ -58,10 +58,14 @@ BOOL isNewAccountSignup = NO;
         [alertView show];
     }
     else {
+        
+        //Assign newUser values
         PFUser *newUser = [PFUser user];
         newUser.username = email;
         newUser.email = email;
         newUser.password = password;
+        
+        //Save the user
         [newUser signUpInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
             if (error) {
                 UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Sorry!"message:[error.userInfo objectForKey:@"error"] delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
@@ -69,7 +73,10 @@ BOOL isNewAccountSignup = NO;
                 NSLog(@"there was an error %@",newUser.email);
             }
             else {
-                [self popToMessagesController];
+                dispatch_async(dispatch_get_main_queue(),^{
+                    [self popToMessagesController];
+                });
+
                 NSLog(@"no error %@",newUser.email);
             }
         }];
@@ -86,10 +93,18 @@ BOOL isNewAccountSignup = NO;
                 NSLog(@"Uh oh. The user cancelled the Facebook login.");
             } else if (user.isNew) {
                 NSLog(@"User signed up and logged in through Facebook!");
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    [self popToMessagesController];
+                });
                 [self updateFacebookUserData];
                 isNewAccountSignup = YES;
             } else {
                 NSLog(@"User logged in through Facebook!");
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    [self.messageTableViewController viewDidLoad];
+                    NSLog(@"viewDidLoad from SignUp");
+                    [self popToMessagesController];
+                });
                 [self updateFacebookUserData];
 //                [FBSDKProfile currentProfile];
 //                [FBSDKProfile enableUpdatesOnAccessTokenChange:YES];
@@ -97,6 +112,11 @@ BOOL isNewAccountSignup = NO;
         }];
 }
 
+
+-(void)popToMessagesController {
+    int viewsToPopAfterSignUp = 1; //Pop 1 views (signup)  Remember index starts at 0.
+    [self.navigationController popToViewController:[self.navigationController.viewControllers objectAtIndex: self.navigationController.viewControllers.count-viewsToPopAfterSignUp-1] animated:YES];
+}
 
 -(void)updateFacebookUserData {
     FBSDKGraphRequest *requestMe = [[FBSDKGraphRequest alloc]initWithGraphPath:@"me" parameters:@{@"fields": @"id,name,link,first_name, last_name, picture.type(large), email, birthday,location ,hometown , gender, timezone, updated_time, verified"}];
@@ -106,6 +126,10 @@ BOOL isNewAccountSignup = NO;
             NSLog(@"There has been an error retrieving fb data for user");
         }
         else {
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [self popToMessagesController];
+            });
+            
             [self updateAllFacebookFields:result];
         }
     }];
@@ -141,12 +165,10 @@ BOOL isNewAccountSignup = NO;
         }
         else {
             NSLog(@"no error, email was updated fine");
-            dispatch_async(dispatch_get_main_queue(), ^{
-                [self popToMessagesController];
-            });
         }
     }];
 }
+
 -(void) showDuplicateEmailAlert:(NSString *)email {
     if(isNewAccountSignup) {
         [PFUser logOut];
@@ -170,12 +192,6 @@ BOOL isNewAccountSignup = NO;
     [self presentViewController:alertController animated:YES completion:nil];
 }
 
--(void)popToMessagesController {
-    int viewsToPopAfterSignUp = 1; //Pop 1 views (signup)  Remember index starts at 0.
-    [self.navigationController popToViewController:[self.navigationController.viewControllers objectAtIndex: self.navigationController.viewControllers.count-viewsToPopAfterSignUp-1] animated:YES];
-    [self.messageTableViewController viewDidLoad];
-
-}
 
 
 - (void)didReceiveMemoryWarning {

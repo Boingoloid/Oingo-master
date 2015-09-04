@@ -44,8 +44,10 @@ Segment *segment;
     [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
         if (!error) {
             self.segmentList = objects;
-            [self prepSegmentSections:self.segmentList];
-            [self.tableView reloadData];
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [self prepSegmentSections:self.segmentList];
+                [self.tableView reloadData];
+            });
         } else {
             NSLog(@"Error: %@ %@", error, [error userInfo]);
         }
@@ -88,9 +90,7 @@ Segment *segment;
         // Capture useful data and deselect row
         UITableView *tableView = (UITableView *)tap.view;
         CGPoint p = [tap locationInView:tap.view];
-        NSLog(@"%@",NSStringFromCGPoint(p));
         NSIndexPath* indexPath = [tableView indexPathForRowAtPoint:p];
-        NSLog(@"index path from point p touch:%@",indexPath);
         [tableView deselectRowAtIndexPath:indexPath animated:NO];
         
         ProgramDetailTableViewCell *cell = (ProgramDetailTableViewCell *)[tableView cellForRowAtIndexPath:indexPath];
@@ -113,7 +113,6 @@ Segment *segment;
 }
 
 -(void)prepSegmentSections:segmentList {
-    NSLog(@"Prep Segment sections triggered");
     
     if(self.sections){
         [self.sections removeAllObjects];

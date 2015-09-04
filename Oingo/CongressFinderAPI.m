@@ -19,10 +19,50 @@
 @implementation CongressFinderAPI
 
 
+-(void)getCongressWithLatitude:(double)latitude andLongitude:(double)longitude addToMessageList:(NSMutableArray*)messageList {
+    // Method called when finding representatives by Lat/Long
+    
+    // Search if get location cell is there and if so delete it
+    NSUInteger index = [messageList indexOfObjectPassingTest:
+                        ^BOOL(NSDictionary *dict, NSUInteger idx, BOOL *stop) {
+                            return [[dict objectForKey:@"isGetLocationCell"] isEqual:@YES];
+                        }];
+    if(index == NSNotFound){
+        NSLog(@"did not find 'get location' line");
+
+    } else {
+        NSLog(@"did find 'no location' line and deleted it");
+        [messageList removeObjectAtIndex:index];
+    }
+    
+    self.messageList = messageList;
+    
+    
+    NSString *sunlightLabsAPIKey = @"ed7f6bb54edc4577943dcc588664c89f";
+    NSString *baseURL = @"https://congress.api.sunlightfoundation.com";
+    NSString *method =@"/legislators/locate?";
+    NSString *urlString = [NSString stringWithFormat:@"%@%@latitude=%%2B%f&longitude=%f&apikey=%@",baseURL,method,latitude,longitude,sunlightLabsAPIKey];
+    [self getCongressData:urlString];
+}
+
 
 -(void) getCongress:zipCode addToMessageList:(NSMutableArray*)messageList {
     // Method called when finding representatives by zipCode
-
+    
+    // Search if get location cell is there and if so delete it
+    NSUInteger index = [messageList indexOfObjectPassingTest:
+                        ^BOOL(NSDictionary *dict, NSUInteger idx, BOOL *stop) {
+                            return [[dict objectForKey:@"isGetLocationCell"] isEqual:@YES];
+                        }];
+    if(index == NSNotFound){
+        NSLog(@"did not find 'get location' line");
+        
+    } else {
+        NSLog(@"did find 'no location' line and deleted it");
+        [messageList removeObjectAtIndex:index];
+    }
+    
+    
     self.messageList = messageList;
     
     NSString *sunlightLabsAPIKey = @"ed7f6bb54edc4577943dcc588664c89f";
@@ -31,33 +71,6 @@
     NSString *urlString = [NSString stringWithFormat:@"%@%@%@&apikey=%@", baseURL,method,zipCode,sunlightLabsAPIKey];
     [self getCongressData:urlString];
     
-}
-    // Method called when finding representatives by Lat/Long
--(void)getCongressWithLatitude:(double)latitude andLongitude:(double)longitude addToMessageList:(NSMutableArray*)messageList {
-    
-    
-    NSUInteger index = [messageList indexOfObjectPassingTest:
-                        ^BOOL(NSDictionary *dict, NSUInteger idx, BOOL *stop) {
-                            return [[dict objectForKey:@"isGetLocationCell"] isEqual:@YES];
-                        }];
-    if(index == NSNotFound){
-        NSLog(@"did not find line");
-
-    } else {
-        NSLog(@"did find line and deleted it");
-        [messageList removeObjectAtIndex:index];
-    }
-    
-    self.messageList = messageList;
-    
-    
-    
-    NSLog(@"message list in get congress with location%@",self.messageList);
-    NSString *sunlightLabsAPIKey = @"ed7f6bb54edc4577943dcc588664c89f";
-    NSString *baseURL = @"https://congress.api.sunlightfoundation.com";
-    NSString *method =@"/legislators/locate?";
-    NSString *urlString = [NSString stringWithFormat:@"%@%@latitude=%%2B%f&longitude=%f&apikey=%@",baseURL,method,latitude,longitude,sunlightLabsAPIKey];
-    [self getCongressData:urlString];
 }
 
 -(void)getCongressData:(NSString*)urlString {
@@ -79,8 +92,6 @@
     //get congress data using url
     NSURLSessionDataTask *dataTask = [session dataTaskWithURL:url];
     [dataTask resume];
-    
-    NSLog(@"session created");
     NSLog(@"url:%@",url);
 }
 
@@ -99,9 +110,7 @@
     
     self.messageTableViewController.isRepsLoaded = YES;
     
-    dispatch_async(dispatch_get_main_queue(), ^{
-        [self.parseAPI prepSections:self.messageListWithCongress];
-    });
+    [self.parseAPI prepSections:self.messageListWithCongress];
 }
 
 
@@ -149,19 +158,23 @@
         [congressionalMessageItem setValue:[congresspersonObject valueForKey:@"last_name"] forKey:@"lastName"];
         congressionalMessageItem.fullName = [NSString stringWithFormat:@"%@ %@",congressionalMessageItem.firstName,congressionalMessageItem.lastName];
         
-        //load dummy images
-        [congressionalMessageItem setValue:[NSString stringWithFormat:@"%@.png",[congressionalMessageItem.lastName lowercaseString]] forKey:@"messageImageString"];
+
+
         
         //Senator, CA District 12
         congressionalMessageItem.state = [congresspersonObject valueForKey:@"state"];
         
+        //load dummy images based on chamber
         if([[congresspersonObject valueForKey:@"chamber"] isEqualToString:@"senate"]) {
             congressionalMessageItem.chamber = @"Senator";
             congressionalMessageItem.title = [NSString stringWithFormat:@"%@, %@",congressionalMessageItem.chamber,congressionalMessageItem.state];
+            congressionalMessageItem.messageImageString = [NSString stringWithFormat:@"Seal_of_Senate_Cropped.png"];
+             
         } else {
             congressionalMessageItem.chamber = @"Representative";
             congressionalMessageItem.district = [congresspersonObject valueForKey:@"district"];
             congressionalMessageItem.title = [NSString stringWithFormat:@"%@, %@ district %@",congressionalMessageItem.chamber,congressionalMessageItem.state,congressionalMessageItem.district];
+            congressionalMessageItem.messageImageString = [NSString stringWithFormat:@"Seal_of_Congress_Cropped.png"];
         }
 
         
@@ -190,6 +203,8 @@
     }
     //now add the two arrays together.
     NSMutableArray *newMessageList = (NSMutableArray*)[messageList arrayByAddingObjectsFromArray:congressMessageList];
+    self.messageTableViewController.congressMessageList = (NSArray*)congressMessageList;
+    
     return newMessageList;
 }
 

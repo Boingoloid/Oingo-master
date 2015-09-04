@@ -36,6 +36,7 @@
 @property (nonatomic, retain) NSString *isCollapsed;
 @property (nonatomic, retain) NSString *orderInCategory;
 @property (nonatomic, assign) NSString *isGetLocationCell;
+@property (nonatomic) bool isNarrowImage;
 
 
 ////social identifiers and contact info
@@ -47,6 +48,8 @@
 @property (nonatomic, retain) NSString *twitterID;
 @property (nonatomic, retain) NSString *contactForm;
 //will be separated in a different call and load later
+
+
 
 //Success fields
 @property (nonatomic) bool isTweetSent;

@@ -90,7 +90,9 @@ BOOL isNewAccount = NO;
                 UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Sorry!" message:[error.userInfo objectForKey:@"error"] delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
                 [alertView show];
             } else {
-                [self popToMessagesController];
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    [self popToMessagesController];
+                });
             }
         }];
     }
@@ -106,10 +108,16 @@ BOOL isNewAccount = NO;
                 NSLog(@"Uh oh. The user cancelled the Facebook login.");
             } else if (user.isNew) {
                 NSLog(@"User signed up and logged in through Facebook!");
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    [self popToMessagesController];
+                });
                 [self updateFacebookUserData];
                 isNewAccount = YES;
             } else {
                 NSLog(@"User logged in through Facebook!");
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    [self popToMessagesController];
+                });
                 [self updateFacebookUserData];
             }
             
@@ -122,13 +130,17 @@ BOOL isNewAccount = NO;
                 NSLog(@"Uh oh. The user cancelled the Facebook login.");
             } else if (user.isNew) {
                 NSLog(@"User signed up and logged in through Facebook!");
-//                [self popToMessagesController];
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    [self popToMessagesController];
+                });
                 [self updateFacebookUserData];
                 isNewAccount = YES;
 
             } else {
                 NSLog(@"User logged in through Facebook!");
-//                [self popToMessagesController];
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    [self popToMessagesController];
+                });
                 [self updateFacebookUserData];
 
             }
@@ -183,16 +195,12 @@ BOOL isNewAccount = NO;
         }
         else {
             NSLog(@"no error, email was updated fine");
-            //            [self.messageTableViewController.tableView reloadData];
             
-            
-            
-    
             dispatch_async(dispatch_get_main_queue(), ^{
+                [self.messageTableViewController viewDidLoad];
+                NSLog(@"viewDidLoad from Login");
                 [self popToMessagesController];
             });
-
-            
         }
     }];
 }
@@ -202,11 +210,7 @@ BOOL isNewAccount = NO;
     int viewsToPopAfterLogin = 2; //Pop 2 views (signup and login)  Remember index starts at 0.
     [self.navigationController popToViewController:[self.navigationController.viewControllers objectAtIndex: self.navigationController.viewControllers.count-viewsToPopAfterLogin-1] animated:YES];
     [self.messageTableViewController.view setNeedsDisplay];
-    NSLog(@"reloading table from login");
-    [self.messageTableViewController viewDidLoad];
-    
-    
-    
+
 }
 
 

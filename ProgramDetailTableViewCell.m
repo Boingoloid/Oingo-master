@@ -36,7 +36,7 @@
     [dateFormatter setTimeStyle:NSDateFormatterNoStyle];
     NSDate *date =[segment valueForKey:@"dateReleased"];
     NSString *formattedDateString = [dateFormatter stringFromDate:date];
-    NSLog(@"formattedDateString: %@", formattedDateString);
+//    NSLog(@"formattedDateString: %@", formattedDateString);
 
 
     self.dateLabel.text = formattedDateString;

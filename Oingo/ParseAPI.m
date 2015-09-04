@@ -12,6 +12,7 @@
 #import "MessageItem.h"
 #import "CongressionalMessageItem.h"
 #import "CongressFinderAPI.h"
+#import "CongressPhotoFinderAPI.h"
 #import "MarkSentMessageAPI.h"
 
 
@@ -23,8 +24,9 @@
 @implementation ParseAPI
 
 BOOL isMenuWithCustomOrdering = NO;
-BOOL isLocalRepIncluded = NO;
+BOOL isLocalRepMessageIncluded = NO;
 BOOL isLocationInfoAvailable = NO;
+BOOL isZipAvailable = NO;
 BOOL isCoordinateInfoAvailable = NO;
 
 
@@ -36,10 +38,8 @@ BOOL isCoordinateInfoAvailable = NO;
 }
 
 
-
-
 -(void)getParseMessageData:(Segment*)selectedSegment{  //get parse messge data for selectedSegment
-    
+    NSLog(@"Parse API");
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     NSLog(@"defaults zip:%@ lat:%@",[defaults valueForKey:@"zipCode"],[defaults valueForKey:@"latitude"]);
     
@@ -59,40 +59,50 @@ BOOL isCoordinateInfoAvailable = NO;
     [query whereKey:@"segmentID" equalTo:[selectedSegment valueForKey:@"segmentID"]];
     [query orderByDescending:@"messageCategory"];
     [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
-        if (!error) {
-            self.messageListFromParseWithContacts = (NSMutableArray*)[self createDeepCopyOfData:objects];
-
+        if(!error){
             
-            //is there a messsage for Local Rep in table?  If yes, then load congress data, if no, then don't
-            //First, grab index of Local Rep.
-            NSUInteger indexLocalRep = [self.messageListFromParseWithContacts indexOfObjectPassingTest:
-                                               ^BOOL(NSDictionary *dict, NSUInteger idx, BOOL *stop) {
-                                                   return [[dict objectForKey:@"messageCategory"] isEqual:@"Local Representative"];
-                                               }];
-            // If index is found, then proceed, else do nothing (CongressFinder is bypassed)
-            if (indexLocalRep == NSNotFound){
-                NSLog(@"No Local Rep entry in table, therefore do not load Local Rep data");
-                isLocalRepIncluded = NO;
-            } else {
-                //If there location, it load congress by coordinates first, then its tries zipCode
-                isLocalRepIncluded = YES;
+            dispatch_async(dispatch_get_main_queue(), ^{
                 
-                // Index found for Local Rep entry: Now load Congress, if not, bypass
-                if(!isLocationInfoAvailable) { //if no location info, then just prep and load it.
-                    NSLog(@"Loading parse data with no congress peoeple");
-                    [self prepSections:self.messageListFromParseWithContacts];
-                } else { //user has location info
-                    CongressFinderAPI *congressFinder = [[CongressFinderAPI alloc]init];
-                    congressFinder.messageTableViewController = self.messageTableViewController;
-                    congressFinder.parseAPI = self;
-                   
-                    if(isCoordinateInfoAvailable) {
-                        [congressFinder getCongressWithLatitude:[defaults doubleForKey:@"latitude"] andLongitude:[defaults doubleForKey:@"longitude"] addToMessageList:(NSMutableArray*)self.messageListFromParseWithContacts];
-                    } else {
-                        [congressFinder getCongress:[defaults valueForKey:@"zipCode"] addToMessageList:self.messageListFromParseWithContacts];
+                self.messageListFromParseWithContacts = (NSMutableArray*)[self createDeepCopyOfData:objects];
+                
+                //Is there a messsage for Local Rep in table?  If yes, then load congress data, if no, then don't
+                //First, grab index of Local Rep.
+                NSUInteger indexLocalRep = [self.messageListFromParseWithContacts indexOfObjectPassingTest:
+                                                   ^BOOL(NSDictionary *dict, NSUInteger idx, BOOL *stop) {
+                                                       return [[dict objectForKey:@"messageCategory"] isEqual:@"Local Representative"];
+                                                   }];
+                
+                // If index is found, then proceed, else do nothing (CongressFinder is bypassed)
+                if (indexLocalRep == NSNotFound){
+                    NSLog(@"No Local Rep entry in table, therefore do not load Local Rep data");
+                    isLocalRepMessageIncluded = NO;
+                    
+                } else { //Local Rep is found
+                    isLocalRepMessageIncluded = YES;
+                    
+                    
+                    if(!isLocationInfoAvailable) { // no location info, then just prep and load it.
+                        NSLog(@"Loading parse data with no congress peoeple");
+                        [self prepSections:self.messageListFromParseWithContacts];  //PREP SECTIONS
+                        
+                        
+                    } else { //user has location info - initiate congressFinder
+                        CongressFinderAPI *congressFinder = [[CongressFinderAPI alloc]init];
+                        congressFinder.messageTableViewController = self.messageTableViewController;
+                        congressFinder.parseAPI = self;
+                       
+                        if(isCoordinateInfoAvailable) {
+                            
+                            //congressFinder gets a list of congress people (by lat/long) and adds it to parse data
+                            [congressFinder getCongressWithLatitude:[defaults doubleForKey:@"latitude"] andLongitude:[defaults doubleForKey:@"longitude"] addToMessageList:(NSMutableArray*)self.messageListFromParseWithContacts];
+                            
+                        } else {
+                            //congressFinder gets a list of congress people (by zip) and adds it to parse data
+                            [congressFinder getCongress:[defaults valueForKey:@"zipCode"] addToMessageList:self.messageListFromParseWithContacts];
+                        }
                     }
                 }
-            }
+            });
         }
     }];
 }
@@ -151,141 +161,17 @@ BOOL isCoordinateInfoAvailable = NO;
     NSMutableArray* allDataDeepCopyArray = [NSKeyedUnarchiver unarchiveObjectWithData:[NSKeyedArchiver archivedDataWithRootObject:allDataTempArray]];
     
     self.messageOptionsList = messagesDeepCopyArray;
+    NSLog(@"menulist%@",self.messageTableViewController.menuList);
     return allDataDeepCopyArray;
+
     
 }
 
 
-- (void)encodeWithCoder:(NSCoder *)coder
-{
-    NSLog(@"encode is firing");
-    [coder encodeObject:self.messageOptionsList];
-}
-
-- (instancetype)initWithCoder:(NSCoder *)coder
-{
-    self = [super init];
-    if (self) {
-        self.messageOptionsList = [coder decodeObjectForKey:@"messageOptionList"];
-        NSLog(@"initwithcoder firing");
-    }
-    return self;
-}
 
 
--(void) separateMessagesFromContacts:(NSMutableArray*)messageList {
-    
-    NSMutableArray *messageListWithContactsSorted = [self sortMessageListWithContacts:messageList];
-    //now have sorted list
-    //now separate them
-    
-    NSMutableArray *messageTextList = [[NSMutableArray alloc]init];
-    NSMutableArray *contactList = [[NSMutableArray alloc]init];
-    
-    for (NSDictionary *dictionary in messageListWithContactsSorted) {
-        NSNumber *isMessageNumber = [dictionary valueForKey:@"isMessage"];
-        bool isMessageBool = [isMessageNumber boolValue];
-        if(isMessageBool) {
-            [messageTextList addObject:dictionary];
-        }else {
-            [contactList addObject:dictionary];
-        }
-    }
 
-    self.messageTextList = messageTextList;
-    
-    self.contactList = contactList;
-//    NSLog(@"contactlist:%@ messageList: %@",contactList,messageTextList);
-}
-
-
--(void)createMenuList{
-    
-    if(self.menuList) {
-        [self.menuList removeAllObjects];
-    } else {
-        self.menuList = [[NSMutableArray alloc]init];
-    }
-    
-    if(self.expandSectionsKeyList) {
-        [self.expandSectionsKeyList removeAllObjects];
-    } else {
-        self.expandSectionsKeyList = [[NSMutableArray alloc]init];
-    }
-    
-
-    NSString *category = @"";
-    NSUInteger contactIndex = 0;
-    NSUInteger localRepIndex = 0;
-    
-    // For every contact, goes to messageTextList and pulls first entry for display
-    for (NSMutableDictionary *contactRow in self.contactList) {
-        
-        //add "success" bools
-        [contactRow setValue:@NO forKey:@"isTweetSent"];
-        
-        if(category != [contactRow valueForKey:@"messageCategory"]){
-            category = [contactRow valueForKey:@"messageCategory"];
-            
-            
-            // Keep a count here.  if local rep, increment
-            if ([category  isEqual: @"Local Representative"]) {
-                localRepIndex ++;
-            }
-            
-            NSUInteger index = [self.messageTextList indexOfObjectPassingTest:
-                                ^BOOL(NSDictionary *dict, NSUInteger idx, BOOL *stop) {
-                                    return [[dict objectForKey:@"messageCategory"] isEqual:category];
-                                }];
-            
-            MessageItem *messageToAdd = [self.messageTextList objectAtIndex:index];
-            [self.menuList addObject:messageToAdd];
-//            [contactRow setValue:@NO forKey:@"isCollapsed"]; // makes sure at least one contact is expanded
-            [self.menuList addObject:contactRow];
-            
-            // create another array to dictate whether they are all showing
-            //add when new category and set to not expanded
-//            NSMutableDictionary *expandSectionTempDictionary = [[NSMutableDictionary alloc]init];
-//            [expandSectionTempDictionary setValue:category forKey:@"Category"];
-//            [expandSectionTempDictionary setValue:@YES forKey:@"isSectionExpanded"];
-//            [self.expandSectionsKeyList addObject:expandSectionTempDictionary];
-            
-        } else {
-            
-//            if ([category  isEqual: @"Local Representative"]) {
-//                localRepIndex ++;
-//            }
-//            
-//            if(localRepIndex >= 3){
-//                [contactRow setValue:@YES forKey:@"isCollapsed"];
-//            }
-            
-            [self.menuList addObject:contactRow];
-        }
-        
-    contactIndex++;
-    
-    }
-
-}
-
-
--(void) addLocalRepLocationCaptureCell{
-    if(!isLocalRepIncluded){
-        //bypass, no local rep info there
-    } else {
-        // Local Reps included, now test if location info, if no, load no zip cell
-        if(!isLocationInfoAvailable){
-            //load no zip cell
-            //add location capture cell reference for the tableview
-            NSMutableDictionary *noZipDictionary = [[NSMutableDictionary alloc]init];
-            [noZipDictionary setValue:@"Local Representative" forKey:@"messageCategory"];
-            [noZipDictionary setValue:@YES forKey:@"isGetLocationCell"];
-            // NSLog(@"dictionary value for isGetLocationCell %@",[noZipDictionary valueForKey:@"isGetLocationCell"]);
-            [self.menuList addObject:noZipDictionary];
-        }
-    }
-}
+# pragma mark - Prep Sections
 
 -(void)prepSections:messageList {
     NSLog(@"Prep sections triggered");
@@ -328,16 +214,144 @@ BOOL isCoordinateInfoAvailable = NO;
     self.messageTableViewController.messageOptionsList = self.messageOptionsList;
     self.messageTableViewController.expandSectionsKeyList = self.expandSectionsKeyList;
     
-    [self.messageTableViewController.tableView reloadData];
+//    dispatch_async(dispatch_get_main_queue(), ^{
     
-    MarkSentMessageAPI *markSentMessagesAPI = [[MarkSentMessageAPI alloc]init];
-    markSentMessagesAPI.messageTableViewController = self.messageTableViewController;
-    markSentMessagesAPI.parseAPI = self;
-    [markSentMessagesAPI markSentMessages];
+    [self.messageTableViewController.tableView reloadData];
+    NSLog(@"reloading data from Prep Sections");
+    
+    if([PFUser currentUser]) {
+        
+        MarkSentMessageAPI *markSentMessagesAPI = [[MarkSentMessageAPI alloc]init];
+        markSentMessagesAPI.messageTableViewController = self.messageTableViewController;
+        markSentMessagesAPI.parseAPI = self;
+        [markSentMessagesAPI markSentMessages];
+        
+        CongressPhotoFinderAPI *congressPhotoFinder = [[CongressPhotoFinderAPI alloc]init];
+        congressPhotoFinder.messageTableViewController = self.messageTableViewController;
+        [congressPhotoFinder getPhotos:self.messageTableViewController.congressMessageList];
+    }
+//    });
+
+}
+
+# pragma mark - Prep Sections Helper Methods
+
+-(void) separateMessagesFromContacts:(NSMutableArray*)messageList {
+    
+    NSMutableArray *messageListWithContactsSorted = [self sortMessageListWithContacts:messageList];
+    //now have sorted list
+    //now separate them
+    
+    NSMutableArray *messageTextList = [[NSMutableArray alloc]init];
+    NSMutableArray *contactList = [[NSMutableArray alloc]init];
+    
+    for (NSDictionary *dictionary in messageListWithContactsSorted) {
+        NSNumber *isMessageNumber = [dictionary valueForKey:@"isMessage"];
+        bool isMessageBool = [isMessageNumber boolValue];
+        if(isMessageBool) {
+            [messageTextList addObject:dictionary];
+        }else {
+            [contactList addObject:dictionary];
+        }
+    }
+    
+    self.messageTextList = messageTextList;
+    
+    self.contactList = contactList;
+    //    NSLog(@"contactlist:%@ messageList: %@",contactList,messageTextList);
+}
+
+
+-(void)createMenuList{
+    
+    if(self.menuList) {
+        [self.menuList removeAllObjects];
+    } else {
+        self.menuList = [[NSMutableArray alloc]init];
+    }
+    
+    if(self.expandSectionsKeyList) {
+        [self.expandSectionsKeyList removeAllObjects];
+    } else {
+        self.expandSectionsKeyList = [[NSMutableArray alloc]init];
+    }
+    
+    NSString *category = @"";
+    NSUInteger contactIndex = 0;
+    NSUInteger localRepIndex = 0;
+    
+    // For every contact, goes to messageTextList and pulls first entry for display
+    for (NSMutableDictionary *contactRow in self.contactList) {
+        
+        //add "success" bools
+        [contactRow setValue:@NO forKey:@"isTweetSent"];
+        
+        if(category != [contactRow valueForKey:@"messageCategory"]){
+            category = [contactRow valueForKey:@"messageCategory"];
+            
+            
+            // Keep a count here.  if local rep, increment
+            if ([category  isEqual: @"Local Representative"]) {
+                localRepIndex ++;
+            }
+            
+            NSUInteger index = [self.messageTextList indexOfObjectPassingTest:
+                                ^BOOL(NSDictionary *dict, NSUInteger idx, BOOL *stop) {
+                                    return [[dict objectForKey:@"messageCategory"] isEqual:category];
+                                }];
+            
+            MessageItem *messageToAdd = [self.messageTextList objectAtIndex:index];
+            [self.menuList addObject:messageToAdd];
+            //            [contactRow setValue:@NO forKey:@"isCollapsed"]; // makes sure at least one contact is expanded
+            [self.menuList addObject:contactRow];
+            
+            // create another array to dictate whether they are all showing
+            //add when new category and set to not expanded
+            //            NSMutableDictionary *expandSectionTempDictionary = [[NSMutableDictionary alloc]init];
+            //            [expandSectionTempDictionary setValue:category forKey:@"Category"];
+            //            [expandSectionTempDictionary setValue:@YES forKey:@"isSectionExpanded"];
+            //            [self.expandSectionsKeyList addObject:expandSectionTempDictionary];
+            
+        } else {
+            
+            //            if ([category  isEqual: @"Local Representative"]) {
+            //                localRepIndex ++;
+            //            }
+            //
+            //            if(localRepIndex >= 3){
+            //                [contactRow setValue:@YES forKey:@"isCollapsed"];
+            //            }
+            
+            [self.menuList addObject:contactRow];
+        }
+        
+        contactIndex++;
+        
+    }
     
 }
 
-# pragma mark - Helper Methods
+-(void) addLocalRepLocationCaptureCell{
+    if(!isLocalRepMessageIncluded){
+        //bypass, no local rep info there
+        
+    } else {
+        // Local Reps included, now test if location info, if no, load no zip cell
+        
+        if(!isLocationInfoAvailable){
+            //load no zip cell
+            //add location capture cell reference for the tableview
+            NSMutableDictionary *noZipDictionary = [[NSMutableDictionary alloc]init];
+            [noZipDictionary setValue:@"Local Representative" forKey:@"messageCategory"];
+            [noZipDictionary setValue:@YES forKey:@"isGetLocationCell"];
+            // NSLog(@"dictionary value for isGetLocationCell %@",[noZipDictionary valueForKey:@"isGetLocationCell"]);
+            [self.menuList addObject:noZipDictionary];
+        }
+    }
+}
+
+
+# pragma mark - Helper Methods like sorting
 
 -(NSMutableArray*)sortMessageListWithContacts:(NSMutableArray*)messageListWithContacts {
     
@@ -357,6 +371,24 @@ BOOL isCoordinateInfoAvailable = NO;
         NSArray *messageListWithContactsSorted = [messageListWithContacts sortedArrayUsingDescriptors:sortDescriptors];
         return (NSMutableArray*)messageListWithContactsSorted;
     }
+}
+
+# pragma mark - Deep Copy Helpers
+
+- (void)encodeWithCoder:(NSCoder *)coder
+{
+    NSLog(@"encode is firing");
+    [coder encodeObject:self.messageOptionsList];
+}
+
+- (instancetype)initWithCoder:(NSCoder *)coder
+{
+    self = [super init];
+    if (self) {
+        self.messageOptionsList = [coder decodeObjectForKey:@"messageOptionList"];
+        NSLog(@"initwithcoder firing");
+    }
+    return self;
 }
 
 //
