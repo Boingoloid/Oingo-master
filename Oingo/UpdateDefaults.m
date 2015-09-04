@@ -12,24 +12,25 @@
 @implementation UpdateDefaults
 
 -(void)updateLocationDefaults {
+     NSLog(@"updating defaults in with class!");
+    
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     PFUser *currentUser = [PFUser currentUser];
-    // If a registered user then set default zip and location if available
     
     if(currentUser){
         if([currentUser valueForKey:@"latitude"] && [currentUser valueForKey:@"longitude"]) {
             [defaults setObject:[currentUser valueForKey:@"latitude"] forKey:@"latitude"];
             [defaults setObject:[currentUser valueForKey:@"longitude"] forKey:@"longitude"];
             [defaults synchronize];
-            NSLog(@"user already has value for location");
+            NSLog(@"user already has value for lat/long, verify default:%@",[defaults valueForKey:@"latitude"]);
         }
         
         if ([currentUser valueForKey:@"zipCode"]) {
             [defaults setObject:[currentUser valueForKey:@"zipCode"] forKey:@"zipCode"];
             [defaults synchronize];
-            NSLog(@"user already has value for zip");
+            NSLog(@"user already has value for zip, verify default:%@",[defaults valueForKey:@"zipCode"]);
         }
     }
-    NSLog(@"updating defaults in with class!");
+
 }
 @end

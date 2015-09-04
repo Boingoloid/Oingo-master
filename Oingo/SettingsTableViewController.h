@@ -7,10 +7,12 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "MessageTableviewController.h"
 
 @interface SettingsTableViewController : UITableViewController
 @property (weak, nonatomic) IBOutlet UISwitch *linkTwitterSwitch;
 @property (weak, nonatomic) IBOutlet UISwitch *linkFacebookSwitch;
+@property (weak, nonatomic) MessageTableViewController *messageTableViewController;
 - (IBAction)linktwitter:(id)sender;
 - (IBAction)linkfacebook:(id)sender;
 - (IBAction)logout:(id)sender;

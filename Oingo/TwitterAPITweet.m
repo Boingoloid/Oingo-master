@@ -183,7 +183,6 @@ bool isUserLinkedToTwitter;
     SignUpViewController *signUpViewController = [self.messageTableViewController.storyboard instantiateViewControllerWithIdentifier:@"signInViewController"];
     signUpViewController.messageTableViewController = self.messageTableViewController;
     [self.messageTableViewController.navigationController pushViewController:signUpViewController animated:YES];
-    NSLog(@"message view controller as signup pushed:%@ and %@",self.messageTableViewController,signUpViewController.messageTableViewController);
 }
 
 -(void)linkUserToTwitter:currentUser{

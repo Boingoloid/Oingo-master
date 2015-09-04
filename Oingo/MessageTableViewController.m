@@ -36,6 +36,7 @@
 #import "LocationFinderAPI.h"
 #import "MessageOptionsTableTableViewController.h"
 #import "SignUpViewController.h"
+#import "SettingsTableViewController.h"
 
 
 @interface MessageTableViewController () <UIGestureRecognizerDelegate,CLLocationManagerDelegate>
@@ -59,8 +60,8 @@ NSInteger footerHeight = 1;
     [super viewDidLoad];
         NSLog(@"viewDidLoad");
     
-//    self.updateDefaults = [[UpdateDefaults alloc]init];
-    [self.updateDefaults updateLocationDefaults]; // Checks if current user has location info, is so set defaults.
+    self.updateDefaults = [[UpdateDefaults alloc]init];
+    [self.updateDefaults updateLocationDefaults]; // Checks if current user has location info, if so, set defaults.
 
     //hidding tweet success
     self.segmentTweetButtonSuccessImageView.hidden = YES;
@@ -89,10 +90,6 @@ NSInteger footerHeight = 1;
     ParseAPI *parseAPI = [[ParseAPI alloc]init];
     parseAPI.messageTableViewController = self;
     [parseAPI getParseMessageData:self.selectedSegment];
-
-
-//    UIBarButtonItem *logOutButton = [[UIBarButtonItem alloc] initWithImage:image style:UIBarButtonItemStylePlain target:self action:@selector(logout)];
-//     [[NSUserDefaults standardUserDefaults] synchronize];
 
 }
 
@@ -335,14 +332,24 @@ NSInteger footerHeight = 1;
 }
 */
 
+
+
 -(void) pushToSignIn {
     SignUpViewController *signUpViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"signInViewController"];
     signUpViewController.messageTableViewController = self;
     [self.navigationController pushViewController:signUpViewController animated:YES];
-    NSLog(@"message view controller as signup pushed:%@ and %@",self,signUpViewController.messageTableViewController);
+
 }
 
 - (IBAction)viewSettings:(id)sender {
+    NSLog(@"currentUser:%@",[PFUser currentUser]);
+    if(![PFUser currentUser]){
+        [self pushToSignIn];
+    }else {
+        
+        [self performSegueWithIdentifier:@"showSettings" sender:nil];
+
+    }
 }
 
 - (IBAction)shareSegmentTwitter:(id)sender {
@@ -787,7 +794,7 @@ NSInteger footerHeight = 1;
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     
-    if([segue.identifier isEqualToString:@"showMessageOptions"]){
+    if ([segue.identifier isEqualToString:@"showMessageOptions"]){
         NSIndexPath *indexPath = [self.tableView indexPathForCell:sender];
         NSString *category= [self categoryForSection:indexPath.section];
         NSArray *rowIndecesInSection = [self.sections objectForKey:category];
@@ -801,8 +808,12 @@ NSInteger footerHeight = 1;
         messageOptionsViewController.originRowIndex = rowIndex;
         messageOptionsViewController.messageOptionsList = self.messageOptionsList;
         messageOptionsViewController.menuList = self.menuList;
+        
+    } else if ([segue.identifier isEqualToString:@"showSettings"]){
+        
+        SettingsTableViewController *settingsTableVC = [segue destinationViewController];
+        settingsTableVC.messageTableViewController = self;
     }
-    
 }
 
 

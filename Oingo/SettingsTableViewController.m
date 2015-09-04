@@ -13,6 +13,7 @@
 #import <FBSDKCoreKit/FBSDKCoreKit.h>
 #import <FBSDKLoginKit/FBSDKLoginKit.h>
 
+
 @interface SettingsTableViewController () 
 
 @end
@@ -25,63 +26,30 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    PFUser *currentUser = [PFUser currentUser];
     
     //Set twitter toggle to off
     [self.linkTwitterSwitch setOn:NO animated:NO];
     
     // Set facebook toggle to off
     [self.linkFacebookSwitch setOn:NO animated:NO];
-    
-    PFUser *currentUser = [PFUser currentUser];
-    // if user not logged in, alert message send to login
-    
-    if(!currentUser){
-        NSString *alertTitle = @"Not Logged In";
-        NSString *alertMessage = @"Would you like to go to Log In?";
-        UIAlertController *alertController = [UIAlertController alertControllerWithTitle:alertTitle message:alertMessage preferredStyle:UIAlertControllerStyleAlert];
         
-        //Add cancel action button
-        UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:NSLocalizedString(@"Cancel", @"Cancel action") style:UIAlertActionStyleDefault handler:^(UIAlertAction *action){
-            [self.navigationController popViewControllerAnimated:YES];
-            NSLog(@"Cancel action");
-        }];
-        [alertController addAction:cancelAction];
-        
-        //Add OK action button
-        UIAlertAction *okAction = [UIAlertAction actionWithTitle:NSLocalizedString(@"OK", @"OK action") style:UIAlertActionStyleDefault handler:^(UIAlertAction *action){
-            [self.navigationController popViewControllerAnimated:YES];
-            UIViewController *controller = [self.storyboard instantiateViewControllerWithIdentifier:@"signInViewController"];
-            [self.navigationController pushViewController:controller animated:YES];
-            NSLog(@"OK action");
-        }];
-        [alertController addAction:okAction];
-        [self.view addSubview:alertController.view];
-        [self presentViewController:alertController animated:YES completion:nil];
+    // User is logged in so load values from user settings to see if linked
+    // Set twitter toggle
+    if([PFTwitterUtils isLinkedWithUser:currentUser]){
+        [self.linkTwitterSwitch setOn:YES animated:NO];
     } else {
-        
-        // User is logged in so load values from user settings to see if linked
-        // Set twitter toggle
-        if([PFTwitterUtils isLinkedWithUser:currentUser]){
-            [self.linkTwitterSwitch setOn:YES animated:NO];
-        } else {
-            [self.linkTwitterSwitch setOn:NO animated:NO];
-        }
-        
-        // Set facebook toggle
-        if([PFFacebookUtils isLinkedWithUser:currentUser]){
-            [self.linkFacebookSwitch setOn:YES animated:NO];
-        } else {
-            [self.linkFacebookSwitch setOn:NO animated:NO];
-        }
-        
+        [self.linkTwitterSwitch setOn:NO animated:NO];
     }
     
-    // Uncomment the following line to preserve selection between presentations.
-    // self.clearsSelectionOnViewWillAppear = NO;
-    
-    // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-    // self.navigationItem.rightBarButtonItem = self.editButtonItem;
+    // Set facebook toggle
+    if([PFFacebookUtils isLinkedWithUser:currentUser]){
+        [self.linkFacebookSwitch setOn:YES animated:NO];
+    } else {
+        [self.linkFacebookSwitch setOn:NO animated:NO];
+    }
 }
+
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
@@ -99,9 +67,9 @@
     
     [PFUser logOut];
     NSLog(@"user logged out");
-    
+    NSLog(@"current user:%@", [PFUser currentUser]);
     [self.navigationController popViewControllerAnimated:YES];
-    [self viewDidLoad];
+    [self.messageTableViewController viewDidLoad];
 }
 
 

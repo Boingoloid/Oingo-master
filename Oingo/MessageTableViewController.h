@@ -48,11 +48,14 @@
 @property (weak, nonatomic) IBOutlet UIImageView *segmentTweetButtonSuccessImageView;
 @property (weak, nonatomic) IBOutlet UIImageView *segmentFacebookButtonSuccessImageView;
 
-
+// Settings
 - (IBAction)viewSettings:(id)sender;
 
+//Segment share actions
 - (IBAction)shareSegmentTwitter:(id)sender;
 - (IBAction)shareSegmentFacebook:(id)sender;
+
+//Location actions
 - (void)lookUpZip;
 - (void)getUserLocation;
 
