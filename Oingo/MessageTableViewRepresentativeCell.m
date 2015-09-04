@@ -96,7 +96,7 @@ CongressPhotoFinderAPI *congressPhotoFinderAPI;
         
         //Phone call
         NSNumber *sendPhoneNumberBool = [congressionalMessageItem valueForKey:@"isPhoneSent"];
-        NSLog(@"mark phone triggered");
+        //NSLog(@"mark phone triggered");
         bool sendPhoneBool = [sendPhoneNumberBool boolValue];
         if(sendPhoneBool) {
             self.phoneSuccessImageView.hidden = NO;
@@ -123,18 +123,7 @@ CongressPhotoFinderAPI *congressPhotoFinderAPI;
         self.state = [self.congressionalMessageItem valueForKey:@"state"];
         self.leadershipRole = [self.congressionalMessageItem valueForKey:@"twitterID"];
         
-        //add image
-//        NSNumber *isNarrowImageNumber = [self.congressionalMessageItem valueForKey:@"isNarrowImage"];
-//        bool isNarrowImage = [isNarrowImageNumber boolValue];
-        
-//        if(isNarrowImage){
-//            NSLog(@"narrow image");
-//            self.imageView.contentMode = UIViewContentModeRedraw;
-////            self.messageImage.layer.frame = CGRectMake(9,7,41,50);
-//            [self.messageImage.layer setNeedsDisplayInRect:CGRectMake(9,7,41,50)];
-//        }
         NSString *imageString = [self.congressionalMessageItem valueForKey:@"messageImageString"];
-        NSLog(@"imageString:%@",imageString);
         self.messageImage.image = [UIImage imageNamed:imageString];
         self.messageImage.layer.borderWidth = .5;
         self.messageImage.layer.borderColor = [[UIColor blackColor] CGColor];

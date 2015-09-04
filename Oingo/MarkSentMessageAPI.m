@@ -22,8 +22,6 @@
         
         NSString *selectedSegmentID = [self.messageTableViewController.selectedSegment valueForKey:@"segmentID"];
         NSString *userObjectID = currentUser.objectId;
-        NSLog(@"selected segment ID %@",selectedSegmentID);
-        NSLog(@"user object ID:%@",currentUser.objectId);
         
         
         //get message data for segment menu
@@ -67,11 +65,11 @@
                                     return [[dict valueForKey:@"contactID"] isEqualToString:contactID];  //but is it called contact id in menulist?
                                 }];
             if(index == NSNotFound){
-                NSLog(@"no index sent found, contactID:%@ / messageType:%@",[dictionary valueForKey:@"contactName"],[dictionary valueForKey:@"messageType"]);
+                //NSLog(@"no index sent found, contactID:%@ / messageType:%@",[dictionary valueForKey:@"contactName"],[dictionary valueForKey:@"messageType"]);
                 // Do nothing
             } else {
                 // Makes check mark visible on twitter message button
-                NSLog(@"found: marking index that is found, contactID:%@ / messageType:%@",[dictionary valueForKey:@"contactName"],[dictionary valueForKey:@"messageType"]);
+                //NSLog(@"found: marking index that is found, contactID:%@ / messageType:%@",[dictionary valueForKey:@"contactName"],[dictionary valueForKey:@"messageType"]);
                 [[self.messageTableViewController.menuList objectAtIndex:index] setValue:@YES forKey:@"isTweetSent"];
             }
         }
@@ -87,7 +85,7 @@
             // Do nothing
         } else {
             // Makes check mark visible on twitter button
-            NSLog(@"INDEX FOUND, unhide segment tweet success");
+            //NSLog(@"INDEX FOUND, unhide segment tweet success");
             self.messageTableViewController.segmentTweetButtonSuccessImageView.hidden = NO;
         }
 }
@@ -101,7 +99,7 @@
         // Do nothing
     } else {
         // Makes check mark visible on twitter button
-        NSLog(@"INDEX FOUND, unhide segment facebook success");
+        //NSLog(@"INDEX FOUND, unhide segment facebook success");
         self.messageTableViewController.segmentFacebookButtonSuccessImageView.hidden = NO;
     }
 }
@@ -122,11 +120,11 @@
                                 }];
             
             if(index == NSNotFound){
-                NSLog(@"no index sent found");
+                //NSLog(@"no index sent found");
                 // Do nothing
             } else {
                 // Makes check mark visible on twitter message button
-                NSLog(@"found: marking index that is found %lu",(unsigned long)index);
+                //NSLog(@"found: marking index that is found %lu",(unsigned long)index);
                 [[self.messageTableViewController.menuList objectAtIndex:index] setValue:@YES forKey:@"isEmailSent"];
             }
         }
@@ -148,11 +146,11 @@
                                 }];
             
             if(index == NSNotFound){
-                NSLog(@"no index sent found");
+                //rNSLog(@"no index sent found");
                 // Do nothing
             } else {
                 // Makes check mark visible on twitter message button
-                NSLog(@"found: marking index that is found %lu",(unsigned long)index);
+                //NSLog(@"found: marking index that is found %lu",(unsigned long)index);
                 [[self.messageTableViewController.menuList objectAtIndex:index] setValue:@YES forKey:@"isPhoneSent"];
             }
         }

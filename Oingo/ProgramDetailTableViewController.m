@@ -144,7 +144,7 @@ Segment *segment;
     
         // Sorts array by dateReleased
         NSSortDescriptor *dateReleased = [[NSSortDescriptor alloc]initWithKey:@"dateReleased" ascending:NO];
-        NSLog(@" NOT custom ordering");
+        //NSLog(@" NOT custom ordering");
         NSArray *sortDescriptors = [NSArray arrayWithObjects: dateReleased, nil];
         NSArray *segmentListSorted = [messageListWithContacts sortedArrayUsingDescriptors:sortDescriptors];
         return (NSMutableArray*)segmentListSorted;

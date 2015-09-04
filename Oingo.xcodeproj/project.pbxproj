@@ -84,7 +84,6 @@
 		CED68DCA1B6973520087546D /* arrow-down-gray-hi.png in Resources */ = {isa = PBXBuildFile; fileRef = CED68DC91B6973520087546D /* arrow-down-gray-hi.png */; };
 		CED68DCC1B69AE8B0087546D /* 40-menu-alt-512.png in Resources */ = {isa = PBXBuildFile; fileRef = CED68DCB1B69AE8B0087546D /* 40-menu-alt-512.png */; };
 		CEDA118C1B97D57E0065ACDD /* TwitterKitResources.bundle in Resources */ = {isa = PBXBuildFile; fileRef = CEDA118B1B97D57E0065ACDD /* TwitterKitResources.bundle */; };
-		CEDA118F1B990B500065ACDD /* CongressImageUpload.m in Sources */ = {isa = PBXBuildFile; fileRef = CEDA118E1B990B500065ACDD /* CongressImageUpload.m */; };
 		CEDA11921B992A770065ACDD /* Seal_of_the_United_States_Congress.svg.png in Resources */ = {isa = PBXBuildFile; fileRef = CEDA11901B992A770065ACDD /* Seal_of_the_United_States_Congress.svg.png */; };
 		CEDA11931B992A770065ACDD /* Seal_of_the_United_States_Senate.svg.png in Resources */ = {isa = PBXBuildFile; fileRef = CEDA11911B992A770065ACDD /* Seal_of_the_United_States_Senate.svg.png */; };
 		CEDA119A1B99946E0065ACDD /* Seal_of_Congress_Cropped.png in Resources */ = {isa = PBXBuildFile; fileRef = CEDA11981B99946E0065ACDD /* Seal_of_Congress_Cropped.png */; };
@@ -1146,8 +1145,6 @@
 		CED68DC91B6973520087546D /* arrow-down-gray-hi.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "arrow-down-gray-hi.png"; path = "Images/arrow-down-gray-hi.png"; sourceTree = "<group>"; };
 		CED68DCB1B69AE8B0087546D /* 40-menu-alt-512.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "40-menu-alt-512.png"; path = "Images/40-menu-alt-512.png"; sourceTree = "<group>"; };
 		CEDA118B1B97D57E0065ACDD /* TwitterKitResources.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; name = TwitterKitResources.bundle; path = TwitterKit.framework/Versions/A/Resources/TwitterKitResources.bundle; sourceTree = "<group>"; };
-		CEDA118D1B990B500065ACDD /* CongressImageUpload.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CongressImageUpload.h; sourceTree = "<group>"; };
-		CEDA118E1B990B500065ACDD /* CongressImageUpload.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CongressImageUpload.m; sourceTree = "<group>"; };
 		CEDA11901B992A770065ACDD /* Seal_of_the_United_States_Congress.svg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Seal_of_the_United_States_Congress.svg.png; path = Images/Seal_of_the_United_States_Congress.svg.png; sourceTree = "<group>"; };
 		CEDA11911B992A770065ACDD /* Seal_of_the_United_States_Senate.svg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Seal_of_the_United_States_Senate.svg.png; path = Images/Seal_of_the_United_States_Senate.svg.png; sourceTree = "<group>"; };
 		CEDA11981B99946E0065ACDD /* Seal_of_Congress_Cropped.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Seal_of_Congress_Cropped.png; path = Images/Seal_of_Congress_Cropped.png; sourceTree = "<group>"; };
@@ -3254,8 +3251,6 @@
 				CEACE5911B4F4BCC007B7D2D /* UpdateDefaults.m */,
 				CE2BF96D1B3E517700AB15AC /* MakePhoneCallAPI.h */,
 				CE2BF96E1B3E517700AB15AC /* MakePhoneCallAPI.m */,
-				CEDA118D1B990B500065ACDD /* CongressImageUpload.h */,
-				CEDA118E1B990B500065ACDD /* CongressImageUpload.m */,
 				CE2029701B363D51005C079B /* CongressFinderAPI.h */,
 				CE2029711B363D51005C079B /* CongressFinderAPI.m */,
 				CE6073311B3AD475007B567C /* CongressPhotoFinderAPI.h */,
@@ -4415,7 +4410,6 @@
 				CE6073331B3AD475007B567C /* CongressPhotoFinderAPI.m in Sources */,
 				CE241A421AEAE45A00F22144 /* main.m in Sources */,
 				CEC0C7411B45C80100A9DD33 /* FacebookAPIPost.m in Sources */,
-				CEDA118F1B990B500065ACDD /* CongressImageUpload.m in Sources */,
 				CE48FDB61B9527C50086349A /* TWAPIManager.m in Sources */,
 				CEEF25111B017C8200EFB257 /* MessageTableViewCell.m in Sources */,
 				CE99E3871B5EF1ED00ED9D33 /* MarkSentMessageAPI.m in Sources */,

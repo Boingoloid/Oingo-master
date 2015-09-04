@@ -43,18 +43,14 @@
             // Load the photo only if file exists in project
             if([UIImage imageNamed:imageString]) {
                 [[self.messageTableViewController.menuList objectAtIndex:index] setValue:imageString forKey:@"messageImageString"];
-                [[self.messageTableViewController.menuList objectAtIndex:index] setValue:@YES forKey:@"isNarrowImage"];
-                
             } else {
                 //Do nothing, leave image string as is so dummy icons will load
             }
         }
-        NSLog(@"menulist after photo find: %@",self.messageTableViewController.menuList);
     }
     
     [self.messageTableViewController.tableView reloadData];
     NSLog(@"reloading data from Congress Photo Finder");
-    NSLog(@"printing out bioguide array:%@",bioguideArray);
 
     
 }

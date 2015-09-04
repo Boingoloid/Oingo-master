@@ -361,12 +361,12 @@ BOOL isCoordinateInfoAvailable = NO;
     
     if([[messageListWithContacts firstObject] valueForKey:@"orderInCategory"]  ){
         isMenuWithCustomOrdering = YES;
-        NSLog(@"custom ordering");
+        //NSLog(@"custom ordering");
         NSArray *sortDescriptors = [NSArray arrayWithObjects:messageCategory, isMessage, orderInCategory, nil];
         NSArray *messageListWithContactsSorted = [messageListWithContacts sortedArrayUsingDescriptors:sortDescriptors];
         return (NSMutableArray*)messageListWithContactsSorted;
     } else {
-        NSLog(@" NOT custom ordering");
+        //NSLog(@" NOT custom ordering");
         NSArray *sortDescriptors = [NSArray arrayWithObjects: messageCategory,isMessage, nil];
         NSArray *messageListWithContactsSorted = [messageListWithContacts sortedArrayUsingDescriptors:sortDescriptors];
         return (NSMutableArray*)messageListWithContactsSorted;

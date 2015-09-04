@@ -36,7 +36,7 @@
 @property (nonatomic, retain) NSString *isCollapsed;
 @property (nonatomic, retain) NSString *orderInCategory;
 @property (nonatomic, assign) NSString *isGetLocationCell;
-@property (nonatomic) bool isNarrowImage;
+
 
 
 ////social identifiers and contact info
