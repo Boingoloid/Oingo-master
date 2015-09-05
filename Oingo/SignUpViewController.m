@@ -116,6 +116,7 @@ BOOL isNewAccountSignup = NO;
 -(void)popToMessagesController {
     int viewsToPopAfterSignUp = 1; //Pop 1 views (signup)  Remember index starts at 0.
     [self.navigationController popToViewController:[self.navigationController.viewControllers objectAtIndex: self.navigationController.viewControllers.count-viewsToPopAfterSignUp-1] animated:YES];
+    [self.messageTableViewController viewDidLoad];
 }
 
 -(void)updateFacebookUserData {

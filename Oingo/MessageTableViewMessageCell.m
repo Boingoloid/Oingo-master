@@ -21,7 +21,7 @@
     NSString *messageText = [NSString stringWithFormat:@"\"%@\"",[messageItem valueForKey:@"messageText"]];
     self.messageText.text = messageText;
     self.messageText.preferredMaxLayoutWidth = 300;
-
+    [self setNeedsDisplay];
     
     
 
@@ -48,5 +48,12 @@
     [super setFrame:frame];
     
 }
+
+//- (void)prepareForReuse {
+//    [super prepareForReuse];
+//    for(UIView *subview in [self.contentView subviews]) {
+//        [subview removeFromSuperview];
+//    }
+//}
 
 @end

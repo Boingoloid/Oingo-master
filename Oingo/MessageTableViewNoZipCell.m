@@ -23,11 +23,17 @@
 - (void) configMessageCellNoZip:(NSIndexPath*)indexPath {
     NSLog(@"no zip cell");
     
+    if(self.zipCodeButton == nil){
+        NSLog(@"nil!!!");
+    }
+    
     //Format button to look up local representatives
     self.zipCodeButton.layer.borderColor = [[UIColor blackColor] CGColor];
     self.zipCodeButton.layer.borderWidth = .5;
     self.zipCodeButton.layer.cornerRadius = 8;
     self.zipCodeButton.clipsToBounds = YES;
+//    [self.contentView layoutIfNeeded];
+    [self setNeedsDisplay];
 }
 
 
@@ -38,5 +44,11 @@
     [super setFrame:frame];
     
 }
+//- (void)prepareForReuse {
+//    [super prepareForReuse];
+//    for(UIView *subview in [self.contentView subviews]) {
+//        [subview removeFromSuperview];
+//    }
+//}
 
 @end

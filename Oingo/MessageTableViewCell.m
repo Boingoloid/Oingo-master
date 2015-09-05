@@ -123,7 +123,7 @@ CongressPhotoFinderAPI *congressPhotoFinderAPI;
         self.messageImage.layer.borderColor = [[UIColor blackColor] CGColor];
         self.messageImage.layer.cornerRadius = 3.0;
         self.messageImage.clipsToBounds = YES;
-    
+    [self setNeedsDisplay];
 //    }
 }
 
@@ -142,7 +142,12 @@ CongressPhotoFinderAPI *congressPhotoFinderAPI;
 
 }
 
-
+//- (void)prepareForReuse {
+//    [super prepareForReuse];
+//    for(UIView *subview in [self.contentView subviews]) {
+//        [subview removeFromSuperview];
+//    }
+//}
 
 
 @end

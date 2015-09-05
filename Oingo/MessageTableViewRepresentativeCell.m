@@ -130,6 +130,7 @@ CongressPhotoFinderAPI *congressPhotoFinderAPI;
         self.messageImage.clipsToBounds = YES;
         self.messageImage.layer.cornerRadius = 3;
     }
+        [self setNeedsDisplay];
 }
 
 
@@ -146,6 +147,13 @@ CongressPhotoFinderAPI *congressPhotoFinderAPI;
     [super setFrame:frame];
     
 }
+
+//- (void)prepareForReuse {
+//    [super prepareForReuse];
+//    for(UIView *subview in [self.contentView subviews]) {
+//        [subview removeFromSuperview];
+//    }
+//}
 
 
 @end

@@ -437,19 +437,38 @@ NSInteger footerHeight = 1;
     [defaults synchronize];
     NSLog(@"UPDATING DEFAULTS!!%@,%@",[defaults valueForKey:@"latitude"],[defaults valueForKey:@"longitude"]);
     
-    //if currently a user then save location info to account.
-    if([PFUser currentUser]) {
-        NSString *latitudeString = [NSString stringWithFormat:@"%f",newLocation.coordinate.latitude];
-        NSString *longitudeString =[NSString stringWithFormat:@"%f",newLocation.coordinate.longitude];
-        [[PFUser currentUser] setValue:latitudeString forKey:@"latitude"];
-        [[PFUser currentUser] setValue:longitudeString forKey:@"longitude"];
-        [[PFUser currentUser] saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
-            if(error) {
+    //if current a user then save location info to account.
+    PFUser *currentUser = [PFUser currentUser];
+
+    if(currentUser) {
+        double latitude = newLocation.coordinate.latitude;
+        double longitude = newLocation.coordinate.longitude;
+        NSLog(@"latitude to be saved: %f",latitude);
+        
+//        [currentUser setEmail:[result objectForKey:@"email"]];
+//            [currentUser setObject:[result objectForKey:@"link"] forKey:@"linkfb"];
+        [currentUser setObject:[NSNumber numberWithDouble:latitude] forKey:@"latitude"];
+        [currentUser setObject:[NSNumber numberWithDouble:longitude] forKey:@"longitude"];
+        
+        [currentUser saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) { //save currentUser to parse disk
+            if(error){
                 NSLog(@"error UPDATING COORDINATES!!");
-            } else{
+            }
+            else {
                 NSLog(@"UPDATING COORDINATES!!");
             }
         }];
+
+        
+        
+//        [[PFUser currentUser] saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
+//            if(error) {
+//                NSLog(@"error UPDATING COORDINATES!!");
+//            } else{
+//                NSLog(@"UPDATING COORDINATES!!");
+//            }
+//        }];
+//    }
     }
     [self viewDidLoad];
 
@@ -551,7 +570,7 @@ NSInteger footerHeight = 1;
                     }
                 }];
             }
-            
+
             [self viewDidLoad];
         }
     }];
@@ -590,6 +609,7 @@ NSInteger footerHeight = 1;
         if (cell == nil){
             NSLog(@"cell was nil");
             cell = [[MessageTableViewMessageCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"CellCategoryMessage"];
+
         }
         
         NSLog(@"loading message cell");
@@ -597,15 +617,22 @@ NSInteger footerHeight = 1;
         [self.tableView addSubview:cell];
         messageItem = [self.menuList objectAtIndex:[rowIndex intValue]];
         [cell configMessageCell:messageItem indexPath:indexPath];
+//        [cell.contentView layoutIfNeeded];
         return cell;
         
     } else if (isGetLocationBool) {
         //user has no zip or location
         NSLog(@"loading no location cell");
         MessageTableViewNoZipCell *cell = [tableView dequeueReusableCellWithIdentifier:@"CellCategoryNoZip" forIndexPath:indexPath];
+        if (cell == nil){
+            NSLog(@"cell was nil");
+            cell = [[MessageTableViewNoZipCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"CellCategoryNoZip"];
+        }
+        
         cell.layer.cornerRadius = 3;
         [self.tableView addSubview:cell];
         [cell configMessageCellNoZip:indexPath];
+//        [cell.contentView layoutIfNeeded];
         return cell;
         
     } else if([category isEqualToString:@"Local Representative"]) {
@@ -620,6 +647,8 @@ NSInteger footerHeight = 1;
         [self.tableView addSubview:cell];
         congressionalMessageItem = [self.menuList objectAtIndex:[rowIndex intValue]];
         [cell configMessageCellLocalRep:congressionalMessageItem indexPath:indexPath];
+//        [cell.contentView layoutIfNeeded];
+        
         return cell;
         
     } else {
@@ -633,6 +662,8 @@ NSInteger footerHeight = 1;
         [self.tableView addSubview:cell];
         messageItem = [self.menuList objectAtIndex:[rowIndex intValue]];
         [cell configMessageContactCell:messageItem indexPath:indexPath];
+//        [cell.contentView layoutIfNeeded];
+        
         return cell;
     }
 }
@@ -680,6 +711,10 @@ NSInteger footerHeight = 1;
         return 65;
     }
 }
+
+
+
+
 
 #pragma mark - Sections
 - (NSString *) categoryForSection:(NSInteger)section { //takes section # and returns name of section.
