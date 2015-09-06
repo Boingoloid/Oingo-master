@@ -248,16 +248,14 @@ BOOL isLocationInfoAvailable = NO;
     
 //    dispatch_async(dispatch_get_main_queue(), ^{
     if([PFUser currentUser]) {
-        
         MarkSentMessageAPI *markSentMessagesAPI = [[MarkSentMessageAPI alloc]init];
         markSentMessagesAPI.messageTableViewController = self.messageTableViewController;
         markSentMessagesAPI.parseAPI = self;
         [markSentMessagesAPI markSentMessages];
-        
-        CongressPhotoFinderAPI *congressPhotoFinder = [[CongressPhotoFinderAPI alloc]init];
-        congressPhotoFinder.messageTableViewController = self.messageTableViewController;
-        [congressPhotoFinder getPhotos:self.messageTableViewController.congressMessageList];
     }
+    CongressPhotoFinderAPI *congressPhotoFinder = [[CongressPhotoFinderAPI alloc]init];
+    congressPhotoFinder.messageTableViewController = self.messageTableViewController;
+    [congressPhotoFinder getPhotos:self.messageTableViewController.congressMessageList];
 //    });
 
 }
