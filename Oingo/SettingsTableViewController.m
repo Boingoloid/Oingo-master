@@ -14,8 +14,8 @@
 #import <FBSDKLoginKit/FBSDKLoginKit.h>
 
 
-@interface SettingsTableViewController () 
-
+@interface SettingsTableViewController () <CLLocationManagerDelegate>
+@property(nonatomic) CLLocationManager *locationManager;
 @end
 
 @implementation SettingsTableViewController
@@ -183,4 +183,179 @@
     
 }
 
+- (IBAction)getUserLocation:(id)sender {
+        //    LocationFinderAPI *locationFinderAPI = [[LocationFinderAPI alloc]init];
+        //    locationFinderAPI.messageTableViewController = self;
+        //    [locationFinderAPI findUserLocation];
+        
+        
+        self.locationManager = [[CLLocationManager alloc] init];
+        self.locationManager.delegate = self;
+        
+        NSUInteger code = [CLLocationManager authorizationStatus];
+        if (code == kCLAuthorizationStatusNotDetermined && ([self.locationManager respondsToSelector:@selector(requestAlwaysAuthorization)] || [self.locationManager respondsToSelector:@selector(requestWhenInUseAuthorization)])) {
+            // choose one request according to your business.
+            if([[NSBundle mainBundle] objectForInfoDictionaryKey:@"NSLocationWhenInUseUsageDescription"]){
+                [self.locationManager requestWhenInUseAuthorization];
+            } else {
+                NSLog(@"Info.plist does not contain NSLocationAlwaysUsageDescription or NSLocationWhenInUseUsageDescription");
+            }
+        }
+        [self.locationManager startUpdatingLocation];
+}
+    
+#pragma mark - CLLocationManagerDelegate
+- (void)locationManager:(CLLocationManager *)manager didFailWithError:(NSError *)error
+{
+    NSLog(@"didFailWithError: %@", error);
+    UIAlertView *errorAlert = [[UIAlertView alloc]
+                               initWithTitle:@"Error" message:@"Failed to Get Your Location" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
+    [errorAlert show];
+}
+
+
+
+- (void)locationManager:(CLLocationManager *)manager didUpdateToLocation:(CLLocation *)newLocation fromLocation:(CLLocation *)oldLocation
+{
+    [self.locationManager stopUpdatingLocation];
+    
+    //Set the location default
+    
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    [defaults setObject:[NSString stringWithFormat:@"%f",newLocation.coordinate.latitude] forKey:@"latitude"];
+    [defaults setObject:[NSString stringWithFormat:@"%f",newLocation.coordinate.longitude] forKey:@"longitude"];
+    [defaults synchronize];
+    NSLog(@"UPDATING DEFAULTS!!%@,%@",[defaults valueForKey:@"latitude"],[defaults valueForKey:@"longitude"]);
+    
+    //if current a user then save location info to account.
+    PFUser *currentUser = [PFUser currentUser];
+    
+    if(currentUser) {
+        // Grab lat/long from newLocation object
+        double latitude = newLocation.coordinate.latitude;
+        double longitude = newLocation.coordinate.longitude;
+        NSLog(@"latitude to be saved: %f",latitude);
+        
+        // Store lat/long data in currentUser instance
+        [currentUser setObject:[NSNumber numberWithDouble:latitude] forKey:@"latitude"];
+        [currentUser setObject:[NSNumber numberWithDouble:longitude] forKey:@"longitude"];
+
+        // Save to Parse
+        [self saveToParse:currentUser];
+
+    }
+}
+
+-(void)saveToParse:(PFUser*)currentUser{
+    // Save to Parse
+    [currentUser saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) { //save currentUser to parse disk
+        if(error){
+            NSLog(@"error UPDATING COORDINATES!!");
+        }
+        else {
+            NSLog(@"UPDATING COORDINATES!!");
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [self.navigationController popViewControllerAnimated:YES];
+                [self.messageTableViewController viewDidLoad];
+            });
+        }
+    }];
+}
+
+- (IBAction)lookUpZip:(id)sender {
+    NSString *alertTitle = @"Let's get your Local Representatives";
+    NSString *alertMessage = [NSString stringWithFormat:@"Enter you Zipcode"];
+    UIAlertController *alertController = [UIAlertController alertControllerWithTitle:alertTitle message:alertMessage preferredStyle:UIAlertControllerStyleAlert];
+    
+    [alertController addTextFieldWithConfigurationHandler:^(UITextField *textField) {
+        textField.placeholder = NSLocalizedString(@"'98765'", @"Zip");
+        textField.keyboardType = UIKeyboardTypeNumberPad;
+        [textField becomeFirstResponder];
+    }];
+    
+    UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:NSLocalizedString(@"cancel", @"cancel action") style:UIAlertActionStyleDefault handler:^(UIAlertAction *action){
+        NSLog(@"cancel action");
+    }];
+    [alertController addAction:cancelAction];
+    
+    UIAlertAction *lookUpAction = [UIAlertAction actionWithTitle:NSLocalizedString(@"Look up", @"Look up") style:UIAlertActionStyleDefault handler:^(UIAlertAction *action){
+        
+        //get value entered
+        NSString *zipCode = [alertController.textFields.firstObject valueForKey:@"text"];
+        __block NSUInteger count = 0;
+        [zipCode enumerateSubstringsInRange:NSMakeRange(0, [zipCode length])
+                                    options:NSStringEnumerationByComposedCharacterSequences
+                                 usingBlock:^(NSString *substring, NSRange substringRange, NSRange enclosingRange, BOOL *stop) {
+                                     count++;
+                                 }];
+        if(count != 5) {
+            [self retryZipCode:zipCode count:count];
+        } else {
+            
+            //set user default zipCode and save to user
+            UpdateDefaults *updateDefaults = [[UpdateDefaults alloc]init];
+            [updateDefaults saveZipCodeToDefaultsWithZip:zipCode];
+            [updateDefaults saveLocationDefaultsToUser];
+            [updateDefaults deleteCoordinates]; //purges lat/long from Defaults and currentUser(if neccesary)
+            // Deleting coordinates in case they conflict with zipCode
+            
+            // Send back to MessageTableViewController
+            [self.navigationController popViewControllerAnimated:YES];
+            [self.messageTableViewController viewDidLoad];
+        }
+    }];
+    [alertController addAction:lookUpAction];
+    
+    [self presentViewController:alertController animated:YES completion:nil];
+}
+
+- (NSString*)retryZipCode:zipCode count:(NSInteger)count {
+    NSString *alertTitle = @"Please give it another try";
+    NSString *alertMessage = [NSString stringWithFormat:@"Your Zip Code must be 5 numbers, you entered %ld",(long)count];
+    UIAlertController *alertController = [UIAlertController alertControllerWithTitle:alertTitle message:alertMessage preferredStyle:UIAlertControllerStyleAlert];
+    
+    [alertController addTextFieldWithConfigurationHandler:^(UITextField *textField) {
+        textField.placeholder = NSLocalizedString(@"'98765'", @"Zip");
+        textField.text = zipCode;
+        textField.keyboardType = UIKeyboardTypeNumberPad;
+        [textField becomeFirstResponder];
+    }];
+    
+    UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:NSLocalizedString(@"cancel", @"cancel action") style:UIAlertActionStyleDefault handler:^(UIAlertAction *action){
+        NSLog(@"cancel action");
+    }];
+    [alertController addAction:cancelAction];
+    
+    UIAlertAction *lookUpAction = [UIAlertAction actionWithTitle:NSLocalizedString(@"Look up", @"Look up") style:UIAlertActionStyleDefault handler:^(UIAlertAction *action){
+        //get value entered
+        NSString *zipCode = [alertController.textFields.firstObject valueForKey:@"text"];
+        
+        __block NSUInteger count = 0;
+        [zipCode enumerateSubstringsInRange:NSMakeRange(0, [zipCode length])
+                                    options:NSStringEnumerationByComposedCharacterSequences
+                                 usingBlock:^(NSString *substring, NSRange substringRange, NSRange enclosingRange, BOOL *stop) {
+                                     count++;
+                                 }];
+        if(count != 5) {
+            [self retryZipCode:zipCode count:count];
+        } else {
+            //set user default zipCode and save to user
+            UpdateDefaults *updateDefaults = [[UpdateDefaults alloc]init];
+            [updateDefaults saveZipCodeToDefaultsWithZip:zipCode];
+            [updateDefaults saveLocationDefaultsToUser];
+            [updateDefaults deleteCoordinates]; //purges lat/long from Defaults and currentUser(if neccesary)
+            // Deleting coordinates in case they conflict with zipCode
+
+            // Send back to MessageTableViewController
+            [self.navigationController popViewControllerAnimated:YES];
+            [self.messageTableViewController viewDidLoad];
+        }
+    }];
+    
+    [alertController addAction:lookUpAction];
+    
+    [self presentViewController:alertController animated:YES completion:nil];
+    
+    return zipCode;
+}
 @end

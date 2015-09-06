@@ -25,9 +25,14 @@
 
 BOOL isMenuWithCustomOrdering = NO;
 BOOL isLocalRepMessageIncluded = NO;
-BOOL isLocationInfoAvailable = NO;
+
 BOOL isZipAvailable = NO;
+BOOL isLatitude = NO;
+BOOL isLongitude = NO;
+
 BOOL isCoordinateInfoAvailable = NO;
+BOOL isLocationInfoAvailable = NO;
+
 
 
 -(id)copyWithZone:(NSZone *)zone
@@ -40,20 +45,44 @@ BOOL isCoordinateInfoAvailable = NO;
 
 -(void)getParseMessageData:(Segment*)selectedSegment{  //get parse messge data for selectedSegment
     NSLog(@"Parse API");
+    
+    // Initialize bool values to NO
+    isMenuWithCustomOrdering = NO;
+    isLocalRepMessageIncluded = NO;
+    isZipAvailable = NO;
+    isLatitude = NO;
+    isLongitude = NO;
+    isLocationInfoAvailable = NO;
+    isCoordinateInfoAvailable = NO;
+    
+
+    //Set bool values
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-    NSLog(@"defaults zip:%@ lat:%@",[defaults valueForKey:@"zipCode"],[defaults valueForKey:@"latitude"]);
-    
-    
-    if(![defaults valueForKey:@"latitude"] && ![defaults valueForKey:@"zipCode"]) {
-        NSLog(@"Default zipCode on parseAPI %@",[defaults valueForKey:@"zipCode"]);
-        isLocationInfoAvailable = NO;
-    } else {
-        isLocationInfoAvailable = YES;
+    if([defaults valueForKey:@"latitude"] != nil) {
+        isLatitude = YES;
     }
     
-    if([defaults valueForKey:@"latitude"] && [defaults valueForKey:@"longitude"]){
+    if([defaults valueForKey:@"longitude"] != nil) {
+        isLongitude = YES;
+    }
+    
+    if([defaults valueForKey:@"zipCode"] != nil) {
+        isZipAvailable = YES;
+    }
+    
+    if(isLatitude && isLongitude) {
         isCoordinateInfoAvailable = YES;
     }
+    
+    if(isCoordinateInfoAvailable || isZipAvailable){
+        isLocationInfoAvailable = YES;
+    }
+
+
+    NSLog(@"defaults zip:%@ lat:%@ long:%@",[defaults valueForKey:@"zipCode"],[defaults valueForKey:@"latitude"],[defaults valueForKey:@"longitude"]);
+    NSLog(@"bool zip:%d lat:%d long:%d coordinate:%d location:%d", isZipAvailable ,isLatitude,isLongitude,isCoordinateInfoAvailable,isLocationInfoAvailable);
+    
+
     
     PFQuery *query = [PFQuery queryWithClassName:@"Messages"];
     [query whereKey:@"segmentID" equalTo:[selectedSegment valueForKey:@"segmentID"]];
@@ -63,43 +92,43 @@ BOOL isCoordinateInfoAvailable = NO;
             
             dispatch_async(dispatch_get_main_queue(), ^{
                 
+                // Grab results of query
                 self.messageListFromParseWithContacts = (NSMutableArray*)[self createDeepCopyOfData:objects];
                 
-                //Is there a messsage for Local Rep in table?  If yes, then load congress data, if no, then don't
-                //First, grab index of Local Rep.
-                NSUInteger indexLocalRep = [self.messageListFromParseWithContacts indexOfObjectPassingTest:
-                                                   ^BOOL(NSDictionary *dict, NSUInteger idx, BOOL *stop) {
-                                                       return [[dict objectForKey:@"messageCategory"] isEqual:@"Local Representative"];
-                                                   }];
                 
-                // If index is found, then proceed, else do nothing (CongressFinder is bypassed)
-                if (indexLocalRep == NSNotFound){
-                    NSLog(@"No Local Rep entry in table, therefore do not load Local Rep data");
-                    isLocalRepMessageIncluded = NO;
-                    
-                } else { //Local Rep is found
+                //Get index of Local Rep message
+                NSUInteger indexLocalRep = [self.messageListFromParseWithContacts indexOfObjectPassingTest:
+                                               ^BOOL(NSDictionary *dict, NSUInteger idx, BOOL *stop) {
+                                                   return [[dict objectForKey:@"messageCategory"] isEqual:@"Local Representative"];
+                                               }];
+                // If Rep found, set bool to load congress)
+                if (indexLocalRep != NSNotFound){
                     isLocalRepMessageIncluded = YES;
+                }
+
+            
+                //Grab congess data based on location info that is available
+                if(!isLocationInfoAvailable) { //No location info - Parse data only
+                    NSLog(@"Loading parse data with no congress peoeple");
+                    [self prepSections:self.messageListFromParseWithContacts];  //PREP SECTIONS
                     
+                } else { //user has location info - initiate congressFinder and get congress data to add
                     
-                    if(!isLocationInfoAvailable) { // no location info, then just prep and load it.
-                        NSLog(@"Loading parse data with no congress peoeple");
-                        [self prepSections:self.messageListFromParseWithContacts];  //PREP SECTIONS
-                        
-                        
-                    } else { //user has location info - initiate congressFinder
+                    // Try 1)coordinates then 2) zipCode
+                    // 1) Coordinates
+                    if(isCoordinateInfoAvailable) {
                         CongressFinderAPI *congressFinder = [[CongressFinderAPI alloc]init];
                         congressFinder.messageTableViewController = self.messageTableViewController;
                         congressFinder.parseAPI = self;
-                       
-                        if(isCoordinateInfoAvailable) {
-                            
-                            //congressFinder gets a list of congress people (by lat/long) and adds it to parse data
-                            [congressFinder getCongressWithLatitude:[defaults doubleForKey:@"latitude"] andLongitude:[defaults doubleForKey:@"longitude"] addToMessageList:(NSMutableArray*)self.messageListFromParseWithContacts];
-                            
-                        } else {
-                            //congressFinder gets a list of congress people (by zip) and adds it to parse data
-                            [congressFinder getCongress:[defaults valueForKey:@"zipCode"] addToMessageList:self.messageListFromParseWithContacts];
-                        }
+                        [congressFinder getCongressWithLatitude:[defaults doubleForKey:@"latitude"] andLongitude:[defaults doubleForKey:@"longitude"] addToMessageList:(NSMutableArray*)self.messageListFromParseWithContacts];
+                        
+                    // 2) zipCode
+                    } else {
+                        //congressFinder with zipCode
+                        CongressFinderAPI *congressFinder = [[CongressFinderAPI alloc]init];
+                        congressFinder.messageTableViewController = self.messageTableViewController;
+                        congressFinder.parseAPI = self;
+                        [congressFinder getCongress:[defaults valueForKey:@"zipCode"] addToMessageList:self.messageListFromParseWithContacts];
                     }
                 }
             });

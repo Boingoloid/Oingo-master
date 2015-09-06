@@ -90,7 +90,13 @@ BOOL isNewAccount = NO;
                 UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Sorry!" message:[error.userInfo objectForKey:@"error"] delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
                 [alertView show];
             } else {
+                NSLog(@"User logged in successfully");
+                
                 dispatch_async(dispatch_get_main_queue(), ^{
+                    UpdateDefaults *updateDefaults = [[UpdateDefaults alloc]init];
+                    [updateDefaults updateLocationDefaultsFromUser];
+                    [self.messageTableViewController viewDidLoad];
+                    NSLog(@"viewDidLoad from Login");
                     [self popToMessagesController];
                 });
             }
@@ -108,19 +114,27 @@ BOOL isNewAccount = NO;
                 NSLog(@"Uh oh. The user cancelled the Facebook login.");
             } else if (user.isNew) {
                 NSLog(@"User signed up and logged in through Facebook!");
+                // Don't update defaults b/c new user
+                
                 dispatch_async(dispatch_get_main_queue(), ^{
+                    [self.messageTableViewController viewDidLoad];
+                    NSLog(@"viewDidLoad from Login");
                     [self popToMessagesController];
                 });
                 [self updateFacebookUserData];
                 isNewAccount = YES;
             } else {
                 NSLog(@"User logged in through Facebook!");
+                [self updateFacebookUserData];
+                
                 dispatch_async(dispatch_get_main_queue(), ^{
+                    UpdateDefaults *updateDefaults = [[UpdateDefaults alloc]init];
+                    [updateDefaults updateLocationDefaultsFromUser];
+                    [self.messageTableViewController viewDidLoad];
+                    NSLog(@"viewDidLoad from Login");
                     [self popToMessagesController];
                 });
-                [self updateFacebookUserData];
             }
-            
         }];
     }
     else {
@@ -130,7 +144,11 @@ BOOL isNewAccount = NO;
                 NSLog(@"Uh oh. The user cancelled the Facebook login.");
             } else if (user.isNew) {
                 NSLog(@"User signed up and logged in through Facebook!");
+                // Don't update defaults b/c new user
+                
                 dispatch_async(dispatch_get_main_queue(), ^{
+                    [self.messageTableViewController viewDidLoad];
+                    NSLog(@"viewDidLoad from Login");
                     [self popToMessagesController];
                 });
                 [self updateFacebookUserData];
@@ -138,11 +156,15 @@ BOOL isNewAccount = NO;
 
             } else {
                 NSLog(@"User logged in through Facebook!");
+                [self updateFacebookUserData];
+                
                 dispatch_async(dispatch_get_main_queue(), ^{
+                    UpdateDefaults *updateDefaults = [[UpdateDefaults alloc]init];
+                    [updateDefaults updateLocationDefaultsFromUser];
+                    [self.messageTableViewController viewDidLoad];
+                    NSLog(@"viewDidLoad from Login");
                     [self popToMessagesController];
                 });
-                [self updateFacebookUserData];
-
             }
         }];
     }
@@ -195,12 +217,6 @@ BOOL isNewAccount = NO;
         }
         else {
             NSLog(@"no error, email was updated fine");
-            
-            dispatch_async(dispatch_get_main_queue(), ^{
-                [self.messageTableViewController viewDidLoad];
-                NSLog(@"viewDidLoad from Login");
-                [self popToMessagesController];
-            });
         }
     }];
 }

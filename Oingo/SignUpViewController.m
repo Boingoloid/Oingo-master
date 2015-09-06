@@ -71,13 +71,15 @@ BOOL isNewAccountSignup = NO;
                 UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Sorry!"message:[error.userInfo objectForKey:@"error"] delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
                 [alertView show];
                 NSLog(@"there was an error %@",newUser.email);
-            }
-            else {
+            } else {
+                NSLog(@"User logged in successfully");
+                
                 dispatch_async(dispatch_get_main_queue(),^{
+                    [self.messageTableViewController viewDidLoad];
+                    NSLog(@"viewDidLoad from Login");
                     [self popToMessagesController];
                 });
-
-                NSLog(@"no error %@",newUser.email);
+            NSLog(@"no error %@",newUser.email);
             }
         }];
     }
@@ -93,6 +95,8 @@ BOOL isNewAccountSignup = NO;
                 NSLog(@"Uh oh. The user cancelled the Facebook login.");
             } else if (user.isNew) {
                 NSLog(@"User signed up and logged in through Facebook!");
+                // Don't update defaults b/c new user
+                
                 dispatch_async(dispatch_get_main_queue(), ^{
                     [self popToMessagesController];
                 });
@@ -100,14 +104,15 @@ BOOL isNewAccountSignup = NO;
                 isNewAccountSignup = YES;
             } else {
                 NSLog(@"User logged in through Facebook!");
+                [self updateFacebookUserData];
+                
                 dispatch_async(dispatch_get_main_queue(), ^{
+                    UpdateDefaults *updateDefaults = [[UpdateDefaults alloc]init];
+                    [updateDefaults updateLocationDefaultsFromUser];
                     [self.messageTableViewController viewDidLoad];
-                    NSLog(@"viewDidLoad from SignUp");
+                    NSLog(@"viewDidLoad from Login");
                     [self popToMessagesController];
                 });
-                [self updateFacebookUserData];
-//                [FBSDKProfile currentProfile];
-//                [FBSDKProfile enableUpdatesOnAccessTokenChange:YES];
             }
         }];
 }
@@ -116,7 +121,7 @@ BOOL isNewAccountSignup = NO;
 -(void)popToMessagesController {
     int viewsToPopAfterSignUp = 1; //Pop 1 views (signup)  Remember index starts at 0.
     [self.navigationController popToViewController:[self.navigationController.viewControllers objectAtIndex: self.navigationController.viewControllers.count-viewsToPopAfterSignUp-1] animated:YES];
-    [self.messageTableViewController viewDidLoad];
+    [self.messageTableViewController.view setNeedsDisplay];
 }
 
 -(void)updateFacebookUserData {

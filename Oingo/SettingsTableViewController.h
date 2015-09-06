@@ -17,4 +17,8 @@
 - (IBAction)linkfacebook:(id)sender;
 - (IBAction)logout:(id)sender;
 
+//Location actions, here as button actions
+- (IBAction)getUserLocation:(id)sender;
+- (IBAction)lookUpZip:(id)sender;
+
 @end

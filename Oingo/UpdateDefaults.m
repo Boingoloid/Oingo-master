@@ -11,26 +11,100 @@
 
 @implementation UpdateDefaults
 
--(void)updateLocationDefaults {
-     NSLog(@"updating defaults in with class!");
+-(void)updateLocationDefaultsFromUser {
+
     
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     PFUser *currentUser = [PFUser currentUser];
     
     if(currentUser){
-        if([currentUser valueForKey:@"latitude"] && [currentUser valueForKey:@"longitude"]) {
+        NSLog(@"updating defaults in with class from user!");
+        if([currentUser valueForKey:@"latitude"] != nil && [currentUser valueForKey:@"longitude"] != nil) {
+            //Coordinates exist so load to defaults
             [defaults setObject:[currentUser valueForKey:@"latitude"] forKey:@"latitude"];
             [defaults setObject:[currentUser valueForKey:@"longitude"] forKey:@"longitude"];
             [defaults synchronize];
-            NSLog(@"user already has value for lat/long, verify default:%@",[defaults valueForKey:@"latitude"]);
+            NSLog(@"loading lat/long from user to defaults, default latitude now:%@",[defaults valueForKey:@"latitude"]);
         }
         
-        if ([currentUser valueForKey:@"zipCode"]) {
+        if ([currentUser valueForKey:@"zipCode"] != nil) {
+            // zipCode exists so load to defaults
             [defaults setObject:[currentUser valueForKey:@"zipCode"] forKey:@"zipCode"];
             [defaults synchronize];
-            NSLog(@"user already has value for zip, verify default:%@",[defaults valueForKey:@"zipCode"]);
+            NSLog(@"loading zipCode from user to defaults, default zipCode now:%@",[defaults valueForKey:@"zipCode"]);
         }
     }
-
 }
+
+-(void)saveZipCodeToDefaultsWithZip:zipCode{
+    NSLog(@"inputs, zipCode:%@",zipCode);
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    [defaults setValue:zipCode forKey:@"zipCode"];
+    [defaults synchronize];
+    
+    //test
+    NSLog(@"Save zipCode to defaults zipCode:%@",[defaults valueForKey:@"zipCode"]);
+    
+    
+}
+
+-(void)saveCoordinatesToDefaultsWithLatitude:(double)latitude andLongitude:(double)longitude {
+    NSLog(@"inputs lat:%f long:%f",latitude,longitude);
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    [defaults setValue:[NSNumber numberWithDouble:latitude] forKey:@"latitude"];
+    [defaults setObject:[NSNumber numberWithDouble:longitude] forKey:@"longitude"];
+    [defaults synchronize];
+    
+    //test
+    NSLog(@"Save coordinates to defaults lat:%@ long:%@",[defaults valueForKey:@"latitude"],[defaults valueForKey:@"longitude"]);
+}
+
+-(void)saveLocationDefaultsToUser{
+    PFUser *currentUser = [PFUser currentUser];
+    if (currentUser){
+        NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+        
+        if([defaults valueForKey:@"latitude"] != nil){
+            [currentUser setValue:[defaults valueForKey:@"latitude"] forKey:@"latitude"];
+        }
+        if([defaults valueForKey:@"longitude"] != nil){
+            [currentUser setObject:[defaults valueForKey:@"longitude"] forKey:@"longitude"];
+        }
+        if([defaults valueForKey:@"zipCode"] != nil){
+            [currentUser setObject:[defaults valueForKey:@"zipCode"] forKey:@"zipCode"];
+        }
+        
+        [currentUser saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) { //save currentUser to parse disk
+            if(error){
+                NSLog(@"error updating from location Defaults to user!! - list:%@ %@ %@",[currentUser objectForKey:@"latitude"],[currentUser objectForKey:@"longitude"],[currentUser objectForKey:@"zipCode"]);
+                
+            }
+            else {
+                NSLog(@"saved location Defaults to user!!");
+                NSLog(@"saved location Defaults to user!! - list:%@ %@ %@",[currentUser objectForKey:@"latitude"],[currentUser objectForKey:@"longitude"],[currentUser objectForKey:@"zipCode"]);
+            }
+        }];
+    }
+}
+
+-(void)deleteCoordinates{
+    // Delete from Defaults
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    [defaults removeObjectForKey:@"latitude"];
+    [defaults removeObjectForKey:@"longitude"];
+    [defaults synchronize];
+    
+    // Delete from currentUser if neccessary
+    PFUser *currentUser = [PFUser currentUser];
+    [currentUser removeObjectForKey:@"latitude"];
+    [currentUser removeObjectForKey:@"longitude"];
+    [currentUser saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) { //save currentUser to parse disk
+        if(error){
+        }
+        else {
+            NSLog(@"deleted coordinates in currentUser - list:%@ %@ %@",[currentUser objectForKey:@"latitude"],[currentUser objectForKey:@"longitude"],[currentUser objectForKey:@"zipCode"]);
+        }
+    }];
+}
+
 @end

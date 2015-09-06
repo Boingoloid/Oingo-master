@@ -9,5 +9,9 @@
 #import <Foundation/Foundation.h>
 
 @interface UpdateDefaults : NSObject
--(void) updateLocationDefaults;
+-(void) updateLocationDefaultsFromUser;
+-(void)saveCoordinatesToDefaultsWithLatitude:(double)latitude andLongitude:(double)longitude;
+-(void)saveZipCodeToDefaultsWithZip:zipCode;
+-(void)saveLocationDefaultsToUser;
+-(void)deleteCoordinates;
 @end

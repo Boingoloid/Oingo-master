@@ -60,8 +60,8 @@ NSInteger footerHeight = 1;
     [super viewDidLoad];
         NSLog(@"viewDidLoad");
     
-    self.updateDefaults = [[UpdateDefaults alloc]init];
-    [self.updateDefaults updateLocationDefaults]; // Checks if current user has location info, if so, set defaults.
+//    self.updateDefaults = [[UpdateDefaults alloc]init];
+//    [self.updateDefaults updateLocationDefaultsFromUser]; // Checks if current user has location info, if so, set defaults.
 
     //hidding tweet success
     self.segmentTweetButtonSuccessImageView.hidden = YES;
@@ -431,33 +431,36 @@ NSInteger footerHeight = 1;
     
     //Set the location default
     
-    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-    [defaults setObject:[NSString stringWithFormat:@"%f",newLocation.coordinate.latitude] forKey:@"latitude"];
-    [defaults setObject:[NSString stringWithFormat:@"%f",newLocation.coordinate.longitude] forKey:@"longitude"];
-    [defaults synchronize];
-    NSLog(@"UPDATING DEFAULTS!!%@,%@",[defaults valueForKey:@"latitude"],[defaults valueForKey:@"longitude"]);
+    UpdateDefaults *updateDefaults = [[UpdateDefaults alloc]init];
+    [updateDefaults saveCoordinatesToDefaultsWithLatitude:(double)newLocation.coordinate.latitude andLongitude:(double)newLocation.coordinate.longitude];
+    [updateDefaults saveLocationDefaultsToUser];
+    
+//    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+//    [defaults setObject:[NSString stringWithFormat:@"%f",newLocation.coordinate.latitude] forKey:@"latitude"];
+//    [defaults setObject:[NSString stringWithFormat:@"%f",newLocation.coordinate.longitude] forKey:@"longitude"];
+//    [defaults synchronize];
+//    NSLog(@"UPDATING DEFAULTS!!%@,%@",[defaults valueForKey:@"latitude"],[defaults valueForKey:@"longitude"]);
     
     //if current a user then save location info to account.
-    PFUser *currentUser = [PFUser currentUser];
+    
+//    PFUser *currentUser = [PFUser currentUser];
 
-    if(currentUser) {
-        double latitude = newLocation.coordinate.latitude;
-        double longitude = newLocation.coordinate.longitude;
-        NSLog(@"latitude to be saved: %f",latitude);
-        
-//        [currentUser setEmail:[result objectForKey:@"email"]];
-//            [currentUser setObject:[result objectForKey:@"link"] forKey:@"linkfb"];
-        [currentUser setObject:[NSNumber numberWithDouble:latitude] forKey:@"latitude"];
-        [currentUser setObject:[NSNumber numberWithDouble:longitude] forKey:@"longitude"];
-        
-        [currentUser saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) { //save currentUser to parse disk
-            if(error){
-                NSLog(@"error UPDATING COORDINATES!!");
-            }
-            else {
-                NSLog(@"UPDATING COORDINATES!!");
-            }
-        }];
+//    if(currentUser) {
+//        double latitude = newLocation.coordinate.latitude;
+//        double longitude = newLocation.coordinate.longitude;
+//        NSLog(@"latitude to be saved: %f",latitude);
+//        
+//        [currentUser setObject:[NSNumber numberWithDouble:latitude] forKey:@"latitude"];
+//        [currentUser setObject:[NSNumber numberWithDouble:longitude] forKey:@"longitude"];
+//        
+//        [currentUser saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) { //save currentUser to parse disk
+//            if(error){
+//                NSLog(@"error UPDATING COORDINATES!!");
+//            }
+//            else {
+//                NSLog(@"UPDATING COORDINATES!!");
+//            }
+//        }];
 
         
         
@@ -469,7 +472,7 @@ NSInteger footerHeight = 1;
 //            }
 //        }];
 //    }
-    }
+//    }
     [self viewDidLoad];
 
 }
@@ -503,21 +506,11 @@ NSInteger footerHeight = 1;
         if(count != 5) {
             [self retryZipCode:zipCode count:count];
         } else {
-            //set user default so zip stays if user goes off table
-//            [self.updateDefaults updateLocationDefaults];
-            NSUserDefaults *defaults = [[NSUserDefaults alloc]init];
-            [defaults setObject:zipCode forKey:@"zipCode"];
-            [defaults synchronize];
+            //set user default zipCode and save to user
+            UpdateDefaults *updateDefaults = [[UpdateDefaults alloc]init];
+            [updateDefaults saveZipCodeToDefaultsWithZip:zipCode];
+            [updateDefaults saveLocationDefaultsToUser];
             
-            //If user, update the user current zip
-            if([PFUser currentUser]) {
-                [[PFUser currentUser] setValue:zipCode forKey:@"zipCode"];
-                [[PFUser currentUser] saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
-                    if(!error){
-                        NSLog(@"succeeded saving user");
-                    }
-                }];
-            }
             [self viewDidLoad];
         }
     }];
@@ -556,20 +549,10 @@ NSInteger footerHeight = 1;
         if(count != 5) {
             [self retryZipCode:zipCode count:count];
         } else {
-            //set user default so zip stays if user goes off table
-            NSUserDefaults *defaults = [[NSUserDefaults alloc]init];
-            [defaults setObject:zipCode forKey:@"zipCode"];
-            [defaults synchronize];
-            
-            //If user, update the user current zip
-            if([PFUser currentUser]) {
-                [[PFUser currentUser] setValue:zipCode forKey:@"zipCode"];
-                [[PFUser currentUser] saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
-                    if(!error){
-                        NSLog(@"succeeded saving user");
-                    }
-                }];
-            }
+            //set user default zipCode and save to user
+            UpdateDefaults *updateDefaults = [[UpdateDefaults alloc]init];
+            [updateDefaults saveZipCodeToDefaultsWithZip:zipCode];
+            [updateDefaults saveLocationDefaultsToUser];
 
             [self viewDidLoad];
         }
