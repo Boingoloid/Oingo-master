@@ -243,11 +243,10 @@ BOOL isLocationInfoAvailable = NO;
     self.messageTableViewController.messageOptionsList = self.messageOptionsList;
     self.messageTableViewController.expandSectionsKeyList = self.expandSectionsKeyList;
     
-//    dispatch_async(dispatch_get_main_queue(), ^{
-    
     [self.messageTableViewController.tableView reloadData];
     NSLog(@"reloading data from Prep Sections");
     
+//    dispatch_async(dispatch_get_main_queue(), ^{
     if([PFUser currentUser]) {
         
         MarkSentMessageAPI *markSentMessagesAPI = [[MarkSentMessageAPI alloc]init];

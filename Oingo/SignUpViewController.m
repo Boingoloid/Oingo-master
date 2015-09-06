@@ -110,7 +110,7 @@ BOOL isNewAccountSignup = NO;
                     UpdateDefaults *updateDefaults = [[UpdateDefaults alloc]init];
                     [updateDefaults updateLocationDefaultsFromUser];
                     [self.messageTableViewController viewDidLoad];
-                    NSLog(@"viewDidLoad from Login");
+                    NSLog(@"viewDidLoad from SignUp");
                     [self popToMessagesController];
                 });
             }

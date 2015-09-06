@@ -50,6 +50,7 @@
     }
     
     [self.messageTableViewController.tableView reloadData];
+    [self.messageTableViewController.view setNeedsDisplay];
     NSLog(@"reloading data from Congress Photo Finder");
 
     
