@@ -126,16 +126,15 @@
 //    PFFile *theImage = self.selectedSegment.linkToContent;
 //    NSData *imageData = [theImage getData];
 //    UIImage *image = [UIImage imageWithData:imageData];
-    
-    
-    NSString *postText = [NSString stringWithFormat:@"%@: %@",[self.selectedProgram valueForKey:@"programTitle"],[self.selectedSegment valueForKey:@"segmentTitle"]];  // Everything is the same except for this line.
 
 //    PFFile *theImage = [self.selectedSegment valueForKey:@"segmentImage"];
 //    NSString *segmentImageString =  theImage.name;
+
     
+    NSString *postText = [NSString stringWithFormat:@"%@: %@",[self.selectedProgram valueForKey:@"programTitle"],[self.selectedSegment valueForKey:@"segmentTitle"]];  // Everything is the same except for this line.
     NSString *linkToContent =[[NSString alloc]initWithString:[self.selectedSegment valueForKey:@"linkToContent"]];
 
-    NSDictionary *parameters = @{//@"message" : postText,
+    NSDictionary *parameters = @{@"message" : postText,
                                  @"link" : linkToContent,
                                  @"name" : postText
                                  };

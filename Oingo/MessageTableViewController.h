@@ -61,6 +61,7 @@
 - (void)lookUpZip;
 - (void)getUserLocation;
 
+- (IBAction)showCompose:(id)sender;
 
 -(NSString *) categoryForSection:(NSInteger)section;
 @end

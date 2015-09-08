@@ -16,6 +16,7 @@
 #import "SignUpViewController.h"
 #import "LogInViewController.h"
 #import "CongressionalMessageItem.h"
+#import "MarkSentMessageAPI.h"
 
 @implementation TwitterAPITweet
 
@@ -175,7 +176,11 @@ bool isUserLinkedToTwitter;
     }];
     
     NSLog(@"Got here in the save 2:%@",sentMessageItem);
-    [self.messageTableViewController viewDidLoad];
+    MarkSentMessageAPI *markSentMessagesAPI = [[MarkSentMessageAPI alloc]init];
+    markSentMessagesAPI.messageTableViewController = self.messageTableViewController;
+    [markSentMessagesAPI markSentMessages];
+    
+    //    [self.messageTableViewController viewDidLoad];
 }
 
 

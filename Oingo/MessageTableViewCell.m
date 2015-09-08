@@ -121,7 +121,7 @@
         self.messageImage.layer.borderColor = [[UIColor blackColor] CGColor];
         self.messageImage.layer.cornerRadius = 3.0;
         self.messageImage.clipsToBounds = YES;
-    [self.contentView setNeedsDisplay];
+        [self.contentView setNeedsDisplay];
 //    }
 }
 

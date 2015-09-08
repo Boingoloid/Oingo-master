@@ -37,6 +37,7 @@
 #import "MessageOptionsTableTableViewController.h"
 #import "SignUpViewController.h"
 #import "SettingsTableViewController.h"
+#import "ComposeViewController.h"
 
 
 @interface MessageTableViewController () <UIGestureRecognizerDelegate,CLLocationManagerDelegate>
@@ -425,6 +426,10 @@ NSInteger footerHeight = 1;
         }
     }
     [self.locationManager startUpdatingLocation];
+}
+
+- (IBAction)showCompose:(id)sender {
+    [self performSegueWithIdentifier:@"showCompose" sender:nil];
 }
 
 #pragma mark - CLLocationManagerDelegate
@@ -841,9 +846,14 @@ NSInteger footerHeight = 1;
         messageOptionsViewController.menuList = self.menuList;
         
     } else if ([segue.identifier isEqualToString:@"showSettings"]){
-        
         SettingsTableViewController *settingsTableVC = [segue destinationViewController];
         settingsTableVC.messageTableViewController = self;
+        
+    } else if ([segue.identifier isEqualToString:@"showCompose"]){
+        ComposeViewController *composeViewController = [segue destinationViewController];
+        composeViewController.messageTableViewController = self;
+        composeViewController.selectedSegment = self.selectedSegment;
+        composeViewController.selectedProgram = self.selectedProgram;
     }
 }
 
