@@ -206,6 +206,8 @@ BOOL isLocationInfoAvailable = NO;
     self.messageTableViewController.messageList = self.menuList;
     self.messageTableViewController.menuList = self.menuList;
     self.messageTableViewController.messageOptionsList = self.messageOptionsList;
+    NSLog(@"self.messageTableViewController.messageOptions:%@",self.messageTableViewController.messageOptionsList);
+        NSLog(@"self.messageOptions:%@",self.messageOptionsList);
     self.messageTableViewController.expandSectionsKeyList = self.expandSectionsKeyList;
     
     [self.messageTableViewController.tableView reloadData];
@@ -402,7 +404,7 @@ BOOL isLocationInfoAvailable = NO;
     NSMutableArray* allDataDeepCopyArray = [NSKeyedUnarchiver unarchiveObjectWithData:[NSKeyedArchiver archivedDataWithRootObject:allDataTempArray]];
     
     self.messageOptionsList = messagesDeepCopyArray;
-    NSLog(@"menulist%@",self.messageTableViewController.menuList);
+    NSLog(@"deep copy of messageOptionsList (deep copy):%@",self.messageOptionsList);
     return allDataDeepCopyArray;
     
     

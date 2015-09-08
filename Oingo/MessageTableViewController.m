@@ -845,6 +845,8 @@ NSInteger footerHeight = 1;
         messageOptionsViewController.messageOptionsList = self.messageOptionsList;
         messageOptionsViewController.menuList = self.menuList;
         
+        NSLog(@"messageOptionsList:%@", self.messageOptionsList);
+        
     } else if ([segue.identifier isEqualToString:@"showSettings"]){
         SettingsTableViewController *settingsTableVC = [segue destinationViewController];
         settingsTableVC.messageTableViewController = self;
@@ -854,6 +856,8 @@ NSInteger footerHeight = 1;
         composeViewController.messageTableViewController = self;
         composeViewController.selectedSegment = self.selectedSegment;
         composeViewController.selectedProgram = self.selectedProgram;
+        composeViewController.facebookAPIPost = (FacebookAPIPost*)sender;
+        NSLog(@"sender:%@",sender);
     }
 }
 

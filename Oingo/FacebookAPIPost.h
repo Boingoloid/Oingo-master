@@ -24,4 +24,5 @@
 @property (nonatomic) NSString *messageText;
 -(void)shareSegmentFacebookAPI;
 -(void)shareMessageFacebookAPI:(MessageTableViewCell*)cell;
+-(void) publishFBPostWithParameters:(NSDictionary*)parameters;
 @end

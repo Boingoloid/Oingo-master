@@ -65,7 +65,17 @@
 */
 
 - (IBAction)send:(id)sender {
+    NSString *postMessage = self.messageTextView.text; // Nothing b/c sharing segment
+    NSString *linkName = [NSString stringWithFormat:@"%@: %@",[self.selectedProgram valueForKey:@"programTitle"],[self.selectedSegment valueForKey:@"segmentTitle"]];  // Everything is the same except for this line.
+    NSString *linkToContent =[[NSString alloc]initWithString:[self.selectedSegment valueForKey:@"linkToContent"]];
     
+    NSDictionary *parameters = @{@"message" : postMessage,
+                                 @"link" : linkToContent,
+                                 @"name" : linkName
+                                 };
+    //list of parameters: https://developers.facebook.com/docs/graph-api/reference/
+    
+    [self.facebookAPIPost publishFBPostWithParameters:parameters];
 }
 
 - (IBAction)cancel:(id)sender {

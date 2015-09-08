@@ -20,6 +20,7 @@
 #import "SignUpViewController.h"
 #import "MessageTableViewController.h"
 #import "MarkSentMessageAPI.h"
+#import "ComposeViewController.h"
 
 @interface FacebookAPIPost ()
 
@@ -65,7 +66,8 @@
 -(void)shareSegmentWithFacebookComposer{
     
     if ([[FBSDKAccessToken currentAccessToken] hasGranted:@"publish_actions"]) {
-        [self publishFBPost]; //publish
+        [self.messageTableViewController performSegueWithIdentifier:@"showCompose" sender:self];
+        //        [self publishFBPost]; //publish
     } else {
         NSLog(@"no publish permissions"); // no publish permissions so get them, then post
         
@@ -75,69 +77,16 @@
                                         block:^(BOOL succeeded, NSError *error) {
                                             if (succeeded) {
                                                 NSLog(@"User now has read and publish permissions!");
-                                                [self publishFBPost];
+                                                [self.messageTableViewController performSegueWithIdentifier:@"showCompose" sender:self];
+//                                                [self publishFBPost];
                                             }
         }];
-
-        
-//        FBSDKLoginManager *loginManager = [[FBSDKLoginManager alloc] init];
-//        [loginManager logInWithPublishPermissions:@[@"publish_actions"] handler:^(FBSDKLoginManagerLoginResult *result, NSError *error) {
-//            if(error){
-//                NSLog(@"publish permissions not working, not active");
-//            } else {
-//                NSLog(@"publish permissions now active");
-//                
-//                //save new permissions to parse
-//                
-//
-//            }
-//        }];
     }
 }
 
--(void) publishFBPost{
-//    FBSDKShareLinkContent *content = [FBSDKShareLinkContent new];
-//    content.contentURL = [NSURL URLWithString:[self.selectedSegment valueForKey:@"linkToContent"]];
-//    content.contentTitle = [self.selectedProgram valueForKey:@"programTitle"];
-//    content.contentDescription = [self.selectedSegment valueForKey:@"purposeSummary"];
-//    
-//    PFFile *theImage = [self.selectedSegment valueForKey:@"segmentImage"];
-//    NSString *urlString = theImage.url;
-//    NSURL *url = [NSURL URLWithString:urlString];
-//    content.imageURL = url;
-//    
-//    FBSDKShareDialog *shareDialog = [FBSDKShareDialog new];
-//    
-//    [shareDialog setMode:FBSDKShareDialogModeAutomatic];
-////    [FBSDKShareDialog showFromViewController:self.messageTableViewController withContent:content delegate:self];
-//    [shareDialog setShareContent:content];
-//    [shareDialog setDelegate:self];
-//    [shareDialog setFromViewController:self.messageTableViewController];
-//    [shareDialog show];
-
-
-//
-//    FBSDKShareLinkContent *content = [[FBSDKShareLinkContent alloc] init];
-//    content.contentURL = [NSURL URLWithString:@"https://developers.facebook.com"];
-    
-//        PFFile *segmentImage = [self.selectedSegment objectForKey:@"segmentImage"];
-//        NSString *segmentImageUrlString = segmentImage.url;
-//
-//    PFFile *theImage = self.selectedSegment.linkToContent;
-//    NSData *imageData = [theImage getData];
-//    UIImage *image = [UIImage imageWithData:imageData];
-
-//    PFFile *theImage = [self.selectedSegment valueForKey:@"segmentImage"];
-//    NSString *segmentImageString =  theImage.name;
+-(void) publishFBPostWithParameters:(NSDictionary*)parameters{
 
     
-    NSString *postText = [NSString stringWithFormat:@"%@: %@",[self.selectedProgram valueForKey:@"programTitle"],[self.selectedSegment valueForKey:@"segmentTitle"]];  // Everything is the same except for this line.
-    NSString *linkToContent =[[NSString alloc]initWithString:[self.selectedSegment valueForKey:@"linkToContent"]];
-
-    NSDictionary *parameters = @{@"message" : postText,
-                                 @"link" : linkToContent,
-                                 @"name" : postText
-                                 };
         [[[FBSDKGraphRequest alloc]
           initWithGraphPath:@"me/feed"
           parameters: parameters
@@ -149,6 +98,7 @@
              if (!error) {
                  NSLog(@"Post id:%@", result[@"id"]);
                  [self saveSentMessageSegment:result[@"id"]];
+                 [self.messageTableViewController.navigationController popViewControllerAnimated:YES];
              }
          }];
 }
@@ -159,7 +109,7 @@
 //-(void) saveSentMessage{
 //    
 //    //  SAVING MESSAGE DATA TO PARSE
-//    PFUser *currentUser = [PFUser currentUser];
+//    PFUser *currentUser = [PFUser currentUser];4
 //    
 //    PFObject *sentMessageItem = [PFObject objectWithClassName:@"sentMessages"];
 //    [sentMessageItem setObject:@"facebookSegment" forKey:@"messageType"];

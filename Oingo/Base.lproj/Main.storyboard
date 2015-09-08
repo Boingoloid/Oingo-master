@@ -966,7 +966,7 @@
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" horizontalHuggingPriority="750" verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" verticalCompressionResistancePriority="250" tableViewCell="x0E-Je-p5i" id="hQk-Tx-BCm">
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="752" verticalHuggingPriority="752" text="Label making this really long to see what it does with the text.  Since I can't get this to work in the code." lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dSg-Lh-tat">
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="752" verticalHuggingPriority="752" ambiguous="YES" misplaced="YES" text="Label making this really long to see what it does with the text.  Since I can't get this to work in the code." lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dSg-Lh-tat">
                                             <rect key="frame" x="18" y="8" width="298" height="62"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                             <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
@@ -994,12 +994,16 @@
                                             <exclude reference="5bu-Mj-1qK"/>
                                             <exclude reference="5dL-OH-R8Y"/>
                                             <exclude reference="B7N-Ti-S70"/>
+                                            <exclude reference="BXI-ce-Z9e"/>
                                             <exclude reference="Hqg-Qs-Uqw"/>
+                                            <exclude reference="IGc-2w-S46"/>
                                             <exclude reference="WoF-0V-LGj"/>
                                             <exclude reference="b1A-9M-IHS"/>
                                             <exclude reference="b8q-pu-DAr"/>
                                             <exclude reference="dEi-CY-gWI"/>
                                             <exclude reference="f3r-cu-k14"/>
+                                            <exclude reference="qvb-dw-MXT"/>
+                                            <exclude reference="zcQ-By-7jg"/>
                                             <exclude reference="zo5-mN-td7"/>
                                         </mask>
                                     </variation>
