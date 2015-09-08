@@ -21,7 +21,7 @@
     NSString *messageText = [NSString stringWithFormat:@"\"%@\"",[messageItem valueForKey:@"messageText"]];
     self.messageText.text = messageText;
     self.messageText.preferredMaxLayoutWidth = 300;
-    [self setNeedsDisplay];
+    [self.contentView setNeedsDisplay];
     
     
 

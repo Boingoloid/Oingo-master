@@ -31,6 +31,11 @@ Segment *segment;
     [super viewWillAppear:YES];
 
 }
+- (void)viewWillTransitionToSize:(CGSize)size withTransitionCoordinator:(id<UIViewControllerTransitionCoordinator>)coordinator
+{
+    [self.tableView reloadData];
+    [super viewWillTransitionToSize:size withTransitionCoordinator:coordinator];
+}
 
 - (void)viewDidLoad {
     

@@ -128,7 +128,7 @@
         self.messageImage.clipsToBounds = YES;
         self.messageImage.layer.cornerRadius = 3;
     }
-        [self setNeedsDisplay];
+        [self.contentView setNeedsDisplay];
 }
 
 

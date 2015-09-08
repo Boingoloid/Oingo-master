@@ -130,8 +130,10 @@
     NSString *postText = [NSString stringWithFormat:@"%@: %@",[self.selectedProgram valueForKey:@"programTitle"],[self.selectedSegment valueForKey:@"segmentTitle"]];  // Everything is the same except for this line.
 
 
-    NSDictionary *parameters = @{@"message" : postText, @"link" : self.selectedSegment.linkToContent,@"link.picture" : self.selectedSegment.segmentImage, @"link.name" : @"test"};
-    
+    NSDictionary *parameters = @{@"message" : postText,
+                                 @"link" : self.selectedSegment.linkToContent,
+                                 @"link.picture" : self.selectedSegment.segmentImage,
+                                 @"link.name" : @"test"};
         [[[FBSDKGraphRequest alloc]
           initWithGraphPath:@"me/feed"
           parameters: parameters
