@@ -151,7 +151,6 @@ BOOL isLocationInfoAvailable = NO;
         NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
         CongressFinderAPI *congressFinder = [[CongressFinderAPI alloc]init];
         congressFinder.messageTableViewController = self.messageTableViewController;
-        congressFinder.parseAPI = self;
         [congressFinder getCongressWithLatitude:[defaults doubleForKey:@"latitude"] andLongitude:[defaults doubleForKey:@"longitude"] addToMessageList:(NSMutableArray*)self.messageListFromParseWithContacts];
         
 // 2) zipCode
@@ -160,7 +159,6 @@ BOOL isLocationInfoAvailable = NO;
         //congressFinder with zipCode
         CongressFinderAPI *congressFinder = [[CongressFinderAPI alloc]init];
         congressFinder.messageTableViewController = self.messageTableViewController;
-        congressFinder.parseAPI = self;
         [congressFinder getCongress:[defaults valueForKey:@"zipCode"] addToMessageList:self.messageListFromParseWithContacts];
     }
 }
@@ -214,7 +212,6 @@ BOOL isLocationInfoAvailable = NO;
     NSLog(@"Prep Sections end: Reloading data from Prep Sections");
     
     if(self.isCongressLoaded) {
-        self.isCongressLoaded = NO;
         //could make this async
         CongressPhotoFinderAPI *congressPhotoFinder = [[CongressPhotoFinderAPI alloc]init];
         congressPhotoFinder.messageTableViewController = self.messageTableViewController;
@@ -224,7 +221,6 @@ BOOL isLocationInfoAvailable = NO;
     if([PFUser currentUser]) {
         MarkSentMessageAPI *markSentMessagesAPI = [[MarkSentMessageAPI alloc]init];
         markSentMessagesAPI.messageTableViewController = self.messageTableViewController;
-        markSentMessagesAPI.parseAPI = self;
         [markSentMessagesAPI markSentMessages];
     }
     self.isCongressLoaded = NO;

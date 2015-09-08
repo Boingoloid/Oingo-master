@@ -19,6 +19,7 @@
 #import <FBSDKLoginKit/FBSDKLoginKit.h>
 #import "SignUpViewController.h"
 #import "MessageTableViewController.h"
+#import "MarkSentMessageAPI.h"
 
 @interface FacebookAPIPost ()
 
@@ -148,6 +149,7 @@
          startWithCompletionHandler:^(FBSDKGraphRequestConnection *connection, id result, NSError *error) {
              if (!error) {
                  NSLog(@"Post id:%@", result[@"id"]);
+                 [self saveSentMessageSegment:result[@"id"]];
              }
          }];
 }
@@ -185,7 +187,6 @@
     
     //  SAVING MESSAGE DATA TO PARSE
     PFUser *currentUser = [PFUser currentUser];
-    
     PFObject *sentMessageItem = [PFObject objectWithClassName:@"sentMessages"];
     [sentMessageItem setObject:@"facebookSegmentOnly" forKey:@"messageType"];
     [sentMessageItem setObject:[self.selectedSegment valueForKey:@"segmentID"] forKey:@"segmentID"];
@@ -200,10 +201,15 @@
         }
         else {
             NSLog(@"no error, message saved");
-            [self.messageTableViewController viewDidLoad];
+            
+            MarkSentMessageAPI *markSentMessagesAPI = [[MarkSentMessageAPI alloc]init];
+            markSentMessagesAPI.messageTableViewController = self.messageTableViewController;
+            [markSentMessagesAPI markSentMessages];
+            
+            
+//            [self.messageTableViewController viewDidLoad];
         }
     }];
-    
 }
 
 -(void) pushToSignIn{
@@ -211,7 +217,6 @@
     signUpViewController.messageTableViewController = self.messageTableViewController;
     [self.messageTableViewController.navigationController pushViewController:signUpViewController animated:YES];
     NSLog(@"message view controller as signup pushed:%@ and %@",self.messageTableViewController,signUpViewController.messageTableViewController);
-
 }
 
 

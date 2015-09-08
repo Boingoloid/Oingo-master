@@ -12,7 +12,6 @@
 
 @interface MarkSentMessageAPI : NSObject
 @property(nonatomic) MessageTableViewController *messageTableViewController;
-@property(nonatomic) ParseAPI *parseAPI;
 @property(nonatomic) NSArray *sentMessagesForSegment;
 
 -(void)markSentMessages;

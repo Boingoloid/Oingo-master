@@ -89,7 +89,6 @@ static CLLocationManager *locationManager;
     parseAPI.messageTableViewController = self.messageTableViewController;
     CongressFinderAPI *congressFinder = [[CongressFinderAPI alloc]init];
     congressFinder.messageTableViewController = self.messageTableViewController;
-    congressFinder.parseAPI = parseAPI;
     [congressFinder getCongressWithLatitude:newLocation.coordinate.latitude andLongitude:newLocation.coordinate.longitude addToMessageList:(NSMutableArray*)self.messageTableViewController.messageList];
     
 }

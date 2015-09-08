@@ -14,7 +14,6 @@
 @interface CongressFinderAPI : NSObject 
 @property(nonatomic) NSMutableArray *messageList;
 @property(nonatomic) NSMutableArray *messageListWithCongress;
-@property(nonatomic) ParseAPI *parseAPI;
 @property(nonatomic) MessageTableViewController *messageTableViewController;
 @property(nonatomic) bool isCongressLoaded;
 

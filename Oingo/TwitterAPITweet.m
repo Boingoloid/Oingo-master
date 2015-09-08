@@ -107,6 +107,7 @@ bool isUserLinkedToTwitter;
         } else {
             NSLog(@"Tweet is sent.");
             [self saveSentMessage];
+            //Need to save tweet result ID in callBack
         }
     }];
 }
@@ -115,7 +116,6 @@ bool isUserLinkedToTwitter;
 -(void) saveSentMessageSegment{
     //  SAVING MESSAGE DATA TO PARSE
     PFUser *currentUser = [PFUser currentUser];
-    
     PFObject *sentMessageItem = [PFObject objectWithClassName:@"sentMessages"];
     [sentMessageItem setObject:@"twitterSegmentOnly" forKey:@"messageType"];
     [sentMessageItem setObject:[self.selectedSegment valueForKey:@"segmentID"] forKey:@"segmentID"];
