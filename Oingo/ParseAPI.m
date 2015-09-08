@@ -168,8 +168,8 @@ BOOL isLocationInfoAvailable = NO;
 # pragma mark - Prep Sections
 
 -(void)prepSections:messageList {
-    NSLog(@"Prep sections triggered, here is the messageList input:%@",messageList);
-    
+//    NSLog(@"Prep sections triggered, here is the messageList input:%@",messageList);
+    NSLog(@"Prep sections triggered");
     //add message to this list
     [self separateMessagesFromContacts:messageList]; //create self.messageList and self.contactList
     [self createMenuList]; //creates self.menuList - these are the grouopings for sections
@@ -206,8 +206,9 @@ BOOL isLocationInfoAvailable = NO;
     self.messageTableViewController.messageList = self.menuList;
     self.messageTableViewController.menuList = self.menuList;
     self.messageTableViewController.messageOptionsList = self.messageOptionsList;
-    NSLog(@"self.messageTableViewController.messageOptions:%@",self.messageTableViewController.messageOptionsList);
-        NSLog(@"self.messageOptions:%@",self.messageOptionsList);
+    
+    NSLog(@"self.messageTableViewController:%@",self.messageTableViewController);
+    NSLog(@"self.messageOptions:%@",[self.messageOptionsList firstObject]); //this one
     self.messageTableViewController.expandSectionsKeyList = self.expandSectionsKeyList;
     
     [self.messageTableViewController.tableView reloadData];
@@ -404,7 +405,7 @@ BOOL isLocationInfoAvailable = NO;
     NSMutableArray* allDataDeepCopyArray = [NSKeyedUnarchiver unarchiveObjectWithData:[NSKeyedArchiver archivedDataWithRootObject:allDataTempArray]];
     
     self.messageOptionsList = messagesDeepCopyArray;
-    NSLog(@"deep copy of messageOptionsList (deep copy):%@",self.messageOptionsList);
+    NSLog(@"deep copy of messageOptionsList (deep copy):%@",[self.messageOptionsList firstObject]);
     return allDataDeepCopyArray;
     
     
