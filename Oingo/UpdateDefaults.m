@@ -80,11 +80,24 @@
                 
             }
             else {
-                NSLog(@"saved location Defaults to user!!");
                 NSLog(@"saved location Defaults to user!! - list:%@ %@ %@",[currentUser objectForKey:@"latitude"],[currentUser objectForKey:@"longitude"],[currentUser objectForKey:@"zipCode"]);
             }
         }];
     }
+}
+
+
+-(void)saveMessageListWithCongressDefault:(NSArray*)messageList{
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    [defaults setObject:messageList forKey:@"messageListWithCongress"];
+    [defaults synchronize];
+    
+}
+
+-(void)deleteMessageListFromCongressDefault{
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    [defaults removeObjectForKey:@"messageListWithCongress"];
+    [defaults synchronize];
 }
 
 -(void)deleteCoordinates{

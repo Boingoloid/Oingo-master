@@ -32,8 +32,6 @@
 
 @implementation MessageTableViewCell
 
-CongressPhotoFinderAPI *congressPhotoFinderAPI;
-
 
 
 - (void) configMessageContactCell:messageItem indexPath:(NSIndexPath*)indexPath {

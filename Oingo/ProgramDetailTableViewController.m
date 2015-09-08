@@ -265,9 +265,9 @@ Segment *segment;
     if ([segue.identifier isEqualToString:@"showMessages"]){
         
         segment = self.segmentList[self.indexPath.row];
-        MessageTableViewController *viewController = [segue destinationViewController];
-        viewController.selectedSegment = self.selectedSegment;
-        viewController.selectedProgram = self.selectedProgram;
+        MessageTableViewController *messageTableViewController = [segue destinationViewController];
+        messageTableViewController.selectedSegment = self.selectedSegment;
+        messageTableViewController.selectedProgram = self.selectedProgram;
         
         
     }

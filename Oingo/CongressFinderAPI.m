@@ -20,7 +20,8 @@
 
 
 -(void)getCongressWithLatitude:(double)latitude andLongitude:(double)longitude addToMessageList:(NSMutableArray*)messageList {
-    // Method called when finding representatives by Lat/Long
+// Method called when finding representatives by Lat/Long
+    
     
     // Search if get location cell is there and if so delete it
     NSUInteger index = [messageList indexOfObjectPassingTest:
@@ -47,9 +48,9 @@
 
 
 -(void) getCongress:zipCode addToMessageList:(NSMutableArray*)messageList {
-    // Method called when finding representatives by zipCode
+// Method called when finding representatives by zipCode
     
-    // Search if get location cell is there and if so delete it
+    // Search if No location cell is there and if so delete it
     NSUInteger index = [messageList indexOfObjectPassingTest:
                         ^BOOL(NSDictionary *dict, NSUInteger idx, BOOL *stop) {
                             return [[dict objectForKey:@"isGetLocationCell"] isEqual:@YES];
@@ -74,7 +75,7 @@
 }
 
 -(void)getCongressData:(NSString*)urlString {
-    
+// API: Uses URL, gets list of congress people from sunlight labs
     NSString *urlEncodedString = [urlString stringByReplacingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
     NSURL *url = [NSURL URLWithString:urlEncodedString];
     
@@ -95,6 +96,7 @@
     NSLog(@"url:%@",url);
 }
 
+# pragma mark - Delegate Methohds
 
 -(void)URLSession:(NSURLSession *)session dataTask:(NSURLSessionDataTask *)dataTask didReceiveData:(NSData *)data {
     //gets the data, makes results array.
@@ -107,33 +109,16 @@
     
     //combine the lists: add congress people to the message list
     self.messageListWithCongress = [self combine:resultsArray withMessageList:self.messageList];
-    
-    self.messageTableViewController.isRepsLoaded = YES;
-    
-    [self.parseAPI prepSections:self.messageListWithCongress];
+
+    self.messageTableViewController.messageListWithCongress = self.messageListWithCongress;
+    self.messageTableViewController.isCongressLoaded = YES; 
+    [self.messageTableViewController viewDidLoad];
 }
 
 
+# pragma mark - Helper Methods
+
 -(NSMutableArray*)combine:(NSArray*)resultsArray withMessageList:(NSMutableArray*)messageList  {
-    
-    
-//    NSUInteger index = [messageList indexOfObjectPassingTest:
-//                       ^BOOL(NSDictionary *dict, NSUInteger idx, BOOL *stop) {
-//                           return [[dict objectForKey:@"messageCategory"] isEqual:@"Local Representative"];
-//                       }];
-//    
-//    self.messageTableViewController.repMessageText = [[messageList objectAtIndex:index] valueForKey:@"messageText"];
-//    NSLog(@"message list before delete%@",messageList);
-//   
-//    //if no name, then dummy line, so store values and remove
-//    if(![[messageList objectAtIndex:index] valueForKey:@"targetName"]) {
-//        NSLog(@"dummy line being deleted");
-//        self.messageText = [[messageList objectAtIndex:index] valueForKey:@"messageText"];
-//        self.segmentID = [[messageList objectAtIndex:index] valueForKey:@"segmentID"];
-//        [messageList removeObjectAtIndex:index];
-//    } else {
-//        NSLog(@"no dummy to delete!");
-//    }
     
     NSMutableArray *congressMessageList = [NSMutableArray array];
     

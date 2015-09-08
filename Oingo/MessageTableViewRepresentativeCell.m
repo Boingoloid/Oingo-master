@@ -30,8 +30,6 @@
 
 @implementation MessageTableViewRepresentativeCell
 
-CongressPhotoFinderAPI *congressPhotoFinderAPI;
-
 - (void) configMessageCellLocalRep:congressionalMessageItem indexPath:(NSIndexPath*)indexPath {
     
     //Assign message item

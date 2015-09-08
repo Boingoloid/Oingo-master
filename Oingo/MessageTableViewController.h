@@ -26,7 +26,7 @@
 @property (nonatomic,copy) NSArray *messageTextListNonMutable;
 @property(nonatomic,copy) NSArray *messageOptionsList;
 @property (nonatomic) NSArray *dataImmutable;
-@property(nonatomic) NSMutableArray *messageListIncludingReps;
+@property(nonatomic) NSMutableArray *messageListWithCongress;
 @property(nonatomic) NSArray *congressMessageList;
 @property(nonatomic) NSString *repMessageText;
 @property(nonatomic) NSString *selectedLink;
@@ -36,8 +36,10 @@
 @property (weak, nonatomic) IBOutlet UILabel *tableHeaderSubLabel;
 @property (weak, nonatomic) IBOutlet UIView *tableHeaderView;
 @property(nonatomic) PFUser *currentUser;
-@property(nonatomic) BOOL isRepsLoaded;
+@property(nonatomic) BOOL isCongressLoaded;
 @property(nonatomic) UpdateDefaults *updateDefaults;
+@property(nonatomic) BOOL isSentFromCongressFinderAPI;
+
 
 
 // segment buttons

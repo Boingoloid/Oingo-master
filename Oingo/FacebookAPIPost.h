@@ -21,6 +21,7 @@
 @property (nonatomic) Program *selectedProgram;
 @property (nonatomic) NSDictionary *selectedContact;
 @property (strong, nonatomic) FBSDKShareDialog *shareDialog;
+@property (nonatomic) NSString *messageText;
 -(void)shareSegmentFacebookAPI;
 -(void)shareMessageFacebookAPI:(MessageTableViewCell*)cell;
 @end

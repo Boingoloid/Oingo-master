@@ -20,7 +20,7 @@
 #import "SignUpViewController.h"
 #import "MessageTableViewController.h"
 
-@interface FacebookAPIPost () <FBSDKSharingDelegate>
+@interface FacebookAPIPost () //<FBSDKSharingDelegate>
 
 @end
 
@@ -95,69 +95,83 @@
 }
 
 -(void) publishFBPost{
-    FBSDKShareLinkContent *content = [FBSDKShareLinkContent new];
-    content.contentURL = [NSURL URLWithString:[self.selectedSegment valueForKey:@"linkToContent"]];
-    content.contentTitle = [self.selectedProgram valueForKey:@"programTitle"];
-    content.contentDescription = [self.selectedSegment valueForKey:@"purposeSummary"];
-    
-    PFFile *theImage = [self.selectedSegment valueForKey:@"segmentImage"];
-    NSString *urlString = theImage.url;
-    NSURL *url = [NSURL URLWithString:urlString];
-    content.imageURL = url;
-    
-    FBSDKShareDialog *shareDialog = [FBSDKShareDialog new];
-    
-    [shareDialog setMode:FBSDKShareDialogModeAutomatic];
-//    [FBSDKShareDialog showFromViewController:self.messageTableViewController withContent:content delegate:self];
-    [shareDialog setShareContent:content];
-    [shareDialog setDelegate:self];
-    [shareDialog setFromViewController:self.messageTableViewController];
-    [shareDialog show];
-}
+//    FBSDKShareLinkContent *content = [FBSDKShareLinkContent new];
+//    content.contentURL = [NSURL URLWithString:[self.selectedSegment valueForKey:@"linkToContent"]];
+//    content.contentTitle = [self.selectedProgram valueForKey:@"programTitle"];
+//    content.contentDescription = [self.selectedSegment valueForKey:@"purposeSummary"];
+//    
+//    PFFile *theImage = [self.selectedSegment valueForKey:@"segmentImage"];
+//    NSString *urlString = theImage.url;
+//    NSURL *url = [NSURL URLWithString:urlString];
+//    content.imageURL = url;
+//    
+//    FBSDKShareDialog *shareDialog = [FBSDKShareDialog new];
+//    
+//    [shareDialog setMode:FBSDKShareDialogModeAutomatic];
+////    [FBSDKShareDialog showFromViewController:self.messageTableViewController withContent:content delegate:self];
+//    [shareDialog setShareContent:content];
+//    [shareDialog setDelegate:self];
+//    [shareDialog setFromViewController:self.messageTableViewController];
+//    [shareDialog show];
+
 
 //
 //    FBSDKShareLinkContent *content = [[FBSDKShareLinkContent alloc] init];
 //    content.contentURL = [NSURL URLWithString:@"https://developers.facebook.com"];
-//                          
-//        [[[FBSDKGraphRequest alloc]
-//          initWithGraphPath:@"me/feed"
-//          parameters: @{ @"message" : @"hello world"}
-//          HTTPMethod:@"POST"]
-//         //list of parameters: https://developers.facebook.com/docs/graph-api/reference/
-//         
-//         startWithCompletionHandler:^(FBSDKGraphRequestConnection *connection, id result, NSError *error) {
-//             if (!error) {
-//                 NSLog(@"Post id:%@", result[@"id"]);
-//             }
-//         }];
-
-
-#pragma mark - delegate methods
-
-- (void)sharer:(id<FBSDKSharing>)sharer didCompleteWithResults:(NSDictionary *)results {
-//    if ([sharer isEqual:self.shareDialog]) {
-    NSString *facebookPostID = [results valueForKey:@"ID"];
-    [self saveSentMessageSegment:facebookPostID];
-    NSLog(@"facebook post successful%@",results);
-        
-        // Your delegate code
-//    }
-}
-
-- (void)sharer:(id<FBSDKSharing>)sharer didFailWithError:(NSError *)error
-{
-    NSLog(@"sharing error:%@", error);
-    NSString *message = error.userInfo[FBSDKErrorLocalizedDescriptionKey] ?:
-    @"There was a problem sharing, please try again later.";
-    NSString *title = error.userInfo[FBSDKErrorLocalizedTitleKey] ?: @"Oops!";
     
-    [[[UIAlertView alloc] initWithTitle:title message:message delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil] show];
+//        PFFile *segmentImage = [self.selectedSegment objectForKey:@"segmentImage"];
+//        NSString *segmentImageUrlString = segmentImage.url;
+//
+//    PFFile *theImage = self.selectedSegment.linkToContent;
+//    NSData *imageData = [theImage getData];
+//    UIImage *image = [UIImage imageWithData:imageData];
+    
+    
+    NSString *postText = [NSString stringWithFormat:@"%@: %@",[self.selectedProgram valueForKey:@"programTitle"],[self.selectedSegment valueForKey:@"segmentTitle"]];  // Everything is the same except for this line.
+
+
+    NSDictionary *parameters = @{@"message" : postText, @"link" : self.selectedSegment.linkToContent,@"link.picture" : self.selectedSegment.segmentImage, @"link.name" : @"test"};
+    
+        [[[FBSDKGraphRequest alloc]
+          initWithGraphPath:@"me/feed"
+          parameters: parameters
+          HTTPMethod:@"POST"]
+         //list of parameters: https://developers.facebook.com/docs/graph-api/reference/
+         //
+         
+         startWithCompletionHandler:^(FBSDKGraphRequestConnection *connection, id result, NSError *error) {
+             if (!error) {
+                 NSLog(@"Post id:%@", result[@"id"]);
+             }
+         }];
 }
 
-- (void)sharerDidCancel:(id<FBSDKSharing>)sharer
-{
-    NSLog(@"share cancelled");
-}
+//#pragma mark - delegate methods
+//
+//- (void)sharer:(id<FBSDKSharing>)sharer didCompleteWithResults:(NSDictionary *)results {
+////    if ([sharer isEqual:self.shareDialog]) {
+//    NSString *facebookPostID = [results valueForKey:@"ID"];
+//    [self saveSentMessageSegment:facebookPostID];
+//    NSLog(@"facebook post successful%@",results);
+//        
+//        // Your delegate code
+////    }
+//}
+//
+//- (void)sharer:(id<FBSDKSharing>)sharer didFailWithError:(NSError *)error
+//{
+//    NSLog(@"sharing error:%@", error);
+//    NSString *message = error.userInfo[FBSDKErrorLocalizedDescriptionKey] ?:
+//    @"There was a problem sharing, please try again later.";
+//    NSString *title = error.userInfo[FBSDKErrorLocalizedTitleKey] ?: @"Oops!";
+//    
+//    [[[UIAlertView alloc] initWithTitle:title message:message delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil] show];
+//}
+//
+//- (void)sharerDidCancel:(id<FBSDKSharing>)sharer
+//{
+//    NSLog(@"share cancelled");
+//}
 
 
 

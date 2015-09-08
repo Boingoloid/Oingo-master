@@ -18,26 +18,25 @@
 
 -(void) getPhotos:(NSArray*)congressMessageList {
     NSLog(@"CongressPhotoFinderAPI is being called");
-
-    NSMutableArray *bioguideArray = [[NSMutableArray alloc]init];
     
-    // Iterate through list and collect bioguideIDs in array
     for(NSMutableDictionary *congresspersonObject in congressMessageList){
-        [bioguideArray addObject:[congresspersonObject valueForKey:@"bioguide_id"]];
         
+        // Grab bioguideID
         NSString *bioguideID = [[NSString alloc]init];
         bioguideID = [congresspersonObject valueForKey:@"bioguide_id"];
+        
+        // Build imageString from the bioguideID
         NSString *imageString =[[NSString alloc]init];
         imageString = [NSString stringWithFormat:@"%@.jpg",bioguideID];
     
-        // Look up index of current rep in menuList
+        // Look up index of current congressPerson in menuList
         NSUInteger index = [self.messageTableViewController.menuList indexOfObjectPassingTest:
                             ^BOOL(NSDictionary *dict, NSUInteger idx, BOOL *stop) {
                                 return [[dict valueForKey:@"bioguide_id"] isEqual:bioguideID];
                             }];
         
         if(index == NSNotFound){
-            // Do nothing
+            // Do nothing, load no photos
         } else {
             
             // Load the photo only if file exists in project
@@ -49,25 +48,14 @@
         }
     }
     
+//    dispatch_async(dispatch_get_main_queue(),^{
+        [self.messageTableViewController.view setNeedsDisplay];
+        [self.messageTableViewController.tableView reloadData];
+        NSLog(@"reloading data from Congress Photo Finder");
+//    });
 
-    [self.messageTableViewController.view setNeedsDisplay];
-    [self.messageTableViewController.tableView reloadData];
-    NSLog(@"reloading data from Congress Photo Finder");
 
-    
 }
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 // ***********************************

@@ -955,8 +955,8 @@
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" horizontalHuggingPriority="750" verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" verticalCompressionResistancePriority="250" tableViewCell="x0E-Je-p5i" id="hQk-Tx-BCm">
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="751" verticalHuggingPriority="752" ambiguous="YES" misplaced="YES" text="Label" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dSg-Lh-tat">
-                                            <rect key="frame" x="29" y="17" width="525" height="43"/>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="752" verticalHuggingPriority="752" text="Label making this really long to see what it does with the text.  Since I can't get this to work in the code." lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dSg-Lh-tat">
+                                            <rect key="frame" x="18" y="8" width="298" height="62"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                             <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                             <nil key="highlightedColor"/>
@@ -966,16 +966,30 @@
                                         <constraint firstItem="dSg-Lh-tat" firstAttribute="top" secondItem="hQk-Tx-BCm" secondAttribute="topMargin" constant="10" id="5bu-Mj-1qK"/>
                                         <constraint firstItem="dSg-Lh-tat" firstAttribute="top" secondItem="hQk-Tx-BCm" secondAttribute="topMargin" constant="9" id="5dL-OH-R8Y"/>
                                         <constraint firstAttribute="trailingMargin" secondItem="dSg-Lh-tat" secondAttribute="trailing" constant="39" id="B7N-Ti-S70"/>
+                                        <constraint firstItem="dSg-Lh-tat" firstAttribute="top" secondItem="hQk-Tx-BCm" secondAttribute="topMargin" id="BXI-ce-Z9e"/>
+                                        <constraint firstAttribute="centerY" secondItem="dSg-Lh-tat" secondAttribute="centerY" id="Hqg-Qs-Uqw"/>
+                                        <constraint firstItem="dSg-Lh-tat" firstAttribute="leading" secondItem="hQk-Tx-BCm" secondAttribute="leadingMargin" constant="10" id="IGc-2w-S46"/>
                                         <constraint firstItem="dSg-Lh-tat" firstAttribute="leading" secondItem="hQk-Tx-BCm" secondAttribute="leadingMargin" constant="20" id="WoF-0V-LGj"/>
+                                        <constraint firstItem="dSg-Lh-tat" firstAttribute="leading" secondItem="hQk-Tx-BCm" secondAttribute="leadingMargin" constant="21" id="b1A-9M-IHS"/>
+                                        <constraint firstAttribute="centerX" secondItem="dSg-Lh-tat" secondAttribute="centerX" constant="8.5" id="b8q-pu-DAr"/>
+                                        <constraint firstItem="dSg-Lh-tat" firstAttribute="bottom" secondItem="hQk-Tx-BCm" secondAttribute="bottomMargin" id="dEi-CY-gWI"/>
                                         <constraint firstAttribute="bottomMargin" secondItem="dSg-Lh-tat" secondAttribute="bottom" priority="100" constant="10" id="f3r-cu-k14"/>
+                                        <constraint firstAttribute="trailingMargin" secondItem="dSg-Lh-tat" secondAttribute="trailing" constant="276" id="qvb-dw-MXT"/>
+                                        <constraint firstItem="dSg-Lh-tat" firstAttribute="bottom" secondItem="hQk-Tx-BCm" secondAttribute="bottomMargin" id="zcQ-By-7jg"/>
+                                        <constraint firstAttribute="trailingMargin" relation="greaterThanOrEqual" secondItem="dSg-Lh-tat" secondAttribute="trailing" constant="38" id="zo5-mN-td7"/>
                                     </constraints>
                                     <variation key="default">
                                         <mask key="constraints">
                                             <exclude reference="5bu-Mj-1qK"/>
                                             <exclude reference="5dL-OH-R8Y"/>
                                             <exclude reference="B7N-Ti-S70"/>
+                                            <exclude reference="Hqg-Qs-Uqw"/>
                                             <exclude reference="WoF-0V-LGj"/>
+                                            <exclude reference="b1A-9M-IHS"/>
+                                            <exclude reference="b8q-pu-DAr"/>
+                                            <exclude reference="dEi-CY-gWI"/>
                                             <exclude reference="f3r-cu-k14"/>
+                                            <exclude reference="zo5-mN-td7"/>
                                         </mask>
                                     </variation>
                                 </tableViewCellContentView>

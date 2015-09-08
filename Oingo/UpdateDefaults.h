@@ -13,5 +13,7 @@
 -(void)saveCoordinatesToDefaultsWithLatitude:(double)latitude andLongitude:(double)longitude;
 -(void)saveZipCodeToDefaultsWithZip:zipCode;
 -(void)saveLocationDefaultsToUser;
+-(void)saveMessageListWithCongressDefault:(NSArray*)messageList;
+-(void)deleteMessageListFromCongressDefault;
 -(void)deleteCoordinates;
 @end

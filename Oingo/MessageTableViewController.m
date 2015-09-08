@@ -56,12 +56,13 @@ NSInteger sectionHeaderHeight = 16;
 NSInteger headerHeight = 48;
 NSInteger footerHeight = 1;
 
+
+
 - (void)viewDidLoad {
     [super viewDidLoad];
-        NSLog(@"viewDidLoad");
-    
-//    self.updateDefaults = [[UpdateDefaults alloc]init];
-//    [self.updateDefaults updateLocationDefaultsFromUser]; // Checks if current user has location info, if so, set defaults.
+    NSLog(@"viewDidLoad");
+
+    NSLog(@"isCongressLoaded:%d",self.isCongressLoaded);
 
     //hidding tweet success
     self.segmentTweetButtonSuccessImageView.hidden = YES;
@@ -85,12 +86,24 @@ NSInteger footerHeight = 1;
     tapRecognizer.numberOfTouchesRequired = 1;
     [tapRecognizer setCancelsTouchesInView:NO];
     [self.tableView addGestureRecognizer:tapRecognizer];
-    
-    // Get menu data from parse
+
+    // 1)Get data from parse or, 2)load data already waiting (with Congress)
+//    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+//    UpdateDefaults *updateDefaults = [[UpdateDefaults alloc]init];
     ParseAPI *parseAPI = [[ParseAPI alloc]init];
     parseAPI.messageTableViewController = self;
-    [parseAPI getParseMessageData:self.selectedSegment];
+    parseAPI.isCongressLoaded = self.isCongressLoaded;
+    
+    if(!self.isCongressLoaded){
+    // Get menu data from parse
+        [parseAPI getParseMessageData:self.selectedSegment];
 
+        
+    } else {
+    //  Load menu data from existing list with Congress (loaded from CongressFinderAPI)
+        [parseAPI prepSections:self.messageListWithCongress];
+        self.isCongressLoaded = NO;
+    }
 }
 
 -(void)viewWillAppear:(BOOL)animated {

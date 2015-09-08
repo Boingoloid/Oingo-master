@@ -92,43 +92,36 @@ BOOL isLocationInfoAvailable = NO;
             
             dispatch_async(dispatch_get_main_queue(), ^{
                 
-                // Grab results of query
+                // 1)Grab results, and create deep copy of data
                 self.messageListFromParseWithContacts = (NSMutableArray*)[self createDeepCopyOfData:objects];
                 
-                
-                //Get index of Local Rep message
+                // 2) Check for message cell for category = "Local Representative"
+                    // A)Get index of Local Rep message
                 NSUInteger indexLocalRep = [self.messageListFromParseWithContacts indexOfObjectPassingTest:
                                                ^BOOL(NSDictionary *dict, NSUInteger idx, BOOL *stop) {
                                                    return [[dict objectForKey:@"messageCategory"] isEqual:@"Local Representative"];
                                                }];
-                // If Rep found, set bool to load congress)
-                if (indexLocalRep != NSNotFound){
+                
+                
+                if (indexLocalRep == NSNotFound){
+                    //Do nothing, don't include local rep as section b/c it has no messages in the meesage table
+                    [self prepSections:self.messageListFromParseWithContacts];
+                    NSLog(@"Is local rep message included? %d",isLocalRepMessageIncluded);
+                
+                } else if (indexLocalRep !=NSNotFound){ //LOCAL REP IS FOUND!!!!!
                     isLocalRepMessageIncluded = YES;
-                }
-
-            
-                //Grab congess data based on location info that is available
-                if(!isLocationInfoAvailable) { //No location info - Parse data only
-                    NSLog(@"Loading parse data with no congress peoeple");
-                    [self prepSections:self.messageListFromParseWithContacts];  //PREP SECTIONS
                     
-                } else { //user has location info - initiate congressFinder and get congress data to add
+                    //Load 1)location capture, or 2) load Reps
+                    // 1)
+                    if(!isLocationInfoAvailable){
+                        [self addLocalRepLocationCaptureCell]; //Adds contacts to Local Rep category, only if messsage exists for local rep
+                        [self prepSections:self.messageListFromParseWithContacts];
                     
-                    // Try 1)coordinates then 2) zipCode
-                    // 1) Coordinates
-                    if(isCoordinateInfoAvailable) {
-                        CongressFinderAPI *congressFinder = [[CongressFinderAPI alloc]init];
-                        congressFinder.messageTableViewController = self.messageTableViewController;
-                        congressFinder.parseAPI = self;
-                        [congressFinder getCongressWithLatitude:[defaults doubleForKey:@"latitude"] andLongitude:[defaults doubleForKey:@"longitude"] addToMessageList:(NSMutableArray*)self.messageListFromParseWithContacts];
-                        
-                    // 2) zipCode
-                    } else {
-                        //congressFinder with zipCode
-                        CongressFinderAPI *congressFinder = [[CongressFinderAPI alloc]init];
-                        congressFinder.messageTableViewController = self.messageTableViewController;
-                        congressFinder.parseAPI = self;
-                        [congressFinder getCongress:[defaults valueForKey:@"zipCode"] addToMessageList:self.messageListFromParseWithContacts];
+                    // 2)
+                    } else if(isLocationInfoAvailable){
+                    //Load progress, then view did load with loaded flag to on.
+                    [self prepSections:self.messageListFromParseWithContacts]; //load so that the user sees something
+                    [self updateMenuListWithCongressDataFromBestAvailableLocation];
                     }
                 }
             });
@@ -136,79 +129,53 @@ BOOL isLocationInfoAvailable = NO;
     }];
 }
 
-
-
--(NSArray*)createDeepCopyOfData:objects {
+-(void) addLocalRepLocationCaptureCell{
+    //If Local Rep message is in data from Parse, and there is no location data, NoZipCell created and displayed.
     
-    // Separate messages out into tempArrays
-    NSMutableArray *messagesTempArray = [[NSMutableArray alloc]init];
-    NSMutableArray *contactsTempArray = [[NSMutableArray alloc]init];
-    NSMutableArray *allDataTempArray = [[NSMutableArray alloc]init];
-
-    // Cycle through objects, create 3 temp arrays initialized above (Message Only, Contact Only, Both("allDataTempArray"))
-    for (NSDictionary *dictionary in objects) {
-     
-        // In every case
-        NSDictionary *tempDicToAddFull = dictionary;
-        NSMutableArray *allKeys = (NSMutableArray*)[tempDicToAddFull allKeys];
-        int count = (int)[[tempDicToAddFull allKeys]count];
-        
-        NSMutableDictionary *dictionaryToAddAggregator = [[NSMutableDictionary alloc]init];
-        for (int i=0; i<count; i++){
-            NSString *keyString = [allKeys objectAtIndex:i];
-
-            NSObject *getObject = [tempDicToAddFull objectForKey:keyString];
-
-    
-            NSMutableDictionary *insertDicTemp = [[NSMutableDictionary alloc]initWithObjects:@[getObject] forKeys:@[keyString]];
-            
-            // Change PFFile to image file
-            if([keyString isEqualToString:@"messageImage"]) {
-                PFFile *theImage = [insertDicTemp objectForKey:@"messageImage"];
-                NSData *imageData = [theImage getData];
-                UIImage *image = [UIImage imageWithData:imageData];
-                [insertDicTemp setObject:image forKey:@"messageImage"];
-            }
-            
-            [dictionaryToAddAggregator addEntriesFromDictionary:insertDicTemp];
+    if(isLocalRepMessageIncluded && !isLocationInfoAvailable){
+        if(isLocationInfoAvailable && !isLocationInfoAvailable){
+            // create NoZipCell - captures location (should be NoLocationInfoCell b/c more descriptive)
+            NSMutableDictionary *noZipDictionary = [[NSMutableDictionary alloc]init];
+            [noZipDictionary setValue:@"Local Representative" forKey:@"messageCategory"];
+            [noZipDictionary setValue:@YES forKey:@"isGetLocationCell"];
+            // NSLog(@"dictionary value for isGetLocationCell %@",[noZipDictionary valueForKey:@"isGetLocationCell"]);
+            [self.messageListFromParseWithContacts addObject:noZipDictionary];
         }
-        
-        NSNumber *isMessageNumber = [dictionaryToAddAggregator valueForKey:@"isMessage"];
-        bool isMessageBool = [isMessageNumber boolValue];
-        
-        // If it's a message, add to messagesTempArray
-        if (isMessageBool) {
-            [messagesTempArray addObject:(NSDictionary*)dictionaryToAddAggregator];
-        } else {
-            // If it's NOT a message, add to contactsTempArray
-            [contactsTempArray addObject:(NSDictionary*)dictionaryToAddAggregator];
-        }
-        [allDataTempArray addObject:(NSDictionary*)dictionaryToAddAggregator];
     }
-    
-    NSMutableArray* messagesDeepCopyArray = [NSKeyedUnarchiver unarchiveObjectWithData:[NSKeyedArchiver archivedDataWithRootObject:messagesTempArray]];
-    NSMutableArray* allDataDeepCopyArray = [NSKeyedUnarchiver unarchiveObjectWithData:[NSKeyedArchiver archivedDataWithRootObject:allDataTempArray]];
-    
-    self.messageOptionsList = messagesDeepCopyArray;
-    NSLog(@"menulist%@",self.messageTableViewController.menuList);
-    return allDataDeepCopyArray;
-
-    
 }
+-(void) updateMenuListWithCongressDataFromBestAvailableLocation{
+//Try 1)coordinates then 2) zipCode
+// 1) Coordinates
 
-
+    if(isCoordinateInfoAvailable) {
+        NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+        CongressFinderAPI *congressFinder = [[CongressFinderAPI alloc]init];
+        congressFinder.messageTableViewController = self.messageTableViewController;
+        congressFinder.parseAPI = self;
+        [congressFinder getCongressWithLatitude:[defaults doubleForKey:@"latitude"] andLongitude:[defaults doubleForKey:@"longitude"] addToMessageList:(NSMutableArray*)self.messageListFromParseWithContacts];
+        
+// 2) zipCode
+    } else if (isZipAvailable){
+        NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+        //congressFinder with zipCode
+        CongressFinderAPI *congressFinder = [[CongressFinderAPI alloc]init];
+        congressFinder.messageTableViewController = self.messageTableViewController;
+        congressFinder.parseAPI = self;
+        [congressFinder getCongress:[defaults valueForKey:@"zipCode"] addToMessageList:self.messageListFromParseWithContacts];
+    }
+}
 
 
 
 # pragma mark - Prep Sections
 
 -(void)prepSections:messageList {
-    NSLog(@"Prep sections triggered");
+    NSLog(@"Prep sections triggered, here is the messageList input:%@",messageList);
     
     //add message to this list
     [self separateMessagesFromContacts:messageList]; //create self.messageList and self.contactList
-    [self createMenuList]; //creates self.menuList
-    [self addLocalRepLocationCaptureCell]; //edits self.menuList
+    [self createMenuList]; //creates self.menuList - these are the grouopings for sections
+
     
     self.menuList = [self sortMessageListWithContacts:self.menuList];
     
@@ -244,20 +211,23 @@ BOOL isLocationInfoAvailable = NO;
     self.messageTableViewController.expandSectionsKeyList = self.expandSectionsKeyList;
     
     [self.messageTableViewController.tableView reloadData];
-    NSLog(@"reloading data from Prep Sections");
+    NSLog(@"Prep Sections end: Reloading data from Prep Sections");
     
-//    dispatch_async(dispatch_get_main_queue(), ^{
+    if(self.isCongressLoaded) {
+        self.isCongressLoaded = NO;
+        //could make this async
+        CongressPhotoFinderAPI *congressPhotoFinder = [[CongressPhotoFinderAPI alloc]init];
+        congressPhotoFinder.messageTableViewController = self.messageTableViewController;
+        [congressPhotoFinder getPhotos:self.messageTableViewController.congressMessageList];
+    }
+
     if([PFUser currentUser]) {
         MarkSentMessageAPI *markSentMessagesAPI = [[MarkSentMessageAPI alloc]init];
         markSentMessagesAPI.messageTableViewController = self.messageTableViewController;
         markSentMessagesAPI.parseAPI = self;
         [markSentMessagesAPI markSentMessages];
     }
-    CongressPhotoFinderAPI *congressPhotoFinder = [[CongressPhotoFinderAPI alloc]init];
-    congressPhotoFinder.messageTableViewController = self.messageTableViewController;
-    [congressPhotoFinder getPhotos:self.messageTableViewController.congressMessageList];
-//    });
-
+    self.isCongressLoaded = NO;
 }
 
 # pragma mark - Prep Sections Helper Methods
@@ -357,24 +327,7 @@ BOOL isLocationInfoAvailable = NO;
     
 }
 
--(void) addLocalRepLocationCaptureCell{
-    if(!isLocalRepMessageIncluded){
-        //bypass, no local rep info there
-        
-    } else {
-        // Local Reps included, now test if location info, if no, load no zip cell
-        
-        if(!isLocationInfoAvailable){
-            //load no zip cell
-            //add location capture cell reference for the tableview
-            NSMutableDictionary *noZipDictionary = [[NSMutableDictionary alloc]init];
-            [noZipDictionary setValue:@"Local Representative" forKey:@"messageCategory"];
-            [noZipDictionary setValue:@YES forKey:@"isGetLocationCell"];
-            // NSLog(@"dictionary value for isGetLocationCell %@",[noZipDictionary valueForKey:@"isGetLocationCell"]);
-            [self.menuList addObject:noZipDictionary];
-        }
-    }
-}
+
 
 
 # pragma mark - Helper Methods like sorting
@@ -400,6 +353,64 @@ BOOL isLocationInfoAvailable = NO;
 }
 
 # pragma mark - Deep Copy Helpers
+
+-(NSArray*)createDeepCopyOfData:objects {
+    
+    // Separate messages out into tempArrays
+    NSMutableArray *messagesTempArray = [[NSMutableArray alloc]init];
+    NSMutableArray *contactsTempArray = [[NSMutableArray alloc]init];
+    NSMutableArray *allDataTempArray = [[NSMutableArray alloc]init];
+    
+    // Cycle through objects, create 3 temp arrays initialized above (Message Only, Contact Only, Both("allDataTempArray"))
+    for (NSDictionary *dictionary in objects) {
+        
+        // In every case
+        NSDictionary *tempDicToAddFull = dictionary;
+        NSMutableArray *allKeys = (NSMutableArray*)[tempDicToAddFull allKeys];
+        int count = (int)[[tempDicToAddFull allKeys]count];
+        
+        NSMutableDictionary *dictionaryToAddAggregator = [[NSMutableDictionary alloc]init];
+        for (int i=0; i<count; i++){
+            NSString *keyString = [allKeys objectAtIndex:i];
+            
+            NSObject *getObject = [tempDicToAddFull objectForKey:keyString];
+            
+            
+            NSMutableDictionary *insertDicTemp = [[NSMutableDictionary alloc]initWithObjects:@[getObject] forKeys:@[keyString]];
+            
+            // Change PFFile to image file
+            if([keyString isEqualToString:@"messageImage"]) {
+                PFFile *theImage = [insertDicTemp objectForKey:@"messageImage"];
+                NSData *imageData = [theImage getData];
+                UIImage *image = [UIImage imageWithData:imageData];
+                [insertDicTemp setObject:image forKey:@"messageImage"];
+            }
+            
+            [dictionaryToAddAggregator addEntriesFromDictionary:insertDicTemp];
+        }
+        
+        NSNumber *isMessageNumber = [dictionaryToAddAggregator valueForKey:@"isMessage"];
+        bool isMessageBool = [isMessageNumber boolValue];
+        
+        // If it's a message, add to messagesTempArray
+        if (isMessageBool) {
+            [messagesTempArray addObject:(NSDictionary*)dictionaryToAddAggregator];
+        } else {
+            // If it's NOT a message, add to contactsTempArray
+            [contactsTempArray addObject:(NSDictionary*)dictionaryToAddAggregator];
+        }
+        [allDataTempArray addObject:(NSDictionary*)dictionaryToAddAggregator];
+    }
+    
+    NSMutableArray* messagesDeepCopyArray = [NSKeyedUnarchiver unarchiveObjectWithData:[NSKeyedArchiver archivedDataWithRootObject:messagesTempArray]];
+    NSMutableArray* allDataDeepCopyArray = [NSKeyedUnarchiver unarchiveObjectWithData:[NSKeyedArchiver archivedDataWithRootObject:allDataTempArray]];
+    
+    self.messageOptionsList = messagesDeepCopyArray;
+    NSLog(@"menulist%@",self.messageTableViewController.menuList);
+    return allDataDeepCopyArray;
+    
+    
+}
 
 - (void)encodeWithCoder:(NSCoder *)coder
 {

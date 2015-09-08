@@ -78,11 +78,11 @@
 		CEB187941B18FAD600C86955 /* MessageOptionsTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CEB187931B18FAD600C86955 /* MessageOptionsTableViewCell.m */; };
 		CEB292501B4528CE00A4E8E0 /* TwitterAPITweet.m in Sources */ = {isa = PBXBuildFile; fileRef = CEB2924F1B4528CE00A4E8E0 /* TwitterAPITweet.m */; };
 		CEB4ED8E1AF8305E0055D547 /* ProgramDetailTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CEB4ED8D1AF8305E0055D547 /* ProgramDetailTableViewController.m */; };
-		CEC0C7411B45C80100A9DD33 /* FacebookAPIPost.m in Sources */ = {isa = PBXBuildFile; fileRef = CEC0C7401B45C80100A9DD33 /* FacebookAPIPost.m */; };
 		CEC0C7441B45D6B400A9DD33 /* LocationFinderAPI.m in Sources */ = {isa = PBXBuildFile; fileRef = CEC0C7431B45D6B400A9DD33 /* LocationFinderAPI.m */; };
 		CEC0C7471B478E0500A9DD33 /* MessageTableViewMessageCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CEC0C7461B478E0500A9DD33 /* MessageTableViewMessageCell.m */; };
 		CED68DCA1B6973520087546D /* arrow-down-gray-hi.png in Resources */ = {isa = PBXBuildFile; fileRef = CED68DC91B6973520087546D /* arrow-down-gray-hi.png */; };
 		CED68DCC1B69AE8B0087546D /* 40-menu-alt-512.png in Resources */ = {isa = PBXBuildFile; fileRef = CED68DCB1B69AE8B0087546D /* 40-menu-alt-512.png */; };
+		CED9B79E1B9E58C800B22396 /* FacebookAPIPost.m in Sources */ = {isa = PBXBuildFile; fileRef = CED9B79D1B9E58C800B22396 /* FacebookAPIPost.m */; };
 		CEDA118C1B97D57E0065ACDD /* TwitterKitResources.bundle in Resources */ = {isa = PBXBuildFile; fileRef = CEDA118B1B97D57E0065ACDD /* TwitterKitResources.bundle */; };
 		CEDA11921B992A770065ACDD /* Seal_of_the_United_States_Congress.svg.png in Resources */ = {isa = PBXBuildFile; fileRef = CEDA11901B992A770065ACDD /* Seal_of_the_United_States_Congress.svg.png */; };
 		CEDA11931B992A770065ACDD /* Seal_of_the_United_States_Senate.svg.png in Resources */ = {isa = PBXBuildFile; fileRef = CEDA11911B992A770065ACDD /* Seal_of_the_United_States_Senate.svg.png */; };
@@ -1137,13 +1137,13 @@
 		CEB4ED8C1AF8305E0055D547 /* ProgramDetailTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProgramDetailTableViewController.h; sourceTree = "<group>"; };
 		CEB4ED8D1AF8305E0055D547 /* ProgramDetailTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProgramDetailTableViewController.m; sourceTree = "<group>"; };
 		CEC0C73F1B45C80100A9DD33 /* FacebookAPIPost.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FacebookAPIPost.h; sourceTree = "<group>"; };
-		CEC0C7401B45C80100A9DD33 /* FacebookAPIPost.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FacebookAPIPost.m; sourceTree = "<group>"; };
 		CEC0C7421B45D6B400A9DD33 /* LocationFinderAPI.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LocationFinderAPI.h; sourceTree = "<group>"; };
 		CEC0C7431B45D6B400A9DD33 /* LocationFinderAPI.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LocationFinderAPI.m; sourceTree = "<group>"; };
 		CEC0C7451B478E0500A9DD33 /* MessageTableViewMessageCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MessageTableViewMessageCell.h; sourceTree = "<group>"; };
 		CEC0C7461B478E0500A9DD33 /* MessageTableViewMessageCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MessageTableViewMessageCell.m; sourceTree = "<group>"; };
 		CED68DC91B6973520087546D /* arrow-down-gray-hi.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "arrow-down-gray-hi.png"; path = "Images/arrow-down-gray-hi.png"; sourceTree = "<group>"; };
 		CED68DCB1B69AE8B0087546D /* 40-menu-alt-512.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "40-menu-alt-512.png"; path = "Images/40-menu-alt-512.png"; sourceTree = "<group>"; };
+		CED9B79D1B9E58C800B22396 /* FacebookAPIPost.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FacebookAPIPost.m; sourceTree = "<group>"; };
 		CEDA118B1B97D57E0065ACDD /* TwitterKitResources.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; name = TwitterKitResources.bundle; path = TwitterKit.framework/Versions/A/Resources/TwitterKitResources.bundle; sourceTree = "<group>"; };
 		CEDA11901B992A770065ACDD /* Seal_of_the_United_States_Congress.svg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Seal_of_the_United_States_Congress.svg.png; path = Images/Seal_of_the_United_States_Congress.svg.png; sourceTree = "<group>"; };
 		CEDA11911B992A770065ACDD /* Seal_of_the_United_States_Senate.svg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Seal_of_the_United_States_Senate.svg.png; path = Images/Seal_of_the_United_States_Senate.svg.png; sourceTree = "<group>"; };
@@ -3264,7 +3264,7 @@
 				CEB2924E1B4528CE00A4E8E0 /* TwitterAPITweet.h */,
 				CEB2924F1B4528CE00A4E8E0 /* TwitterAPITweet.m */,
 				CEC0C73F1B45C80100A9DD33 /* FacebookAPIPost.h */,
-				CEC0C7401B45C80100A9DD33 /* FacebookAPIPost.m */,
+				CED9B79D1B9E58C800B22396 /* FacebookAPIPost.m */,
 				CEC0C7421B45D6B400A9DD33 /* LocationFinderAPI.h */,
 				CEC0C7431B45D6B400A9DD33 /* LocationFinderAPI.m */,
 			);
@@ -4409,11 +4409,11 @@
 				CE2029721B363D51005C079B /* CongressFinderAPI.m in Sources */,
 				CE6073331B3AD475007B567C /* CongressPhotoFinderAPI.m in Sources */,
 				CE241A421AEAE45A00F22144 /* main.m in Sources */,
-				CEC0C7411B45C80100A9DD33 /* FacebookAPIPost.m in Sources */,
 				CE48FDB61B9527C50086349A /* TWAPIManager.m in Sources */,
 				CEEF25111B017C8200EFB257 /* MessageTableViewCell.m in Sources */,
 				CE99E3871B5EF1ED00ED9D33 /* MarkSentMessageAPI.m in Sources */,
 				CE6F71F41B2BCA9E0067E4DA /* SettingsTableViewController.m in Sources */,
+				CED9B79E1B9E58C800B22396 /* FacebookAPIPost.m in Sources */,
 				CE87CAC91AFAB9B70084C666 /* ProgramsTableViewCell.m in Sources */,
 				CEC0C7441B45D6B400A9DD33 /* LocationFinderAPI.m in Sources */,
 				CEB187941B18FAD600C86955 /* MessageOptionsTableViewCell.m in Sources */,

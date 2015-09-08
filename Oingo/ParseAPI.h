@@ -24,6 +24,7 @@
 @property(nonatomic) NSArray *messageOptionsList;
 @property(nonatomic) NSArray *messageTextList;
 @property(nonatomic) NSArray *tempArray;
+@property(nonatomic) bool isCongressLoaded;
 
 
 -(void)getParseMessageData:(Segment*)selectedSegment;

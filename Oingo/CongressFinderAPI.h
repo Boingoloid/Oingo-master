@@ -16,6 +16,7 @@
 @property(nonatomic) NSMutableArray *messageListWithCongress;
 @property(nonatomic) ParseAPI *parseAPI;
 @property(nonatomic) MessageTableViewController *messageTableViewController;
+@property(nonatomic) bool isCongressLoaded;
 
 -(void)getCongress:zipCode addToMessageList:messageList;
 -(void)getCongressWithLatitude:(double)latitude andLongitude:(double)longitude addToMessageList:(NSMutableArray*)messageList;
