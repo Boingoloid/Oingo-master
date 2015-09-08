@@ -128,8 +128,8 @@
     
     
     NSString *postText = [NSString stringWithFormat:@"%@: %@",[self.selectedProgram valueForKey:@"programTitle"],[self.selectedSegment valueForKey:@"segmentTitle"]];  // Everything is the same except for this line.
-    
-    PFFile *theImage = [self.selectedSegment valueForKey:@"segmentImage"];
+
+//    PFFile *theImage = [self.selectedSegment valueForKey:@"segmentImage"];
 //    NSString *segmentImageString =  theImage.name;
     
     NSString *linkToContent =[[NSString alloc]initWithString:[self.selectedSegment valueForKey:@"linkToContent"]];
