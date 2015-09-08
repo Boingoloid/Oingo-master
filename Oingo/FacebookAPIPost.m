@@ -128,12 +128,16 @@
     
     
     NSString *postText = [NSString stringWithFormat:@"%@: %@",[self.selectedProgram valueForKey:@"programTitle"],[self.selectedSegment valueForKey:@"segmentTitle"]];  // Everything is the same except for this line.
+    
+    PFFile *theImage = [self.selectedSegment valueForKey:@"segmentImage"];
+//    NSString *segmentImageString =  theImage.name;
+    
+    NSString *linkToContent =[[NSString alloc]initWithString:[self.selectedSegment valueForKey:@"linkToContent"]];
 
-
-    NSDictionary *parameters = @{@"message" : postText,
-                                 @"link" : self.selectedSegment.linkToContent,
-                                 @"link.picture" : self.selectedSegment.segmentImage,
-                                 @"link.name" : @"test"};
+    NSDictionary *parameters = @{//@"message" : postText,
+                                 @"link" : linkToContent,
+                                 @"name" : postText
+                                 };
         [[[FBSDKGraphRequest alloc]
           initWithGraphPath:@"me/feed"
           parameters: parameters
