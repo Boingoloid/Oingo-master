@@ -20,7 +20,7 @@
 #import "SignUpViewController.h"
 #import "MessageTableViewController.h"
 
-@interface FacebookAPIPost () //<FBSDKSharingDelegate>
+@interface FacebookAPIPost ()
 
 @end
 
@@ -151,33 +151,6 @@
              }
          }];
 }
-
-//#pragma mark - delegate methods
-//
-//- (void)sharer:(id<FBSDKSharing>)sharer didCompleteWithResults:(NSDictionary *)results {
-////    if ([sharer isEqual:self.shareDialog]) {
-//    NSString *facebookPostID = [results valueForKey:@"ID"];
-//    [self saveSentMessageSegment:facebookPostID];
-//    NSLog(@"facebook post successful%@",results);
-//        
-//        // Your delegate code
-////    }
-//}
-//
-//- (void)sharer:(id<FBSDKSharing>)sharer didFailWithError:(NSError *)error
-//{
-//    NSLog(@"sharing error:%@", error);
-//    NSString *message = error.userInfo[FBSDKErrorLocalizedDescriptionKey] ?:
-//    @"There was a problem sharing, please try again later.";
-//    NSString *title = error.userInfo[FBSDKErrorLocalizedTitleKey] ?: @"Oops!";
-//    
-//    [[[UIAlertView alloc] initWithTitle:title message:message delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil] show];
-//}
-//
-//- (void)sharerDidCancel:(id<FBSDKSharing>)sharer
-//{
-//    NSLog(@"share cancelled");
-//}
 
 
 
