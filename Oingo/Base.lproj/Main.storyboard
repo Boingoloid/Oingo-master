@@ -593,7 +593,7 @@
                                                 <constraint firstAttribute="height" relation="lessThanOrEqual" priority="500" constant="50" id="2iJ-pE-9es"/>
                                                 <constraint firstAttribute="height" relation="lessThanOrEqual" priority="200" constant="53" id="RDd-Cr-bBe"/>
                                                 <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="15" id="TMk-9O-JmU"/>
-                                                <constraint firstAttribute="width" constant="300" id="Yht-1z-I6F"/>
+                                                <constraint firstAttribute="width" relation="lessThanOrEqual" constant="300" id="Yht-1z-I6F"/>
                                                 <constraint firstAttribute="width" constant="300" id="rhE-hH-mnC"/>
                                                 <constraint firstAttribute="width" constant="279" id="wWD-3F-QKR"/>
                                             </constraints>
@@ -611,6 +611,7 @@
                                             <variation key="default">
                                                 <mask key="constraints">
                                                     <exclude reference="2iJ-pE-9es"/>
+                                                    <exclude reference="RDd-Cr-bBe"/>
                                                     <exclude reference="rhE-hH-mnC"/>
                                                     <exclude reference="wWD-3F-QKR"/>
                                                 </mask>
@@ -630,6 +631,7 @@
                                         <constraint firstItem="zCX-6N-C1q" firstAttribute="top" secondItem="C1f-Ie-wjl" secondAttribute="topMargin" constant="-1" id="GAt-Yl-eLn"/>
                                         <constraint firstItem="zCX-6N-C1q" firstAttribute="top" secondItem="C1f-Ie-wjl" secondAttribute="topMargin" constant="-5" id="HtV-fP-0nd"/>
                                         <constraint firstItem="zCX-6N-C1q" firstAttribute="leading" secondItem="C1f-Ie-wjl" secondAttribute="leadingMargin" constant="12" id="Ke2-Vb-sZ0"/>
+                                        <constraint firstAttribute="trailingMargin" relation="greaterThanOrEqual" secondItem="zCX-6N-C1q" secondAttribute="trailing" constant="40" id="QTd-OK-ML3"/>
                                         <constraint firstItem="zCX-6N-C1q" firstAttribute="leading" secondItem="C1f-Ie-wjl" secondAttribute="leadingMargin" constant="12" id="RvI-98-XeK"/>
                                         <constraint firstAttribute="centerY" secondItem="zCX-6N-C1q" secondAttribute="centerY" id="fuR-kY-Gnp"/>
                                         <constraint firstItem="zCX-6N-C1q" firstAttribute="centerY" secondItem="c35-RH-Xc3" secondAttribute="centerY" constant="-0.5" id="gOJ-DW-TUx"/>
@@ -956,9 +958,8 @@
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" horizontalHuggingPriority="750" verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" verticalCompressionResistancePriority="250" tableViewCell="x0E-Je-p5i" id="hQk-Tx-BCm">
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="752" verticalHuggingPriority="752" text="Label making this really long to see what it does with the text.  Since I can't get this to work in the code." lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dSg-Lh-tat">
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="752" verticalHuggingPriority="752" text="Label making this really long to see what it does with the text.  Since I can't get this to work in the code." lineBreakMode="wordWrap" numberOfLines="0" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dSg-Lh-tat">
                                             <rect key="frame" x="11" y="8" width="566" height="62"/>
-                                            <color key="backgroundColor" red="0.90196079019999997" green="0.90196079019999997" blue="0.90196079019999997" alpha="1" colorSpace="calibratedRGB"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                             <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                             <nil key="highlightedColor"/>
