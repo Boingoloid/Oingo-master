@@ -957,7 +957,8 @@
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="752" verticalHuggingPriority="752" text="Label making this really long to see what it does with the text.  Since I can't get this to work in the code." lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dSg-Lh-tat">
-                                            <rect key="frame" x="11" y="8" width="561" height="62"/>
+                                            <rect key="frame" x="11" y="8" width="566" height="62"/>
+                                            <color key="backgroundColor" red="0.90196079019999997" green="0.90196079019999997" blue="0.90196079019999997" alpha="1" colorSpace="calibratedRGB"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                             <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                             <nil key="highlightedColor"/>
@@ -965,7 +966,7 @@
                                     </subviews>
                                     <constraints>
                                         <constraint firstItem="dSg-Lh-tat" firstAttribute="bottom" secondItem="hQk-Tx-BCm" secondAttribute="bottomMargin" id="0Ij-13-3pl"/>
-                                        <constraint firstAttribute="trailingMargin" secondItem="dSg-Lh-tat" secondAttribute="trailing" constant="20" id="Qh5-VO-u4b"/>
+                                        <constraint firstAttribute="trailingMargin" secondItem="dSg-Lh-tat" secondAttribute="trailing" constant="15" id="Qh5-VO-u4b"/>
                                         <constraint firstItem="dSg-Lh-tat" firstAttribute="leading" secondItem="hQk-Tx-BCm" secondAttribute="leadingMargin" constant="3" id="Rsn-Lr-PjV"/>
                                         <constraint firstItem="dSg-Lh-tat" firstAttribute="top" secondItem="hQk-Tx-BCm" secondAttribute="topMargin" id="TDq-KY-Nyi"/>
                                     </constraints>

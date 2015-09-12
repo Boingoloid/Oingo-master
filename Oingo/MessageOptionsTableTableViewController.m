@@ -47,7 +47,7 @@
     
 
 
-    self.tableView.estimatedRowHeight = 100.0;
+    self.tableView.estimatedRowHeight = 150.0;
     self.tableView.rowHeight = UITableViewAutomaticDimension;
 
     
@@ -86,7 +86,7 @@
     
     NSLog(@"messageOption calling config cell%@",messageOption);    
     [cell configMessageOptionCell:(NSDictionary*)messageOption];
-
+    [cell layoutIfNeeded];
     
 //    NSString *messageText = [[self.messageOptionsListFiltered objectAtIndex:[indexPath row]] valueForKey:@"messageText"];
 //    cell.textLabel.text = messageText;
