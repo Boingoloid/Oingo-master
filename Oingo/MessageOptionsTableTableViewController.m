@@ -7,8 +7,9 @@
 //
 
 #import "MessageOptionsTableTableViewController.h"
+#import "MessageOptionsTableViewCell.h"
 #import "MessageTableViewController.h"
-#import "MessageTableViewCell.h"
+//#import "MessageTableViewCell.h"
 
 @interface MessageOptionsTableTableViewController ()
 
@@ -21,10 +22,12 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
+    NSLog(@"messageOption viewDidLoad");
     
 
-    [self.tableView registerClass:[UITableViewCell class] forCellReuseIdentifier:@"Cell1"];
+//    [self.tableView registerClass:[UITableViewCell class] forCellReuseIdentifier:@"Cell1"];
+    
+    
     
     NSString *selectedCategory= [self.messageTableViewController categoryForSection:self.originIndexPath.section];
     NSMutableArray *messageTextList = [[NSMutableArray alloc]init];
@@ -64,41 +67,55 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     // Return the number of rows in the section.
+    NSLog(@"optionlistFiltered count:%lu, %@", (unsigned long)[self.messageOptionsListFiltered count],self.messageOptionsListFiltered);
     return [self.messageOptionsListFiltered count];
+//    return 3;
 }
 
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-     [self.view layoutIfNeeded];
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"Cell1" forIndexPath:indexPath];
+    NSDictionary *messageOption = (NSDictionary*)[self.messageOptionsListFiltered objectAtIndex:indexPath.row];
+    
+    MessageOptionsTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"Cell1" forIndexPath:indexPath];
     // Configure the cell...
-    NSString *messageText = [[self.messageOptionsListFiltered objectAtIndex:[indexPath row]] valueForKey:@"messageText"];
-    cell.textLabel.text = messageText;
-//    cell.textLabel.preferredMaxLayoutWidth = 300;
+    if (cell == nil){
+        NSLog(@"cell was nil");
+        cell = [[MessageOptionsTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"Cell1"];
+        
+    }
+    
+    NSLog(@"messageOption calling config cell%@",messageOption);    
+    [cell configMessageOptionCell:(NSDictionary*)messageOption];
+
+    
+//    NSString *messageText = [[self.messageOptionsListFiltered objectAtIndex:[indexPath row]] valueForKey:@"messageText"];
+//    cell.textLabel.text = messageText;
+//    [cell.textLabel sizeToFit];
+//    cell.textLabel.preferredMaxLayoutWidth = self.view.bounds.size.width;
     return cell;
 }
 
-- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    NSString *messageText = [[self.messageOptionsListFiltered objectAtIndex:[indexPath row]] valueForKey:@"messageText"];
-    
-    double charCount = messageText.length;
-    
-    int rowHeight = 25;
-    
-    if (charCount < 50){
-        rowHeight = 25;
-        
-    } else if (charCount < 100) {
-        rowHeight = 50;
-        
-    } else {
-        
-        rowHeight = 75;
-    }
-    return rowHeight;
-    
-
-}
+//- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
+//    NSString *messageText = [[self.messageOptionsListFiltered objectAtIndex:[indexPath row]] valueForKey:@"messageText"];
+//    
+//    double charCount = messageText.length;
+//    
+//    int rowHeight = 25;
+//    
+//    if (charCount < 50){
+//        rowHeight = 25;
+//        
+//    } else if (charCount < 100) {
+//        rowHeight = 50;
+//        
+//    } else {
+//        
+//        rowHeight = 75;
+//    }
+//    return rowHeight;
+//    
+//
+//}
 
 -(void)tableView:(UITableView *)tableView  didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     

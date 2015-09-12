@@ -17,4 +17,6 @@
 @property(nonatomic) MessageTableViewController *messageTableViewController;
 @property(nonatomic) NSIndexPath *originIndexPath;
 @property(nonatomic) NSNumber *originRowIndex;
+
+
 @end

@@ -9,5 +9,6 @@
 #import <UIKit/UIKit.h>
 
 @interface MessageOptionsTableViewCell : UITableViewCell
-
+@property (weak, nonatomic) IBOutlet UILabel *messageOptionLabel;
+-(void)configMessageOptionCell:(NSDictionary*)messageOption;
 @end

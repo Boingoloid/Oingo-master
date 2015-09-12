@@ -840,7 +840,7 @@ NSInteger footerHeight = 1;
         messageOptionsViewController.messageOptionsList = self.messageOptionsList;
         messageOptionsViewController.menuList = self.menuList;
         
-        NSLog(@"messageOptionsList:%@,%@", self.messageOptionsList, messageOptionsViewController.messageOptionsList);
+        NSLog(@"segway to Message Options: messageOptionsList:%@,%@", self.messageOptionsList, messageOptionsViewController.messageOptionsList);
         
     } else if ([segue.identifier isEqualToString:@"showSettings"]){
         SettingsTableViewController *settingsTableVC = [segue destinationViewController];

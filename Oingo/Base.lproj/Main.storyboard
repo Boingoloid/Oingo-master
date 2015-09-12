@@ -951,56 +951,31 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
-                            <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="Cell1" rowHeight="79" id="x0E-Je-p5i" customClass="MessageOptionsTableViewCell">
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="Cell1" id="x0E-Je-p5i" customClass="MessageOptionsTableViewCell">
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" horizontalHuggingPriority="750" verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" verticalCompressionResistancePriority="250" tableViewCell="x0E-Je-p5i" id="hQk-Tx-BCm">
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="752" verticalHuggingPriority="752" misplaced="YES" text="Label making this really long to see what it does with the text.  Since I can't get this to work in the code." lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dSg-Lh-tat">
-                                            <rect key="frame" x="18" y="8" width="574" height="62"/>
+                                            <rect key="frame" x="18" y="8" width="447" height="62"/>
+                                            <constraints>
+                                                <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="35" id="CsN-3J-weA"/>
+                                                <constraint firstAttribute="width" relation="lessThanOrEqual" constant="574" id="nPf-0Z-Ayj"/>
+                                            </constraints>
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                             <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                     </subviews>
                                     <constraints>
-                                        <constraint firstAttribute="centerY" secondItem="dSg-Lh-tat" secondAttribute="centerY" id="3gB-ct-b4f"/>
-                                        <constraint firstItem="dSg-Lh-tat" firstAttribute="top" secondItem="hQk-Tx-BCm" secondAttribute="topMargin" constant="10" id="5bu-Mj-1qK"/>
-                                        <constraint firstItem="dSg-Lh-tat" firstAttribute="top" secondItem="hQk-Tx-BCm" secondAttribute="topMargin" constant="9" id="5dL-OH-R8Y"/>
-                                        <constraint firstItem="dSg-Lh-tat" firstAttribute="trailing" secondItem="hQk-Tx-BCm" secondAttribute="trailingMargin" id="6CH-g1-A7y"/>
-                                        <constraint firstAttribute="trailingMargin" secondItem="dSg-Lh-tat" secondAttribute="trailing" constant="39" id="B7N-Ti-S70"/>
-                                        <constraint firstItem="dSg-Lh-tat" firstAttribute="top" secondItem="hQk-Tx-BCm" secondAttribute="topMargin" id="BXI-ce-Z9e"/>
-                                        <constraint firstAttribute="centerY" secondItem="dSg-Lh-tat" secondAttribute="centerY" id="Hqg-Qs-Uqw"/>
-                                        <constraint firstItem="dSg-Lh-tat" firstAttribute="leading" secondItem="hQk-Tx-BCm" secondAttribute="leadingMargin" constant="10" id="IGc-2w-S46"/>
+                                        <constraint firstItem="dSg-Lh-tat" firstAttribute="trailing" relation="lessThanOrEqual" secondItem="hQk-Tx-BCm" secondAttribute="trailingMargin" constant="-10" id="6CH-g1-A7y"/>
                                         <constraint firstItem="dSg-Lh-tat" firstAttribute="leading" secondItem="hQk-Tx-BCm" secondAttribute="leadingMargin" constant="10" id="LZ5-iN-Lvw"/>
-                                        <constraint firstItem="dSg-Lh-tat" firstAttribute="leading" secondItem="hQk-Tx-BCm" secondAttribute="leadingMargin" constant="20" id="WoF-0V-LGj"/>
-                                        <constraint firstItem="dSg-Lh-tat" firstAttribute="leading" secondItem="hQk-Tx-BCm" secondAttribute="leadingMargin" constant="21" id="b1A-9M-IHS"/>
-                                        <constraint firstAttribute="centerX" secondItem="dSg-Lh-tat" secondAttribute="centerX" constant="8.5" id="b8q-pu-DAr"/>
-                                        <constraint firstItem="dSg-Lh-tat" firstAttribute="bottom" secondItem="hQk-Tx-BCm" secondAttribute="bottomMargin" id="dEi-CY-gWI"/>
-                                        <constraint firstAttribute="bottomMargin" secondItem="dSg-Lh-tat" secondAttribute="bottom" priority="100" constant="10" id="f3r-cu-k14"/>
-                                        <constraint firstAttribute="trailingMargin" secondItem="dSg-Lh-tat" secondAttribute="trailing" constant="276" id="qvb-dw-MXT"/>
-                                        <constraint firstItem="dSg-Lh-tat" firstAttribute="bottom" secondItem="hQk-Tx-BCm" secondAttribute="bottomMargin" id="zcQ-By-7jg"/>
-                                        <constraint firstAttribute="trailingMargin" relation="greaterThanOrEqual" secondItem="dSg-Lh-tat" secondAttribute="trailing" constant="38" id="zo5-mN-td7"/>
+                                        <constraint firstItem="dSg-Lh-tat" firstAttribute="top" secondItem="hQk-Tx-BCm" secondAttribute="topMargin" id="eyL-QX-jJK"/>
                                     </constraints>
-                                    <variation key="default">
-                                        <mask key="constraints">
-                                            <exclude reference="5bu-Mj-1qK"/>
-                                            <exclude reference="5dL-OH-R8Y"/>
-                                            <exclude reference="B7N-Ti-S70"/>
-                                            <exclude reference="BXI-ce-Z9e"/>
-                                            <exclude reference="Hqg-Qs-Uqw"/>
-                                            <exclude reference="IGc-2w-S46"/>
-                                            <exclude reference="WoF-0V-LGj"/>
-                                            <exclude reference="b1A-9M-IHS"/>
-                                            <exclude reference="b8q-pu-DAr"/>
-                                            <exclude reference="dEi-CY-gWI"/>
-                                            <exclude reference="f3r-cu-k14"/>
-                                            <exclude reference="qvb-dw-MXT"/>
-                                            <exclude reference="zcQ-By-7jg"/>
-                                            <exclude reference="zo5-mN-td7"/>
-                                        </mask>
-                                    </variation>
                                 </tableViewCellContentView>
+                                <connections>
+                                    <outlet property="messageOptionLabel" destination="dSg-Lh-tat" id="cBJ-0E-Dk7"/>
+                                </connections>
                             </tableViewCell>
                         </prototypes>
                         <connections>

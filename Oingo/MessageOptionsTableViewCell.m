@@ -10,6 +10,13 @@
 
 @implementation MessageOptionsTableViewCell
 
+
+-(void) configMessageOptionCell:(NSDictionary*)messageOptionDictionary{
+
+    self.messageOptionLabel.text = [messageOptionDictionary valueForKey:@"messageText"];
+    
+}
+
 - (void)awakeFromNib {
     // Initialization code
 }
