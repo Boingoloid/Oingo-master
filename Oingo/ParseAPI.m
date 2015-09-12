@@ -136,10 +136,6 @@ BOOL isLocationInfoAvailable = NO;
 
 
 -(void) addLocalRepLocationCaptureCell{
-
-    
-    
-    
     
     // Create NoZipCell - captures location (should be NoLocationInfoCell b/c more descriptive)
     if(isLocalRepMessageIncluded && !isLocationInfoAvailable){
@@ -282,6 +278,10 @@ BOOL isLocationInfoAvailable = NO;
     }
     
     self.messageTextList = messageTextList;
+    
+    if(self.isCongressLoaded){
+        self.messageOptionsList = (NSMutableArray*)[self createDeepCopyOfData:self.messageTextList];
+    }
     
     self.contactList = contactList;
     //    NSLog(@"contactlist:%@ messageList: %@",contactList,messageTextList);
