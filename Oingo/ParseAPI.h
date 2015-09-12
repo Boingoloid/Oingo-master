@@ -21,7 +21,7 @@
 @property (nonatomic) NSMutableArray *menuList;
 @property (nonatomic, retain) NSMutableArray *expandSectionsKeyList;
 @property(nonatomic) MessageTableViewController *messageTableViewController;
-@property(nonatomic) NSArray *messageOptionsList;
+@property(nonatomic) NSMutableArray *messageOptionsList;
 @property(nonatomic) NSArray *messageTextList;
 @property(nonatomic) NSArray *tempArray;
 @property(nonatomic) bool isCongressLoaded;

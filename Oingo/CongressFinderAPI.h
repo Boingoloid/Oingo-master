@@ -15,6 +15,7 @@
 @property(nonatomic) NSMutableArray *messageList;
 @property(nonatomic) NSMutableArray *messageListWithCongress;
 @property(nonatomic) MessageTableViewController *messageTableViewController;
+@property(nonatomic) NSMutableArray *messageOptionsList;
 @property(nonatomic) bool isCongressLoaded;
 
 -(void)getCongress:zipCode addToMessageList:messageList;

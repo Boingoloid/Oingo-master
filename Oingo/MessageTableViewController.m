@@ -89,8 +89,6 @@ NSInteger footerHeight = 1;
     [self.tableView addGestureRecognizer:tapRecognizer];
 
     // 1)Get data from parse or, 2)load data already waiting (with Congress)
-//    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-//    UpdateDefaults *updateDefaults = [[UpdateDefaults alloc]init];
     ParseAPI *parseAPI = [[ParseAPI alloc]init];
     parseAPI.messageTableViewController = self;
     parseAPI.isCongressLoaded = self.isCongressLoaded;
@@ -428,9 +426,6 @@ NSInteger footerHeight = 1;
     [self.locationManager startUpdatingLocation];
 }
 
-- (IBAction)showCompose:(id)sender {
-    [self performSegueWithIdentifier:@"showCompose" sender:nil];
-}
 
 #pragma mark - CLLocationManagerDelegate
 - (void)locationManager:(CLLocationManager *)manager didFailWithError:(NSError *)error
@@ -845,7 +840,7 @@ NSInteger footerHeight = 1;
         messageOptionsViewController.messageOptionsList = self.messageOptionsList;
         messageOptionsViewController.menuList = self.menuList;
         
-        NSLog(@"messageOptionsList:%@", self.messageOptionsList);
+        NSLog(@"messageOptionsList:%@,%@", self.messageOptionsList, messageOptionsViewController.messageOptionsList);
         
     } else if ([segue.identifier isEqualToString:@"showSettings"]){
         SettingsTableViewController *settingsTableVC = [segue destinationViewController];

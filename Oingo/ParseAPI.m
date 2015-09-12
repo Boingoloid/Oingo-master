@@ -56,7 +56,7 @@ BOOL isLocationInfoAvailable = NO;
     isCoordinateInfoAvailable = NO;
     
 
-    //Set bool values
+    // Set bool values
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     if([defaults valueForKey:@"latitude"] != nil) {
         isLatitude = YES;
@@ -77,7 +77,7 @@ BOOL isLocationInfoAvailable = NO;
     if(isCoordinateInfoAvailable || isZipAvailable){
         isLocationInfoAvailable = YES;
     }
-
+    
 
     NSLog(@"defaults zip:%@ lat:%@ long:%@",[defaults valueForKey:@"zipCode"],[defaults valueForKey:@"latitude"],[defaults valueForKey:@"longitude"]);
     NSLog(@"bool zip:%d lat:%d long:%d coordinate:%d location:%d", isZipAvailable ,isLatitude,isLongitude,isCoordinateInfoAvailable,isLocationInfoAvailable);
@@ -93,54 +93,61 @@ BOOL isLocationInfoAvailable = NO;
             dispatch_async(dispatch_get_main_queue(), ^{
                 
                 // 1)Grab results, and create deep copy of data
+                //NSLog(@" first deep copy:%@", self.messageListFromParseWithContacts);
                 self.messageListFromParseWithContacts = (NSMutableArray*)[self createDeepCopyOfData:objects];
+
                 
                 // 2) Check for message cell for category = "Local Representative"
-                    // A)Get index of Local Rep message
-                NSUInteger indexLocalRep = [self.messageListFromParseWithContacts indexOfObjectPassingTest:
-                                               ^BOOL(NSDictionary *dict, NSUInteger idx, BOOL *stop) {
-                                                   return [[dict objectForKey:@"messageCategory"] isEqual:@"Local Representative"];
-                                               }];
+                isLocalRepMessageIncluded = [self isLocalRepIncluded];
                 
-                
-                if (indexLocalRep == NSNotFound){
-                    //Do nothing, don't include local rep as section b/c it has no messages in the meesage table
-                    [self prepSections:self.messageListFromParseWithContacts];
-                    NSLog(@"Is local rep message included? %d",isLocalRepMessageIncluded);
-                
-                } else if (indexLocalRep !=NSNotFound){ //LOCAL REP IS FOUND!!!!!
-                    isLocalRepMessageIncluded = YES;
-                    
-                    //Load 1)location capture, or 2) load Reps
-                    // 1)
+                // 3) Choose load path
+                if(!isLocalRepMessageIncluded){
+                    [self prepSections:self.messageListFromParseWithContacts]; // Load with no rep data, b/c no local rep message
+               
+                } else {
                     if(!isLocationInfoAvailable){
-                        [self addLocalRepLocationCaptureCell]; //Adds contacts to Local Rep category, only if messsage exists for local rep
+                        [self addLocalRepLocationCaptureCell];
                         [self prepSections:self.messageListFromParseWithContacts];
-                    
-                    // 2)
-                    } else if(isLocationInfoAvailable){
-                    //Load progress, then view did load with loaded flag to on.
-                    [self prepSections:self.messageListFromParseWithContacts]; //load so that the user sees something
-                    [self updateMenuListWithCongressDataFromBestAvailableLocation];
+                        
+                    } else {
+                        [self prepSections:self.messageListFromParseWithContacts]; //load so that the user sees something
+                        [self updateMenuListWithCongressDataFromBestAvailableLocation];  //lazy update of congress people
                     }
                 }
+
             });
         }
     }];
 }
 
+
+-(BOOL)isLocalRepIncluded{
+    NSUInteger indexLocalRep = [self.messageListFromParseWithContacts indexOfObjectPassingTest:
+                                ^BOOL(NSDictionary *dict, NSUInteger idx, BOOL *stop) {
+                                    return [[dict objectForKey:@"messageCategory"] isEqual:@"Local Representative"];
+                                }];
+    if (indexLocalRep == NSNotFound){
+        return NO;
+    } else {
+        return YES;
+    }
+}
+
+
+
 -(void) addLocalRepLocationCaptureCell{
-    //If Local Rep message is in data from Parse, and there is no location data, NoZipCell created and displayed.
+
     
+    
+    
+    
+    // Create NoZipCell - captures location (should be NoLocationInfoCell b/c more descriptive)
     if(isLocalRepMessageIncluded && !isLocationInfoAvailable){
-        if(isLocationInfoAvailable && !isLocationInfoAvailable){
-            // create NoZipCell - captures location (should be NoLocationInfoCell b/c more descriptive)
-            NSMutableDictionary *noZipDictionary = [[NSMutableDictionary alloc]init];
-            [noZipDictionary setValue:@"Local Representative" forKey:@"messageCategory"];
-            [noZipDictionary setValue:@YES forKey:@"isGetLocationCell"];
-            // NSLog(@"dictionary value for isGetLocationCell %@",[noZipDictionary valueForKey:@"isGetLocationCell"]);
-            [self.messageListFromParseWithContacts addObject:noZipDictionary];
-        }
+        NSMutableDictionary *noZipDictionary = [[NSMutableDictionary alloc]init];
+        [noZipDictionary setValue:@"Local Representative" forKey:@"messageCategory"];
+        [noZipDictionary setValue:@YES forKey:@"isGetLocationCell"];
+        // NSLog(@"dictionary value for isGetLocationCell %@",[noZipDictionary valueForKey:@"isGetLocationCell"]);
+        [self.messageListFromParseWithContacts addObject:noZipDictionary];
     }
 }
 -(void) updateMenuListWithCongressDataFromBestAvailableLocation{
@@ -148,9 +155,18 @@ BOOL isLocationInfoAvailable = NO;
 // 1) Coordinates
 
     if(isCoordinateInfoAvailable) {
+        
+//        NSLog(@"updateMenuListWithBestAvailableLocation (parseAPI) %@:", self.messageOptionsList);
+//        NSLog(@"updateMenuListWithBestAvailableLocation (parseAPI) %@:", self.messageTableViewController.messageOptionsList);
+//        NSLog(@"updateMenuListWithBestAvailableLocation (parseAPI) %@:", self.messageListFromParseWithContacts);
+//        NSLog(@"updateMenuListWithBestAvailableLocation (parseAPI) %@:", self.messageOptionsList);
+//        NSLog(@"updateMenuListWithBestAvailableLocation (parseAPI) %@:", self.messageOptionsList);
+//        NSLog(@"updateMenuListWithBestAvailableLocation (parseAPI) %@:", self.messageOptionsList);
+        
         NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
         CongressFinderAPI *congressFinder = [[CongressFinderAPI alloc]init];
         congressFinder.messageTableViewController = self.messageTableViewController;
+        congressFinder.messageOptionsList = self.messageOptionsList;
         [congressFinder getCongressWithLatitude:[defaults doubleForKey:@"latitude"] andLongitude:[defaults doubleForKey:@"longitude"] addToMessageList:(NSMutableArray*)self.messageListFromParseWithContacts];
         
 // 2) zipCode
@@ -168,11 +184,24 @@ BOOL isLocationInfoAvailable = NO;
 # pragma mark - Prep Sections
 
 -(void)prepSections:messageList {
-//    NSLog(@"Prep sections triggered, here is the messageList input:%@",messageList);
-    NSLog(@"Prep sections triggered");
-    //add message to this list
+    
+//    NSMutableArray *array = (NSMutableArray*)[self createDeepCopyOfData:messageList];
+//    NSMutableArray *arrayMessages = [[NSMutableArray alloc] init];
+//    
+//    for (NSDictionary *dic in array) {
+//        if([dic valueForKey:@"isMessage"]){
+//            [arrayMessages addObject:dic];
+//        }
+//    }
+//    
+//    NSLog(@"arrayMessages%@",arrayMessages);
+    NSLog(@"Prep sections triggered, here is the self.messageOptionsList input:%@",self.messageOptionsList);
+    NSLog(@"Prep sections triggered, here is the self.parselistWithContacts %@",self.messageListFromParseWithContacts);
+    NSLog(@"Prep sections triggered, here is the messageList %@",[messageList firstObject]);
+    NSLog(@"Prep sections triggered, here is the self.menulist %@",[self.menuList lastObject]);
+    
     [self separateMessagesFromContacts:messageList]; //create self.messageList and self.contactList
-    [self createMenuList]; //creates self.menuList - these are the grouopings for sections
+    [self createMenuList]; //creates self.menuList - these are th   e grouopings for sections
 
     
     self.menuList = [self sortMessageListWithContacts:self.menuList];
@@ -193,7 +222,7 @@ BOOL isLocationInfoAvailable = NO;
         if (!objectsInSection) {
             objectsInSection = [NSMutableArray array];  //if new create array
             // this is the first time we see this category - increment the section index
-            // sectionToCategoryMap literally it ends up (Regulator = 0)
+            // sectionToCategoryM ap literally it ends up (Regulator = 0)
             [self.sectionToCategoryMap setObject:category forKey:[NSNumber numberWithInt:(int)section++]]; // zero
         }
         [objectsInSection addObject:[NSNumber numberWithInt:(int)rowIndex++]]; //adds index number to objectsInSection temp array.
@@ -207,8 +236,10 @@ BOOL isLocationInfoAvailable = NO;
     self.messageTableViewController.menuList = self.menuList;
     self.messageTableViewController.messageOptionsList = self.messageOptionsList;
     
-    NSLog(@"self.messageTableViewController:%@",self.messageTableViewController);
-    NSLog(@"self.messageOptions:%@",[self.messageOptionsList firstObject]); //this one
+    
+    NSLog(@"1) self.messageTableViewController:%@",self.messageTableViewController);
+    NSLog(@"2) self.messageOptions:%@",[self.messageOptionsList firstObject]); //this one
+    
     self.messageTableViewController.expandSectionsKeyList = self.expandSectionsKeyList;
     
     [self.messageTableViewController.tableView reloadData];
@@ -405,7 +436,10 @@ BOOL isLocationInfoAvailable = NO;
     NSMutableArray* allDataDeepCopyArray = [NSKeyedUnarchiver unarchiveObjectWithData:[NSKeyedArchiver archivedDataWithRootObject:allDataTempArray]];
     
     self.messageOptionsList = messagesDeepCopyArray;
+    self.messageTableViewController.messageOptionsList = self.messageOptionsList;
     NSLog(@"deep copy of messageOptionsList (deep copy):%@",[self.messageOptionsList firstObject]);
+        NSLog(@"self.messagetableviewcontroller.messageOptionsList last object(deep copy):%@",[self.messageTableViewController.messageOptionsList lastObject]);
+    
     return allDataDeepCopyArray;
     
     

@@ -38,8 +38,9 @@
                     [self checkFacebookShareForSegment];
                     [self checkEmail];
                     [self checkPhone];
-                    [self.messageTableViewController.tableView reloadData];
                     NSLog(@"reloading data from MarkSentMessages");
+                    [self.messageTableViewController.tableView reloadData];
+
 
                 });
             } else {

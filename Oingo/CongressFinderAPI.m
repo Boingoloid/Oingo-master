@@ -20,6 +20,7 @@
 
 
 -(void)getCongressWithLatitude:(double)latitude andLongitude:(double)longitude addToMessageList:(NSMutableArray*)messageList {
+    NSLog(@"Congress Finder triggered: self.messageTableViewController.messageOptionsList (last object): %@",[self.messageTableViewController.messageOptionsList lastObject]);
 // Method called when finding representatives by Lat/Long
     
     
@@ -29,10 +30,10 @@
                             return [[dict objectForKey:@"isGetLocationCell"] isEqual:@YES];
                         }];
     if(index == NSNotFound){
-        NSLog(@"did not find 'get location' line");
+//        NSLog(@"did not find 'get location' line");
 
     } else {
-        NSLog(@"did find 'no location' line and deleted it");
+//        NSLog(@"did find 'no location' line and deleted it");
         [messageList removeObjectAtIndex:index];
     }
     
@@ -111,7 +112,9 @@
     self.messageListWithCongress = [self combine:resultsArray withMessageList:self.messageList];
 
     self.messageTableViewController.messageListWithCongress = self.messageListWithCongress;
-    self.messageTableViewController.isCongressLoaded = YES; 
+    self.messageTableViewController.isCongressLoaded = YES;
+    self.messageTableViewController.messageOptionsList = self.messageOptionsList;
+    NSLog(@"congress datat received, viewDidLoad on MessageTableView, now with Congress. self.messageTVC.messageOptionsList%@",self.messageTableViewController.messageOptionsList);
     [self.messageTableViewController viewDidLoad];
 }
 
