@@ -956,21 +956,18 @@
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" horizontalHuggingPriority="750" verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" verticalCompressionResistancePriority="250" tableViewCell="x0E-Je-p5i" id="hQk-Tx-BCm">
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="752" verticalHuggingPriority="752" misplaced="YES" text="Label making this really long to see what it does with the text.  Since I can't get this to work in the code." lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dSg-Lh-tat">
-                                            <rect key="frame" x="18" y="8" width="447" height="62"/>
-                                            <constraints>
-                                                <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="35" id="CsN-3J-weA"/>
-                                                <constraint firstAttribute="width" relation="lessThanOrEqual" constant="574" id="nPf-0Z-Ayj"/>
-                                            </constraints>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="752" verticalHuggingPriority="752" text="Label making this really long to see what it does with the text.  Since I can't get this to work in the code." lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dSg-Lh-tat">
+                                            <rect key="frame" x="11" y="8" width="561" height="62"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                             <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                     </subviews>
                                     <constraints>
-                                        <constraint firstItem="dSg-Lh-tat" firstAttribute="trailing" relation="lessThanOrEqual" secondItem="hQk-Tx-BCm" secondAttribute="trailingMargin" constant="-10" id="6CH-g1-A7y"/>
-                                        <constraint firstItem="dSg-Lh-tat" firstAttribute="leading" secondItem="hQk-Tx-BCm" secondAttribute="leadingMargin" constant="10" id="LZ5-iN-Lvw"/>
-                                        <constraint firstItem="dSg-Lh-tat" firstAttribute="top" secondItem="hQk-Tx-BCm" secondAttribute="topMargin" id="eyL-QX-jJK"/>
+                                        <constraint firstItem="dSg-Lh-tat" firstAttribute="bottom" secondItem="hQk-Tx-BCm" secondAttribute="bottomMargin" id="0Ij-13-3pl"/>
+                                        <constraint firstAttribute="trailingMargin" secondItem="dSg-Lh-tat" secondAttribute="trailing" constant="20" id="Qh5-VO-u4b"/>
+                                        <constraint firstItem="dSg-Lh-tat" firstAttribute="leading" secondItem="hQk-Tx-BCm" secondAttribute="leadingMargin" constant="3" id="Rsn-Lr-PjV"/>
+                                        <constraint firstItem="dSg-Lh-tat" firstAttribute="top" secondItem="hQk-Tx-BCm" secondAttribute="topMargin" id="TDq-KY-Nyi"/>
                                     </constraints>
                                 </tableViewCellContentView>
                                 <connections>

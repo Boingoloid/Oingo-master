@@ -47,8 +47,8 @@
     
 
 
-//    self.tableView.estimatedRowHeight = 50.0;
-//    self.tableView.rowHeight = UITableViewAutomaticDimension;
+    self.tableView.estimatedRowHeight = 100.0;
+    self.tableView.rowHeight = UITableViewAutomaticDimension;
 
     
 }
