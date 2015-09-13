@@ -32,15 +32,15 @@
 @property(nonatomic) NSString *selectedLink;
 @property(nonatomic) Program *selectedProgram;
 @property(nonatomic) NSDictionary *selectedContact;
-@property (weak, nonatomic) IBOutlet UILabel *tableHeaderLabel;
-@property (weak, nonatomic) IBOutlet UILabel *tableHeaderSubLabel;
-@property (weak, nonatomic) IBOutlet UIView *tableHeaderView;
 @property(nonatomic) PFUser *currentUser;
 @property(nonatomic) BOOL isCongressLoaded;
 @property(nonatomic) UpdateDefaults *updateDefaults;
 @property(nonatomic) BOOL isSentFromCongressFinderAPI;
 
-
+// Header
+@property (weak, nonatomic) IBOutlet UILabel *tableHeaderLabel;
+@property (weak, nonatomic) IBOutlet UILabel *tableHeaderSubLabel;
+@property (weak, nonatomic) IBOutlet UIView *tableHeaderView;
 
 // segment buttons
 @property (weak, nonatomic) IBOutlet UIButton *segmentTweetButton;
@@ -61,7 +61,6 @@
 - (void)lookUpZip;
 - (void)getUserLocation;
 
-- (IBAction)showCompose:(id)sender;
 
 -(NSString *) categoryForSection:(NSInteger)section;
 @end

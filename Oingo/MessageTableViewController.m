@@ -69,12 +69,27 @@ NSInteger footerHeight = 1;
     self.segmentTweetButtonSuccessImageView.hidden = YES;
     self.segmentFacebookButtonSuccessImageView.hidden = YES;
     
+    
+//    - (void)setFrame:(CGRect)frame {
+
+//        frame.origin.x += inset; //equal to saying originx = originx + inset
+//        frame.size.width -= 2 * inset; //mult by 2 b/c taking from both sides
+//        [super setFrame:frame];
+//        
+//    }
+//
+    
     // Format table header
     self.tableHeaderView.layer.borderColor = [[UIColor whiteColor] CGColor];
     self.tableHeaderView.layer.borderWidth = .5;
     self.tableHeaderView.layer.backgroundColor = [[UIColor whiteColor] CGColor];
     self.tableHeaderView.layer.cornerRadius = 3;
     self.tableHeaderView.clipsToBounds = YES;
+//    int inset = 10;
+    NSLog(@"self.tableView.frame.width:%f",self.tableView.frame.size.width);
+    [self.tableHeaderView setFrame:(CGRectMake(10, 0, self.tableView.frame.size.width - 20, 67))];
+    
+    
     NSString* padding = @"  "; // # of spaces
     self.tableHeaderLabel.text = [NSString stringWithFormat:@"%@%@%@", padding,[self.selectedSegment valueForKey:@"segmentTitle"], padding];
     self.tableHeaderSubLabel.text = [NSString stringWithFormat:@"%@%@%@", padding,[self.selectedProgram valueForKey:@"programTitle"], padding];
