@@ -13,6 +13,8 @@
 @property (weak, nonatomic) IBOutlet UISwitch *linkTwitterSwitch;
 @property (weak, nonatomic) IBOutlet UISwitch *linkFacebookSwitch;
 @property (weak, nonatomic) MessageTableViewController *messageTableViewController;
+@property (weak, nonatomic) IBOutlet UIButton *enterZipButton;
+@property (weak, nonatomic) IBOutlet UIButton *logoutButton;
 - (IBAction)linktwitter:(id)sender;
 - (IBAction)linkfacebook:(id)sender;
 - (IBAction)logout:(id)sender;

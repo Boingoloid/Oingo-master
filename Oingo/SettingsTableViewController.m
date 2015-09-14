@@ -28,10 +28,8 @@
     [super viewDidLoad];
     PFUser *currentUser = [PFUser currentUser];
     
-    //Set twitter toggle to off
+    //Set twitter/facebook toggle to off
     [self.linkTwitterSwitch setOn:NO animated:NO];
-    
-    // Set facebook toggle to off
     [self.linkFacebookSwitch setOn:NO animated:NO];
         
     // User is logged in so load values from user settings to see if linked
@@ -48,6 +46,17 @@
     } else {
         [self.linkFacebookSwitch setOn:NO animated:NO];
     }
+    
+    // Draw borders on buttons
+    self.enterZipButton.layer.borderColor = [[UIColor blackColor]CGColor];
+    self.enterZipButton.layer.borderWidth = .5;
+    self.enterZipButton.layer.cornerRadius =3;
+    self.enterZipButton.clipsToBounds = YES;
+    
+    self.logoutButton.layer.borderColor = [[UIColor blackColor]CGColor];
+    self.logoutButton.layer.borderWidth = .5;
+    self.logoutButton.layer.cornerRadius =3;
+    self.logoutButton.clipsToBounds = YES;
 }
 
 
