@@ -1164,6 +1164,9 @@
                                                 </label>
                                                 <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="abe-Vd-qrC">
                                                     <rect key="frame" x="530" y="11" width="51" height="31"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" secondItem="abe-Vd-qrC" secondAttribute="height" multiplier="49:31" id="h3Z-VP-NpN"/>
+                                                    </constraints>
                                                     <connections>
                                                         <action selector="linktwitter:" destination="pMd-EZ-Xws" eventType="valueChanged" id="Yd7-N7-3f3"/>
                                                     </connections>
@@ -1193,6 +1196,9 @@
                                                 </label>
                                                 <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="STs-0c-kRR">
                                                     <rect key="frame" x="530" y="11" width="51" height="31"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" secondItem="STs-0c-kRR" secondAttribute="height" multiplier="49:31" id="FuZ-bR-1ZL"/>
+                                                    </constraints>
                                                     <connections>
                                                         <action selector="linkfacebook:" destination="pMd-EZ-Xws" eventType="valueChanged" id="EeM-er-Zqa"/>
                                                     </connections>
@@ -1252,8 +1258,18 @@
                                                         <action selector="getUserLocation:" destination="pMd-EZ-Xws" eventType="touchUpInside" id="HYK-Ck-ZHf"/>
                                                     </connections>
                                                 </button>
-                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="DnK-re-g91">
-                                                    <rect key="frame" x="247" y="59" width="106" height="37"/>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="or" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wKd-WW-yfv">
+                                                    <rect key="frame" x="181" y="67" width="31" height="21"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" constant="31" id="pwB-Tr-P8H"/>
+                                                        <constraint firstAttribute="height" constant="21" id="yib-AQ-rw3"/>
+                                                    </constraints>
+                                                    <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="17"/>
+                                                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="DnK-re-g91">
+                                                    <rect key="frame" x="486" y="62" width="106" height="37"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="106" id="iP6-hY-R9V"/>
                                                         <constraint firstAttribute="height" constant="37" id="lYU-c0-ZDF"/>
@@ -1267,16 +1283,6 @@
                                                         <action selector="lookUpZip:" destination="pMd-EZ-Xws" eventType="touchUpInside" id="q0T-gx-Hfa"/>
                                                     </connections>
                                                 </button>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="or" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wKd-WW-yfv">
-                                                    <rect key="frame" x="181" y="67" width="31" height="21"/>
-                                                    <constraints>
-                                                        <constraint firstAttribute="width" constant="31" id="pwB-Tr-P8H"/>
-                                                        <constraint firstAttribute="height" constant="21" id="yib-AQ-rw3"/>
-                                                    </constraints>
-                                                    <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="17"/>
-                                                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
                                             </subviews>
                                             <constraints>
                                                 <constraint firstItem="KP3-c0-RLY" firstAttribute="leading" secondItem="7vb-nq-8Z2" secondAttribute="leadingMargin" constant="15" id="1bN-sx-T7Z"/>
@@ -1292,13 +1298,30 @@
                                             </constraints>
                                         </tableViewCellContentView>
                                     </tableViewCell>
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="35" id="o8u-IW-PTf">
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="o8u-IW-PTf" id="jd3-ip-k1k">
+                                            <autoresizingMask key="autoresizingMask"/>
+                                        </tableViewCellContentView>
+                                        <color key="backgroundColor" white="0.25690009120000001" alpha="1" colorSpace="calibratedWhite"/>
+                                    </tableViewCell>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="Table View Cell4" rowHeight="55" id="8XT-KM-4sD">
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="8XT-KM-4sD" id="HDV-3v-0ez">
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="CY8-k7-NVe">
-                                                    <rect key="frame" x="247" y="8" width="106" height="37"/>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Log Out:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="C33-Wa-W0b">
+                                                    <rect key="frame" x="23" y="16" width="84" height="21"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" constant="84" id="CY6-Vv-Cc0"/>
+                                                        <constraint firstAttribute="height" constant="21" id="Pcs-Kp-Y7H"/>
+                                                    </constraints>
+                                                    <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="17"/>
+                                                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="CY8-k7-NVe">
+                                                    <rect key="frame" x="486" y="9" width="106" height="37"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="37" id="BYz-6L-FKV"/>
                                                         <constraint firstAttribute="width" constant="106" id="wO2-aE-Lnw"/>
@@ -1312,16 +1335,6 @@
                                                         <action selector="logout:" destination="pMd-EZ-Xws" eventType="touchUpInside" id="BEx-Fv-WHV"/>
                                                     </connections>
                                                 </button>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Log Out:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="C33-Wa-W0b">
-                                                    <rect key="frame" x="23" y="16" width="84" height="21"/>
-                                                    <constraints>
-                                                        <constraint firstAttribute="width" constant="84" id="CY6-Vv-Cc0"/>
-                                                        <constraint firstAttribute="height" constant="21" id="Pcs-Kp-Y7H"/>
-                                                    </constraints>
-                                                    <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="17"/>
-                                                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
                                             </subviews>
                                             <constraints>
                                                 <constraint firstItem="C33-Wa-W0b" firstAttribute="leading" secondItem="HDV-3v-0ez" secondAttribute="leadingMargin" constant="15" id="1Ny-Q9-zFS"/>
@@ -1329,12 +1342,6 @@
                                                 <constraint firstAttribute="centerY" secondItem="C33-Wa-W0b" secondAttribute="centerY" constant="0.5" id="a1D-K5-tjr"/>
                                                 <constraint firstAttribute="centerY" secondItem="CY8-k7-NVe" secondAttribute="centerY" constant="0.5" id="ghy-3n-nQv"/>
                                             </constraints>
-                                        </tableViewCellContentView>
-                                    </tableViewCell>
-                                    <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="55" id="S2E-fp-ziT">
-                                        <autoresizingMask key="autoresizingMask"/>
-                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="S2E-fp-ziT" id="Wf5-ah-57S">
-                                            <autoresizingMask key="autoresizingMask"/>
                                         </tableViewCellContentView>
                                     </tableViewCell>
                                 </cells>

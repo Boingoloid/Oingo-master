@@ -629,6 +629,8 @@ NSInteger footerHeight = 1;
         messageItem = [self.menuList objectAtIndex:[rowIndex intValue]];
         [cell configMessageCell:messageItem indexPath:indexPath];
 //        [cell.contentView layoutIfNeeded];
+        [cell setNeedsDisplay];
+        [cell layoutIfNeeded];
         return cell;
         
     } else if (isGetLocationBool) {
@@ -644,6 +646,9 @@ NSInteger footerHeight = 1;
         [self.tableView addSubview:cell];
         [cell configMessageCellNoZip:indexPath];
 //        [cell.contentView layoutIfNeeded];
+        
+        [cell setNeedsDisplay];
+        [cell layoutIfNeeded];
         return cell;
         
     } else if([category isEqualToString:@"Local Representative"]) {
@@ -660,6 +665,8 @@ NSInteger footerHeight = 1;
         [cell configMessageCellLocalRep:congressionalMessageItem indexPath:indexPath];
 //        [cell.contentView layoutIfNeeded];
         
+        [cell setNeedsDisplay];
+        [cell layoutIfNeeded];
         return cell;
         
     } else {
@@ -675,6 +682,9 @@ NSInteger footerHeight = 1;
         [cell configMessageContactCell:messageItem indexPath:indexPath];
 //        [cell.contentView layoutIfNeeded];
         
+        
+        [cell setNeedsDisplay];
+        [cell layoutIfNeeded];
         return cell;
     }
 }
