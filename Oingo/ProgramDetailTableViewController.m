@@ -38,10 +38,11 @@ Segment *segment;
 }
 
 - (void)viewDidLoad {
-    
+    [super viewDidLoad];
     
     //Separator style for tableview
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+    
     
     //Pulling data for tablecell from Parse (filtered by selected program i.e. List of all associated with the Daily Show.)
     PFQuery *query = [PFQuery queryWithClassName:@"Segments"];
@@ -51,7 +52,6 @@ Segment *segment;
             self.segmentList = objects;
             dispatch_async(dispatch_get_main_queue(), ^{
                 [self prepSegmentSections:self.segmentList];
-                [self.tableView reloadData];
             });
         } else {
             NSLog(@"Error: %@ %@", error, [error userInfo]);
@@ -67,7 +67,7 @@ Segment *segment;
     NSString* padding = @"  "; // # of spaces
     self.programTitleHeaderLabel.text = [NSString stringWithFormat:@"%@%@%@", padding,[self.selectedProgram valueForKey:@"programTitle"], padding];
     
-    [super viewDidLoad];
+
     //Create gesture recognizer,
     UITapGestureRecognizer *tapRocognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(respondToTapGesture:)]; //connect recognizer to action method.
     tapRocognizer.delegate = self;
