@@ -29,6 +29,10 @@ Segment *segment;
 
 - (void) viewWillAppear:(BOOL)animated {
     [super viewWillAppear:YES];
+    [super viewDidAppear:animated];
+    [self.tableView setNeedsLayout];
+    [self.tableView layoutIfNeeded];
+    [self.tableView reloadData];
 
 }
 - (void)viewWillTransitionToSize:(CGSize)size withTransitionCoordinator:(id<UIViewControllerTransitionCoordinator>)coordinator
@@ -39,6 +43,10 @@ Segment *segment;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+
+    self.tableView.estimatedRowHeight = 100;
+    self.tableView.rowHeight = UITableViewAutomaticDimension;
     
     //Separator style for tableview
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
@@ -141,6 +149,8 @@ Segment *segment;
         [objectsInSection addObject:[NSNumber numberWithInt:(int)rowIndex++]]; //adds index number to objectsInSection temp array.
         [self.sections setObject:objectsInSection forKey:dateGroup]; //overwrite 1st object with new objects (2 regulatory objects).
     }
+    [self.tableView setNeedsLayout];
+    [self.tableView layoutIfNeeded];
     [self.tableView reloadData];
 }
 
@@ -168,12 +178,14 @@ Segment *segment;
     ProgramDetailTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"Cell" forIndexPath:indexPath];
     segment = [self.segmentList objectAtIndex:[rowIndex intValue]];
     [cell configSegmentCell:segment];
+    [cell setNeedsDisplay];
+    [cell layoutIfNeeded];
     return cell;
 }
-
-- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    return 112;
-}
+//
+//- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
+//    return 112;
+//}
 
 
 #pragma mark - Sections
