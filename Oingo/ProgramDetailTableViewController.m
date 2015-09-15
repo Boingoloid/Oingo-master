@@ -30,8 +30,8 @@ Segment *segment;
 - (void) viewWillAppear:(BOOL)animated {
     [super viewWillAppear:YES];
     [super viewDidAppear:animated];
-    [self.tableView setNeedsLayout];
-    [self.tableView layoutIfNeeded];
+    [self.tableView setNeedsLayout];  //may not need these as I'm doing it in the cells individually.
+    [self.tableView layoutIfNeeded]; //may not need these as I'm doing it in the cells individually.
     [self.tableView reloadData];
 
 }

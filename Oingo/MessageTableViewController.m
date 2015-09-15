@@ -58,26 +58,21 @@ NSInteger headerHeight = 48;
 NSInteger footerHeight = 1;
 
 
-
 - (void)viewDidLoad {
     [super viewDidLoad];
     NSLog(@"viewDidLoad");
 
+    // Allows for auto resizing of row height
+    self.tableView.estimatedRowHeight = 100;
+    self.tableView.rowHeight = UITableViewAutomaticDimension;
+    
+    
     NSLog(@"isCongressLoaded:%d",self.isCongressLoaded);
 
-    //hidding tweet success
+    //hidding success icons
     self.segmentTweetButtonSuccessImageView.hidden = YES;
     self.segmentFacebookButtonSuccessImageView.hidden = YES;
     
-    
-//    - (void)setFrame:(CGRect)frame {
-
-//        frame.origin.x += inset; //equal to saying originx = originx + inset
-//        frame.size.width -= 2 * inset; //mult by 2 b/c taking from both sides
-//        [super setFrame:frame];
-//        
-//    }
-//
     
     // Format table header
     self.tableHeaderView.layer.borderColor = [[UIColor whiteColor] CGColor];
@@ -85,11 +80,11 @@ NSInteger footerHeight = 1;
     self.tableHeaderView.layer.backgroundColor = [[UIColor whiteColor] CGColor];
     self.tableHeaderView.layer.cornerRadius = 3;
     self.tableHeaderView.clipsToBounds = YES;
-//    int inset = 10;
-    NSLog(@"self.tableView.frame.width:%f",self.tableView.frame.size.width);
-    [self.tableHeaderView setFrame:(CGRectMake(10, 0, self.tableView.frame.size.width - 20, 67))];
+
+//    NSLog(@"self.tableView.frame.width:%f",self.tableView.frame.size.width);
+//    [self.tableHeaderView setFrame:(CGRectMake(10, 0, self.tableView.frame.size.width - 20, 67))];
     
-    
+    // Assign header values
     NSString* padding = @"  "; // # of spaces
     self.tableHeaderLabel.text = [NSString stringWithFormat:@"%@%@%@", padding,[self.selectedSegment valueForKey:@"segmentTitle"], padding];
     self.tableHeaderSubLabel.text = [NSString stringWithFormat:@"%@%@%@", padding,[self.selectedProgram valueForKey:@"programTitle"], padding];
@@ -127,6 +122,10 @@ NSInteger footerHeight = 1;
 }
 - (void)viewWillTransitionToSize:(CGSize)size withTransitionCoordinator:(id<UIViewControllerTransitionCoordinator>)coordinator
 {
+    [self.tableView setNeedsDisplay];
+    [self.tableView setNeedsLayout];
+    [self.view layoutSubviews];
+    [self.tableView layoutSubviews];
     [self.tableView reloadData];
     [super viewWillTransitionToSize:size withTransitionCoordinator:coordinator];
 }
@@ -426,7 +425,7 @@ NSInteger footerHeight = 1;
 //    [locationFinderAPI findUserLocation];
     
     
-    self.locationManager = [[CLLocationManager alloc] init];
+//    self.locationManager = [[CLLocationManager alloc] init];
     self.locationManager.delegate = self;
     
     NSUInteger code = [CLLocationManager authorizationStatus];
@@ -455,10 +454,9 @@ NSInteger footerHeight = 1;
 
 - (void)locationManager:(CLLocationManager *)manager didUpdateToLocation:(CLLocation *)newLocation fromLocation:(CLLocation *)oldLocation
 {
-    [self.locationManager stopUpdatingLocation];
+//    [self.locationManager stopUpdatingLocation];
     
     //Set the location default
-    
     UpdateDefaults *updateDefaults = [[UpdateDefaults alloc]init];
     [updateDefaults saveCoordinatesToDefaultsWithLatitude:(double)newLocation.coordinate.latitude andLongitude:(double)newLocation.coordinate.longitude];
     [updateDefaults saveLocationDefaultsToUser];
@@ -628,7 +626,7 @@ NSInteger footerHeight = 1;
         [self.tableView addSubview:cell];
         messageItem = [self.menuList objectAtIndex:[rowIndex intValue]];
         [cell configMessageCell:messageItem indexPath:indexPath];
-//        [cell.contentView layoutIfNeeded];
+        [cell.contentView layoutIfNeeded];
         [cell setNeedsDisplay];
         [cell layoutIfNeeded];
         return cell;
@@ -685,53 +683,54 @@ NSInteger footerHeight = 1;
         
         [cell setNeedsDisplay];
         [cell layoutIfNeeded];
+        [cell layoutSubviews];
         return cell;
     }
 }
 
 
-- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    NSString *category= [self categoryForSection:indexPath.section];
-    NSArray *rowIndecesInSection = [self.sections objectForKey:category];
-    NSNumber *rowIndex = [rowIndecesInSection objectAtIndex:indexPath.row]; //pulling the row indece from array above
-    
-    // Get bool value from current index on list.
-    NSDictionary *dictionary = [self.menuList objectAtIndex:[rowIndex intValue]];
-    NSNumber *isMessageNumber = [dictionary valueForKey:@"isMessage"];
-    bool isMessageBool = [isMessageNumber boolValue];
-    
-    NSNumber *isGetLocationNumber = [dictionary valueForKey:@"isGetLocationCell"];
-    bool isGetLocationBool = [isGetLocationNumber boolValue];
-    
-    NSNumber *isCollapsedNumber = [dictionary valueForKey:@"isCollapsed"];
-    bool isCollapsedBool = [isCollapsedNumber boolValue];
-
-    if(isMessageBool) {
-        NSString *messageText = [dictionary valueForKey:@"messageText"];
-        double charCount = messageText.length;
-        
-        int rowHeight = 50;
-            if (charCount < 50){
-                rowHeight = 25;
-
-            } else if (charCount < 100) {
-                rowHeight = 35;
-
-            } else {
-
-                rowHeight = 50;
-            }
-        return rowHeight;
-    } else if(isGetLocationBool) {
-        return 55;
-    } else if(isCollapsedBool) {
-        return .0001;
-    } else if([category isEqualToString:@"Local Representative"]) {
-        return 65;
-    } else { // normal contact cell
-        return 65;
-    }
-}
+//- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
+//    NSString *category= [self categoryForSection:indexPath.section];
+//    NSArray *rowIndecesInSection = [self.sections objectForKey:category];
+//    NSNumber *rowIndex = [rowIndecesInSection objectAtIndex:indexPath.row]; //pulling the row indece from array above
+//    
+//    // Get bool value from current index on list.
+//    NSDictionary *dictionary = [self.menuList objectAtIndex:[rowIndex intValue]];
+//    NSNumber *isMessageNumber = [dictionary valueForKey:@"isMessage"];
+//    bool isMessageBool = [isMessageNumber boolValue];
+//    
+//    NSNumber *isGetLocationNumber = [dictionary valueForKey:@"isGetLocationCell"];
+//    bool isGetLocationBool = [isGetLocationNumber boolValue];
+//    
+//    NSNumber *isCollapsedNumber = [dictionary valueForKey:@"isCollapsed"];
+//    bool isCollapsedBool = [isCollapsedNumber boolValue];
+//
+//    if(isMessageBool) {
+//        NSString *messageText = [dictionary valueForKey:@"messageText"];
+//        double charCount = messageText.length;
+//        
+//        int rowHeight = 50;
+//            if (charCount < 50){
+//                rowHeight = 25;
+//
+//            } else if (charCount < 100) {
+//                rowHeight = 35;
+//
+//            } else {
+//
+//                rowHeight = 50;
+//            }
+//        return rowHeight;
+//    } else if(isGetLocationBool) {
+//        return 55;
+//    } else if(isCollapsedBool) {
+//        return .0001;
+//    } else if([category isEqualToString:@"Local Representative"]) {
+//        return 65;
+//    } else { // normal contact cell
+//        return 65;
+//    }
+//}
 
 
 
