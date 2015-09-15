@@ -220,7 +220,8 @@ NSInteger footerHeight = 1;
         } else if (CGRectContainsPoint(cell.locationButton.frame, pointInCell)) {
             NSLog(@"touch in getUserLocation area");
             if(!cell.locationButton.hidden){
-                [self getUserLocation];
+                [self getUserLocationAlert];
+                //[self getUserLocation];
             }
         } else if (CGRectContainsPoint(cell.phoneButton.frame, pointInCell)) {
             NSLog(@"touch in phone area");
@@ -419,13 +420,37 @@ NSInteger footerHeight = 1;
 }
 
 
+-(void) getUserLocationAlert{
+    NSString *alertTitle = @"Let's get your Local Representatives!";
+    NSString *alertMessage = [NSString stringWithFormat:@"We will access your location one time only to get your current location."];
+    UIAlertController *alertController = [UIAlertController alertControllerWithTitle:alertTitle message:alertMessage preferredStyle:UIAlertControllerStyleAlert];
+    
+    UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:NSLocalizedString(@"cancel", @"cancel action") style:UIAlertActionStyleDefault handler:^(UIAlertAction *action){
+        NSLog(@"cancel action");
+    }];
+    [alertController addAction:cancelAction];
+    
+    UIAlertAction *okAction = [UIAlertAction actionWithTitle:NSLocalizedString(@"OK", @"OK") style:UIAlertActionStyleDefault handler:^(UIAlertAction *action){
+        [self getUserLocation];
+          }];
+    [alertController addAction:okAction];
+    
+    [self presentViewController:alertController animated:YES completion:nil];
+
+}
+
+
 -(void) getUserLocation {
+    
+
 //    LocationFinderAPI *locationFinderAPI = [[LocationFinderAPI alloc]init];
 //    locationFinderAPI.messageTableViewController = self;
 //    [locationFinderAPI findUserLocation];
     
+    if(self.locationManager == nil){
+        self.locationManager = [[CLLocationManager alloc] init];
+    }
     
-//    self.locationManager = [[CLLocationManager alloc] init];
     self.locationManager.delegate = self;
     
     NSUInteger code = [CLLocationManager authorizationStatus];
@@ -454,51 +479,13 @@ NSInteger footerHeight = 1;
 
 - (void)locationManager:(CLLocationManager *)manager didUpdateToLocation:(CLLocation *)newLocation fromLocation:(CLLocation *)oldLocation
 {
-//    [self.locationManager stopUpdatingLocation];
+    [self.locationManager stopUpdatingLocation];
     
     //Set the location default
     UpdateDefaults *updateDefaults = [[UpdateDefaults alloc]init];
     [updateDefaults saveCoordinatesToDefaultsWithLatitude:(double)newLocation.coordinate.latitude andLongitude:(double)newLocation.coordinate.longitude];
     [updateDefaults saveLocationDefaultsToUser];
     
-//    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-//    [defaults setObject:[NSString stringWithFormat:@"%f",newLocation.coordinate.latitude] forKey:@"latitude"];
-//    [defaults setObject:[NSString stringWithFormat:@"%f",newLocation.coordinate.longitude] forKey:@"longitude"];
-//    [defaults synchronize];
-//    NSLog(@"UPDATING DEFAULTS!!%@,%@",[defaults valueForKey:@"latitude"],[defaults valueForKey:@"longitude"]);
-    
-    //if current a user then save location info to account.
-    
-//    PFUser *currentUser = [PFUser currentUser];
-
-//    if(currentUser) {
-//        double latitude = newLocation.coordinate.latitude;
-//        double longitude = newLocation.coordinate.longitude;
-//        NSLog(@"latitude to be saved: %f",latitude);
-//        
-//        [currentUser setObject:[NSNumber numberWithDouble:latitude] forKey:@"latitude"];
-//        [currentUser setObject:[NSNumber numberWithDouble:longitude] forKey:@"longitude"];
-//        
-//        [currentUser saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) { //save currentUser to parse disk
-//            if(error){
-//                NSLog(@"error UPDATING COORDINATES!!");
-//            }
-//            else {
-//                NSLog(@"UPDATING COORDINATES!!");
-//            }
-//        }];
-
-        
-        
-//        [[PFUser currentUser] saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
-//            if(error) {
-//                NSLog(@"error UPDATING COORDINATES!!");
-//            } else{
-//                NSLog(@"UPDATING COORDINATES!!");
-//            }
-//        }];
-//    }
-//    }
     [self viewDidLoad];
 
 }

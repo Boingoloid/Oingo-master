@@ -37,6 +37,7 @@
 @property(nonatomic) UpdateDefaults *updateDefaults;
 @property(nonatomic) BOOL isSentFromCongressFinderAPI;
 
+
 // Header
 @property (weak, nonatomic) IBOutlet UILabel *tableHeaderLabel;
 @property (weak, nonatomic) IBOutlet UILabel *tableHeaderSubLabel;
