@@ -412,7 +412,7 @@
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="----------   already have an account?    ----------" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ht5-BT-3T2">
-                                <rect key="frame" x="160" y="458" width="280" height="21"/>
+                                <rect key="frame" x="160" y="494" width="280" height="21"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="280" id="G4e-pH-w03"/>
                                     <constraint firstAttribute="height" constant="21" id="XLn-nG-89r"/>
@@ -422,7 +422,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="VZN-S0-zjp">
-                                <rect key="frame" x="160" y="484" width="280" height="30"/>
+                                <rect key="frame" x="160" y="520" width="280" height="30"/>
                                 <color key="backgroundColor" red="0.084218430035002789" green="0.49431999362244894" blue="0.038772465174642945" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="30" id="67x-Ko-10S"/>
@@ -482,7 +482,13 @@
                             <constraint firstItem="UMe-hP-e4I" firstAttribute="top" secondItem="9Lf-Qn-aBu" secondAttribute="bottom" constant="8" id="liQ-Xd-nk3"/>
                             <constraint firstAttribute="centerX" secondItem="VZN-S0-zjp" secondAttribute="centerX" id="mZi-p8-dPC"/>
                             <constraint firstItem="Zq6-io-Wmr" firstAttribute="top" secondItem="cQy-jI-lEO" secondAttribute="bottom" constant="55" id="yjn-I4-cD4"/>
+                            <constraint firstItem="30d-mA-0wd" firstAttribute="top" secondItem="VZN-S0-zjp" secondAttribute="bottom" constant="50" id="zwj-H3-kjT"/>
                         </constraints>
+                        <variation key="default">
+                            <mask key="constraints">
+                                <exclude reference="FhU-Ye-FDK"/>
+                            </mask>
+                        </variation>
                     </view>
                     <connections>
                         <outlet property="emailField" destination="9Lf-Qn-aBu" id="ADa-d6-jiW"/>
@@ -1019,24 +1025,13 @@
                                             </state>
                                             <state key="selected" image="Web-frame2.png"/>
                                         </button>
-                                        <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="EPa-bW-Y3O">
+                                        <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="EPa-bW-Y3O">
                                             <rect key="frame" x="549" y="36" width="24" height="26"/>
                                             <constraints>
                                                 <constraint firstAttribute="height" constant="26" id="QOj-mn-ov9"/>
                                                 <constraint firstAttribute="width" constant="24" id="vf3-bm-r3s"/>
                                             </constraints>
                                             <state key="normal" title="Button" image="phone-gray.png">
-                                                <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                            </state>
-                                            <state key="selected" image="Web-frame2.png"/>
-                                        </button>
-                                        <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="VAA-aK-7Be">
-                                            <rect key="frame" x="494" y="35" width="29" height="31"/>
-                                            <constraints>
-                                                <constraint firstAttribute="height" constant="31" id="A9e-2P-vFw"/>
-                                                <constraint firstAttribute="width" constant="29" id="Opm-C4-whz"/>
-                                            </constraints>
-                                            <state key="normal" title="Button" image="mail-icon-gray.png">
                                                 <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                             </state>
                                             <state key="selected" image="Web-frame2.png"/>
@@ -1076,6 +1071,17 @@
                                                 <constraint firstAttribute="height" constant="13" id="hlW-Od-w4n"/>
                                             </constraints>
                                         </imageView>
+                                        <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="VAA-aK-7Be">
+                                            <rect key="frame" x="494" y="35" width="29" height="31"/>
+                                            <constraints>
+                                                <constraint firstAttribute="height" constant="31" id="A9e-2P-vFw"/>
+                                                <constraint firstAttribute="width" constant="29" id="Opm-C4-whz"/>
+                                            </constraints>
+                                            <state key="normal" title="Button" image="mail-icon-gray.png">
+                                                <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                            </state>
+                                            <state key="selected" image="Web-frame2.png"/>
+                                        </button>
                                     </subviews>
                                     <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                     <constraints>
@@ -1793,7 +1799,7 @@
         <image name="mail-icon-gray.png" width="256" height="256"/>
         <image name="monsanto gas apple.png" width="1065" height="1066"/>
         <image name="phone-gray.png" width="260" height="260"/>
-        <image name="settingswhite.png" width="30" height="30"/>
+        <image name="settingswhite.png" width="20" height="20"/>
         <image name="success.png" width="254" height="181"/>
         <image name="tweetButtonIconGray.png" width="259" height="259"/>
     </resources>
