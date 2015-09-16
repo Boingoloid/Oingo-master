@@ -44,10 +44,18 @@
 @property (weak, nonatomic) IBOutlet UIImageView *emailSuccessImageView;
 @property (weak, nonatomic) IBOutlet UIImageView *phoneSuccessImageView;
 
-
+// Location Capture
 @property(nonatomic) UIButton *locationButton;
 @property(nonatomic) UIButton *zipCodeButton;
 @property(nonatomic) UILabel *zipLabel;
+
+
+// Touch Capture
+@property (weak, nonatomic) IBOutlet UIImageView *phoneTouchCaptureImageView;
+@property (weak, nonatomic) IBOutlet UIImageView *emailTouchCaptureImageView;
+@property (weak, nonatomic) IBOutlet UIImageView *tweetTouchCaptureImageView;
+@property (weak, nonatomic) IBOutlet UIImageView *webFormTouchCaptureImageView;
+
 
 - (void) configMessageContactCell:messageItem indexPath:(NSIndexPath*)indexPath;
 

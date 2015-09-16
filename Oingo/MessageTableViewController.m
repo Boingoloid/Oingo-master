@@ -81,8 +81,6 @@ NSInteger footerHeight = 1;
     self.tableHeaderView.layer.cornerRadius = 3;
     self.tableHeaderView.clipsToBounds = YES;
 
-//    NSLog(@"self.tableView.frame.width:%f",self.tableView.frame.size.width);
-//    [self.tableHeaderView setFrame:(CGRectMake(10, 0, self.tableView.frame.size.width - 20, 67))];
     
     // Assign header values
     NSString* padding = @"  "; // # of spaces
@@ -160,7 +158,36 @@ NSInteger footerHeight = 1;
         UITableView *tableView = (UITableView *)tap.view;
         CGPoint p = [tap locationInView:tap.view];
         NSIndexPath* indexPath = [tableView indexPathForRowAtPoint:p];
+        NSLog(@"[tableView cellForRowAtIndexPath:indexPath]:%@",[tableView cellForRowAtIndexPath:indexPath]);
+
+        
+
+        if([[tableView cellForRowAtIndexPath:indexPath] isKindOfClass:[MessageTableViewMessageCell class]]) {
+            MessageTableViewMessageCell *cell1 = (MessageTableViewMessageCell *)[tableView cellForRowAtIndexPath:indexPath];
+            NSLog(@"class of cell is message cell");
+        } else if ([[tableView cellForRowAtIndexPath:indexPath] isKindOfClass:[MessageTableViewNoZipCell class]]){
+            MessageTableViewNoZipCell *cell1 = (MessageTableViewNoZipCell *)[tableView cellForRowAtIndexPath:indexPath];
+        } else if ([[tableView cellForRowAtIndexPath:indexPath] isKindOfClass:[MessageTableViewRepresentativeCell class]]){
+            MessageTableViewRepresentativeCell *cell1 = (MessageTableViewRepresentativeCell *)[tableView cellForRowAtIndexPath:indexPath];
+            NSLog(@"class of cell is representative cell");
+        } else {
+            MessageTableViewCell *cell1 = (MessageTableViewCell *)[tableView cellForRowAtIndexPath:indexPath];
+        }
+        
+//        // Detect the type of cell
+//        UITableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
+//        if ([cell isKindOfClass:[CustomCell class]]) {
+//            //do specific code
+//        }else if([cell isKindOfClass:[CustomCell2 class]]){
+//            //Another custom cell
+//        }else{
+//            //General cell
+//        }
+        
+        
         MessageTableViewCell *cell = (MessageTableViewCell *)[tableView cellForRowAtIndexPath:indexPath];
+        NSLog(@"cell:%@",cell);
+        
         CGPoint pointInCell = [tap locationInView:cell];
         NSString *category= [self categoryForSection:indexPath.section];
         NSArray *rowIndecesInSection = [self.sections objectForKey:category];
@@ -180,7 +207,7 @@ NSInteger footerHeight = 1;
         if(isMessageBool){
             NSLog(@"touch in message cell");
             // triggers segue to message options
-        } else if (CGRectContainsPoint(cell.tweetButton.frame, pointInCell)) {
+        } else if (CGRectContainsPoint(cell.tweetTouchCaptureImageView.frame, pointInCell)) {
             NSLog(@"touch in tweet button area");
             if(!cell.tweetButton.hidden){
                 // Create Tweet API object, Properties passed: -menuList -selection info
@@ -223,7 +250,7 @@ NSInteger footerHeight = 1;
                 [self getUserLocationAlert];
                 //[self getUserLocation];
             }
-        } else if (CGRectContainsPoint(cell.phoneButton.frame, pointInCell)) {
+        } else if (CGRectContainsPoint(cell.phoneTouchCaptureImageView.frame, pointInCell)) {
             NSLog(@"touch in phone area");
             if(!cell.phoneButton.hidden){
                 
@@ -263,7 +290,7 @@ NSInteger footerHeight = 1;
                 }
 
             }
-        } else if (CGRectContainsPoint(cell.emailButton.frame, pointInCell)) {
+        } else if (CGRectContainsPoint(cell.emailTouchCaptureImageView.frame, pointInCell)) {
             NSLog(@"touch in email button area");
             if(!cell.emailButton.hidden){
                 
