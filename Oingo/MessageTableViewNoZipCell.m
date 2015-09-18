@@ -33,7 +33,7 @@
     self.zipCodeButton.layer.cornerRadius = 8;
     self.zipCodeButton.clipsToBounds = YES;
 //    [self.contentView layoutIfNeeded];
-    [self.contentView setNeedsDisplay];
+//    [self.contentView setNeedsDisplay];
 }
 
 

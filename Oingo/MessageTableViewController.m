@@ -58,6 +58,8 @@ NSInteger headerHeight = 48;
 NSInteger footerHeight = 1;
 
 
+
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     NSLog(@"viewDidLoad");
@@ -120,10 +122,10 @@ NSInteger footerHeight = 1;
 }
 - (void)viewWillTransitionToSize:(CGSize)size withTransitionCoordinator:(id<UIViewControllerTransitionCoordinator>)coordinator
 {
-    [self.tableView setNeedsDisplay];
-    [self.tableView setNeedsLayout];
-    [self.view layoutSubviews];
-    [self.tableView layoutSubviews];
+//    [self.tableView setNeedsDisplay];
+//    [self.tableView setNeedsLayout];
+//    [self.view layoutSubviews];
+//    [self.tableView layoutSubviews];
     [self.tableView reloadData];
     [super viewWillTransitionToSize:size withTransitionCoordinator:coordinator];
 }
@@ -162,17 +164,17 @@ NSInteger footerHeight = 1;
 
         
 
-        if([[tableView cellForRowAtIndexPath:indexPath] isKindOfClass:[MessageTableViewMessageCell class]]) {
-            MessageTableViewMessageCell *cell1 = (MessageTableViewMessageCell *)[tableView cellForRowAtIndexPath:indexPath];
-            NSLog(@"class of cell is message cell");
-        } else if ([[tableView cellForRowAtIndexPath:indexPath] isKindOfClass:[MessageTableViewNoZipCell class]]){
-            MessageTableViewNoZipCell *cell1 = (MessageTableViewNoZipCell *)[tableView cellForRowAtIndexPath:indexPath];
-        } else if ([[tableView cellForRowAtIndexPath:indexPath] isKindOfClass:[MessageTableViewRepresentativeCell class]]){
-            MessageTableViewRepresentativeCell *cell1 = (MessageTableViewRepresentativeCell *)[tableView cellForRowAtIndexPath:indexPath];
-            NSLog(@"class of cell is representative cell");
-        } else {
-            MessageTableViewCell *cell1 = (MessageTableViewCell *)[tableView cellForRowAtIndexPath:indexPath];
-        }
+//        if([[tableView cellForRowAtIndexPath:indexPath] isKindOfClass:[MessageTableViewMessageCell class]]) {
+//            MessageTableViewMessageCell *cell1 = (MessageTableViewMessageCell *)[tableView cellForRowAtIndexPath:indexPath];
+//            NSLog(@"class of cell is message cell");
+//        } else if ([[tableView cellForRowAtIndexPath:indexPath] isKindOfClass:[MessageTableViewNoZipCell class]]){
+//            MessageTableViewNoZipCell *cell1 = (MessageTableViewNoZipCell *)[tableView cellForRowAtIndexPath:indexPath];
+//        } else if ([[tableView cellForRowAtIndexPath:indexPath] isKindOfClass:[MessageTableViewRepresentativeCell class]]){
+//            MessageTableViewRepresentativeCell *cell1 = (MessageTableViewRepresentativeCell *)[tableView cellForRowAtIndexPath:indexPath];
+//            NSLog(@"class of cell is representative cell");
+//        } else {
+//            MessageTableViewCell *cell1 = (MessageTableViewCell *)[tableView cellForRowAtIndexPath:indexPath];
+//        }
         
 //        // Detect the type of cell
 //        UITableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
@@ -227,7 +229,7 @@ NSInteger footerHeight = 1;
                     NSLog(@"did not find line");
                     
                 } else {
-                    NSLog(@"index was found:%ld",index);
+                    NSLog(@"index was found:%ld",(unsigned long)index);
                     twitterAPITweet.messageText = [[self.menuList objectAtIndex:index] valueForKey:@"messageText"];
                 }
                 
@@ -309,7 +311,7 @@ NSInteger footerHeight = 1;
                         NSLog(@"did not find line");
                         
                     } else {
-                        NSLog(@"index was found:%ld",index);
+                        NSLog(@"index was found:%ld",(unsigned long)index);
                         
                         EmailComposerViewController *emailComposer = [[EmailComposerViewController alloc] init];
                         emailComposer.selectedSegment = self.selectedSegment;
@@ -640,9 +642,10 @@ NSInteger footerHeight = 1;
         [self.tableView addSubview:cell];
         messageItem = [self.menuList objectAtIndex:[rowIndex intValue]];
         [cell configMessageCell:messageItem indexPath:indexPath];
-        [cell.contentView layoutIfNeeded];
-        [cell setNeedsDisplay];
-        [cell layoutIfNeeded];
+        
+//        [cell.contentView layoutIfNeeded];
+//        [cell setNeedsDisplay];
+//        [cell layoutIfNeeded];
         return cell;
         
     } else if (isGetLocationBool) {
@@ -657,10 +660,10 @@ NSInteger footerHeight = 1;
         cell.layer.cornerRadius = 3;
         [self.tableView addSubview:cell];
         [cell configMessageCellNoZip:indexPath];
-//        [cell.contentView layoutIfNeeded];
         
-        [cell setNeedsDisplay];
-        [cell layoutIfNeeded];
+//        [cell.contentView layoutIfNeeded];
+//        [cell setNeedsDisplay];
+//        [cell layoutIfNeeded];
         return cell;
         
     } else if([category isEqualToString:@"Local Representative"]) {
@@ -675,10 +678,10 @@ NSInteger footerHeight = 1;
         [self.tableView addSubview:cell];
         congressionalMessageItem = [self.menuList objectAtIndex:[rowIndex intValue]];
         [cell configMessageCellLocalRep:congressionalMessageItem indexPath:indexPath];
+
 //        [cell.contentView layoutIfNeeded];
-        
-        [cell setNeedsDisplay];
-        [cell layoutIfNeeded];
+//        [cell setNeedsDisplay];
+//        [cell layoutIfNeeded];
         return cell;
         
     } else {
@@ -692,12 +695,11 @@ NSInteger footerHeight = 1;
         [self.tableView addSubview:cell];
         messageItem = [self.menuList objectAtIndex:[rowIndex intValue]];
         [cell configMessageContactCell:messageItem indexPath:indexPath];
+        
 //        [cell.contentView layoutIfNeeded];
-        
-        
-        [cell setNeedsDisplay];
-        [cell layoutIfNeeded];
-        [cell layoutSubviews];
+//        [cell setNeedsDisplay];
+//        [cell layoutIfNeeded];
+//        [cell layoutSubviews];
         return cell;
     }
 }

@@ -14,7 +14,7 @@
 @property (nonatomic) IBOutlet UIButton *linkToContentButton;
 @property (weak, nonatomic) IBOutlet UILabel *dateLabel;
 @property (weak, nonatomic) IBOutlet UIImageView *segmentImage;
-@property (weak, nonatomic) IBOutlet UILabel *purposeSummary;
+@property (weak, nonatomic) IBOutlet UITextView *purposeSummary;
 @property (weak, nonatomic) NSURLRequest *urlRequest;
 @property (weak, nonatomic) IBOutlet UIImageView *segmentTypeImage;
 @property (weak, nonatomic) IBOutlet UILabel *segmentTitleLabel;

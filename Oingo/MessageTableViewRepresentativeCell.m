@@ -35,27 +35,27 @@
     //Assign message item
     self.congressionalMessageItem = congressionalMessageItem;
     
-    if([[self.congressionalMessageItem valueForKey:@"isCollapsed"]  isEqual: @YES]){
-        
-        NSLog(@"isCollapsed congress cell:%@",[self.congressionalMessageItem valueForKey:@"isCollapsed"]);
-        //hide everything bc row height is zero
-        self.targetName.hidden = YES;
-        self.targetTitleLabel.hidden = YES;
-        self.messageImage.hidden = YES;
-        self.sendCount.hidden = YES;
-        
-        self.tweetButton.hidden = YES;
-        self.tweetSuccessImageView.hidden = YES;
-        self.emailButton.hidden = YES;
-        self.emailSuccessImageView.hidden = YES;
-        self.phoneButton.hidden = YES;
-        self.webFormButton.hidden = YES;
-        
-        self.zipCodeButton.hidden = YES;
-        self.locationButton.hidden = YES;
-        self.zipLabel.hidden = YES;
-    
-    }else {
+//    if([[self.congressionalMessageItem valueForKey:@"isCollapsed"]  isEqual: @YES]){
+//        
+//        NSLog(@"isCollapsed congress cell:%@",[self.congressionalMessageItem valueForKey:@"isCollapsed"]);
+//        //hide everything bc row height is zero
+//        self.targetName.hidden = YES;
+//        self.targetTitleLabel.hidden = YES;
+//        self.messageImage.hidden = YES;
+//        self.sendCount.hidden = YES;
+//        
+//        self.tweetButton.hidden = YES;
+//        self.tweetSuccessImageView.hidden = YES;
+//        self.emailButton.hidden = YES;
+//        self.emailSuccessImageView.hidden = YES;
+//        self.phoneButton.hidden = YES;
+//        self.webFormButton.hidden = YES;
+//        
+//        self.zipCodeButton.hidden = YES;
+//        self.locationButton.hidden = YES;
+//        self.zipLabel.hidden = YES;
+//    
+//    }else {
 
         self.targetName.hidden = NO;
         self.targetTitleLabel.hidden = NO;
@@ -127,7 +127,8 @@
         self.messageImage.layer.borderColor = [[UIColor blackColor] CGColor];
         self.messageImage.clipsToBounds = YES;
         self.messageImage.layer.cornerRadius = 3;
-    }
+//    }  // Lower bracket for isCollapsed above
+    
         [self.contentView setNeedsDisplay];
 }
 
