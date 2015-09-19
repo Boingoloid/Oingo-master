@@ -191,10 +191,10 @@ BOOL isLocationInfoAvailable = NO;
 //    }
 //    
 //    NSLog(@"arrayMessages%@",arrayMessages);
-    NSLog(@"Prep sections triggered, here is the self.messageOptionsList input:%@",self.messageOptionsList);
-    NSLog(@"Prep sections triggered, here is the self.parselistWithContacts %@",self.messageListFromParseWithContacts);
-    NSLog(@"Prep sections triggered, here is the messageList %@",[messageList firstObject]);
-    NSLog(@"Prep sections triggered, here is the self.menulist %@",[self.menuList lastObject]);
+//    NSLog(@"Prep sections triggered, here is the self.messageOptionsList input:%@",self.messageOptionsList);
+//    NSLog(@"Prep sections triggered, here is the self.parselistWithContacts %@",self.messageListFromParseWithContacts);
+//    NSLog(@"Prep sections triggered, here is the messageList %@",[messageList firstObject]);
+//    NSLog(@"Prep sections triggered, here is the self.menulist %@",[self.menuList lastObject]);
     
     [self separateMessagesFromContacts:messageList]; //create self.messageList and self.contactList
     [self createMenuList]; //creates self.menuList - these are th   e grouopings for sections
@@ -233,8 +233,8 @@ BOOL isLocationInfoAvailable = NO;
     self.messageTableViewController.messageOptionsList = self.messageOptionsList;
     
     
-    NSLog(@"1) self.messageTableViewController:%@",self.messageTableViewController);
-    NSLog(@"2) self.messageOptions:%@",[self.messageOptionsList firstObject]); //this one
+//    NSLog(@"1) self.messageTableViewController:%@",self.messageTableViewController);
+//    NSLog(@"2) self.messageOptions:%@",[self.messageOptionsList firstObject]); //this one
     
     self.messageTableViewController.expandSectionsKeyList = self.expandSectionsKeyList;
     
@@ -437,8 +437,8 @@ BOOL isLocationInfoAvailable = NO;
     
     self.messageOptionsList = messagesDeepCopyArray;
     self.messageTableViewController.messageOptionsList = self.messageOptionsList;
-    NSLog(@"deep copy of messageOptionsList (deep copy):%@",[self.messageOptionsList firstObject]);
-        NSLog(@"self.messagetableviewcontroller.messageOptionsList last object(deep copy):%@",[self.messageTableViewController.messageOptionsList lastObject]);
+//    NSLog(@"deep copy of messageOptionsList (deep copy):%@",[self.messageOptionsList firstObject]);
+//        NSLog(@"self.messagetableviewcontroller.messageOptionsList last object(deep copy):%@",[self.messageTableViewController.messageOptionsList lastObject]);
     
     return allDataDeepCopyArray;
     

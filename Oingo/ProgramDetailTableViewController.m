@@ -200,7 +200,7 @@ Segment *segment;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    NSLog(@"Section %ld Row %ld", (long)[indexPath section], (long)[indexPath row]);
+//    NSLog(@"Section %ld Row %ld", (long)[indexPath section], (long)[indexPath row]);
     return UITableViewAutomaticDimension;
 }
 
