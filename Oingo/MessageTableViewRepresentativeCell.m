@@ -64,7 +64,12 @@
         self.phoneButton.hidden = NO;
         self.webFormButton.hidden = NO;
         self.messageImage.hidden = NO;
-        
+    
+//        self.tweetTouchCaptureImageView.hidden = NO;
+//        self.emailTouchCaptureImageView.hidden = NO;
+//        self.phoneTouchCaptureImageView.hidden = NO;
+//        self.webFormTouchCaptureImageView.hidden = NO;
+    
         // Hide all other fields
         self.locationButton.hidden = YES;
         self.zipCodeButton.hidden = YES;

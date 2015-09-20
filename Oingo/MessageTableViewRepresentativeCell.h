@@ -54,7 +54,7 @@
 // Touch Capture
 @property (weak, nonatomic) IBOutlet UIImageView *emailTouchCaptureImageView;
 @property (weak, nonatomic) IBOutlet UIImageView *phoneTouchCaptureImageView;
-@property (weak, nonatomic) IBOutlet UIButton *tweetTouchCaptureImageView;
+@property (weak, nonatomic) IBOutlet UIImageView *tweetTouchCaptureImageView;
 @property (weak, nonatomic) IBOutlet UIImageView *webFormTouchCaptureImageView;
 
 

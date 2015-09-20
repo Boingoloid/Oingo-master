@@ -70,7 +70,13 @@
         self.messageImage.hidden = NO;
         self.sendCount.hidden = NO;
         self.tweetButton.hidden = NO;
-        
+    
+//        //Touch Fields
+//        self.tweetTouchCaptureImageView.hidden = NO;
+//        self.emailTouchCaptureImageView.hidden = NO;
+//        self.phoneTouchCaptureImageView.hidden = NO;
+//        self.webFormTouchCaptureImageView.hidden = NO;
+    
         //Hide fields
         self.zipCodeButton.hidden = YES;
         self.locationButton.hidden = YES;

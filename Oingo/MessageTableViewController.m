@@ -256,7 +256,7 @@ NSInteger footerHeight = 1;
             NSLog(@"touch in phone area");
             if(!cell.phoneButton.hidden){
                 
-//                NSString *phoneNumber =[[cell.phone componentsSeparatedByCharactersInSet:[[NSCharacterSet characterSetWithCharactersInString:@"16177940337"] invertedSet]]   componentsJoinedByString:@""];
+                // NSString *phoneNumber =[[cell.phone componentsSeparatedByCharactersInSet:[[NSCharacterSet characterSetWithCharactersInString:@"16177940337"] invertedSet]]   componentsJoinedByString:@""];
                 NSURL *phoneUrl = [NSURL URLWithString:[NSString  stringWithFormat:@"tel://%@",cell.phone]];
                 //code for making call, can't test in simulator
                 NSLog(@"phone url:%@",phoneUrl);
