@@ -61,6 +61,7 @@
 		CE7B38581B584C77009107DD /* congressionalDishProgramCover.png in Resources */ = {isa = PBXBuildFile; fileRef = CE7B38571B584C77009107DD /* congressionalDishProgramCover.png */; };
 		CE80B5D61AFC0EFB007D69FB /* dailyshow6cover.png in Resources */ = {isa = PBXBuildFile; fileRef = CE80B5D51AFC0EFB007D69FB /* dailyshow6cover.png */; };
 		CE82943D1B38DB7C00B596E6 /* CongressionalMessageItem.m in Sources */ = {isa = PBXBuildFile; fileRef = CE82943C1B38DB7C00B596E6 /* CongressionalMessageItem.m */; };
+		CE85C3881BB4D0C7007F2745 /* LeaveFeedbackViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CE85C3871BB4D0C7007F2745 /* LeaveFeedbackViewController.m */; settings = {ASSET_TAGS = (); }; };
 		CE87CABE1AF977120084C666 /* Segment.m in Sources */ = {isa = PBXBuildFile; fileRef = CE87CABD1AF977120084C666 /* Segment.m */; };
 		CE87CAC01AF9945B0084C666 /* last-night-660x330.png in Resources */ = {isa = PBXBuildFile; fileRef = CE87CABF1AF9945B0084C666 /* last-night-660x330.png */; };
 		CE87CAC21AF9B2570084C666 /* vicegasmask.png in Resources */ = {isa = PBXBuildFile; fileRef = CE87CAC11AF9B2570084C666 /* vicegasmask.png */; };
@@ -1101,6 +1102,8 @@
 		CE80B5D51AFC0EFB007D69FB /* dailyshow6cover.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = dailyshow6cover.png; path = Images/dailyshow6cover.png; sourceTree = "<group>"; };
 		CE82943B1B38DB7C00B596E6 /* CongressionalMessageItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CongressionalMessageItem.h; sourceTree = "<group>"; };
 		CE82943C1B38DB7C00B596E6 /* CongressionalMessageItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CongressionalMessageItem.m; sourceTree = "<group>"; };
+		CE85C3861BB4D0C7007F2745 /* LeaveFeedbackViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LeaveFeedbackViewController.h; sourceTree = "<group>"; };
+		CE85C3871BB4D0C7007F2745 /* LeaveFeedbackViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LeaveFeedbackViewController.m; sourceTree = "<group>"; };
 		CE87CABC1AF977120084C666 /* Segment.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Segment.h; sourceTree = "<group>"; };
 		CE87CABD1AF977120084C666 /* Segment.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Segment.m; sourceTree = "<group>"; };
 		CE87CABF1AF9945B0084C666 /* last-night-660x330.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "last-night-660x330.png"; path = "Images/last-night-660x330.png"; sourceTree = "<group>"; };
@@ -3275,6 +3278,8 @@
 				CEC0C7431B45D6B400A9DD33 /* LocationFinderAPI.m */,
 				CED9B7A21B9EDB4A00B22396 /* ComposeViewController.h */,
 				CED9B7A31B9EDB4B00B22396 /* ComposeViewController.m */,
+				CE85C3861BB4D0C7007F2745 /* LeaveFeedbackViewController.h */,
+				CE85C3871BB4D0C7007F2745 /* LeaveFeedbackViewController.m */,
 			);
 			name = Methods;
 			sourceTree = "<group>";
@@ -4435,6 +4440,7 @@
 				CEEF25071B015ACA00EFB257 /* MessageTableViewController.m in Sources */,
 				CE14A8B31B22D20B0032664C /* TweetTableViewDemoTableViewController.m in Sources */,
 				CEC0C7471B478E0500A9DD33 /* MessageTableViewMessageCell.m in Sources */,
+				CE85C3881BB4D0C7007F2745 /* LeaveFeedbackViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -4559,6 +4565,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=*]" = "iPhone Developer";
+				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/parse-library-1.7.2",
@@ -4583,6 +4590,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/parse-library-1.7.2",

@@ -120,8 +120,7 @@ NSInteger footerHeight = 1;
     NSLog(@"viewWillApper");
     
 }
-- (void)viewWillTransitionToSize:(CGSize)size withTransitionCoordinator:(id<UIViewControllerTransitionCoordinator>)coordinator
-{
+- (void)viewWillTransitionToSize:(CGSize)size withTransitionCoordinator:(id<UIViewControllerTransitionCoordinator>)coordinator {
 //    [self.tableView setNeedsDisplay];
 //    [self.tableView setNeedsLayout];
 //    [self.view layoutSubviews];

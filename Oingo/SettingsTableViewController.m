@@ -48,6 +48,11 @@
     }
     
     // Draw borders on buttons
+    self.leaveFeedbackButton.layer.borderColor = [[UIColor blueColor]CGColor];
+    self.leaveFeedbackButton.layer.borderWidth = .5;
+    self.leaveFeedbackButton.layer.cornerRadius =3;
+    self.leaveFeedbackButton.clipsToBounds = YES;
+    
     self.enterZipButton.layer.borderColor = [[UIColor blackColor]CGColor];
     self.enterZipButton.layer.borderWidth = .5;
     self.enterZipButton.layer.cornerRadius =3;
@@ -55,8 +60,10 @@
     
     self.logoutButton.layer.borderColor = [[UIColor blackColor]CGColor];
     self.logoutButton.layer.borderWidth = .5;
-    self.logoutButton.layer.cornerRadius =3;
+    self.logoutButton.layer.cornerRadius = 3;
     self.logoutButton.clipsToBounds = YES;
+    
+
 }
 
 
@@ -80,6 +87,8 @@
     [self.navigationController popViewControllerAnimated:YES];
     [self.messageTableViewController viewDidLoad];
 }
+
+
 
 
 #pragma mark - Table view data source

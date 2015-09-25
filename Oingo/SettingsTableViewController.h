@@ -15,6 +15,7 @@
 @property (weak, nonatomic) MessageTableViewController *messageTableViewController;
 @property (weak, nonatomic) IBOutlet UIButton *enterZipButton;
 @property (weak, nonatomic) IBOutlet UIButton *logoutButton;
+@property (weak, nonatomic) IBOutlet UIButton *leaveFeedbackButton;
 - (IBAction)linktwitter:(id)sender;
 - (IBAction)linkfacebook:(id)sender;
 - (IBAction)logout:(id)sender;
