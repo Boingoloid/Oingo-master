@@ -57,6 +57,17 @@
     [super viewWillTransitionToSize:size withTransitionCoordinator:coordinator];
 }
 
+- (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
+    [super touchesBegan:touches withEvent:event];
+    
+    //hide the keyborad
+    UITouch *touch = [[event allTouches] anyObject];
+    if ([self.messageTextView isFirstResponder] && [touch view] != self.messageTextView) {
+        [self.messageTextView resignFirstResponder];
+    }
+
+}
+
 - (IBAction)send:(id)sender {
     
     //get feedback message and user
