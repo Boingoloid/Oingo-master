@@ -10,6 +10,7 @@
 #import <Parse/Parse.h>
 #import "MessageItem.h"
 #import "CongressionalMessageItem.h"
+#import "EmailItem.h"
 #import "MessageTableViewCell.h"
 #import "MessageTableViewMessageCell.h"
 #import "MessageTableViewRepresentativeCell.h"
@@ -38,7 +39,7 @@
 #import "SignUpViewController.h"
 #import "SettingsTableViewController.h"
 #import "ComposeViewController.h"
-#import "EmailTableViewCell.h"
+#import "MessageTableViewEmailCell.h"
 
 
 @interface MessageTableViewController () <UIGestureRecognizerDelegate,CLLocationManagerDelegate>
@@ -52,6 +53,7 @@
 
 MessageItem *messageItem;
 CongressionalMessageItem *congressionalMessageItem;
+EmailItem *emailItem;
 
 NSInteger section;
 NSInteger sectionHeaderHeight = 16;
@@ -64,6 +66,8 @@ NSInteger footerHeight = 1;
 - (void)viewDidLoad {
     [super viewDidLoad];
     NSLog(@"viewDidLoad");
+    
+
 
     // Allows for auto resizing of row height
     self.tableView.estimatedRowHeight = 100;
@@ -197,9 +201,13 @@ NSInteger footerHeight = 1;
             } else {
                 NSLog(@"touch in outer area");
             }
+        } else if ([cellScout isKindOfClass:[MessageTableViewEmailCell class]]){
+            NSLog(@"Email class cell");
+            MessageTableViewEmailCell *cell = (MessageTableViewEmailCell *)[tableView cellForRowAtIndexPath:indexPath];
+            
+            //action for the email cell
             
         } else {
-            
             MessageTableViewCell *cell = (MessageTableViewCell *)[tableView cellForRowAtIndexPath:indexPath];
             
             if (CGRectContainsPoint(cell.tweetTouchCaptureImageView.frame, pointInCell)) {
@@ -287,84 +295,7 @@ NSInteger footerHeight = 1;
     }
 }
 
--(void)showPhoneCallAlert:(NSString*)phoneString{
-    NSURL *phoneUrl = [NSURL URLWithString:[NSString  stringWithFormat:@"tel://%@",phoneString]];
-    
-    if ([[UIApplication sharedApplication] canOpenURL:phoneUrl]) {
-        
-        NSString *alertTitle = @"Phone Call";
-        NSString *alertMessage = @"Remember to state your name and your sentiment.  Would you like to call?";
-        UIAlertController *alertController = [UIAlertController alertControllerWithTitle:alertTitle message:alertMessage preferredStyle:UIAlertControllerStyleAlert];
-        
-        //Add cancel button
-        UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:NSLocalizedString(@"Cancel", @"Cancel action") style:UIAlertActionStyleDefault handler:^(UIAlertAction *action){
-            NSLog(@"Cancel action");
-        }];
-        [alertController addAction:cancelAction];
-        
-        //Add OK action button
-        UIAlertAction *okAction = [UIAlertAction actionWithTitle:NSLocalizedString(@"OK", @"OK action") style:UIAlertActionStyleDefault handler:^(UIAlertAction *action){
-            
-            [[UIApplication sharedApplication] openURL:phoneUrl];
-            [self savePhoneCall:phoneUrl];
-            
-            NSLog(@"OK action");
-            
-        }];
-        [alertController addAction:okAction];
-        
-        [self presentViewController:alertController animated:YES completion:nil];
-    } else{
-        UIAlertView *calert = [[UIAlertView alloc]initWithTitle:@"Alert" message:@"Call facility is not available." delegate:nil cancelButtonTitle:@"ok" otherButtonTitles:nil, nil];
-        [calert show];
-    }
 
-//    MakePhoneCallAPI *makePhoneCallAPI = [[MakePhoneCallAPI alloc] init];
-//    makePhoneCallAPI.selectedProgram = self.selectedProgram;
-//    makePhoneCallAPI.selectedSegment = self.selectedSegment;
-//    makePhoneCallAPI.selectedContact = self.selectedContact;
-//    [makePhoneCallAPI dialPhoneNumber:(NSURL*)phoneUrl];
-    
-}
--(void)savePhoneCall:(NSURL*)phoneURL{
-    //  SAVING MESSAGE DATA TO PARSE
-    PFUser *currentUser = [PFUser currentUser];
-    
-    PFObject *sentMessageItem = [PFObject objectWithClassName:@"sentMessages"];
-    [sentMessageItem setObject:@"phoneCall" forKey:@"messageType"];
-    [sentMessageItem setObject:[phoneURL absoluteString] forKey:@"phoneNumber"];
-    [sentMessageItem setObject:[self.selectedSegment valueForKey:@"segmentID"] forKey:@"segmentID"];
-    [sentMessageItem setObject:[currentUser valueForKey:@"username"] forKey:@"username"];
-    NSString *userObjectID = currentUser.objectId;
-    [sentMessageItem setObject:userObjectID forKey:@"userObjectID"];
-    
-    //if segment then skip, else don't
-    if ([self.selectedContact isKindOfClass:[CongressionalMessageItem class]]) {
-        NSLog(@"Saving congressional Message Item Class");
-        NSString *bioguide_id = [self.selectedContact valueForKey:@"bioguide_id"];
-        NSString *fullName = [self.selectedContact valueForKey:@"fullName"];
-        [sentMessageItem setObject:bioguide_id forKey:@"contactID"];
-        [sentMessageItem setObject:fullName forKey:@"contactName"];
-    } else {
-        NSLog(@"Regular Contact Item Class");
-        NSString *contactID = [self.selectedContact valueForKey:@"contactID"];
-        NSString *targetName = [self.selectedContact valueForKey:@"targetName"];
-        [sentMessageItem setObject:contactID forKey:@"contactID"];
-        [sentMessageItem setObject:targetName forKey:@"contactName"];
-    }
-    
-    
-    [sentMessageItem saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) { //save sent message to parse
-        if(error){
-            NSLog(@"error, message not saved");
-        }
-        else {
-            NSLog(@"no error, message saved");
-            [self viewDidLoad];
-        }
-    }];
-
-}
 
 
 /*
@@ -423,20 +354,15 @@ NSInteger footerHeight = 1;
 }
 
 
-
-
-//    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"\u2699"  style:UIBarButtonItemStylePlain target:nil action:nil];
-//    self.navigationItem.rightBarButtonItem.tintColor = [UIColor whiteColor];
-
-
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
 }
 
+#pragma mark - Location Manager
 
 -(void) getUserLocationAlert{
     NSString *alertTitle = @"Let's get your Local Representatives!";
-    NSString *alertMessage = [NSString stringWithFormat:@"We will access your location one time only to get your current location."];
+    NSString *alertMessage = [NSString stringWithFormat:@"We will access your location one time only to get your district."];
     UIAlertController *alertController = [UIAlertController alertControllerWithTitle:alertTitle message:alertMessage preferredStyle:UIAlertControllerStyleAlert];
     
     UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:NSLocalizedString(@"cancel", @"cancel action") style:UIAlertActionStyleDefault handler:^(UIAlertAction *action){
@@ -453,9 +379,7 @@ NSInteger footerHeight = 1;
 
 }
 
-
 -(void) getUserLocation {
-    
 
 //    LocationFinderAPI *locationFinderAPI = [[LocationFinderAPI alloc]init];
 //    locationFinderAPI.messageTableViewController = self;
@@ -599,7 +523,6 @@ NSInteger footerHeight = 1;
     NSArray *rowIndecesInSection = [self.sections objectForKey:category];
     NSNumber *rowIndex = [rowIndecesInSection objectAtIndex:indexPath.row]; //pulling the row indece from array above
 
-
     // Get dictionary from current index on list.
     NSDictionary *dictionary = [self.menuList objectAtIndex:[rowIndex intValue]];
     
@@ -650,6 +573,25 @@ NSInteger footerHeight = 1;
 //        [cell setNeedsDisplay];
 //        [cell layoutIfNeeded];
         return cell;
+        
+    } else if([category isEqualToString:@"Email"]) {
+        MessageTableViewEmailCell *cell = [tableView dequeueReusableCellWithIdentifier:@"CellEmail" forIndexPath:indexPath];
+        NSLog(@"loading email cell");
+        if (cell == nil){
+            NSLog(@"cell was nil");
+            cell = [[MessageTableViewEmailCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"CellEmail"];
+        }
+        
+        cell.layer.cornerRadius = 3;
+        [self.tableView addSubview:cell];
+        emailItem = [self.menuList objectAtIndex:[rowIndex intValue]];
+        [cell configEmailCell:emailItem indexPath:indexPath];
+        
+        //        [cell.contentView layoutIfNeeded];
+        //        [cell setNeedsDisplay];
+        //        [cell layoutIfNeeded];
+        return cell;
+
         
     } else if([category isEqualToString:@"Local Representative"]) {
         MessageTableViewRepresentativeCell *cell = [tableView dequeueReusableCellWithIdentifier:@"CellRep" forIndexPath:indexPath];
@@ -845,6 +787,87 @@ NSInteger footerHeight = 1;
 }
 */
 
+#pragma mark - Phone Call API
+-(void)showPhoneCallAlert:(NSString*)phoneString{
+    NSURL *phoneUrl = [NSURL URLWithString:[NSString  stringWithFormat:@"tel://%@",phoneString]];
+    
+    if ([[UIApplication sharedApplication] canOpenURL:phoneUrl]) {
+        
+        NSString *alertTitle = @"Phone Call";
+        NSString *alertMessage = @"Remember to state your name and your sentiment.  Would you like to call?";
+        UIAlertController *alertController = [UIAlertController alertControllerWithTitle:alertTitle message:alertMessage preferredStyle:UIAlertControllerStyleAlert];
+        
+        //Add cancel button
+        UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:NSLocalizedString(@"Cancel", @"Cancel action") style:UIAlertActionStyleDefault handler:^(UIAlertAction *action){
+            NSLog(@"Cancel action");
+        }];
+        [alertController addAction:cancelAction];
+        
+        //Add OK action button
+        UIAlertAction *okAction = [UIAlertAction actionWithTitle:NSLocalizedString(@"OK", @"OK action") style:UIAlertActionStyleDefault handler:^(UIAlertAction *action){
+            
+            [[UIApplication sharedApplication] openURL:phoneUrl];
+            [self savePhoneCall:phoneUrl];
+            
+            NSLog(@"OK action");
+            
+        }];
+        [alertController addAction:okAction];
+        
+        [self presentViewController:alertController animated:YES completion:nil];
+    } else{
+        UIAlertView *calert = [[UIAlertView alloc]initWithTitle:@"Alert" message:@"Call facility is not available." delegate:nil cancelButtonTitle:@"ok" otherButtonTitles:nil, nil];
+        [calert show];
+    }
+    
+    //    MakePhoneCallAPI *makePhoneCallAPI = [[MakePhoneCallAPI alloc] init];
+    //    makePhoneCallAPI.selectedProgram = self.selectedProgram;
+    //    makePhoneCallAPI.selectedSegment = self.selectedSegment;
+    //    makePhoneCallAPI.selectedContact = self.selectedContact;
+    //    [makePhoneCallAPI dialPhoneNumber:(NSURL*)phoneUrl];
+    
+}
+-(void)savePhoneCall:(NSURL*)phoneURL{
+    //  SAVING MESSAGE DATA TO PARSE
+    PFUser *currentUser = [PFUser currentUser];
+    
+    PFObject *sentMessageItem = [PFObject objectWithClassName:@"sentMessages"];
+    [sentMessageItem setObject:@"phoneCall" forKey:@"messageType"];
+    [sentMessageItem setObject:[phoneURL absoluteString] forKey:@"phoneNumber"];
+    [sentMessageItem setObject:[self.selectedSegment valueForKey:@"segmentID"] forKey:@"segmentID"];
+    [sentMessageItem setObject:[currentUser valueForKey:@"username"] forKey:@"username"];
+    NSString *userObjectID = currentUser.objectId;
+    [sentMessageItem setObject:userObjectID forKey:@"userObjectID"];
+    
+    //if segment then skip, else don't
+    if ([self.selectedContact isKindOfClass:[CongressionalMessageItem class]]) {
+        NSLog(@"Saving congressional Message Item Class");
+        NSString *bioguide_id = [self.selectedContact valueForKey:@"bioguide_id"];
+        NSString *fullName = [self.selectedContact valueForKey:@"fullName"];
+        [sentMessageItem setObject:bioguide_id forKey:@"contactID"];
+        [sentMessageItem setObject:fullName forKey:@"contactName"];
+    } else {
+        NSLog(@"Regular Contact Item Class");
+        NSString *contactID = [self.selectedContact valueForKey:@"contactID"];
+        NSString *targetName = [self.selectedContact valueForKey:@"targetName"];
+        [sentMessageItem setObject:contactID forKey:@"contactID"];
+        [sentMessageItem setObject:targetName forKey:@"contactName"];
+    }
+    
+    
+    [sentMessageItem saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) { //save sent message to parse
+        if(error){
+            NSLog(@"error, message not saved");
+        }
+        else {
+            NSLog(@"no error, message saved");
+            [self viewDidLoad];
+        }
+    }];
+    
+}
+
+
 
 #pragma mark - Navigation
 
@@ -880,6 +903,7 @@ NSInteger footerHeight = 1;
         NSLog(@"sender:%@",sender);
     }
 }
+
 
 
 

@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		CE035F631BC453D3008977E6 /* EmailItem.m in Sources */ = {isa = PBXBuildFile; fileRef = CE035F621BC453D3008977E6 /* EmailItem.m */; settings = {ASSET_TAGS = (); }; };
 		CE06A2001B31F7C5000D3210 /* Bolts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CE06A1FA1B31F7C5000D3210 /* Bolts.framework */; };
 		CE06A2011B31F7C5000D3210 /* Parse.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CE06A1FB1B31F7C5000D3210 /* Parse.framework */; };
 		CE06A2021B31F7C5000D3210 /* ParseCrashReporting.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CE06A1FC1B31F7C5000D3210 /* ParseCrashReporting.framework */; };
@@ -20,7 +21,7 @@
 		CE12E4241B94DACE001B3E25 /* OAuth+Additions.m in Sources */ = {isa = PBXBuildFile; fileRef = CE12E4231B94DACE001B3E25 /* OAuth+Additions.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		CE12E42A1B94DB1A001B3E25 /* TWSignedRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = CE12E4281B94DB1A001B3E25 /* TWSignedRequest.m */; };
 		CE12E42C1B94DF36001B3E25 /* Crashlytics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CE12E42B1B94DF36001B3E25 /* Crashlytics.framework */; };
-		CE13C9101BC4042D00A1D223 /* EmailTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CE13C90F1BC4042D00A1D223 /* EmailTableViewCell.m */; settings = {ASSET_TAGS = (); }; };
+		CE13C9101BC4042D00A1D223 /* MessageTableViewEmailCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CE13C90F1BC4042D00A1D223 /* MessageTableViewEmailCell.m */; settings = {ASSET_TAGS = (); }; };
 		CE14A8AA1B211B7B0032664C /* SignUpViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CE14A8A91B211B7A0032664C /* SignUpViewController.m */; };
 		CE14A8AD1B2227C60032664C /* LogInViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CE14A8AC1B2227C60032664C /* LogInViewController.m */; };
 		CE14A8B31B22D20B0032664C /* TweetTableViewDemoTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CE14A8B21B22D20B0032664C /* TweetTableViewDemoTableViewController.m */; };
@@ -1023,6 +1024,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		CE035F611BC453D3008977E6 /* EmailItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EmailItem.h; sourceTree = "<group>"; };
+		CE035F621BC453D3008977E6 /* EmailItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EmailItem.m; sourceTree = "<group>"; };
 		CE06A1FA1B31F7C5000D3210 /* Bolts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Bolts.framework; sourceTree = "<group>"; };
 		CE06A1FB1B31F7C5000D3210 /* Parse.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Parse.framework; sourceTree = "<group>"; };
 		CE06A1FC1B31F7C5000D3210 /* ParseCrashReporting.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = ParseCrashReporting.framework; sourceTree = "<group>"; };
@@ -1040,8 +1043,8 @@
 		CE12E4271B94DB1A001B3E25 /* TWSignedRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TWSignedRequest.h; sourceTree = "<group>"; };
 		CE12E4281B94DB1A001B3E25 /* TWSignedRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TWSignedRequest.m; sourceTree = "<group>"; };
 		CE12E42B1B94DF36001B3E25 /* Crashlytics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Crashlytics.framework; sourceTree = "<group>"; };
-		CE13C90E1BC4042D00A1D223 /* EmailTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EmailTableViewCell.h; sourceTree = "<group>"; };
-		CE13C90F1BC4042D00A1D223 /* EmailTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EmailTableViewCell.m; sourceTree = "<group>"; };
+		CE13C90E1BC4042D00A1D223 /* MessageTableViewEmailCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MessageTableViewEmailCell.h; sourceTree = "<group>"; };
+		CE13C90F1BC4042D00A1D223 /* MessageTableViewEmailCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MessageTableViewEmailCell.m; sourceTree = "<group>"; };
 		CE14A8A81B211B7A0032664C /* SignUpViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SignUpViewController.h; sourceTree = "<group>"; };
 		CE14A8A91B211B7A0032664C /* SignUpViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SignUpViewController.m; sourceTree = "<group>"; };
 		CE14A8AB1B2227C60032664C /* LogInViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LogInViewController.h; sourceTree = "<group>"; };
@@ -2182,8 +2185,8 @@
 				CE5B5D0D1AF95A740033A668 /* ProgramDetailTableViewCell.m */,
 				CEEF25051B015ACA00EFB257 /* MessageTableViewController.h */,
 				CEEF25061B015ACA00EFB257 /* MessageTableViewController.m */,
-				CE13C90E1BC4042D00A1D223 /* EmailTableViewCell.h */,
-				CE13C90F1BC4042D00A1D223 /* EmailTableViewCell.m */,
+				CE13C90E1BC4042D00A1D223 /* MessageTableViewEmailCell.h */,
+				CE13C90F1BC4042D00A1D223 /* MessageTableViewEmailCell.m */,
 				CEEF250F1B017C8200EFB257 /* MessageTableViewCell.h */,
 				CEEF25101B017C8200EFB257 /* MessageTableViewCell.m */,
 				CE0E80541B9129B80093453D /* MessageTableViewNoZipCell.h */,
@@ -2289,6 +2292,8 @@
 		CE2BF9781B3E5A2F00AB15AC /* In process */ = {
 			isa = PBXGroup;
 			children = (
+				CE2BF96D1B3E517700AB15AC /* MakePhoneCallAPI.h */,
+				CE2BF96E1B3E517700AB15AC /* MakePhoneCallAPI.m */,
 				CEB1878F1B18F8C400C86955 /* MessageOptionsTableTableViewController.h */,
 				CEB187901B18F8C400C86955 /* MessageOptionsTableTableViewController.m */,
 				CEB187921B18FAD600C86955 /* MessageOptionsTableViewCell.h */,
@@ -2308,6 +2313,8 @@
 				CE87CACB1AFABA920084C666 /* Program.m */,
 				CE87CABC1AF977120084C666 /* Segment.h */,
 				CE87CABD1AF977120084C666 /* Segment.m */,
+				CE035F611BC453D3008977E6 /* EmailItem.h */,
+				CE035F621BC453D3008977E6 /* EmailItem.m */,
 				CEEF250C1B017BAA00EFB257 /* MessageItem.h */,
 				CEEF250D1B017BAA00EFB257 /* MessageItem.m */,
 				CE82943B1B38DB7C00B596E6 /* CongressionalMessageItem.h */,
@@ -3268,8 +3275,6 @@
 			children = (
 				CEACE5901B4F4BCC007B7D2D /* UpdateDefaults.h */,
 				CEACE5911B4F4BCC007B7D2D /* UpdateDefaults.m */,
-				CE2BF96D1B3E517700AB15AC /* MakePhoneCallAPI.h */,
-				CE2BF96E1B3E517700AB15AC /* MakePhoneCallAPI.m */,
 				CE2029701B363D51005C079B /* CongressFinderAPI.h */,
 				CE2029711B363D51005C079B /* CongressFinderAPI.m */,
 				CE6073311B3AD475007B567C /* CongressPhotoFinderAPI.h */,
@@ -4417,6 +4422,7 @@
 				CEF1C9011B0E7B79003EFAD1 /* WebViewController.m in Sources */,
 				CE87CACC1AFABA920084C666 /* Program.m in Sources */,
 				CE44670C1B94C0DF001D46EB /* PFTwitterUtils+NativeTwitter.m in Sources */,
+				CE035F631BC453D3008977E6 /* EmailItem.m in Sources */,
 				CE0E80561B9129B80093453D /* MessageTableViewNoZipCell.m in Sources */,
 				CE2BF9771B3E5A1700AB15AC /* EmailComposerViewController.m in Sources */,
 				CE12E4241B94DACE001B3E25 /* OAuth+Additions.m in Sources */,
@@ -4451,7 +4457,7 @@
 				CEEF25071B015ACA00EFB257 /* MessageTableViewController.m in Sources */,
 				CE14A8B31B22D20B0032664C /* TweetTableViewDemoTableViewController.m in Sources */,
 				CEC0C7471B478E0500A9DD33 /* MessageTableViewMessageCell.m in Sources */,
-				CE13C9101BC4042D00A1D223 /* EmailTableViewCell.m in Sources */,
+				CE13C9101BC4042D00A1D223 /* MessageTableViewEmailCell.m in Sources */,
 				CE85C3881BB4D0C7007F2745 /* LeaveFeedbackViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

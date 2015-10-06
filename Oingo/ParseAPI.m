@@ -209,11 +209,11 @@ BOOL isLocationInfoAvailable = NO;
             self.sections = [NSMutableDictionary dictionary];
             self.sectionToCategoryMap = [NSMutableDictionary dictionary];
         }
-    //Loops through every messageItem in the messageList and creates 2 dictionaries with index values and categories.
+    //Loops through every Item in the messageList and creates 2 dictionaries with index values and categories.
     NSInteger section = 0;
     NSInteger rowIndex = 0; //now 1
-    for (MessageItem  *messageItem in self.menuList) {
-        NSString *category = [messageItem valueForKey:@"messageCategory"]; //retrieves category for each message -1st regulator
+    for (NSMutableDictionary *dictionaryItem in self.menuList) {
+        NSString *category = [dictionaryItem valueForKey:@"messageCategory"]; //retrieves category for each message -1st regulator
         NSMutableArray *objectsInSection = [self.sections objectForKey:category]; //assigns objectsInSection value of sections for current category
         if (!objectsInSection) {
             objectsInSection = [NSMutableArray array];  //if new create array
@@ -266,12 +266,17 @@ BOOL isLocationInfoAvailable = NO;
     
     NSMutableArray *messageTextList = [[NSMutableArray alloc]init];
     NSMutableArray *contactList = [[NSMutableArray alloc]init];
+    NSMutableArray *otherList = [[NSMutableArray alloc]init];
     
     for (NSDictionary *dictionary in messageListWithContactsSorted) {
+        NSLog(@"[dictionary valueForKey:@messageCategory]:%@",[dictionary valueForKey:@"messageCategory"]);
         NSNumber *isMessageNumber = [dictionary valueForKey:@"isMessage"];
         bool isMessageBool = [isMessageNumber boolValue];
         if(isMessageBool) {
             [messageTextList addObject:dictionary];
+        } else if ([[dictionary valueForKey:@"messageCategory"] isEqualToString:@"Email"]){
+            NSLog(@"[dictionary valueForKey:@messageCategory]:%@",[dictionary valueForKey:@"messageCategory"]);
+            [otherList addObject:dictionary];
         }else {
             [contactList addObject:dictionary];
         }
@@ -284,6 +289,7 @@ BOOL isLocationInfoAvailable = NO;
     }
     
     self.contactList = contactList;
+    self.otherList = otherList;
     //    NSLog(@"contactlist:%@ messageList: %@",contactList,messageTextList);
 }
 
@@ -325,8 +331,7 @@ BOOL isLocationInfoAvailable = NO;
                                 ^BOOL(NSDictionary *dict, NSUInteger idx, BOOL *stop) {
                                     return [[dict objectForKey:@"messageCategory"] isEqual:category];
                                 }];
-            
-            MessageItem *messageToAdd = [self.messageTextList objectAtIndex:index];
+            NSMutableDictionary *messageToAdd = [self.messageTextList objectAtIndex:index];
             [self.menuList addObject:messageToAdd];
             //            [contactRow setValue:@NO forKey:@"isCollapsed"]; // makes sure at least one contact is expanded
             [self.menuList addObject:contactRow];
@@ -337,27 +342,16 @@ BOOL isLocationInfoAvailable = NO;
             //            [expandSectionTempDictionary setValue:category forKey:@"Category"];
             //            [expandSectionTempDictionary setValue:@YES forKey:@"isSectionExpanded"];
             //            [self.expandSectionsKeyList addObject:expandSectionTempDictionary];
-            
         } else {
-            
-            //            if ([category  isEqual: @"Local Representative"]) {
-            //                localRepIndex ++;
-            //            }
-            //
-            //            if(localRepIndex >= 3){
-            //                [contactRow setValue:@YES forKey:@"isCollapsed"];
-            //            }
-            
             [self.menuList addObject:contactRow];
         }
-        
         contactIndex++;
-        
     }
-    
+    [self.menuList addObjectsFromArray:self.otherList];
+    NSLog(@"self.otherList:%@",self.otherList);
+    NSLog(@"self.contactList:%@",self.contactList);
+    NSLog(@"self.messageList:%@",self.messageTextList);
 }
-
-
 
 
 # pragma mark - Helper Methods like sorting

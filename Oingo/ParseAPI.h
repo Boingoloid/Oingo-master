@@ -16,13 +16,14 @@
 @property (nonatomic, retain) NSMutableDictionary *sections;
 @property (nonatomic, retain) NSMutableDictionary *sectionToCategoryMap;
 @property (nonatomic, retain) NSMutableDictionary *noZipDictionary;
-@property (nonatomic) NSMutableArray *contactList;
 @property(nonatomic) NSArray *dataImmutable;
 @property (nonatomic) NSMutableArray *menuList;
 @property (nonatomic, retain) NSMutableArray *expandSectionsKeyList;
 @property(nonatomic) MessageTableViewController *messageTableViewController;
 @property(nonatomic) NSMutableArray *messageOptionsList;
 @property(nonatomic) NSArray *messageTextList;
+@property (nonatomic) NSMutableArray *contactList;
+@property (nonatomic) NSMutableArray *otherList;
 @property(nonatomic) NSArray *tempArray;
 @property(nonatomic) bool isCongressLoaded;
 
