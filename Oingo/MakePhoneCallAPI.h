@@ -7,11 +7,15 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "MessageTableViewController.h"
+#import "Program.h"
+#import "Segment.h"
 
 @interface MakePhoneCallAPI : NSObject
-
-//@property(nonatomic) MessageTableViewController *messageTableViewController;
-
--(void) dialPhoneNumber:(NSString*)phoneNumber;
+@property (nonatomic) Segment *selectedSegment;
+@property (nonatomic) Program *selectedProgram;
+@property(nonatomic) NSDictionary *selectedContact;
+@property(nonatomic) MessageTableViewController *messageTableViewController;
+-(void) dialPhoneNumber:(NSURL*)phoneUrl;
 
 @end
