@@ -67,9 +67,9 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     // Return the number of rows in the section.
-    NSLog(@"optionlistFiltered count:%lu, %@", (unsigned long)[self.messageOptionsListFiltered count],self.messageOptionsListFiltered);
+    //NSLog(@"optionlistFiltered count:%lu, %@", (unsigned long)[self.messageOptionsListFiltered count],self.messageOptionsListFiltered);
     return [self.messageOptionsListFiltered count];
-//    return 3;
+    //return 3;
 }
 
 
@@ -84,7 +84,7 @@
         
     }
     
-    NSLog(@"messageOption calling config cell%@",messageOption);    
+//    NSLog(@"messageOption calling config cell%@",messageOption);
     [cell configMessageOptionCell:(NSDictionary*)messageOption];
     [cell layoutIfNeeded];
     

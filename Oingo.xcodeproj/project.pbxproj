@@ -20,6 +20,7 @@
 		CE12E4241B94DACE001B3E25 /* OAuth+Additions.m in Sources */ = {isa = PBXBuildFile; fileRef = CE12E4231B94DACE001B3E25 /* OAuth+Additions.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		CE12E42A1B94DB1A001B3E25 /* TWSignedRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = CE12E4281B94DB1A001B3E25 /* TWSignedRequest.m */; };
 		CE12E42C1B94DF36001B3E25 /* Crashlytics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CE12E42B1B94DF36001B3E25 /* Crashlytics.framework */; };
+		CE13C9101BC4042D00A1D223 /* EmailTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CE13C90F1BC4042D00A1D223 /* EmailTableViewCell.m */; settings = {ASSET_TAGS = (); }; };
 		CE14A8AA1B211B7B0032664C /* SignUpViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CE14A8A91B211B7A0032664C /* SignUpViewController.m */; };
 		CE14A8AD1B2227C60032664C /* LogInViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CE14A8AC1B2227C60032664C /* LogInViewController.m */; };
 		CE14A8B31B22D20B0032664C /* TweetTableViewDemoTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CE14A8B21B22D20B0032664C /* TweetTableViewDemoTableViewController.m */; };
@@ -70,6 +71,7 @@
 		CE87CAC91AFAB9B70084C666 /* ProgramsTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CE87CAC81AFAB9B70084C666 /* ProgramsTableViewCell.m */; };
 		CE87CACC1AFABA920084C666 /* Program.m in Sources */ = {isa = PBXBuildFile; fileRef = CE87CACB1AFABA920084C666 /* Program.m */; };
 		CE99E3871B5EF1ED00ED9D33 /* MarkSentMessageAPI.m in Sources */ = {isa = PBXBuildFile; fileRef = CE99E3861B5EF1ED00ED9D33 /* MarkSentMessageAPI.m */; };
+		CE9D625E1BC3C10F00A244ED /* MessagePanelViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CE9D625D1BC3C10F00A244ED /* MessagePanelViewController.m */; settings = {ASSET_TAGS = (); }; };
 		CEA042261B9704BB00071518 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CE5B98EF1B96F33400BFF14F /* UIKit.framework */; };
 		CEA79FD61AEC7C0D00535B06 /* ProgramsTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CEA79FD51AEC7C0D00535B06 /* ProgramsTableViewController.m */; };
 		CEAA72B11B94D5A40066299D /* TwitterCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CEAA72AF1B94D5A40066299D /* TwitterCore.framework */; };
@@ -1038,6 +1040,8 @@
 		CE12E4271B94DB1A001B3E25 /* TWSignedRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TWSignedRequest.h; sourceTree = "<group>"; };
 		CE12E4281B94DB1A001B3E25 /* TWSignedRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TWSignedRequest.m; sourceTree = "<group>"; };
 		CE12E42B1B94DF36001B3E25 /* Crashlytics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Crashlytics.framework; sourceTree = "<group>"; };
+		CE13C90E1BC4042D00A1D223 /* EmailTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EmailTableViewCell.h; sourceTree = "<group>"; };
+		CE13C90F1BC4042D00A1D223 /* EmailTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EmailTableViewCell.m; sourceTree = "<group>"; };
 		CE14A8A81B211B7A0032664C /* SignUpViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SignUpViewController.h; sourceTree = "<group>"; };
 		CE14A8A91B211B7A0032664C /* SignUpViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SignUpViewController.m; sourceTree = "<group>"; };
 		CE14A8AB1B2227C60032664C /* LogInViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LogInViewController.h; sourceTree = "<group>"; };
@@ -1116,6 +1120,8 @@
 		CE87CACB1AFABA920084C666 /* Program.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Program.m; sourceTree = "<group>"; };
 		CE99E3851B5EF1ED00ED9D33 /* MarkSentMessageAPI.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MarkSentMessageAPI.h; sourceTree = "<group>"; };
 		CE99E3861B5EF1ED00ED9D33 /* MarkSentMessageAPI.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MarkSentMessageAPI.m; sourceTree = "<group>"; };
+		CE9D625C1BC3C10F00A244ED /* MessagePanelViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MessagePanelViewController.h; sourceTree = "<group>"; };
+		CE9D625D1BC3C10F00A244ED /* MessagePanelViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MessagePanelViewController.m; sourceTree = "<group>"; };
 		CEA79FD41AEC7C0D00535B06 /* ProgramsTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ProgramsTableViewController.h; path = ../ProgramsTableViewController.h; sourceTree = "<group>"; };
 		CEA79FD51AEC7C0D00535B06 /* ProgramsTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ProgramsTableViewController.m; path = ../ProgramsTableViewController.m; sourceTree = "<group>"; };
 		CEA79FDA1AECA88C00535B06 /* Social.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Social.framework; path = System/Library/Frameworks/Social.framework; sourceTree = SDKROOT; };
@@ -2162,6 +2168,8 @@
 				CEE04BA01B3501B000AAF8EA /* Methods */,
 				CE6F71F11B2A5A670067E4DA /* objects */,
 				CE241A4C1AEAE45A00F22144 /* Main.storyboard */,
+				CE9D625C1BC3C10F00A244ED /* MessagePanelViewController.h */,
+				CE9D625D1BC3C10F00A244ED /* MessagePanelViewController.m */,
 				CE241A431AEAE45A00F22144 /* AppDelegate.h */,
 				CE241A441AEAE45A00F22144 /* AppDelegate.m */,
 				CEA79FD41AEC7C0D00535B06 /* ProgramsTableViewController.h */,
@@ -2174,6 +2182,8 @@
 				CE5B5D0D1AF95A740033A668 /* ProgramDetailTableViewCell.m */,
 				CEEF25051B015ACA00EFB257 /* MessageTableViewController.h */,
 				CEEF25061B015ACA00EFB257 /* MessageTableViewController.m */,
+				CE13C90E1BC4042D00A1D223 /* EmailTableViewCell.h */,
+				CE13C90F1BC4042D00A1D223 /* EmailTableViewCell.m */,
 				CEEF250F1B017C8200EFB257 /* MessageTableViewCell.h */,
 				CEEF25101B017C8200EFB257 /* MessageTableViewCell.m */,
 				CE0E80541B9129B80093453D /* MessageTableViewNoZipCell.h */,
@@ -4429,6 +4439,7 @@
 				CE99E3871B5EF1ED00ED9D33 /* MarkSentMessageAPI.m in Sources */,
 				CE6F71F41B2BCA9E0067E4DA /* SettingsTableViewController.m in Sources */,
 				CED9B79E1B9E58C800B22396 /* FacebookAPIPost.m in Sources */,
+				CE9D625E1BC3C10F00A244ED /* MessagePanelViewController.m in Sources */,
 				CE87CAC91AFAB9B70084C666 /* ProgramsTableViewCell.m in Sources */,
 				CEC0C7441B45D6B400A9DD33 /* LocationFinderAPI.m in Sources */,
 				CEB187941B18FAD600C86955 /* MessageOptionsTableViewCell.m in Sources */,
@@ -4440,6 +4451,7 @@
 				CEEF25071B015ACA00EFB257 /* MessageTableViewController.m in Sources */,
 				CE14A8B31B22D20B0032664C /* TweetTableViewDemoTableViewController.m in Sources */,
 				CEC0C7471B478E0500A9DD33 /* MessageTableViewMessageCell.m in Sources */,
+				CE13C9101BC4042D00A1D223 /* EmailTableViewCell.m in Sources */,
 				CE85C3881BB4D0C7007F2745 /* LeaveFeedbackViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -1,25 +1,26 @@
 //
-//  ComposeViewController.m
+//  MessagePanelViewController.m
 //  Oingo
 //
-//  Created by Matthew Acalin on 9/8/15.
-//  Copyright (c) 2015 Oingo Inc. All rights reserved.
+//  Created by Matthew Acalin on 10/6/15.
+//  Copyright © 2015 Oingo Inc. All rights reserved.
 //
 
-#import "ComposeViewController.h"
+#import "MessagePanelViewController.h"
 #import <QuartzCore/QuartzCore.h>
 #import <UIKit/UIKit.h>
 #import "Segment.h"
 #import "Program.h"
 
-@interface ComposeViewController ()
+@interface MessagePanelViewController ()
 
 @end
 
-@implementation ComposeViewController
+@implementation MessagePanelViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    // Do any additional setup after loading the view.
     
     // Format messageTextView field
     self.messageTextView.layer.borderColor = [[UIColor whiteColor] CGColor];
@@ -27,8 +28,6 @@
     self.messageTextView.clipsToBounds = YES;
     self.messageTextView.layer.cornerRadius = 3;
     self.messageTextView.text = [NSString stringWithFormat:@"%@: %@  @PushThought",[self.selectedProgram valueForKey:@"programTitle"],[self.selectedSegment valueForKey:@"segmentTitle"]];  // Everything is the same except for this line.
-
-    
     
     // Format Cancel Button
     self.cancelButton.layer.borderColor = [[UIColor colorWithWhite:0.9f alpha:1] CGColor];
@@ -39,17 +38,28 @@
     self.sendButton.layer.borderColor = [[UIColor colorWithWhite:0.9f alpha:1] CGColor];
     self.sendButton.layer.cornerRadius = 1;
     self.sendButton.backgroundColor = [UIColor clearColor];
-
+    
     
     self.linkToContent.text = [self.selectedSegment valueForKey:@"linkToContent"];
     NSLog(@"linkToContent:%@",[self.selectedSegment valueForKey:@"linkToContent"]);
-        NSLog(@"Selected Segment:%@",self.selectedSegment);
+    NSLog(@"Selected Segment:%@",self.selectedSegment);
+
+    
     
 }
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+- (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
+    //hide the keyborad
+    [super touchesBegan:touches withEvent:event];
+    UITouch *touch = [[event allTouches] anyObject];
+    if ([self.messageTextView isFirstResponder] && [touch view] != self.messageTextView) {
+        [self.messageTextView resignFirstResponder];
+    }
+
 }
 
 /*
@@ -62,20 +72,8 @@
 }
 */
 
-- (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
-    [super touchesBegan:touches withEvent:event];
-    
-    //hide the keyborad
-    UITouch *touch = [[event allTouches] anyObject];
-    if ([self.messageTextView isFirstResponder] && [touch view] != self.messageTextView) {
-        [self.messageTextView resignFirstResponder];
-    }
-    
-}
-
-
 - (IBAction)send:(id)sender {
-    NSString *postMessage = self.messageTextView.text; // Nothing b/c sharing segment
+    NSString *postMessage = self.messageTextView.text; 
     NSString *linkName = [NSString stringWithFormat:@"%@: %@",[self.selectedProgram valueForKey:@"programTitle"],[self.selectedSegment valueForKey:@"segmentTitle"]];  // Everything is the same except for this line.
     NSString *linkToContent =[[NSString alloc]initWithString:[self.selectedSegment valueForKey:@"linkToContent"]];
     
@@ -89,8 +87,6 @@
 }
 
 - (IBAction)cancel:(id)sender {
-
     [self.navigationController popViewControllerAnimated:YES];
-    
 }
 @end

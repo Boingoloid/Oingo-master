@@ -44,26 +44,9 @@
 //  IBAction for the Compose Mail button.
 // -------------------------------------------------------------------------------
 - (void)showMailPicker:(NSString*)email withMessage:(NSString *)message {
-    
-
-
-    
-    
-    
-    // You must check that the current device can send email messages before you
-    // attempt to create an instance of MFMailComposeViewController.  If the
-    // device can not send email messages,
-    // [[MFMailComposeViewController alloc] init] will return nil.  Your app
-    // will crash when it calls -presentViewController:animated:completion: with
-    // a nil view controller.
-    if ([MFMailComposeViewController canSendMail])
-        // The device can send email.
-    {
+    if ([MFMailComposeViewController canSendMail]){
         [self displayMailComposerSheet:email withMessage:message];
-    }
-    else
-        // The device can not send email.
-    {
+    } else {
         self.feedbackMsg.hidden = NO;
         self.feedbackMsg.text = @"Device not configured to send mail.";
     }
@@ -81,8 +64,6 @@
 {
     MFMailComposeViewController *picker = [[MFMailComposeViewController alloc] init];
     picker.mailComposeDelegate = self;
-    
-
 
     NSString *subject = [NSString stringWithFormat:@"Message from local voter re: %@",[self.selectedSegment valueForKey:@"segmentTitle"]];
     [picker setSubject:subject];

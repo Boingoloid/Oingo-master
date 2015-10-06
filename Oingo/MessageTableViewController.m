@@ -38,6 +38,7 @@
 #import "SignUpViewController.h"
 #import "SettingsTableViewController.h"
 #import "ComposeViewController.h"
+#import "EmailTableViewCell.h"
 
 
 @interface MessageTableViewController () <UIGestureRecognizerDelegate,CLLocationManagerDelegate>
@@ -175,19 +176,33 @@ NSInteger footerHeight = 1;
 //            MessageTableViewCell *cell1 = (MessageTableViewCell *)[tableView cellForRowAtIndexPath:indexPath];
 //        }
         
-//        // Detect the type of cell
-//        UITableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
-//        if ([cell isKindOfClass:[CustomCell class]]) {
-//            //do specific code
-//        }else if([cell isKindOfClass:[CustomCell2 class]]){
-//            //Another custom cell
-//        }else{
-//            //General cell
-//        }
+
         
+        UITableViewCell *cellScout = (UITableViewCell *)[tableView cellForRowAtIndexPath:indexPath];
         
+        if ([cellScout isKindOfClass:[MessageTableViewMessageCell class]]) {
+            NSLog(@"yes it is a message class cell");
+            
+            
+            
+            
+            
+        } else if ([cellScout isKindOfClass:[MessageTableViewNoZipCell class]]){
+            NSLog(@"yes it is a NO ZIP class cell");
+        } else if ([cellScout isKindOfClass:[MessageTableViewCell class]]){
+            NSLog(@"yes it is a civilian cell");
+        } else if ([cellScout isKindOfClass:[MessageTableViewRepresentativeCell class]]){
+            NSLog(@"yes it is a Representative cell");
+        }
+            
+            
+            
         MessageTableViewCell *cell = (MessageTableViewCell *)[tableView cellForRowAtIndexPath:indexPath];
-        NSLog(@"cell:%@",cell);
+        NSLog(@"type of class:%@ and type of cell:%@",[MessageTableViewCell class],cell);
+        
+
+        
+        
         
         CGPoint pointInCell = [tap locationInView:cell];
         NSString *category= [self categoryForSection:indexPath.section];
@@ -879,7 +894,7 @@ NSInteger footerHeight = 1;
         messageOptionsViewController.messageOptionsList = self.messageOptionsList;
         messageOptionsViewController.menuList = self.menuList;
         
-        NSLog(@"segway to Message Options: messageOptionsList:%@,%@", self.messageOptionsList, messageOptionsViewController.messageOptionsList);
+        //NSLog(@"segway to Message Options: messageOptionsList:%@,%@", self.messageOptionsList, messageOptionsViewController.messageOptionsList);
         
     } else if ([segue.identifier isEqualToString:@"showSettings"]){
         SettingsTableViewController *settingsTableVC = [segue destinationViewController];
