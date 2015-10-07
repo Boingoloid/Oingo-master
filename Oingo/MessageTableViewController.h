@@ -30,6 +30,7 @@
 @property(nonatomic) NSArray *congressMessageList;
 @property(nonatomic) NSString *repMessageText;
 @property(nonatomic) NSString *selectedLink;
+@property(nonatomic) NSString *linkToEmail;
 @property(nonatomic) Program *selectedProgram;
 @property(nonatomic) NSDictionary *selectedContact;
 @property(nonatomic) PFUser *currentUser;
