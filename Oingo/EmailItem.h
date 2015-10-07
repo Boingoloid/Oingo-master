@@ -16,4 +16,6 @@
 //@property (nonatomic, retain) NSString *messageImage;
 @property (nonatomic, retain) NSString *messageCategory;
 @property (nonatomic, retain) NSString *emailRecipients;
+@property (nonatomic, retain) NSString *linkToEmail;
+@property (nonatomic, retain) NSString *emailSubject;
 @end

@@ -20,17 +20,27 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     self.webView.delegate = self;
-    
+}
+
+- (void)webViewDidFinishLoad:(UIWebView *)webView {
+    [loadingView setHidden:YES];
+}
+
+- (void)webViewDidStartLoad:(UIWebView *)webView {
+    [loadingView setHidden:NO];
+}
+
+- (void)viewWillAppear:(BOOL)animated {
     NSURL *url = [NSURL URLWithString:self.selectedLink];
     NSURLRequest *requestURL = [NSURLRequest requestWithURL:url];
     [self.webView loadRequest:requestURL];
-   
+    
     loadingView = [[UIView alloc]initWithFrame:CGRectMake(100, 400, 80, 80)];
     loadingView.backgroundColor = [UIColor colorWithWhite:0. alpha:0.6];
     loadingView.layer.cornerRadius = 5;
     
     UIActivityIndicatorView *activityView=[[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhiteLarge];
-    activityView.center = CGPointMake(loadingView.frame.size.width / 2.0, 35);
+//    activityView.center = CGPointMake(loadingView.frame.size.width / 2.0, 35);
     [activityView startAnimating];
     activityView.tag = 100;
     [loadingView addSubview:activityView];
@@ -43,15 +53,6 @@
     [loadingView addSubview:lblLoading];
     
     [self.view addSubview:loadingView];
-
-}
-- (void)webViewDidFinishLoad:(UIWebView *)webView {
-    [loadingView setHidden:YES];
-}
-- (void)webViewDidStartLoad:(UIWebView *)webView {
-    
-    [loadingView setHidden:NO];
-    
 }
 
 - (void)didReceiveMemoryWarning {

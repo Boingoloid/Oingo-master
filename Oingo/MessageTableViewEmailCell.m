@@ -8,6 +8,7 @@
 
 #import "MessageTableViewEmailCell.h"
 #import <UIKit/UIKit.h>
+#import "WebViewController.h"
 
 
 @implementation MessageTableViewEmailCell
@@ -29,10 +30,14 @@
     NSLog(@"Configuring email cell");
     [self setSelectionStyle:UITableViewCellSelectionStyleNone];
     
+    // Assign values
     self.emailItem = emailItem;
     self.messageTextView.text = [NSString stringWithFormat:@"%@ /",[emailItem valueForKey:@"messageText"]];
+    self.emailSubject.text = [NSString stringWithFormat:@"Subject: %@ /",[emailItem valueForKey:@"emailSubject"]];
     self.emailRecipients = [emailItem valueForKey:@"emailRecipients"];
+    self.linkToEmail = [emailItem valueForKey:@"linkToEmail"];
 
+    // Formatting
     self.messageTextView.layer.borderWidth = .5;
     self.messageTextView.layer.borderColor = [[UIColor lightGrayColor] CGColor];
     self.messageTextView.layer.cornerRadius = 3.0;
@@ -59,13 +64,12 @@
     self.storeTextInClipboardButton.layer.cornerRadius = 3.0;
     self.storeTextInClipboardButton.clipsToBounds = YES;
 
-    self.storeRecipientsInClipboard.layer.borderWidth = .5;
-    self.storeRecipientsInClipboard.layer.borderColor = [[UIColor blackColor] CGColor];
-    self.storeRecipientsInClipboard.layer.cornerRadius = 3.0;
-    self.storeRecipientsInClipboard.clipsToBounds = YES;
-
-
+    self.storeRecipientsInClipboardButton.layer.borderWidth = .5;
+    self.storeRecipientsInClipboardButton.layer.borderColor = [[UIColor blackColor] CGColor];
+    self.storeRecipientsInClipboardButton.layer.cornerRadius = 3.0;
+    self.storeRecipientsInClipboardButton.clipsToBounds = YES;
 }
+
 - (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
     //hide the keyborad
     UITouch *touch = [[event allTouches] anyObject];
@@ -74,6 +78,8 @@
     }
     [super touchesBegan:touches withEvent:event];
 }
+
+
 
 - (IBAction)emailRecipients:(id)sender {
     

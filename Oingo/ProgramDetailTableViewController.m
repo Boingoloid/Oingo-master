@@ -307,6 +307,7 @@ Segment *segment;
     if ([segue.identifier isEqualToString:@"showWebViewController"]){
         WebViewController *webViewController =  [segue destinationViewController];
         webViewController.selectedLink = self.selectedLink;
+        NSLog(@"selected link program detail %@:",webViewController.selectedLink);
     }
     
     // Get the new view controller using [segue destinationViewController].

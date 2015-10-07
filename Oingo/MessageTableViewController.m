@@ -40,6 +40,7 @@
 #import "SettingsTableViewController.h"
 #import "ComposeViewController.h"
 #import "MessageTableViewEmailCell.h"
+#import "WebViewController.h"
 
 
 @interface MessageTableViewController () <UIGestureRecognizerDelegate,CLLocationManagerDelegate>
@@ -227,12 +228,15 @@ NSInteger footerHeight = 1;
             } else if (CGRectContainsPoint(cell.storeTextInClipboardButton.frame, pointInCell)) {
                 
                 
-            } else if (CGRectContainsPoint(cell.storeRecipientsInClipboard.frame, pointInCell)) {
+            } else if (CGRectContainsPoint(cell.storeRecipientsInClipboardButton.frame, pointInCell)) {
                 
+                
+            } else if (CGRectContainsPoint(cell.linkToEmailButton.frame, pointInCell)) {
+                self.linkToEmail = cell.linkToEmail;
+                [self performSegueWithIdentifier:@"showWebViewControllerEmail" sender:self];
                 
             }
 
-            
         // Civilian/Rep Cell Touch ----------
         } else {
             MessageTableViewCell *cell = (MessageTableViewCell *)[tableView cellForRowAtIndexPath:indexPath];
@@ -928,10 +932,13 @@ NSInteger footerHeight = 1;
         composeViewController.selectedProgram = self.selectedProgram;
         composeViewController.facebookAPIPost = (FacebookAPIPost*)sender;
         NSLog(@"sender:%@",sender);
+    } else if ([segue.identifier isEqualToString:@"showWebViewControllerEmail"]){
+        WebViewController *webViewController =  [segue destinationViewController];
+        webViewController.selectedLink = self.linkToEmail;
+        NSLog(@"selected link program detail %@:",webViewController.selectedLink);
     }
+
 }
-
-
 
 
 @end

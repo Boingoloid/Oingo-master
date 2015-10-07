@@ -15,11 +15,15 @@
 @property (weak, nonatomic) IBOutlet UIButton *emailMyEmailButton;
 @property (weak, nonatomic) IBOutlet UIButton *emailBlankButton;
 @property (weak, nonatomic) IBOutlet UIButton *storeTextInClipboardButton;
-@property (weak, nonatomic) IBOutlet UIButton *storeRecipientsInClipboard;
-@property (weak, nonatomic) IBOutlet UIButton *linkToEmail;
+@property (weak, nonatomic) IBOutlet UIButton *storeRecipientsInClipboardButton;
+@property (weak, nonatomic) IBOutlet UIButton *linkToEmailButton;
+@property (weak, nonatomic) NSString *linkToEmail;
+
+@property (weak, nonatomic) IBOutlet UILabel *emailSubject;
 
 @property (weak, nonatomic) IBOutlet EmailItem *emailItem;
 @property (weak, nonatomic) IBOutlet NSString *emailRecipients;
+
 
 - (IBAction)emailRecipients:(id)sender;
 - (IBAction)emailMyEmail:(id)sender;
