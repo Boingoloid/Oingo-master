@@ -139,6 +139,7 @@ NSInteger footerHeight = 1;
     NSLog(@"viewDidAppear");
 }
 
+
 - (BOOL)gestureRecognizerShouldBegin:(UIGestureRecognizer *)gestureRecognizer
 {
     UITableView *tableView = (UITableView *)gestureRecognizer.view;
@@ -180,9 +181,13 @@ NSInteger footerHeight = 1;
         NSDictionary *dictionary = [self.menuList objectAtIndex:[rowIndex intValue]];
         self.selectedContact = dictionary;
         
+        
+        // Message Cell Touch ----------
         if ([cellScout isKindOfClass:[MessageTableViewMessageCell class]]) {
             NSLog(@"yes it is a message class cell"); // Segue triggered to message options
+        
             
+        // NoZip Cell Touch ----------
         } else if ([cellScout isKindOfClass:[MessageTableViewNoZipCell class]]){
             NSLog(@"yes it is a NO ZIP class cell");
             MessageTableViewNoZipCell *cell = (MessageTableViewNoZipCell *)[tableView cellForRowAtIndexPath:indexPath];
@@ -201,12 +206,34 @@ NSInteger footerHeight = 1;
             } else {
                 NSLog(@"touch in outer area");
             }
+            
+            
+        // Email Cell Touch ----------
         } else if ([cellScout isKindOfClass:[MessageTableViewEmailCell class]]){
             NSLog(@"Email class cell");
             MessageTableViewEmailCell *cell = (MessageTableViewEmailCell *)[tableView cellForRowAtIndexPath:indexPath];
+            if (CGRectContainsPoint(cell.emailRecipientsButton.frame, pointInCell)) {
+                //get text
+                //get subject
+                //get recipients
+                //send to email
+                
+            } else if (CGRectContainsPoint(cell.emailMyEmailButton.frame, pointInCell)) {
+                
+                
+            } else if (CGRectContainsPoint(cell.emailBlankButton.frame, pointInCell)) {
+                
+                
+            } else if (CGRectContainsPoint(cell.storeTextInClipboardButton.frame, pointInCell)) {
+                
+                
+            } else if (CGRectContainsPoint(cell.storeRecipientsInClipboard.frame, pointInCell)) {
+                
+                
+            }
+
             
-            //action for the email cell
-            
+        // Civilian/Rep Cell Touch ----------
         } else {
             MessageTableViewCell *cell = (MessageTableViewCell *)[tableView cellForRowAtIndexPath:indexPath];
             

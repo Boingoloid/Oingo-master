@@ -27,6 +27,8 @@
 - (void) configEmailCell:(EmailItem*)emailItem indexPath:(NSIndexPath*)indexPath{
     //add information
     NSLog(@"Configuring email cell");
+    [self setSelectionStyle:UITableViewCellSelectionStyleNone];
+    
     self.emailItem = emailItem;
     self.messageTextView.text = [NSString stringWithFormat:@"%@ /",[emailItem valueForKey:@"messageText"]];
     self.emailRecipients = [emailItem valueForKey:@"emailRecipients"];
@@ -64,7 +66,14 @@
 
 
 }
-
+- (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
+    //hide the keyborad
+    UITouch *touch = [[event allTouches] anyObject];
+    if ([self.messageTextView isFirstResponder] && [touch view] != self.messageTextView) {
+        [self.messageTextView resignFirstResponder];
+    }
+    [super touchesBegan:touches withEvent:event];
+}
 
 - (IBAction)emailRecipients:(id)sender {
     
