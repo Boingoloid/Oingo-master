@@ -71,6 +71,7 @@
 		CE87CAC61AF9B5F30084C666 /* lastweektonightcoverphoto.png in Resources */ = {isa = PBXBuildFile; fileRef = CE87CAC51AF9B5F30084C666 /* lastweektonightcoverphoto.png */; };
 		CE87CAC91AFAB9B70084C666 /* ProgramsTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CE87CAC81AFAB9B70084C666 /* ProgramsTableViewCell.m */; };
 		CE87CACC1AFABA920084C666 /* Program.m in Sources */ = {isa = PBXBuildFile; fileRef = CE87CACB1AFABA920084C666 /* Program.m */; };
+		CE9034861BC63C04000BE136 /* LongFormEmailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CE9034851BC63C04000BE136 /* LongFormEmailViewController.m */; settings = {ASSET_TAGS = (); }; };
 		CE99E3871B5EF1ED00ED9D33 /* MarkSentMessageAPI.m in Sources */ = {isa = PBXBuildFile; fileRef = CE99E3861B5EF1ED00ED9D33 /* MarkSentMessageAPI.m */; };
 		CE9D625E1BC3C10F00A244ED /* MessagePanelViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CE9D625D1BC3C10F00A244ED /* MessagePanelViewController.m */; settings = {ASSET_TAGS = (); }; };
 		CEA042261B9704BB00071518 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CE5B98EF1B96F33400BFF14F /* UIKit.framework */; };
@@ -1121,6 +1122,8 @@
 		CE87CAC81AFAB9B70084C666 /* ProgramsTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProgramsTableViewCell.m; sourceTree = "<group>"; };
 		CE87CACA1AFABA920084C666 /* Program.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Program.h; sourceTree = "<group>"; };
 		CE87CACB1AFABA920084C666 /* Program.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Program.m; sourceTree = "<group>"; };
+		CE9034841BC63C04000BE136 /* LongFormEmailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LongFormEmailViewController.h; path = ../LongFormEmailViewController.h; sourceTree = "<group>"; };
+		CE9034851BC63C04000BE136 /* LongFormEmailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LongFormEmailViewController.m; path = ../LongFormEmailViewController.m; sourceTree = "<group>"; };
 		CE99E3851B5EF1ED00ED9D33 /* MarkSentMessageAPI.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MarkSentMessageAPI.h; sourceTree = "<group>"; };
 		CE99E3861B5EF1ED00ED9D33 /* MarkSentMessageAPI.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MarkSentMessageAPI.m; sourceTree = "<group>"; };
 		CE9D625C1BC3C10F00A244ED /* MessagePanelViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MessagePanelViewController.h; sourceTree = "<group>"; };
@@ -3281,6 +3284,8 @@
 				CE6073321B3AD475007B567C /* CongressPhotoFinderAPI.m */,
 				CE2BF9751B3E5A1700AB15AC /* EmailComposerViewController.h */,
 				CE2BF9761B3E5A1700AB15AC /* EmailComposerViewController.m */,
+				CE9034841BC63C04000BE136 /* LongFormEmailViewController.h */,
+				CE9034851BC63C04000BE136 /* LongFormEmailViewController.m */,
 				CE31B1A71B44923B0048A5B1 /* ParseAPI.h */,
 				CE31B1A81B44923B0048A5B1 /* ParseAPI.m */,
 				CE99E3851B5EF1ED00ED9D33 /* MarkSentMessageAPI.h */,
@@ -4437,6 +4442,7 @@
 				CE31B1A01B420C670048A5B1 /* MessageTableViewRepresentativeCell.m in Sources */,
 				CED9B7A41B9EDB4B00B22396 /* ComposeViewController.m in Sources */,
 				CEB187911B18F8C400C86955 /* MessageOptionsTableTableViewController.m in Sources */,
+				CE9034861BC63C04000BE136 /* LongFormEmailViewController.m in Sources */,
 				CE2029721B363D51005C079B /* CongressFinderAPI.m in Sources */,
 				CE6073331B3AD475007B567C /* CongressPhotoFinderAPI.m in Sources */,
 				CE241A421AEAE45A00F22144 /* main.m in Sources */,

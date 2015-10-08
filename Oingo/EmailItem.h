@@ -18,4 +18,8 @@
 @property (nonatomic, retain) NSString *emailRecipients;
 @property (nonatomic, retain) NSString *linkToEmail;
 @property (nonatomic, retain) NSString *emailSubject;
+
+//Success fields
+@property (nonatomic) bool isLongFormEmailSent;
+
 @end

@@ -160,6 +160,7 @@ dependencies: \
   /Users/matthewacalin/Documents/FacebookSDK/FBSDKShareKit.framework/Modules/module.modulemap \
   /Users/matthewacalin/Desktop/IphoneApps/PushThought/Oingo/MakePhoneCallAPI.h \
   /Users/matthewacalin/Desktop/IphoneApps/PushThought/Oingo/EmailComposerViewController.h \
+  /Users/matthewacalin/Desktop/IphoneApps/PushThought/LongFormEmailViewController.h \
   /Users/matthewacalin/Desktop/IphoneApps/PushThought/Oingo/ParseAPI.h \
   /Users/matthewacalin/Desktop/IphoneApps/PushThought/Oingo/CongressFinderAPI.h \
   /Users/matthewacalin/Desktop/IphoneApps/PushThought/Oingo/TwitterAPITweet.h \

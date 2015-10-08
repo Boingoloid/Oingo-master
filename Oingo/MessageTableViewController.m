@@ -30,6 +30,7 @@
 #import <UIKit/UIKit.h>
 #import "MakePhoneCallAPI.h"
 #import "EmailComposerViewController.h"
+#import "LongFormEmailViewController.h"
 #import "ParseAPI.h"
 #import "CongressFinderAPI.h"
 #import "TwitterAPITweet.h"
@@ -211,30 +212,80 @@ NSInteger footerHeight = 1;
         } else if ([cellScout isKindOfClass:[MessageTableViewEmailCell class]]){
             NSLog(@"Email class cell");
             MessageTableViewEmailCell *cell = (MessageTableViewEmailCell *)[tableView cellForRowAtIndexPath:indexPath];
+            
+            
+            __block NSUInteger countFirstName = 0;
+            [cell.firstName.text enumerateSubstringsInRange:NSMakeRange(0, [cell.firstName.text length])
+                                        options:NSStringEnumerationByComposedCharacterSequences
+                                     usingBlock:^(NSString *substring, NSRange substringRange, NSRange enclosingRange, BOOL *stop) {
+                                         countFirstName++;
+                                     }];
+            
+            __block NSUInteger countLastName = 0;
+            [cell.lastName.text enumerateSubstringsInRange:NSMakeRange(0, [cell.lastName.text length])
+                                                    options:NSStringEnumerationByComposedCharacterSequences
+                                                 usingBlock:^(NSString *substring, NSRange substringRange, NSRange enclosingRange, BOOL *stop) {
+                                                     countLastName++;
+                                                 }];
+
+            
+            
             if (CGRectContainsPoint(cell.emailRecipientsButton.frame, pointInCell)) {
-                //get text
-                //get subject
-                //get recipients
-                //send to email
                 
-            } else if (CGRectContainsPoint(cell.emailMyEmailButton.frame, pointInCell)) {
-                
-                
-            } else if (CGRectContainsPoint(cell.emailBlankButton.frame, pointInCell)) {
-                
-                
-            } else if (CGRectContainsPoint(cell.storeTextInClipboardButton.frame, pointInCell)) {
-                
-                
-            } else if (CGRectContainsPoint(cell.storeRecipientsInClipboardButton.frame, pointInCell)) {
-                
-                
+                PFUser *currentUser = [PFUser currentUser];
+                if(!currentUser) {
+                    [self pushToSignIn];
+                    
+                } else if (countFirstName == 0 || countLastName == 0) {
+
+                    [self showCheckFullNameWarning];
+                    
+                } else {
+                    LongFormEmailViewController *emailComposer = [[LongFormEmailViewController alloc] init];
+                    emailComposer.selectedSegment = self.selectedSegment;
+                    emailComposer.emailSubject = cell.emailSubjectTextView.text;
+                    emailComposer.emailBody = cell.messageTextView.text;
+                    emailComposer.emailRecipients = cell.emailRecipientsTextView.text;
+                    emailComposer.firstName = cell.firstName.text;
+                    emailComposer.lastName = cell.lastName.text;
+                    emailComposer.messageTableViewController = self;
+                    [emailComposer showMailPicker];
+                    [self presentViewController:emailComposer animated:YES completion:NULL];
+                }
+
             } else if (CGRectContainsPoint(cell.linkToEmailButton.frame, pointInCell)) {
-                self.linkToEmail = cell.linkToEmail;
-                [self performSegueWithIdentifier:@"showWebViewControllerEmail" sender:self];
                 
+                PFUser *currentUser = [PFUser currentUser];
+                if(!currentUser) {
+                    [self pushToSignIn];
+                } else {
+                    self.linkToEmail = cell.linkToEmail;
+                    [self performSegueWithIdentifier:@"showWebViewControllerEmail" sender:self];
+                }
             }
 
+
+        // Local Rep Touch - Right now only webForm unique
+        } else if ([cellScout isKindOfClass:[MessageTableViewRepresentativeCell class]]){
+            MessageTableViewRepresentativeCell *cell = (MessageTableViewRepresentativeCell *)[tableView cellForRowAtIndexPath:indexPath];
+
+            PFUser *currentUser = [PFUser currentUser];
+            if(!currentUser) {
+                [self pushToSignIn];
+            } else if (CGRectContainsPoint(cell.webFormButton.frame, pointInCell)) {
+                NSLog(@"touch in webForm area");
+                if(!cell.webFormButton.hidden){
+                    
+                    PFUser *currentUser = [PFUser currentUser];
+                    if(!currentUser) {
+                        [self pushToSignIn];
+                    } else {
+                        NSString *url = cell.contactForm;
+                        [[UIApplication sharedApplication] openURL:[NSURL URLWithString:url]];
+                    }
+                }
+            }
+            
         // Civilian/Rep Cell Touch ----------
         } else {
             MessageTableViewCell *cell = (MessageTableViewCell *)[tableView cellForRowAtIndexPath:indexPath];
@@ -271,15 +322,22 @@ NSInteger footerHeight = 1;
                     [self postToFacebook:cell];
                 }
             } else if (CGRectContainsPoint(cell.phoneTouchCaptureImageView.frame, pointInCell)) {
+                
                 NSLog(@"touch in phone area");
                 if(!cell.phoneButton.hidden){
-                    [self showPhoneCallAlert:cell.phone];
+
+                    PFUser *currentUser = [PFUser currentUser];
+                    if(!currentUser) {
+                        [self pushToSignIn];
+                    } else {
+                        [self showPhoneCallAlert:cell.phone];
+                    }
+                
                 }
             } else if (CGRectContainsPoint(cell.emailTouchCaptureImageView.frame, pointInCell)) {
                 NSLog(@"touch in email button area");
                 if(!cell.emailButton.hidden){
-                    
-                    // Check if current user, otherwise send to login
+
                     PFUser *currentUser = [PFUser currentUser];
                     if(!currentUser) {
                         [self pushToSignIn];
@@ -306,12 +364,6 @@ NSInteger footerHeight = 1;
                             [self presentViewController:emailComposer animated:YES completion:NULL];
                         }
                     }
-                }
-            } else if (CGRectContainsPoint(cell.webFormButton.frame, pointInCell)) {
-                NSLog(@"touch in webForm area");
-                if(!cell.webFormButton.hidden){
-                    NSString *url = cell.contantForm;
-                    [[UIApplication sharedApplication] openURL:[NSURL URLWithString:url]];
                 }
             } else if (CGRectContainsPoint(cell.messageImage.frame, pointInCell)) {
                 NSLog(@"touch in image area");
@@ -812,6 +864,20 @@ NSInteger footerHeight = 1;
     return YES;
 }
 */
+
+
+#pragma mark - Check Full Name for Email Alert
+- (void) showCheckFullNameWarning {
+    NSString *alertTitle = @"Please enter your name";
+    NSString *alertMessage = [NSString stringWithFormat:@"Please enter both a first and last name."];
+    UIAlertController *alertController = [UIAlertController alertControllerWithTitle:alertTitle message:alertMessage preferredStyle:UIAlertControllerStyleAlert];
+    UIAlertAction *OKAction = [UIAlertAction actionWithTitle:NSLocalizedString(@"OK", @"OK") style:UIAlertActionStyleDefault handler:^(UIAlertAction *action){
+    
+    }];
+    
+    [alertController addAction:OKAction];
+    [self presentViewController:alertController animated:YES completion:nil];
+}
 
 #pragma mark - Phone Call API
 -(void)showPhoneCallAlert:(NSString*)phoneString{

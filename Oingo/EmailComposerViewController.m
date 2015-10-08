@@ -13,8 +13,7 @@
 #import "MessageItem.h"
 
 @interface EmailComposerViewController ()<MFMailComposeViewControllerDelegate, UINavigationControllerDelegate>
-//MFMessageComposeViewControllerDelegate
-// UILabel for displaying the result of the sending the message.
+
 @property (nonatomic, weak) IBOutlet UILabel *feedbackMsg;
 @end
 

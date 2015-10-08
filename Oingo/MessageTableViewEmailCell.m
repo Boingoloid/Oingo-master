@@ -26,6 +26,10 @@
 
 
 - (void) configEmailCell:(EmailItem*)emailItem indexPath:(NSIndexPath*)indexPath{
+    
+    // Hide success fields
+    self.emailSuccessImageView.hidden = YES;
+    
     //add information
     NSLog(@"Configuring email cell");
     [self setSelectionStyle:UITableViewCellSelectionStyleNone];
@@ -66,21 +70,18 @@
     self.emailMyEmailButton.layer.borderColor = [[UIColor blackColor] CGColor];
     self.emailMyEmailButton.layer.cornerRadius = 3.0;
     self.emailMyEmailButton.clipsToBounds = YES;
+    
+    // Success fields
+    // Long Form Email
+    NSNumber *sendEmailNumberBool = [emailItem valueForKey:@"isLongFormEmailSent"];
+    bool sendEmailBool = [sendEmailNumberBool boolValue];
+    if(sendEmailBool) {
+        self.emailSuccessImageView.hidden = NO;
+    } else {
+        self.emailSuccessImageView.hidden = YES;
+    }
+    
 
-    self.emailBlankButton.layer.borderWidth = .5;
-    self.emailBlankButton.layer.borderColor = [[UIColor blackColor] CGColor];
-    self.emailBlankButton.layer.cornerRadius = 3.0;
-    self.emailBlankButton.clipsToBounds = YES;
-
-    self.storeTextInClipboardButton.layer.borderWidth = .5;
-    self.storeTextInClipboardButton.layer.borderColor = [[UIColor blackColor] CGColor];
-    self.storeTextInClipboardButton.layer.cornerRadius = 3.0;
-    self.storeTextInClipboardButton.clipsToBounds = YES;
-
-    self.storeRecipientsInClipboardButton.layer.borderWidth = .5;
-    self.storeRecipientsInClipboardButton.layer.borderColor = [[UIColor blackColor] CGColor];
-    self.storeRecipientsInClipboardButton.layer.cornerRadius = 3.0;
-    self.storeRecipientsInClipboardButton.clipsToBounds = YES;
 }
 
 - (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
@@ -92,36 +93,27 @@
         [self.emailSubjectTextView resignFirstResponder];
     } else  if ([self.emailRecipientsTextView isFirstResponder] && [touch view] != self.emailRecipientsTextView) {
         [self.emailRecipientsTextView resignFirstResponder];
+    } else  if ([self.firstName isFirstResponder] && [touch view] != self.firstName) {
+        [self.firstName resignFirstResponder];
+    } else  if ([self.lastName isFirstResponder] && [touch view] != self.lastName) {
+        [self.lastName resignFirstResponder];
     }
+    
     [super touchesBegan:touches withEvent:event];
 }
 
-
-
-- (IBAction)emailRecipients:(id)sender {
-    
-}
-
-- (IBAction)emailMyEmail:(id)sender {
-    
-}
-
-- (IBAction)emailBlank:(id)sender {
-    
-}
-
-- (IBAction)storeText:(id)sender {
-    NSString *copyStringverse = self.messageTextView.text;
-    UIPasteboard *pb = [UIPasteboard generalPasteboard];
-    [pb setString:copyStringverse];
-//    http://stackoverflow.com/questions/8869569/copy-functionality-in-ios-by-using-uipasteboard
-}
-
-- (IBAction)storeRecipients:(id)sender {
-    NSString *copyStringverse = self.emailRecipientsTextView.text;
-    UIPasteboard *pb = [UIPasteboard generalPasteboard];
-    [pb setString:copyStringverse];
-}
+//- (IBAction)storeText:(id)sender {
+//    NSString *copyStringverse = self.messageTextView.text;
+//    UIPasteboard *pb = [UIPasteboard generalPasteboard];
+//    [pb setString:copyStringverse];
+////    http://stackoverflow.com/questions/8869569/copy-functionality-in-ios-by-using-uipasteboard
+//}
+//
+//- (IBAction)storeRecipients:(id)sender {
+//    NSString *copyStringverse = self.emailRecipientsTextView.text;
+//    UIPasteboard *pb = [UIPasteboard generalPasteboard];
+//    [pb setString:copyStringverse];
+//}
 
 - (void)setFrame:(CGRect)frame {
     int inset = 10;

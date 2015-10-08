@@ -110,7 +110,7 @@
         // Add information from congressional message iterm to properties of cell
         self.targetName.text = [NSString stringWithFormat:@"%@ /",[congressionalMessageItem valueForKey:@"fullName"]];
         self.targetTitleLabel.text = [congressionalMessageItem valueForKey:@"title"];
-        self.contantForm = [self.congressionalMessageItem valueForKey:@"contactForm"];
+        self.contactForm = [self.congressionalMessageItem valueForKey:@"contactForm"];
         self.phone = [self.congressionalMessageItem valueForKey:@"phone"];
         self.website = [self.congressionalMessageItem valueForKey:@"website"];
         self.openCongressEmail = [self.congressionalMessageItem valueForKey:@"openCongressEmail"];
