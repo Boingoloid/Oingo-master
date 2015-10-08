@@ -9,6 +9,7 @@
 #import "MessageTableViewEmailCell.h"
 #import <UIKit/UIKit.h>
 #import "WebViewController.h"
+#import <Parse/Parse.h>
 
 
 @implementation MessageTableViewEmailCell
@@ -27,8 +28,14 @@
 
 - (void) configEmailCell:(EmailItem*)emailItem indexPath:(NSIndexPath*)indexPath{
     
-    // Hide success fields
-    self.emailSuccessImageView.hidden = YES;
+    PFUser *currentUser = [PFUser currentUser];
+    
+    if([currentUser valueForKey:@"firstNameEmail"]){
+        self.firstName.text = [currentUser valueForKey:@"firstNameEmail"];
+    }
+    if([currentUser valueForKey:@"lastNameEmail"]){
+        self.lastName.text = [currentUser valueForKey:@"lastNameEmail"];
+    }
     
     //add information
     NSLog(@"Configuring email cell");
@@ -39,8 +46,8 @@
     self.messageTextView.text = [NSString stringWithFormat:@"%@",[emailItem valueForKey:@"messageText"]];
     self.emailSubjectTextView.text = [NSString stringWithFormat:@"%@",[emailItem valueForKey:@"emailSubject"]];
     self.emailRecipientsTextView.text = [emailItem valueForKey:@"emailRecipients"];
-    
     self.linkToEmail = [emailItem valueForKey:@"linkToEmail"];
+
 
     // Formatting
     self.emailSubjectTextView.layer.borderWidth = .5;
@@ -71,8 +78,10 @@
     self.emailMyEmailButton.layer.cornerRadius = 3.0;
     self.emailMyEmailButton.clipsToBounds = YES;
     
-    // Success fields
-    // Long Form Email
+    // Hide success fields
+    self.emailSuccessImageView.hidden = YES;
+    
+    // Mark and show Success fields
     NSNumber *sendEmailNumberBool = [emailItem valueForKey:@"isLongFormEmailSent"];
     bool sendEmailBool = [sendEmailNumberBool boolValue];
     if(sendEmailBool) {
