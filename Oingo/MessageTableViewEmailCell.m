@@ -32,12 +32,25 @@
     
     // Assign values
     self.emailItem = emailItem;
-    self.messageTextView.text = [NSString stringWithFormat:@"%@ /",[emailItem valueForKey:@"messageText"]];
-    self.emailSubject.text = [NSString stringWithFormat:@"Subject: %@ /",[emailItem valueForKey:@"emailSubject"]];
-    self.emailRecipients = [emailItem valueForKey:@"emailRecipients"];
+    self.messageTextView.text = [NSString stringWithFormat:@"%@",[emailItem valueForKey:@"messageText"]];
+    self.emailSubjectTextView.text = [NSString stringWithFormat:@"%@",[emailItem valueForKey:@"emailSubject"]];
+    self.emailRecipientsTextView.text = [emailItem valueForKey:@"emailRecipients"];
+    
     self.linkToEmail = [emailItem valueForKey:@"linkToEmail"];
 
     // Formatting
+    self.emailSubjectTextView.layer.borderWidth = .5;
+    self.emailSubjectTextView.layer.borderColor = [[UIColor lightGrayColor] CGColor];
+    self.emailSubjectTextView.layer.cornerRadius = 3.0;
+    self.emailSubjectTextView.clipsToBounds = YES;
+    [self.emailSubjectTextView scrollRangeToVisible:NSMakeRange(0, 0)];
+    
+    self.emailRecipientsTextView.layer.borderWidth = .5;
+    self.emailRecipientsTextView.layer.borderColor = [[UIColor lightGrayColor] CGColor];
+    self.emailRecipientsTextView.layer.cornerRadius = 3.0;
+    self.emailRecipientsTextView.clipsToBounds = YES;
+    [self.emailRecipientsTextView scrollRangeToVisible:NSMakeRange(0, 0)];
+    
     self.messageTextView.layer.borderWidth = .5;
     self.messageTextView.layer.borderColor = [[UIColor lightGrayColor] CGColor];
     self.messageTextView.layer.cornerRadius = 3.0;
@@ -75,6 +88,10 @@
     UITouch *touch = [[event allTouches] anyObject];
     if ([self.messageTextView isFirstResponder] && [touch view] != self.messageTextView) {
         [self.messageTextView resignFirstResponder];
+    } else  if ([self.emailSubjectTextView isFirstResponder] && [touch view] != self.emailSubjectTextView) {
+        [self.emailSubjectTextView resignFirstResponder];
+    } else  if ([self.emailRecipientsTextView isFirstResponder] && [touch view] != self.emailRecipientsTextView) {
+        [self.emailRecipientsTextView resignFirstResponder];
     }
     [super touchesBegan:touches withEvent:event];
 }
@@ -101,17 +118,18 @@
 }
 
 - (IBAction)storeRecipients:(id)sender {
-    NSString *copyStringverse = self.emailRecipients;
+    NSString *copyStringverse = self.emailRecipientsTextView.text;
     UIPasteboard *pb = [UIPasteboard generalPasteboard];
     [pb setString:copyStringverse];
 }
 
 - (void)setFrame:(CGRect)frame {
-    [super setFrame:frame];
     int inset = 10;
     frame.origin.x += inset; //equal to saying originx = originx + inset
     frame.size.width -= 2 * inset; //mult by 2 b/c taking from both sides
-
     
+    dispatch_async(dispatch_get_main_queue(), ^{
+    [super setFrame:frame];
+    });
 }
 @end

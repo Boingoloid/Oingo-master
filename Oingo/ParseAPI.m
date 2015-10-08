@@ -196,7 +196,7 @@ BOOL isLocationInfoAvailable = NO;
 //    NSLog(@"Prep sections triggered, here is the messageList %@",[messageList firstObject]);
 //    NSLog(@"Prep sections triggered, here is the self.menulist %@",[self.menuList lastObject]);
     
-    [self separateMessagesFromContacts:messageList]; //create self.messageList and self.contactList
+    [self separateMessagesFromContacts:messageList]; //create self.messageList and self.contactList and other
     [self createMenuList]; //creates self.menuList - these are th   e grouopings for sections
 
     
@@ -274,7 +274,7 @@ BOOL isLocationInfoAvailable = NO;
         bool isMessageBool = [isMessageNumber boolValue];
         if(isMessageBool) {
             [messageTextList addObject:dictionary];
-        } else if ([[dictionary valueForKey:@"messageCategory"] isEqualToString:@"Email"]){
+        } else if ([[dictionary valueForKey:@"messageCategory"] isEqualToString:@"Long Form Email"]){
             NSLog(@"[dictionary valueForKey:@messageCategory]:%@",[dictionary valueForKey:@"messageCategory"]);
             [otherList addObject:dictionary];
         }else {

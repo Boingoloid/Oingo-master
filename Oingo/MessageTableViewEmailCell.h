@@ -10,7 +10,7 @@
 #import "EmailItem.h"
 
 @interface MessageTableViewEmailCell : UITableViewCell
-@property (weak, nonatomic) IBOutlet UITextView *messageTextView;
+
 @property (weak, nonatomic) IBOutlet UIButton *emailRecipientsButton;
 @property (weak, nonatomic) IBOutlet UIButton *emailMyEmailButton;
 @property (weak, nonatomic) IBOutlet UIButton *emailBlankButton;
@@ -19,10 +19,12 @@
 @property (weak, nonatomic) IBOutlet UIButton *linkToEmailButton;
 @property (weak, nonatomic) NSString *linkToEmail;
 
-@property (weak, nonatomic) IBOutlet UILabel *emailSubject;
+@property (weak, nonatomic) IBOutlet UITextView *emailSubjectTextView;
+@property (weak, nonatomic) IBOutlet UITextView *messageTextView;
+@property (weak, nonatomic) IBOutlet UITextView *emailRecipientsTextView;
 
 @property (weak, nonatomic) IBOutlet EmailItem *emailItem;
-@property (weak, nonatomic) IBOutlet NSString *emailRecipients;
+
 
 
 - (IBAction)emailRecipients:(id)sender;

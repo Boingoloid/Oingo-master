@@ -101,7 +101,10 @@ dependencies: \
   /Users/matthewacalin/Documents/FacebookSDK/FBSDKShareKit.framework/Headers/FBSDKAppGroupAddDialog.h \
   /Users/matthewacalin/Documents/FacebookSDK/FBSDKShareKit.framework/Headers/FBSDKShareKit.h \
   /Users/matthewacalin/Documents/FacebookSDK/FBSDKShareKit.framework/Modules/module.modulemap \
+  /Users/matthewacalin/Desktop/IphoneApps/PushThought/TwitterCore.framework/Headers/TWTRSessionStore.h \
+  /Users/matthewacalin/Desktop/IphoneApps/PushThought/TwitterCore.framework/Headers/TWTRSession.h \
   /Users/matthewacalin/Desktop/IphoneApps/PushThought/TwitterCore.framework/Headers/TWTRGuestSession.h \
+  /Users/matthewacalin/Desktop/IphoneApps/PushThought/TwitterCore.framework/Headers/TWTRDefines.h \
   /Users/matthewacalin/Desktop/IphoneApps/PushThought/TwitterCore.framework/Headers/TWTRCoreOAuthSigning.h \
   /Users/matthewacalin/Desktop/IphoneApps/PushThought/TwitterCore.framework/Headers/TWTRConstants.h \
   /Users/matthewacalin/Desktop/IphoneApps/PushThought/TwitterCore.framework/Headers/TWTRAuthSession.h \
@@ -125,8 +128,6 @@ dependencies: \
   /Users/matthewacalin/Desktop/IphoneApps/PushThought/TwitterKit.framework/Headers/TWTRTimelineType.h \
   /Users/matthewacalin/Desktop/IphoneApps/PushThought/TwitterKit.framework/Headers/TWTRTimelineDataSource.h \
   /Users/matthewacalin/Desktop/IphoneApps/PushThought/TwitterKit.framework/Headers/TWTRCollectionTimelineDataSource.h \
-  /Users/matthewacalin/Desktop/IphoneApps/PushThought/TwitterKit.framework/Headers/TWTRSession.h \
-  /Users/matthewacalin/Desktop/IphoneApps/PushThought/TwitterKit.framework/Headers/TWTRDefines.h \
   /Users/matthewacalin/Desktop/IphoneApps/PushThought/TwitterKit.framework/Headers/TWTRAPIClient.h \
   /Users/matthewacalin/Desktop/IphoneApps/PushThought/TwitterKit.framework/Headers/Twitter.h \
   /Users/matthewacalin/Desktop/IphoneApps/PushThought/TwitterKit.framework/Headers/TwitterKit.h \

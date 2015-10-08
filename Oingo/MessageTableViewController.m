@@ -57,7 +57,7 @@ CongressionalMessageItem *congressionalMessageItem;
 EmailItem *emailItem;
 
 NSInteger section;
-NSInteger sectionHeaderHeight = 16;
+NSInteger sectionHeaderHeight = 18;
 NSInteger headerHeight = 48;
 NSInteger footerHeight = 1;
 
@@ -68,8 +68,6 @@ NSInteger footerHeight = 1;
     [super viewDidLoad];
     NSLog(@"viewDidLoad");
     
-
-
     // Allows for auto resizing of row height
     self.tableView.estimatedRowHeight = 100;
     self.tableView.rowHeight = UITableViewAutomaticDimension;
@@ -573,7 +571,6 @@ NSInteger footerHeight = 1;
         if (cell == nil){
             NSLog(@"cell was nil");
             cell = [[MessageTableViewMessageCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"CellCategoryMessage"];
-
         }
         
         NSLog(@"loading message cell");
@@ -605,7 +602,7 @@ NSInteger footerHeight = 1;
 //        [cell layoutIfNeeded];
         return cell;
         
-    } else if([category isEqualToString:@"Email"]) {
+    } else if([category isEqualToString:@"Long Form Email"]) {
         MessageTableViewEmailCell *cell = [tableView dequeueReusableCellWithIdentifier:@"CellEmail" forIndexPath:indexPath];
         NSLog(@"loading email cell");
         if (cell == nil){
@@ -743,14 +740,13 @@ NSInteger footerHeight = 1;
 
 -(UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
 {
-
         UIView *view = [[UIView alloc] initWithFrame:CGRectMake(7, 0, tableView.frame.size.width -14 , sectionHeaderHeight)];
         UILabel *sectionLabel = [[UILabel alloc] init];
         sectionLabel.frame = CGRectMake(7, 0, tableView.frame.size.width -14, sectionHeaderHeight);
         sectionLabel.backgroundColor = [UIColor colorWithRed:.96 green:.96 blue:.96 alpha:1];
         sectionLabel.layer.borderWidth = .5;
         sectionLabel.layer.borderColor = [[UIColor blackColor] CGColor];
-        sectionLabel.font = [UIFont boldSystemFontOfSize:11];
+        sectionLabel.font = [UIFont systemFontOfSize:14];
         sectionLabel.textColor = [UIColor blackColor];
         sectionLabel.layer.cornerRadius = 3;
         sectionLabel.clipsToBounds = YES;
@@ -758,7 +754,6 @@ NSInteger footerHeight = 1;
         sectionLabel.text = [NSString stringWithFormat:@"%@%@%@", padding, [self categoryForSection:section], padding];
         [view addSubview:sectionLabel];
         return view;
-
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section {
@@ -895,7 +890,6 @@ NSInteger footerHeight = 1;
             [self viewDidLoad];
         }
     }];
-    
 }
 
 
