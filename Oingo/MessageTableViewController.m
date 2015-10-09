@@ -516,7 +516,7 @@ NSInteger footerHeight = 1;
 }
 
 
-- (void)postToFacebook:(MessageTableViewCell *)cell {
+- (void)postToFacebook:(UITableViewCell *)cell {
 
     FacebookAPIPost *facebookAPIPost = [[FacebookAPIPost alloc]init];
     facebookAPIPost.messageTableViewController = self;
