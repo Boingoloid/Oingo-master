@@ -296,36 +296,32 @@ BOOL isLocationInfoAvailable = NO;
 
 -(void)createMenuList{
     
+    // 1) Sep up objects
     if(self.menuList) {
         [self.menuList removeAllObjects];
     } else {
         self.menuList = [[NSMutableArray alloc]init];
     }
     
-    if(self.expandSectionsKeyList) {
-        [self.expandSectionsKeyList removeAllObjects];
-    } else {
-        self.expandSectionsKeyList = [[NSMutableArray alloc]init];
-    }
+//
+//    if(self.expandSectionsKeyList) {
+//        [self.expandSectionsKeyList removeAllObjects];
+//    } else {
+//        self.expandSectionsKeyList = [[NSMutableArray alloc]init];
+//    }
     
     NSString *category = @"";
     NSUInteger contactIndex = 0;
-    NSUInteger localRepIndex = 0;
     
-    // For every contact, goes to messageTextList and pulls first entry for display
+    // 2) For every section grabs 1 message, then fills in contacts beneath
     for (NSMutableDictionary *contactRow in self.contactList) {
         
         //add "success" bools
         [contactRow setValue:@NO forKey:@"isTweetSent"];
         
+        
         if(category != [contactRow valueForKey:@"messageCategory"]){
             category = [contactRow valueForKey:@"messageCategory"];
-            
-            
-            // Keep a count here.  if local rep, increment
-            if ([category  isEqual: @"Local Representative"]) {
-                localRepIndex ++;
-            }
             
             NSUInteger index = [self.messageTextList indexOfObjectPassingTest:
                                 ^BOOL(NSDictionary *dict, NSUInteger idx, BOOL *stop) {
