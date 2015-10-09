@@ -31,7 +31,7 @@
 @property (nonatomic, retain) NSString *youtubeID;
 @property (nonatomic, retain) NSString *facebookID;
 @property (nonatomic, retain) NSString *twitterID;
-@property(nonatomic) NSString *contantForm;
+@property(nonatomic) NSString *contactForm;
 @property (nonatomic, retain) NSString *inOffice;
 @property (nonatomic, retain) NSString *gender;
 @property (nonatomic, retain) NSString *birthday;

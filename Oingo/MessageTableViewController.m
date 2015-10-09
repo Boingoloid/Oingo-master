@@ -266,16 +266,88 @@ NSInteger footerHeight = 1;
 
 
         // Local Rep Touch - Right now only webForm unique
-        } else if ([cellScout isKindOfClass:[MessageTableViewRepresentativeCell class]]){
+        } else if ([cellScout isKindOfClass:[MessageTableViewRepresentativeCell class]] || [cellScout isKindOfClass:[MessageTableViewCell class]]){
             MessageTableViewRepresentativeCell *cell = (MessageTableViewRepresentativeCell *)[tableView cellForRowAtIndexPath:indexPath];
 
-            PFUser *currentUser = [PFUser currentUser];
-            if(!currentUser) {
-                [self pushToSignIn];
-            } else if (CGRectContainsPoint(cell.webFormButton.frame, pointInCell)) {
+            
+            if (CGRectContainsPoint(cell.tweetTouchCaptureImageView.frame, pointInCell)) {
+                NSLog(@"touch in tweet button area");
+                if(!cell.tweetButton.hidden){
+                    // Create Tweet API object, Properties passed: -menuList -selection info
+                    TwitterAPITweet *twitterAPITweet = [[TwitterAPITweet alloc]init];
+                    twitterAPITweet.messageTableViewController = self;
+                    twitterAPITweet.selectedSegment = self.selectedSegment;
+                    twitterAPITweet.selectedProgram = self.selectedProgram;
+                    twitterAPITweet.menuList = self.menuList;
+                    twitterAPITweet.selectedContact = self.selectedContact;
+                    
+                    //Look up message - note this works b/c message is first item in section.
+                    NSUInteger index = [self.menuList indexOfObjectPassingTest:
+                                        ^BOOL(NSDictionary *dict, NSUInteger idx, BOOL *stop) {
+                                            return [[dict valueForKey:@"messageCategory"] isEqualToString:category];
+                                        }];
+                    if(index == NSNotFound){
+                        NSLog(@"did not find line");
+                        
+                    } else {
+                        NSLog(@"index was found:%ld",(unsigned long)index);
+                        twitterAPITweet.messageText = [[self.menuList objectAtIndex:index] valueForKey:@"messageText"];
+                    }
+                    
+                    [twitterAPITweet shareMessageTwitterAPI:cell];
+                }
+            } else if(CGRectContainsPoint(cell.postToFacebookButton.frame, pointInCell)) {
+                NSLog(@"touch in facebook button area");
+                if(!cell.postToFacebookButton.hidden){
+                    [self postToFacebook:cell];
+                }
+            } else if (CGRectContainsPoint(cell.phoneTouchCaptureImageView.frame, pointInCell)) {
+                
+                NSLog(@"touch in phone area");
+                if(!cell.phoneButton.hidden){
+                    
+                    PFUser *currentUser = [PFUser currentUser];
+                    if(!currentUser) {
+                        [self pushToSignIn];
+                    } else {
+                        [self showPhoneCallAlert:cell.phone];
+                    }
+                    
+                }
+            } else if (CGRectContainsPoint(cell.emailTouchCaptureImageView.frame, pointInCell)) {
+                NSLog(@"touch in email button area");
+                if(!cell.emailButton.hidden){
+                    
+                    PFUser *currentUser = [PFUser currentUser];
+                    if(!currentUser) {
+                        [self pushToSignIn];
+                    } else {
+                        
+                        //Look up message - note this works b/c message is first item in section.
+                        NSUInteger index = [self.menuList indexOfObjectPassingTest:
+                                            ^BOOL(NSDictionary *dict, NSUInteger idx, BOOL *stop) {
+                                                return [[dict valueForKey:@"messageCategory"] isEqualToString:category];
+                                            }];
+                        if(index == NSNotFound){
+                            NSLog(@"did not find line");
+                            
+                        } else {
+                            NSLog(@"index was found:%ld",(unsigned long)index);
+                            
+                            EmailComposerViewController *emailComposer = [[EmailComposerViewController alloc] init];
+                            emailComposer.selectedSegment = self.selectedSegment;
+                            emailComposer.selectedContact = self.selectedContact;
+                            emailComposer.messageTableViewController = self;
+                            
+                            [emailComposer showMailPicker:cell.openCongressEmail withMessage:[[self.menuList objectAtIndex:index] valueForKey:@"messageText"]];
+                            
+                            [self presentViewController:emailComposer animated:YES completion:NULL];
+                        }
+                    }
+                }
+            } else if (CGRectContainsPoint(cell.webFormTouchCaptureImageView.frame, pointInCell)){
                 NSLog(@"touch in webForm area");
                 if(!cell.webFormButton.hidden){
-                    
                     PFUser *currentUser = [PFUser currentUser];
                     if(!currentUser) {
                         [self pushToSignIn];
@@ -284,7 +356,15 @@ NSInteger footerHeight = 1;
                         [[UIApplication sharedApplication] openURL:[NSURL URLWithString:url]];
                     }
                 }
+            } else if (CGRectContainsPoint(cell.messageImage.frame, pointInCell)) {
+                NSLog(@"touch in image area");
+                if(!cell.messageImage.hidden){
+                }
+            } else {
+                NSLog(@"touch in outer area");
             }
+            
+            
             
         // Civilian/Rep Cell Touch ----------
         } else {
@@ -337,7 +417,7 @@ NSInteger footerHeight = 1;
             } else if (CGRectContainsPoint(cell.emailTouchCaptureImageView.frame, pointInCell)) {
                 NSLog(@"touch in email button area");
                 if(!cell.emailButton.hidden){
-
+                    
                     PFUser *currentUser = [PFUser currentUser];
                     if(!currentUser) {
                         [self pushToSignIn];
@@ -363,6 +443,17 @@ NSInteger footerHeight = 1;
                             
                             [self presentViewController:emailComposer animated:YES completion:NULL];
                         }
+                    }
+                }
+            } else if (CGRectContainsPoint(cell.webFormTouchCaptureImageView.frame, pointInCell)){
+                NSLog(@"touch in webForm area");
+                if(!cell.webFormButton.hidden){
+                    PFUser *currentUser = [PFUser currentUser];
+                    if(!currentUser) {
+                        [self pushToSignIn];
+                    } else {
+                        NSString *url = cell.contactForm;
+                        [[UIApplication sharedApplication] openURL:[NSURL URLWithString:url]];
                     }
                 }
             } else if (CGRectContainsPoint(cell.messageImage.frame, pointInCell)) {

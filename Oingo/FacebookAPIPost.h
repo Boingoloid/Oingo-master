@@ -23,6 +23,6 @@
 @property (strong, nonatomic) FBSDKShareDialog *shareDialog;
 @property (nonatomic) NSString *messageText;
 -(void)shareSegmentFacebookAPI;
--(void)shareMessageFacebookAPI:(MessageTableViewCell*)cell;
+-(void)shareMessageFacebookAPI:(UITableViewCell*)cell;
 -(void) publishFBPostWithParameters:(NSDictionary*)parameters;
 @end
