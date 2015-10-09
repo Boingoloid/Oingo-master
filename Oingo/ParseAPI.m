@@ -93,9 +93,27 @@ BOOL isLocationInfoAvailable = NO;
             dispatch_async(dispatch_get_main_queue(), ^{
                 
                 // 1)Grab results, and create deep copy of data
-                //NSLog(@" first deep copy:%@", self.messageListFromParseWithContacts);
                 self.messageListFromParseWithContacts = (NSMutableArray*)[self createDeepCopyOfData:objects];
-
+                
+                
+////  TOGGLE ON FOR PRODUCTION:  --------------------------------------------------------------------------------------------
+////  Toggle this code on for deployment builds so that new categories do not break the MessageTableViewController
+//// COMMENT OUT DEEP COPY LINE DIRECTLY ABOVE IF ACTIVE - not a must, but more efficient to not make 2 deep copies
+//*******************************************************************************************************************************
+                // 1.5 Deletes any cells labeled as experimental so I don't break the current build on app store.
+//                NSMutableArray *nonExperimentalMutableArray = [[NSMutableArray alloc] initWithCapacity:10];
+//                for (NSDictionary *dictionary in objects){
+//                    NSNumber *isExperimentalNumber = [dictionary valueForKey:@"isExperimental"];
+//                    bool isExperimentalBool = [isExperimentalNumber boolValue];
+//                    if(!isExperimentalBool) {
+//                        [nonExperimentalMutableArray addObject:dictionary];
+//                    } else {
+//                        NSLog(@"Object is experimental, don't add: %@",dictionary);
+//                    }
+//                }
+//                self.messageListFromParseWithContacts = (NSMutableArray*)[self createDeepCopyOfData:nonExperimentalMutableArray];
+//*******************************************************************************************************************************
+                
                 
                 // 2) Check for message cell for category = "Local Representative"
                 isLocalRepMessageIncluded = [self isLocalRepIncluded];

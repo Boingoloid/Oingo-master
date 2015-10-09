@@ -27,14 +27,19 @@
 
 
 - (void) configEmailCell:(EmailItem*)emailItem indexPath:(NSIndexPath*)indexPath{
+
     
     PFUser *currentUser = [PFUser currentUser];
-    
-    if([currentUser valueForKey:@"firstNameEmail"]){
-        self.firstName.text = [currentUser valueForKey:@"firstNameEmail"];
-    }
-    if([currentUser valueForKey:@"lastNameEmail"]){
-        self.lastName.text = [currentUser valueForKey:@"lastNameEmail"];
+    if(currentUser) {
+        if([currentUser valueForKey:@"firstNameEmail"]){
+            self.firstName.text = [currentUser valueForKey:@"firstNameEmail"];
+        }
+        if([currentUser valueForKey:@"lastNameEmail"]){
+            self.lastName.text = [currentUser valueForKey:@"lastNameEmail"];
+        }
+    } else {
+        self.firstName.text = @"lll";
+        self.lastName.text = @"lll";
     }
     
     //add information
@@ -43,7 +48,10 @@
     
     // Assign values
     self.emailItem = emailItem;
+    [self.messageTextView setScrollEnabled:NO];
     self.messageTextView.text = [NSString stringWithFormat:@"%@",[emailItem valueForKey:@"messageText"]];
+
+    
     self.emailSubjectTextView.text = [NSString stringWithFormat:@"%@",[emailItem valueForKey:@"emailSubject"]];
     self.emailRecipientsTextView.text = [emailItem valueForKey:@"emailRecipients"];
     self.linkToEmail = [emailItem valueForKey:@"linkToEmail"];
@@ -62,11 +70,18 @@
     self.emailRecipientsTextView.clipsToBounds = YES;
     [self.emailRecipientsTextView scrollRangeToVisible:NSMakeRange(0, 0)];
     
+    
     self.messageTextView.layer.borderWidth = .5;
     self.messageTextView.layer.borderColor = [[UIColor lightGrayColor] CGColor];
     self.messageTextView.layer.cornerRadius = 3.0;
     self.messageTextView.clipsToBounds = YES;
     [self.messageTextView scrollRangeToVisible:NSMakeRange(0, 0)];
+//    [self.messageTextView scrollRangeToVisible:NSMakeRange(0, 0)];  //Alas, I have failed! It will not scroll to the top.
+//    self.messageTextView.contentOffset = CGPointZero;
+//    [self.messageTextView setContentOffset:CGPointMake(0.0, 0.0) animated:TRUE];
+//    [self.messageTextView setScrollsToTop:@YES];
+//    [self.messageTextView setScrollEnabled:@YES];
+
     
     self.emailRecipientsButton.layer.borderWidth = .5;
     self.emailRecipientsButton.layer.borderColor = [[UIColor blackColor] CGColor];
@@ -77,6 +92,7 @@
     self.emailMyEmailButton.layer.borderColor = [[UIColor blackColor] CGColor];
     self.emailMyEmailButton.layer.cornerRadius = 3.0;
     self.emailMyEmailButton.clipsToBounds = YES;
+    
     
     // Hide success fields
     self.emailSuccessImageView.hidden = YES;
@@ -90,8 +106,11 @@
         self.emailSuccessImageView.hidden = YES;
     }
     
-
+    [self.messageTextView becomeFirstResponder];
+    [self.messageTextView resignFirstResponder];
+    
 }
+
 
 - (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
     //hide the keyborad

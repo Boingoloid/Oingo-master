@@ -73,6 +73,8 @@ NSInteger footerHeight = 1;
     self.tableView.estimatedRowHeight = 100;
     self.tableView.rowHeight = UITableViewAutomaticDimension;
     
+    // TextView start at the top (NOT WORKING!!)
+    //self.automaticallyAdjustsScrollViewInsets = false;
     
     NSLog(@"isCongressLoaded:%d",self.isCongressLoaded);
 
@@ -757,9 +759,9 @@ NSInteger footerHeight = 1;
         [self.tableView addSubview:cell];
         emailItem = [self.menuList objectAtIndex:[rowIndex intValue]];
         [cell configEmailCell:emailItem indexPath:indexPath];
-        
+
         //        [cell.contentView layoutIfNeeded];
-        //        [cell setNeedsDisplay];
+        //        [cell  setNeedsDisplay];
         //        [cell layoutIfNeeded];
         return cell;
 

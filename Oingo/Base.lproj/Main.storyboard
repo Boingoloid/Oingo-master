@@ -1416,7 +1416,7 @@
                                             </variation>
                                         </button>
                                         <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="zW1-h7-PXb">
-                                            <rect key="frame" x="10" y="126" width="569" height="132"/>
+                                            <rect key="frame" x="10" y="126" width="582" height="132"/>
                                             <color key="tintColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                             <constraints>
                                                 <constraint firstAttribute="height" constant="132" id="T1e-uo-fzj"/>
@@ -1426,7 +1426,7 @@
                                             <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                                         </textView>
                                         <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="ah2-f0-k4S">
-                                            <rect key="frame" x="10" y="38" width="569" height="45"/>
+                                            <rect key="frame" x="10" y="38" width="582" height="45"/>
                                             <color key="tintColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                             <constraints>
                                                 <constraint firstAttribute="height" constant="45" id="7g4-jW-P9D"/>
@@ -1580,7 +1580,7 @@
                                         <constraint firstAttribute="trailingMargin" secondItem="XLC-PO-euQ" secondAttribute="trailing" constant="13" id="8cr-0N-uYG"/>
                                         <constraint firstItem="gCu-Wz-CDm" firstAttribute="top" secondItem="zW1-h7-PXb" secondAttribute="bottom" constant="21" id="8vN-57-Ow5"/>
                                         <constraint firstItem="DzH-cR-caQ" firstAttribute="top" secondItem="AqT-1X-99l" secondAttribute="bottom" constant="3" id="CZ6-JB-pFS"/>
-                                        <constraint firstAttribute="trailingMargin" secondItem="zW1-h7-PXb" secondAttribute="trailing" constant="13" id="Dye-FA-4pt"/>
+                                        <constraint firstAttribute="trailingMargin" secondItem="zW1-h7-PXb" secondAttribute="trailing" id="Dye-FA-4pt"/>
                                         <constraint firstItem="Jyn-BL-HaE" firstAttribute="top" secondItem="4WO-DD-nHe" secondAttribute="top" constant="5" id="Ehm-dE-zUk"/>
                                         <constraint firstAttribute="topMargin" secondItem="hPp-Su-N3k" secondAttribute="top" constant="14" id="FXy-W7-AmW"/>
                                         <constraint firstItem="iSG-zE-CwS" firstAttribute="top" secondItem="DzH-cR-caQ" secondAttribute="top" id="FeT-Yc-qHu"/>
@@ -1591,7 +1591,7 @@
                                         <constraint firstAttribute="leadingMargin" secondItem="4WO-DD-nHe" secondAttribute="leading" constant="3" id="PVv-kj-ghF"/>
                                         <constraint firstItem="nko-dl-1N6" firstAttribute="bottom" secondItem="4WO-DD-nHe" secondAttribute="bottom" constant="-4" id="Poj-V1-dhn"/>
                                         <constraint firstItem="iSG-zE-CwS" firstAttribute="leading" secondItem="DzH-cR-caQ" secondAttribute="trailing" constant="21" id="RCf-FF-dvV"/>
-                                        <constraint firstAttribute="trailingMargin" secondItem="ah2-f0-k4S" secondAttribute="trailing" constant="13" id="RYP-nc-IpQ"/>
+                                        <constraint firstAttribute="trailingMargin" secondItem="ah2-f0-k4S" secondAttribute="trailing" id="RYP-nc-IpQ"/>
                                         <constraint firstItem="hyf-Sf-2Tm" firstAttribute="leading" secondItem="4WO-DD-nHe" secondAttribute="trailing" constant="-13" id="Rfo-br-7Tm"/>
                                         <constraint firstItem="zW1-h7-PXb" firstAttribute="leading" secondItem="ah2-f0-k4S" secondAttribute="leading" id="TcC-nA-Q2A"/>
                                         <constraint firstItem="XLC-PO-euQ" firstAttribute="top" secondItem="gCu-Wz-CDm" secondAttribute="bottom" constant="1" id="UbC-ll-GUa"/>
