@@ -15,9 +15,9 @@
 #import <QuartzCore/QuartzCore.h>
 #import <FBSDKShareKit/FBSDKShareKit.h>
 #import <FBSDKCoreKit/FBSDKCoreKit.h>
-#import <TwitterKit/TwitterKit.h>
 #import <Fabric/Fabric.h>
-//#import <Crashlytics/Crashlytics.h>
+#import <TwitterKit/TwitterKit.h>
+#import <Crashlytics/Crashlytics.h>
 #import <Accounts/Accounts.h>
 #import <Social/Social.h>
 #import "CongressionalMessageItem.h"

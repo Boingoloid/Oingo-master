@@ -32,12 +32,16 @@ dependencies: \
   /Users/matthewacalin/Desktop/IphoneApps/PushThought/Oingo/UpdateDefaults.h \
   /Users/matthewacalin/Desktop/IphoneApps/PushThought/Oingo/MessageItem.h \
   /Users/matthewacalin/Desktop/IphoneApps/PushThought/Oingo/CongressionalMessageItem.h \
+  /Users/matthewacalin/Desktop/IphoneApps/PushThought/Oingo/EmailItem.h \
   /Users/matthewacalin/Desktop/IphoneApps/PushThought/Oingo/MessageTableViewCell.h \
   /Users/matthewacalin/Desktop/IphoneApps/PushThought/Oingo/MessageTableViewMessageCell.h \
   /Users/matthewacalin/Desktop/IphoneApps/PushThought/Oingo/MessageTableViewRepresentativeCell.h \
   /Users/matthewacalin/Desktop/IphoneApps/PushThought/Oingo/MessageTableViewNoZipCell.h \
   /Users/matthewacalin/Desktop/IphoneApps/PushThought/Oingo/PFTwitterUtils+NativeTwitter.h \
+  /Users/matthewacalin/Desktop/IphoneApps/PushThought/TwitterCore.framework/Headers/TWTRSessionStore.h \
+  /Users/matthewacalin/Desktop/IphoneApps/PushThought/TwitterCore.framework/Headers/TWTRSession.h \
   /Users/matthewacalin/Desktop/IphoneApps/PushThought/TwitterCore.framework/Headers/TWTRGuestSession.h \
+  /Users/matthewacalin/Desktop/IphoneApps/PushThought/TwitterCore.framework/Headers/TWTRDefines.h \
   /Users/matthewacalin/Desktop/IphoneApps/PushThought/TwitterCore.framework/Headers/TWTRCoreOAuthSigning.h \
   /Users/matthewacalin/Desktop/IphoneApps/PushThought/TwitterCore.framework/Headers/TWTRConstants.h \
   /Users/matthewacalin/Desktop/IphoneApps/PushThought/TwitterCore.framework/Headers/TWTRAuthSession.h \
@@ -61,8 +65,6 @@ dependencies: \
   /Users/matthewacalin/Desktop/IphoneApps/PushThought/TwitterKit.framework/Headers/TWTRTimelineType.h \
   /Users/matthewacalin/Desktop/IphoneApps/PushThought/TwitterKit.framework/Headers/TWTRTimelineDataSource.h \
   /Users/matthewacalin/Desktop/IphoneApps/PushThought/TwitterKit.framework/Headers/TWTRCollectionTimelineDataSource.h \
-  /Users/matthewacalin/Desktop/IphoneApps/PushThought/TwitterKit.framework/Headers/TWTRSession.h \
-  /Users/matthewacalin/Desktop/IphoneApps/PushThought/TwitterKit.framework/Headers/TWTRDefines.h \
   /Users/matthewacalin/Desktop/IphoneApps/PushThought/TwitterKit.framework/Headers/TWTRAPIClient.h \
   /Users/matthewacalin/Desktop/IphoneApps/PushThought/TwitterKit.framework/Headers/Twitter.h \
   /Users/matthewacalin/Desktop/IphoneApps/PushThought/TwitterKit.framework/Headers/TwitterKit.h \
@@ -70,10 +72,12 @@ dependencies: \
   /Users/matthewacalin/Desktop/IphoneApps/PushThought/Fabric.framework/Headers/FABAttributes.h \
   /Users/matthewacalin/Desktop/IphoneApps/PushThought/Fabric.framework/Headers/Fabric.h \
   /Users/matthewacalin/Desktop/IphoneApps/PushThought/Fabric.framework/Modules/module.modulemap \
+  /Users/matthewacalin/Desktop/IphoneApps/PushThought/Crashlytics.framework/Headers/ANSCompatibility.h \
   /Users/matthewacalin/Desktop/IphoneApps/PushThought/Crashlytics.framework/Headers/Answers.h \
   /Users/matthewacalin/Desktop/IphoneApps/PushThought/Crashlytics.framework/Headers/CLSStackFrame.h \
   /Users/matthewacalin/Desktop/IphoneApps/PushThought/Crashlytics.framework/Headers/CLSReport.h \
   /Users/matthewacalin/Desktop/IphoneApps/PushThought/Crashlytics.framework/Headers/CLSLogging.h \
+  /Users/matthewacalin/Desktop/IphoneApps/PushThought/Crashlytics.framework/Headers/CLSAttributes.h \
   /Users/matthewacalin/Desktop/IphoneApps/PushThought/Crashlytics.framework/Headers/Crashlytics.h \
   /Users/matthewacalin/Desktop/IphoneApps/PushThought/Crashlytics.framework/Modules/module.modulemap \
   /Users/matthewacalin/Desktop/IphoneApps/PushThought/Oingo/SignUpViewController.h \
@@ -156,6 +160,7 @@ dependencies: \
   /Users/matthewacalin/Documents/FacebookSDK/FBSDKShareKit.framework/Modules/module.modulemap \
   /Users/matthewacalin/Desktop/IphoneApps/PushThought/Oingo/MakePhoneCallAPI.h \
   /Users/matthewacalin/Desktop/IphoneApps/PushThought/Oingo/EmailComposerViewController.h \
+  /Users/matthewacalin/Desktop/IphoneApps/PushThought/LongFormEmailViewController.h \
   /Users/matthewacalin/Desktop/IphoneApps/PushThought/Oingo/ParseAPI.h \
   /Users/matthewacalin/Desktop/IphoneApps/PushThought/Oingo/CongressFinderAPI.h \
   /Users/matthewacalin/Desktop/IphoneApps/PushThought/Oingo/TwitterAPITweet.h \
@@ -163,4 +168,6 @@ dependencies: \
   /Users/matthewacalin/Desktop/IphoneApps/PushThought/Oingo/LocationFinderAPI.h \
   /Users/matthewacalin/Desktop/IphoneApps/PushThought/Oingo/MessageOptionsTableTableViewController.h \
   /Users/matthewacalin/Desktop/IphoneApps/PushThought/Oingo/SettingsTableViewController.h \
-  /Users/matthewacalin/Desktop/IphoneApps/PushThought/Oingo/ComposeViewController.h
+  /Users/matthewacalin/Desktop/IphoneApps/PushThought/Oingo/ComposeViewController.h \
+  /Users/matthewacalin/Desktop/IphoneApps/PushThought/Oingo/MessageTableViewEmailCell.h \
+  /Users/matthewacalin/Desktop/IphoneApps/PushThought/WebViewController.h
