@@ -69,7 +69,20 @@
         self.targetTitleLabel.hidden = NO;
         self.messageImage.hidden = NO;
         self.sendCount.hidden = NO;
+    
+    
+    if([self.messageItem valueForKey:@"twitterID"]){
         self.tweetButton.hidden = NO;
+    } else {
+        self.tweetButton.hidden = YES;
+    }
+
+    if([self.messageItem valueForKey:@"email"]){
+        self.emailButton.hidden = NO;
+    } else {
+        self.emailButton.hidden = YES;
+    }
+
     
 //        //Touch Fields
 //        self.tweetTouchCaptureImageView.hidden = NO;
@@ -82,9 +95,10 @@
         self.locationButton.hidden = YES;
         self.zipLabel.hidden = YES;
 
-        self.emailButton.hidden = YES;
+
         self.phoneButton.hidden = YES;
         self.webFormButton.hidden = YES;
+    
         self.tweetSuccessImageView.hidden = YES;
         self.emailSuccessImageView.hidden = YES;
 
@@ -145,7 +159,9 @@
     int inset = 10;
     frame.origin.x += inset; //equal to saying originx = originx + inset
     frame.size.width -= 2 * inset; //mult by 2 b/c taking from both sides
-    [super setFrame:frame];
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [super setFrame:frame];
+    });
 
 }
 

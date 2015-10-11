@@ -16,6 +16,7 @@
 @property (nonatomic, retain) NSString *messageText;
 @property (nonatomic, retain) NSString *messageImage;
 @property (nonatomic, retain) NSString *twitterID;
+@property (nonatomic, retain) NSString *email;
 @property (nonatomic, retain) NSString *messageCategory;
 @property (nonatomic, retain) NSString *firstName;
 @property (nonatomic, retain) NSString *isGetLocationCell;

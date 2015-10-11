@@ -231,7 +231,7 @@
                                                 <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="50" id="RiS-2U-enh"/>
                                                 <constraint firstAttribute="height" relation="greaterThanOrEqual" priority="200" constant="90" id="fY7-XR-qU3"/>
                                             </constraints>
-                                            <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="14"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                             <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                                             <variation key="default">
                                                 <mask key="constraints">
@@ -291,12 +291,12 @@
                                             </variation>
                                         </label>
                                         <button userInteractionEnabled="NO" contentMode="left" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="tailTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cDZ-re-iL0">
-                                            <rect key="frame" x="9" y="81" width="228" height="20"/>
+                                            <rect key="frame" x="9" y="81" width="269" height="20"/>
                                             <constraints>
                                                 <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="350" id="ASs-iW-eYz"/>
                                                 <constraint firstAttribute="height" constant="25" id="CpU-ps-2WY"/>
                                             </constraints>
-                                            <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="11"/>
+                                            <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="13"/>
                                             <state key="normal" title="https://www.linkToContent.com/newepisode...">
                                                 <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                             </state>
@@ -695,15 +695,15 @@
                             </variation>
                         </view>
                         <prototypes>
-                            <tableViewCell contentMode="scaleToFill" horizontalHuggingPriority="1000" verticalHuggingPriority="1000" horizontalCompressionResistancePriority="200" verticalCompressionResistancePriority="200" selectionStyle="none" indentationWidth="10" reuseIdentifier="CellCategoryMessage" rowHeight="48" id="boJ-HR-9a7" customClass="MessageTableViewMessageCell">
-                                <rect key="frame" x="0.0" y="218" width="600" height="48"/>
+                            <tableViewCell contentMode="scaleToFill" horizontalHuggingPriority="1000" verticalHuggingPriority="1000" horizontalCompressionResistancePriority="200" verticalCompressionResistancePriority="200" selectionStyle="none" indentationWidth="10" reuseIdentifier="CellCategoryMessage" id="boJ-HR-9a7" customClass="MessageTableViewMessageCell">
+                                <rect key="frame" x="0.0" y="218" width="600" height="115"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" horizontalHuggingPriority="1000" verticalHuggingPriority="1000" horizontalCompressionResistancePriority="200" verticalCompressionResistancePriority="200" tableViewCell="boJ-HR-9a7" id="C1f-Ie-wjl">
-                                    <rect key="frame" x="0.0" y="0.0" width="600" height="48"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="600" height="115"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="1000" verticalHuggingPriority="1000" horizontalCompressionResistancePriority="100" verticalCompressionResistancePriority="100" usesAttributedText="YES" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zCX-6N-C1q">
-                                            <rect key="frame" x="18" y="11" width="505" height="26"/>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalCompressionResistancePriority="1000" verticalCompressionResistancePriority="1000" text="@NancyPelozi, this argues that your products, policies, and interests are harmful to farmers, consumers," lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zCX-6N-C1q">
+                                            <rect key="frame" x="18" y="11" width="524" height="93"/>
                                             <constraints>
                                                 <constraint firstAttribute="height" relation="lessThanOrEqual" priority="500" constant="50" id="2iJ-pE-9es"/>
                                                 <constraint firstAttribute="height" relation="lessThanOrEqual" priority="200" constant="53" id="RDd-Cr-bBe"/>
@@ -712,16 +712,9 @@
                                                 <constraint firstAttribute="width" constant="300" id="rhE-hH-mnC"/>
                                                 <constraint firstAttribute="width" constant="279" id="wWD-3F-QKR"/>
                                             </constraints>
-                                            <attributedString key="attributedText">
-                                                <fragment>
-                                                    <string key="content">@NancyPelozi, this &lt;VICE episode link&gt; argues that your products, policies, and interests are harmful to farmers, consumers, and our global food system.</string>
-                                                    <attributes>
-                                                        <color key="NSColor" red="0.015686275437474251" green="0.011764707043766975" blue="0.0039215688593685627" alpha="1" colorSpace="deviceRGB"/>
-                                                        <font key="NSFont" size="14" name="HelveticaNeue"/>
-                                                        <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural"/>
-                                                    </attributes>
-                                                </fragment>
-                                            </attributedString>
+                                            <edgeInsets key="layoutMargins" top="8" left="8" bottom="8" right="8"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                            <color key="textColor" red="0.015686275437474251" green="0.011764707043766975" blue="0.0039215688593685627" alpha="1" colorSpace="deviceRGB"/>
                                             <nil key="highlightedColor"/>
                                             <variation key="default">
                                                 <mask key="constraints">
@@ -734,14 +727,14 @@
                                                 </mask>
                                             </variation>
                                         </label>
-                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="40-menu-alt-512.png" translatesAutoresizingMaskIntoConstraints="NO" id="c35-RH-Xc3">
+                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" image="40-menu-alt-512.png" translatesAutoresizingMaskIntoConstraints="NO" id="c35-RH-Xc3">
                                             <rect key="frame" x="562" y="12" width="22" height="22"/>
                                             <constraints>
                                                 <constraint firstAttribute="height" constant="22" id="3Vf-GV-Eu4"/>
                                                 <constraint firstAttribute="width" constant="22" id="43N-5a-6C5"/>
                                             </constraints>
                                         </imageView>
-                                        <button hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="PLO-TV-RmB">
+                                        <button hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="PLO-TV-RmB">
                                             <rect key="frame" x="431" y="9" width="111" height="30"/>
                                             <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                             <constraints>
@@ -785,8 +778,8 @@
                                         <constraint firstAttribute="centerX" secondItem="zCX-6N-C1q" secondAttribute="centerX" id="hrb-rP-Sar"/>
                                         <constraint firstItem="c35-RH-Xc3" firstAttribute="leading" secondItem="PLO-TV-RmB" secondAttribute="trailing" constant="20" id="jQb-eo-rKf"/>
                                         <constraint firstItem="c35-RH-Xc3" firstAttribute="leading" secondItem="zCX-6N-C1q" secondAttribute="trailing" constant="3" id="mDf-WL-VcD"/>
-                                        <constraint firstAttribute="bottomMargin" secondItem="zCX-6N-C1q" secondAttribute="bottom" priority="999" constant="3" id="nj9-Ua-V1d"/>
-                                        <constraint firstAttribute="trailingMargin" secondItem="zCX-6N-C1q" secondAttribute="trailing" priority="999" constant="50" id="s73-gL-RYh"/>
+                                        <constraint firstAttribute="bottomMargin" secondItem="zCX-6N-C1q" secondAttribute="bottom" constant="3" id="nj9-Ua-V1d"/>
+                                        <constraint firstAttribute="trailingMargin" secondItem="zCX-6N-C1q" secondAttribute="trailing" constant="50" id="s73-gL-RYh"/>
                                         <constraint firstAttribute="bottomMargin" secondItem="zCX-6N-C1q" secondAttribute="bottom" priority="100" constant="19" id="tgZ-hk-pli"/>
                                         <constraint firstItem="zCX-6N-C1q" firstAttribute="centerY" secondItem="c35-RH-Xc3" secondAttribute="centerY" constant="10.5" id="utE-KX-bO3"/>
                                         <constraint firstAttribute="centerY" secondItem="c35-RH-Xc3" secondAttribute="centerY" id="yp0-5f-wWX"/>
@@ -822,7 +815,7 @@
                                 </connections>
                             </tableViewCell>
                             <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="Cell" id="noR-Lv-KB1" customClass="MessageTableViewCell">
-                                <rect key="frame" x="0.0" y="266" width="600" height="115"/>
+                                <rect key="frame" x="0.0" y="333" width="600" height="115"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="noR-Lv-KB1" id="z0f-nP-wDJ">
                                     <rect key="frame" x="0.0" y="0.0" width="600" height="115"/>
@@ -1063,7 +1056,7 @@
                                 </connections>
                             </tableViewCell>
                             <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="CellRep" rowHeight="93" id="hSg-ik-YTq" customClass="MessageTableViewRepresentativeCell">
-                                <rect key="frame" x="0.0" y="381" width="600" height="93"/>
+                                <rect key="frame" x="0.0" y="448" width="600" height="93"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="hSg-ik-YTq" id="j8a-NV-gD6">
                                     <rect key="frame" x="0.0" y="0.0" width="600" height="93"/>
@@ -1305,7 +1298,7 @@
                                 </connections>
                             </tableViewCell>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="CellEmail" rowHeight="592" id="DoV-1B-tgM" customClass="MessageTableViewEmailCell">
-                                <rect key="frame" x="0.0" y="474" width="600" height="592"/>
+                                <rect key="frame" x="0.0" y="541" width="600" height="592"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="DoV-1B-tgM" id="AOE-8Z-ojf">
                                     <rect key="frame" x="0.0" y="0.0" width="600" height="592"/>
@@ -1660,7 +1653,7 @@
                                 </connections>
                             </tableViewCell>
                             <tableViewCell contentMode="scaleToFill" horizontalHuggingPriority="1000" verticalHuggingPriority="1000" horizontalCompressionResistancePriority="200" verticalCompressionResistancePriority="200" selectionStyle="none" indentationWidth="10" reuseIdentifier="CellCategoryNoZip" rowHeight="48" id="I9y-TC-F2A" customClass="MessageTableViewNoZipCell">
-                                <rect key="frame" x="0.0" y="1066" width="600" height="48"/>
+                                <rect key="frame" x="0.0" y="1133" width="600" height="48"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" horizontalHuggingPriority="1000" verticalHuggingPriority="1000" horizontalCompressionResistancePriority="200" verticalCompressionResistancePriority="200" tableViewCell="I9y-TC-F2A" id="POE-Dd-tX8">
                                     <rect key="frame" x="0.0" y="0.0" width="600" height="48"/>
@@ -2685,6 +2678,6 @@
         <image name="tweetButtonIconGray.png" width="259" height="259"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="ncd-tE-Df4"/>
+        <segue reference="Xre-gW-P64"/>
     </inferredMetricsTieBreakers>
 </document>

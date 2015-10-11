@@ -82,11 +82,11 @@
 //    [picker addAttachmentData:myData mimeType:@"image/jpeg" fileName:@"rainy"];
     
     // Fill out the email body text
-
-    
-    NSString *pushThoughtFooter = @"Sent via PushThought App!";
     NSString *emailBody = message;
+    NSString *pushThoughtFooter = @"Sent via PushThought App!";
+    
     NSString *fullEmailBodyText =[NSString stringWithFormat:@"%@\n\nPlease check out this segment for background:%@\n\n%@",emailBody, [self.selectedSegment valueForKey:@"linkToContent"],pushThoughtFooter];
+
     [picker setMessageBody:fullEmailBodyText isHTML:NO];
     
     [self presentViewController:picker animated:YES completion:NULL];

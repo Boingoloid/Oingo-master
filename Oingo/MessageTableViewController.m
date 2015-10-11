@@ -128,7 +128,7 @@ NSInteger footerHeight = 1;
     
 }
 - (void)viewWillTransitionToSize:(CGSize)size withTransitionCoordinator:(id<UIViewControllerTransitionCoordinator>)coordinator {
-//    [self.tableView setNeedsDisplay];
+    [self.tableView setNeedsDisplay];
 //    [self.tableView setNeedsLayout];
 //    [self.view layoutSubviews];
 //    [self.tableView layoutSubviews];
@@ -267,7 +267,7 @@ NSInteger footerHeight = 1;
             }
 
 
-        // Local Rep Touch - Right now only webForm unique
+        // Local Rep Touch
         } else if ([cellScout isKindOfClass:[MessageTableViewRepresentativeCell class]] || [cellScout isKindOfClass:[MessageTableViewCell class]]){
             MessageTableViewRepresentativeCell *cell = (MessageTableViewRepresentativeCell *)[tableView cellForRowAtIndexPath:indexPath];
 
@@ -441,7 +441,7 @@ NSInteger footerHeight = 1;
                             emailComposer.selectedContact = self.selectedContact;
                             emailComposer.messageTableViewController = self;
                             
-                            [emailComposer showMailPicker:cell.openCongressEmail withMessage:[[self.menuList objectAtIndex:index] valueForKey:@"messageText"]];
+                            [emailComposer showMailPicker:[cell.messageItem valueForKey:@"email"] withMessage:[[self.menuList objectAtIndex:index] valueForKey:@"messageText"]];
                             
                             [self presentViewController:emailComposer animated:YES completion:NULL];
                         }
@@ -724,9 +724,9 @@ NSInteger footerHeight = 1;
         messageItem = [self.menuList objectAtIndex:[rowIndex intValue]];
         [cell configMessageCell:messageItem indexPath:indexPath];
         
-//        [cell.contentView layoutIfNeeded];
-//        [cell setNeedsDisplay];
-//        [cell layoutIfNeeded];
+        [cell.contentView layoutIfNeeded];
+        [cell setNeedsDisplay];
+        [cell layoutIfNeeded];
         return cell;
         
     } else if (isGetLocationBool) {

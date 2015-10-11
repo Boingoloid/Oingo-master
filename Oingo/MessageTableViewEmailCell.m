@@ -37,9 +37,6 @@
         if([currentUser valueForKey:@"lastNameEmail"]){
             self.lastName.text = [currentUser valueForKey:@"lastNameEmail"];
         }
-    } else {
-        self.firstName.text = @"lll";
-        self.lastName.text = @"lll";
     }
     
     //add information
@@ -48,7 +45,6 @@
     
     // Assign values
     self.emailItem = emailItem;
-    [self.messageTextView setScrollEnabled:NO];
     self.messageTextView.text = [NSString stringWithFormat:@"%@",[emailItem valueForKey:@"messageText"]];
 
     
@@ -76,7 +72,7 @@
     self.messageTextView.layer.cornerRadius = 3.0;
     self.messageTextView.clipsToBounds = YES;
     [self.messageTextView scrollRangeToVisible:NSMakeRange(0, 0)];
-//    [self.messageTextView scrollRangeToVisible:NSMakeRange(0, 0)];  //Alas, I have failed! It will not scroll to the top.
+//    [self.messageTextView scrollRangeToVisible:NSMakeRange(0, 0)];  //Alas, I have failed! It will not scroll to the top unless user signed in
 //    self.messageTextView.contentOffset = CGPointZero;
 //    [self.messageTextView setContentOffset:CGPointMake(0.0, 0.0) animated:TRUE];
 //    [self.messageTextView setScrollsToTop:@YES];
@@ -105,9 +101,7 @@
     } else {
         self.emailSuccessImageView.hidden = YES;
     }
-    
-    [self.messageTextView becomeFirstResponder];
-    [self.messageTextView resignFirstResponder];
+
     
 }
 
@@ -149,7 +143,7 @@
     frame.size.width -= 2 * inset; //mult by 2 b/c taking from both sides
     
     dispatch_async(dispatch_get_main_queue(), ^{
-    [super setFrame:frame];
+        [super setFrame:frame];
     });
 }
 @end

@@ -64,8 +64,9 @@
     [picker setSubject:self.emailSubject];
     
     PFUser *currentUser = [PFUser currentUser];
-    
-    NSArray *toRecipients = [NSArray arrayWithObject:currentUser.email];
+    NSString *userEmail = currentUser.email;
+    NSLog(@"User email - long form email VC:%@",userEmail);
+    NSArray *toRecipients = [NSArray arrayWithObject:userEmail];
     NSArray *bccRecipients = [self.emailRecipients componentsSeparatedByString:@","];
     //    NSArray *ccRecipients = [NSArray arrayWithObjects:@"", nil];
 
