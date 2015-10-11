@@ -30,4 +30,6 @@ dependencies: \
   /Users/matthewacalin/Desktop/IphoneApps/PushThought/Parse.framework/Headers/PFACL.h \
   /Users/matthewacalin/Desktop/IphoneApps/PushThought/Parse.framework/Headers/Parse.h \
   /Users/matthewacalin/Desktop/IphoneApps/PushThought/Parse.framework/Modules/module.modulemap \
-  /Users/matthewacalin/Desktop/IphoneApps/PushThought/Oingo/UpdateDefaults.h
+  /Users/matthewacalin/Desktop/IphoneApps/PushThought/Oingo/UpdateDefaults.h \
+  /Users/matthewacalin/Desktop/IphoneApps/PushThought/Oingo/CongressionalMessageItem.h \
+  /Users/matthewacalin/Desktop/IphoneApps/PushThought/Oingo/MessageItem.h

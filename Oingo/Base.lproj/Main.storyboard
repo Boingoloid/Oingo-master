@@ -223,24 +223,7 @@
                                     <rect key="frame" x="0.0" y="0.0" width="600" height="112"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" bounces="NO" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" indicatorStyle="black" editable="NO" text="Monsanto modifies plant genes so they can resist massive amounts of pesticides that end up in our soil and food supply." translatesAutoresizingMaskIntoConstraints="NO" id="NKo-ja-dvl">
-                                            <rect key="frame" x="67" y="24" width="525" height="50"/>
-                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                            <constraints>
-                                                <constraint firstAttribute="height" relation="lessThanOrEqual" constant="100" id="Bg9-HF-bay"/>
-                                                <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="50" id="RiS-2U-enh"/>
-                                                <constraint firstAttribute="height" relation="greaterThanOrEqual" priority="200" constant="90" id="fY7-XR-qU3"/>
-                                            </constraints>
-                                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                            <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
-                                            <variation key="default">
-                                                <mask key="constraints">
-                                                    <exclude reference="Bg9-HF-bay"/>
-                                                    <exclude reference="fY7-XR-qU3"/>
-                                                </mask>
-                                            </variation>
-                                        </textView>
-                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" image="monsanto gas apple.png" translatesAutoresizingMaskIntoConstraints="NO" id="QWG-RJ-9hI">
+                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="monsanto gas apple.png" translatesAutoresizingMaskIntoConstraints="NO" id="QWG-RJ-9hI">
                                             <rect key="frame" x="9" y="29" width="50" height="50"/>
                                             <constraints>
                                                 <constraint firstAttribute="height" constant="50" id="3r4-3p-88V"/>
@@ -257,9 +240,10 @@
                                                 </mask>
                                             </variation>
                                         </imageView>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="TopLeft" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" text="Genetically Modificed Food" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tlM-Jd-7yY">
-                                            <rect key="frame" x="9" y="8" width="178" height="16"/>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="TopLeft" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Genetically Modificed Food" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tlM-Jd-7yY">
+                                            <rect key="frame" x="9" y="8" width="178" height="17"/>
                                             <constraints>
+                                                <constraint firstAttribute="height" constant="17" id="A9L-JU-YwP"/>
                                                 <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="350" id="MkB-VI-TVK"/>
                                                 <constraint firstAttribute="width" constant="231" id="SyQ-oE-GRd"/>
                                                 <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="16" id="fbY-IE-pmZ"/>
@@ -272,6 +256,7 @@
                                                 <mask key="constraints">
                                                     <exclude reference="MkB-VI-TVK"/>
                                                     <exclude reference="SyQ-oE-GRd"/>
+                                                    <exclude reference="fbY-IE-pmZ"/>
                                                     <exclude reference="i4P-Ff-Fz2"/>
                                                 </mask>
                                             </variation>
@@ -279,22 +264,25 @@
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Date " textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3jQ-uc-33Q">
                                             <rect key="frame" x="561" y="5" width="31" height="16"/>
                                             <constraints>
-                                                <constraint firstAttribute="width" constant="60" id="kZa-Ob-9Je"/>
+                                                <constraint firstAttribute="width" relation="lessThanOrEqual" constant="50" id="j9O-3v-X4G"/>
+                                                <constraint firstAttribute="width" relation="lessThanOrEqual" constant="60" id="kZa-Ob-9Je"/>
                                             </constraints>
                                             <fontDescription key="fontDescription" name="HelveticaNeue-Italic" family="Helvetica Neue" pointSize="13"/>
                                             <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                             <nil key="highlightedColor"/>
                                             <variation key="default">
                                                 <mask key="constraints">
+                                                    <exclude reference="j9O-3v-X4G"/>
                                                     <exclude reference="kZa-Ob-9Je"/>
                                                 </mask>
                                             </variation>
                                         </label>
-                                        <button userInteractionEnabled="NO" contentMode="left" ambiguous="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="tailTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cDZ-re-iL0">
-                                            <rect key="frame" x="9" y="82" width="269" height="19"/>
+                                        <button userInteractionEnabled="NO" contentMode="left" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="tailTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cDZ-re-iL0">
+                                            <rect key="frame" x="9" y="78" width="573" height="23"/>
                                             <constraints>
                                                 <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="350" id="ASs-iW-eYz"/>
                                                 <constraint firstAttribute="height" constant="25" id="CpU-ps-2WY"/>
+                                                <constraint firstAttribute="height" constant="23" id="yye-Zs-duI"/>
                                             </constraints>
                                             <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="13"/>
                                             <state key="normal" title="https://www.linkToContent.com/newepisode...">
@@ -307,24 +295,43 @@
                                                 </mask>
                                             </variation>
                                         </button>
+                                        <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" bounces="NO" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" indicatorStyle="black" editable="NO" text="Monsanto modifies plant genes so they can resist massive amounts of pesticides that end up in our soil and food supply." translatesAutoresizingMaskIntoConstraints="NO" id="NKo-ja-dvl">
+                                            <rect key="frame" x="67" y="25" width="525" height="50"/>
+                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                            <constraints>
+                                                <constraint firstAttribute="height" relation="lessThanOrEqual" constant="100" id="Bg9-HF-bay"/>
+                                                <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="50" id="RiS-2U-enh"/>
+                                                <constraint firstAttribute="height" relation="greaterThanOrEqual" priority="200" constant="90" id="fY7-XR-qU3"/>
+                                            </constraints>
+                                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                            <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                            <variation key="default">
+                                                <mask key="constraints">
+                                                    <exclude reference="Bg9-HF-bay"/>
+                                                    <exclude reference="RiS-2U-enh"/>
+                                                    <exclude reference="fY7-XR-qU3"/>
+                                                </mask>
+                                            </variation>
+                                        </textView>
                                     </subviews>
                                     <constraints>
                                         <constraint firstAttribute="bottomMargin" secondItem="cDZ-re-iL0" secondAttribute="bottom" constant="-5" id="2Sd-iS-0xV"/>
                                         <constraint firstAttribute="bottomMargin" secondItem="cDZ-re-iL0" secondAttribute="bottom" constant="8" id="2bT-mE-f5T"/>
-                                        <constraint firstAttribute="trailingMargin" relation="greaterThanOrEqual" secondItem="cDZ-re-iL0" secondAttribute="trailing" priority="999" constant="10" id="4NJ-bp-Ptg"/>
+                                        <constraint firstAttribute="trailingMargin" secondItem="cDZ-re-iL0" secondAttribute="trailing" priority="999" constant="10" id="4NJ-bp-Ptg"/>
+                                        <constraint firstItem="3jQ-uc-33Q" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="tlM-Jd-7yY" secondAttribute="trailing" constant="10" id="5bl-PM-65h"/>
                                         <constraint firstItem="QWG-RJ-9hI" firstAttribute="leading" secondItem="jef-ur-wKC" secondAttribute="leadingMargin" constant="1" id="6EB-xj-koo"/>
                                         <constraint firstItem="NKo-ja-dvl" firstAttribute="leading" secondItem="QWG-RJ-9hI" secondAttribute="trailing" priority="999" constant="8" id="7fu-LR-ol6"/>
                                         <constraint firstItem="tlM-Jd-7yY" firstAttribute="top" secondItem="3jQ-uc-33Q" secondAttribute="top" id="8Er-W5-su2"/>
                                         <constraint firstItem="3jQ-uc-33Q" firstAttribute="trailing" secondItem="jef-ur-wKC" secondAttribute="trailingMargin" id="AMr-Gg-RCZ"/>
                                         <constraint firstItem="cDZ-re-iL0" firstAttribute="top" secondItem="jef-ur-wKC" secondAttribute="topMargin" constant="73" id="Ai7-ti-pYT"/>
                                         <constraint firstAttribute="bottomMargin" secondItem="cDZ-re-iL0" secondAttribute="bottom" constant="8" id="EJY-nm-75G"/>
-                                        <constraint firstItem="3jQ-uc-33Q" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="tlM-Jd-7yY" secondAttribute="trailing" priority="999" constant="6" id="FsE-HV-bD3"/>
+                                        <constraint firstItem="3jQ-uc-33Q" firstAttribute="leading" secondItem="tlM-Jd-7yY" secondAttribute="trailing" priority="999" constant="6" id="FsE-HV-bD3"/>
                                         <constraint firstAttribute="bottomMargin" secondItem="cDZ-re-iL0" secondAttribute="bottom" constant="8" id="Gei-Xz-dth"/>
                                         <constraint firstItem="tlM-Jd-7yY" firstAttribute="baseline" secondItem="3jQ-uc-33Q" secondAttribute="baseline" id="HSf-RV-xSZ"/>
                                         <constraint firstItem="NKo-ja-dvl" firstAttribute="top" secondItem="tlM-Jd-7yY" secondAttribute="bottom" id="K11-6I-Wov"/>
                                         <constraint firstItem="cDZ-re-iL0" firstAttribute="trailing" secondItem="jef-ur-wKC" secondAttribute="trailingMargin" constant="-35" id="Kr2-0f-rH8"/>
                                         <constraint firstAttribute="bottomMargin" secondItem="cDZ-re-iL0" secondAttribute="bottom" priority="998" constant="3" id="MdX-Ve-0UH"/>
-                                        <constraint firstItem="cDZ-re-iL0" firstAttribute="top" relation="greaterThanOrEqual" secondItem="NKo-ja-dvl" secondAttribute="bottom" priority="999" constant="3" id="NfF-Cb-RVc"/>
+                                        <constraint firstItem="cDZ-re-iL0" firstAttribute="top" secondItem="NKo-ja-dvl" secondAttribute="bottom" priority="999" constant="3" id="NfF-Cb-RVc"/>
                                         <constraint firstItem="QWG-RJ-9hI" firstAttribute="top" secondItem="tlM-Jd-7yY" secondAttribute="bottom" constant="4" id="NxF-OK-yyG"/>
                                         <constraint firstAttribute="trailingMargin" secondItem="cDZ-re-iL0" secondAttribute="trailing" constant="355" id="Rwa-RH-EKu"/>
                                         <constraint firstItem="3jQ-uc-33Q" firstAttribute="top" secondItem="jef-ur-wKC" secondAttribute="topMargin" constant="-3" id="Unv-wg-Fo4"/>
@@ -358,7 +365,9 @@
                                             <exclude reference="bFs-Pu-BUn"/>
                                             <exclude reference="bWG-Vr-23N"/>
                                             <exclude reference="gUV-lN-KYE"/>
+                                            <exclude reference="rE5-S1-E96"/>
                                             <exclude reference="tF2-aB-C7y"/>
+                                            <exclude reference="FsE-HV-bD3"/>
                                         </mask>
                                     </variation>
                                 </tableViewCellContentView>
@@ -727,15 +736,15 @@
                                                 </mask>
                                             </variation>
                                         </label>
-                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" image="40-menu-alt-512.png" translatesAutoresizingMaskIntoConstraints="NO" id="c35-RH-Xc3">
-                                            <rect key="frame" x="562" y="12" width="22" height="22"/>
+                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="40-menu-alt-512.png" translatesAutoresizingMaskIntoConstraints="NO" id="c35-RH-Xc3">
+                                            <rect key="frame" x="562" y="46" width="22" height="22"/>
                                             <constraints>
                                                 <constraint firstAttribute="height" constant="22" id="3Vf-GV-Eu4"/>
                                                 <constraint firstAttribute="width" constant="22" id="43N-5a-6C5"/>
                                             </constraints>
                                         </imageView>
-                                        <button hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="PLO-TV-RmB">
-                                            <rect key="frame" x="431" y="9" width="111" height="30"/>
+                                        <button hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="PLO-TV-RmB">
+                                            <rect key="frame" x="431" y="43" width="111" height="30"/>
                                             <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                             <constraints>
                                                 <constraint firstAttribute="width" constant="111" id="Squ-M7-aSI"/>
