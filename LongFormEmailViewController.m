@@ -83,7 +83,6 @@
     
     // Fill out the email body text
     
-    
 
     NSString *emailBody = self.emailBody;
     NSString *nameSignature = [NSString stringWithFormat:@"Sincerely,\n\n%@ %@",self.firstName,self.lastName];
@@ -107,23 +106,37 @@
 - (void)mailComposeController:(MFMailComposeViewController*)controller
           didFinishWithResult:(MFMailComposeResult)result error:(NSError*)error
 {
+    NSLog(@"result from email%u",result);
+    
+    if(result == MFMailComposeResultCancelled){
+        NSLog(@"true, cancelled:%u",result);
+        
+    }else if(result == MFMailComposeResultSaved) {
+        NSLog(@"NOT cancelled:%u",result);
+    }
+    
     
     // Notifies users about errors associated with the interface
     switch (result)
     {
         case MFMailComposeResultCancelled:
+            NSLog(@"compose cancelled");
             [self dismissViewControllerAnimated:YES completion:NULL];
-            [self dismissViewControllerAnimated:YES completion:NULL];
+            [self.navigationController popViewControllerAnimated:NO];
             NSLog(@"email canceled");
+            break;
         case MFMailComposeResultSaved:
+            NSLog(@"compose saved");
             //            self.feedbackMsg.text = @"Result: Mail saved";
             [self dismissViewControllerAnimated:YES completion:NULL];
-            [self dismissViewControllerAnimated:YES completion:NULL];
+            [self.navigationController popViewControllerAnimated:NO];
             NSLog(@"email saved");
+            break;
         case MFMailComposeResultSent:{
+            NSLog(@"compose sent");
             //            self.feedbackMsg.text = @"Result: Mail sent";
             [self dismissViewControllerAnimated:YES completion:NULL];
-            [self dismissViewControllerAnimated:YES completion:NULL];
+            [self.navigationController popViewControllerAnimated:NO];
             
             
             //  SAVING MESSAGE DATA TO PARSE
@@ -165,19 +178,19 @@
             
             NSLog(@"Got here in the save 2:%@",sentMessageItem);
             [self.messageTableViewController viewDidLoad];
-            
+            break;
         }
 
         case MFMailComposeResultFailed:
             //self.feedbackMsg.text = @"Result: Mail sending failed";
             [self dismissViewControllerAnimated:YES completion:NULL];
-            [self dismissViewControllerAnimated:YES completion:NULL];
-
+            [self.navigationController popViewControllerAnimated:NO];
+            break;
         default:
             //self.feedbackMsg.text = @"Result: Mail not sent";
             [self dismissViewControllerAnimated:YES completion:NULL];
-            [self dismissViewControllerAnimated:YES completion:NULL];
-
+            [self.navigationController popViewControllerAnimated:NO];
+            break;
     }
     //    [self dismissViewControllerAnimated:YES completion:NULL];
 }

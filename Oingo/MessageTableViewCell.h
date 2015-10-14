@@ -27,7 +27,7 @@
 @property (weak, nonatomic) IBOutlet UIButton *webFormButton;
 @property (nonatomic, retain) NSString *phone;
 @property (nonatomic, retain) NSString *website;
-@property (nonatomic, retain) NSString *openCongressEmail;
+@property (nonatomic, retain) NSString *email;
 @property (nonatomic, retain) NSString *youtubeID;
 @property (nonatomic, retain) NSString *facebookID;
 @property (nonatomic, retain) NSString *twitterID;

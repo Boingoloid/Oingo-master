@@ -12,6 +12,7 @@
 @implementation MarkSentMessageAPI
 
 
+
 -(void)markSentMessages{
     NSLog(@"Mark Sent Triggerd");
     PFUser *currentUser = [PFUser currentUser];
@@ -41,8 +42,6 @@
                     [self checkPhone];
                     NSLog(@"reloading data from MarkSentMessages");
                     [self.messageTableViewController.tableView reloadData];
-
-
                 });
             } else {
                 NSLog(@"Error: %@ %@", error, [error userInfo]);

@@ -141,7 +141,7 @@ NSInteger footerHeight = 1;
     NSLog(@"viewDidAppear");
 }
 
-
+#pragma mark - Gesture Recognizer
 - (BOOL)gestureRecognizerShouldBegin:(UIGestureRecognizer *)gestureRecognizer
 {
     UITableView *tableView = (UITableView *)gestureRecognizer.view;
@@ -181,7 +181,7 @@ NSInteger footerHeight = 1;
         
         // Create dictionary = selected menu object (could be message or contact)
         NSDictionary *dictionary = [self.menuList objectAtIndex:[rowIndex intValue]];
-        self.selectedContact = dictionary;
+
         
         
         // Message Cell Touch ----------
@@ -210,7 +210,7 @@ NSInteger footerHeight = 1;
             }
             
             
-        // Email Cell Touch ----------
+        // Long Form Email Cell Touch ----------
         } else if ([cellScout isKindOfClass:[MessageTableViewEmailCell class]]){
             NSLog(@"Email class cell");
             MessageTableViewEmailCell *cell = (MessageTableViewEmailCell *)[tableView cellForRowAtIndexPath:indexPath];
@@ -252,7 +252,8 @@ NSInteger footerHeight = 1;
                     emailComposer.lastName = cell.lastName.text;
                     emailComposer.messageTableViewController = self;
                     [emailComposer showMailPicker];
-                    [self presentViewController:emailComposer animated:YES completion:NULL];
+                    [self.navigationController pushViewController:emailComposer animated:NO];
+//                    [self presentViewController:emailComposer animated:YES completion:NULL];
                 }
 
             } else if (CGRectContainsPoint(cell.linkToEmailButton.frame, pointInCell)) {
@@ -268,9 +269,10 @@ NSInteger footerHeight = 1;
 
 
         // Local Rep Touch
-        } else if ([cellScout isKindOfClass:[MessageTableViewRepresentativeCell class]] || [cellScout isKindOfClass:[MessageTableViewCell class]]){
+        } else if ([cellScout isKindOfClass:[MessageTableViewRepresentativeCell class]]){
             MessageTableViewRepresentativeCell *cell = (MessageTableViewRepresentativeCell *)[tableView cellForRowAtIndexPath:indexPath];
-
+            
+            self.selectedContact = dictionary;
             
             if (CGRectContainsPoint(cell.tweetTouchCaptureImageView.frame, pointInCell)) {
                 NSLog(@"touch in tweet button area");
@@ -340,10 +342,12 @@ NSInteger footerHeight = 1;
                             emailComposer.selectedSegment = self.selectedSegment;
                             emailComposer.selectedContact = self.selectedContact;
                             emailComposer.messageTableViewController = self;
+                            NSLog(@"selected contact:%@",cell.openCongressEmail);
                             
                             [emailComposer showMailPicker:cell.openCongressEmail withMessage:[[self.menuList objectAtIndex:index] valueForKey:@"messageText"]];
+                            [self.navigationController pushViewController:emailComposer animated:NO];
+//                            [self presentViewController:emailComposer animated:YES completion:NULL];
                             
-                            [self presentViewController:emailComposer animated:YES completion:NULL];
                         }
                     }
                 }
@@ -368,9 +372,11 @@ NSInteger footerHeight = 1;
             
             
             
-        // Civilian/Rep Cell Touch ----------
-        } else {
+        // Civil Cell Touch ----------
+        } else if ([cellScout isKindOfClass:[MessageTableViewCell class]]){
             MessageTableViewCell *cell = (MessageTableViewCell *)[tableView cellForRowAtIndexPath:indexPath];
+            
+            self.selectedContact = dictionary;
             
             if (CGRectContainsPoint(cell.tweetTouchCaptureImageView.frame, pointInCell)) {
             NSLog(@"touch in tweet button area");
@@ -440,10 +446,12 @@ NSInteger footerHeight = 1;
                             emailComposer.selectedSegment = self.selectedSegment;
                             emailComposer.selectedContact = self.selectedContact;
                             emailComposer.messageTableViewController = self;
+                            NSLog(@"PING! create email civilian %@:",self.selectedContact);
+                            [emailComposer showMailPicker:[self.selectedContact valueForKey:@"email"] withMessage:[[self.menuList objectAtIndex:index] valueForKey:@"messageText"]];
+                            NSLog(@"selected contact:%@",self.selectedContact);
                             
-                            [emailComposer showMailPicker:[cell.messageItem valueForKey:@"email"] withMessage:[[self.menuList objectAtIndex:index] valueForKey:@"messageText"]];
-                            
-                            [self presentViewController:emailComposer animated:YES completion:NULL];
+                            [self.navigationController pushViewController:emailComposer animated:NO];
+//                            [self presentViewController:emailComposer animated:YES completion:NULL];
                         }
                     }
                 }

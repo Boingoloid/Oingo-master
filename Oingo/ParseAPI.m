@@ -198,7 +198,6 @@ BOOL isLocationInfoAvailable = NO;
 }
 
 
-
 # pragma mark - Prep Sections
 
 -(void)prepSections:messageList {
@@ -274,8 +273,12 @@ BOOL isLocationInfoAvailable = NO;
         MarkSentMessageAPI *markSentMessagesAPI = [[MarkSentMessageAPI alloc]init];
         markSentMessagesAPI.messageTableViewController = self.messageTableViewController;
         [markSentMessagesAPI markSentMessages];
+        
+        
     }
     self.isCongressLoaded = NO;
+    
+    
 }
 
 # pragma mark - Prep Sections Helper Methods

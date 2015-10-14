@@ -104,7 +104,7 @@
 
     
     // Success fields
-        //Twitter
+        //Twitter success
         NSNumber *sendTweetNumberBool = [messageItem valueForKey:@"isTweetSent"];
         bool sendTweetBool = [sendTweetNumberBool boolValue];
         if(sendTweetBool) {
@@ -113,7 +113,7 @@
             self.tweetSuccessImageView.hidden = YES;
         }
     
-        //Email
+        //Email success
         NSNumber *sendEmailNumberBool = [messageItem valueForKey:@"isEmailSent"];
         bool sendEmailBool = [sendEmailNumberBool boolValue];
         if(sendEmailBool) {
@@ -122,7 +122,7 @@
             self.emailSuccessImageView.hidden = YES;
         }
     
-        //Phone call
+        //Phone call success
         NSNumber *sendPhoneNumberBool = [messageItem valueForKey:@"isPhoneSent"];
         bool sendPhoneBool = [sendPhoneNumberBool boolValue];
         if(sendPhoneBool) {
@@ -134,6 +134,7 @@
         //add information
         self.targetName.text = [NSString stringWithFormat:@"%@ /",[messageItem valueForKey:@"targetName"]];
         self.targetTitleLabel.text = [messageItem valueForKey:@"targetTitle"];
+        
         
         //load program image from Parse and format
         self.messageImage.image = [messageItem objectForKey:@"messageImage"];

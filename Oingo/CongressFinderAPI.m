@@ -132,6 +132,7 @@
         CongressionalMessageItem *congressionalMessageItem = [[CongressionalMessageItem alloc] init];
         
         [congressionalMessageItem setValue:@"Local Representative" forKey:@"messageCategory"];
+        
         [congressionalMessageItem setValue:[congresspersonObject valueForKey:@"bioguide_id"] forKey:@"bioguide_id"];
         congressionalMessageItem.contactID = [congresspersonObject valueForKey:@"bioguide_id"];
         [congressionalMessageItem setValue:self.segmentID forKey:@"segmentID"];

@@ -68,6 +68,7 @@
     [picker setSubject:subject];
     
     // Set up recipients
+    NSLog(@"email:%@",email);
     NSArray *toRecipients = [NSArray arrayWithObject:email];
 //    NSArray *ccRecipients = [NSArray arrayWithObjects:@"", nil];
 //    NSArray *bccRecipients = [NSArray arrayWithObject:@""];
@@ -89,6 +90,8 @@
 
     [picker setMessageBody:fullEmailBodyText isHTML:NO];
     
+    
+//    [self.navigationController pushViewController:picker animated:YES];
     [self presentViewController:picker animated:YES completion:NULL];
     
     
@@ -113,17 +116,19 @@
     {
         case MFMailComposeResultCancelled:
             [self dismissViewControllerAnimated:YES completion:NULL];
-            [self dismissViewControllerAnimated:YES completion:NULL];
+            [self.navigationController popViewControllerAnimated:NO];
             NSLog(@"email canceled");
+            break;
         case MFMailComposeResultSaved:
 //            self.feedbackMsg.text = @"Result: Mail saved";
             [self dismissViewControllerAnimated:YES completion:NULL];
-            [self dismissViewControllerAnimated:YES completion:NULL];
+            [self.navigationController popViewControllerAnimated:NO];
             NSLog(@"email saved");
+            break;
         case MFMailComposeResultSent:{
 //            self.feedbackMsg.text = @"Result: Mail sent";
             [self dismissViewControllerAnimated:YES completion:NULL];
-            [self dismissViewControllerAnimated:YES completion:NULL];
+            [self.navigationController popViewControllerAnimated:NO];
             
             
             //  SAVING MESSAGE DATA TO PARSE
@@ -168,19 +173,19 @@
             [self.messageTableViewController viewDidLoad];
             
         }
-//            break;
+            break;
         case MFMailComposeResultFailed:
 //            self.feedbackMsg.text = @"Result: Mail sending failed";
             [self dismissViewControllerAnimated:YES completion:NULL];
-            [self dismissViewControllerAnimated:YES completion:NULL];
-//            break;
+            [self.navigationController popViewControllerAnimated:NO];
+            break;
         default:
 //            self.feedbackMsg.text = @"Result: Mail not sent";
             [self dismissViewControllerAnimated:YES completion:NULL];
-            [self dismissViewControllerAnimated:YES completion:NULL];
-//            break;
+            [self.navigationController popViewControllerAnimated:NO];
+            break;
     }
-//    [self dismissViewControllerAnimated:YES completion:NULL];
+
 }
 
 
