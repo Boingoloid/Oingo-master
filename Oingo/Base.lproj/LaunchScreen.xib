@@ -17,33 +17,21 @@
                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                     <nil key="highlightedColor"/>
                 </label>
-                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Push Thought" textAlignment="center" lineBreakMode="middleTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kId-c2-rCX">
-                    <rect key="frame" x="144" y="207" width="193" height="37"/>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="LogoSquare.png" translatesAutoresizingMaskIntoConstraints="NO" id="lsy-24-dNk">
+                    <rect key="frame" x="103" y="53" width="275" height="275"/>
                     <constraints>
-                        <constraint firstAttribute="height" constant="37" id="Q54-Q3-tT8"/>
-                        <constraint firstAttribute="width" constant="193" id="m3u-FC-kC3"/>
-                    </constraints>
-                    <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="18"/>
-                    <color key="textColor" red="1" green="0.98797424010000001" blue="0.9542948953" alpha="1" colorSpace="calibratedRGB"/>
-                    <nil key="highlightedColor"/>
-                </label>
-                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="light_bulb_icon120.png" translatesAutoresizingMaskIntoConstraints="NO" id="lsy-24-dNk">
-                    <rect key="frame" x="206" y="135" width="68" height="72"/>
-                    <constraints>
-                        <constraint firstAttribute="width" constant="68" id="DiK-Nx-IQh"/>
-                        <constraint firstAttribute="height" constant="72" id="KEt-mM-mh3"/>
+                        <constraint firstAttribute="width" constant="275" id="DiK-Nx-IQh"/>
+                        <constraint firstAttribute="height" constant="275" id="KEt-mM-mh3"/>
                     </constraints>
                 </imageView>
             </subviews>
             <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
             <constraints>
-                <constraint firstAttribute="centerY" secondItem="kId-c2-rCX" secondAttribute="centerY" constant="14.5" id="1lz-zX-ZPc"/>
+                <constraint firstItem="lsy-24-dNk" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" constant="-50" id="33N-dC-562"/>
+                <constraint firstItem="lsy-24-dNk" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="Fw2-kz-9qI"/>
                 <constraint firstAttribute="bottom" secondItem="8ie-xW-0ye" secondAttribute="bottom" constant="20" id="Kzo-t9-V3l"/>
                 <constraint firstItem="8ie-xW-0ye" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="20" symbolic="YES" id="MfP-vx-nX0"/>
-                <constraint firstItem="lsy-24-dNk" firstAttribute="centerX" secondItem="kId-c2-rCX" secondAttribute="centerX" id="PIX-SP-Qox"/>
                 <constraint firstAttribute="centerX" secondItem="8ie-xW-0ye" secondAttribute="centerX" id="ZEH-qu-HZ9"/>
-                <constraint firstAttribute="centerX" secondItem="kId-c2-rCX" secondAttribute="centerX" id="hNG-0v-J80"/>
-                <constraint firstItem="kId-c2-rCX" firstAttribute="top" secondItem="lsy-24-dNk" secondAttribute="bottom" id="zoo-pZ-Jxd"/>
             </constraints>
             <nil key="simulatedStatusBarMetrics"/>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
@@ -51,6 +39,6 @@
         </view>
     </objects>
     <resources>
-        <image name="light_bulb_icon120.png" width="120" height="120"/>
+        <image name="LogoSquare.png" width="400" height="400"/>
     </resources>
 </document>

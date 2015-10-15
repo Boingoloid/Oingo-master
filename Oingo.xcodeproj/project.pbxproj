@@ -14,8 +14,6 @@
 		CE06A2041B31F7C5000D3210 /* ParseFacebookUtilsV4.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CE06A1FE1B31F7C5000D3210 /* ParseFacebookUtilsV4.framework */; };
 		CE06A2051B31F7C5000D3210 /* ParseUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CE06A1FF1B31F7C5000D3210 /* ParseUI.framework */; };
 		CE0E80561B9129B80093453D /* MessageTableViewNoZipCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CE0E80551B9129B80093453D /* MessageTableViewNoZipCell.m */; };
-		CE0E80581B9276600093453D /* light_bulb_icon87.png in Resources */ = {isa = PBXBuildFile; fileRef = CE0E80571B9276600093453D /* light_bulb_icon87.png */; };
-		CE0E805A1B9276690093453D /* light_bulb_icon58.png in Resources */ = {isa = PBXBuildFile; fileRef = CE0E80591B9276690093453D /* light_bulb_icon58.png */; };
 		CE0E805E1B9288070093453D /* settings.png in Resources */ = {isa = PBXBuildFile; fileRef = CE0E805D1B9288070093453D /* settings.png */; };
 		CE12E4211B94DA75001B3E25 /* OAuthCore.m in Sources */ = {isa = PBXBuildFile; fileRef = CE12E4201B94DA75001B3E25 /* OAuthCore.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		CE12E4241B94DACE001B3E25 /* OAuth+Additions.m in Sources */ = {isa = PBXBuildFile; fileRef = CE12E4231B94DACE001B3E25 /* OAuth+Additions.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
@@ -74,6 +72,8 @@
 		CE87F7CC1BC742D100092897 /* TwitterKitResources.bundle in Resources */ = {isa = PBXBuildFile; fileRef = CE87F7CB1BC742D100092897 /* TwitterKitResources.bundle */; settings = {ASSET_TAGS = (); }; };
 		CE9034861BC63C04000BE136 /* LongFormEmailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CE9034851BC63C04000BE136 /* LongFormEmailViewController.m */; settings = {ASSET_TAGS = (); }; };
 		CE99E3871B5EF1ED00ED9D33 /* MarkSentMessageAPI.m in Sources */ = {isa = PBXBuildFile; fileRef = CE99E3861B5EF1ED00ED9D33 /* MarkSentMessageAPI.m */; };
+		CE9C034B1BD04C6A000FAB42 /* LogoSquare.png in Resources */ = {isa = PBXBuildFile; fileRef = CE9C034A1BD04C6A000FAB42 /* LogoSquare.png */; settings = {ASSET_TAGS = (); }; };
+		CE9C034E1BD04DED000FAB42 /* NSData+Base64.m in Sources */ = {isa = PBXBuildFile; fileRef = CE9C034D1BD04DED000FAB42 /* NSData+Base64.m */; settings = {ASSET_TAGS = (); }; };
 		CE9D625E1BC3C10F00A244ED /* MessagePanelViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CE9D625D1BC3C10F00A244ED /* MessagePanelViewController.m */; settings = {ASSET_TAGS = (); }; };
 		CEA042261B9704BB00071518 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CE5B98EF1B96F33400BFF14F /* UIKit.framework */; };
 		CEA79FD61AEC7C0D00535B06 /* ProgramsTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CEA79FD51AEC7C0D00535B06 /* ProgramsTableViewController.m */; };
@@ -982,10 +982,6 @@
 		CEE074421B5EFEE900245C56 /* success.png in Resources */ = {isa = PBXBuildFile; fileRef = CEE074411B5EFEE900245C56 /* success.png */; };
 		CEE074441B5F027E00245C56 /* success-icon.png in Resources */ = {isa = PBXBuildFile; fileRef = CEE074431B5F027E00245C56 /* success-icon.png */; };
 		CEE772B41BA8C14D00E45842 /* settingswhite.png in Resources */ = {isa = PBXBuildFile; fileRef = CEE772B31BA8C14D00E45842 /* settingswhite.png */; };
-		CEEB51991B9122AC00B54228 /* light_bulb_icon60.png in Resources */ = {isa = PBXBuildFile; fileRef = CEEB51971B9122AC00B54228 /* light_bulb_icon60.png */; };
-		CEEB519A1B9122AC00B54228 /* light_bulb_icon90.png in Resources */ = {isa = PBXBuildFile; fileRef = CEEB51981B9122AC00B54228 /* light_bulb_icon90.png */; };
-		CEEB519E1B91240B00B54228 /* light_bulb_icon80.png in Resources */ = {isa = PBXBuildFile; fileRef = CEEB519D1B91240B00B54228 /* light_bulb_icon80.png */; };
-		CEEB51A01B91247600B54228 /* light_bulb_icon120.png in Resources */ = {isa = PBXBuildFile; fileRef = CEEB519F1B91247600B54228 /* light_bulb_icon120.png */; };
 		CEED9BD41AF4160300402BC2 /* Accounts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CE395D851AED5422006786C0 /* Accounts.framework */; };
 		CEED9BD51AF4165400402BC2 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CE40D7FF1AF382A5006F2D2E /* AudioToolbox.framework */; };
 		CEED9BD61AF4166000402BC2 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CEA92FA11AF368590042D0EE /* CoreGraphics.framework */; };
@@ -1032,8 +1028,6 @@
 		CE06A1FF1B31F7C5000D3210 /* ParseUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = ParseUI.framework; sourceTree = "<group>"; };
 		CE0E80541B9129B80093453D /* MessageTableViewNoZipCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MessageTableViewNoZipCell.h; sourceTree = "<group>"; };
 		CE0E80551B9129B80093453D /* MessageTableViewNoZipCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MessageTableViewNoZipCell.m; sourceTree = "<group>"; };
-		CE0E80571B9276600093453D /* light_bulb_icon87.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = light_bulb_icon87.png; path = Images/light_bulb_icon87.png; sourceTree = "<group>"; };
-		CE0E80591B9276690093453D /* light_bulb_icon58.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = light_bulb_icon58.png; path = Images/light_bulb_icon58.png; sourceTree = "<group>"; };
 		CE0E805D1B9288070093453D /* settings.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = settings.png; path = Images/settings.png; sourceTree = "<group>"; };
 		CE12E41F1B94DA75001B3E25 /* OAuthCore.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OAuthCore.h; sourceTree = SOURCE_ROOT; };
 		CE12E4201B94DA75001B3E25 /* OAuthCore.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OAuthCore.m; sourceTree = SOURCE_ROOT; };
@@ -1124,6 +1118,9 @@
 		CE9034851BC63C04000BE136 /* LongFormEmailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LongFormEmailViewController.m; path = ../LongFormEmailViewController.m; sourceTree = "<group>"; };
 		CE99E3851B5EF1ED00ED9D33 /* MarkSentMessageAPI.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MarkSentMessageAPI.h; sourceTree = "<group>"; };
 		CE99E3861B5EF1ED00ED9D33 /* MarkSentMessageAPI.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MarkSentMessageAPI.m; sourceTree = "<group>"; };
+		CE9C034A1BD04C6A000FAB42 /* LogoSquare.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = LogoSquare.png; path = Images/LogoSquare.png; sourceTree = "<group>"; };
+		CE9C034C1BD04DED000FAB42 /* NSData+Base64.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSData+Base64.h"; sourceTree = "<group>"; };
+		CE9C034D1BD04DED000FAB42 /* NSData+Base64.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSData+Base64.m"; sourceTree = "<group>"; };
 		CE9D625C1BC3C10F00A244ED /* MessagePanelViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MessagePanelViewController.h; sourceTree = "<group>"; };
 		CE9D625D1BC3C10F00A244ED /* MessagePanelViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MessagePanelViewController.m; sourceTree = "<group>"; };
 		CEA79FD41AEC7C0D00535B06 /* ProgramsTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ProgramsTableViewController.h; path = ../ProgramsTableViewController.h; sourceTree = "<group>"; };
@@ -2051,10 +2048,6 @@
 		CEE074411B5EFEE900245C56 /* success.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = success.png; sourceTree = "<group>"; };
 		CEE074431B5F027E00245C56 /* success-icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "success-icon.png"; sourceTree = "<group>"; };
 		CEE772B31BA8C14D00E45842 /* settingswhite.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = settingswhite.png; path = Oingo/Images/settingswhite.png; sourceTree = "<group>"; };
-		CEEB51971B9122AC00B54228 /* light_bulb_icon60.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = light_bulb_icon60.png; path = Images/light_bulb_icon60.png; sourceTree = "<group>"; };
-		CEEB51981B9122AC00B54228 /* light_bulb_icon90.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = light_bulb_icon90.png; path = Images/light_bulb_icon90.png; sourceTree = "<group>"; };
-		CEEB519D1B91240B00B54228 /* light_bulb_icon80.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = light_bulb_icon80.png; path = Images/light_bulb_icon80.png; sourceTree = "<group>"; };
-		CEEB519F1B91247600B54228 /* light_bulb_icon120.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = light_bulb_icon120.png; path = Images/light_bulb_icon120.png; sourceTree = "<group>"; };
 		CEED9BB61AF40A4000402BC2 /* Twitter.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Twitter.framework; path = System/Library/Frameworks/Twitter.framework; sourceTree = SDKROOT; };
 		CEED9BF91AF41A7300402BC2 /* NSData+Base64.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "NSData+Base64.h"; sourceTree = "<group>"; };
 		CEED9BFA1AF41A7300402BC2 /* NSData+Base64.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "NSData+Base64.m"; sourceTree = "<group>"; };
@@ -2127,6 +2120,8 @@
 		461A3BA50F675DAFB84D6483 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				CE9C034C1BD04DED000FAB42 /* NSData+Base64.h */,
+				CE9C034D1BD04DED000FAB42 /* NSData+Base64.m */,
 				CEB1BA271BC7370200581EC6 /* libz.1.1.3.tbd */,
 				CEB1BA251BC736DA00581EC6 /* libsqlite3.0.tbd */,
 				CE5B98EF1B96F33400BFF14F /* UIKit.framework */,
@@ -2235,17 +2230,12 @@
 		CE241A6A1AEAF0D300F22144 /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				CE9C034A1BD04C6A000FAB42 /* LogoSquare.png */,
 				CEDA11981B99946E0065ACDD /* Seal_of_Congress_Cropped.png */,
 				CEDA11991B99946E0065ACDD /* Seal_of_Senate_Cropped.png */,
 				CEDA11901B992A770065ACDD /* Seal_of_the_United_States_Congress.svg.png */,
 				CEDA11911B992A770065ACDD /* Seal_of_the_United_States_Senate.svg.png */,
 				CE0E805D1B9288070093453D /* settings.png */,
-				CE0E80591B9276690093453D /* light_bulb_icon58.png */,
-				CEEB51971B9122AC00B54228 /* light_bulb_icon60.png */,
-				CEEB51981B9122AC00B54228 /* light_bulb_icon90.png */,
-				CEEB519D1B91240B00B54228 /* light_bulb_icon80.png */,
-				CE0E80571B9276600093453D /* light_bulb_icon87.png */,
-				CEEB519F1B91247600B54228 /* light_bulb_icon120.png */,
 				CED68DCB1B69AE8B0087546D /* 40-menu-alt-512.png */,
 				CED68DC91B6973520087546D /* arrow-down-gray-hi.png */,
 				CEE074431B5F027E00245C56 /* success-icon.png */,
@@ -3642,7 +3632,6 @@
 				CEDA153E1B9995D60065ACDD /* B000911.jpg in Resources */,
 				CEDA18131B9995D60065ACDD /* S001177.jpg in Resources */,
 				CEDA18671B9995D60065ACDD /* W000800.jpg in Resources */,
-				CEEB51991B9122AC00B54228 /* light_bulb_icon60.png in Resources */,
 				CEDA15671B9995D60065ACDD /* B001266.jpg in Resources */,
 				CEDA16921B9995D60065ACDD /* H001059.jpg in Resources */,
 				CEDA16321B9995D60065ACDD /* F000455.jpg in Resources */,
@@ -3688,7 +3677,6 @@
 				CEDA16DB1B9995D60065ACDD /* K000383.jpg in Resources */,
 				CEDA17181B9995D60065ACDD /* M000404.jpg in Resources */,
 				CEDA17821B9995D60065ACDD /* P000422.jpg in Resources */,
-				CE0E80581B9276600093453D /* light_bulb_icon87.png in Resources */,
 				CEDA15DF1B9995D60065ACDD /* D000168.jpg in Resources */,
 				CEDA15D01B9995D60065ACDD /* C001092.jpg in Resources */,
 				CEDA16451B9995D60065ACDD /* G000535.jpg in Resources */,
@@ -3770,7 +3758,6 @@
 				CEDA18791B9995D60065ACDD /* W000821.jpg in Resources */,
 				CEDA18371B9995D60065ACDD /* T000464.jpg in Resources */,
 				CEDA16A51B9995D60065ACDD /* I000055.jpg in Resources */,
-				CE0E805A1B9276690093453D /* light_bulb_icon58.png in Resources */,
 				CEDA17DE1B9995D60065ACDD /* S000097.jpg in Resources */,
 				CEDA15791B9995D60065ACDD /* B001284.jpg in Resources */,
 				CEDA16761B9995D60065ACDD /* H001028.jpg in Resources */,
@@ -3791,7 +3778,6 @@
 				CEDA16791B9995D60065ACDD /* H001032.jpg in Resources */,
 				CEDA15CA1B9995D60065ACDD /* C001086.jpg in Resources */,
 				CEDA17911B9995D60065ACDD /* P000595.jpg in Resources */,
-				CEEB519E1B91240B00B54228 /* light_bulb_icon80.png in Resources */,
 				CEDA16361B9995D60065ACDD /* F000459.jpg in Resources */,
 				CEDA15121B9995D60065ACDD /* A000022.jpg in Resources */,
 				CEDA169E1B9995D60065ACDD /* H001071.jpg in Resources */,
@@ -3990,7 +3976,6 @@
 				CEDA15D61B9995D60065ACDD /* C001098.jpg in Resources */,
 				CEDA17FF1B9995D60065ACDD /* S001153.jpg in Resources */,
 				CEDA177A1B9995D60065ACDD /* P000099.jpg in Resources */,
-				CEEB51A01B91247600B54228 /* light_bulb_icon120.png in Resources */,
 				CEDA187C1B9995D60065ACDD /* Y000033.jpg in Resources */,
 				CEDA15801B9995D60065ACDD /* B001291.jpg in Resources */,
 				CEDA152D1B9995D60065ACDD /* B000287.jpg in Resources */,
@@ -4058,7 +4043,6 @@
 				CE7B38581B584C77009107DD /* congressionalDishProgramCover.png in Resources */,
 				CEDA16E51B9995D60065ACDD /* L000174.jpg in Resources */,
 				CEDA16EB1B9995D60065ACDD /* L000304.jpg in Resources */,
-				CEEB519A1B9122AC00B54228 /* light_bulb_icon90.png in Resources */,
 				CEDA15F71B9995D60065ACDD /* D000604.jpg in Resources */,
 				CEDA168B1B9995D60065ACDD /* H001052.jpg in Resources */,
 				CEDA175B1B9995D60065ACDD /* M001193.jpg in Resources */,
@@ -4152,6 +4136,7 @@
 				CEDA16531B9995D60065ACDD /* G000559.jpg in Resources */,
 				CEDA17711B9995D60065ACDD /* O000007.jpg in Resources */,
 				CEDA17791B9995D60065ACDD /* P000096.jpg in Resources */,
+				CE9C034B1BD04C6A000FAB42 /* LogoSquare.png in Resources */,
 				CEDA17D51B9995D60065ACDD /* R000601.jpg in Resources */,
 				CEDA18731B9995D60065ACDD /* W000814.jpg in Resources */,
 				CEDA16D81B9995D60065ACDD /* K000380.jpg in Resources */,
@@ -4437,6 +4422,7 @@
 				CE6073331B3AD475007B567C /* CongressPhotoFinderAPI.m in Sources */,
 				CE241A421AEAE45A00F22144 /* main.m in Sources */,
 				CE48FDB61B9527C50086349A /* TWAPIManager.m in Sources */,
+				CE9C034E1BD04DED000FAB42 /* NSData+Base64.m in Sources */,
 				CEEF25111B017C8200EFB257 /* MessageTableViewCell.m in Sources */,
 				CE99E3871B5EF1ED00ED9D33 /* MarkSentMessageAPI.m in Sources */,
 				CE6F71F41B2BCA9E0067E4DA /* SettingsTableViewController.m in Sources */,
