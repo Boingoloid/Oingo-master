@@ -13,8 +13,6 @@
 		CE06A2021B31F7C5000D3210 /* ParseCrashReporting.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CE06A1FC1B31F7C5000D3210 /* ParseCrashReporting.framework */; };
 		CE06A2041B31F7C5000D3210 /* ParseFacebookUtilsV4.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CE06A1FE1B31F7C5000D3210 /* ParseFacebookUtilsV4.framework */; };
 		CE0E80561B9129B80093453D /* MessageTableViewNoZipCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CE0E80551B9129B80093453D /* MessageTableViewNoZipCell.m */; };
-		CE0E80581B9276600093453D /* light_bulb_icon87.png in Resources */ = {isa = PBXBuildFile; fileRef = CE0E80571B9276600093453D /* light_bulb_icon87.png */; };
-		CE0E805A1B9276690093453D /* light_bulb_icon58.png in Resources */ = {isa = PBXBuildFile; fileRef = CE0E80591B9276690093453D /* light_bulb_icon58.png */; };
 		CE0E805E1B9288070093453D /* settings.png in Resources */ = {isa = PBXBuildFile; fileRef = CE0E805D1B9288070093453D /* settings.png */; };
 		CE12E4211B94DA75001B3E25 /* OAuthCore.m in Sources */ = {isa = PBXBuildFile; fileRef = CE12E4201B94DA75001B3E25 /* OAuthCore.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		CE12E4241B94DACE001B3E25 /* OAuth+Additions.m in Sources */ = {isa = PBXBuildFile; fileRef = CE12E4231B94DACE001B3E25 /* OAuth+Additions.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
@@ -60,6 +58,15 @@
 		CE6073331B3AD475007B567C /* CongressPhotoFinderAPI.m in Sources */ = {isa = PBXBuildFile; fileRef = CE6073321B3AD475007B567C /* CongressPhotoFinderAPI.m */; };
 		CE6F71F41B2BCA9E0067E4DA /* SettingsTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CE6F71F31B2BCA9E0067E4DA /* SettingsTableViewController.m */; };
 		CE76D26F1B94E41A00AE3E21 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CE76D26E1B94E41A00AE3E21 /* QuartzCore.framework */; };
+		CE7800C01BDEAEA2008B9F37 /* LogoGlow58.png in Resources */ = {isa = PBXBuildFile; fileRef = CE7800B91BDEAEA2008B9F37 /* LogoGlow58.png */; settings = {ASSET_TAGS = (); }; };
+		CE7800C11BDEAEA2008B9F37 /* LogoGlow80.png in Resources */ = {isa = PBXBuildFile; fileRef = CE7800BA1BDEAEA2008B9F37 /* LogoGlow80.png */; settings = {ASSET_TAGS = (); }; };
+		CE7800C21BDEAEA2008B9F37 /* LogoGlow87.png in Resources */ = {isa = PBXBuildFile; fileRef = CE7800BB1BDEAEA2008B9F37 /* LogoGlow87.png */; settings = {ASSET_TAGS = (); }; };
+		CE7800C31BDEAEA2008B9F37 /* LogoGlow120-1.png in Resources */ = {isa = PBXBuildFile; fileRef = CE7800BC1BDEAEA2008B9F37 /* LogoGlow120-1.png */; settings = {ASSET_TAGS = (); }; };
+		CE7800C41BDEAEA2008B9F37 /* LogoGlow120.png in Resources */ = {isa = PBXBuildFile; fileRef = CE7800BD1BDEAEA2008B9F37 /* LogoGlow120.png */; settings = {ASSET_TAGS = (); }; };
+		CE7800C51BDEAEA2008B9F37 /* LogoGlow180.png in Resources */ = {isa = PBXBuildFile; fileRef = CE7800BE1BDEAEA2008B9F37 /* LogoGlow180.png */; settings = {ASSET_TAGS = (); }; };
+		CE7800C91BDEB142008B9F37 /* LogoGlow-1.png in Resources */ = {isa = PBXBuildFile; fileRef = CE7800C61BDEB142008B9F37 /* LogoGlow-1.png */; settings = {ASSET_TAGS = (); }; };
+		CE7800CA1BDEB142008B9F37 /* LogoGlow-2.png in Resources */ = {isa = PBXBuildFile; fileRef = CE7800C71BDEB142008B9F37 /* LogoGlow-2.png */; settings = {ASSET_TAGS = (); }; };
+		CE7800CB1BDEB142008B9F37 /* LogoGlow.png in Resources */ = {isa = PBXBuildFile; fileRef = CE7800C81BDEB142008B9F37 /* LogoGlow.png */; settings = {ASSET_TAGS = (); }; };
 		CE7B38581B584C77009107DD /* congressionalDishProgramCover.png in Resources */ = {isa = PBXBuildFile; fileRef = CE7B38571B584C77009107DD /* congressionalDishProgramCover.png */; };
 		CE80B5D61AFC0EFB007D69FB /* dailyshow6cover.png in Resources */ = {isa = PBXBuildFile; fileRef = CE80B5D51AFC0EFB007D69FB /* dailyshow6cover.png */; };
 		CE82943D1B38DB7C00B596E6 /* CongressionalMessageItem.m in Sources */ = {isa = PBXBuildFile; fileRef = CE82943C1B38DB7C00B596E6 /* CongressionalMessageItem.m */; };
@@ -982,10 +989,6 @@
 		CEE074421B5EFEE900245C56 /* success.png in Resources */ = {isa = PBXBuildFile; fileRef = CEE074411B5EFEE900245C56 /* success.png */; };
 		CEE074441B5F027E00245C56 /* success-icon.png in Resources */ = {isa = PBXBuildFile; fileRef = CEE074431B5F027E00245C56 /* success-icon.png */; };
 		CEE772B41BA8C14D00E45842 /* settingswhite.png in Resources */ = {isa = PBXBuildFile; fileRef = CEE772B31BA8C14D00E45842 /* settingswhite.png */; };
-		CEEB51991B9122AC00B54228 /* light_bulb_icon60.png in Resources */ = {isa = PBXBuildFile; fileRef = CEEB51971B9122AC00B54228 /* light_bulb_icon60.png */; };
-		CEEB519A1B9122AC00B54228 /* light_bulb_icon90.png in Resources */ = {isa = PBXBuildFile; fileRef = CEEB51981B9122AC00B54228 /* light_bulb_icon90.png */; };
-		CEEB519E1B91240B00B54228 /* light_bulb_icon80.png in Resources */ = {isa = PBXBuildFile; fileRef = CEEB519D1B91240B00B54228 /* light_bulb_icon80.png */; };
-		CEEB51A01B91247600B54228 /* light_bulb_icon120.png in Resources */ = {isa = PBXBuildFile; fileRef = CEEB519F1B91247600B54228 /* light_bulb_icon120.png */; };
 		CEED9BD41AF4160300402BC2 /* Accounts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CE395D851AED5422006786C0 /* Accounts.framework */; };
 		CEED9BD51AF4165400402BC2 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CE40D7FF1AF382A5006F2D2E /* AudioToolbox.framework */; };
 		CEED9BD61AF4166000402BC2 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CEA92FA11AF368590042D0EE /* CoreGraphics.framework */; };
@@ -1028,8 +1031,6 @@
 		CE06A1FE1B31F7C5000D3210 /* ParseFacebookUtilsV4.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = ParseFacebookUtilsV4.framework; sourceTree = "<group>"; };
 		CE0E80541B9129B80093453D /* MessageTableViewNoZipCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MessageTableViewNoZipCell.h; sourceTree = "<group>"; };
 		CE0E80551B9129B80093453D /* MessageTableViewNoZipCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MessageTableViewNoZipCell.m; sourceTree = "<group>"; };
-		CE0E80571B9276600093453D /* light_bulb_icon87.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = light_bulb_icon87.png; path = Images/light_bulb_icon87.png; sourceTree = "<group>"; };
-		CE0E80591B9276690093453D /* light_bulb_icon58.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = light_bulb_icon58.png; path = Images/light_bulb_icon58.png; sourceTree = "<group>"; };
 		CE0E805D1B9288070093453D /* settings.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = settings.png; path = Images/settings.png; sourceTree = "<group>"; };
 		CE12E41F1B94DA75001B3E25 /* OAuthCore.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OAuthCore.h; sourceTree = SOURCE_ROOT; };
 		CE12E4201B94DA75001B3E25 /* OAuthCore.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OAuthCore.m; sourceTree = SOURCE_ROOT; };
@@ -1100,6 +1101,15 @@
 		CE6F71F21B2BCA9E0067E4DA /* SettingsTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingsTableViewController.h; sourceTree = "<group>"; };
 		CE6F71F31B2BCA9E0067E4DA /* SettingsTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingsTableViewController.m; sourceTree = "<group>"; };
 		CE76D26E1B94E41A00AE3E21 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
+		CE7800B91BDEAEA2008B9F37 /* LogoGlow58.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = LogoGlow58.png; path = Images.xcassets/AppIcon.appiconset/LogoGlow58.png; sourceTree = "<group>"; };
+		CE7800BA1BDEAEA2008B9F37 /* LogoGlow80.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = LogoGlow80.png; path = Images.xcassets/AppIcon.appiconset/LogoGlow80.png; sourceTree = "<group>"; };
+		CE7800BB1BDEAEA2008B9F37 /* LogoGlow87.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = LogoGlow87.png; path = Images.xcassets/AppIcon.appiconset/LogoGlow87.png; sourceTree = "<group>"; };
+		CE7800BC1BDEAEA2008B9F37 /* LogoGlow120-1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "LogoGlow120-1.png"; path = "Images.xcassets/AppIcon.appiconset/LogoGlow120-1.png"; sourceTree = "<group>"; };
+		CE7800BD1BDEAEA2008B9F37 /* LogoGlow120.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = LogoGlow120.png; path = Images.xcassets/AppIcon.appiconset/LogoGlow120.png; sourceTree = "<group>"; };
+		CE7800BE1BDEAEA2008B9F37 /* LogoGlow180.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = LogoGlow180.png; path = Images.xcassets/AppIcon.appiconset/LogoGlow180.png; sourceTree = "<group>"; };
+		CE7800C61BDEB142008B9F37 /* LogoGlow-1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "LogoGlow-1.png"; path = "Images.xcassets/Image.imageset/LogoGlow-1.png"; sourceTree = "<group>"; };
+		CE7800C71BDEB142008B9F37 /* LogoGlow-2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "LogoGlow-2.png"; path = "Images.xcassets/Image.imageset/LogoGlow-2.png"; sourceTree = "<group>"; };
+		CE7800C81BDEB142008B9F37 /* LogoGlow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = LogoGlow.png; path = Images.xcassets/Image.imageset/LogoGlow.png; sourceTree = "<group>"; };
 		CE7B38571B584C77009107DD /* congressionalDishProgramCover.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = congressionalDishProgramCover.png; path = Images/congressionalDishProgramCover.png; sourceTree = "<group>"; };
 		CE80B5D51AFC0EFB007D69FB /* dailyshow6cover.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = dailyshow6cover.png; path = Images/dailyshow6cover.png; sourceTree = "<group>"; };
 		CE82943B1B38DB7C00B596E6 /* CongressionalMessageItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CongressionalMessageItem.h; sourceTree = "<group>"; };
@@ -2048,10 +2058,6 @@
 		CEE074411B5EFEE900245C56 /* success.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = success.png; sourceTree = "<group>"; };
 		CEE074431B5F027E00245C56 /* success-icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "success-icon.png"; sourceTree = "<group>"; };
 		CEE772B31BA8C14D00E45842 /* settingswhite.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = settingswhite.png; path = Oingo/Images/settingswhite.png; sourceTree = "<group>"; };
-		CEEB51971B9122AC00B54228 /* light_bulb_icon60.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = light_bulb_icon60.png; path = Images/light_bulb_icon60.png; sourceTree = "<group>"; };
-		CEEB51981B9122AC00B54228 /* light_bulb_icon90.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = light_bulb_icon90.png; path = Images/light_bulb_icon90.png; sourceTree = "<group>"; };
-		CEEB519D1B91240B00B54228 /* light_bulb_icon80.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = light_bulb_icon80.png; path = Images/light_bulb_icon80.png; sourceTree = "<group>"; };
-		CEEB519F1B91247600B54228 /* light_bulb_icon120.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = light_bulb_icon120.png; path = Images/light_bulb_icon120.png; sourceTree = "<group>"; };
 		CEED9BB61AF40A4000402BC2 /* Twitter.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Twitter.framework; path = System/Library/Frameworks/Twitter.framework; sourceTree = SDKROOT; };
 		CEEF24FF1B0114C900EFB257 /* monsanto nutrition facts.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "monsanto nutrition facts.png"; sourceTree = "<group>"; };
 		CEEF25011B011A4B00EFB257 /* monsanto gas apple.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "monsanto gas apple.png"; sourceTree = "<group>"; };
@@ -2237,12 +2243,15 @@
 				CEDA11901B992A770065ACDD /* Seal_of_the_United_States_Congress.svg.png */,
 				CEDA11911B992A770065ACDD /* Seal_of_the_United_States_Senate.svg.png */,
 				CE0E805D1B9288070093453D /* settings.png */,
-				CE0E80591B9276690093453D /* light_bulb_icon58.png */,
-				CEEB51971B9122AC00B54228 /* light_bulb_icon60.png */,
-				CEEB51981B9122AC00B54228 /* light_bulb_icon90.png */,
-				CEEB519D1B91240B00B54228 /* light_bulb_icon80.png */,
-				CE0E80571B9276600093453D /* light_bulb_icon87.png */,
-				CEEB519F1B91247600B54228 /* light_bulb_icon120.png */,
+				CE7800B91BDEAEA2008B9F37 /* LogoGlow58.png */,
+				CE7800BA1BDEAEA2008B9F37 /* LogoGlow80.png */,
+				CE7800BB1BDEAEA2008B9F37 /* LogoGlow87.png */,
+				CE7800BC1BDEAEA2008B9F37 /* LogoGlow120-1.png */,
+				CE7800BD1BDEAEA2008B9F37 /* LogoGlow120.png */,
+				CE7800BE1BDEAEA2008B9F37 /* LogoGlow180.png */,
+				CE7800C61BDEB142008B9F37 /* LogoGlow-1.png */,
+				CE7800C71BDEB142008B9F37 /* LogoGlow-2.png */,
+				CE7800C81BDEB142008B9F37 /* LogoGlow.png */,
 				CED68DCB1B69AE8B0087546D /* 40-menu-alt-512.png */,
 				CED68DC91B6973520087546D /* arrow-down-gray-hi.png */,
 				CEE074431B5F027E00245C56 /* success-icon.png */,
@@ -3406,6 +3415,7 @@
 				CEDA155B1B9995D60065ACDD /* B001254.jpg in Resources */,
 				CEDA16021B9995D60065ACDD /* D000616.jpg in Resources */,
 				CEDA18191B9995D60065ACDD /* S001184.jpg in Resources */,
+				CE7800CA1BDEB142008B9F37 /* LogoGlow-2.png in Resources */,
 				CEE04B9A1B34B9EC00AAF8EA /* lightGrayButtonBackground.png in Resources */,
 				CEDA166A1B9995D60065ACDD /* H000338.jpg in Resources */,
 				CEDA159D1B9995D60065ACDD /* C000962.jpg in Resources */,
@@ -3505,6 +3515,7 @@
 				CEDA18551B9995D60065ACDD /* W000267.jpg in Resources */,
 				CEDA16161B9995D60065ACDD /* E000288.jpg in Resources */,
 				CEDA17ED1B9995D60065ACDD /* S000663.jpg in Resources */,
+				CE7800CB1BDEB142008B9F37 /* LogoGlow.png in Resources */,
 				CEDA17991B9995D60065ACDD /* P000603.jpg in Resources */,
 				CEDA17CE1B9995D60065ACDD /* R000593.jpg in Resources */,
 				CEDA18201B9995D60065ACDD /* S001191.jpg in Resources */,
@@ -3594,8 +3605,8 @@
 				CEDA153E1B9995D60065ACDD /* B000911.jpg in Resources */,
 				CEDA18131B9995D60065ACDD /* S001177.jpg in Resources */,
 				CEDA18671B9995D60065ACDD /* W000800.jpg in Resources */,
-				CEEB51991B9122AC00B54228 /* light_bulb_icon60.png in Resources */,
 				CEDA15671B9995D60065ACDD /* B001266.jpg in Resources */,
+				CE7800C41BDEAEA2008B9F37 /* LogoGlow120.png in Resources */,
 				CEDA16921B9995D60065ACDD /* H001059.jpg in Resources */,
 				CEDA16321B9995D60065ACDD /* F000455.jpg in Resources */,
 				CEDA15FE1B9995D60065ACDD /* D000612.jpg in Resources */,
@@ -3620,6 +3631,7 @@
 				CEDA16071B9995D60065ACDD /* D000621.jpg in Resources */,
 				CEDA16B81B9995D60065ACDD /* J000297.jpg in Resources */,
 				CEDA15C91B9995D60065ACDD /* C001085.jpg in Resources */,
+				CE7800C21BDEAEA2008B9F37 /* LogoGlow87.png in Resources */,
 				CEDA15651B9995D60065ACDD /* B001264.jpg in Resources */,
 				CEDA178F1B9995D60065ACDD /* P000593.jpg in Resources */,
 				CEDA16821B9995D60065ACDD /* H001043.jpg in Resources */,
@@ -3639,7 +3651,6 @@
 				CEDA16DB1B9995D60065ACDD /* K000383.jpg in Resources */,
 				CEDA17181B9995D60065ACDD /* M000404.jpg in Resources */,
 				CEDA17821B9995D60065ACDD /* P000422.jpg in Resources */,
-				CE0E80581B9276600093453D /* light_bulb_icon87.png in Resources */,
 				CEDA15DF1B9995D60065ACDD /* D000168.jpg in Resources */,
 				CEDA15D01B9995D60065ACDD /* C001092.jpg in Resources */,
 				CEDA16451B9995D60065ACDD /* G000535.jpg in Resources */,
@@ -3721,7 +3732,6 @@
 				CEDA18791B9995D60065ACDD /* W000821.jpg in Resources */,
 				CEDA18371B9995D60065ACDD /* T000464.jpg in Resources */,
 				CEDA16A51B9995D60065ACDD /* I000055.jpg in Resources */,
-				CE0E805A1B9276690093453D /* light_bulb_icon58.png in Resources */,
 				CEDA17DE1B9995D60065ACDD /* S000097.jpg in Resources */,
 				CEDA15791B9995D60065ACDD /* B001284.jpg in Resources */,
 				CEDA16761B9995D60065ACDD /* H001028.jpg in Resources */,
@@ -3742,7 +3752,6 @@
 				CEDA16791B9995D60065ACDD /* H001032.jpg in Resources */,
 				CEDA15CA1B9995D60065ACDD /* C001086.jpg in Resources */,
 				CEDA17911B9995D60065ACDD /* P000595.jpg in Resources */,
-				CEEB519E1B91240B00B54228 /* light_bulb_icon80.png in Resources */,
 				CEDA16361B9995D60065ACDD /* F000459.jpg in Resources */,
 				CEDA15121B9995D60065ACDD /* A000022.jpg in Resources */,
 				CEDA169E1B9995D60065ACDD /* H001071.jpg in Resources */,
@@ -3845,6 +3854,7 @@
 				CEDA156E1B9995D60065ACDD /* B001273.jpg in Resources */,
 				CEDA159A1B9995D60065ACDD /* C000858.jpg in Resources */,
 				CEDA179F1B9995D60065ACDD /* P000609.jpg in Resources */,
+				CE7800C01BDEAEA2008B9F37 /* LogoGlow58.png in Resources */,
 				CEDA172E1B9995D60065ACDD /* M001146.jpg in Resources */,
 				CEDA17D21B9995D60065ACDD /* R000598.jpg in Resources */,
 				CEDA15871B9995D60065ACDD /* C000059.jpg in Resources */,
@@ -3940,7 +3950,6 @@
 				CEDA15D61B9995D60065ACDD /* C001098.jpg in Resources */,
 				CEDA17FF1B9995D60065ACDD /* S001153.jpg in Resources */,
 				CEDA177A1B9995D60065ACDD /* P000099.jpg in Resources */,
-				CEEB51A01B91247600B54228 /* light_bulb_icon120.png in Resources */,
 				CEDA187C1B9995D60065ACDD /* Y000033.jpg in Resources */,
 				CEDA15801B9995D60065ACDD /* B001291.jpg in Resources */,
 				CEDA152D1B9995D60065ACDD /* B000287.jpg in Resources */,
@@ -3983,6 +3992,7 @@
 				CEDA16911B9995D60065ACDD /* H001058.jpg in Resources */,
 				CEDA15381B9995D60065ACDD /* B000611.jpg in Resources */,
 				CEDA17E21B9995D60065ACDD /* S000248.jpg in Resources */,
+				CE7800C11BDEAEA2008B9F37 /* LogoGlow80.png in Resources */,
 				CEDA161C1B9995D60065ACDD /* E000294.jpg in Resources */,
 				CEDA17531B9995D60065ACDD /* M001184.jpg in Resources */,
 				CEDA154E1B9995D60065ACDD /* B001235.jpg in Resources */,
@@ -4008,7 +4018,6 @@
 				CE7B38581B584C77009107DD /* congressionalDishProgramCover.png in Resources */,
 				CEDA16E51B9995D60065ACDD /* L000174.jpg in Resources */,
 				CEDA16EB1B9995D60065ACDD /* L000304.jpg in Resources */,
-				CEEB519A1B9122AC00B54228 /* light_bulb_icon90.png in Resources */,
 				CEDA15F71B9995D60065ACDD /* D000604.jpg in Resources */,
 				CEDA168B1B9995D60065ACDD /* H001052.jpg in Resources */,
 				CEDA175B1B9995D60065ACDD /* M001193.jpg in Resources */,
@@ -4202,6 +4211,7 @@
 				CEDA16BD1B9995D60065ACDD /* K000148.jpg in Resources */,
 				CEDA17E41B9995D60065ACDD /* S000275.jpg in Resources */,
 				CEDA15AE1B9995D60065ACDD /* C001058.jpg in Resources */,
+				CE7800C91BDEB142008B9F37 /* LogoGlow-1.png in Resources */,
 				CEDA16EA1B9995D60065ACDD /* L000293.jpg in Resources */,
 				CEDA17B91B9995D60065ACDD /* R000571.jpg in Resources */,
 				CEDA16BB1B9995D60065ACDD /* K000105.jpg in Resources */,
@@ -4218,6 +4228,7 @@
 				CEDA17381B9995D60065ACDD /* M001156.jpg in Resources */,
 				CEDA161E1B9995D60065ACDD /* F000010.jpg in Resources */,
 				CEDA16301B9995D60065ACDD /* F000453.jpg in Resources */,
+				CE7800C51BDEAEA2008B9F37 /* LogoGlow180.png in Resources */,
 				CEDA16F91B9995D60065ACDD /* L000559.jpg in Resources */,
 				CEDA15891B9995D60065ACDD /* C000116.jpg in Resources */,
 				CEDA17AA1B9995D60065ACDD /* R000141.jpg in Resources */,
@@ -4225,6 +4236,7 @@
 				CEDA165E1B9995D60065ACDD /* G000571.jpg in Resources */,
 				CEDA172F1B9995D60065ACDD /* M001147.jpg in Resources */,
 				CEDA16561B9995D60065ACDD /* G000563.jpg in Resources */,
+				CE7800C31BDEAEA2008B9F37 /* LogoGlow120-1.png in Resources */,
 				CEDA15B01B9995D60065ACDD /* C001060.jpg in Resources */,
 				CEDA173E1B9995D60065ACDD /* M001162.jpg in Resources */,
 				CEDA16741B9995D60065ACDD /* H000981.jpg in Resources */,

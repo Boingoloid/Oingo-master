@@ -2,16 +2,17 @@
   "images" : [
     {
       "idiom" : "universal",
-      "scale" : "1x",
-      "filename" : "brainwash40.png"
+      "filename" : "LogoGlow.png",
+      "scale" : "1x"
     },
     {
       "idiom" : "universal",
-      "scale" : "2x",
-      "filename" : "brainwash80.png"
+      "filename" : "LogoGlow-1.png",
+      "scale" : "2x"
     },
     {
       "idiom" : "universal",
+      "filename" : "LogoGlow-2.png",
       "scale" : "3x"
     }
   ],
