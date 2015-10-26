@@ -44,7 +44,9 @@
 // -------------------------------------------------------------------------------
 - (void)showMailPicker:(NSString*)email withMessage:(NSString *)message {
     if ([MFMailComposeViewController canSendMail]){
+            NSLog(@"User email - short email VC 1st:%@",email);
         [self displayMailComposerSheet:email withMessage:message];
+
     } else {
         self.feedbackMsg.hidden = NO;
         self.feedbackMsg.text = @"Device not configured to send mail.";
@@ -66,6 +68,7 @@
 
     NSString *subject = [NSString stringWithFormat:@"Message from local voter re: %@",[self.selectedSegment valueForKey:@"segmentTitle"]];
     [picker setSubject:subject];
+        NSLog(@"User email - short email VC:%@",email);
     
     // Set up recipients
     NSArray *toRecipients = [NSArray arrayWithObject:email];
@@ -73,13 +76,6 @@
 //    NSArray *bccRecipients = [NSArray arrayWithObject:@""];
     
     [picker setToRecipients:toRecipients];
-//    [picker setCcRecipients:ccRecipients];
-//    [picker setBccRecipients:bccRecipients];
-    
-    // Attach an image to the email
-//    NSString *path = [[NSBundle mainBundle] pathForResource:@"rainy" ofType:@"jpg"];
-//    NSData *myData = [NSData dataWithContentsOfFile:path];
-//    [picker addAttachmentData:myData mimeType:@"image/jpeg" fileName:@"rainy"];
     
     // Fill out the email body text
     NSString *emailBody = message;
@@ -113,17 +109,19 @@
     {
         case MFMailComposeResultCancelled:
             [self dismissViewControllerAnimated:YES completion:NULL];
-            [self dismissViewControllerAnimated:YES completion:NULL];
+            [self.navigationController popViewControllerAnimated:YES];
             NSLog(@"email canceled");
+            break;
         case MFMailComposeResultSaved:
 //            self.feedbackMsg.text = @"Result: Mail saved";
-            [self dismissViewControllerAnimated:YES completion:NULL];
-            [self dismissViewControllerAnimated:YES completion:NULL];
+            [self dismissViewControllerAnimated:NO completion:NULL];
+            [self.navigationController popViewControllerAnimated:YES];
             NSLog(@"email saved");
+            break;
         case MFMailComposeResultSent:{
 //            self.feedbackMsg.text = @"Result: Mail sent";
-            [self dismissViewControllerAnimated:YES completion:NULL];
-            [self dismissViewControllerAnimated:YES completion:NULL];
+            [self dismissViewControllerAnimated:NO completion:NULL];
+            [self.navigationController popViewControllerAnimated:YES];
             
             
             //  SAVING MESSAGE DATA TO PARSE
@@ -166,19 +164,19 @@
             
             NSLog(@"Got here in the save 2:%@",sentMessageItem);
             [self.messageTableViewController viewDidLoad];
-            
+        break;
         }
-//            break;
+            
         case MFMailComposeResultFailed:
 //            self.feedbackMsg.text = @"Result: Mail sending failed";
-            [self dismissViewControllerAnimated:YES completion:NULL];
-            [self dismissViewControllerAnimated:YES completion:NULL];
-//            break;
+            [self dismissViewControllerAnimated:NO completion:NULL];
+            [self.navigationController popViewControllerAnimated:YES];
+            break;
         default:
 //            self.feedbackMsg.text = @"Result: Mail not sent";
-            [self dismissViewControllerAnimated:YES completion:NULL];
-            [self dismissViewControllerAnimated:YES completion:NULL];
-//            break;
+            [self dismissViewControllerAnimated:NO completion:NULL];
+            [self.navigationController popViewControllerAnimated:YES];
+            break;
     }
 //    [self dismissViewControllerAnimated:YES completion:NULL];
 }

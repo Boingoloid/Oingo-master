@@ -113,17 +113,19 @@
     {
         case MFMailComposeResultCancelled:
             [self dismissViewControllerAnimated:YES completion:NULL];
-            [self dismissViewControllerAnimated:YES completion:NULL];
+            [self.navigationController popViewControllerAnimated:YES];
             NSLog(@"email canceled");
+            break;
         case MFMailComposeResultSaved:
             //            self.feedbackMsg.text = @"Result: Mail saved";
             [self dismissViewControllerAnimated:YES completion:NULL];
-            [self dismissViewControllerAnimated:YES completion:NULL];
+            [self.navigationController popViewControllerAnimated:YES];
             NSLog(@"email saved");
+            break;
         case MFMailComposeResultSent:{
             //            self.feedbackMsg.text = @"Result: Mail sent";
             [self dismissViewControllerAnimated:YES completion:NULL];
-            [self dismissViewControllerAnimated:YES completion:NULL];
+            [self.navigationController popViewControllerAnimated:YES];
             
             
             //  SAVING MESSAGE DATA TO PARSE
@@ -167,19 +169,19 @@
             [self.messageTableViewController viewDidLoad];
             
         }
-
+            break;
         case MFMailComposeResultFailed:
             //self.feedbackMsg.text = @"Result: Mail sending failed";
             [self dismissViewControllerAnimated:YES completion:NULL];
-            [self dismissViewControllerAnimated:YES completion:NULL];
-
+            [self.navigationController popViewControllerAnimated:YES];
+            break;
         default:
             //self.feedbackMsg.text = @"Result: Mail not sent";
             [self dismissViewControllerAnimated:YES completion:NULL];
-            [self dismissViewControllerAnimated:YES completion:NULL];
-
+            [self.navigationController popViewControllerAnimated:YES];
+            break;
     }
-    //    [self dismissViewControllerAnimated:YES completion:NULL];
+
 }
 
 - (void)viewDidLoad {

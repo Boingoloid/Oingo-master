@@ -1,7 +1,6 @@
 dependencies: \
   /Users/matthewacalin/Desktop/IphoneApps/PushThought/Oingo/MessageTableViewEmailCell.m \
-  /Users/matthewacalin/Desktop/IphoneApps/PushThought/Oingo/MessageTableViewEmailCell.h \
-  /Users/matthewacalin/Desktop/IphoneApps/PushThought/Oingo/EmailItem.h \
+  Oingo/MessageTableViewEmailCell.h Oingo/EmailItem.h \
   /Users/matthewacalin/Desktop/IphoneApps/PushThought/WebViewController.h \
   /Users/matthewacalin/Desktop/IphoneApps/PushThought/Parse.framework/Headers/PF_Twitter.h \
   /Users/matthewacalin/Desktop/IphoneApps/PushThought/Parse.framework/Headers/PFTwitterUtils.h \

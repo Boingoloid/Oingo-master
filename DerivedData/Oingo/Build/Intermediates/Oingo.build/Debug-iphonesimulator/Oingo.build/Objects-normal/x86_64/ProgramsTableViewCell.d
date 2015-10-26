@@ -1,7 +1,6 @@
 dependencies: \
   /Users/matthewacalin/Desktop/IphoneApps/PushThought/Oingo/ProgramsTableViewCell.m \
-  /Users/matthewacalin/Desktop/IphoneApps/PushThought/Oingo/ProgramsTableViewCell.h \
-  /Users/matthewacalin/Desktop/IphoneApps/PushThought/Oingo/Program.h \
+  Oingo/ProgramsTableViewCell.h Oingo/Program.h \
   /Users/matthewacalin/Desktop/IphoneApps/PushThought/ProgramsTableViewController.h \
   /Users/matthewacalin/Desktop/IphoneApps/PushThought/Parse.framework/Headers/PF_Twitter.h \
   /Users/matthewacalin/Desktop/IphoneApps/PushThought/Parse.framework/Headers/PFTwitterUtils.h \

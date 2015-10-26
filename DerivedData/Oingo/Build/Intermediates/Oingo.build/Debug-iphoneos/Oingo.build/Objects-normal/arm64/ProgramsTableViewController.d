@@ -31,5 +31,5 @@ dependencies: \
   /Users/matthewacalin/Desktop/IphoneApps/PushThought/Oingo/ProgramsTableViewCell.h \
   /Users/matthewacalin/Desktop/IphoneApps/PushThought/Oingo/PFTwitterUtils+NativeTwitter.h \
   /Users/matthewacalin/Desktop/IphoneApps/PushThought/Oingo/ProgramDetailTableViewController.h \
-  /Users/matthewacalin/Desktop/IphoneApps/PushThought/Oingo/Segment.h \
+  Oingo/Segment.h \
   /Users/matthewacalin/Desktop/IphoneApps/PushThought/ProgramDetailTableViewCell.h

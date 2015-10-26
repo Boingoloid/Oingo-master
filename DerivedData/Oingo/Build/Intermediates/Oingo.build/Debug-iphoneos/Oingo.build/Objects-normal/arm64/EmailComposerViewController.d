@@ -1,9 +1,7 @@
 dependencies: \
   /Users/matthewacalin/Desktop/IphoneApps/PushThought/Oingo/EmailComposerViewController.m \
-  /Users/matthewacalin/Desktop/IphoneApps/PushThought/Oingo/EmailComposerViewController.h \
-  /Users/matthewacalin/Desktop/IphoneApps/PushThought/Oingo/Segment.h \
-  /Users/matthewacalin/Desktop/IphoneApps/PushThought/Oingo/MessageTableViewController.h \
-  /Users/matthewacalin/Desktop/IphoneApps/PushThought/Oingo/Program.h \
+  Oingo/EmailComposerViewController.h Oingo/Segment.h \
+  Oingo/MessageTableViewController.h Oingo/Program.h \
   /Users/matthewacalin/Desktop/IphoneApps/PushThought/Parse.framework/Headers/PF_Twitter.h \
   /Users/matthewacalin/Desktop/IphoneApps/PushThought/Parse.framework/Headers/PFTwitterUtils.h \
   /Users/matthewacalin/Desktop/IphoneApps/PushThought/Parse.framework/Headers/PFPush.h \
@@ -30,6 +28,5 @@ dependencies: \
   /Users/matthewacalin/Desktop/IphoneApps/PushThought/Parse.framework/Headers/PFACL.h \
   /Users/matthewacalin/Desktop/IphoneApps/PushThought/Parse.framework/Headers/Parse.h \
   /Users/matthewacalin/Desktop/IphoneApps/PushThought/Parse.framework/Modules/module.modulemap \
-  /Users/matthewacalin/Desktop/IphoneApps/PushThought/Oingo/UpdateDefaults.h \
-  /Users/matthewacalin/Desktop/IphoneApps/PushThought/Oingo/CongressionalMessageItem.h \
-  /Users/matthewacalin/Desktop/IphoneApps/PushThought/Oingo/MessageItem.h
+  Oingo/UpdateDefaults.h Oingo/CongressionalMessageItem.h \
+  Oingo/MessageItem.h

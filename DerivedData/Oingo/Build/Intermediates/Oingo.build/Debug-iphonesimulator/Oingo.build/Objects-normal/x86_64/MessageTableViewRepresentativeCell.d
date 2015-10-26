@@ -1,8 +1,7 @@
 dependencies: \
   /Users/matthewacalin/Desktop/IphoneApps/PushThought/Oingo/MessageTableViewRepresentativeCell.m \
-  /Users/matthewacalin/Desktop/IphoneApps/PushThought/Oingo/MessageTableViewRepresentativeCell.h \
-  /Users/matthewacalin/Desktop/IphoneApps/PushThought/Oingo/MessageItem.h \
-  /Users/matthewacalin/Desktop/IphoneApps/PushThought/Oingo/CongressionalMessageItem.h \
+  Oingo/MessageTableViewRepresentativeCell.h Oingo/MessageItem.h \
+  Oingo/CongressionalMessageItem.h \
   /Users/matthewacalin/Desktop/IphoneApps/PushThought/Parse.framework/Headers/PF_Twitter.h \
   /Users/matthewacalin/Desktop/IphoneApps/PushThought/Parse.framework/Headers/PFTwitterUtils.h \
   /Users/matthewacalin/Desktop/IphoneApps/PushThought/Parse.framework/Headers/PFPush.h \
@@ -29,10 +28,8 @@ dependencies: \
   /Users/matthewacalin/Desktop/IphoneApps/PushThought/Parse.framework/Headers/PFACL.h \
   /Users/matthewacalin/Desktop/IphoneApps/PushThought/Parse.framework/Headers/Parse.h \
   /Users/matthewacalin/Desktop/IphoneApps/PushThought/Parse.framework/Modules/module.modulemap \
-  /Users/matthewacalin/Desktop/IphoneApps/PushThought/Oingo/MessageTableViewController.h \
-  /Users/matthewacalin/Desktop/IphoneApps/PushThought/Oingo/Segment.h \
-  /Users/matthewacalin/Desktop/IphoneApps/PushThought/Oingo/Program.h \
-  /Users/matthewacalin/Desktop/IphoneApps/PushThought/Oingo/UpdateDefaults.h \
+  Oingo/MessageTableViewController.h Oingo/Segment.h Oingo/Program.h \
+  Oingo/UpdateDefaults.h \
   /Users/matthewacalin/Desktop/IphoneApps/PushThought/Bolts.framework/Headers/BFWebViewAppLinkResolver.h \
   /Users/matthewacalin/Desktop/IphoneApps/PushThought/Bolts.framework/Headers/BFURL.h \
   /Users/matthewacalin/Desktop/IphoneApps/PushThought/Bolts.framework/Headers/BFMeasurementEvent.h \
@@ -48,100 +45,57 @@ dependencies: \
   /Users/matthewacalin/Desktop/IphoneApps/PushThought/Bolts.framework/Headers/BoltsVersion.h \
   /Users/matthewacalin/Desktop/IphoneApps/PushThought/Bolts.framework/Headers/Bolts.h \
   /Users/matthewacalin/Desktop/IphoneApps/PushThought/Bolts.framework/Modules/module.modulemap \
-  /Users/matthewacalin/Documents/FacebookSDK/FBSDKCoreKit.framework/Headers/FBSDKGraphRequestDataAttachment.h \
-  /Users/matthewacalin/Documents/FacebookSDK/FBSDKCoreKit.framework/Headers/FBSDKGraphErrorRecoveryProcessor.h \
-  /Users/matthewacalin/Documents/FacebookSDK/FBSDKCoreKit.framework/Headers/FBSDKAppLinkResolver.h \
-  /Users/matthewacalin/Documents/FacebookSDK/FBSDKCoreKit.framework/Headers/FBSDKButton.h \
-  /Users/matthewacalin/Documents/FacebookSDK/FBSDKCoreKit.framework/Headers/FBSDKUtility.h \
-  /Users/matthewacalin/Documents/FacebookSDK/FBSDKCoreKit.framework/Headers/FBSDKTestUsersManager.h \
-  /Users/matthewacalin/Documents/FacebookSDK/FBSDKCoreKit.framework/Headers/FBSDKSettings.h \
-  /Users/matthewacalin/Documents/FacebookSDK/FBSDKCoreKit.framework/Headers/FBSDKProfilePictureView.h \
-  /Users/matthewacalin/Documents/FacebookSDK/FBSDKCoreKit.framework/Headers/FBSDKProfile.h \
-  /Users/matthewacalin/Documents/FacebookSDK/FBSDKCoreKit.framework/Headers/FBSDKMutableCopying.h \
-  /Users/matthewacalin/Documents/FacebookSDK/FBSDKCoreKit.framework/Headers/FBSDKGraphRequest.h \
-  /Users/matthewacalin/Documents/FacebookSDK/FBSDKCoreKit.framework/Headers/FBSDKConstants.h \
-  /Users/matthewacalin/Documents/FacebookSDK/FBSDKCoreKit.framework/Headers/FBSDKApplicationDelegate.h \
-  /Users/matthewacalin/Documents/FacebookSDK/FBSDKCoreKit.framework/Headers/FBSDKAppLinkUtility.h \
-  /Users/matthewacalin/Documents/FacebookSDK/FBSDKCoreKit.framework/Headers/FBSDKAppEvents.h \
-  /Users/matthewacalin/Documents/FacebookSDK/FBSDKCoreKit.framework/Headers/FBSDKMacros.h \
-  /Users/matthewacalin/Documents/FacebookSDK/FBSDKCoreKit.framework/Headers/FBSDKGraphRequestConnection.h \
-  /Users/matthewacalin/Documents/FacebookSDK/FBSDKCoreKit.framework/Headers/FBSDKCopying.h \
-  /Users/matthewacalin/Documents/FacebookSDK/FBSDKCoreKit.framework/Headers/FBSDKAccessToken.h \
-  /Users/matthewacalin/Documents/FacebookSDK/FBSDKCoreKit.framework/Headers/FBSDKCoreKit.h \
-  /Users/matthewacalin/Documents/FacebookSDK/FBSDKCoreKit.framework/Modules/module.modulemap \
-  /Users/matthewacalin/Documents/FacebookSDK/FBSDKShareKit.framework/Headers/FBSDKShareVideoContent.h \
-  /Users/matthewacalin/Documents/FacebookSDK/FBSDKShareKit.framework/Headers/FBSDKShareVideo.h \
-  /Users/matthewacalin/Documents/FacebookSDK/FBSDKShareKit.framework/Headers/FBSDKSharePhotoContent.h \
-  /Users/matthewacalin/Documents/FacebookSDK/FBSDKShareKit.framework/Headers/FBSDKSharePhoto.h \
-  /Users/matthewacalin/Documents/FacebookSDK/FBSDKShareKit.framework/Headers/FBSDKShareOpenGraphContent.h \
-  /Users/matthewacalin/Documents/FacebookSDK/FBSDKShareKit.framework/Headers/FBSDKShareOpenGraphAction.h \
-  /Users/matthewacalin/Documents/FacebookSDK/FBSDKShareKit.framework/Headers/FBSDKShareLinkContent.h \
-  /Users/matthewacalin/Documents/FacebookSDK/FBSDKShareKit.framework/Headers/FBSDKShareDialogMode.h \
-  /Users/matthewacalin/Documents/FacebookSDK/FBSDKShareKit.framework/Headers/FBSDKShareDialog.h \
-  /Users/matthewacalin/Documents/FacebookSDK/FBSDKShareKit.framework/Headers/FBSDKShareConstants.h \
-  /Users/matthewacalin/Documents/FacebookSDK/FBSDKShareKit.framework/Headers/FBSDKShareButton.h \
-  /Users/matthewacalin/Documents/FacebookSDK/FBSDKShareKit.framework/Headers/FBSDKShareOpenGraphValueContainer.h \
-  /Users/matthewacalin/Documents/FacebookSDK/FBSDKShareKit.framework/Headers/FBSDKShareOpenGraphObject.h \
-  /Users/matthewacalin/Documents/FacebookSDK/FBSDKShareKit.framework/Headers/FBSDKShareAPI.h \
-  /Users/matthewacalin/Documents/FacebookSDK/FBSDKShareKit.framework/Headers/FBSDKSharingButton.h \
-  /Users/matthewacalin/Documents/FacebookSDK/FBSDKShareKit.framework/Headers/FBSDKSendButton.h \
-  /Users/matthewacalin/Documents/FacebookSDK/FBSDKShareKit.framework/Headers/FBSDKSharingContent.h \
-  /Users/matthewacalin/Documents/FacebookSDK/FBSDKShareKit.framework/Headers/FBSDKSharing.h \
-  /Users/matthewacalin/Documents/FacebookSDK/FBSDKShareKit.framework/Headers/FBSDKMessageDialog.h \
-  /Users/matthewacalin/Documents/FacebookSDK/FBSDKShareKit.framework/Headers/FBSDKLikeControl.h \
-  /Users/matthewacalin/Documents/FacebookSDK/FBSDKShareKit.framework/Headers/FBSDKLiking.h \
-  /Users/matthewacalin/Documents/FacebookSDK/FBSDKShareKit.framework/Headers/FBSDKLikeObjectType.h \
-  /Users/matthewacalin/Documents/FacebookSDK/FBSDKShareKit.framework/Headers/FBSDKLikeButton.h \
-  /Users/matthewacalin/Documents/FacebookSDK/FBSDKShareKit.framework/Headers/FBSDKGameRequestDialog.h \
-  /Users/matthewacalin/Documents/FacebookSDK/FBSDKShareKit.framework/Headers/FBSDKGameRequestContent.h \
-  /Users/matthewacalin/Documents/FacebookSDK/FBSDKShareKit.framework/Headers/FBSDKAppInviteDialog.h \
-  /Users/matthewacalin/Documents/FacebookSDK/FBSDKShareKit.framework/Headers/FBSDKAppInviteContent.h \
-  /Users/matthewacalin/Documents/FacebookSDK/FBSDKShareKit.framework/Headers/FBSDKAppGroupJoinDialog.h \
-  /Users/matthewacalin/Documents/FacebookSDK/FBSDKShareKit.framework/Headers/FBSDKAppGroupContent.h \
-  /Users/matthewacalin/Documents/FacebookSDK/FBSDKShareKit.framework/Headers/FBSDKAppGroupAddDialog.h \
-  /Users/matthewacalin/Documents/FacebookSDK/FBSDKShareKit.framework/Headers/FBSDKShareKit.h \
-  /Users/matthewacalin/Documents/FacebookSDK/FBSDKShareKit.framework/Modules/module.modulemap \
-  /Users/matthewacalin/Desktop/IphoneApps/PushThought/Fabric.framework/Headers/FABAttributes.h \
-  /Users/matthewacalin/Desktop/IphoneApps/PushThought/Fabric.framework/Headers/Fabric.h \
-  /Users/matthewacalin/Desktop/IphoneApps/PushThought/Fabric.framework/Modules/module.modulemap \
-  /Users/matthewacalin/Desktop/IphoneApps/PushThought/TwitterCore.framework/Headers/TWTRSessionStore.h \
-  /Users/matthewacalin/Desktop/IphoneApps/PushThought/TwitterCore.framework/Headers/TWTRSession.h \
-  /Users/matthewacalin/Desktop/IphoneApps/PushThought/TwitterCore.framework/Headers/TWTRGuestSession.h \
-  /Users/matthewacalin/Desktop/IphoneApps/PushThought/TwitterCore.framework/Headers/TWTRDefines.h \
-  /Users/matthewacalin/Desktop/IphoneApps/PushThought/TwitterCore.framework/Headers/TWTRCoreOAuthSigning.h \
-  /Users/matthewacalin/Desktop/IphoneApps/PushThought/TwitterCore.framework/Headers/TWTRConstants.h \
-  /Users/matthewacalin/Desktop/IphoneApps/PushThought/TwitterCore.framework/Headers/TWTRAuthSession.h \
-  /Users/matthewacalin/Desktop/IphoneApps/PushThought/TwitterCore.framework/Headers/TWTRAuthConfig.h \
-  /Users/matthewacalin/Desktop/IphoneApps/PushThought/TwitterCore.framework/Headers/TWTRAPIErrorCode.h \
-  /Users/matthewacalin/Desktop/IphoneApps/PushThought/TwitterCore.framework/Headers/TwitterCore.h \
-  /Users/matthewacalin/Desktop/IphoneApps/PushThought/TwitterCore.framework/Modules/module.modulemap \
-  /Users/matthewacalin/Desktop/IphoneApps/PushThought/TwitterKit.framework/Headers/TWTRUserTimelineDataSource.h \
-  /Users/matthewacalin/Desktop/IphoneApps/PushThought/TwitterKit.framework/Headers/TWTRUser.h \
-  /Users/matthewacalin/Desktop/IphoneApps/PushThought/TwitterKit.framework/Headers/TWTRTweetViewDelegate.h \
-  /Users/matthewacalin/Desktop/IphoneApps/PushThought/TwitterKit.framework/Headers/TWTRTweetView.h \
-  /Users/matthewacalin/Desktop/IphoneApps/PushThought/TwitterKit.framework/Headers/TWTRTweetTableViewCell.h \
-  /Users/matthewacalin/Desktop/IphoneApps/PushThought/TwitterKit.framework/Headers/TWTRTweet.h \
-  /Users/matthewacalin/Desktop/IphoneApps/PushThought/TwitterKit.framework/Headers/TWTRTimelineViewController.h \
-  /Users/matthewacalin/Desktop/IphoneApps/PushThought/TwitterKit.framework/Headers/TWTRShareEmailViewController.h \
-  /Users/matthewacalin/Desktop/IphoneApps/PushThought/TwitterKit.framework/Headers/TWTRSearchTimelineDataSource.h \
-  /Users/matthewacalin/Desktop/IphoneApps/PushThought/TwitterKit.framework/Headers/TWTROAuthSigning.h \
-  /Users/matthewacalin/Desktop/IphoneApps/PushThought/TwitterKit.framework/Headers/TWTRLogInButton.h \
-  /Users/matthewacalin/Desktop/IphoneApps/PushThought/TwitterKit.framework/Headers/TWTRListTimelineDataSource.h \
-  /Users/matthewacalin/Desktop/IphoneApps/PushThought/TwitterKit.framework/Headers/TWTRComposer.h \
-  /Users/matthewacalin/Desktop/IphoneApps/PushThought/TwitterKit.framework/Headers/TWTRTimelineType.h \
-  /Users/matthewacalin/Desktop/IphoneApps/PushThought/TwitterKit.framework/Headers/TWTRTimelineDataSource.h \
-  /Users/matthewacalin/Desktop/IphoneApps/PushThought/TwitterKit.framework/Headers/TWTRCollectionTimelineDataSource.h \
-  /Users/matthewacalin/Desktop/IphoneApps/PushThought/TwitterKit.framework/Headers/TWTRAPIClient.h \
-  /Users/matthewacalin/Desktop/IphoneApps/PushThought/TwitterKit.framework/Headers/Twitter.h \
-  /Users/matthewacalin/Desktop/IphoneApps/PushThought/TwitterKit.framework/Headers/TwitterKit.h \
-  /Users/matthewacalin/Desktop/IphoneApps/PushThought/TwitterKit.framework/Modules/module.modulemap \
-  /Users/matthewacalin/Desktop/IphoneApps/PushThought/Crashlytics.framework/Headers/ANSCompatibility.h \
-  /Users/matthewacalin/Desktop/IphoneApps/PushThought/Crashlytics.framework/Headers/Answers.h \
-  /Users/matthewacalin/Desktop/IphoneApps/PushThought/Crashlytics.framework/Headers/CLSStackFrame.h \
-  /Users/matthewacalin/Desktop/IphoneApps/PushThought/Crashlytics.framework/Headers/CLSReport.h \
-  /Users/matthewacalin/Desktop/IphoneApps/PushThought/Crashlytics.framework/Headers/CLSLogging.h \
-  /Users/matthewacalin/Desktop/IphoneApps/PushThought/Crashlytics.framework/Headers/CLSAttributes.h \
-  /Users/matthewacalin/Desktop/IphoneApps/PushThought/Crashlytics.framework/Headers/Crashlytics.h \
-  /Users/matthewacalin/Desktop/IphoneApps/PushThought/Crashlytics.framework/Modules/module.modulemap \
-  /Users/matthewacalin/Desktop/IphoneApps/PushThought/Oingo/CongressPhotoFinderAPI.h \
-  /Users/matthewacalin/Desktop/IphoneApps/PushThought/Oingo/MessageTableViewCell.h
+  /Users/matthewacalin/Desktop/IphoneApps/PushThought/FBSDKCoreKit.framework/Headers/FBSDKGraphRequestDataAttachment.h \
+  /Users/matthewacalin/Desktop/IphoneApps/PushThought/FBSDKCoreKit.framework/Headers/FBSDKGraphErrorRecoveryProcessor.h \
+  /Users/matthewacalin/Desktop/IphoneApps/PushThought/FBSDKCoreKit.framework/Headers/FBSDKAppLinkResolver.h \
+  /Users/matthewacalin/Desktop/IphoneApps/PushThought/FBSDKCoreKit.framework/Headers/FBSDKButton.h \
+  /Users/matthewacalin/Desktop/IphoneApps/PushThought/FBSDKCoreKit.framework/Headers/FBSDKUtility.h \
+  /Users/matthewacalin/Desktop/IphoneApps/PushThought/FBSDKCoreKit.framework/Headers/FBSDKTestUsersManager.h \
+  /Users/matthewacalin/Desktop/IphoneApps/PushThought/FBSDKCoreKit.framework/Headers/FBSDKSettings.h \
+  /Users/matthewacalin/Desktop/IphoneApps/PushThought/FBSDKCoreKit.framework/Headers/FBSDKProfilePictureView.h \
+  /Users/matthewacalin/Desktop/IphoneApps/PushThought/FBSDKCoreKit.framework/Headers/FBSDKProfile.h \
+  /Users/matthewacalin/Desktop/IphoneApps/PushThought/FBSDKCoreKit.framework/Headers/FBSDKMutableCopying.h \
+  /Users/matthewacalin/Desktop/IphoneApps/PushThought/FBSDKCoreKit.framework/Headers/FBSDKGraphRequest.h \
+  /Users/matthewacalin/Desktop/IphoneApps/PushThought/FBSDKCoreKit.framework/Headers/FBSDKConstants.h \
+  /Users/matthewacalin/Desktop/IphoneApps/PushThought/FBSDKCoreKit.framework/Headers/FBSDKApplicationDelegate.h \
+  /Users/matthewacalin/Desktop/IphoneApps/PushThought/FBSDKCoreKit.framework/Headers/FBSDKAppLinkUtility.h \
+  /Users/matthewacalin/Desktop/IphoneApps/PushThought/FBSDKCoreKit.framework/Headers/FBSDKAppEvents.h \
+  /Users/matthewacalin/Desktop/IphoneApps/PushThought/FBSDKCoreKit.framework/Headers/FBSDKMacros.h \
+  /Users/matthewacalin/Desktop/IphoneApps/PushThought/FBSDKCoreKit.framework/Headers/FBSDKGraphRequestConnection.h \
+  /Users/matthewacalin/Desktop/IphoneApps/PushThought/FBSDKCoreKit.framework/Headers/FBSDKCopying.h \
+  /Users/matthewacalin/Desktop/IphoneApps/PushThought/FBSDKCoreKit.framework/Headers/FBSDKAccessToken.h \
+  /Users/matthewacalin/Desktop/IphoneApps/PushThought/FBSDKCoreKit.framework/Headers/FBSDKCoreKit.h \
+  /Users/matthewacalin/Desktop/IphoneApps/PushThought/FBSDKCoreKit.framework/Modules/module.modulemap \
+  /Users/matthewacalin/Desktop/IphoneApps/PushThought/FBSDKShareKit.framework/Headers/FBSDKShareVideoContent.h \
+  /Users/matthewacalin/Desktop/IphoneApps/PushThought/FBSDKShareKit.framework/Headers/FBSDKShareVideo.h \
+  /Users/matthewacalin/Desktop/IphoneApps/PushThought/FBSDKShareKit.framework/Headers/FBSDKSharePhotoContent.h \
+  /Users/matthewacalin/Desktop/IphoneApps/PushThought/FBSDKShareKit.framework/Headers/FBSDKSharePhoto.h \
+  /Users/matthewacalin/Desktop/IphoneApps/PushThought/FBSDKShareKit.framework/Headers/FBSDKShareOpenGraphContent.h \
+  /Users/matthewacalin/Desktop/IphoneApps/PushThought/FBSDKShareKit.framework/Headers/FBSDKShareOpenGraphAction.h \
+  /Users/matthewacalin/Desktop/IphoneApps/PushThought/FBSDKShareKit.framework/Headers/FBSDKShareLinkContent.h \
+  /Users/matthewacalin/Desktop/IphoneApps/PushThought/FBSDKShareKit.framework/Headers/FBSDKShareDialogMode.h \
+  /Users/matthewacalin/Desktop/IphoneApps/PushThought/FBSDKShareKit.framework/Headers/FBSDKShareDialog.h \
+  /Users/matthewacalin/Desktop/IphoneApps/PushThought/FBSDKShareKit.framework/Headers/FBSDKShareConstants.h \
+  /Users/matthewacalin/Desktop/IphoneApps/PushThought/FBSDKShareKit.framework/Headers/FBSDKShareButton.h \
+  /Users/matthewacalin/Desktop/IphoneApps/PushThought/FBSDKShareKit.framework/Headers/FBSDKShareOpenGraphValueContainer.h \
+  /Users/matthewacalin/Desktop/IphoneApps/PushThought/FBSDKShareKit.framework/Headers/FBSDKShareOpenGraphObject.h \
+  /Users/matthewacalin/Desktop/IphoneApps/PushThought/FBSDKShareKit.framework/Headers/FBSDKShareAPI.h \
+  /Users/matthewacalin/Desktop/IphoneApps/PushThought/FBSDKShareKit.framework/Headers/FBSDKSharingButton.h \
+  /Users/matthewacalin/Desktop/IphoneApps/PushThought/FBSDKShareKit.framework/Headers/FBSDKSendButton.h \
+  /Users/matthewacalin/Desktop/IphoneApps/PushThought/FBSDKShareKit.framework/Headers/FBSDKSharingContent.h \
+  /Users/matthewacalin/Desktop/IphoneApps/PushThought/FBSDKShareKit.framework/Headers/FBSDKSharing.h \
+  /Users/matthewacalin/Desktop/IphoneApps/PushThought/FBSDKShareKit.framework/Headers/FBSDKMessageDialog.h \
+  /Users/matthewacalin/Desktop/IphoneApps/PushThought/FBSDKShareKit.framework/Headers/FBSDKLikeControl.h \
+  /Users/matthewacalin/Desktop/IphoneApps/PushThought/FBSDKShareKit.framework/Headers/FBSDKLiking.h \
+  /Users/matthewacalin/Desktop/IphoneApps/PushThought/FBSDKShareKit.framework/Headers/FBSDKLikeObjectType.h \
+  /Users/matthewacalin/Desktop/IphoneApps/PushThought/FBSDKShareKit.framework/Headers/FBSDKLikeButton.h \
+  /Users/matthewacalin/Desktop/IphoneApps/PushThought/FBSDKShareKit.framework/Headers/FBSDKGameRequestDialog.h \
+  /Users/matthewacalin/Desktop/IphoneApps/PushThought/FBSDKShareKit.framework/Headers/FBSDKGameRequestContent.h \
+  /Users/matthewacalin/Desktop/IphoneApps/PushThought/FBSDKShareKit.framework/Headers/FBSDKAppInviteDialog.h \
+  /Users/matthewacalin/Desktop/IphoneApps/PushThought/FBSDKShareKit.framework/Headers/FBSDKAppInviteContent.h \
+  /Users/matthewacalin/Desktop/IphoneApps/PushThought/FBSDKShareKit.framework/Headers/FBSDKAppGroupJoinDialog.h \
+  /Users/matthewacalin/Desktop/IphoneApps/PushThought/FBSDKShareKit.framework/Headers/FBSDKAppGroupContent.h \
+  /Users/matthewacalin/Desktop/IphoneApps/PushThought/FBSDKShareKit.framework/Headers/FBSDKAppGroupAddDialog.h \
+  /Users/matthewacalin/Desktop/IphoneApps/PushThought/FBSDKShareKit.framework/Headers/FBSDKShareKit.h \
+  /Users/matthewacalin/Desktop/IphoneApps/PushThought/FBSDKShareKit.framework/Modules/module.modulemap \
+  Oingo/CongressPhotoFinderAPI.h Oingo/MessageTableViewCell.h

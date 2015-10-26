@@ -12,7 +12,6 @@
 #import "Segment.h"
 #import "MessageTableViewCell.h"
 
-
 @interface TwitterAPITweet : NSObject
 @property (nonatomic) MessageTableViewController *messageTableViewController;
 @property (nonatomic) Segment *selectedSegment;

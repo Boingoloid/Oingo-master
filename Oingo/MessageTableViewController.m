@@ -19,9 +19,9 @@
 #import "PFTwitterUtils+NativeTwitter.h"
 #import <Accounts/Accounts.h>
 #import <Social/Social.h>
-#import <TwitterKit/TwitterKit.h>
-#import <Fabric/Fabric.h>
-#import <Crashlytics/Crashlytics.h>
+//#import <TwitterKit/TwitterKit.h>
+//#import <Fabric/Fabric.h>
+//#import <Crashlytics/Crashlytics.h>
 #import "SignUpViewController.h"
 #import <ParseFacebookUtilsV4/PFFacebookUtils.h>
 #import <FBSDKShareKit/FBSDKShareKit.h>
@@ -210,7 +210,7 @@ NSInteger footerHeight = 1;
             }
             
             
-        // Email Cell Touch ----------
+        // Long Form Email Cell Touch ----------
         } else if ([cellScout isKindOfClass:[MessageTableViewEmailCell class]]){
             NSLog(@"Email class cell");
             MessageTableViewEmailCell *cell = (MessageTableViewEmailCell *)[tableView cellForRowAtIndexPath:indexPath];
@@ -251,8 +251,8 @@ NSInteger footerHeight = 1;
                     emailComposer.firstName = cell.firstName.text;
                     emailComposer.lastName = cell.lastName.text;
                     emailComposer.messageTableViewController = self;
+                    [self.navigationController pushViewController:emailComposer animated:YES];
                     [emailComposer showMailPicker];
-                    [self presentViewController:emailComposer animated:YES completion:NULL];
                 }
 
             } else if (CGRectContainsPoint(cell.linkToEmailButton.frame, pointInCell)) {
@@ -268,7 +268,7 @@ NSInteger footerHeight = 1;
 
 
         // Local Rep Touch
-        } else if ([cellScout isKindOfClass:[MessageTableViewRepresentativeCell class]] || [cellScout isKindOfClass:[MessageTableViewCell class]]){
+        } else if ([cellScout isKindOfClass:[MessageTableViewRepresentativeCell class]]){
             MessageTableViewRepresentativeCell *cell = (MessageTableViewRepresentativeCell *)[tableView cellForRowAtIndexPath:indexPath];
 
             
@@ -341,9 +341,8 @@ NSInteger footerHeight = 1;
                             emailComposer.selectedContact = self.selectedContact;
                             emailComposer.messageTableViewController = self;
                             
+                            [self.navigationController pushViewController:emailComposer animated:YES];
                             [emailComposer showMailPicker:cell.openCongressEmail withMessage:[[self.menuList objectAtIndex:index] valueForKey:@"messageText"]];
-                            
-                            [self presentViewController:emailComposer animated:YES completion:NULL];
                         }
                     }
                 }
@@ -435,15 +434,14 @@ NSInteger footerHeight = 1;
                             
                         } else {
                             NSLog(@"index was found:%ld",(unsigned long)index);
+                            NSLog(@"User email - short email VC double 1st:%@",cell.email);
                             
-                            EmailComposerViewController *emailComposer = [[EmailComposerViewController alloc] init];
+                            EmailComposerViewController *emailComposer = [[EmailComposerViewController alloc]init];
                             emailComposer.selectedSegment = self.selectedSegment;
                             emailComposer.selectedContact = self.selectedContact;
                             emailComposer.messageTableViewController = self;
-                            
-                            [emailComposer showMailPicker:[cell.messageItem valueForKey:@"email"] withMessage:[[self.menuList objectAtIndex:index] valueForKey:@"messageText"]];
-                            
-                            [self presentViewController:emailComposer animated:YES completion:NULL];
+                            [self.navigationController pushViewController:emailComposer animated:YES];
+                            [emailComposer showMailPicker:cell.email withMessage:[[self.menuList objectAtIndex:index] valueForKey:@"messageText"]];
                         }
                     }
                 }

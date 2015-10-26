@@ -1,6 +1,6 @@
 dependencies: \
   /Users/matthewacalin/Desktop/IphoneApps/PushThought/Oingo/UpdateDefaults.m \
-  /Users/matthewacalin/Desktop/IphoneApps/PushThought/Oingo/UpdateDefaults.h \
+  Oingo/UpdateDefaults.h \
   /Users/matthewacalin/Desktop/IphoneApps/PushThought/Parse.framework/Headers/PF_Twitter.h \
   /Users/matthewacalin/Desktop/IphoneApps/PushThought/Parse.framework/Headers/PFTwitterUtils.h \
   /Users/matthewacalin/Desktop/IphoneApps/PushThought/Parse.framework/Headers/PFPush.h \

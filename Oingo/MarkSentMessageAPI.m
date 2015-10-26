@@ -31,8 +31,8 @@
         [query whereKey:@"userObjectID" equalTo:userObjectID];
         [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
             if (!error) {
-                self.sentMessagesForSegment = objects;
                 dispatch_async(dispatch_get_main_queue(), ^{
+                self.sentMessagesForSegment = objects;
                     [self checkTwitterShareForSegment];
                     [self checkTwitterShareForContacts];
                     [self checkFacebookShareForSegment];
@@ -41,8 +41,6 @@
                     [self checkPhone];
                     NSLog(@"reloading data from MarkSentMessages");
                     [self.messageTableViewController.tableView reloadData];
-
-
                 });
             } else {
                 NSLog(@"Error: %@ %@", error, [error userInfo]);
@@ -173,7 +171,7 @@
                                 }];
             
             if(index == NSNotFound){
-                //rNSLog(@"no index sent found");
+                //NSLog(@"no index sent found");
                 // Do nothing
             } else {
                 // Makes check mark visible on twitter message button

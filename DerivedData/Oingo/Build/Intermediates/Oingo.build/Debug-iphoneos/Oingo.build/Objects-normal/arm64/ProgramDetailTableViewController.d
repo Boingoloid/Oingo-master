@@ -1,8 +1,7 @@
 dependencies: \
   /Users/matthewacalin/Desktop/IphoneApps/PushThought/Oingo/ProgramDetailTableViewController.m \
-  /Users/matthewacalin/Desktop/IphoneApps/PushThought/Oingo/ProgramDetailTableViewController.h \
-  /Users/matthewacalin/Desktop/IphoneApps/PushThought/Oingo/Program.h \
-  /Users/matthewacalin/Desktop/IphoneApps/PushThought/Oingo/Segment.h \
+  Oingo/ProgramDetailTableViewController.h Oingo/Program.h \
+  Oingo/Segment.h \
   /Users/matthewacalin/Desktop/IphoneApps/PushThought/ProgramsTableViewController.h \
   /Users/matthewacalin/Desktop/IphoneApps/PushThought/Parse.framework/Headers/PF_Twitter.h \
   /Users/matthewacalin/Desktop/IphoneApps/PushThought/Parse.framework/Headers/PFTwitterUtils.h \
@@ -30,8 +29,7 @@ dependencies: \
   /Users/matthewacalin/Desktop/IphoneApps/PushThought/Parse.framework/Headers/PFACL.h \
   /Users/matthewacalin/Desktop/IphoneApps/PushThought/Parse.framework/Headers/Parse.h \
   /Users/matthewacalin/Desktop/IphoneApps/PushThought/Parse.framework/Modules/module.modulemap \
-  /Users/matthewacalin/Desktop/IphoneApps/PushThought/Oingo/PFTwitterUtils+NativeTwitter.h \
+  Oingo/PFTwitterUtils+NativeTwitter.h \
   /Users/matthewacalin/Desktop/IphoneApps/PushThought/ProgramDetailTableViewCell.h \
-  /Users/matthewacalin/Desktop/IphoneApps/PushThought/Oingo/MessageTableViewController.h \
-  /Users/matthewacalin/Desktop/IphoneApps/PushThought/Oingo/UpdateDefaults.h \
+  Oingo/MessageTableViewController.h Oingo/UpdateDefaults.h \
   /Users/matthewacalin/Desktop/IphoneApps/PushThought/WebViewController.h

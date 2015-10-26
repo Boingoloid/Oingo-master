@@ -1,6 +1,6 @@
 dependencies: \
   /Users/matthewacalin/Desktop/IphoneApps/PushThought/Oingo/CongressionalMessageItem.m \
-  /Users/matthewacalin/Desktop/IphoneApps/PushThought/Oingo/CongressionalMessageItem.h \
+  Oingo/CongressionalMessageItem.h \
   /Users/matthewacalin/Desktop/IphoneApps/PushThought/Parse.framework/Headers/PF_Twitter.h \
   /Users/matthewacalin/Desktop/IphoneApps/PushThought/Parse.framework/Headers/PFTwitterUtils.h \
   /Users/matthewacalin/Desktop/IphoneApps/PushThought/Parse.framework/Headers/PFPush.h \

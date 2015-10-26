@@ -15,9 +15,9 @@
 #import <QuartzCore/QuartzCore.h>
 #import <FBSDKShareKit/FBSDKShareKit.h>
 #import <FBSDKCoreKit/FBSDKCoreKit.h>
-#import <TwitterKit/TwitterKit.h>
-#import <Fabric/Fabric.h>
-#import <Crashlytics/Crashlytics.h>
+////#import <TwitterKit/TwitterKit.h>
+//#import <Fabric/Fabric.h>z
+//#import <Crashlytics/Crashlytics.h>
 #import <Accounts/Accounts.h>
 #import <Social/Social.h>
 #import "CongressionalMessageItem.h"
@@ -38,9 +38,9 @@
     
     //Assign message item
     self.messageItem = messageItem;
-    
-    
-    
+    self.email = [self.messageItem valueForKey:@"email"];
+//    NSLog(@"self.email:%@:",self.email);
+
 //    if([[self.messageItem valueForKey:@"isCollapsed"]  isEqual: @YES]){
 //        
 //        NSLog(@"isCollapsed contact cell:%@",[self.messageItem valueForKey:@"isCollapsed"]);
@@ -83,7 +83,7 @@
         self.emailButton.hidden = YES;
     }
 
-    
+    NSLog(@"messageItem email value:%@",[self.messageItem valueForKey:@"email"]);
 //        //Touch Fields
 //        self.tweetTouchCaptureImageView.hidden = NO;
 //        self.emailTouchCaptureImageView.hidden = NO;

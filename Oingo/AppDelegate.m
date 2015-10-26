@@ -8,11 +8,11 @@
 
 #import "AppDelegate.h"
 #import <Parse/Parse.h>
-#import "PFTwitterUtils+NativeTwitter.h"
+//#import "PFTwitterUtils+NativeTwitter.h"
 #import <ParseFacebookUtilsV4/PFFacebookUtils.h>
-#import <TwitterKit/TwitterKit.h>
-#import <Fabric/Fabric.h>
-#import <Crashlytics/Crashlytics.h>
+//#import <TwitterKit/TwitterKit.h>
+//#import <Fabric/Fabric.h>
+//#import <Crashlytics/Crashlytics.h>
 #import <FBSDKCoreKit/FBSDKCoreKit.h>
 #import <FBSDKLoginKit/FBSDKLoginKit.h>
 
@@ -25,12 +25,12 @@
 
 @implementation AppDelegate
 
-- (id)initWithCoder:(NSCoder *)aDecoder {
-    
-   [Fabric with:@[CrashlyticsKit]];
-    
-    return self;
-}
+//- (id)initWithCoder:(NSCoder *)aDecoder {
+//    
+//   [Fabric with:@[CrashlyticsKit]];
+//    
+//    return self;
+//}
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
@@ -46,10 +46,13 @@
     [PFTwitterUtils initializeWithConsumerKey:@"wFbOMUhdXSwU7WCGzW4V6a9Rn" consumerSecret:@"Y4zH1qR55icmp5eiDhZKbgg3sC7TEvxPxrlKpd7y6NSzzsqfP1"];
 
 //    Initialize Twitter
-    [[Twitter sharedInstance] startWithConsumerKey:@"wFbOMUhdXSwU7WCGzW4V6a9Rn" consumerSecret:@"Y4zH1qR55icmp5eiDhZKbgg3sC7TEvxPxrlKpd7y6NSzzsqfP1"];
-    [Fabric with:@[[Twitter sharedInstance]]];
-    [Fabric with:@[TwitterKit, CrashlyticsKit]];
-    [Fabric with:@[[Crashlytics class], [Twitter class]]];
+//    [[Twitter sharedInstance] startWithConsumerKey:@"wFbOMUhdXSwU7WCGzW4V6a9Rn" consumerSecret:@"Y4zH1qR55icmp5eiDhZKbgg3sC7TEvxPxrlKpd7y6NSzzsqfP1"];
+//    
+//    [Fabric with:@[[Crashlytics class], [Twitter class]]];
+
+//    [Fabric with:@[[Twitter sharedInstance]]];
+//    [Fabric with:@[TwitterKit, CrashlyticsKit]];
+//    [Fabric with:@[[Crashlytics class], [Twitter class]]];
 
 
     // [Optional] Track statistics around application opens.

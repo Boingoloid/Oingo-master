@@ -16,6 +16,7 @@
 @property(nonatomic) MessageItem *messageItem;
 @property(nonatomic) CongressionalMessageItem *congressionalMessageItem;
 @property(nonatomic) NSString *messageImageString;
+@property(nonatomic) NSString *email;
 @property (weak, nonatomic) IBOutlet UILabel *targetName;
 @property (weak, nonatomic) IBOutlet UILabel *sendCount;
 @property (weak, nonatomic) IBOutlet UIImageView *messageImage;

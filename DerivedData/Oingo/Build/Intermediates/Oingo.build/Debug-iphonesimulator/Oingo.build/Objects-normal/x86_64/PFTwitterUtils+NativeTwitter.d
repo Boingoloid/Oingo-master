@@ -1,6 +1,6 @@
 dependencies: \
   /Users/matthewacalin/Desktop/IphoneApps/PushThought/Oingo/PFTwitterUtils+NativeTwitter.m \
-  /Users/matthewacalin/Desktop/IphoneApps/PushThought/Oingo/PFTwitterUtils+NativeTwitter.h \
+  Oingo/PFTwitterUtils+NativeTwitter.h \
   /Users/matthewacalin/Desktop/IphoneApps/PushThought/Parse.framework/Headers/PF_Twitter.h \
   /Users/matthewacalin/Desktop/IphoneApps/PushThought/Parse.framework/Headers/PFTwitterUtils.h \
   /Users/matthewacalin/Desktop/IphoneApps/PushThought/Parse.framework/Headers/PFPush.h \
@@ -27,6 +27,4 @@ dependencies: \
   /Users/matthewacalin/Desktop/IphoneApps/PushThought/Parse.framework/Headers/PFACL.h \
   /Users/matthewacalin/Desktop/IphoneApps/PushThought/Parse.framework/Headers/Parse.h \
   /Users/matthewacalin/Desktop/IphoneApps/PushThought/Parse.framework/Modules/module.modulemap \
-  /Users/matthewacalin/Desktop/IphoneApps/PushThought/Oingo/OAuth+Additions.h \
-  /Users/matthewacalin/Desktop/IphoneApps/PushThought/Oingo/TWAPIManager.h \
-  /Users/matthewacalin/Desktop/IphoneApps/PushThought/Oingo/TWSignedRequest.h
+  Oingo/OAuth+Additions.h Oingo/TWAPIManager.h Oingo/TWSignedRequest.h

@@ -287,13 +287,13 @@ BOOL isLocationInfoAvailable = NO;
     NSMutableArray *otherList = [[NSMutableArray alloc]init];
     
     for (NSDictionary *dictionary in messageListWithContactsSorted) {
-        NSLog(@"[dictionary valueForKey:@messageCategory]:%@",[dictionary valueForKey:@"messageCategory"]);
+        //NSLog(@"[dictionary valueForKey:@messageCategory]:%@",[dictionary valueForKey:@"messageCategory"]);
         NSNumber *isMessageNumber = [dictionary valueForKey:@"isMessage"];
         bool isMessageBool = [isMessageNumber boolValue];
         if(isMessageBool) {
             [messageTextList addObject:dictionary];
         } else if ([[dictionary valueForKey:@"messageCategory"] isEqualToString:@"Long Form Email"]){
-            NSLog(@"[dictionary valueForKey:@messageCategory]:%@",[dictionary valueForKey:@"messageCategory"]);
+            //NSLog(@"[dictionary valueForKey:@messageCategory]:%@",[dictionary valueForKey:@"messageCategory"]);
             [otherList addObject:dictionary];
         }else {
             [contactList addObject:dictionary];
@@ -362,9 +362,9 @@ BOOL isLocationInfoAvailable = NO;
         contactIndex++;
     }
     [self.menuList addObjectsFromArray:self.otherList];
-    NSLog(@"self.otherList:%@",self.otherList);
-    NSLog(@"self.contactList:%@",self.contactList);
-    NSLog(@"self.messageList:%@",self.messageTextList);
+//    NSLog(@"self.otherList:%@",self.otherList);
+//    NSLog(@"self.contactList:%@",self.contactList);
+//    NSLog(@"self.messageList:%@",self.messageTextList);
 }
 
 
