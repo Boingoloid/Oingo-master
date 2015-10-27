@@ -10,8 +10,8 @@
 #import <Parse/Parse.h>
 #import <UIKit/UIKit.h>
 //#import <TwitterKit/TwitterKit.h>
-#import <Fabric/Fabric.h>
-#import "PFTwitterUtils+NativeTwitter.h"
+//#import <Fabric/Fabric.h>
+//#import "PFTwitterUtils+NativeTwitter.h"
 #import <Accounts/Accounts.h>
 #import "SignUpViewController.h"
 #import "LogInViewController.h"

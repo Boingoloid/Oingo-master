@@ -78,7 +78,7 @@
                                             if (succeeded) {
                                                 NSLog(@"User now has read and publish permissions!");
                                                 [self.messageTableViewController performSegueWithIdentifier:@"showCompose" sender:self];
-//                                                [self publishFBPost];
+
                                             }
         }];
     }

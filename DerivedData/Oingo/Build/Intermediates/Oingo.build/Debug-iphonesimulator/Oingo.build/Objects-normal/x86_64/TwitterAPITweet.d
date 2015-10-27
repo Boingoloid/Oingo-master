@@ -30,9 +30,5 @@ dependencies: \
   /Users/matthewacalin/Desktop/IphoneApps/PushThought/Parse.framework/Modules/module.modulemap \
   Oingo/UpdateDefaults.h Oingo/MessageTableViewCell.h \
   Oingo/MessageItem.h Oingo/CongressionalMessageItem.h \
-  /Users/matthewacalin/Desktop/IphoneApps/PushThought/Fabric.framework/Headers/FABAttributes.h \
-  /Users/matthewacalin/Desktop/IphoneApps/PushThought/Fabric.framework/Headers/Fabric.h \
-  /Users/matthewacalin/Desktop/IphoneApps/PushThought/Fabric.framework/Modules/module.modulemap \
-  Oingo/PFTwitterUtils+NativeTwitter.h Oingo/SignUpViewController.h \
-  Oingo/LogInViewController.h Oingo/MarkSentMessageAPI.h \
-  Oingo/ParseAPI.h
+  Oingo/SignUpViewController.h Oingo/LogInViewController.h \
+  Oingo/MarkSentMessageAPI.h Oingo/ParseAPI.h

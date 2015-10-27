@@ -216,7 +216,6 @@ BOOL isLocationInfoAvailable = NO;
     
     [self separateMessagesFromContacts:messageList]; //create self.messageList and self.contactList and other
     [self createMenuList]; //creates self.menuList - these are th   e grouopings for sections
-
     
     self.menuList = [self sortMessageListWithContacts:self.menuList];
     
@@ -255,23 +254,26 @@ BOOL isLocationInfoAvailable = NO;
 //    NSLog(@"2) self.messageOptions:%@",[self.messageOptionsList firstObject]); //this one
     
     self.messageTableViewController.expandSectionsKeyList = self.expandSectionsKeyList;
-    
-    [self.messageTableViewController.tableView reloadData];
-    NSLog(@"Prep Sections end: Reloading data from Prep Sections");
-    
-    if(self.isCongressLoaded) {
-        //could make this async
-        CongressPhotoFinderAPI *congressPhotoFinder = [[CongressPhotoFinderAPI alloc]init];
-        congressPhotoFinder.messageTableViewController = self.messageTableViewController;
-        [congressPhotoFinder getPhotos:self.messageTableViewController.congressMessageList];
-    }
+    dispatch_async(dispatch_get_main_queue(), ^{
 
-    if([PFUser currentUser]) {
-        MarkSentMessageAPI *markSentMessagesAPI = [[MarkSentMessageAPI alloc]init];
-        markSentMessagesAPI.messageTableViewController = self.messageTableViewController;
-        [markSentMessagesAPI markSentMessages];
-    }
-    self.isCongressLoaded = NO;
+        [self.messageTableViewController.tableView reloadData];
+        NSLog(@"Prep Sections end: Reloading data from Prep Sections");
+        
+
+        if(self.isCongressLoaded) {
+            //could make this async
+            CongressPhotoFinderAPI *congressPhotoFinder = [[CongressPhotoFinderAPI alloc]init];
+            congressPhotoFinder.messageTableViewController = self.messageTableViewController;
+            [congressPhotoFinder getPhotos:self.messageTableViewController.congressMessageList];
+        }
+
+        if([PFUser currentUser]) {
+            MarkSentMessageAPI *markSentMessagesAPI = [[MarkSentMessageAPI alloc]init];
+            markSentMessagesAPI.messageTableViewController = self.messageTableViewController;
+            [markSentMessagesAPI markSentMessages];
+        }
+        self.isCongressLoaded = NO;
+    });
 }
 
 # pragma mark - Prep Sections Helper Methods
