@@ -1090,6 +1090,7 @@ NSInteger footerHeight = 1;
         webViewController.selectedLink = self.linkToEmail;
         NSLog(@"selected link program detail %@:",webViewController.selectedLink);
     } else if ([segue.identifier isEqualToString:@"showMessagePanel"]){
+        
         NSIndexPath *indexPath = [self.tableView indexPathForCell:sender];
         NSString *category= [self categoryForSection:indexPath.section];
         NSArray *rowIndecesInSection = [self.sections objectForKey:category];
@@ -1116,6 +1117,7 @@ NSInteger footerHeight = 1;
             
         } else {
             NSLog(@"index was found:%ld",(unsigned long)index);
+            NSLog(@"indexpath:%@",indexPath);
             messagePanel.selectedMessageDictionary = [self.menuList objectAtIndex:index];
         }
     }

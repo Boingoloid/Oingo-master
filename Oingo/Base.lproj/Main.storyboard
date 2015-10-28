@@ -750,9 +750,6 @@
                                                     <exclude reference="cHN-r7-yO5"/>
                                                 </mask>
                                             </variation>
-                                            <connections>
-                                                <segue destination="m9r-j1-HpL" kind="show" identifier="showMessagePanel" id="hiL-BR-iCq"/>
-                                            </connections>
                                         </button>
                                     </subviews>
                                     <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
@@ -811,7 +808,7 @@
                                 <inset key="separatorInset" minX="10" minY="0.0" maxX="10" maxY="0.0"/>
                                 <connections>
                                     <outlet property="messageText" destination="zCX-6N-C1q" id="AOZ-KM-gSG"/>
-                                    <segue destination="UVS-hS-LPJ" kind="show" identifier="showMessageOptions" id="cC6-J2-2VS"/>
+                                    <segue destination="m9r-j1-HpL" kind="show" identifier="showMessagePanel" id="FAa-Ut-Lep"/>
                                 </connections>
                             </tableViewCell>
                             <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="Cell" id="noR-Lv-KB1" customClass="MessageTableViewCell">
@@ -1881,7 +1878,7 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
                             <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="Cell1" id="x0E-Je-p5i" customClass="MessageOptionsTableViewCell">
-                                <rect key="frame" x="0.0" y="86" width="600" height="79"/>
+                                <rect key="frame" x="0.0" y="22" width="600" height="79"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" horizontalHuggingPriority="750" verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" verticalCompressionResistancePriority="250" tableViewCell="x0E-Je-p5i" id="hQk-Tx-BCm">
                                     <rect key="frame" x="0.0" y="0.0" width="600" height="78"/>
