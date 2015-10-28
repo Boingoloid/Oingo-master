@@ -42,7 +42,7 @@ bool isUserLinkedToTwitter;
 }
 
 -(void)shareSegmentWithTwitterComposer{
-    NSString *tweetText = [NSString stringWithFormat:@"%@: %@",[self.selectedProgram valueForKey:@"programTitle"],[self.selectedSegment valueForKey:@"segmentTitle"]];  // Everything is the same except for this line.
+    NSString *tweetText = [NSString stringWithFormat:@"Interesting segment on %@",[self.selectedProgram valueForKey:@"programTitle"]];
     NSURL *tweetURL = [NSURL URLWithString:[self.selectedSegment valueForKey:@"linkToContent"]];
     PFFile *theImage = [self.selectedSegment valueForKey:@"segmentImage"];
     NSData *imageData = [theImage getData];
@@ -93,7 +93,7 @@ bool isUserLinkedToTwitter;
     NSLog(@"selected contact print out:%@",self.selectedContact);
     NSString *twitterId = [self.selectedContact valueForKey:@"twitterID"];
     
-    NSString *tweetText = [NSString stringWithFormat:@"@%@, %@ #pushthought",twitterId,self.messageText];
+    NSString *tweetText = [NSString stringWithFormat:@"@%@, %@",twitterId,self.messageText];
     NSURL *tweetURL = [NSURL URLWithString:[self.selectedSegment valueForKey:@"linkToContent"]];
     PFFile *theImage = [self.selectedSegment valueForKey:@"segmentImage"];
     NSData *imageData = [theImage getData];

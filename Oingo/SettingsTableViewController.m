@@ -26,6 +26,9 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    self.tableView.allowsSelection = NO;
+    
+    
     PFUser *currentUser = [PFUser currentUser];
     
     //Set twitter/facebook toggle to off

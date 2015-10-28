@@ -101,14 +101,9 @@
         linkToContent = [NSString stringWithFormat:@"When you have a moment, please take a look at this segment: %@",[self.selectedSegment valueForKey:@"linkToContent"]];
     }
     
-    NSString *pushThoughtFooter = @"sent via pushthought";
+    NSString *pushThoughtFooter = @"sent via pushthought app";
     
     // Get the isLinkIncluded bool to see if user wants to include link
-
-    
-    
-    
-
     
     NSString *fullEmailBodyText =[NSString stringWithFormat:@"%@\n\n%@\n\n%@\n\n\n%@", header, body, linkToContent, pushThoughtFooter];
     

@@ -26,7 +26,7 @@
     self.messageTextView.layer.borderWidth = 1.0;
     self.messageTextView.clipsToBounds = YES;
     self.messageTextView.layer.cornerRadius = 3;
-    self.messageTextView.text = [NSString stringWithFormat:@"%@: %@  @PushThought",[self.selectedProgram valueForKey:@"programTitle"],[self.selectedSegment valueForKey:@"segmentTitle"]];  // Everything is the same except for this line.
+    self.messageTextView.text = [NSString stringWithFormat:@"Interesting segment on %@",[self.selectedProgram valueForKey:@"programTitle"]];
 
     
     
@@ -42,8 +42,6 @@
 
     
     self.linkToContent.text = [self.selectedSegment valueForKey:@"linkToContent"];
-    NSLog(@"linkToContent:%@",[self.selectedSegment valueForKey:@"linkToContent"]);
-        NSLog(@"Selected Segment:%@",self.selectedSegment);
     
 }
 
