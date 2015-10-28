@@ -100,8 +100,19 @@ bool isUserLinkedToTwitter;
     UIImage *image = [UIImage imageWithData:imageData];
     TWTRComposer *composer = [[TWTRComposer alloc] init];
     [composer setText:tweetText];
-    [composer setURL:tweetURL];
     [composer setImage:image];
+    
+    NSNumber *isLinkIncludedNumber = [self.selectedMessageDictionary valueForKey:@"isLinkIncluded"];
+    NSLog(@"selected message dic:%@",self.selectedMessageDictionary);
+    bool isLinkIncludedBool = [isLinkIncludedNumber boolValue];
+    if(isLinkIncludedBool == 0){
+        // don't add link - do nothing
+        NSLog(@"link was NOT added");
+    } else {
+        [composer setURL:tweetURL];
+        NSLog(@"link was added");
+    }
+    
     [composer showFromViewController:self.messageTableViewController completion:^(TWTRComposerResult result) {
         if (result == TWTRComposerResultCancelled) {
             NSLog(@"Tweet composition cancelled");
@@ -123,6 +134,7 @@ bool isUserLinkedToTwitter;
     [sentMessageItem setObject:[currentUser valueForKey:@"username"] forKey:@"username"];
     NSString *userObjectID = currentUser.objectId;
     [sentMessageItem setObject:userObjectID forKey:@"userObjectID"];
+    
     
     [sentMessageItem saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) { //save sent message to parse
         if(error){

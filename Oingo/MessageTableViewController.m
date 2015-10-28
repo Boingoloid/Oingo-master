@@ -280,6 +280,7 @@ NSInteger footerHeight = 1;
                     twitterAPITweet.selectedProgram = self.selectedProgram;
                     twitterAPITweet.menuList = self.menuList;
                     twitterAPITweet.selectedContact = self.selectedContact;
+
                     
                     //Look up message - note this works b/c message is first item in section.
                     NSUInteger index = [self.menuList indexOfObjectPassingTest:
@@ -293,7 +294,7 @@ NSInteger footerHeight = 1;
                         NSLog(@"index was found:%ld",(unsigned long)index);
                         twitterAPITweet.messageText = [[self.menuList objectAtIndex:index] valueForKey:@"messageText"];
                     }
-                    
+                    twitterAPITweet.selectedMessageDictionary = [self.menuList objectAtIndex:index];
                     [twitterAPITweet shareMessageTwitterAPI:cell];
                 }
             } else if(CGRectContainsPoint(cell.postToFacebookButton.frame, pointInCell)) {
@@ -393,7 +394,7 @@ NSInteger footerHeight = 1;
                         NSLog(@"index was found:%ld",(unsigned long)index);
                         twitterAPITweet.messageText = [[self.menuList objectAtIndex:index] valueForKey:@"messageText"];
                     }
-                    
+                    twitterAPITweet.selectedMessageDictionary = [self.menuList objectAtIndex:index];
                     [twitterAPITweet shareMessageTwitterAPI:cell];
                 }
             } else if(CGRectContainsPoint(cell.postToFacebookButton.frame, pointInCell)) {
@@ -438,6 +439,8 @@ NSInteger footerHeight = 1;
                             emailComposer.selectedSegment = self.selectedSegment;
                             emailComposer.selectedContact = self.selectedContact;
                             emailComposer.messageTableViewController = self;
+                            emailComposer.selectedMessageDictionary = [self.menuList objectAtIndex:index];
+                            
                             [self.navigationController pushViewController:emailComposer animated:YES];
                             [emailComposer showMailPicker:cell.email withMessage:[[self.menuList objectAtIndex:index] valueForKey:@"messageText"]];
                         }
