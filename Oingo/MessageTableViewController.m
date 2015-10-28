@@ -743,6 +743,7 @@ NSInteger footerHeight = 1;
         cell.layer.cornerRadius = 3;
         [self.tableView addSubview:cell];
         emailItem = [self.menuList objectAtIndex:[rowIndex intValue]];
+        cell.menuList = self.menuList;
         [cell configEmailCell:emailItem indexPath:indexPath];
 
         //        [cell.contentView layoutIfNeeded];

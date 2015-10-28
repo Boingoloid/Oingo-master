@@ -73,6 +73,8 @@
     
     NSString *header;
     NSString *subject;
+    
+    // For Local Rep
     if([[self.selectedContact valueForKey:@"messageCategory"] isEqualToString:@"Local Representative"]){
         
         if([[self.selectedContact valueForKey:@"chamber"] isEqualToString:@"Senator"]){
@@ -81,6 +83,8 @@
             header = [NSString stringWithFormat:@"Representative %@,",[self.selectedContact valueForKey:@"lastName"]];
         }
         subject = [NSString stringWithFormat:@"Thought to share from local voter"];
+    
+    // For civilian
     } else {
         header = [NSString stringWithFormat:@"%@,",[self.selectedContact valueForKey:@"targetName"]];
         subject = [NSString stringWithFormat:@"Thought I'd like to share"];

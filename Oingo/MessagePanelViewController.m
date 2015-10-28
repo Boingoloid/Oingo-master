@@ -148,10 +148,6 @@
     UITouch *touch = [[event allTouches] anyObject];
     NSLog(@"touch.view:%@", touch.view);
     
-    if(![PFUser currentUser]){
-        [self pushToSignIn];
-    }
-    
     if ([self.messageTextView isFirstResponder] && [touch view] != self.messageTextView) {
         [self.messageTextView resignFirstResponder];
     }
@@ -165,22 +161,6 @@
     
 }
 
-- (void)respondToTapGesture:(UITapGestureRecognizer *)tap {
-    
-    if (UIGestureRecognizerStateEnded == tap.state) {
-        
-        // Collect data about tap location
-        UIView *view = (UIView*)tap.view;
-        CGPoint p = [tap locationInView:view];
-        if(CGRectContainsPoint(self.messageTextView.frame, p)){
-            NSLog(@"touch inside textview");
-            if(![PFUser currentUser]){
-                NSLog(@"touch inside textview and not user");
-                [self pushToSignIn];
-            }
-        }
-    }
-}
 
 
 /*
@@ -223,11 +203,6 @@
 - (IBAction)toggleIncludeLink:(id)sender {
     if([self.includeLinkToggle isOn]){
         [[self.messageTableViewController.menuList objectAtIndex:[self.originRowIndex intValue]] setValue:@YES  forKey:@"isLinkIncluded"];
-
-//        NSLog(@"Link will be included:%@",self.messageTableViewController.menuList);
-        
-        // change indicator to true that link will be included
-        //indicator assigned here, passed to MTVController. Then passed to
     }else {
         [[self.messageTableViewController.menuList objectAtIndex:[self.originRowIndex intValue]] setValue:@NO  forKey:@"isLinkIncluded"];
         NSLog(@"Link will not be included");

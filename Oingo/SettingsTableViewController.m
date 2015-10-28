@@ -48,7 +48,7 @@
     }
     
     // Draw borders on buttons
-    self.leaveFeedbackButton.layer.borderColor = [[UIColor blueColor]CGColor];
+    self.leaveFeedbackButton.layer.borderColor = [[UIColor colorWithRed:13/255.0 green:81/255.0 blue:183/255.0 alpha:1] CGColor];
     self.leaveFeedbackButton.layer.borderWidth = .5;
     self.leaveFeedbackButton.layer.cornerRadius =3;
     self.leaveFeedbackButton.clipsToBounds = YES;
@@ -62,7 +62,6 @@
     self.logoutButton.layer.borderWidth = .5;
     self.logoutButton.layer.cornerRadius = 3;
     self.logoutButton.clipsToBounds = YES;
-    
 
 }
 

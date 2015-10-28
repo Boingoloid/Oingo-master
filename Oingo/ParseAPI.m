@@ -293,6 +293,8 @@ BOOL isLocationInfoAvailable = NO;
         NSNumber *isMessageNumber = [dictionary valueForKey:@"isMessage"];
         bool isMessageBool = [isMessageNumber boolValue];
         if(isMessageBool) {
+            // Add or set any defaults
+            [dictionary setValue:@YES forKey:@"isLinkIncluded"];
             [messageTextList addObject:dictionary];
         } else if ([[dictionary valueForKey:@"messageCategory"] isEqualToString:@"Long Form Email"]){
             //NSLog(@"[dictionary valueForKey:@messageCategory]:%@",[dictionary valueForKey:@"messageCategory"]);
@@ -333,11 +335,11 @@ BOOL isLocationInfoAvailable = NO;
     NSString *category = @"";
     NSUInteger contactIndex = 0;
     
-    // 2) For every section grabs 1 message, then fills in contacts beneath
+    // 2) For every section grabs 1 message, then fills in contacts beneath, adds others to end
     for (NSMutableDictionary *contactRow in self.contactList) {
         
         //add "success" bools
-        [contactRow setValue:@NO forKey:@"isTweetSent"];
+        //[contactRow setValue:@NO forKey:@"isTweetSent"];
         
         
         if(category != [contactRow valueForKey:@"messageCategory"]){
@@ -348,17 +350,17 @@ BOOL isLocationInfoAvailable = NO;
                                     return [[dict objectForKey:@"messageCategory"] isEqual:category];
                                 }];
             NSMutableDictionary *messageToAdd = [self.messageTextList objectAtIndex:index];
-            [messageToAdd setValue:@YES forKey:@"isLinkIncluded"];
+
             [self.menuList addObject:messageToAdd];
-            //            [contactRow setValue:@NO forKey:@"isCollapsed"]; // makes sure at least one contact is expanded
+            //[contactRow setValue:@NO forKey:@"isCollapsed"]; // makes sure at least one contact is expanded
             [self.menuList addObject:contactRow];
             
             // create another array to dictate whether they are all showing
             //add when new category and set to not expanded
-            //            NSMutableDictionary *expandSectionTempDictionary = [[NSMutableDictionary alloc]init];
-            //            [expandSectionTempDictionary setValue:category forKey:@"Category"];
-            //            [expandSectionTempDictionary setValue:@YES forKey:@"isSectionExpanded"];
-            //            [self.expandSectionsKeyList addObject:expandSectionTempDictionary];
+            //NSMutableDictionary *expandSectionTempDictionary = [[NSMutableDictionary alloc]init];
+            //[expandSectionTempDictionary setValue:category forKey:@"Category"];
+            //[expandSectionTempDictionary setValue:@YES forKey:@"isSectionExpanded"];
+            //[self.expandSectionsKeyList addObject:expandSectionTempDictionary];
         } else {
             [self.menuList addObject:contactRow];
         }

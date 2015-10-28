@@ -12,7 +12,6 @@
 @interface MessageTableViewEmailCell : UITableViewCell
 
 @property (weak, nonatomic) IBOutlet UIButton *emailRecipientsButton;
-@property (weak, nonatomic) IBOutlet UIButton *emailMyEmailButton; //might use later, fields hidden
 @property (weak, nonatomic) IBOutlet UIButton *linkToEmailButton;
 @property (weak, nonatomic) NSString *linkToEmail;
 
@@ -23,6 +22,8 @@
 @property (weak, nonatomic) IBOutlet UITextField *lastName;
 
 @property (weak, nonatomic) EmailItem *emailItem;
+@property (weak, nonatomic) NSArray *menuList;
+
 
 @property (weak, nonatomic) IBOutlet UIImageView *emailSuccessImageView;
 

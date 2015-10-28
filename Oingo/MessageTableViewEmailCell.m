@@ -29,6 +29,39 @@
 - (void) configEmailCell:(EmailItem*)emailItem indexPath:(NSIndexPath*)indexPath{
 
     
+    NSNumber *includeLocalRepNumber = [emailItem valueForKey:@"includeLocalReps"];
+    bool includeLocalRepBool = [includeLocalRepNumber boolValue];
+    NSLog(@"includelocalBOOL:%d",includeLocalRepBool);
+    
+    NSMutableArray *localRepEmails = [[NSMutableArray alloc]init];
+
+
+    
+    if(includeLocalRepBool){
+        for (NSDictionary *dictionary in self.menuList){
+            
+            // Get the isMesssage bool
+            NSNumber *isMessageNumber = [dictionary valueForKey:@"isMessage"];
+            bool isMessageBool = [isMessageNumber boolValue];
+            
+            // Get the isGetLocation bool
+            NSNumber *isGetLocationNumber = [dictionary valueForKey:@"isGetLocationCell"];
+            bool isGetLocationBool = [isGetLocationNumber boolValue];
+            
+            if([[dictionary valueForKey:@"messageCategory"] isEqualToString:@"Local Representative"] && !isMessageBool && !isGetLocationBool){
+                [localRepEmails addObject:[dictionary valueForKey:@"openCongressEmail"]];
+            } else {
+                //NSLog(@"local rep cell skip (message cell?):%@",dictionary);
+            }
+        }
+        
+
+    }
+    NSString *localRepEmailsString = [localRepEmails componentsJoinedByString:@","];
+    NSLog(@"list of rep emails:%@",localRepEmails);
+    NSLog(@"menulist:%@",self.menuList);
+    
+    
     PFUser *currentUser = [PFUser currentUser];
     if(currentUser) {
         if([currentUser valueForKey:@"firstNameEmail"]){
@@ -47,11 +80,10 @@
     self.emailItem = emailItem;
     self.messageTextView.text = [NSString stringWithFormat:@"%@",[emailItem valueForKey:@"messageText"]];
 
-    
     self.emailSubjectTextView.text = [NSString stringWithFormat:@"%@",[emailItem valueForKey:@"emailSubject"]];
-    self.emailRecipientsTextView.text = [emailItem valueForKey:@"emailRecipients"];
+    self.emailRecipientsTextView.text = [NSString stringWithFormat:@"%@,%@",[emailItem valueForKey:@"emailRecipients"],localRepEmailsString];
+    
     self.linkToEmail = [emailItem valueForKey:@"linkToEmail"];
-
 
     // Formatting
     self.emailSubjectTextView.layer.borderWidth = .5;
@@ -83,11 +115,6 @@
     self.emailRecipientsButton.layer.borderColor = [[UIColor blackColor] CGColor];
     self.emailRecipientsButton.layer.cornerRadius = 3.0;
     self.emailRecipientsButton.clipsToBounds = YES;
-    
-    self.emailMyEmailButton.layer.borderWidth = .5;
-    self.emailMyEmailButton.layer.borderColor = [[UIColor blackColor] CGColor];
-    self.emailMyEmailButton.layer.cornerRadius = 3.0;
-    self.emailMyEmailButton.clipsToBounds = YES;
     
     
     // Hide success fields
