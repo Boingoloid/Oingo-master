@@ -13,18 +13,11 @@
 
 - (void) configMessageCell:messageItem indexPath:(NSIndexPath*)indexPath{
     
-    
-    self.locationButton.hidden = YES;
-    self.zipCodeButton.hidden = YES;
-    self.zipLabel.hidden = YES;
-    
     NSString *messageText = [NSString stringWithFormat:@"\"%@\"",[messageItem valueForKey:@"messageText"]];
     self.messageText.text = messageText;
-
     //    [self.contentView layoutIfNeeded];
     //    [self.contentView setNeedsDisplay];
 }
-
 
 
 - (void)awakeFromNib {
@@ -33,7 +26,6 @@
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
     [super setSelected:selected animated:animated];
-
     // Configure the view for the selected state
 }
 

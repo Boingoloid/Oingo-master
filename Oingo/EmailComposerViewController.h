@@ -15,6 +15,9 @@
 @property (nonatomic) NSString *sentEmailSubject;
 @property (nonatomic) NSString *sentEmailBody;
 @property (nonatomic) NSDictionary *selectedContact;
+@property (nonatomic) NSMutableDictionary *selectedMessageDictionary;
+
 @property (nonatomic) MessageTableViewController *messageTableViewController;
+@property (nonatomic) BOOL *isLinkIncluded;
 - (void)showMailPicker:(NSString*)email withMessage:(NSString*)message;
 @end

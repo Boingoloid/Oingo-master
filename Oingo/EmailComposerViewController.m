@@ -63,28 +63,40 @@
 // -------------------------------------------------------------------------------
 - (void)displayMailComposerSheet:email withMessage:message
 {
+    
+
+    
     MFMailComposeViewController *picker = [[MFMailComposeViewController alloc] init];
     picker.mailComposeDelegate = self;
-
-    NSString *subject = [NSString stringWithFormat:@"Message from local voter re: %@",[self.selectedSegment valueForKey:@"segmentTitle"]];
-    [picker setSubject:subject];
-        NSLog(@"User email - short email VC:%@",email);
     
-    // Set up recipients
+    // Enter values as if Civialian
+    NSString *subject = [NSString stringWithFormat:@"Thought I'd like to share"];
+    
+    
+    //Build body text
+    NSString *header = [NSString stringWithFormat:@"%@,",[self.selectedContact valueForKey:@"firstName"]];
+    NSString *body = message;
+    NSString *linkToContent = [NSString stringWithFormat:@"When you have a moment, please take a look at this segment: %@",[self.selectedSegment valueForKey:@"linkToContent"]];
+    NSString *pushThoughtFooter = @"sent via pushthought";
+    
+    NSString *fullEmailBodyText =[NSString stringWithFormat:@"%@\n\n%@\n\n%@\n\n\n%@", header, body, linkToContent, pushThoughtFooter];
+    
+    // Get the isLinkIncluded bool to see if user wants to include link
+    NSNumber *isLinkIncludedNumber = [self.selectedMessageDictionary valueForKey:@"isLinkIncluded"];
+    bool isLinkIncludedBool = [isLinkIncludedNumber boolValue];
+    if(isLinkIncludedBool == 0){
+        linkToContent = @"";
+    }
+    
+    // Next step would be to build changes if Local Rep
+    
+    // grab Recipients emails
     NSArray *toRecipients = [NSArray arrayWithObject:email];
-//    NSArray *ccRecipients = [NSArray arrayWithObjects:@"", nil];
-//    NSArray *bccRecipients = [NSArray arrayWithObject:@""];
     
+    // Set values of picker
     [picker setToRecipients:toRecipients];
-    
-    // Fill out the email body text
-    NSString *emailBody = message;
-    NSString *pushThoughtFooter = @"Sent via PushThought App!";
-    
-    NSString *fullEmailBodyText =[NSString stringWithFormat:@"%@\n\nPlease check out this segment for background:%@\n\n%@",emailBody, [self.selectedSegment valueForKey:@"linkToContent"],pushThoughtFooter];
-
+    [picker setSubject:subject];
     [picker setMessageBody:fullEmailBodyText isHTML:NO];
-    
     [self presentViewController:picker animated:YES completion:NULL];
     
     

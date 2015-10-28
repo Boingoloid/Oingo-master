@@ -42,6 +42,7 @@
 #import "ComposeViewController.h"
 #import "MessageTableViewEmailCell.h"
 #import "WebViewController.h"
+#import "MessagePanelViewController.h"
 
 
 @interface MessageTableViewController () <UIGestureRecognizerDelegate,CLLocationManagerDelegate>
@@ -340,6 +341,7 @@ NSInteger footerHeight = 1;
                             emailComposer.selectedSegment = self.selectedSegment;
                             emailComposer.selectedContact = self.selectedContact;
                             emailComposer.messageTableViewController = self;
+                            emailComposer.selectedMessageDictionary = [self.menuList objectAtIndex:index];
                             
                             [self.navigationController pushViewController:emailComposer animated:YES];
                             [emailComposer showMailPicker:cell.openCongressEmail withMessage:[[self.menuList objectAtIndex:index] valueForKey:@"messageText"]];
@@ -435,6 +437,8 @@ NSInteger footerHeight = 1;
                         } else {
                             NSLog(@"index was found:%ld",(unsigned long)index);
                             NSLog(@"User email - short email VC double 1st:%@",cell.email);
+                            
+                            
                             
                             EmailComposerViewController *emailComposer = [[EmailComposerViewController alloc]init];
                             emailComposer.selectedSegment = self.selectedSegment;
@@ -1037,7 +1041,6 @@ NSInteger footerHeight = 1;
         [sentMessageItem setObject:targetName forKey:@"contactName"];
     }
     
-    
     [sentMessageItem saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) { //save sent message to parse
         if(error){
             NSLog(@"error, message not saved");
@@ -1061,7 +1064,7 @@ NSInteger footerHeight = 1;
         NSArray *rowIndecesInSection = [self.sections objectForKey:category];
         NSNumber *rowIndex = [rowIndecesInSection objectAtIndex:indexPath.row]; //pulling the row indece from array above
        
-        MessageOptionsTableTableViewController *messageOptionsViewController = segue.destinationViewController;
+        MessageOptionsTableTableViewController *messageOptionsViewController = [segue destinationViewController];
         
         messageOptionsViewController.category = category;
         messageOptionsViewController.messageTableViewController = self;
@@ -1070,7 +1073,6 @@ NSInteger footerHeight = 1;
         messageOptionsViewController.messageOptionsList = self.messageOptionsList;
         messageOptionsViewController.menuList = self.menuList;
         
-        //NSLog(@"segway to Message Options: messageOptionsList:%@,%@", self.messageOptionsList, messageOptionsViewController.messageOptionsList);
         
     } else if ([segue.identifier isEqualToString:@"showSettings"]){
         SettingsTableViewController *settingsTableVC = [segue destinationViewController];
@@ -1087,9 +1089,36 @@ NSInteger footerHeight = 1;
         WebViewController *webViewController =  [segue destinationViewController];
         webViewController.selectedLink = self.linkToEmail;
         NSLog(@"selected link program detail %@:",webViewController.selectedLink);
+    } else if ([segue.identifier isEqualToString:@"showMessagePanel"]){
+        NSIndexPath *indexPath = [self.tableView indexPathForCell:sender];
+        NSString *category= [self categoryForSection:indexPath.section];
+        NSArray *rowIndecesInSection = [self.sections objectForKey:category];
+        NSNumber *rowIndex = [rowIndecesInSection objectAtIndex:indexPath.row]; //pulling the row indece from array above
+        
+        MessagePanelViewController *messagePanel =  [segue destinationViewController];
+        
+        messagePanel.selectedProgram = self.selectedProgram;
+        messagePanel.selectedSegment = self.selectedSegment;
+        messagePanel.category = category;
+        messagePanel.messageTableViewController = self;
+        messagePanel.originIndexPath = indexPath;
+        messagePanel.originRowIndex = rowIndex;
+        messagePanel.menuList = self.menuList;
+        NSLog(@"menuList:%@",self.menuList);
+        
+        //Look up message - note this works b/c message is first item in section.
+        NSUInteger index = [self.menuList indexOfObjectPassingTest:
+                            ^BOOL(NSDictionary *dict, NSUInteger idx, BOOL *stop) {
+                                return [[dict valueForKey:@"messageCategory"] isEqualToString:category];
+                            }];
+        if(index == NSNotFound){
+            NSLog(@"did not find line");
+            
+        } else {
+            NSLog(@"index was found:%ld",(unsigned long)index);
+            messagePanel.selectedMessageDictionary = [self.menuList objectAtIndex:index];
+        }
     }
-
 }
-
 
 @end

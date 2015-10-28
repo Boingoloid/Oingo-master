@@ -117,4 +117,5 @@ dependencies: \
   Oingo/MessageOptionsTableTableViewController.h \
   Oingo/SettingsTableViewController.h Oingo/ComposeViewController.h \
   Oingo/MessageTableViewEmailCell.h \
-  /Users/matthewacalin/Desktop/IphoneApps/PushThought/WebViewController.h
+  /Users/matthewacalin/Desktop/IphoneApps/PushThought/WebViewController.h \
+  Oingo/MessagePanelViewController.h

@@ -348,6 +348,7 @@ BOOL isLocationInfoAvailable = NO;
                                     return [[dict objectForKey:@"messageCategory"] isEqual:category];
                                 }];
             NSMutableDictionary *messageToAdd = [self.messageTextList objectAtIndex:index];
+            [messageToAdd setValue:@YES forKey:@"isLinkIncluded"];
             [self.menuList addObject:messageToAdd];
             //            [contactRow setValue:@NO forKey:@"isCollapsed"]; // makes sure at least one contact is expanded
             [self.menuList addObject:contactRow];
