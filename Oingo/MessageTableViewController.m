@@ -19,9 +19,6 @@
 #import "PFTwitterUtils+NativeTwitter.h"
 #import <Accounts/Accounts.h>
 #import <Social/Social.h>
-//#import <TwitterKit/TwitterKit.h>
-//#import <Fabric/Fabric.h>
-//#import <Crashlytics/Crashlytics.h>
 #import "SignUpViewController.h"
 #import <ParseFacebookUtilsV4/PFFacebookUtils.h>
 #import <FBSDKShareKit/FBSDKShareKit.h>
@@ -436,9 +433,6 @@ NSInteger footerHeight = 1;
                             
                         } else {
                             NSLog(@"index was found:%ld",(unsigned long)index);
-                            NSLog(@"User email - short email VC double 1st:%@",cell.email);
-                            
-                            
                             
                             EmailComposerViewController *emailComposer = [[EmailComposerViewController alloc]init];
                             emailComposer.selectedSegment = self.selectedSegment;
@@ -1105,7 +1099,7 @@ NSInteger footerHeight = 1;
         messagePanel.originIndexPath = indexPath;
         messagePanel.originRowIndex = rowIndex;
         messagePanel.menuList = self.menuList;
-        NSLog(@"menuList:%@",self.menuList);
+        //NSLog(@"menuList:%@",self.menuList);
         
         //Look up message - note this works b/c message is first item in section.
         NSUInteger index = [self.menuList indexOfObjectPassingTest:
@@ -1116,8 +1110,6 @@ NSInteger footerHeight = 1;
             NSLog(@"did not find line");
             
         } else {
-            NSLog(@"index was found:%ld",(unsigned long)index);
-            NSLog(@"indexpath:%@",indexPath);
             messagePanel.selectedMessageDictionary = [self.menuList objectAtIndex:index];
         }
     }

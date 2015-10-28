@@ -9,9 +9,9 @@
 #import "TwitterAPITweet.h"
 #import <Parse/Parse.h>
 #import <UIKit/UIKit.h>
-//#import <TwitterKit/TwitterKit.h>
-//#import <Fabric/Fabric.h>
-//#import "PFTwitterUtils+NativeTwitter.h"
+#import <TwitterKit/TwitterKit.h>
+#import <Fabric/Fabric.h>
+#import "PFTwitterUtils+NativeTwitter.h"
 #import <Accounts/Accounts.h>
 #import "SignUpViewController.h"
 #import "LogInViewController.h"
@@ -48,18 +48,18 @@ bool isUserLinkedToTwitter;
     NSData *imageData = [theImage getData];
     UIImage *image = [UIImage imageWithData:imageData];
     
-//    TWTRComposer *composer = [[TWTRComposer alloc] init];
-//    [composer setText:tweetText];
-//    [composer setURL:tweetURL];
-//    [composer setImage:image];
-//    [composer showWithCompletion:^(TWTRComposerResult result) {
-//        if (result == TWTRComposerResultCancelled) {
-//            NSLog(@"Tweet composition cancelled");
-//        } else {
-//            NSLog(@"Tweet is sent, segment only.");
-//            [self saveSentMessageSegment];
-//        }
-//    }];
+    TWTRComposer *composer = [[TWTRComposer alloc] init];
+    [composer setText:tweetText];
+    [composer setURL:tweetURL];
+    [composer setImage:image];
+    [composer showWithCompletion:^(TWTRComposerResult result) {
+        if (result == TWTRComposerResultCancelled) {
+            NSLog(@"Tweet composition cancelled");
+        } else {
+            NSLog(@"Tweet is sent, segment only.");
+            [self saveSentMessageSegment];
+        }
+    }];
 }
 
 
@@ -98,19 +98,19 @@ bool isUserLinkedToTwitter;
     PFFile *theImage = [self.selectedSegment valueForKey:@"segmentImage"];
     NSData *imageData = [theImage getData];
     UIImage *image = [UIImage imageWithData:imageData];
-//    TWTRComposer *composer = [[TWTRComposer alloc] init];
-//    [composer setText:tweetText];
-//    [composer setURL:tweetURL];
-//    [composer setImage:image];
-//    [composer showFromViewController:self.messageTableViewController completion:^(TWTRComposerResult result) {
-//        if (result == TWTRComposerResultCancelled) {
-//            NSLog(@"Tweet composition cancelled");
-//        } else {
-//            NSLog(@"Tweet is sent.");
-//            [self saveSentMessage];
-//            //Need to save tweet result ID in callBack
-//        }
-//    }];
+    TWTRComposer *composer = [[TWTRComposer alloc] init];
+    [composer setText:tweetText];
+    [composer setURL:tweetURL];
+    [composer setImage:image];
+    [composer showFromViewController:self.messageTableViewController completion:^(TWTRComposerResult result) {
+        if (result == TWTRComposerResultCancelled) {
+            NSLog(@"Tweet composition cancelled");
+        } else {
+            NSLog(@"Tweet is sent.");
+            [self saveSentMessage];
+            //Need to save tweet result ID in callBack
+        }
+    }];
 }
 
 

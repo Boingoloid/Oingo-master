@@ -44,7 +44,7 @@
 // -------------------------------------------------------------------------------
 - (void)showMailPicker:(NSString*)email withMessage:(NSString *)message {
     if ([MFMailComposeViewController canSendMail]){
-            NSLog(@"User email - short email VC 1st:%@",email);
+
         [self displayMailComposerSheet:email withMessage:message];
 
     } else {
@@ -63,32 +63,53 @@
 // -------------------------------------------------------------------------------
 - (void)displayMailComposerSheet:email withMessage:message
 {
-    
 
-    
     MFMailComposeViewController *picker = [[MFMailComposeViewController alloc] init];
     picker.mailComposeDelegate = self;
     
-    // Enter values as if Civialian
-    NSString *subject = [NSString stringWithFormat:@"Thought I'd like to share"];
+    NSLog(@"selected contact value:%@",[self.selectedContact valueForKey:@"chamber"]);
+        NSLog(@"selected contact value:%@",[self.selectedContact valueForKey:@"chamber"]);
     
     
-    //Build body text
-    NSString *header = [NSString stringWithFormat:@"%@,",[self.selectedContact valueForKey:@"firstName"]];
+    NSString *header;
+    NSString *subject;
+    if([[self.selectedContact valueForKey:@"messageCategory"] isEqualToString:@"Local Representative"]){
+        
+        if([[self.selectedContact valueForKey:@"chamber"] isEqualToString:@"Senator"]){
+            header = [NSString stringWithFormat:@"Senator %@,",[self.selectedContact valueForKey:@"lastName"]];
+        } else{
+            header = [NSString stringWithFormat:@"Representative %@,",[self.selectedContact valueForKey:@"lastName"]];
+        }
+        subject = [NSString stringWithFormat:@"Thought to share from local voter"];
+    } else {
+        header = [NSString stringWithFormat:@"%@,",[self.selectedContact valueForKey:@"targetName"]];
+        subject = [NSString stringWithFormat:@"Thought I'd like to share"];
+    }
+    
     NSString *body = message;
-    NSString *linkToContent = [NSString stringWithFormat:@"When you have a moment, please take a look at this segment: %@",[self.selectedSegment valueForKey:@"linkToContent"]];
-    NSString *pushThoughtFooter = @"sent via pushthought";
     
-    NSString *fullEmailBodyText =[NSString stringWithFormat:@"%@\n\n%@\n\n%@\n\n\n%@", header, body, linkToContent, pushThoughtFooter];
-    
-    // Get the isLinkIncluded bool to see if user wants to include link
+    NSString *linkToContent;
     NSNumber *isLinkIncludedNumber = [self.selectedMessageDictionary valueForKey:@"isLinkIncluded"];
     bool isLinkIncludedBool = [isLinkIncludedNumber boolValue];
     if(isLinkIncludedBool == 0){
         linkToContent = @"";
+    } else {
+        linkToContent = [NSString stringWithFormat:@"When you have a moment, please take a look at this segment: %@",[self.selectedSegment valueForKey:@"linkToContent"]];
     }
     
+    NSString *pushThoughtFooter = @"sent via pushthought";
+    
+    // Get the isLinkIncluded bool to see if user wants to include link
+
+    
+    
+    
+
+    
+    NSString *fullEmailBodyText =[NSString stringWithFormat:@"%@\n\n%@\n\n%@\n\n\n%@", header, body, linkToContent, pushThoughtFooter];
+    
     // Next step would be to build changes if Local Rep
+    
     
     // grab Recipients emails
     NSArray *toRecipients = [NSArray arrayWithObject:email];

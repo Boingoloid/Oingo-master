@@ -10,9 +10,9 @@
 #import <Parse/Parse.h>
 //#import "PFTwitterUtils+NativeTwitter.h"
 #import <ParseFacebookUtilsV4/PFFacebookUtils.h>
-//#import <TwitterKit/TwitterKit.h>
-//#import <Fabric/Fabric.h>
-//#import <Crashlytics/Crashlytics.h>
+#import <TwitterKit/TwitterKit.h>
+#import <Fabric/Fabric.h>
+#import <Crashlytics/Crashlytics.h>
 #import <FBSDKCoreKit/FBSDKCoreKit.h>
 #import <FBSDKLoginKit/FBSDKLoginKit.h>
 
@@ -45,14 +45,10 @@
     [PFFacebookUtils initializeFacebookWithApplicationLaunchOptions:launchOptions];
     [PFTwitterUtils initializeWithConsumerKey:@"wFbOMUhdXSwU7WCGzW4V6a9Rn" consumerSecret:@"Y4zH1qR55icmp5eiDhZKbgg3sC7TEvxPxrlKpd7y6NSzzsqfP1"];
 
-//    Initialize Twitter
-//    [[Twitter sharedInstance] startWithConsumerKey:@"wFbOMUhdXSwU7WCGzW4V6a9Rn" consumerSecret:@"Y4zH1qR55icmp5eiDhZKbgg3sC7TEvxPxrlKpd7y6NSzzsqfP1"];
-//    
-//    [Fabric with:@[[Crashlytics class], [Twitter class]]];
+    //Initialize Twitter
+    [[Twitter sharedInstance] startWithConsumerKey:@"2dKhN7TgnxeEWqvQ8m0dcV9TH" consumerSecret:@"Gn0PbCgPa4Vt3WwclEZpu0iceKsHP41vJnCNAVIhEmIaLU8WqK"];
 
-//    [Fabric with:@[[Twitter sharedInstance]]];
-//    [Fabric with:@[TwitterKit, CrashlyticsKit]];
-//    [Fabric with:@[[Crashlytics class], [Twitter class]]];
+    [Fabric with:@[[Twitter class], [Crashlytics class]]];
 
 
     // [Optional] Track statistics around application opens.

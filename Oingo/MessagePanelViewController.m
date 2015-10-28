@@ -32,7 +32,6 @@
     bool includeLinkBool = [includeLinkNumber boolValue];
     
     if(includeLinkBool){
-        NSLog(@"Truth flag");
     } else {
         [self.includeLinkToggle setOn:NO animated:YES];
     }
@@ -63,8 +62,8 @@
     self.linkToContent.text = [self.selectedSegment valueForKey:@"linkToContent"];
     self.linkToContent.layer.borderWidth=0;
     self.linkToContent.layer.borderColor= [[UIColor lightGrayColor] CGColor];
-    NSLog(@"linkToContent:%@",[self.selectedSegment valueForKey:@"linkToContent"]);
-    NSLog(@"Selected Segment:%@",self.selectedSegment);
+//    NSLog(@"linkToContent:%@",[self.selectedSegment valueForKey:@"linkToContent"]);
+//    NSLog(@"Selected Segment:%@",self.selectedSegment);
     [self.linkToContent scrollRangeToVisible:NSMakeRange(0, 0)];
     
     //    [self registerForKeyboardNotifications];

@@ -30,10 +30,10 @@
                             return [[dict objectForKey:@"isGetLocationCell"] isEqual:@YES];
                         }];
     if(index == NSNotFound){
-//        NSLog(@"did not find 'get location' line");
+        //NSLog(@"did not find 'get location' line");
 
     } else {
-//        NSLog(@"did find 'no location' line and deleted it");
+        //NSLog(@"did find 'no location' line and deleted it");
         [messageList removeObjectAtIndex:index];
     }
     

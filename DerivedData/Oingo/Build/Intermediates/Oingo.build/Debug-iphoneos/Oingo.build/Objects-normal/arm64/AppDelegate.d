@@ -71,4 +71,49 @@ dependencies: \
   /Users/matthewacalin/Desktop/IphoneApps/PushThought/FBSDKLoginKit.framework/Headers/FBSDKLoginManager.h \
   /Users/matthewacalin/Desktop/IphoneApps/PushThought/FBSDKLoginKit.framework/Headers/FBSDKLoginButton.h \
   /Users/matthewacalin/Desktop/IphoneApps/PushThought/FBSDKLoginKit.framework/Headers/FBSDKLoginKit.h \
-  /Users/matthewacalin/Desktop/IphoneApps/PushThought/FBSDKLoginKit.framework/Modules/module.modulemap
+  /Users/matthewacalin/Desktop/IphoneApps/PushThought/FBSDKLoginKit.framework/Modules/module.modulemap \
+  /Users/matthewacalin/Desktop/IphoneApps/PushThought/TwitterCore.framework/Headers/TWTRSessionStore.h \
+  /Users/matthewacalin/Desktop/IphoneApps/PushThought/TwitterCore.framework/Headers/TWTRSession.h \
+  /Users/matthewacalin/Desktop/IphoneApps/PushThought/TwitterCore.framework/Headers/TWTRGuestSession.h \
+  /Users/matthewacalin/Desktop/IphoneApps/PushThought/TwitterCore.framework/Headers/TWTRDefines.h \
+  /Users/matthewacalin/Desktop/IphoneApps/PushThought/TwitterCore.framework/Headers/TWTRCoreOAuthSigning.h \
+  /Users/matthewacalin/Desktop/IphoneApps/PushThought/TwitterCore.framework/Headers/TWTRConstants.h \
+  /Users/matthewacalin/Desktop/IphoneApps/PushThought/TwitterCore.framework/Headers/TWTRAuthSession.h \
+  /Users/matthewacalin/Desktop/IphoneApps/PushThought/TwitterCore.framework/Headers/TWTRAuthConfig.h \
+  /Users/matthewacalin/Desktop/IphoneApps/PushThought/TwitterCore.framework/Headers/TWTRAPIErrorCode.h \
+  /Users/matthewacalin/Desktop/IphoneApps/PushThought/TwitterCore.framework/Headers/TwitterCore.h \
+  /Users/matthewacalin/Desktop/IphoneApps/PushThought/TwitterCore.framework/Modules/module.modulemap \
+  /Users/matthewacalin/Desktop/IphoneApps/PushThought/TwitterKit.framework/Headers/TWTRUserTimelineDataSource.h \
+  /Users/matthewacalin/Desktop/IphoneApps/PushThought/TwitterKit.framework/Headers/TWTRUser.h \
+  /Users/matthewacalin/Desktop/IphoneApps/PushThought/TwitterKit.framework/Headers/TWTRTweetViewDelegate.h \
+  /Users/matthewacalin/Desktop/IphoneApps/PushThought/TwitterKit.framework/Headers/TWTRTweetView.h \
+  /Users/matthewacalin/Desktop/IphoneApps/PushThought/TwitterKit.framework/Headers/TWTRTweetTableViewCell.h \
+  /Users/matthewacalin/Desktop/IphoneApps/PushThought/TwitterKit.framework/Headers/TWTRTweet.h \
+  /Users/matthewacalin/Desktop/IphoneApps/PushThought/TwitterKit.framework/Headers/TWTRTimelineViewController.h \
+  /Users/matthewacalin/Desktop/IphoneApps/PushThought/TwitterKit.framework/Headers/TWTRShareEmailViewController.h \
+  /Users/matthewacalin/Desktop/IphoneApps/PushThought/TwitterKit.framework/Headers/TWTRSearchTimelineDataSource.h \
+  /Users/matthewacalin/Desktop/IphoneApps/PushThought/TwitterKit.framework/Headers/TWTROAuthSigning.h \
+  /Users/matthewacalin/Desktop/IphoneApps/PushThought/TwitterKit.framework/Headers/TWTRLogInButton.h \
+  /Users/matthewacalin/Desktop/IphoneApps/PushThought/TwitterKit.framework/Headers/TWTRListTimelineDataSource.h \
+  /Users/matthewacalin/Desktop/IphoneApps/PushThought/TwitterKit.framework/Headers/TWTRComposerTheme.h \
+  /Users/matthewacalin/Desktop/IphoneApps/PushThought/TwitterKit.framework/Headers/TWTRComposer.h \
+  /Users/matthewacalin/Desktop/IphoneApps/PushThought/TwitterKit.framework/Headers/TWTRTimelineType.h \
+  /Users/matthewacalin/Desktop/IphoneApps/PushThought/TwitterKit.framework/Headers/TWTRTimelineDataSource.h \
+  /Users/matthewacalin/Desktop/IphoneApps/PushThought/TwitterKit.framework/Headers/TWTRCollectionTimelineDataSource.h \
+  /Users/matthewacalin/Desktop/IphoneApps/PushThought/TwitterKit.framework/Headers/TWTRComposerViewController.h \
+  /Users/matthewacalin/Desktop/IphoneApps/PushThought/TwitterKit.framework/Headers/TWTRCardConfiguration.h \
+  /Users/matthewacalin/Desktop/IphoneApps/PushThought/TwitterKit.framework/Headers/TWTRAPIClient.h \
+  /Users/matthewacalin/Desktop/IphoneApps/PushThought/TwitterKit.framework/Headers/Twitter.h \
+  /Users/matthewacalin/Desktop/IphoneApps/PushThought/TwitterKit.framework/Headers/TwitterKit.h \
+  /Users/matthewacalin/Desktop/IphoneApps/PushThought/TwitterKit.framework/Modules/module.modulemap \
+  /Users/matthewacalin/Desktop/IphoneApps/PushThought/Fabric.framework/Headers/FABAttributes.h \
+  /Users/matthewacalin/Desktop/IphoneApps/PushThought/Fabric.framework/Headers/Fabric.h \
+  /Users/matthewacalin/Desktop/IphoneApps/PushThought/Fabric.framework/Modules/module.modulemap \
+  /Users/matthewacalin/Desktop/IphoneApps/PushThought/Crashlytics.framework/Headers/ANSCompatibility.h \
+  /Users/matthewacalin/Desktop/IphoneApps/PushThought/Crashlytics.framework/Headers/Answers.h \
+  /Users/matthewacalin/Desktop/IphoneApps/PushThought/Crashlytics.framework/Headers/CLSStackFrame.h \
+  /Users/matthewacalin/Desktop/IphoneApps/PushThought/Crashlytics.framework/Headers/CLSReport.h \
+  /Users/matthewacalin/Desktop/IphoneApps/PushThought/Crashlytics.framework/Headers/CLSLogging.h \
+  /Users/matthewacalin/Desktop/IphoneApps/PushThought/Crashlytics.framework/Headers/CLSAttributes.h \
+  /Users/matthewacalin/Desktop/IphoneApps/PushThought/Crashlytics.framework/Headers/Crashlytics.h \
+  /Users/matthewacalin/Desktop/IphoneApps/PushThought/Crashlytics.framework/Modules/module.modulemap

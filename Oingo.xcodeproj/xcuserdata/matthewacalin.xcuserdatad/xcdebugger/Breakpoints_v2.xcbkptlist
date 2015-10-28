@@ -433,11 +433,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Oingo/MessageTableViewController.m"
-            timestampString = "467678310.768269"
+            timestampString = "467691552.819489"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "787"
-            endingLineNumber = "787"
+            startingLineNumber = "781"
+            endingLineNumber = "781"
             landmarkName = "-tableView:cellForRowAtIndexPath:"
             landmarkType = "5">
          </BreakpointContent>
@@ -449,11 +449,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Oingo/MessageTableViewController.m"
-            timestampString = "467623461.287643"
+            timestampString = "467690510.089427"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "242"
-            endingLineNumber = "242"
+            startingLineNumber = "239"
+            endingLineNumber = "239"
             landmarkName = "-respondToTapGesture:"
             landmarkType = "5">
          </BreakpointContent>
@@ -465,11 +465,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Oingo/MessageTableViewController.m"
-            timestampString = "467623461.287643"
+            timestampString = "467690510.089427"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "251"
-            endingLineNumber = "251"
+            startingLineNumber = "248"
+            endingLineNumber = "248"
             landmarkName = "-respondToTapGesture:"
             landmarkType = "5">
          </BreakpointContent>
@@ -513,11 +513,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Oingo/MessageTableViewController.m"
-            timestampString = "467678310.768269"
+            timestampString = "467691552.819489"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "444"
-            endingLineNumber = "444"
+            startingLineNumber = "438"
+            endingLineNumber = "438"
             landmarkName = "-respondToTapGesture:"
             landmarkType = "5">
          </BreakpointContent>
@@ -529,11 +529,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Oingo/MessageTableViewController.m"
-            timestampString = "467678310.768269"
+            timestampString = "467690510.089427"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "345"
-            endingLineNumber = "345"
+            startingLineNumber = "342"
+            endingLineNumber = "342"
             landmarkName = "-respondToTapGesture:"
             landmarkType = "5">
          </BreakpointContent>
@@ -561,11 +561,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Oingo/MessagePanelViewController.m"
-            timestampString = "467683518.774883"
+            timestampString = "467691552.819489"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "136"
-            endingLineNumber = "136"
+            startingLineNumber = "135"
+            endingLineNumber = "135"
             landmarkName = "-touchesBegan:withEvent:"
             landmarkType = "5">
          </BreakpointContent>
@@ -577,11 +577,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Oingo/MessageTableViewController.m"
-            timestampString = "467667998.153644"
+            timestampString = "467690510.089427"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "319"
-            endingLineNumber = "319"
+            startingLineNumber = "316"
+            endingLineNumber = "316"
             landmarkName = "-respondToTapGesture:"
             landmarkType = "5">
          </BreakpointContent>
