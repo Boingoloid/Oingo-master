@@ -2457,6 +2457,12 @@
                                     <constraint firstAttribute="height" constant="2" id="CWz-Pq-gVn"/>
                                 </constraints>
                             </imageView>
+                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="MeP-l2-3yo">
+                                <rect key="frame" x="20" y="256" width="564" height="100"/>
+                                <connections>
+                                    <action selector="sendToSignIn:" destination="m9r-j1-HpL" eventType="touchUpInside" id="nGc-DH-jQj"/>
+                                </connections>
+                            </button>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" translatesAutoresizingMaskIntoConstraints="NO" id="pAN-0m-dWd">
                                 <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                                 <connections>
@@ -2467,6 +2473,7 @@
                         <color key="backgroundColor" red="0.90196079019999997" green="0.90196079019999997" blue="0.90196079019999997" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
                             <constraint firstItem="D62-Sd-JhU" firstAttribute="leading" secondItem="Ull-Cr-wMC" secondAttribute="leading" id="1Vo-5u-olu"/>
+                            <constraint firstItem="MeP-l2-3yo" firstAttribute="trailing" secondItem="D62-Sd-JhU" secondAttribute="trailing" id="1ek-vT-co2"/>
                             <constraint firstItem="bmf-f5-k4i" firstAttribute="trailing" secondItem="D62-Sd-JhU" secondAttribute="trailing" id="3Pu-Ja-y1P"/>
                             <constraint firstAttribute="leadingMargin" secondItem="Un9-eE-1ok" secondAttribute="leading" id="5ae-NF-mQ3"/>
                             <constraint firstItem="D62-Sd-JhU" firstAttribute="leading" secondItem="bvE-DM-J4j" secondAttribute="leadingMargin" constant="4" id="6KC-9q-fog"/>
@@ -2474,7 +2481,10 @@
                             <constraint firstAttribute="trailingMargin" secondItem="Gk2-zK-fEd" secondAttribute="trailing" constant="3" id="9VX-jx-AkG"/>
                             <constraint firstItem="4Eh-IQ-sv5" firstAttribute="top" secondItem="bjz-WX-bzz" secondAttribute="bottom" constant="32" id="AU8-gP-f1d"/>
                             <constraint firstItem="4Eh-IQ-sv5" firstAttribute="top" secondItem="0ao-p0-MXz" secondAttribute="bottom" constant="14" id="CNb-KA-5OA"/>
+                            <constraint firstItem="MeP-l2-3yo" firstAttribute="top" secondItem="D62-Sd-JhU" secondAttribute="top" id="G2F-1h-zpb"/>
                             <constraint firstItem="D62-Sd-JhU" firstAttribute="top" secondItem="bmf-f5-k4i" secondAttribute="bottom" id="GKk-f4-ZQo"/>
+                            <constraint firstItem="MeP-l2-3yo" firstAttribute="bottom" secondItem="D62-Sd-JhU" secondAttribute="bottom" id="JJZ-DY-h3I"/>
+                            <constraint firstItem="MeP-l2-3yo" firstAttribute="leading" secondItem="D62-Sd-JhU" secondAttribute="leading" id="KOR-fL-kuG"/>
                             <constraint firstItem="bjz-WX-bzz" firstAttribute="top" secondItem="Un9-eE-1ok" secondAttribute="bottom" constant="3" id="NIs-HQ-APf"/>
                             <constraint firstAttribute="leadingMargin" secondItem="bjz-WX-bzz" secondAttribute="leading" id="Neb-id-gO5"/>
                             <constraint firstItem="bmf-f5-k4i" firstAttribute="top" secondItem="D62-Sd-JhU" secondAttribute="bottom" id="Ogt-mW-aWB"/>
@@ -2521,6 +2531,7 @@
                         <outlet property="linkToContent" destination="bjz-WX-bzz" id="cX5-2o-ogc"/>
                         <outlet property="loadMessageButton" destination="bmf-f5-k4i" id="LB3-RO-EFU"/>
                         <outlet property="messageTextView" destination="D62-Sd-JhU" id="GPe-5E-fb7"/>
+                        <outlet property="signInButton" destination="MeP-l2-3yo" id="2H8-6r-cJq"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="hPf-8l-HR7" userLabel="First Responder" sceneMemberID="firstResponder"/>

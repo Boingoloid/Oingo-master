@@ -11,8 +11,10 @@
 #import <UIKit/UIKit.h>
 #import "Segment.h"
 #import "Program.h"
+#import <Parse/Parse.h>
+#import "SignUpViewController.h"
 
-@interface MessagePanelViewController ()
+@interface MessagePanelViewController () <UIGestureRecognizerDelegate>
 
 @end
 
@@ -126,6 +128,15 @@
     [super viewWillTransitionToSize:size withTransitionCoordinator:coordinator];
 }
 
+
+-(void)viewWillAppear:(BOOL)animated{
+    if([PFUser currentUser]){
+        self.signInButton.hidden = YES;
+    } else {
+        self.signInButton.hidden = NO;
+    }
+}
+
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
@@ -135,14 +146,47 @@
     //hide the keyborad
     [super touchesBegan:touches withEvent:event];
     UITouch *touch = [[event allTouches] anyObject];
+    NSLog(@"touch.view:%@", touch.view);
+    
+    if(![PFUser currentUser]){
+        [self pushToSignIn];
+    }
+    
     if ([self.messageTextView isFirstResponder] && [touch view] != self.messageTextView) {
         [self.messageTextView resignFirstResponder];
     }
 }
 
+
+-(void) pushToSignIn {
+    SignUpViewController *signUpViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"signInViewController"];
+    signUpViewController.messageTableViewController = self.messageTableViewController;
+    [self.navigationController pushViewController:signUpViewController animated:YES];
+    
+}
+
+- (void)respondToTapGesture:(UITapGestureRecognizer *)tap {
+    
+    if (UIGestureRecognizerStateEnded == tap.state) {
+        
+        // Collect data about tap location
+        UIView *view = (UIView*)tap.view;
+        CGPoint p = [tap locationInView:view];
+        if(CGRectContainsPoint(self.messageTextView.frame, p)){
+            NSLog(@"touch inside textview");
+            if(![PFUser currentUser]){
+                NSLog(@"touch inside textview and not user");
+                [self pushToSignIn];
+            }
+        }
+    }
+}
+
+
 /*
 #pragma mark - Navigation
 
+ 
 // In a storyboard-based application, you will often want to do a little preparation before navigation
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     // Get the new view controller using [segue destinationViewController].
@@ -193,5 +237,8 @@
     
     
     
+}
+- (IBAction)sendToSignIn:(id)sender {
+    [self pushToSignIn];
 }
 @end

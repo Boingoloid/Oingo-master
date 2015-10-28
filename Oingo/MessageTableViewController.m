@@ -144,9 +144,6 @@ NSInteger footerHeight = 1;
 {
     UITableView *tableView = (UITableView *)gestureRecognizer.view;
     CGPoint p = [gestureRecognizer locationInView:gestureRecognizer.view];
-//    NSIndexPath* indexPath = [tableView indexPathForRowAtPoint:p];
-//    MessageTableViewCell *cell = (MessageTableViewCell *)[tableView cellForRowAtIndexPath:indexPath];
-    //if point is in the tableview then return YES
     if ([tableView indexPathForRowAtPoint:p]) {
         return YES;
     }
@@ -467,17 +464,6 @@ NSInteger footerHeight = 1;
         }
     }
 }
-
-
-
-
-/*
--(void)shareMessageTwitter{
-    
-}
-*/
-
-
 
 -(void) pushToSignIn {
     SignUpViewController *signUpViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"signInViewController"];

@@ -16,6 +16,9 @@
 @property (weak, nonatomic) IBOutlet UIButton *cancelButton;
 @property (weak, nonatomic) IBOutlet UIButton *loadMessageButton;
 @property (weak, nonatomic) IBOutlet UISwitch *includeLinkToggle;
+@property (weak, nonatomic) IBOutlet UIButton *signInButton;
+
+
 
 @property(nonatomic,copy) NSArray *menuList;
 @property(nonatomic,copy) NSString *category;
@@ -32,6 +35,8 @@
 - (IBAction)loadMessage:(id)sender;
 - (IBAction)toggleIncludeLink:(id)sender;
 - (IBAction)cancel:(id)sender;
+
+- (IBAction)sendToSignIn:(id)sender;
 
 
 @end
