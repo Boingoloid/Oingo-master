@@ -224,7 +224,7 @@
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" bounces="NO" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" indicatorStyle="black" editable="NO" text="Monsanto modifies plant genes so they can resist massive amounts of pesticides that end up in our soil and food supply." translatesAutoresizingMaskIntoConstraints="NO" id="NKo-ja-dvl">
-                                            <rect key="frame" x="67" y="24" width="525" height="50"/>
+                                            <rect key="frame" x="67" y="24" width="505" height="50"/>
                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                             <constraints>
                                                 <constraint firstAttribute="height" relation="lessThanOrEqual" constant="100" id="Bg9-HF-bay"/>
@@ -307,6 +307,13 @@
                                                 </mask>
                                             </variation>
                                         </button>
+                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="arrowDetailIcon.png" translatesAutoresizingMaskIntoConstraints="NO" id="Nbq-pC-o63">
+                                            <rect key="frame" x="572" y="34" width="20" height="30"/>
+                                            <constraints>
+                                                <constraint firstAttribute="height" constant="30" id="2pN-EJ-LLh"/>
+                                                <constraint firstAttribute="width" constant="20" id="M1K-4B-bWQ"/>
+                                            </constraints>
+                                        </imageView>
                                     </subviews>
                                     <constraints>
                                         <constraint firstAttribute="bottomMargin" secondItem="cDZ-re-iL0" secondAttribute="bottom" constant="-5" id="2Sd-iS-0xV"/>
@@ -330,13 +337,15 @@
                                         <constraint firstItem="3jQ-uc-33Q" firstAttribute="top" secondItem="jef-ur-wKC" secondAttribute="topMargin" constant="-3" id="Unv-wg-Fo4"/>
                                         <constraint firstItem="cDZ-re-iL0" firstAttribute="leading" secondItem="jef-ur-wKC" secondAttribute="leadingMargin" constant="1" id="Uwn-nH-uCg"/>
                                         <constraint firstAttribute="bottomMargin" secondItem="cDZ-re-iL0" secondAttribute="bottom" constant="8" id="WWj-rB-pBM"/>
+                                        <constraint firstAttribute="trailingMargin" secondItem="Nbq-pC-o63" secondAttribute="trailing" id="aF0-Xu-4TG"/>
                                         <constraint firstItem="tlM-Jd-7yY" firstAttribute="top" secondItem="3jQ-uc-33Q" secondAttribute="top" constant="4" id="aOr-eO-eDo"/>
                                         <constraint firstItem="cDZ-re-iL0" firstAttribute="top" relation="greaterThanOrEqual" secondItem="QWG-RJ-9hI" secondAttribute="bottom" constant="8" id="bFs-Pu-BUn"/>
                                         <constraint firstItem="cDZ-re-iL0" firstAttribute="top" secondItem="QWG-RJ-9hI" secondAttribute="bottom" constant="3" id="bWG-Vr-23N"/>
                                         <constraint firstItem="QWG-RJ-9hI" firstAttribute="leading" secondItem="cDZ-re-iL0" secondAttribute="leading" id="er5-NK-yZ9"/>
                                         <constraint firstItem="cDZ-re-iL0" firstAttribute="top" relation="greaterThanOrEqual" secondItem="QWG-RJ-9hI" secondAttribute="bottom" constant="11" id="gUV-lN-KYE"/>
                                         <constraint firstItem="tlM-Jd-7yY" firstAttribute="leading" secondItem="jef-ur-wKC" secondAttribute="leadingMargin" constant="1" id="hdr-VZ-HOK"/>
-                                        <constraint firstItem="NKo-ja-dvl" firstAttribute="trailing" secondItem="jef-ur-wKC" secondAttribute="trailingMargin" id="mWF-gm-v8D"/>
+                                        <constraint firstItem="Nbq-pC-o63" firstAttribute="centerY" secondItem="NKo-ja-dvl" secondAttribute="centerY" id="iKy-aK-SJ3"/>
+                                        <constraint firstItem="NKo-ja-dvl" firstAttribute="trailing" secondItem="jef-ur-wKC" secondAttribute="trailingMargin" constant="-20" id="mWF-gm-v8D"/>
                                         <constraint firstItem="cDZ-re-iL0" firstAttribute="top" relation="greaterThanOrEqual" secondItem="QWG-RJ-9hI" secondAttribute="bottom" priority="999" constant="3" id="rE5-S1-E96"/>
                                         <constraint firstItem="tlM-Jd-7yY" firstAttribute="top" secondItem="jef-ur-wKC" secondAttribute="topMargin" id="sYc-YT-r0f"/>
                                         <constraint firstAttribute="bottomMargin" secondItem="cDZ-re-iL0" secondAttribute="bottom" id="tF2-aB-C7y"/>
@@ -2723,6 +2732,7 @@
     <resources>
         <image name="40-menu-alt-512.png" width="512" height="512"/>
         <image name="Web-frame2.png" width="2858" height="1950"/>
+        <image name="arrowDetailIcon.png" width="20" height="30"/>
         <image name="document-xxl.png" width="256" height="256"/>
         <image name="facebookButtonIconGray.png" width="259" height="259"/>
         <image name="location-gray.png" width="228" height="228"/>
@@ -2734,6 +2744,6 @@
         <image name="tweetButtonIconGray.png" width="259" height="259"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="ncd-tE-Df4"/>
+        <segue reference="Xre-gW-P64"/>
     </inferredMetricsTieBreakers>
 </document>

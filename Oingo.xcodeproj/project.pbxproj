@@ -83,6 +83,7 @@
 		CE968CFF1BE061BD005CF1F0 /* TwitterKitResources.bundle in Resources */ = {isa = PBXBuildFile; fileRef = CE968CFB1BE061BD005CF1F0 /* TwitterKitResources.bundle */; settings = {ASSET_TAGS = (); }; };
 		CE968D001BE061BD005CF1F0 /* TwitterCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CE968CFC1BE061BD005CF1F0 /* TwitterCore.framework */; settings = {ASSET_TAGS = (); }; };
 		CE968D021BE06243005CF1F0 /* Crashlytics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CE968D011BE06243005CF1F0 /* Crashlytics.framework */; settings = {ASSET_TAGS = (); }; };
+		CE968D041BE14E28005CF1F0 /* arrowDetailIcon.png in Resources */ = {isa = PBXBuildFile; fileRef = CE968D031BE14E28005CF1F0 /* arrowDetailIcon.png */; settings = {ASSET_TAGS = (); }; };
 		CE99E3871B5EF1ED00ED9D33 /* MarkSentMessageAPI.m in Sources */ = {isa = PBXBuildFile; fileRef = CE99E3861B5EF1ED00ED9D33 /* MarkSentMessageAPI.m */; };
 		CE9D625E1BC3C10F00A244ED /* MessagePanelViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CE9D625D1BC3C10F00A244ED /* MessagePanelViewController.m */; settings = {ASSET_TAGS = (); }; };
 		CEA042261B9704BB00071518 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CE5B98EF1B96F33400BFF14F /* UIKit.framework */; };
@@ -1136,6 +1137,7 @@
 		CE968CFB1BE061BD005CF1F0 /* TwitterKitResources.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; name = TwitterKitResources.bundle; path = TwitterKit.framework/Versions/A/Resources/TwitterKitResources.bundle; sourceTree = "<group>"; };
 		CE968CFC1BE061BD005CF1F0 /* TwitterCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = TwitterCore.framework; sourceTree = "<group>"; };
 		CE968D011BE06243005CF1F0 /* Crashlytics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Crashlytics.framework; sourceTree = "<group>"; };
+		CE968D031BE14E28005CF1F0 /* arrowDetailIcon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = arrowDetailIcon.png; path = Images/arrowDetailIcon.png; sourceTree = "<group>"; };
 		CE99E3851B5EF1ED00ED9D33 /* MarkSentMessageAPI.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MarkSentMessageAPI.h; sourceTree = "<group>"; };
 		CE99E3861B5EF1ED00ED9D33 /* MarkSentMessageAPI.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MarkSentMessageAPI.m; sourceTree = "<group>"; };
 		CE9D625C1BC3C10F00A244ED /* MessagePanelViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MessagePanelViewController.h; sourceTree = "<group>"; };
@@ -2253,6 +2255,7 @@
 		CE241A6A1AEAF0D300F22144 /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				CE968D031BE14E28005CF1F0 /* arrowDetailIcon.png */,
 				CEDA11981B99946E0065ACDD /* Seal_of_Congress_Cropped.png */,
 				CEDA11991B99946E0065ACDD /* Seal_of_Senate_Cropped.png */,
 				CEDA11901B992A770065ACDD /* Seal_of_the_United_States_Congress.svg.png */,
@@ -3784,6 +3787,7 @@
 				CEDA119A1B99946E0065ACDD /* Seal_of_Congress_Cropped.png in Resources */,
 				CEDA15BE1B9995D60065ACDD /* C001074.jpg in Resources */,
 				CEDA119B1B99946E0065ACDD /* Seal_of_Senate_Cropped.png in Resources */,
+				CE968D041BE14E28005CF1F0 /* arrowDetailIcon.png in Resources */,
 				CEDA17A91B9995D60065ACDD /* R000122.jpg in Resources */,
 				CEDA17F11B9995D60065ACDD /* S000770.jpg in Resources */,
 				CEDA16661B9995D60065ACDD /* H000206.jpg in Resources */,
