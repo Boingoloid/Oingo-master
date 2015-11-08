@@ -1725,7 +1725,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="YJr-tv-HwU" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2862" y="-203"/>
+            <point key="canvasLocation" x="2804" y="-111"/>
         </scene>
         <!--Log In View Controller-->
         <scene sceneID="HtI-5Z-e1F">
@@ -1904,7 +1904,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="C2Y-Sh-7XT" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3755" y="-394"/>
+            <point key="canvasLocation" x="4201" y="-213"/>
         </scene>
         <!--Settings-->
         <scene sceneID="wMo-Cc-daG">
@@ -2547,7 +2547,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="hPf-8l-HR7" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4265" y="286"/>
+            <point key="canvasLocation" x="4193" y="486"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="Jvj-7u-IbA">
@@ -2744,6 +2744,6 @@
         <image name="tweetButtonIconGray.png" width="259" height="259"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="Xre-gW-P64"/>
+        <segue reference="ncd-tE-Df4"/>
     </inferredMetricsTieBreakers>
 </document>

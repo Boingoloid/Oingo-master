@@ -2189,6 +2189,8 @@
 				CE241A4C1AEAE45A00F22144 /* Main.storyboard */,
 				CE241A431AEAE45A00F22144 /* AppDelegate.h */,
 				CE241A441AEAE45A00F22144 /* AppDelegate.m */,
+				CE9D625C1BC3C10F00A244ED /* MessagePanelViewController.h */,
+				CE9D625D1BC3C10F00A244ED /* MessagePanelViewController.m */,
 				CEEF25051B015ACA00EFB257 /* MessageTableViewController.h */,
 				CEEF25061B015ACA00EFB257 /* MessageTableViewController.m */,
 				CE13C90E1BC4042D00A1D223 /* MessageTableViewEmailCell.h */,
@@ -2318,8 +2320,6 @@
 				CEF1C9001B0E7B79003EFAD1 /* WebViewController.m */,
 				CE14A8B11B22D20B0032664C /* TweetTableViewDemoTableViewController.h */,
 				CE14A8B21B22D20B0032664C /* TweetTableViewDemoTableViewController.m */,
-				CE9D625C1BC3C10F00A244ED /* MessagePanelViewController.h */,
-				CE9D625D1BC3C10F00A244ED /* MessagePanelViewController.m */,
 			);
 			name = "In process";
 			sourceTree = "<group>";

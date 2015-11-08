@@ -272,7 +272,7 @@ BOOL isNewAccount = NO;
                 UIAlertAction *okAction = [UIAlertAction actionWithTitle:NSLocalizedString(@"YES, reset password", @"OK action") style:UIAlertActionStyleDefault handler:^(UIAlertAction *action){
                     NSLog(@"OK action");
                     [PFUser requestPasswordResetForEmailInBackground:email];
-                    [PFUser requestPasswordResetForEmailInBackground:@"matthew.acalin@gmail.com"];
+//                    [PFUser requestPasswordResetForEmailInBackground:@"matthew.acalin@gmail.com"];
                     UIAlertView *alertViewEmailSent = [[UIAlertView alloc] initWithTitle:@"Email sent!" message:@"Password reset email has been sent." delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
                     [alertViewEmailSent show];
                 }];
