@@ -7,6 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
+#import <UIKit/UIKit.h>
 
 @interface MessageItem : NSObject
 
@@ -21,6 +22,7 @@
 @property (nonatomic, retain) NSString *firstName;
 @property (nonatomic, retain) NSString *isGetLocationCell;
 @property (nonatomic, retain) NSString *contactID;
+@property (nonatomic, retain) UIImage *messageImageDownload;
 
 //Success fields
 @property (nonatomic) bool isTweetSent;

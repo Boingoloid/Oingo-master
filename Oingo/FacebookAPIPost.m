@@ -86,7 +86,6 @@
 
 -(void) publishFBPostWithParameters:(NSDictionary*)parameters{
 
-    
         [[[FBSDKGraphRequest alloc]
           initWithGraphPath:@"me/feed"
           parameters: parameters

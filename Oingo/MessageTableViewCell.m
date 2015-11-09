@@ -83,7 +83,7 @@
         self.emailButton.hidden = YES;
     }
 
-    NSLog(@"messageItem email value:%@",[self.messageItem valueForKey:@"email"]);
+
 //        //Touch Fields
 //        self.tweetTouchCaptureImageView.hidden = NO;
 //        self.emailTouchCaptureImageView.hidden = NO;
@@ -142,8 +142,6 @@
         self.messageImage.layer.cornerRadius = 3.0;
         self.messageImage.clipsToBounds = YES;
     
-//        [self.contentView layoutSubviews];
-//        [self.contentView setNeedsDisplay];
     
 //    }
 }

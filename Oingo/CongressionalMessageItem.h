@@ -13,6 +13,7 @@
 
 
 @property (nonatomic, retain) NSString *messageImageString;
+@property (nonatomic, retain) UIImage *messageImageDownload;
 @property (nonatomic, retain) NSString *bioguide_id;
 @property (nonatomic, retain) NSString *contactID;
 //@property (nonatomic) NSTimeInterval date;

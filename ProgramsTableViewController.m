@@ -16,6 +16,7 @@
 
 
 @interface ProgramsTableViewController ()
+- (IBAction)uploadPhotos:(id)sender;
 
 
 @end
@@ -25,6 +26,12 @@
 Program *program;
 BOOL isFinished = NO;
 NSUInteger numberOfRows = 0;
+
+
+
+    
+    
+    
 
 
 -(void)viewWillAppear:(BOOL)animated {
@@ -64,6 +71,8 @@ NSUInteger numberOfRows = 0;
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
 
 }
+
+
 
 
 - (void)didReceiveMemoryWarning {
@@ -146,6 +155,47 @@ NSUInteger numberOfRows = 0;
 */
 
 
+#pragma mark - Data Entry
+// Method for uploading congress photos to Parse.
+// Add the below method to a button and run.
+- (IBAction)uploadPhotos:(id)sender {
+    
+    NSLog(@"hey");
+    
+    NSFileManager *fileManager = [NSFileManager defaultManager];
+    NSURL *bundleURL = [[NSBundle mainBundle] bundleURL];
+    NSArray *contents = [fileManager contentsOfDirectoryAtURL:bundleURL
+                                   includingPropertiesForKeys:@[]
+                                                      options:NSDirectoryEnumerationSkipsHiddenFiles
+                                                        error:nil];
+    
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"pathExtension ENDSWITH 'jpg'"];
+    for (NSString *path in [contents filteredArrayUsingPredicate:predicate]) {
+        NSLog(@"path name:%@",path);
+        
+        NSString *theFileName = [path lastPathComponent];
+        NSString *bioguideID = [[path lastPathComponent] stringByDeletingPathExtension];
+        
+        NSLog(@"the file name:%@",theFileName);
+        NSLog(@"bioguide:%@",bioguideID);
+        
+        UIImage *imageFile = [UIImage imageNamed:theFileName];
+        NSLog(@"image:%@",imageFile);
+        
+        NSData *imageData = UIImageJPEGRepresentation(imageFile, 1.0f);
+        PFFile *imageFileParse = [PFFile fileWithName:theFileName data:imageData];
+        
+        PFObject *imageObject = [PFObject objectWithClassName:@"CongressImages"];
+        imageObject[@"bioguideID"] = bioguideID;
+        imageObject[@"imageName"] = theFileName;
+        imageObject[@"imageFile"] = imageFileParse;
+        [imageObject saveInBackground];
+        
+        [NSThread sleepForTimeInterval:1];
+    }
+}
+
+
 #pragma mark - Navigation
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
@@ -156,5 +206,6 @@ NSUInteger numberOfRows = 0;
         viewController.selectedProgram = self.selectedProgram;
     }
 }
+
 
 @end

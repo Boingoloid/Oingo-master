@@ -58,8 +58,8 @@
 
     }
     NSString *localRepEmailsString = [localRepEmails componentsJoinedByString:@","];
-    NSLog(@"list of rep emails:%@",localRepEmails);
-    NSLog(@"menulist:%@",self.menuList);
+    //NSLog(@"list of rep emails:%@",localRepEmails);
+    //NSLog(@"menulist:%@",self.menuList);
     
     
     PFUser *currentUser = [PFUser currentUser];

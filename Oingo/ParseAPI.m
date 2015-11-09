@@ -215,9 +215,10 @@ BOOL isLocationInfoAvailable = NO;
 //    NSLog(@"Prep sections triggered, here is the self.menulist %@",[self.menuList lastObject]);
     
     [self separateMessagesFromContacts:messageList]; //create self.messageList and self.contactList and other
-    [self createMenuList]; //creates self.menuList - these are th   e grouopings for sections
+    [self createMenuList]; //creates self.menuList - these are the grouopings for sections
     
     self.menuList = [self sortMessageListWithContacts:self.menuList];
+    self.menuList = [self moveLocalRepsToTop:self.menuList];
     
         if(self.sections){
             [self.sections removeAllObjects];
@@ -394,6 +395,53 @@ BOOL isLocationInfoAvailable = NO;
         return (NSMutableArray*)messageListWithContactsSorted;
     }
 }
+
+-(NSMutableArray*)moveLocalRepsToTop:(NSMutableArray*)messageListWithContactsSorted {
+    
+    
+    NSMutableArray *localRepArray = [[NSMutableArray alloc]init];
+    NSMutableArray *nonLocalRepArray = [[NSMutableArray alloc]init];
+
+    
+    for (NSDictionary *dictionary in messageListWithContactsSorted) {
+
+        NSString *category = [dictionary valueForKey:@"messageCategory"];
+        
+        if([category isEqualToString:@"Local Representative"]){
+            [localRepArray addObject:dictionary];
+        } else {
+            [nonLocalRepArray addObject:dictionary];
+        }
+    }
+    
+    NSMutableArray *messageListWithRepsFirst = [[NSMutableArray alloc]initWithCapacity:20];
+
+    
+    [messageListWithRepsFirst addObjectsFromArray:localRepArray];
+    [messageListWithRepsFirst addObjectsFromArray:nonLocalRepArray];
+    
+    return messageListWithRepsFirst;
+    
+    
+    
+//    for(NSMutableDictionary *item in messageListWithContactsSorted){
+//        NSString *category = [item valueForKey:@"messageCategory"];
+//        if([category isEqualToString:@"Local Representative"]){
+//
+//                        NSMutableArray *reorderArray = [[NSMutableDictionary alloc]init];
+//            NSMutableDictionary *reorderDict = [[NSMutableDictionary alloc]init];
+//
+//            reorderDict = item;
+//            [messageListWithContactsSorted insertObject:reorderDict atIndex:0];
+//            [messageListWithContactsSorted removeObject:item];
+//        } else {
+//            //do nothing
+//        }
+//    }
+//    NSLog(@"messageListWithContactsSorted:%@",messageListWithContactsSorted);
+//    return (NSMutableArray*)messageListWithContactsSorted;
+}
+
 
 # pragma mark - Deep Copy Helpers
 

@@ -161,7 +161,8 @@
             congressionalMessageItem.title = [NSString stringWithFormat:@"Rep, %@ / d:%@",congressionalMessageItem.state,congressionalMessageItem.district];
             congressionalMessageItem.messageImageString = [NSString stringWithFormat:@"Seal_of_Congress_Cropped.png"];
         }
-
+        
+        
         
         congressionalMessageItem.inOffice = [congresspersonObject valueForKey:@"in_office"];
         congressionalMessageItem.gender = [congresspersonObject valueForKey:@"gender"];
@@ -183,8 +184,11 @@
         congressionalMessageItem.isCollapsed = 0;
 
         
+//        congressionalMessageItem.messageImageDownload = nil;
+        
         //now I have message item with all the data.  add object to the array
         [congressMessageList addObject:congressionalMessageItem];
+        
     }
     //now add the two arrays together.
     NSMutableArray *newMessageList = (NSMutableArray*)[messageList arrayByAddingObjectsFromArray:congressMessageList];

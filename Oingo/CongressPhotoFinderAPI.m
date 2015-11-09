@@ -15,20 +15,11 @@
 
 @implementation CongressPhotoFinderAPI
 
-
--(void) getPhotos:(NSArray*)congressMessageList {
-    NSLog(@"CongressPhotoFinderAPI is being called");
-    
-    for(NSMutableDictionary *congresspersonObject in congressMessageList){
+-(void)addImagesToMenuList:objects{
+    NSLog(@"objects before image add:%@",objects);
+    for (PFObject *object in objects) {
+        NSString *bioguideID = [object valueForKey:@"bioguideID"];
         
-        // Grab bioguideID
-        NSString *bioguideID = [[NSString alloc]init];
-        bioguideID = [congresspersonObject valueForKey:@"bioguide_id"];
-        
-        // Build imageString from the bioguideID
-        NSString *imageString =[[NSString alloc]init];
-        imageString = [NSString stringWithFormat:@"%@.jpg",bioguideID];
-    
         // Look up index of current congressPerson in menuList
         NSUInteger index = [self.messageTableViewController.menuList indexOfObjectPassingTest:
                             ^BOOL(NSDictionary *dict, NSUInteger idx, BOOL *stop) {
@@ -36,24 +27,93 @@
                             }];
         
         if(index == NSNotFound){
-            // Do nothing, load no photos
+            // Do nothing, load no photo
+            NSLog(@"did nothing");
         } else {
+            if([object objectForKey:@"imageFile"]) {
             
+            //add image to menuList
+            PFFile *theImage = [object objectForKey:@"imageFile"];
+            NSData *imageData = [theImage getData];
+            UIImage *image = [UIImage imageWithData:imageData];
+            [[self.messageTableViewController.menuList objectAtIndex:index] setValue:image forKey:@"messageImageDownload"];
             // Load the photo only if file exists in project
-            if([UIImage imageNamed:imageString]) {
-                [[self.messageTableViewController.menuList objectAtIndex:index] setValue:imageString forKey:@"messageImageString"];
+            NSLog(@"check:%@",[self.messageTableViewController.menuList objectAtIndex:index]);
             } else {
-                //Do nothing, leave image string as is so dummy icons will load
+            //Do nothing, leave image string as is so dummy icons will load
             }
         }
     }
+    [self.messageTableViewController.view setNeedsDisplay];
+    [self.messageTableViewController.tableView reloadData];
+    NSLog(@"reloading data from Congress Photo Finder");
     
-    dispatch_async(dispatch_get_main_queue(),^{
-        [self.messageTableViewController.view setNeedsDisplay];
-        [self.messageTableViewController.tableView reloadData];
-        NSLog(@"reloading data from Congress Photo Finder");
-    });
+}
 
+
+-(void) getPhotos:(NSArray*)congressMessageList {
+    NSLog(@"CongressPhotoFinderAPI is being called");
+    
+    NSMutableArray *bioguideArray = [congressMessageList valueForKey:@"bioguide_id"];
+
+    PFQuery *query = [PFQuery queryWithClassName:@"CongressImages"];
+    [query whereKey:@"bioguideID" containedIn:bioguideArray];
+
+    [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
+        if (error) {
+            // Log details of the failure
+            NSLog(@"Error: %@ %@", error, [error userInfo]);
+        } else {
+            
+            NSLog(@"results of congress query:%@",objects);
+            dispatch_async(dispatch_get_main_queue(),^{
+            
+            [self addImagesToMenuList:objects];
+            
+            
+            });
+        }
+    }];
+
+
+    
+    
+//    for(NSMutableDictionary *congresspersonObject in congressMessageList){
+//        
+//        // Grab bioguideID
+//        NSString *bioguideID = [[NSString alloc]init];
+//        bioguideID = [congresspersonObject valueForKey:@"bioguide_id"];
+//        
+//
+//        // Build imageString from the bioguideID
+//        NSString *imageString =[[NSString alloc]init];
+//        imageString = [NSString stringWithFormat:@"%@.jpg",bioguideID];
+//    
+//        // Look up index of current congressPerson in menuList
+//        NSUInteger index = [self.messageTableViewController.menuList indexOfObjectPassingTest:
+//                            ^BOOL(NSDictionary *dict, NSUInteger idx, BOOL *stop) {
+//                                return [[dict valueForKey:@"bioguide_id"] isEqual:bioguideID];
+//                            }];
+//        
+//        if(index == NSNotFound){
+//            // Do nothing, load no photos
+//        } else {
+//            
+//            // Load the photo only if file exists in project
+//            if([UIImage imageNamed:imageString]) {
+//                [[self.messageTableViewController.menuList objectAtIndex:index] setValue:imageString forKey:@"messageImageString"];
+//            } else {
+//                //Do nothing, leave image string as is so dummy icons will load
+//            }
+//        }
+//    }
+//    
+//    dispatch_async(dispatch_get_main_queue(),^{
+//        [self.messageTableViewController.view setNeedsDisplay];
+//        [self.messageTableViewController.tableView reloadData];
+//        NSLog(@"reloading data from Congress Photo Finder");
+//    });
+//
 
 }
 

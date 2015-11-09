@@ -122,9 +122,15 @@
         self.stateName = [self.congressionalMessageItem valueForKey:@"stateName"];
         self.state = [self.congressionalMessageItem valueForKey:@"state"];
         self.leadershipRole = [self.congressionalMessageItem valueForKey:@"twitterID"];
-        
+    
+        // Set image, loads image if available
         NSString *imageString = [self.congressionalMessageItem valueForKey:@"messageImageString"];
         self.messageImage.image = [UIImage imageNamed:imageString];
+        if([congressionalMessageItem valueForKey:@"messageImageDownload"]!=nil){
+            self.messageImage.image = [congressionalMessageItem valueForKey:@"messageImageDownload"];
+        }
+    
+        // Image formatting
         self.messageImage.layer.borderWidth = .5;
         self.messageImage.layer.borderColor = [[UIColor blackColor] CGColor];
         self.messageImage.clipsToBounds = YES;
