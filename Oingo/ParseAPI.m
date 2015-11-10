@@ -421,25 +421,6 @@ BOOL isLocationInfoAvailable = NO;
     [messageListWithRepsFirst addObjectsFromArray:nonLocalRepArray];
     
     return messageListWithRepsFirst;
-    
-    
-    
-//    for(NSMutableDictionary *item in messageListWithContactsSorted){
-//        NSString *category = [item valueForKey:@"messageCategory"];
-//        if([category isEqualToString:@"Local Representative"]){
-//
-//                        NSMutableArray *reorderArray = [[NSMutableDictionary alloc]init];
-//            NSMutableDictionary *reorderDict = [[NSMutableDictionary alloc]init];
-//
-//            reorderDict = item;
-//            [messageListWithContactsSorted insertObject:reorderDict atIndex:0];
-//            [messageListWithContactsSorted removeObject:item];
-//        } else {
-//            //do nothing
-//        }
-//    }
-//    NSLog(@"messageListWithContactsSorted:%@",messageListWithContactsSorted);
-//    return (NSMutableArray*)messageListWithContactsSorted;
 }
 
 

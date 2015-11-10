@@ -17,6 +17,7 @@
 @property (weak, nonatomic) IBOutlet UIButton *loadMessageButton;
 @property (weak, nonatomic) IBOutlet UISwitch *includeLinkToggle;
 @property (weak, nonatomic) IBOutlet UIButton *signInButton;
+@property (weak, nonatomic) IBOutlet UILabel *charCountLabel;
 
 
 

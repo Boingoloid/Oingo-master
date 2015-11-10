@@ -14,7 +14,7 @@
 #import <Parse/Parse.h>
 #import "SignUpViewController.h"
 
-@interface MessagePanelViewController () <UIGestureRecognizerDelegate>
+@interface MessagePanelViewController () <UIGestureRecognizerDelegate,UITextViewDelegate>
 
 @end
 
@@ -44,6 +44,8 @@
     self.messageTextView.layer.backgroundColor = [[UIColor colorWithRed:243/255.0 green:243/255.0 blue:243/255.0 alpha:1] CGColor];
     self.messageTextView.clipsToBounds = YES;
     self.messageTextView.layer.cornerRadius = 3;
+    [self.messageTextView setKeyboardType:UIKeyboardTypeTwitter];
+    self.messageTextView.delegate = self;
  
     
     // Format Cancel Button
@@ -69,7 +71,12 @@
     [self.linkToContent scrollRangeToVisible:NSMakeRange(0, 0)];
     
     //    [self registerForKeyboardNotifications];
+    
+//    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(textViewTextDidChangeNotification:) name:UITextViewTextDidChangeNotification object:self.messageTextView];
+
 }
+
+
 
 //- (void)registerForKeyboardNotifications
 //{
@@ -119,6 +126,11 @@
 //    self.scrollView.scrollIndicatorInsets = contentInsets;
 //}
 
+//-(void)viewWillDisappear:(BOOL)animated{
+//    [[NSNotificationCenter defaultCenter] removeObserver:self name:UITextViewTextDidChangeNotification object:nil];
+//
+//}
+
 - (void)viewWillTransitionToSize:(CGSize)size withTransitionCoordinator:(id<UIViewControllerTransitionCoordinator>)coordinator {
     [self.view setNeedsDisplay];
     [self.view layoutIfNeeded];
@@ -128,13 +140,37 @@
     [super viewWillTransitionToSize:size withTransitionCoordinator:coordinator];
 }
 
+- (void)textViewDidChange:(UITextView *)textView {
+    // Update the character count
+    long characterCount = [[textView text] length];
+    [self.charCountLabel setText:[NSString stringWithFormat:@"%ld", characterCount]];
+    
+    // Check if the count is over the limit
+    if(characterCount > 140) {
+        // Change the color to red
+        [self.charCountLabel setTextColor:[UIColor redColor]];
+    }
+    else if(characterCount < 140) {
+        // Change the color to white
+        [self.charCountLabel setTextColor:[UIColor whiteColor]];
+    }
+    else {
+        // Set normal color to white
+        [self.charCountLabel setTextColor:[UIColor whiteColor]];
+    }
+}
+
+
 
 -(void)viewWillAppear:(BOOL)animated{
+
+    //This button covers the entire text view. Sends to sign in if not a user.
     if([PFUser currentUser]){
         self.signInButton.hidden = YES;
     } else {
         self.signInButton.hidden = NO;
     }
+    [self textViewDidChange:self.messageTextView];
 }
 
 - (void)didReceiveMemoryWarning {

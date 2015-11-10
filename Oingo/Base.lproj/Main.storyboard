@@ -2468,6 +2468,18 @@
                                     <action selector="sendToSignIn:" destination="m9r-j1-HpL" eventType="touchUpInside" id="nGc-DH-jQj"/>
                                 </connections>
                             </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="count" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KjK-g2-zrB">
+                                <rect key="frame" x="286" y="212" width="37" height="17"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="16" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8Z3-q3-SA3">
+                                <rect key="frame" x="295" y="231" width="18" height="20"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" translatesAutoresizingMaskIntoConstraints="NO" id="pAN-0m-dWd">
                                 <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                                 <connections>
@@ -2477,8 +2489,10 @@
                         </subviews>
                         <color key="backgroundColor" red="0.90196079019999997" green="0.90196079019999997" blue="0.90196079019999997" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
+                            <constraint firstItem="8Z3-q3-SA3" firstAttribute="top" secondItem="KjK-g2-zrB" secondAttribute="bottom" constant="2" id="0TC-zk-0YU"/>
                             <constraint firstItem="D62-Sd-JhU" firstAttribute="leading" secondItem="Ull-Cr-wMC" secondAttribute="leading" id="1Vo-5u-olu"/>
                             <constraint firstItem="MeP-l2-3yo" firstAttribute="trailing" secondItem="D62-Sd-JhU" secondAttribute="trailing" id="1ek-vT-co2"/>
+                            <constraint firstItem="MeP-l2-3yo" firstAttribute="top" secondItem="8Z3-q3-SA3" secondAttribute="bottom" constant="5" id="2Xl-2t-8Uj"/>
                             <constraint firstItem="bmf-f5-k4i" firstAttribute="trailing" secondItem="D62-Sd-JhU" secondAttribute="trailing" id="3Pu-Ja-y1P"/>
                             <constraint firstAttribute="leadingMargin" secondItem="Un9-eE-1ok" secondAttribute="leading" id="5ae-NF-mQ3"/>
                             <constraint firstItem="D62-Sd-JhU" firstAttribute="leading" secondItem="bvE-DM-J4j" secondAttribute="leadingMargin" constant="4" id="6KC-9q-fog"/>
@@ -2495,6 +2509,8 @@
                             <constraint firstItem="bmf-f5-k4i" firstAttribute="top" secondItem="D62-Sd-JhU" secondAttribute="bottom" id="Ogt-mW-aWB"/>
                             <constraint firstItem="ycs-j9-bIM" firstAttribute="top" secondItem="mcM-lW-OGb" secondAttribute="bottom" constant="17" id="QQY-m6-ViQ"/>
                             <constraint firstItem="Gk2-zK-fEd" firstAttribute="leading" secondItem="bjz-WX-bzz" secondAttribute="trailing" constant="33" id="UcP-0g-G1O"/>
+                            <constraint firstItem="8Z3-q3-SA3" firstAttribute="centerX" secondItem="MeP-l2-3yo" secondAttribute="centerX" id="Wms-U2-PrI"/>
+                            <constraint firstItem="KjK-g2-zrB" firstAttribute="centerX" secondItem="8Z3-q3-SA3" secondAttribute="centerX" id="Yu9-UY-AVy"/>
                             <constraint firstItem="Un9-eE-1ok" firstAttribute="leading" secondItem="bvE-DM-J4j" secondAttribute="leadingMargin" constant="-6" id="ZTT-bx-9Rf"/>
                             <constraint firstItem="D62-Sd-JhU" firstAttribute="top" secondItem="4Eh-IQ-sv5" secondAttribute="bottom" constant="50" id="aK0-eA-baf"/>
                             <constraint firstItem="4Eh-IQ-sv5" firstAttribute="centerX" secondItem="bvE-DM-J4j" secondAttribute="centerX" constant="-214" id="aNN-Vm-thL"/>
@@ -2532,6 +2548,7 @@
                     <navigationItem key="navigationItem" title="Message Panel" id="R35-6Q-Hug"/>
                     <connections>
                         <outlet property="cancelButton" destination="Ull-Cr-wMC" id="V7T-xZ-VID"/>
+                        <outlet property="charCountLabel" destination="8Z3-q3-SA3" id="k1b-gp-B1k"/>
                         <outlet property="includeLinkToggle" destination="Gk2-zK-fEd" id="nxV-Ce-UYj"/>
                         <outlet property="linkToContent" destination="bjz-WX-bzz" id="cX5-2o-ogc"/>
                         <outlet property="loadMessageButton" destination="bmf-f5-k4i" id="LB3-RO-EFU"/>
