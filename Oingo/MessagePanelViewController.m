@@ -14,7 +14,7 @@
 #import <Parse/Parse.h>
 #import "SignUpViewController.h"
 
-@interface MessagePanelViewController () <UIGestureRecognizerDelegate,UITextViewDelegate>
+@interface MessagePanelViewController () <UIGestureRecognizerDelegate,UITextViewDelegate,UITableViewDataSource, UITableViewDelegate>
 
 @end
 
@@ -24,12 +24,44 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     
+    self.tableView.delegate = self;
+    self.tableView.dataSource = self;
+    
+    PFUser *currentUser = [PFUser currentUser];
+    
+    if(!currentUser) {
+        NSLog(@"No user signed in");
+    } else {
+        
+        NSString *selectedSegmentID = [self.messageTableViewController.selectedSegment valueForKey:@"segmentID"];
+        NSString *userObjectID = currentUser.objectId;
+        
+        
+        //get message data for segment menu
+        PFQuery *query = [PFQuery queryWithClassName:@"sentMessages"];
+        [query whereKey:@"segmentID" equalTo:selectedSegmentID];
+        [query whereKey:@"messageType" equalTo:@"twitter"];
+        [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
+            if (!error) {
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    self.sentMessagesForSegment = objects;
+                    NSLog(@"loading data from sentMessagesList%@:",self.sentMessagesForSegment);
+                    [self.tableView reloadData];
+                });
+            } else {
+                NSLog(@"Error: %@ %@", error, [error userInfo]);
+            }
+        }];
+    }
+
+    
+    
+    
     // Assign Values
     self.messageTextView.text = [[self.menuList objectAtIndex:[self.originRowIndex intValue]] valueForKey:@"messageText"];
     
     [self.includeLinkToggle setOn:YES animated:NO];
 
-    
     NSNumber *includeLinkNumber = [self.selectedMessageDictionary objectForKey:@"isLinkIncluded"];
     bool includeLinkBool = [includeLinkNumber boolValue];
     
@@ -160,8 +192,6 @@
     }
 }
 
-
-
 -(void)viewWillAppear:(BOOL)animated{
 
     //This button covers the entire text view. Sends to sign in if not a user.
@@ -242,13 +272,59 @@
         [[self.messageTableViewController.menuList objectAtIndex:[self.originRowIndex intValue]] setValue:@NO  forKey:@"isLinkIncluded"];
         NSLog(@"Link will not be included");
     }
-        
-
-    
-    
-    
 }
 - (IBAction)sendToSignIn:(id)sender {
     [self pushToSignIn];
 }
+
+
+
+
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
+    return 1;
+}
+
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+    // Number of rows is the number of time zones in the region for the specified section.
+
+    return [self.sentMessagesForSegment count];
+}
+
+- (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
+    // The header for the section is the region name -- get this from the region at the section index.
+
+    return [NSString stringWithFormat:@"Latest Tweets in (%@)",[self.selectedMessageDictionary valueForKey:@"messageCategory"]];
+}
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+    NSDictionary *sentMessage = (NSDictionary*)[self.sentMessagesForSegment objectAtIndex:indexPath.row];
+    
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"Cell" forIndexPath:indexPath];
+    // Configure the cell...
+    if (cell == nil){
+        NSLog(@"cell was nil");
+        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"Cell"];
+        
+    }
+    NSLog(@"sent message to put in this cell:%@",[sentMessage valueForKey:@"messageText"]);
+    cell.textLabel.text = [sentMessage valueForKey:@"messageText"];
+    
+    //    NSLog(@"messageOption calling config cell%@",messageOption);
+    //    [cell configMessageOptionCell:(NSDictionary*)messageOption];
+    [cell layoutIfNeeded];
+    
+    //    NSString *messageText = [[self.messageOptionsListFiltered objectAtIndex:[indexPath row]] valueForKey:@"messageText"];
+    //    cell.textLabel.text = messageText;
+    //    [cell.textLabel sizeToFit];
+    //    cell.textLabel.preferredMaxLayoutWidth = self.view.bounds.size.width;
+    return cell;
+}
+
+
+
+
+
+
+
+
 @end

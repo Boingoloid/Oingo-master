@@ -126,7 +126,7 @@
         // Set image, loads image if available
         NSString *imageString = [self.congressionalMessageItem valueForKey:@"messageImageString"];
         self.messageImage.image = [UIImage imageNamed:imageString];
-        if([congressionalMessageItem valueForKey:@"messageImageDownload"]!=nil){
+        if([congressionalMessageItem valueForKey:@"messageImageDownload"]){
             self.messageImage.image = [congressionalMessageItem valueForKey:@"messageImageDownload"];
         }
     

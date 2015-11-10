@@ -84,6 +84,8 @@
         
     }
     
+    
+    
 //    NSLog(@"messageOption calling config cell%@",messageOption);
     [cell configMessageOptionCell:(NSDictionary*)messageOption];
     [cell layoutIfNeeded];
