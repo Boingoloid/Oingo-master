@@ -137,6 +137,7 @@
     PFUser *currentUser = [PFUser currentUser];
     PFObject *sentMessageItem = [PFObject objectWithClassName:@"sentMessages"];
     [sentMessageItem setObject:@"facebookSegmentOnly" forKey:@"messageType"];
+    [sentMessageItem setObject:@"segment only" forKey:@"messageCategory"];
     [sentMessageItem setObject:[self.selectedSegment valueForKey:@"segmentID"] forKey:@"segmentID"];
     [sentMessageItem setObject:[currentUser valueForKey:@"username"] forKey:@"username"];
     NSString *userObjectID = currentUser.objectId;

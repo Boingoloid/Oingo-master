@@ -94,6 +94,7 @@ bool isUserLinkedToTwitter;
     NSString *twitterId = [self.selectedContact valueForKey:@"twitterID"];
     
     NSString *tweetText = [NSString stringWithFormat:@"@%@, %@",twitterId,self.messageText];
+    self.tweetText = tweetText;
     NSURL *tweetURL = [NSURL URLWithString:[self.selectedSegment valueForKey:@"linkToContent"]];
     PFFile *theImage = [self.selectedSegment valueForKey:@"segmentImage"];
     NSData *imageData = [theImage getData];
@@ -130,12 +131,12 @@ bool isUserLinkedToTwitter;
     PFUser *currentUser = [PFUser currentUser];
     PFObject *sentMessageItem = [PFObject objectWithClassName:@"sentMessages"];
     [sentMessageItem setObject:@"twitterSegmentOnly" forKey:@"messageType"];
+    [sentMessageItem setObject:@"segment only" forKey:@"messageCategory"];
     [sentMessageItem setObject:[self.selectedSegment valueForKey:@"segmentID"] forKey:@"segmentID"];
     [sentMessageItem setObject:[currentUser valueForKey:@"username"] forKey:@"username"];
     NSString *userObjectID = currentUser.objectId;
     [sentMessageItem setObject:userObjectID forKey:@"userObjectID"];
-    
-    
+
     [sentMessageItem saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) { //save sent message to parse
         if(error){
             NSLog(@"error, message not saved");
@@ -145,7 +146,6 @@ bool isUserLinkedToTwitter;
             [self.messageTableViewController viewDidLoad];
         }
     }];
-    
 }
 
 
@@ -156,6 +156,7 @@ bool isUserLinkedToTwitter;
     
     PFObject *sentMessageItem = [PFObject objectWithClassName:@"sentMessages"];
     [sentMessageItem setObject:self.messageText forKey:@"messageText"];
+    [sentMessageItem setObject:[self.selectedContact valueForKey:@"messageCategory"] forKey:@"messageCategory"];
     [sentMessageItem setObject:@"twitter" forKey:@"messageType"];
     [sentMessageItem setObject:[self.selectedSegment valueForKey:@"segmentID"] forKey:@"segmentID"];
     [sentMessageItem setObject:[currentUser valueForKey:@"username"] forKey:@"username"];

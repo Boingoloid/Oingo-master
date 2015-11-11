@@ -136,6 +136,7 @@
             [sentMessageItem setObject:self.emailBody forKey:@"messageText"];
             [sentMessageItem setObject:self.emailRecipients forKey:@"emailRecipients"];
             [sentMessageItem setObject:@"Long Form Email" forKey:@"messageType"];
+            [sentMessageItem setObject:@"Long Form Email" forKey:@"messageCategory"];
             [sentMessageItem setObject:[self.selectedSegment valueForKey:@"segmentID"] forKey:@"segmentID"];
             [sentMessageItem setObject:[currentUser valueForKey:@"username"] forKey:@"username"];
             NSString *userObjectID = currentUser.objectId;

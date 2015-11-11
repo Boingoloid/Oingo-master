@@ -163,6 +163,7 @@
             PFObject *sentMessageItem = [PFObject objectWithClassName:@"sentMessages"];
             [sentMessageItem setObject:self.sentEmailBody forKey:@"messageText"];
             [sentMessageItem setObject:@"email" forKey:@"messageType"];
+                [sentMessageItem setObject:[self.selectedContact valueForKey:@"messageCategory"] forKey:@"messageCategory"];
             [sentMessageItem setObject:[self.selectedSegment valueForKey:@"segmentID"] forKey:@"segmentID"];
             [sentMessageItem setObject:[currentUser valueForKey:@"username"] forKey:@"username"];
             NSString *userObjectID = currentUser.objectId;

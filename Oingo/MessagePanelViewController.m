@@ -34,13 +34,14 @@
     } else {
         
         NSString *selectedSegmentID = [self.messageTableViewController.selectedSegment valueForKey:@"segmentID"];
-        NSString *userObjectID = currentUser.objectId;
-        
+        NSString *category = [self.selectedMessageDictionary valueForKey:@"messageCategory"];
+
         
         //get message data for segment menu
         PFQuery *query = [PFQuery queryWithClassName:@"sentMessages"];
         [query whereKey:@"segmentID" equalTo:selectedSegmentID];
         [query whereKey:@"messageType" equalTo:@"twitter"];
+        [query whereKey:@"messageCategory" equalTo:category];
         [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
             if (!error) {
                 dispatch_async(dispatch_get_main_queue(), ^{
@@ -321,7 +322,13 @@
 }
 
 
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
 
+    [self.tableView deselectRowAtIndexPath:indexPath animated:YES];
+    UITableViewCell *cell = (UITableViewCell *)[tableView cellForRowAtIndexPath:indexPath];
+    self.messageTextView.text =   cell.textLabel.text;
+
+}
 
 
 

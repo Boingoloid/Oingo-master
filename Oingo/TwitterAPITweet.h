@@ -17,6 +17,7 @@
 @property (nonatomic) Segment *selectedSegment;
 @property (nonatomic) Program *selectedProgram;
 @property (nonatomic) NSString *messageText;
+@property (nonatomic) NSString *tweetText;
 @property (nonatomic) NSArray *menuList;
 @property (nonatomic) NSDictionary *selectedContact;
 @property (nonatomic) NSDictionary *selectedMessageDictionary;
