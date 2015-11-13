@@ -50,10 +50,11 @@
 }
 
 -(void)checkTwitterShareForContacts {
+        NSLog(@"self.sentMessagefor segment:%@",self.sentMessagesForSegment);
     
     for (NSDictionary *dictionary in self.sentMessagesForSegment) {
         if ([[dictionary valueForKey:@"messageType"] isEqualToString:@"twitter"]){
-
+            //NSLog(@"sent messages bog dictionary twitter:%@",dictionary);
             // if twitter I need to grab contact id and flag twitter icon on cell in menulist.
             NSString *contactID = [dictionary valueForKey:@"contactID"];
             NSArray *menuList = self.messageTableViewController.menuList;

@@ -14,7 +14,7 @@
 #import <Parse/Parse.h>
 #import "SignUpViewController.h"
 
-@interface MessagePanelViewController () <UIGestureRecognizerDelegate,UITextViewDelegate,UITableViewDataSource, UITableViewDelegate>
+@interface MessagePanelViewController () <UIGestureRecognizerDelegate,UITextViewDelegate,UITableViewDataSource, UITableViewDelegate, UITextInputDelegate>
 
 @end
 
@@ -27,12 +27,8 @@
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
     
-    PFUser *currentUser = [PFUser currentUser];
+//    PFUser *currentUser = [PFUser currentUser];
     
-    if(!currentUser) {
-        NSLog(@"No user signed in");
-    } else {
-        
         NSString *selectedSegmentID = [self.messageTableViewController.selectedSegment valueForKey:@"segmentID"];
         NSString *category = [self.selectedMessageDictionary valueForKey:@"messageCategory"];
 
@@ -46,26 +42,38 @@
             if (!error) {
                 dispatch_async(dispatch_get_main_queue(), ^{
                     self.sentMessagesForSegment = objects;
-                    NSLog(@"loading data from sentMessagesList%@:",self.sentMessagesForSegment);
+                    //NSLog(@"loading data from sentMessagesList%@:",self.sentMessagesForSegment);
                     [self.tableView reloadData];
+                    
+                    //get message data for segment menu
+                    PFQuery *queryHashtags = [PFQuery queryWithClassName:@"Hashtags"];
+                    [queryHashtags whereKey:@"segmentID" equalTo:selectedSegmentID];
+                    //[query whereKey:@"messageType" equalTo:@"twitter"];
+                    //[query whereKey:@"messageCategory" equalTo:category];
+                    [queryHashtags findObjectsInBackgroundWithBlock:^(NSArray *objectsHash, NSError *error) {
+                        if (!error) {
+                            dispatch_async(dispatch_get_main_queue(), ^{
+                                self.hashtagList = (NSMutableArray*)objectsHash;
+                                NSLog(@"hastag list:%@",self.hashtagList);
+                                //[self.tableView reloadData];
+                            });
+                        } else {
+                            NSLog(@"Error: %@ %@", error, [error userInfo]);
+                        }
+                    }];
+                    
+                    
                 });
             } else {
                 NSLog(@"Error: %@ %@", error, [error userInfo]);
             }
         }];
-    }
 
-    
-    
-    
     // Assign Values
     self.messageTextView.text = [[self.menuList objectAtIndex:[self.originRowIndex intValue]] valueForKey:@"messageText"];
-    
     [self.includeLinkToggle setOn:YES animated:NO];
-
     NSNumber *includeLinkNumber = [self.selectedMessageDictionary objectForKey:@"isLinkIncluded"];
     bool includeLinkBool = [includeLinkNumber boolValue];
-    
     if(includeLinkBool){
     } else {
         [self.includeLinkToggle setOn:NO animated:YES];
@@ -99,70 +107,15 @@
     self.linkToContent.text = [self.selectedSegment valueForKey:@"linkToContent"];
     self.linkToContent.layer.borderWidth=0;
     self.linkToContent.layer.borderColor= [[UIColor lightGrayColor] CGColor];
-//    NSLog(@"linkToContent:%@",[self.selectedSegment valueForKey:@"linkToContent"]);
-//    NSLog(@"Selected Segment:%@",self.selectedSegment);
     [self.linkToContent scrollRangeToVisible:NSMakeRange(0, 0)];
     
     //    [self registerForKeyboardNotifications];
     
 //    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(textViewTextDidChangeNotification:) name:UITextViewTextDidChangeNotification object:self.messageTextView];
-
 }
 
 
 
-//- (void)registerForKeyboardNotifications
-//{
-//    [[NSNotificationCenter defaultCenter] addObserver:self
-//                                             selector:@selector(keyboardWasShown:)
-//                                                 name:UIKeyboardDidShowNotification object:nil];
-//    
-//    [[NSNotificationCenter defaultCenter] addObserver:self
-//                                             selector:@selector(keyboardWillBeHidden:)
-//                                                 name:UIKeyboardWillHideNotification object:nil];
-//    
-//}
-
-// Called when the UIKeyboardDidShowNotification is sent.
-//- (void)keyboardWasShown:(NSNotification*)aNotification
-//{
-//    NSDictionary* info = [aNotification userInfo];
-//    CGSize kbSize = [[info objectForKey:UIKeyboardFrameBeginUserInfoKey] CGRectValue].size;
-//    
-//    UIEdgeInsets contentInsets = UIEdgeInsetsMake(0.0, 0.0, kbSize.height, 0.0);
-//    self.scrollView.contentInset = contentInsets;
-//    self.scrollView.scrollIndicatorInsets = contentInsets;
-//    
-//    // If active text field is hidden by keyboard, scroll it so it's visible
-//    // Your app might not need or want this behavior.
-//    CGRect aRect = self.view.frame;
-//    aRect.size.height -= kbSize.height;
-//    if (!CGRectContainsPoint(aRect, self.messageTextView.frame.origin) ) {
-//        [self.scrollView scrollRectToVisible:self.messageTextView.frame animated:YES];
-//    }
-//}
-
-//- (void)keyboardWasShown:(NSNotification*)aNotification {
-//    NSDictionary* info = [aNotification userInfo];
-//    CGSize kbSize = [[info objectForKey:UIKeyboardFrameBeginUserInfoKey] CGRectValue].size;
-//    CGRect bkgndRect = self.view.superview.frame;
-//    bkgndRect.size.height += kbSize.height;
-//    [self.view.superview setFrame:bkgndRect];
-//    [self.scrollView setContentOffset:CGPointMake(0.0, self.messageTextView.frame.origin.y-kbSize.height) animated:YES];
-//}
-//
-//// Called when the UIKeyboardWillHideNotification is sent
-//- (void)keyboardWillBeHidden:(NSNotification*)aNotification
-//{
-//    UIEdgeInsets contentInsets = UIEdgeInsetsZero;
-//    self.scrollView.contentInset = contentInsets;
-//    self.scrollView.scrollIndicatorInsets = contentInsets;
-//}
-
-//-(void)viewWillDisappear:(BOOL)animated{
-//    [[NSNotificationCenter defaultCenter] removeObserver:self name:UITextViewTextDidChangeNotification object:nil];
-//
-//}
 
 - (void)viewWillTransitionToSize:(CGSize)size withTransitionCoordinator:(id<UIViewControllerTransitionCoordinator>)coordinator {
     [self.view setNeedsDisplay];
@@ -242,17 +195,6 @@
 */
 
 - (IBAction)loadMessage:(id)sender {
-//    NSString *postMessage = self.messageTextView.text; 
-//    NSString *linkName = [NSString stringWithFormat:@"%@: %@",[self.selectedProgram valueForKey:@"programTitle"],[self.selectedSegment valueForKey:@"segmentTitle"]];  // Everything is the same except for this line.
-//    NSString *linkToContent =[[NSString alloc]initWithString:[self.selectedSegment valueForKey:@"linkToContent"]];
-//    
-//    NSDictionary *parameters = @{@"message" : postMessage,
-//                                 @"link" : linkToContent,
-//                                 @"name" : linkName
-//                                 };
-//    //list of parameters: https://developers.facebook.com/docs/graph-api/reference/
-//    
-//    [self.facebookAPIPost publishFBPostWithParameters:parameters];
     
     [[self.messageTableViewController.menuList objectAtIndex:[self.originRowIndex intValue]] setValue:self.messageTextView.text  forKey:@"messageText"];
     
@@ -278,60 +220,120 @@
     [self pushToSignIn];
 }
 
-
-
-
-- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    return 1;
+- (IBAction)tableSegmentControlClick:(id)sender {
+    [self.tableView reloadData];
 }
 
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    // Number of rows is the number of time zones in the region for the specified section.
 
-    return [self.sentMessagesForSegment count];
-}
-
-- (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
-    // The header for the section is the region name -- get this from the region at the section index.
-
-    return [NSString stringWithFormat:@"Latest Tweets in (%@)",[self.selectedMessageDictionary valueForKey:@"messageCategory"]];
-}
+#pragma mark - Table view
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    NSDictionary *sentMessage = (NSDictionary*)[self.sentMessagesForSegment objectAtIndex:indexPath.row];
     
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"Cell" forIndexPath:indexPath];
     // Configure the cell...
     if (cell == nil){
         NSLog(@"cell was nil");
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"Cell"];
-        
     }
-    NSLog(@"sent message to put in this cell:%@",[sentMessage valueForKey:@"messageText"]);
-    cell.textLabel.text = [sentMessage valueForKey:@"messageText"];
     
-    //    NSLog(@"messageOption calling config cell%@",messageOption);
-    //    [cell configMessageOptionCell:(NSDictionary*)messageOption];
+    if(self.tableSegmentControl.selectedSegmentIndex == 0){
+        NSDictionary *sentMessage = (NSDictionary*)[self.sentMessagesForSegment objectAtIndex:indexPath.row];
+        cell.textLabel.text = [sentMessage valueForKey:@"messageText"];
+    } else {
+        NSDictionary *hashtag = (NSDictionary*)[self.hashtagList objectAtIndex:indexPath.row];
+        cell.textLabel.text = [hashtag valueForKey:@"hashtag"];
+    }
+    
+//    NSLog(@"hastag list:%@",self.hashtagList);
+//    cell.textLabel.text =(NSString*)[self.hashtagList objectAtIndex:indexPath.row];
     [cell layoutIfNeeded];
-    
-    //    NSString *messageText = [[self.messageOptionsListFiltered objectAtIndex:[indexPath row]] valueForKey:@"messageText"];
-    //    cell.textLabel.text = messageText;
-    //    [cell.textLabel sizeToFit];
-    //    cell.textLabel.preferredMaxLayoutWidth = self.view.bounds.size.width;
     return cell;
 }
-
-
-- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
-
-    [self.tableView deselectRowAtIndexPath:indexPath animated:YES];
-    UITableViewCell *cell = (UITableViewCell *)[tableView cellForRowAtIndexPath:indexPath];
-    self.messageTextView.text =   cell.textLabel.text;
-
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
+    return 1;
 }
 
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+    // Number of rows is the number of time zones in the region for the specified section.
+    if(self.tableSegmentControl.selectedSegmentIndex == 0){
+        return [self.sentMessagesForSegment count];
+    } else {
+        return [self.hashtagList count];
+    }
+}
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+    [self.tableView deselectRowAtIndexPath:indexPath animated:YES];
+    UITableViewCell *cell = (UITableViewCell *)[tableView cellForRowAtIndexPath:indexPath];
+    
+    if(self.tableSegmentControl.selectedSegmentIndex == 0){
+        self.messageTextView.text = cell.textLabel.text;
+    } else {
+        [self.messageTextView replaceRange:self.messageTextView.selectedTextRange withText:cell.textLabel.text];
+    }
+}
+
+//- (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
+//    // The header for the section is the region name -- get this from the region at the section index.
+//
+//    return [NSString stringWithFormat:@"Touch to insert above \r\n(%@)",[self.selectedMessageDictionary valueForKey:@"messageCategory"]];
+//
+////    return [NSString stringWithFormat:@"Touch to insert above (%@)",[self.selectedMessageDictionary valueForKey:@"messageCategory"]];
+//}
 
 
 
+//- (void)registerForKeyboardNotifications
+//{
+//    [[NSNotificationCenter defaultCenter] addObserver:self
+//                                             selector:@selector(keyboardWasShown:)
+//                                                 name:UIKeyboardDidShowNotification object:nil];
+//
+//    [[NSNotificationCenter defaultCenter] addObserver:self
+//                                             selector:@selector(keyboardWillBeHidden:)
+//                                                 name:UIKeyboardWillHideNotification object:nil];
+//
+//}
+
+// Called when the UIKeyboardDidShowNotification is sent.
+//- (void)keyboardWasShown:(NSNotification*)aNotification
+//{
+//    NSDictionary* info = [aNotification userInfo];
+//    CGSize kbSize = [[info objectForKey:UIKeyboardFrameBeginUserInfoKey] CGRectValue].size;
+//
+//    UIEdgeInsets contentInsets = UIEdgeInsetsMake(0.0, 0.0, kbSize.height, 0.0);
+//    self.scrollView.contentInset = contentInsets;
+//    self.scrollView.scrollIndicatorInsets = contentInsets;
+//
+//    // If active text field is hidden by keyboard, scroll it so it's visible
+//    // Your app might not need or want this behavior.
+//    CGRect aRect = self.view.frame;
+//    aRect.size.height -= kbSize.height;
+//    if (!CGRectContainsPoint(aRect, self.messageTextView.frame.origin) ) {
+//        [self.scrollView scrollRectToVisible:self.messageTextView.frame animated:YES];
+//    }
+//}
+
+//- (void)keyboardWasShown:(NSNotification*)aNotification {
+//    NSDictionary* info = [aNotification userInfo];
+//    CGSize kbSize = [[info objectForKey:UIKeyboardFrameBeginUserInfoKey] CGRectValue].size;
+//    CGRect bkgndRect = self.view.superview.frame;
+//    bkgndRect.size.height += kbSize.height;
+//    [self.view.superview setFrame:bkgndRect];
+//    [self.scrollView setContentOffset:CGPointMake(0.0, self.messageTextView.frame.origin.y-kbSize.height) animated:YES];
+//}
+//
+//// Called when the UIKeyboardWillHideNotification is sent
+//- (void)keyboardWillBeHidden:(NSNotification*)aNotification
+//{
+//    UIEdgeInsets contentInsets = UIEdgeInsetsZero;
+//    self.scrollView.contentInset = contentInsets;
+//    self.scrollView.scrollIndicatorInsets = contentInsets;
+//}
+
+//-(void)viewWillDisappear:(BOOL)animated{
+//    [[NSNotificationCenter defaultCenter] removeObserver:self name:UITextViewTextDidChangeNotification object:nil];
+//
+//}
 
 @end

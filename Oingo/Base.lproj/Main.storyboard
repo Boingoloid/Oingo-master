@@ -1357,8 +1357,8 @@
                                                 <action selector="emailRecipients:" destination="DoV-1B-tgM" eventType="touchUpInside" id="bOV-0c-jG2"/>
                                             </connections>
                                         </button>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" text="Recipients:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gCu-Wz-CDm">
-                                            <rect key="frame" x="10" y="343" width="72" height="21"/>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Recipients:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gCu-Wz-CDm">
+                                            <rect key="frame" x="10" y="279" width="72" height="21"/>
                                             <constraints>
                                                 <constraint firstAttribute="height" constant="21" id="39e-rU-ISh"/>
                                             </constraints>
@@ -1446,11 +1446,11 @@
                                                 </mask>
                                             </variation>
                                         </button>
-                                        <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="zW1-h7-PXb">
-                                            <rect key="frame" x="10" y="126" width="582" height="196"/>
+                                        <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="zW1-h7-PXb">
+                                            <rect key="frame" x="10" y="126" width="582" height="132"/>
                                             <color key="tintColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                             <constraints>
-                                                <constraint firstAttribute="height" priority="999" constant="132" id="T1e-uo-fzj"/>
+                                                <constraint firstAttribute="height" constant="132" id="T1e-uo-fzj"/>
                                             </constraints>
                                             <string key="text">The historic July flyby of Pluto once again demonstrated the awesome scientific and public engagement potential of solar system exploration. I strongly support NASA's Planetary Science Division, which was responsible for New Horizons at Pluto. Unfortunately, the White House has requested cuts to this program line within NASA for the last four years.
 </string>
@@ -1466,8 +1466,8 @@
                                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                             <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                                         </textView>
-                                        <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" text="email@email.com, email@email.com. email@email.com" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="XLC-PO-euQ">
-                                            <rect key="frame" x="10" y="365" width="569" height="40"/>
+                                        <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" text="email@email.com, email@email.com. email@email.com" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="XLC-PO-euQ">
+                                            <rect key="frame" x="10" y="301" width="569" height="104"/>
                                             <color key="tintColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                             <constraints>
                                                 <constraint firstAttribute="height" priority="999" constant="40" id="Tcx-BG-ffi"/>
@@ -1719,7 +1719,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="YJr-tv-HwU" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2804" y="-111"/>
+            <point key="canvasLocation" x="2804" y="-163"/>
         </scene>
         <!--Log In View Controller-->
         <scene sceneID="HtI-5Z-e1F">
@@ -1898,7 +1898,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="C2Y-Sh-7XT" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4201" y="-213"/>
+            <point key="canvasLocation" x="4173" y="-111"/>
         </scene>
         <!--Settings-->
         <scene sceneID="wMo-Cc-daG">
@@ -2209,7 +2209,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Qn7-kN-gKn" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2842" y="669"/>
+            <point key="canvasLocation" x="2804" y="638"/>
         </scene>
         <!--ComposeViewController-->
         <scene sceneID="NXF-2F-XCN">
@@ -2362,7 +2362,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="M63-PH-xuV" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3539" y="669"/>
+            <point key="canvasLocation" x="3455" y="638"/>
         </scene>
         <!--Message Panel-->
         <scene sceneID="Ebc-Co-Odb">
@@ -2407,10 +2407,10 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" text="I support labelling on GMO Foods. " textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="D62-Sd-JhU">
-                                <rect key="frame" x="24" y="228" width="560" height="75"/>
+                                <rect key="frame" x="24" y="228" width="560" height="65"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="75" id="YKR-zI-YRI"/>
+                                    <constraint firstAttribute="height" constant="65" id="YKR-zI-YRI"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
@@ -2430,7 +2430,7 @@
                                 </connections>
                             </button>
                             <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Gk2-zK-fEd">
-                                <rect key="frame" x="527" y="107" width="51" height="30"/>
+                                <rect key="frame" x="527" y="107" width="51" height="31"/>
                                 <color key="tintColor" red="0.050980392159999999" green="0.31764705879999999" blue="0.71764705880000002" alpha="1" colorSpace="calibratedRGB"/>
                                 <color key="onTintColor" red="0.050980392156862744" green="0.31764705882352939" blue="0.71764705882352942" alpha="1" colorSpace="calibratedRGB"/>
                                 <color key="thumbTintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -2469,7 +2469,7 @@
                                 </constraints>
                             </imageView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="MeP-l2-3yo">
-                                <rect key="frame" x="24" y="228" width="560" height="75"/>
+                                <rect key="frame" x="24" y="228" width="560" height="65"/>
                                 <connections>
                                     <action selector="sendToSignIn:" destination="m9r-j1-HpL" eventType="touchUpInside" id="nGc-DH-jQj"/>
                                 </connections>
@@ -2487,7 +2487,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="LBa-jW-SDc">
-                                <rect key="frame" x="24" y="317" width="560" height="275"/>
+                                <rect key="frame" x="24" y="363" width="560" height="229"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="Cell" textLabel="owr-Gh-rCh" style="IBUITableViewCellStyleDefault" id="FDF-h3-YdY">
@@ -2509,12 +2509,29 @@
                                     </tableViewCell>
                                 </prototypes>
                             </tableView>
+                            <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="epL-hn-VWr">
+                                <rect key="frame" x="24" y="336" width="560" height="29"/>
+                                <segments>
+                                    <segment title="Tweets"/>
+                                    <segment title="# hashtags"/>
+                                </segments>
+                                <color key="tintColor" red="0.052346804859999999" green="0.31878997590000002" blue="0.71888809970000001" alpha="1" colorSpace="calibratedRGB"/>
+                                <connections>
+                                    <action selector="tableSegmentControlClick:" destination="m9r-j1-HpL" eventType="valueChanged" id="Qnr-4z-usa"/>
+                                </connections>
+                            </segmentedControl>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" translatesAutoresizingMaskIntoConstraints="NO" id="pAN-0m-dWd">
                                 <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                                 <connections>
                                     <outlet property="delegate" destination="m9r-j1-HpL" id="AFW-Lb-Lui"/>
                                 </connections>
                             </scrollView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="tap message to insert above" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NTQ-NW-nmv">
+                                <rect key="frame" x="196" y="314" width="217" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" red="0.90196079019999997" green="0.90196079019999997" blue="0.90196079019999997" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
@@ -2523,6 +2540,7 @@
                             <constraint firstItem="MeP-l2-3yo" firstAttribute="trailing" secondItem="D62-Sd-JhU" secondAttribute="trailing" id="1ek-vT-co2"/>
                             <constraint firstItem="MeP-l2-3yo" firstAttribute="top" secondItem="8Z3-q3-SA3" secondAttribute="bottom" constant="5" id="2Xl-2t-8Uj"/>
                             <constraint firstItem="bmf-f5-k4i" firstAttribute="trailing" secondItem="D62-Sd-JhU" secondAttribute="trailing" id="3Pu-Ja-y1P"/>
+                            <constraint firstItem="epL-hn-VWr" firstAttribute="leading" secondItem="LBa-jW-SDc" secondAttribute="leading" id="3X1-uK-lna"/>
                             <constraint firstAttribute="leadingMargin" secondItem="Un9-eE-1ok" secondAttribute="leading" id="5ae-NF-mQ3"/>
                             <constraint firstItem="D62-Sd-JhU" firstAttribute="leading" secondItem="bvE-DM-J4j" secondAttribute="leadingMargin" constant="4" id="6KC-9q-fog"/>
                             <constraint firstItem="Gk2-zK-fEd" firstAttribute="top" secondItem="ycs-j9-bIM" secondAttribute="bottom" constant="3" id="85h-yT-ZHX"/>
@@ -2534,6 +2552,7 @@
                             <constraint firstItem="D62-Sd-JhU" firstAttribute="top" secondItem="bmf-f5-k4i" secondAttribute="bottom" id="GKk-f4-ZQo"/>
                             <constraint firstItem="MeP-l2-3yo" firstAttribute="bottom" secondItem="D62-Sd-JhU" secondAttribute="bottom" id="JJZ-DY-h3I"/>
                             <constraint firstItem="MeP-l2-3yo" firstAttribute="leading" secondItem="D62-Sd-JhU" secondAttribute="leading" id="KOR-fL-kuG"/>
+                            <constraint firstItem="epL-hn-VWr" firstAttribute="top" secondItem="NTQ-NW-nmv" secondAttribute="bottom" constant="1" id="LHb-lR-y8r"/>
                             <constraint firstItem="LBa-jW-SDc" firstAttribute="leading" secondItem="MeP-l2-3yo" secondAttribute="trailing" constant="-560" id="N87-SM-Dj6"/>
                             <constraint firstItem="bjz-WX-bzz" firstAttribute="top" secondItem="Un9-eE-1ok" secondAttribute="bottom" constant="3" id="NIs-HQ-APf"/>
                             <constraint firstAttribute="leadingMargin" secondItem="bjz-WX-bzz" secondAttribute="leading" id="Neb-id-gO5"/>
@@ -2547,8 +2566,10 @@
                             <constraint firstItem="4Eh-IQ-sv5" firstAttribute="centerX" secondItem="bvE-DM-J4j" secondAttribute="centerX" constant="-214" id="aNN-Vm-thL"/>
                             <constraint firstItem="gdi-FZ-Smy" firstAttribute="top" secondItem="LBa-jW-SDc" secondAttribute="bottom" constant="8" id="bfs-23-VEa"/>
                             <constraint firstAttribute="trailingMargin" secondItem="0ao-p0-MXz" secondAttribute="trailing" constant="4" id="bwe-f0-XD7"/>
+                            <constraint firstItem="NTQ-NW-nmv" firstAttribute="centerX" secondItem="epL-hn-VWr" secondAttribute="centerX" id="dVq-qk-xqi"/>
                             <constraint firstItem="Gk2-zK-fEd" firstAttribute="centerX" secondItem="ycs-j9-bIM" secondAttribute="centerX" id="f5V-ZO-Gct"/>
-                            <constraint firstItem="LBa-jW-SDc" firstAttribute="top" secondItem="MeP-l2-3yo" secondAttribute="bottom" constant="14" id="fei-0I-37R"/>
+                            <constraint firstItem="LBa-jW-SDc" firstAttribute="top" secondItem="MeP-l2-3yo" secondAttribute="bottom" constant="70" id="fei-0I-37R"/>
+                            <constraint firstItem="LBa-jW-SDc" firstAttribute="top" secondItem="epL-hn-VWr" secondAttribute="bottom" constant="-1" id="ftb-Ut-TAr"/>
                             <constraint firstItem="LBa-jW-SDc" firstAttribute="leading" secondItem="bvE-DM-J4j" secondAttribute="leadingMargin" constant="4" id="gFh-vq-1Q4"/>
                             <constraint firstItem="D62-Sd-JhU" firstAttribute="trailing" secondItem="bmf-f5-k4i" secondAttribute="trailing" id="h9a-Gd-2Gf"/>
                             <constraint firstItem="Un9-eE-1ok" firstAttribute="top" secondItem="mcM-lW-OGb" secondAttribute="bottom" constant="10" id="ki2-gf-QCL"/>
@@ -2559,6 +2580,7 @@
                             <constraint firstItem="Gk2-zK-fEd" firstAttribute="leading" secondItem="bjz-WX-bzz" secondAttribute="trailing" constant="21" id="sEg-J9-xDF"/>
                             <constraint firstAttribute="trailingMargin" secondItem="D62-Sd-JhU" secondAttribute="trailing" constant="-4" id="tu4-Nc-n8q"/>
                             <constraint firstItem="D62-Sd-JhU" firstAttribute="top" secondItem="Ull-Cr-wMC" secondAttribute="bottom" id="vPq-Pk-CI4"/>
+                            <constraint firstItem="epL-hn-VWr" firstAttribute="trailing" secondItem="LBa-jW-SDc" secondAttribute="trailing" id="vne-xW-tMh"/>
                             <constraint firstItem="bmf-f5-k4i" firstAttribute="top" secondItem="Gk2-zK-fEd" secondAttribute="bottom" constant="70" id="wJr-n0-S2M"/>
                             <constraint firstItem="4Eh-IQ-sv5" firstAttribute="leading" secondItem="Un9-eE-1ok" secondAttribute="leading" id="xGP-DV-Wsb"/>
                             <constraint firstItem="D62-Sd-JhU" firstAttribute="top" secondItem="4Eh-IQ-sv5" secondAttribute="bottom" constant="8" id="xrh-47-tad"/>
@@ -2589,12 +2611,13 @@
                         <outlet property="loadMessageButton" destination="bmf-f5-k4i" id="LB3-RO-EFU"/>
                         <outlet property="messageTextView" destination="D62-Sd-JhU" id="GPe-5E-fb7"/>
                         <outlet property="signInButton" destination="MeP-l2-3yo" id="2H8-6r-cJq"/>
+                        <outlet property="tableSegmentControl" destination="epL-hn-VWr" id="foH-Gc-Fre"/>
                         <outlet property="tableView" destination="LBa-jW-SDc" id="1pG-wG-yeC"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="hPf-8l-HR7" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4193" y="486"/>
+            <point key="canvasLocation" x="3487" y="-111"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="Jvj-7u-IbA">

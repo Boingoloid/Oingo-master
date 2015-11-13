@@ -16,7 +16,7 @@
 @implementation CongressPhotoFinderAPI
 
 -(void)addImagesToMenuList:objects{
-    NSLog(@"objects before image add:%@",objects);
+
     for (PFObject *object in objects) {
         NSString *bioguideID = [object valueForKey:@"bioguideID"];
         
@@ -65,7 +65,7 @@
             NSLog(@"Error: %@ %@", error, [error userInfo]);
         } else {
             
-            NSLog(@"results of congress query:%@",objects);
+
             dispatch_async(dispatch_get_main_queue(),^{
             
             [self addImagesToMenuList:objects];

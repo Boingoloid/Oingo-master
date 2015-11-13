@@ -143,7 +143,18 @@ bool isUserLinkedToTwitter;
         }
         else {
             NSLog(@"no error, message saved");
-            [self.messageTableViewController viewDidLoad];
+            
+            dispatch_async(dispatch_get_main_queue(), ^{
+                MarkSentMessageAPI *markSentMessagesAPI = [[MarkSentMessageAPI alloc]init];
+                markSentMessagesAPI.messageTableViewController = self.messageTableViewController;
+                [markSentMessagesAPI markSentMessages];
+                
+                [self saveHashtags];
+                //[self.messageTableViewController viewDidLoad];
+                //[self.messageTableViewController.tableView reloadData];
+
+            });
+
         }
     }];
 }
@@ -185,17 +196,40 @@ bool isUserLinkedToTwitter;
         }
         else {
             NSLog(@"no error, message saved");
+            NSLog(@"Got here in the save 2:%@",sentMessageItem);
+            MarkSentMessageAPI *markSentMessagesAPI = [[MarkSentMessageAPI alloc]init];
+            markSentMessagesAPI.messageTableViewController = self.messageTableViewController;
+            [markSentMessagesAPI markSentMessages];
+            
+            [self saveHashtags];
         }
     }];
     
-    NSLog(@"Got here in the save 2:%@",sentMessageItem);
-    MarkSentMessageAPI *markSentMessagesAPI = [[MarkSentMessageAPI alloc]init];
-    markSentMessagesAPI.messageTableViewController = self.messageTableViewController;
-    [markSentMessagesAPI markSentMessages];
-    
-    //    [self.messageTableViewController viewDidLoad];
+
 }
 
+-(void) saveHashtags {
+    NSMutableArray *hashtagList = [[NSMutableArray alloc]init];
+    
+    NSError *error = nil;
+    NSRegularExpression *regex = [NSRegularExpression regularExpressionWithPattern:@"#(\\w+)" options:0 error:&error];
+    NSArray *matches = [regex matchesInString:self.messageText options:0 range:NSMakeRange(0, self.messageText.length)];
+    
+    
+    for (NSTextCheckingResult *match in matches) {
+        NSRange wordRange = [match rangeAtIndex:0];
+        NSString* word = [self.messageText substringWithRange:wordRange];
+        PFObject *parseHashtagDict = [PFObject objectWithClassName:@"Hashtags"];
+        [parseHashtagDict setValue:word forKey:@"hashtag"];
+        [parseHashtagDict setValue:[self.selectedSegment valueForKey:@"segmentID"] forKey:@"segmentID"];
+        [parseHashtagDict setValue:[NSNumber numberWithInt:1] forKey:@"frequency"];
+        NSLog(@"Found tag %@", word);
+        [hashtagList addObject:parseHashtagDict];
+    }
+
+    
+    [PFObject saveAll:(NSArray*)hashtagList];
+}
 
 -(void) pushToSignIn {
     SignUpViewController *signUpViewController = [self.messageTableViewController.storyboard instantiateViewControllerWithIdentifier:@"signInViewController"];

@@ -20,6 +20,9 @@
 @property (weak, nonatomic) IBOutlet UILabel *charCountLabel;
 @property (nonatomic) NSArray *sentMessagesForSegment;
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
+@property (nonatomic) NSMutableArray *hashtagList;
+@property (nonatomic) NSMutableArray *tableSourceArray;
+@property (weak, nonatomic) IBOutlet UISegmentedControl *tableSegmentControl;
 
 
 @property(nonatomic,copy) NSArray *menuList;
@@ -39,6 +42,6 @@
 - (IBAction)cancel:(id)sender;
 
 - (IBAction)sendToSignIn:(id)sender;
-
+- (IBAction)tableSegmentControlClick:(id)sender;
 
 @end

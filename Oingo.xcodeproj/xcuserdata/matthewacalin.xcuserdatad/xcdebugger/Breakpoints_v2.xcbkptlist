@@ -90,11 +90,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Oingo/ParseAPI.m"
-            timestampString = "466056761.635868"
+            timestampString = "469071850.072647"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "209"
-            endingLineNumber = "209"
+            startingLineNumber = "229"
+            endingLineNumber = "229"
             landmarkName = "-prepSections:"
             landmarkType = "5">
          </BreakpointContent>
@@ -106,59 +106,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Oingo/ParseAPI.m"
-            timestampString = "468786051.301205"
+            timestampString = "469071850.072647"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "241"
-            endingLineNumber = "241"
-            landmarkName = "-prepSections:"
-            landmarkType = "5">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "Oingo/ParseAPI.m"
-            timestampString = "468786051.301205"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "225"
-            endingLineNumber = "225"
-            landmarkName = "-prepSections:"
-            landmarkType = "5">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "Oingo/ParseAPI.m"
-            timestampString = "466056761.635868"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "208"
-            endingLineNumber = "208"
-            landmarkName = "-prepSections:"
-            landmarkType = "5">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "Oingo/ParseAPI.m"
-            timestampString = "466056761.635868"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "207"
-            endingLineNumber = "207"
+            startingLineNumber = "213"
+            endingLineNumber = "213"
             landmarkName = "-prepSections:"
             landmarkType = "5">
          </BreakpointContent>
@@ -176,54 +128,6 @@
             startingLineNumber = "68"
             endingLineNumber = "68"
             landmarkName = "-shareSegmentWithFacebookComposer"
-            landmarkType = "5">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "Oingo/ParseAPI.m"
-            timestampString = "466056761.635868"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "210"
-            endingLineNumber = "210"
-            landmarkName = "-prepSections:"
-            landmarkType = "5">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "Oingo/ParseAPI.m"
-            timestampString = "466056761.635868"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "211"
-            endingLineNumber = "211"
-            landmarkName = "-prepSections:"
-            landmarkType = "5">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "Oingo/ParseAPI.m"
-            timestampString = "468786051.301205"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "254"
-            endingLineNumber = "254"
-            landmarkName = "-prepSections:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -401,11 +305,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Oingo/ParseAPI.m"
-            timestampString = "468786051.301205"
+            timestampString = "469071850.072647"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "276"
-            endingLineNumber = "276"
+            startingLineNumber = "260"
+            endingLineNumber = "260"
             landmarkName = "-prepSections:"
             landmarkType = "5">
          </BreakpointContent>
@@ -417,11 +321,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Oingo/MessagePanelViewController.m"
-            timestampString = "468887726.435267"
+            timestampString = "469088648.526657"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "213"
-            endingLineNumber = "213"
+            startingLineNumber = "166"
+            endingLineNumber = "166"
             landmarkName = "-touchesBegan:withEvent:"
             landmarkType = "5">
          </BreakpointContent>
@@ -497,11 +401,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Oingo/ParseAPI.m"
-            timestampString = "468786051.301205"
+            timestampString = "469071850.072647"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "220"
-            endingLineNumber = "220"
+            startingLineNumber = "207"
+            endingLineNumber = "207"
             landmarkName = "-prepSections:"
             landmarkType = "5">
          </BreakpointContent>
@@ -513,13 +417,77 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Oingo/MessagePanelViewController.m"
-            timestampString = "468958919.96726"
+            timestampString = "469088648.526657"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "329"
-            endingLineNumber = "329"
+            startingLineNumber = "271"
+            endingLineNumber = "271"
             landmarkName = "-tableView:didSelectRowAtIndexPath:"
             landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Oingo/TwitterAPITweet.m"
+            timestampString = "468971230.755889"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "147"
+            endingLineNumber = "147"
+            landmarkName = "-saveSentMessageSegment"
+            landmarkType = "5">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "__41-[TwitterAPITweet saveSentMessageSegment]_block_invoke"
+                  moduleName = "Oingo"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/matthewacalin/Desktop/IphoneApps/PushThought/Oingo/TwitterAPITweet.m"
+                  timestampString = "469088649.704988"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "147"
+                  endingLineNumber = "147"
+                  offsetFromSymbolStart = "108">
+               </Location>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "__41-[TwitterAPITweet saveSentMessageSegment]_block_invoke_2"
+                  moduleName = "Oingo"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/matthewacalin/Desktop/IphoneApps/PushThought/Oingo/TwitterAPITweet.m"
+                  timestampString = "469088649.708569"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "147"
+                  endingLineNumber = "147"
+                  offsetFromSymbolStart = "24">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Oingo/MessagePanelViewController.m"
+            timestampString = "469085921.305572"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "21"
+            endingLineNumber = "21"
+            landmarkName = "@implementation MessagePanelViewController"
+            landmarkType = "3">
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>

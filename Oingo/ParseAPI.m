@@ -199,26 +199,14 @@ BOOL isLocationInfoAvailable = NO;
 
 -(void)prepSections:messageList {
     
-//    NSMutableArray *array = (NSMutableArray*)[self createDeepCopyOfData:messageList];
-//    NSMutableArray *arrayMessages = [[NSMutableArray alloc] init];
-//    
-//    for (NSDictionary *dic in array) {
-//        if([dic valueForKey:@"isMessage"]){
-//            [arrayMessages addObject:dic];
-//        }
-//    }
-//    
-//    NSLog(@"arrayMessages%@",arrayMessages);
-//    NSLog(@"Prep sections triggered, here is the self.messageOptionsList input:%@",self.messageOptionsList);
-//    NSLog(@"Prep sections triggered, here is the self.parselistWithContacts %@",self.messageListFromParseWithContacts);
-//    NSLog(@"Prep sections triggered, here is the messageList %@",[messageList firstObject]);
-//    NSLog(@"Prep sections triggered, here is the self.menulist %@",[self.menuList lastObject]);
+    //NSLog(@"messageLst: %@",messageList);
     
     [self separateMessagesFromContacts:messageList]; //create self.messageList and self.contactList and other
     [self createMenuList]; //creates self.menuList - these are the grouopings for sections
-    
+
     self.menuList = [self sortMessageListWithContacts:self.menuList];
     self.menuList = [self moveLocalRepsToTop:self.menuList];
+
     
         if(self.sections){
             [self.sections removeAllObjects];
@@ -249,10 +237,6 @@ BOOL isLocationInfoAvailable = NO;
     self.messageTableViewController.messageList = self.menuList;
     self.messageTableViewController.menuList = self.menuList;
     self.messageTableViewController.messageOptionsList = self.messageOptionsList;
-    
-    
-//    NSLog(@"1) self.messageTableViewController:%@",self.messageTableViewController);
-//    NSLog(@"2) self.messageOptions:%@",[self.messageOptionsList firstObject]); //this one
     
     self.messageTableViewController.expandSectionsKeyList = self.expandSectionsKeyList;
     dispatch_async(dispatch_get_main_queue(), ^{
@@ -313,7 +297,8 @@ BOOL isLocationInfoAvailable = NO;
     
     self.contactList = contactList;
     self.otherList = otherList;
-    //    NSLog(@"contactlist:%@ messageList: %@",contactList,messageTextList);
+//    NSLog(@"contactlist:%@ messageList: %@",contactList,messageTextList);
+//    NSLog(@"other :%@",otherList);
 }
 
 
@@ -345,13 +330,15 @@ BOOL isLocationInfoAvailable = NO;
         
         if(category != [contactRow valueForKey:@"messageCategory"]){
             category = [contactRow valueForKey:@"messageCategory"];
+            //NSLog(@"category not equal (new one) :%@",category);
+            
             
             NSUInteger index = [self.messageTextList indexOfObjectPassingTest:
                                 ^BOOL(NSDictionary *dict, NSUInteger idx, BOOL *stop) {
                                     return [[dict objectForKey:@"messageCategory"] isEqual:category];
                                 }];
             NSMutableDictionary *messageToAdd = [self.messageTextList objectAtIndex:index];
-
+            //NSLog(@"mesage to add%@:", messageToAdd);
             [self.menuList addObject:messageToAdd];
             //[contactRow setValue:@NO forKey:@"isCollapsed"]; // makes sure at least one contact is expanded
             [self.menuList addObject:contactRow];
