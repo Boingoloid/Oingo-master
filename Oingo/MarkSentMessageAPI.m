@@ -50,7 +50,7 @@
 }
 
 -(void)checkTwitterShareForContacts {
-        NSLog(@"self.sentMessagefor segment:%@",self.sentMessagesForSegment);
+        //NSLog(@"self.sentMessagefor segment:%@",self.sentMessagesForSegment);
     
     for (NSDictionary *dictionary in self.sentMessagesForSegment) {
         if ([[dictionary valueForKey:@"messageType"] isEqualToString:@"twitter"]){

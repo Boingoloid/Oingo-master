@@ -174,7 +174,6 @@ bool isUserLinkedToTwitter;
         NSString *userObjectID = currentUser.objectId;
     [sentMessageItem setObject:userObjectID forKey:@"userObjectID"];
     
-    //if segment then skip, else don't
     
     if ([self.selectedContact isKindOfClass:[CongressionalMessageItem class]]) {
         NSLog(@"Congressional Message Item Class");
@@ -190,6 +189,8 @@ bool isUserLinkedToTwitter;
         [sentMessageItem setObject:targetName forKey:@"contactName"];
     }
     
+    
+    
     [sentMessageItem saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) { //save currentUser to parse disk
         if(error){
             NSLog(@"error, message not saved");
@@ -200,7 +201,6 @@ bool isUserLinkedToTwitter;
             MarkSentMessageAPI *markSentMessagesAPI = [[MarkSentMessageAPI alloc]init];
             markSentMessagesAPI.messageTableViewController = self.messageTableViewController;
             [markSentMessagesAPI markSentMessages];
-            
             [self saveHashtags];
         }
     }];

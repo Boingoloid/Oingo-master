@@ -21,6 +21,7 @@
 @property (nonatomic) NSArray *menuList;
 @property (nonatomic) NSDictionary *selectedContact;
 @property (nonatomic) NSDictionary *selectedMessageDictionary;
+@property (nonatomic) NSArray *messageOptionsList;
 
 -(void)shareSegmentTwitterAPI;
 -(void)shareMessageTwitterAPI:(UITableViewCell*)cell;

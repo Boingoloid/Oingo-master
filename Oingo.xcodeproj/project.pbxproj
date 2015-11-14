@@ -110,6 +110,7 @@
 		CEE04B9C1B34C43900AAF8EA /* location-gray.png in Resources */ = {isa = PBXBuildFile; fileRef = CEE04B9B1B34C43900AAF8EA /* location-gray.png */; };
 		CEE074421B5EFEE900245C56 /* success.png in Resources */ = {isa = PBXBuildFile; fileRef = CEE074411B5EFEE900245C56 /* success.png */; };
 		CEE074441B5F027E00245C56 /* success-icon.png in Resources */ = {isa = PBXBuildFile; fileRef = CEE074431B5F027E00245C56 /* success-icon.png */; };
+		CEE691D41BF66A9600C11749 /* MessagePanelTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CEE691D31BF66A9600C11749 /* MessagePanelTableViewCell.m */; settings = {ASSET_TAGS = (); }; };
 		CEE772B41BA8C14D00E45842 /* settingswhite.png in Resources */ = {isa = PBXBuildFile; fileRef = CEE772B31BA8C14D00E45842 /* settingswhite.png */; };
 		CEED9BD41AF4160300402BC2 /* Accounts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CE395D851AED5422006786C0 /* Accounts.framework */; };
 		CEED9BD51AF4165400402BC2 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CE40D7FF1AF382A5006F2D2E /* AudioToolbox.framework */; };
@@ -301,6 +302,8 @@
 		CEE04B9B1B34C43900AAF8EA /* location-gray.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "location-gray.png"; path = "Images/location-gray.png"; sourceTree = "<group>"; };
 		CEE074411B5EFEE900245C56 /* success.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = success.png; sourceTree = "<group>"; };
 		CEE074431B5F027E00245C56 /* success-icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "success-icon.png"; sourceTree = "<group>"; };
+		CEE691D21BF66A9600C11749 /* MessagePanelTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MessagePanelTableViewCell.h; sourceTree = "<group>"; };
+		CEE691D31BF66A9600C11749 /* MessagePanelTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MessagePanelTableViewCell.m; sourceTree = "<group>"; };
 		CEE772B31BA8C14D00E45842 /* settingswhite.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = settingswhite.png; path = Oingo/Images/settingswhite.png; sourceTree = "<group>"; };
 		CEED9BB61AF40A4000402BC2 /* Twitter.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Twitter.framework; path = System/Library/Frameworks/Twitter.framework; sourceTree = SDKROOT; };
 		CEEF24FF1B0114C900EFB257 /* monsanto nutrition facts.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "monsanto nutrition facts.png"; sourceTree = "<group>"; };
@@ -423,6 +426,8 @@
 				CE241A441AEAE45A00F22144 /* AppDelegate.m */,
 				CE9D625C1BC3C10F00A244ED /* MessagePanelViewController.h */,
 				CE9D625D1BC3C10F00A244ED /* MessagePanelViewController.m */,
+				CEE691D21BF66A9600C11749 /* MessagePanelTableViewCell.h */,
+				CEE691D31BF66A9600C11749 /* MessagePanelTableViewCell.m */,
 				CEEF25051B015ACA00EFB257 /* MessageTableViewController.h */,
 				CEEF25061B015ACA00EFB257 /* MessageTableViewController.m */,
 				CE13C90E1BC4042D00A1D223 /* MessageTableViewEmailCell.h */,
@@ -849,6 +854,7 @@
 			files = (
 				CED53C051BDDA27500B34ED9 /* TwitterAPITweet.m in Sources */,
 				CE12E42A1B94DB1A001B3E25 /* TWSignedRequest.m in Sources */,
+				CEE691D41BF66A9600C11749 /* MessagePanelTableViewCell.m in Sources */,
 				CEF1C9011B0E7B79003EFAD1 /* WebViewController.m in Sources */,
 				CE87CACC1AFABA920084C666 /* Program.m in Sources */,
 				CE44670C1B94C0DF001D46EB /* PFTwitterUtils+NativeTwitter.m in Sources */,

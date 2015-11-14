@@ -465,6 +465,7 @@ BOOL isLocationInfoAvailable = NO;
     NSMutableArray* allDataDeepCopyArray = [NSKeyedUnarchiver unarchiveObjectWithData:[NSKeyedArchiver archivedDataWithRootObject:allDataTempArray]];
     
     self.messageOptionsList = messagesDeepCopyArray;
+    NSLog(@"self.messageoptions:%@",self.messageOptionsList);
     self.messageTableViewController.messageOptionsList = self.messageOptionsList;
 //    NSLog(@"deep copy of messageOptionsList (deep copy):%@",[self.messageOptionsList firstObject]);
 //        NSLog(@"self.messagetableviewcontroller.messageOptionsList last object(deep copy):%@",[self.messageTableViewController.messageOptionsList lastObject]);

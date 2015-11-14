@@ -13,6 +13,7 @@
 #import "Program.h"
 #import <Parse/Parse.h>
 #import "SignUpViewController.h"
+#import "MessagePanelTableViewCell.h"
 
 @interface MessagePanelViewController () <UIGestureRecognizerDelegate,UITextViewDelegate,UITableViewDataSource, UITableViewDelegate, UITextInputDelegate>
 
@@ -26,6 +27,7 @@
     
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
+    self.tableSegmentControl.selectedSegmentIndex = 0;
     
 //    PFUser *currentUser = [PFUser currentUser];
     
@@ -40,29 +42,16 @@
         [query whereKey:@"messageCategory" equalTo:category];
         [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
             if (!error) {
+                
+                //get message from message 
+                
+                
+                
                 dispatch_async(dispatch_get_main_queue(), ^{
                     self.sentMessagesForSegment = objects;
+                    self.tableData = (NSMutableArray*)self.sentMessagesForSegment;
                     //NSLog(@"loading data from sentMessagesList%@:",self.sentMessagesForSegment);
-                    [self.tableView reloadData];
-                    
-                    //get message data for segment menu
-                    PFQuery *queryHashtags = [PFQuery queryWithClassName:@"Hashtags"];
-                    [queryHashtags whereKey:@"segmentID" equalTo:selectedSegmentID];
-                    //[query whereKey:@"messageType" equalTo:@"twitter"];
-                    //[query whereKey:@"messageCategory" equalTo:category];
-                    [queryHashtags findObjectsInBackgroundWithBlock:^(NSArray *objectsHash, NSError *error) {
-                        if (!error) {
-                            dispatch_async(dispatch_get_main_queue(), ^{
-                                self.hashtagList = (NSMutableArray*)objectsHash;
-                                NSLog(@"hastag list:%@",self.hashtagList);
-                                //[self.tableView reloadData];
-                            });
-                        } else {
-                            NSLog(@"Error: %@ %@", error, [error userInfo]);
-                        }
-                    }];
-                    
-                    
+                    [self getHashtagData];
                 });
             } else {
                 NSLog(@"Error: %@ %@", error, [error userInfo]);
@@ -79,15 +68,25 @@
         [self.includeLinkToggle setOn:NO animated:YES];
     }
     
+    
+    //Format Tableview
+    self.tableView.layer.borderColor = [[UIColor colorWithRed:13/255.0 green:81/255.0 blue:183/255.0 alpha:1] CGColor];
+    self.tableView.layer.borderWidth = 1.0f;
+    self.tableView.layer.cornerRadius = 3;
+    self.tableView.clipsToBounds = YES;
+    
+    
     // Format messageTextView field
     self.messageTextView.layer.borderColor = [[UIColor whiteColor] CGColor];
     self.messageTextView.layer.borderWidth = 0;
-    self.messageTextView.layer.backgroundColor = [[UIColor colorWithRed:243/255.0 green:243/255.0 blue:243/255.0 alpha:1] CGColor];
+    //self.messageTextView.layer.backgroundColor = [[UIColor colorWithRed:243/255.0 green:243/255.0 blue:243/255.0 alpha:1] CGColor];
     self.messageTextView.clipsToBounds = YES;
     self.messageTextView.layer.cornerRadius = 3;
     [self.messageTextView setKeyboardType:UIKeyboardTypeTwitter];
     self.messageTextView.delegate = self;
  
+    
+    
     
     // Format Cancel Button
     self.cancelButton.layer.borderColor = [[UIColor colorWithRed:13/255.0 green:81/255.0 blue:183/255.0 alpha:1] CGColor];
@@ -112,10 +111,64 @@
     //    [self registerForKeyboardNotifications];
     
 //    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(textViewTextDidChangeNotification:) name:UITextViewTextDidChangeNotification object:self.messageTextView];
+    [self.tableView reloadData];
 }
 
 
+-(void) getHashtagData{
+    
+    //**************  This should  be moved to Cloud Code at some point.  Pointless to do all this work as the UI is loading when I just need the grouped/summed table
+    //get message data for segment menu
+    NSString *selectedSegmentID = [self.messageTableViewController.selectedSegment valueForKey:@"segmentID"];
+    PFQuery *queryHashtags = [PFQuery queryWithClassName:@"Hashtags"];
+    [queryHashtags whereKey:@"segmentID" equalTo:selectedSegmentID];
+    [queryHashtags orderByAscending:@"hashtag"];
+    [queryHashtags findObjectsInBackgroundWithBlock:^(NSArray *objectsHash, NSError *error) {
+        if (!error) {
+            
+            NSString *hashtag = @"";
+            NSMutableArray *hashtagGroupedArray = [[NSMutableArray alloc]init];
+            
+            for(NSDictionary *hashtagDict in objectsHash){
+                //NSLog(@"hashtag:%@",hashtag);
+                //NSLog(@"hashtagDict hashtag:%@",[[hashtagDict valueForKey:@"hashtag"] lowercaseString]);
 
+                if([hashtag caseInsensitiveCompare:[hashtagDict valueForKey:@"hashtag"]]){
+                    //NSLog(@"different"); //add new item to list
+                    hashtag = [hashtagDict valueForKey:@"hashtag"];
+                    int frequency = [[hashtagDict valueForKey:@"frequency"]intValue];
+                    //NSLog(@"frequency from parse %d",frequency);
+                    NSMutableDictionary *hashtagInsertDictionary = [[NSMutableDictionary alloc]init];
+                    [hashtagInsertDictionary setValue:hashtag forKey:@"hashtag"];
+                    [hashtagInsertDictionary setValue:[NSNumber numberWithInt:frequency] forKey:@"frequency"];
+                    [hashtagGroupedArray addObject:hashtagInsertDictionary];
+                   
+                } else {
+                    //NSLog(@"same, increment 1"); //no add, just increment 1
+                    
+                    int frequency = [[[hashtagGroupedArray lastObject] valueForKey:@"frequency"] intValue] + 1;
+                    //NSLog(@"frequency from array value %d",frequency);
+                    [[hashtagGroupedArray lastObject] setValue:[NSNumber numberWithInt:frequency] forKey:@"frequency"];
+                }
+            }
+            
+            //NSLog(@"hashtagGroupedArray:%@",hashtagGroupedArray);
+            NSSortDescriptor *frequncySortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"frequency" ascending:NO];
+            NSArray *sortDescriptors = [NSArray arrayWithObjects:frequncySortDescriptor, nil];
+            NSArray *hashtagSortedArray = [hashtagGroupedArray sortedArrayUsingDescriptors:sortDescriptors];
+
+            dispatch_async(dispatch_get_main_queue(), ^{
+                self.hashtagList = (NSMutableArray*)hashtagSortedArray;
+                //NSLog(@"reloading data from hashtag func: %@",[self.sentMessagesForSegment firstObject]);
+                [self.tableView reloadData];
+            });
+        } else {
+            NSLog(@"Error: %@ %@", error, [error userInfo]);
+        }
+    }];
+    //*****************
+
+}
 
 - (void)viewWillTransitionToSize:(CGSize)size withTransitionCoordinator:(id<UIViewControllerTransitionCoordinator>)coordinator {
     [self.view setNeedsDisplay];
@@ -221,6 +274,12 @@
 }
 
 - (IBAction)tableSegmentControlClick:(id)sender {
+    
+    if(self.tableSegmentControl.selectedSegmentIndex == 0){
+        self.tableData = (NSMutableArray*)self.sentMessagesForSegment;
+    } else {
+        self.tableData = (NSMutableArray*)self.hashtagList;
+    }
     [self.tableView reloadData];
 }
 
@@ -229,25 +288,36 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"Cell" forIndexPath:indexPath];
+    MessagePanelTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"Cell" forIndexPath:indexPath];
     // Configure the cell...
     if (cell == nil){
         NSLog(@"cell was nil");
-        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"Cell"];
+        cell = [[MessagePanelTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"Cell"];
     }
     
-    if(self.tableSegmentControl.selectedSegmentIndex == 0){
-        NSDictionary *sentMessage = (NSDictionary*)[self.sentMessagesForSegment objectAtIndex:indexPath.row];
-        cell.textLabel.text = [sentMessage valueForKey:@"messageText"];
-    } else {
-        NSDictionary *hashtag = (NSDictionary*)[self.hashtagList objectAtIndex:indexPath.row];
-        cell.textLabel.text = [hashtag valueForKey:@"hashtag"];
-    }
+    cell.messagePanelViewController = self;
+    [cell configureCellWithData:(NSDictionary*)[self.tableData objectAtIndex:indexPath.row]];
     
-//    NSLog(@"hastag list:%@",self.hashtagList);
-//    cell.textLabel.text =(NSString*)[self.hashtagList objectAtIndex:indexPath.row];
     [cell layoutIfNeeded];
     return cell;
+
+//    
+//    if(self.tableSegmentControl.selectedSegmentIndex == 0){
+//        //self.frequencyLabel.hidden = true;
+//        
+//        NSDictionary *sentMessage = (NSDictionary*)[self.sentMessagesForSegment objectAtIndex:indexPath.row];
+//        cell.textLabel.text = [sentMessage valueForKey:@"messageText"];
+//        
+//        
+//    } else {
+//        //self.frequencyLabel.hidden = false;
+//        NSDictionary *hashtag = (NSDictionary*)[self.hashtagList objectAtIndex:indexPath.row];
+//        cell.textLabel.text = [hashtag valueForKey:@"hashtag"];
+//        cell.detailTextLabel.text = [NSString stringWithFormat:@"%@",[hashtag valueForKey:@"frequency"]];
+//
+//    }
+    
+
 }
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
     return 1;
@@ -255,21 +325,22 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     // Number of rows is the number of time zones in the region for the specified section.
-    if(self.tableSegmentControl.selectedSegmentIndex == 0){
-        return [self.sentMessagesForSegment count];
-    } else {
-        return [self.hashtagList count];
-    }
+//    if(self.tableSegmentControl.selectedSegmentIndex == 0){
+//        return [self.sentMessagesForSegment count];
+//    } else {
+//        return [self.hashtagList count];
+//    }
+    return [self.tableData count];
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     [self.tableView deselectRowAtIndexPath:indexPath animated:YES];
-    UITableViewCell *cell = (UITableViewCell *)[tableView cellForRowAtIndexPath:indexPath];
+    MessagePanelTableViewCell *cell = (MessagePanelTableViewCell *)[tableView cellForRowAtIndexPath:indexPath];
     
     if(self.tableSegmentControl.selectedSegmentIndex == 0){
-        self.messageTextView.text = cell.textLabel.text;
+        self.messageTextView.text = cell.messageTextLabel.text;
     } else {
-        [self.messageTextView replaceRange:self.messageTextView.selectedTextRange withText:cell.textLabel.text];
+        [self.messageTextView replaceRange:self.messageTextView.selectedTextRange withText:cell.messageTextLabel.text];
     }
 }
 

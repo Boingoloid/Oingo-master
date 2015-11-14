@@ -28,4 +28,5 @@ dependencies: \
   /Users/matthewacalin/Desktop/IphoneApps/PushThought/Parse.framework/Headers/PFACL.h \
   /Users/matthewacalin/Desktop/IphoneApps/PushThought/Parse.framework/Headers/Parse.h \
   /Users/matthewacalin/Desktop/IphoneApps/PushThought/Parse.framework/Modules/module.modulemap \
-  Oingo/UpdateDefaults.h Oingo/SignUpViewController.h
+  Oingo/UpdateDefaults.h Oingo/SignUpViewController.h \
+  Oingo/MessagePanelTableViewCell.h

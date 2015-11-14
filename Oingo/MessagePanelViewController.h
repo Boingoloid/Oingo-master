@@ -11,6 +11,7 @@
 
 @interface MessagePanelViewController : UIViewController
 @property(nonatomic) MessageTableViewController *messageTableViewController;
+@property (nonatomic) NSArray *messageOptionsList;
 @property (weak, nonatomic) IBOutlet UITextView *linkToContent;
 @property (weak, nonatomic) IBOutlet UITextView *messageTextView;
 @property (weak, nonatomic) IBOutlet UIButton *cancelButton;
@@ -20,9 +21,11 @@
 @property (weak, nonatomic) IBOutlet UILabel *charCountLabel;
 @property (nonatomic) NSArray *sentMessagesForSegment;
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
+@property (nonatomic) NSMutableArray *tableData;
 @property (nonatomic) NSMutableArray *hashtagList;
 @property (nonatomic) NSMutableArray *tableSourceArray;
 @property (weak, nonatomic) IBOutlet UISegmentedControl *tableSegmentControl;
+
 
 
 @property(nonatomic,copy) NSArray *menuList;

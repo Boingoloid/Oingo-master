@@ -277,6 +277,7 @@ NSInteger footerHeight = 1;
                     twitterAPITweet.selectedProgram = self.selectedProgram;
                     twitterAPITweet.menuList = self.menuList;
                     twitterAPITweet.selectedContact = self.selectedContact;
+                    twitterAPITweet.messageOptionsList = self.messageOptionsList;
 
                     
                     //Look up message - note this works b/c message is first item in section.
@@ -378,6 +379,7 @@ NSInteger footerHeight = 1;
                     twitterAPITweet.selectedProgram = self.selectedProgram;
                     twitterAPITweet.menuList = self.menuList;
                     twitterAPITweet.selectedContact = self.selectedContact;
+                    twitterAPITweet.messageOptionsList = self.messageOptionsList;
                     
                     //Look up message - note this works b/c message is first item in section.
                     NSUInteger index = [self.menuList indexOfObjectPassingTest:
@@ -1084,11 +1086,13 @@ NSInteger footerHeight = 1;
         
         messagePanel.selectedProgram = self.selectedProgram;
         messagePanel.selectedSegment = self.selectedSegment;
+        messagePanel.messageOptionsList = self.messageOptionsList;
         messagePanel.category = category;
         messagePanel.messageTableViewController = self;
         messagePanel.originIndexPath = indexPath;
         messagePanel.originRowIndex = rowIndex;
         messagePanel.menuList = self.menuList;
+        messagePanel.messageOptionsList = self.messageOptionsList;
         //NSLog(@"menuList:%@",self.menuList);
         
         //Look up message - note this works b/c message is first item in section.
