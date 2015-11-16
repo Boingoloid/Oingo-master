@@ -15,7 +15,7 @@
 #import "Program.h"
 
 
-@interface ProgramsTableViewController ()
+@interface ProgramsTableViewController () <UISearchResultsUpdating>
 - (IBAction)uploadPhotos:(id)sender;
 
 
@@ -44,7 +44,19 @@ NSUInteger numberOfRows = 0;
     
     self.navigationController.navigationBar.barStyle = UIBarStyleBlack;  // optional
     self.navigationController.navigationBar.translucent = YES;
-
+    
+    self.searchController = [[UISearchController alloc] initWithSearchResultsController:self];
+    self.searchController.searchResultsUpdater = self;
+    self.definesPresentationContext = YES;
+    self.searchController.dimsBackgroundDuringPresentation = NO;
+    [self.searchController.searchBar sizeToFit];
+    self.tableView.tableHeaderView = self.searchController.searchBar;
+    self.definesPresentationContext = true;
+    
+    self.searchController.searchBar.scopeButtonTitles = @[NSLocalizedString(@"ScopeButtonCountry",@"Country"),
+        NSLocalizedString(@"ScopeButtonCapital",@"Capital")];
+//    self.searchController.searchBar.delegate = self.tableView;
+    
     PFQuery *query = [PFQuery queryWithClassName:@"Programs"];
 //    [query setCachePolicy:kPFCachePolicyCacheThenNetwork];  //This causes crash
     [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
@@ -61,12 +73,19 @@ NSUInteger numberOfRows = 0;
     
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;
-    
-    // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
 
 }
 
-
+-(void)updateSearchResultsForSearchController:(UISearchController *)searchController {
+    NSString *searchText = searchController.searchBar.text;
+    
+    if([searchText isEqualToString:@""]){
+        
+    }
+    
+    
+    
+}
 
 
 - (void)didReceiveMemoryWarning {
