@@ -30,7 +30,7 @@
 @property (nonatomic, retain) NSString *youtubeID;
 @property (nonatomic, retain) NSString *facebookID;
 @property (nonatomic, retain) NSString *twitterID;
-@property(nonatomic) NSString *contantForm;
+@property(nonatomic) NSString *contactForm;
 @property (nonatomic, retain) NSString *inOffice;
 @property (nonatomic, retain) NSString *gender;
 @property (nonatomic, retain) NSString *birthday;
@@ -40,14 +40,23 @@
 @property (nonatomic, retain) NSString *state;
 @property (nonatomic, retain) NSString *leadershipRole;
 
+// Success icons
 @property (weak, nonatomic) IBOutlet UIImageView *tweetSuccessImageView;
 @property (weak, nonatomic) IBOutlet UIImageView *emailSuccessImageView;
 @property (weak, nonatomic) IBOutlet UIImageView *phoneSuccessImageView;
 
-
+// Capture location
 @property(nonatomic) UIButton *locationButton;
 @property(nonatomic) UIButton *zipCodeButton;
 @property(nonatomic) UILabel *zipLabel;
+
+
+// Touch Capture
+@property (weak, nonatomic) IBOutlet UIImageView *emailTouchCaptureImageView;
+@property (weak, nonatomic) IBOutlet UIImageView *phoneTouchCaptureImageView;
+@property (weak, nonatomic) IBOutlet UIImageView *tweetTouchCaptureImageView;
+@property (weak, nonatomic) IBOutlet UIImageView *webFormTouchCaptureImageView;
+
 
 
 - (void) configMessageCellLocalRep:congressionalMessageItem indexPath:(NSIndexPath*)indexPath;

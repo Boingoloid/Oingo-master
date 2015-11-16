@@ -49,6 +49,7 @@
     [[Twitter sharedInstance] startWithConsumerKey:@"wFbOMUhdXSwU7WCGzW4V6a9Rn" consumerSecret:@"Y4zH1qR55icmp5eiDhZKbgg3sC7TEvxPxrlKpd7y6NSzzsqfP1"];
     [Fabric with:@[[Twitter sharedInstance]]];
     [Fabric with:@[TwitterKit, CrashlyticsKit]];
+    [Fabric with:@[[Crashlytics class], [Twitter class]]];
 
 
     // [Optional] Track statistics around application opens.

@@ -27,11 +27,11 @@
 @property (weak, nonatomic) IBOutlet UIButton *webFormButton;
 @property (nonatomic, retain) NSString *phone;
 @property (nonatomic, retain) NSString *website;
-@property (nonatomic, retain) NSString *openCongressEmail;
+@property (nonatomic, retain) NSString *email;
 @property (nonatomic, retain) NSString *youtubeID;
 @property (nonatomic, retain) NSString *facebookID;
 @property (nonatomic, retain) NSString *twitterID;
-@property(nonatomic) NSString *contantForm;
+@property(nonatomic) NSString *contactForm;
 @property (nonatomic, retain) NSString *inOffice;
 @property (nonatomic, retain) NSString *gender;
 @property (nonatomic, retain) NSString *birthday;
@@ -40,14 +40,24 @@
 @property (nonatomic, retain) NSString *stateName;
 @property (nonatomic, retain) NSString *state;
 @property (nonatomic, retain) NSString *leadershipRole;
+
+//Success Fields
 @property (weak, nonatomic) IBOutlet UIImageView *tweetSuccessImageView;
 @property (weak, nonatomic) IBOutlet UIImageView *emailSuccessImageView;
 @property (weak, nonatomic) IBOutlet UIImageView *phoneSuccessImageView;
 
-
+// Location Capture
 @property(nonatomic) UIButton *locationButton;
 @property(nonatomic) UIButton *zipCodeButton;
 @property(nonatomic) UILabel *zipLabel;
+
+
+// Touch Capture
+@property (weak, nonatomic) IBOutlet UIImageView *phoneTouchCaptureImageView;
+@property (weak, nonatomic) IBOutlet UIImageView *emailTouchCaptureImageView;
+@property (weak, nonatomic) IBOutlet UIImageView *tweetTouchCaptureImageView;
+@property (weak, nonatomic) IBOutlet UIImageView *webFormTouchCaptureImageView;
+
 
 - (void) configMessageContactCell:messageItem indexPath:(NSIndexPath*)indexPath;
 

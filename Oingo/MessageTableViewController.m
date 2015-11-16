@@ -10,6 +10,7 @@
 #import <Parse/Parse.h>
 #import "MessageItem.h"
 #import "CongressionalMessageItem.h"
+#import "EmailItem.h"
 #import "MessageTableViewCell.h"
 #import "MessageTableViewMessageCell.h"
 #import "MessageTableViewRepresentativeCell.h"
@@ -29,6 +30,7 @@
 #import <UIKit/UIKit.h>
 #import "MakePhoneCallAPI.h"
 #import "EmailComposerViewController.h"
+#import "LongFormEmailViewController.h"
 #import "ParseAPI.h"
 #import "CongressFinderAPI.h"
 #import "TwitterAPITweet.h"
@@ -38,6 +40,8 @@
 #import "SignUpViewController.h"
 #import "SettingsTableViewController.h"
 #import "ComposeViewController.h"
+#import "MessageTableViewEmailCell.h"
+#import "WebViewController.h"
 
 
 @interface MessageTableViewController () <UIGestureRecognizerDelegate,CLLocationManagerDelegate>
@@ -51,21 +55,26 @@
 
 MessageItem *messageItem;
 CongressionalMessageItem *congressionalMessageItem;
+EmailItem *emailItem;
 
 NSInteger section;
-NSInteger sectionHeaderHeight = 16;
+NSInteger sectionHeaderHeight = 18;
 NSInteger headerHeight = 48;
 NSInteger footerHeight = 1;
+
+
 
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     NSLog(@"viewDidLoad");
-
+    
     // Allows for auto resizing of row height
     self.tableView.estimatedRowHeight = 100;
     self.tableView.rowHeight = UITableViewAutomaticDimension;
     
+    // TextView start at the top (NOT WORKING!!)
+    //self.automaticallyAdjustsScrollViewInsets = false;
     
     NSLog(@"isCongressLoaded:%d",self.isCongressLoaded);
 
@@ -81,8 +90,6 @@ NSInteger footerHeight = 1;
     self.tableHeaderView.layer.cornerRadius = 3;
     self.tableHeaderView.clipsToBounds = YES;
 
-//    NSLog(@"self.tableView.frame.width:%f",self.tableView.frame.size.width);
-//    [self.tableHeaderView setFrame:(CGRectMake(10, 0, self.tableView.frame.size.width - 20, 67))];
     
     // Assign header values
     NSString* padding = @"  "; // # of spaces
@@ -120,12 +127,11 @@ NSInteger footerHeight = 1;
     NSLog(@"viewWillApper");
     
 }
-- (void)viewWillTransitionToSize:(CGSize)size withTransitionCoordinator:(id<UIViewControllerTransitionCoordinator>)coordinator
-{
+- (void)viewWillTransitionToSize:(CGSize)size withTransitionCoordinator:(id<UIViewControllerTransitionCoordinator>)coordinator {
     [self.tableView setNeedsDisplay];
-    [self.tableView setNeedsLayout];
-    [self.view layoutSubviews];
-    [self.tableView layoutSubviews];
+//    [self.tableView setNeedsLayout];
+//    [self.view layoutSubviews];
+//    [self.tableView layoutSubviews];
     [self.tableView reloadData];
     [super viewWillTransitionToSize:size withTransitionCoordinator:coordinator];
 }
@@ -135,6 +141,7 @@ NSInteger footerHeight = 1;
     NSLog(@"viewDidAppear");
 }
 
+#pragma mark - Gesture Recognizer
 - (BOOL)gestureRecognizerShouldBegin:(UIGestureRecognizer *)gestureRecognizer
 {
     UITableView *tableView = (UITableView *)gestureRecognizer.view;
@@ -160,119 +167,124 @@ NSInteger footerHeight = 1;
         UITableView *tableView = (UITableView *)tap.view;
         CGPoint p = [tap locationInView:tap.view];
         NSIndexPath* indexPath = [tableView indexPathForRowAtPoint:p];
-        MessageTableViewCell *cell = (MessageTableViewCell *)[tableView cellForRowAtIndexPath:indexPath];
-        CGPoint pointInCell = [tap locationInView:cell];
-        NSString *category= [self categoryForSection:indexPath.section];
-        NSArray *rowIndecesInSection = [self.sections objectForKey:category];
-        NSNumber *rowIndex = [rowIndecesInSection objectAtIndex:indexPath.row]; //pulling the row indece from array above
         
+
         // Deselect the row
         [tableView deselectRowAtIndexPath:indexPath animated:NO];
- 
+        
+        // Gathering info about cell touched
+        UITableViewCell *cellScout = (UITableViewCell *)[tableView cellForRowAtIndexPath:indexPath];
+        CGPoint pointInCell = [tap locationInView:cellScout];
+        NSString *category= [self categoryForSection:indexPath.section];
+        NSArray *rowIndecesInSection = [self.sections objectForKey:category];
+        NSNumber *rowIndex = [rowIndecesInSection objectAtIndex:indexPath.row];
+        
         // Create dictionary = selected menu object (could be message or contact)
         NSDictionary *dictionary = [self.menuList objectAtIndex:[rowIndex intValue]];
-        self.selectedContact = dictionary;
-       
-        //Get the isMessage Bool from Parse backend
-        NSNumber *isMessageNumber = [dictionary valueForKey:@"isMessage"];
-        bool isMessageBool = [isMessageNumber boolValue];
+
         
-        if(isMessageBool){
-            NSLog(@"touch in message cell");
-            // triggers segue to message options
-        } else if (CGRectContainsPoint(cell.tweetButton.frame, pointInCell)) {
-            NSLog(@"touch in tweet button area");
-            if(!cell.tweetButton.hidden){
-                // Create Tweet API object, Properties passed: -menuList -selection info
-                TwitterAPITweet *twitterAPITweet = [[TwitterAPITweet alloc]init];
-                twitterAPITweet.messageTableViewController = self;
-                twitterAPITweet.selectedSegment = self.selectedSegment;
-                twitterAPITweet.selectedProgram = self.selectedProgram;
-                twitterAPITweet.menuList = self.menuList;
-                twitterAPITweet.selectedContact = self.selectedContact;
+        
+        // Message Cell Touch ----------
+        if ([cellScout isKindOfClass:[MessageTableViewMessageCell class]]) {
+            NSLog(@"yes it is a message class cell"); // Segue triggered to message options
+        
+            
+        // NoZip Cell Touch ----------
+        } else if ([cellScout isKindOfClass:[MessageTableViewNoZipCell class]]){
+            NSLog(@"yes it is a NO ZIP class cell");
+            MessageTableViewNoZipCell *cell = (MessageTableViewNoZipCell *)[tableView cellForRowAtIndexPath:indexPath];
+            
+            if(CGRectContainsPoint(cell.zipCodeButton.frame, pointInCell)) {
+                NSLog(@"touch in zipCodeButton area");
+                if(!cell.zipCodeButton.hidden){
+                    [self lookUpZip];
+                }
                 
-                //Look up message - note this works b/c message is first item in section.
-                NSUInteger index = [self.menuList indexOfObjectPassingTest:
-                                    ^BOOL(NSDictionary *dict, NSUInteger idx, BOOL *stop) {
-                                        return [[dict valueForKey:@"messageCategory"] isEqualToString:category];
-                                    }];
-                if(index == NSNotFound){
-                    NSLog(@"did not find line");
+            } else if (CGRectContainsPoint(cell.locationButton.frame, pointInCell)) {
+                NSLog(@"touch in getUserLocation area");
+                if(!cell.locationButton.hidden){
+                    [self getUserLocationAlert];
+                }
+            } else {
+                NSLog(@"touch in outer area");
+            }
+            
+            
+        // Long Form Email Cell Touch ----------
+        } else if ([cellScout isKindOfClass:[MessageTableViewEmailCell class]]){
+            NSLog(@"Email class cell");
+            MessageTableViewEmailCell *cell = (MessageTableViewEmailCell *)[tableView cellForRowAtIndexPath:indexPath];
+            
+            
+            __block NSUInteger countFirstName = 0;
+            [cell.firstName.text enumerateSubstringsInRange:NSMakeRange(0, [cell.firstName.text length])
+                                        options:NSStringEnumerationByComposedCharacterSequences
+                                     usingBlock:^(NSString *substring, NSRange substringRange, NSRange enclosingRange, BOOL *stop) {
+                                         countFirstName++;
+                                     }];
+            
+            __block NSUInteger countLastName = 0;
+            [cell.lastName.text enumerateSubstringsInRange:NSMakeRange(0, [cell.lastName.text length])
+                                                    options:NSStringEnumerationByComposedCharacterSequences
+                                                 usingBlock:^(NSString *substring, NSRange substringRange, NSRange enclosingRange, BOOL *stop) {
+                                                     countLastName++;
+                                                 }];
+
+            
+            
+            if (CGRectContainsPoint(cell.emailRecipientsButton.frame, pointInCell)) {
+                
+                PFUser *currentUser = [PFUser currentUser];
+                if(!currentUser) {
+                    [self pushToSignIn];
+                    
+                } else if (countFirstName == 0 || countLastName == 0) {
+
+                    [self showCheckFullNameWarning];
                     
                 } else {
-                    NSLog(@"index was found:%ld",index);
-                    twitterAPITweet.messageText = [[self.menuList objectAtIndex:index] valueForKey:@"messageText"];
-                }
-                
-                [twitterAPITweet shareMessageTwitterAPI:cell];
-            }
-        //if touch on postToFacebookButton, then
-        } else if(CGRectContainsPoint(cell.postToFacebookButton.frame, pointInCell)) {
-            NSLog(@"touch in facebook button area");
-            if(!cell.postToFacebookButton.hidden){
-                [self postToFacebook:cell];
-            }
-        } else if(CGRectContainsPoint(cell.zipCodeButton.frame, pointInCell)) {
-            NSLog(@"touch in zipCodeButton area");
-            if(!cell.zipCodeButton.hidden){
-                [self lookUpZip];
-            }
-        } else if (CGRectContainsPoint(cell.locationButton.frame, pointInCell)) {
-            NSLog(@"touch in getUserLocation area");
-            if(!cell.locationButton.hidden){
-                [self getUserLocationAlert];
-                //[self getUserLocation];
-            }
-        } else if (CGRectContainsPoint(cell.phoneButton.frame, pointInCell)) {
-            NSLog(@"touch in phone area");
-            if(!cell.phoneButton.hidden){
-                
-//                NSString *phoneNumber =[[cell.phone componentsSeparatedByCharactersInSet:[[NSCharacterSet characterSetWithCharactersInString:@"16177940337"] invertedSet]]   componentsJoinedByString:@""];
-                NSURL *phoneUrl = [NSURL URLWithString:[NSString  stringWithFormat:@"tel://%@",cell.phone]];
-                //code for making call, can't test in simulator
-                NSLog(@"phone url:%@",phoneUrl);
-
-                if ([[UIApplication sharedApplication] canOpenURL:phoneUrl]) {
-                    
-                    NSString *alertTitle = @"Phone Call";
-                    NSString *alertMessage = @"Remember to state your name and your sentiment.  Would you like to call?";
-                    UIAlertController *alertController = [UIAlertController alertControllerWithTitle:alertTitle message:alertMessage preferredStyle:UIAlertControllerStyleAlert];
-                    
-                    //Add cancel button
-                    UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:NSLocalizedString(@"Cancel", @"Cancel action") style:UIAlertActionStyleDefault handler:^(UIAlertAction *action){
-                        NSLog(@"Cancel action");
-                    }];
-                    [alertController addAction:cancelAction];
-                    
-                    //Add OK action button
-                    UIAlertAction *okAction = [UIAlertAction actionWithTitle:NSLocalizedString(@"OK", @"OK action") style:UIAlertActionStyleDefault handler:^(UIAlertAction *action){
-//                        MakePhoneCallAPI *makePhoneCallAPI = [[MakePhoneCallAPI alloc] init];
-//                        [makePhoneCallAPI dialPhoneNumber:phoneNumber];
-                        [[UIApplication sharedApplication] openURL:phoneUrl];
-                        [self savePhoneCall:phoneUrl];
-                        NSLog(@"OK action");
-                    }];
-                    [alertController addAction:okAction];
-                    
-                    [self presentViewController:alertController animated:YES completion:nil];
-                    
-                } else
-                {
-                    UIAlertView *calert = [[UIAlertView alloc]initWithTitle:@"Alert" message:@"Call facility is not available." delegate:nil cancelButtonTitle:@"ok" otherButtonTitles:nil, nil];
-                    [calert show];
+                    LongFormEmailViewController *emailComposer = [[LongFormEmailViewController alloc] init];
+                    emailComposer.selectedSegment = self.selectedSegment;
+                    emailComposer.emailSubject = cell.emailSubjectTextView.text;
+                    emailComposer.emailBody = cell.messageTextView.text;
+                    emailComposer.emailRecipients = cell.emailRecipientsTextView.text;
+                    emailComposer.firstName = cell.firstName.text;
+                    emailComposer.lastName = cell.lastName.text;
+                    emailComposer.messageTableViewController = self;
+                    [emailComposer showMailPicker];
+                    [self.navigationController pushViewController:emailComposer animated:NO];
+//                    [self presentViewController:emailComposer animated:YES completion:NULL];
                 }
 
-            }
-        } else if (CGRectContainsPoint(cell.emailButton.frame, pointInCell)) {
-            NSLog(@"touch in email button area");
-            if(!cell.emailButton.hidden){
+            } else if (CGRectContainsPoint(cell.linkToEmailButton.frame, pointInCell)) {
                 
-                // Check if current user, otherwise send to login
                 PFUser *currentUser = [PFUser currentUser];
                 if(!currentUser) {
                     [self pushToSignIn];
                 } else {
-                
+                    self.linkToEmail = cell.linkToEmail;
+                    [self performSegueWithIdentifier:@"showWebViewControllerEmail" sender:self];
+                }
+            }
+
+
+        // Local Rep Touch
+        } else if ([cellScout isKindOfClass:[MessageTableViewRepresentativeCell class]]){
+            MessageTableViewRepresentativeCell *cell = (MessageTableViewRepresentativeCell *)[tableView cellForRowAtIndexPath:indexPath];
+            
+            self.selectedContact = dictionary;
+            
+            if (CGRectContainsPoint(cell.tweetTouchCaptureImageView.frame, pointInCell)) {
+                NSLog(@"touch in tweet button area");
+                if(!cell.tweetButton.hidden){
+                    // Create Tweet API object, Properties passed: -menuList -selection info
+                    TwitterAPITweet *twitterAPITweet = [[TwitterAPITweet alloc]init];
+                    twitterAPITweet.messageTableViewController = self;
+                    twitterAPITweet.selectedSegment = self.selectedSegment;
+                    twitterAPITweet.selectedProgram = self.selectedProgram;
+                    twitterAPITweet.menuList = self.menuList;
+                    twitterAPITweet.selectedContact = self.selectedContact;
+                    
                     //Look up message - note this works b/c message is first item in section.
                     NSUInteger index = [self.menuList indexOfObjectPassingTest:
                                         ^BOOL(NSDictionary *dict, NSUInteger idx, BOOL *stop) {
@@ -282,75 +294,190 @@ NSInteger footerHeight = 1;
                         NSLog(@"did not find line");
                         
                     } else {
-                        NSLog(@"index was found:%ld",index);
+                        NSLog(@"index was found:%ld",(unsigned long)index);
+                        twitterAPITweet.messageText = [[self.menuList objectAtIndex:index] valueForKey:@"messageText"];
+                    }
+                    
+                    [twitterAPITweet shareMessageTwitterAPI:cell];
+                }
+            } else if(CGRectContainsPoint(cell.postToFacebookButton.frame, pointInCell)) {
+                NSLog(@"touch in facebook button area");
+                if(!cell.postToFacebookButton.hidden){
+                    [self postToFacebook:cell];
+                }
+            } else if (CGRectContainsPoint(cell.phoneTouchCaptureImageView.frame, pointInCell)) {
+                
+                NSLog(@"touch in phone area");
+                if(!cell.phoneButton.hidden){
+                    
+                    PFUser *currentUser = [PFUser currentUser];
+                    if(!currentUser) {
+                        [self pushToSignIn];
+                    } else {
+                        [self showPhoneCallAlert:cell.phone];
+                    }
+                    
+                }
+            } else if (CGRectContainsPoint(cell.emailTouchCaptureImageView.frame, pointInCell)) {
+                NSLog(@"touch in email button area");
+                if(!cell.emailButton.hidden){
+                    
+                    PFUser *currentUser = [PFUser currentUser];
+                    if(!currentUser) {
+                        [self pushToSignIn];
+                    } else {
                         
-                        EmailComposerViewController *emailComposer = [[EmailComposerViewController alloc] init];
-                        emailComposer.selectedSegment = self.selectedSegment;
-                        emailComposer.selectedContact = self.selectedContact;
-                        emailComposer.messageTableViewController = self;
-                        
-                        [emailComposer showMailPicker:cell.openCongressEmail withMessage:[[self.menuList objectAtIndex:index] valueForKey:@"messageText"]];
-
-                        [self presentViewController:emailComposer animated:YES completion:NULL];
+                        //Look up message - note this works b/c message is first item in section.
+                        NSUInteger index = [self.menuList indexOfObjectPassingTest:
+                                            ^BOOL(NSDictionary *dict, NSUInteger idx, BOOL *stop) {
+                                                return [[dict valueForKey:@"messageCategory"] isEqualToString:category];
+                                            }];
+                        if(index == NSNotFound){
+                            NSLog(@"did not find line");
+                            
+                        } else {
+                            NSLog(@"index was found:%ld",(unsigned long)index);
+                            
+                            EmailComposerViewController *emailComposer = [[EmailComposerViewController alloc] init];
+                            emailComposer.selectedSegment = self.selectedSegment;
+                            emailComposer.selectedContact = self.selectedContact;
+                            emailComposer.messageTableViewController = self;
+                            NSLog(@"selected contact:%@",cell.openCongressEmail);
+                            
+                            [emailComposer showMailPicker:cell.openCongressEmail withMessage:[[self.menuList objectAtIndex:index] valueForKey:@"messageText"]];
+                            [self.navigationController pushViewController:emailComposer animated:NO];
+//                            [self presentViewController:emailComposer animated:YES completion:NULL];
+                            
+                        }
                     }
                 }
+            } else if (CGRectContainsPoint(cell.webFormTouchCaptureImageView.frame, pointInCell)){
+                NSLog(@"touch in webForm area");
+                if(!cell.webFormButton.hidden){
+                    PFUser *currentUser = [PFUser currentUser];
+                    if(!currentUser) {
+                        [self pushToSignIn];
+                    } else {
+                        NSString *url = cell.contactForm;
+                        [[UIApplication sharedApplication] openURL:[NSURL URLWithString:url]];
+                    }
+                }
+            } else if (CGRectContainsPoint(cell.messageImage.frame, pointInCell)) {
+                NSLog(@"touch in image area");
+                if(!cell.messageImage.hidden){
+                }
+            } else {
+                NSLog(@"touch in outer area");
             }
-        } else if (CGRectContainsPoint(cell.webFormButton.frame, pointInCell)) {
-            NSLog(@"touch in webForm area");
-            if(!cell.webFormButton.hidden){
-                NSString *url = cell.contantForm;
-                [[UIApplication sharedApplication] openURL:[NSURL URLWithString:url]];
+            
+            
+            
+        // Civil Cell Touch ----------
+        } else if ([cellScout isKindOfClass:[MessageTableViewCell class]]){
+            MessageTableViewCell *cell = (MessageTableViewCell *)[tableView cellForRowAtIndexPath:indexPath];
+            
+            self.selectedContact = dictionary;
+            
+            if (CGRectContainsPoint(cell.tweetTouchCaptureImageView.frame, pointInCell)) {
+            NSLog(@"touch in tweet button area");
+                if(!cell.tweetButton.hidden){
+                    // Create Tweet API object, Properties passed: -menuList -selection info
+                    TwitterAPITweet *twitterAPITweet = [[TwitterAPITweet alloc]init];
+                    twitterAPITweet.messageTableViewController = self;
+                    twitterAPITweet.selectedSegment = self.selectedSegment;
+                    twitterAPITweet.selectedProgram = self.selectedProgram;
+                    twitterAPITweet.menuList = self.menuList;
+                    twitterAPITweet.selectedContact = self.selectedContact;
+                    
+                    //Look up message - note this works b/c message is first item in section.
+                    NSUInteger index = [self.menuList indexOfObjectPassingTest:
+                                        ^BOOL(NSDictionary *dict, NSUInteger idx, BOOL *stop) {
+                                            return [[dict valueForKey:@"messageCategory"] isEqualToString:category];
+                                        }];
+                    if(index == NSNotFound){
+                        NSLog(@"did not find line");
+                        
+                    } else {
+                        NSLog(@"index was found:%ld",(unsigned long)index);
+                        twitterAPITweet.messageText = [[self.menuList objectAtIndex:index] valueForKey:@"messageText"];
+                    }
+                    
+                    [twitterAPITweet shareMessageTwitterAPI:cell];
+                }
+            } else if(CGRectContainsPoint(cell.postToFacebookButton.frame, pointInCell)) {
+            NSLog(@"touch in facebook button area");
+                if(!cell.postToFacebookButton.hidden){
+                    [self postToFacebook:cell];
+                }
+            } else if (CGRectContainsPoint(cell.phoneTouchCaptureImageView.frame, pointInCell)) {
+                
+                NSLog(@"touch in phone area");
+                if(!cell.phoneButton.hidden){
+
+                    PFUser *currentUser = [PFUser currentUser];
+                    if(!currentUser) {
+                        [self pushToSignIn];
+                    } else {
+                        [self showPhoneCallAlert:cell.phone];
+                    }
+                
+                }
+            } else if (CGRectContainsPoint(cell.emailTouchCaptureImageView.frame, pointInCell)) {
+                NSLog(@"touch in email button area");
+                if(!cell.emailButton.hidden){
+                    
+                    PFUser *currentUser = [PFUser currentUser];
+                    if(!currentUser) {
+                        [self pushToSignIn];
+                    } else {
+                        
+                        //Look up message - note this works b/c message is first item in section.
+                        NSUInteger index = [self.menuList indexOfObjectPassingTest:
+                                            ^BOOL(NSDictionary *dict, NSUInteger idx, BOOL *stop) {
+                                                return [[dict valueForKey:@"messageCategory"] isEqualToString:category];
+                                            }];
+                        if(index == NSNotFound){
+                            NSLog(@"did not find line");
+                            
+                        } else {
+                            NSLog(@"index was found:%ld",(unsigned long)index);
+                            
+                            EmailComposerViewController *emailComposer = [[EmailComposerViewController alloc] init];
+                            emailComposer.selectedSegment = self.selectedSegment;
+                            emailComposer.selectedContact = self.selectedContact;
+                            emailComposer.messageTableViewController = self;
+                            NSLog(@"PING! create email civilian %@:",self.selectedContact);
+                            [emailComposer showMailPicker:[self.selectedContact valueForKey:@"email"] withMessage:[[self.menuList objectAtIndex:index] valueForKey:@"messageText"]];
+                            NSLog(@"selected contact:%@",self.selectedContact);
+                            
+                            [self.navigationController pushViewController:emailComposer animated:NO];
+//                            [self presentViewController:emailComposer animated:YES completion:NULL];
+                        }
+                    }
+                }
+            } else if (CGRectContainsPoint(cell.webFormTouchCaptureImageView.frame, pointInCell)){
+                NSLog(@"touch in webForm area");
+                if(!cell.webFormButton.hidden){
+                    PFUser *currentUser = [PFUser currentUser];
+                    if(!currentUser) {
+                        [self pushToSignIn];
+                    } else {
+                        NSString *url = cell.contactForm;
+                        [[UIApplication sharedApplication] openURL:[NSURL URLWithString:url]];
+                    }
+                }
+            } else if (CGRectContainsPoint(cell.messageImage.frame, pointInCell)) {
+                NSLog(@"touch in image area");
+                if(!cell.messageImage.hidden){
+                }
+            } else {
+                NSLog(@"touch in outer area");
             }
-        } else if (CGRectContainsPoint(cell.messageImage.frame, pointInCell)) {
-            NSLog(@"touch in image area");
-            if(!cell.messageImage.hidden){
-            }
-        } else {
-            NSLog(@"touch in outer area");
         }
     }
 }
 
 
--(void)savePhoneCall:(NSURL*)phoneURL{
-    //  SAVING MESSAGE DATA TO PARSE
-    PFUser *currentUser = [PFUser currentUser];
-    
-    PFObject *sentMessageItem = [PFObject objectWithClassName:@"sentMessages"];
-    [sentMessageItem setObject:@"phoneCall" forKey:@"messageType"];
-    [sentMessageItem setObject:[phoneURL absoluteString] forKey:@"phoneNumber"];
-    [sentMessageItem setObject:[self.selectedSegment valueForKey:@"segmentID"] forKey:@"segmentID"];
-    [sentMessageItem setObject:[currentUser valueForKey:@"username"] forKey:@"username"];
-    NSString *userObjectID = currentUser.objectId;
-    [sentMessageItem setObject:userObjectID forKey:@"userObjectID"];
-    
-    //if segment then skip, else don't
-    if ([self.selectedContact isKindOfClass:[CongressionalMessageItem class]]) {
-        NSLog(@"Saving congressional Message Item Class");
-        NSString *bioguide_id = [self.selectedContact valueForKey:@"bioguide_id"];
-        NSString *fullName = [self.selectedContact valueForKey:@"fullName"];
-        [sentMessageItem setObject:bioguide_id forKey:@"contactID"];
-        [sentMessageItem setObject:fullName forKey:@"contactName"];
-    } else {
-        NSLog(@"Regular Contact Item Class");
-        NSString *contactID = [self.selectedContact valueForKey:@"contactID"];
-        NSString *targetName = [self.selectedContact valueForKey:@"targetName"];
-        [sentMessageItem setObject:contactID forKey:@"contactID"];
-        [sentMessageItem setObject:targetName forKey:@"contactName"];
-    }
-    
-    
-    [sentMessageItem saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) { //save sent message to parse
-        if(error){
-            NSLog(@"error, message not saved");
-        }
-        else {
-            NSLog(@"no error, message saved");
-            [self viewDidLoad];
-        }
-    }];
-
-}
 
 
 /*
@@ -399,7 +526,7 @@ NSInteger footerHeight = 1;
 }
 
 
-- (void)postToFacebook:(MessageTableViewCell *)cell {
+- (void)postToFacebook:(UITableViewCell *)cell {
 
     FacebookAPIPost *facebookAPIPost = [[FacebookAPIPost alloc]init];
     facebookAPIPost.messageTableViewController = self;
@@ -409,20 +536,15 @@ NSInteger footerHeight = 1;
 }
 
 
-
-
-//    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"\u2699"  style:UIBarButtonItemStylePlain target:nil action:nil];
-//    self.navigationItem.rightBarButtonItem.tintColor = [UIColor whiteColor];
-
-
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
 }
 
+#pragma mark - Location Manager
 
 -(void) getUserLocationAlert{
     NSString *alertTitle = @"Let's get your Local Representatives!";
-    NSString *alertMessage = [NSString stringWithFormat:@"We will access your location one time only to get your current location."];
+    NSString *alertMessage = [NSString stringWithFormat:@"We will access your location one time only to get your district."];
     UIAlertController *alertController = [UIAlertController alertControllerWithTitle:alertTitle message:alertMessage preferredStyle:UIAlertControllerStyleAlert];
     
     UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:NSLocalizedString(@"cancel", @"cancel action") style:UIAlertActionStyleDefault handler:^(UIAlertAction *action){
@@ -439,9 +561,7 @@ NSInteger footerHeight = 1;
 
 }
 
-
 -(void) getUserLocation {
-    
 
 //    LocationFinderAPI *locationFinderAPI = [[LocationFinderAPI alloc]init];
 //    locationFinderAPI.messageTableViewController = self;
@@ -585,7 +705,6 @@ NSInteger footerHeight = 1;
     NSArray *rowIndecesInSection = [self.sections objectForKey:category];
     NSNumber *rowIndex = [rowIndecesInSection objectAtIndex:indexPath.row]; //pulling the row indece from array above
 
-
     // Get dictionary from current index on list.
     NSDictionary *dictionary = [self.menuList objectAtIndex:[rowIndex intValue]];
     
@@ -605,7 +724,6 @@ NSInteger footerHeight = 1;
         if (cell == nil){
             NSLog(@"cell was nil");
             cell = [[MessageTableViewMessageCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"CellCategoryMessage"];
-
         }
         
         NSLog(@"loading message cell");
@@ -613,6 +731,7 @@ NSInteger footerHeight = 1;
         [self.tableView addSubview:cell];
         messageItem = [self.menuList objectAtIndex:[rowIndex intValue]];
         [cell configMessageCell:messageItem indexPath:indexPath];
+        
         [cell.contentView layoutIfNeeded];
         [cell setNeedsDisplay];
         [cell layoutIfNeeded];
@@ -630,11 +749,30 @@ NSInteger footerHeight = 1;
         cell.layer.cornerRadius = 3;
         [self.tableView addSubview:cell];
         [cell configMessageCellNoZip:indexPath];
-//        [cell.contentView layoutIfNeeded];
         
-        [cell setNeedsDisplay];
-        [cell layoutIfNeeded];
+//        [cell.contentView layoutIfNeeded];
+//        [cell setNeedsDisplay];
+//        [cell layoutIfNeeded];
         return cell;
+        
+    } else if([category isEqualToString:@"Long Form Email"]) {
+        MessageTableViewEmailCell *cell = [tableView dequeueReusableCellWithIdentifier:@"CellEmail" forIndexPath:indexPath];
+        NSLog(@"loading email cell");
+        if (cell == nil){
+            NSLog(@"cell was nil");
+            cell = [[MessageTableViewEmailCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"CellEmail"];
+        }
+        
+        cell.layer.cornerRadius = 3;
+        [self.tableView addSubview:cell];
+        emailItem = [self.menuList objectAtIndex:[rowIndex intValue]];
+        [cell configEmailCell:emailItem indexPath:indexPath];
+
+        //        [cell.contentView layoutIfNeeded];
+        //        [cell  setNeedsDisplay];
+        //        [cell layoutIfNeeded];
+        return cell;
+
         
     } else if([category isEqualToString:@"Local Representative"]) {
         MessageTableViewRepresentativeCell *cell = [tableView dequeueReusableCellWithIdentifier:@"CellRep" forIndexPath:indexPath];
@@ -648,10 +786,10 @@ NSInteger footerHeight = 1;
         [self.tableView addSubview:cell];
         congressionalMessageItem = [self.menuList objectAtIndex:[rowIndex intValue]];
         [cell configMessageCellLocalRep:congressionalMessageItem indexPath:indexPath];
+
 //        [cell.contentView layoutIfNeeded];
-        
-        [cell setNeedsDisplay];
-        [cell layoutIfNeeded];
+//        [cell setNeedsDisplay];
+//        [cell layoutIfNeeded];
         return cell;
         
     } else {
@@ -665,12 +803,11 @@ NSInteger footerHeight = 1;
         [self.tableView addSubview:cell];
         messageItem = [self.menuList objectAtIndex:[rowIndex intValue]];
         [cell configMessageContactCell:messageItem indexPath:indexPath];
+        
 //        [cell.contentView layoutIfNeeded];
-        
-        
-        [cell setNeedsDisplay];
-        [cell layoutIfNeeded];
-        [cell layoutSubviews];
+//        [cell setNeedsDisplay];
+//        [cell layoutIfNeeded];
+//        [cell layoutSubviews];
         return cell;
     }
 }
@@ -756,14 +893,13 @@ NSInteger footerHeight = 1;
 
 -(UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
 {
-
         UIView *view = [[UIView alloc] initWithFrame:CGRectMake(7, 0, tableView.frame.size.width -14 , sectionHeaderHeight)];
         UILabel *sectionLabel = [[UILabel alloc] init];
         sectionLabel.frame = CGRectMake(7, 0, tableView.frame.size.width -14, sectionHeaderHeight);
         sectionLabel.backgroundColor = [UIColor colorWithRed:.96 green:.96 blue:.96 alpha:1];
         sectionLabel.layer.borderWidth = .5;
         sectionLabel.layer.borderColor = [[UIColor blackColor] CGColor];
-        sectionLabel.font = [UIFont boldSystemFontOfSize:11];
+        sectionLabel.font = [UIFont systemFontOfSize:14];
         sectionLabel.textColor = [UIColor blackColor];
         sectionLabel.layer.cornerRadius = 3;
         sectionLabel.clipsToBounds = YES;
@@ -771,7 +907,6 @@ NSInteger footerHeight = 1;
         sectionLabel.text = [NSString stringWithFormat:@"%@%@%@", padding, [self categoryForSection:section], padding];
         [view addSubview:sectionLabel];
         return view;
-
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section {
@@ -832,6 +967,100 @@ NSInteger footerHeight = 1;
 */
 
 
+#pragma mark - Check Full Name for Email Alert
+- (void) showCheckFullNameWarning {
+    NSString *alertTitle = @"Please enter your name";
+    NSString *alertMessage = [NSString stringWithFormat:@"Please enter both a first and last name."];
+    UIAlertController *alertController = [UIAlertController alertControllerWithTitle:alertTitle message:alertMessage preferredStyle:UIAlertControllerStyleAlert];
+    UIAlertAction *OKAction = [UIAlertAction actionWithTitle:NSLocalizedString(@"OK", @"OK") style:UIAlertActionStyleDefault handler:^(UIAlertAction *action){
+    
+    }];
+    
+    [alertController addAction:OKAction];
+    [self presentViewController:alertController animated:YES completion:nil];
+}
+
+#pragma mark - Phone Call API
+-(void)showPhoneCallAlert:(NSString*)phoneString{
+    NSURL *phoneUrl = [NSURL URLWithString:[NSString  stringWithFormat:@"tel://%@",phoneString]];
+    
+    if ([[UIApplication sharedApplication] canOpenURL:phoneUrl]) {
+        
+        NSString *alertTitle = @"Phone Call";
+        NSString *alertMessage = @"Remember to state your name and your sentiment.  Would you like to call?";
+        UIAlertController *alertController = [UIAlertController alertControllerWithTitle:alertTitle message:alertMessage preferredStyle:UIAlertControllerStyleAlert];
+        
+        //Add cancel button
+        UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:NSLocalizedString(@"Cancel", @"Cancel action") style:UIAlertActionStyleDefault handler:^(UIAlertAction *action){
+            NSLog(@"Cancel action");
+        }];
+        [alertController addAction:cancelAction];
+        
+        //Add OK action button
+        UIAlertAction *okAction = [UIAlertAction actionWithTitle:NSLocalizedString(@"OK", @"OK action") style:UIAlertActionStyleDefault handler:^(UIAlertAction *action){
+            
+            [[UIApplication sharedApplication] openURL:phoneUrl];
+            [self savePhoneCall:phoneUrl];
+            
+            NSLog(@"OK action");
+            
+        }];
+        [alertController addAction:okAction];
+        
+        [self presentViewController:alertController animated:YES completion:nil];
+    } else{
+        UIAlertView *calert = [[UIAlertView alloc]initWithTitle:@"Alert" message:@"Call facility is not available." delegate:nil cancelButtonTitle:@"ok" otherButtonTitles:nil, nil];
+        [calert show];
+    }
+    
+    //    MakePhoneCallAPI *makePhoneCallAPI = [[MakePhoneCallAPI alloc] init];
+    //    makePhoneCallAPI.selectedProgram = self.selectedProgram;
+    //    makePhoneCallAPI.selectedSegment = self.selectedSegment;
+    //    makePhoneCallAPI.selectedContact = self.selectedContact;
+    //    [makePhoneCallAPI dialPhoneNumber:(NSURL*)phoneUrl];
+    
+}
+-(void)savePhoneCall:(NSURL*)phoneURL{
+    //  SAVING MESSAGE DATA TO PARSE
+    PFUser *currentUser = [PFUser currentUser];
+    
+    PFObject *sentMessageItem = [PFObject objectWithClassName:@"sentMessages"];
+    [sentMessageItem setObject:@"phoneCall" forKey:@"messageType"];
+    [sentMessageItem setObject:[phoneURL absoluteString] forKey:@"phoneNumber"];
+    [sentMessageItem setObject:[self.selectedSegment valueForKey:@"segmentID"] forKey:@"segmentID"];
+    [sentMessageItem setObject:[currentUser valueForKey:@"username"] forKey:@"username"];
+    NSString *userObjectID = currentUser.objectId;
+    [sentMessageItem setObject:userObjectID forKey:@"userObjectID"];
+    
+    //if segment then skip, else don't
+    if ([self.selectedContact isKindOfClass:[CongressionalMessageItem class]]) {
+        NSLog(@"Saving congressional Message Item Class");
+        NSString *bioguide_id = [self.selectedContact valueForKey:@"bioguide_id"];
+        NSString *fullName = [self.selectedContact valueForKey:@"fullName"];
+        [sentMessageItem setObject:bioguide_id forKey:@"contactID"];
+        [sentMessageItem setObject:fullName forKey:@"contactName"];
+    } else {
+        NSLog(@"Regular Contact Item Class");
+        NSString *contactID = [self.selectedContact valueForKey:@"contactID"];
+        NSString *targetName = [self.selectedContact valueForKey:@"targetName"];
+        [sentMessageItem setObject:contactID forKey:@"contactID"];
+        [sentMessageItem setObject:targetName forKey:@"contactName"];
+    }
+    
+    
+    [sentMessageItem saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) { //save sent message to parse
+        if(error){
+            NSLog(@"error, message not saved");
+        }
+        else {
+            NSLog(@"no error, message saved");
+            [self viewDidLoad];
+        }
+    }];
+}
+
+
+
 #pragma mark - Navigation
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
@@ -851,7 +1080,7 @@ NSInteger footerHeight = 1;
         messageOptionsViewController.messageOptionsList = self.messageOptionsList;
         messageOptionsViewController.menuList = self.menuList;
         
-        NSLog(@"segway to Message Options: messageOptionsList:%@,%@", self.messageOptionsList, messageOptionsViewController.messageOptionsList);
+        //NSLog(@"segway to Message Options: messageOptionsList:%@,%@", self.messageOptionsList, messageOptionsViewController.messageOptionsList);
         
     } else if ([segue.identifier isEqualToString:@"showSettings"]){
         SettingsTableViewController *settingsTableVC = [segue destinationViewController];
@@ -864,9 +1093,13 @@ NSInteger footerHeight = 1;
         composeViewController.selectedProgram = self.selectedProgram;
         composeViewController.facebookAPIPost = (FacebookAPIPost*)sender;
         NSLog(@"sender:%@",sender);
+    } else if ([segue.identifier isEqualToString:@"showWebViewControllerEmail"]){
+        WebViewController *webViewController =  [segue destinationViewController];
+        webViewController.selectedLink = self.linkToEmail;
+        NSLog(@"selected link program detail %@:",webViewController.selectedLink);
     }
-}
 
+}
 
 
 @end

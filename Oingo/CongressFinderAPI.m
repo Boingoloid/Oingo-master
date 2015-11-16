@@ -20,7 +20,7 @@
 
 
 -(void)getCongressWithLatitude:(double)latitude andLongitude:(double)longitude addToMessageList:(NSMutableArray*)messageList {
-    NSLog(@"Congress Finder triggered: self.messageTableViewController.messageOptionsList (last object): %@",[self.messageTableViewController.messageOptionsList lastObject]);
+    //NSLog(@"Congress Finder triggered: self.messageTableViewController.messageOptionsList (last object): %@",[self.messageTableViewController.messageOptionsList lastObject]);
 // Method called when finding representatives by Lat/Long
     
     
@@ -114,7 +114,7 @@
     self.messageTableViewController.messageListWithCongress = self.messageListWithCongress;
     self.messageTableViewController.isCongressLoaded = YES;
     self.messageTableViewController.messageOptionsList = self.messageOptionsList;
-    NSLog(@"congress datat received, viewDidLoad on MessageTableView, now with Congress. self.messageTVC.messageOptionsList%@",self.messageTableViewController.messageOptionsList);
+    //NSLog(@"congress datat received, viewDidLoad on MessageTableView, now with Congress. self.messageTVC.messageOptionsList%@",self.messageTableViewController.messageOptionsList);
     [self.messageTableViewController viewDidLoad];
 }
 
@@ -132,6 +132,7 @@
         CongressionalMessageItem *congressionalMessageItem = [[CongressionalMessageItem alloc] init];
         
         [congressionalMessageItem setValue:@"Local Representative" forKey:@"messageCategory"];
+        
         [congressionalMessageItem setValue:[congresspersonObject valueForKey:@"bioguide_id"] forKey:@"bioguide_id"];
         congressionalMessageItem.contactID = [congresspersonObject valueForKey:@"bioguide_id"];
         [congressionalMessageItem setValue:self.segmentID forKey:@"segmentID"];

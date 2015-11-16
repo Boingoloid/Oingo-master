@@ -23,6 +23,12 @@
 @property (weak, nonatomic) IBOutlet UIImageView *messageImage;
 @property (weak, nonatomic) IBOutlet UILabel *targetTitleLabel;
 
+// Touch Capture
+@property (weak, nonatomic) IBOutlet UIImageView *emailTouchCaptureImageView;
+@property (weak, nonatomic) IBOutlet UIImageView *phoneTouchCaptureImageView;
+@property (weak, nonatomic) IBOutlet UIImageView *tweetTouchCaptureImageView;
+@property (weak, nonatomic) IBOutlet UIImageView *webFormTouchCaptureImageView;
+
 - (void) configMessageCellNoZip:(NSIndexPath*)indexPath;
 
 @end

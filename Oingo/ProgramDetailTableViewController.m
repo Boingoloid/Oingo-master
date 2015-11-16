@@ -30,13 +30,16 @@ Segment *segment;
 - (void) viewWillAppear:(BOOL)animated {
     [super viewWillAppear:YES];
     [super viewDidAppear:animated];
-    [self.tableView setNeedsLayout];  //may not need these as I'm doing it in the cells individually.
-    [self.tableView layoutIfNeeded]; //may not need these as I'm doing it in the cells individually.
-    [self.tableView reloadData];
+//    [self.tableView setNeedsLayout];  //may not need these as I'm doing it in the cells individually.
+//    [self.tableView layoutIfNeeded]; //may not need these as I'm doing it in the cells individually.
+//    [self.tableView reloadData];
 
 }
 - (void)viewWillTransitionToSize:(CGSize)size withTransitionCoordinator:(id<UIViewControllerTransitionCoordinator>)coordinator
 {
+//    [self.tableView setNeedsDisplay];
+//    [self.tableView setNeedsLayout];
+//    [self.tableView layoutIfNeeded];
     [self.tableView reloadData];
     [super viewWillTransitionToSize:size withTransitionCoordinator:coordinator];
 }
@@ -44,9 +47,11 @@ Segment *segment;
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-
-    self.tableView.estimatedRowHeight = 100;
+//    self.view.translatesAutoresizingMaskIntoConstraints = NO;
+    self.tableView.estimatedRowHeight = 44;
     self.tableView.rowHeight = UITableViewAutomaticDimension;
+    
+    
     
     //Separator style for tableview
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
@@ -82,6 +87,8 @@ Segment *segment;
     tapRocognizer.numberOfTapsRequired = 1;
     tapRocognizer.numberOfTouchesRequired = 1;
     [self.tableView addGestureRecognizer:tapRocognizer];
+    
+
 }
 
 
@@ -180,6 +187,7 @@ Segment *segment;
     [cell configSegmentCell:segment];
     [cell setNeedsDisplay];
     [cell layoutIfNeeded];
+    
     return cell;
 }
 //
@@ -187,6 +195,14 @@ Segment *segment;
 //    return 112;
 //}
 
+-(CGFloat)tableView:(UITableView *)tableView estimatedHeightForRowAtIndexPath:(NSIndexPath *)indexPath{
+    return 44;
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
+//    NSLog(@"Section %ld Row %ld", (long)[indexPath section], (long)[indexPath row]);
+    return UITableViewAutomaticDimension;
+}
 
 #pragma mark - Sections
 
@@ -291,6 +307,7 @@ Segment *segment;
     if ([segue.identifier isEqualToString:@"showWebViewController"]){
         WebViewController *webViewController =  [segue destinationViewController];
         webViewController.selectedLink = self.selectedLink;
+        NSLog(@"selected link program detail %@:",webViewController.selectedLink);
     }
     
     // Get the new view controller using [segue destinationViewController].

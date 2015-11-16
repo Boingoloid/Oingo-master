@@ -15,9 +15,9 @@
 #import <QuartzCore/QuartzCore.h>
 #import <FBSDKShareKit/FBSDKShareKit.h>
 #import <FBSDKCoreKit/FBSDKCoreKit.h>
-#import <TwitterKit/TwitterKit.h>
 #import <Fabric/Fabric.h>
-//#import <Crashlytics/Crashlytics.h>
+#import <TwitterKit/TwitterKit.h>
+#import <Crashlytics/Crashlytics.h>
 #import <Accounts/Accounts.h>
 #import <Social/Social.h>
 #import "CongressionalMessageItem.h"
@@ -35,27 +35,27 @@
     //Assign message item
     self.congressionalMessageItem = congressionalMessageItem;
     
-    if([[self.congressionalMessageItem valueForKey:@"isCollapsed"]  isEqual: @YES]){
-        
-        NSLog(@"isCollapsed congress cell:%@",[self.congressionalMessageItem valueForKey:@"isCollapsed"]);
-        //hide everything bc row height is zero
-        self.targetName.hidden = YES;
-        self.targetTitleLabel.hidden = YES;
-        self.messageImage.hidden = YES;
-        self.sendCount.hidden = YES;
-        
-        self.tweetButton.hidden = YES;
-        self.tweetSuccessImageView.hidden = YES;
-        self.emailButton.hidden = YES;
-        self.emailSuccessImageView.hidden = YES;
-        self.phoneButton.hidden = YES;
-        self.webFormButton.hidden = YES;
-        
-        self.zipCodeButton.hidden = YES;
-        self.locationButton.hidden = YES;
-        self.zipLabel.hidden = YES;
-    
-    }else {
+//    if([[self.congressionalMessageItem valueForKey:@"isCollapsed"]  isEqual: @YES]){
+//        
+//        NSLog(@"isCollapsed congress cell:%@",[self.congressionalMessageItem valueForKey:@"isCollapsed"]);
+//        //hide everything bc row height is zero
+//        self.targetName.hidden = YES;
+//        self.targetTitleLabel.hidden = YES;
+//        self.messageImage.hidden = YES;
+//        self.sendCount.hidden = YES;
+//        
+//        self.tweetButton.hidden = YES;
+//        self.tweetSuccessImageView.hidden = YES;
+//        self.emailButton.hidden = YES;
+//        self.emailSuccessImageView.hidden = YES;
+//        self.phoneButton.hidden = YES;
+//        self.webFormButton.hidden = YES;
+//        
+//        self.zipCodeButton.hidden = YES;
+//        self.locationButton.hidden = YES;
+//        self.zipLabel.hidden = YES;
+//    
+//    }else {
 
         self.targetName.hidden = NO;
         self.targetTitleLabel.hidden = NO;
@@ -64,7 +64,12 @@
         self.phoneButton.hidden = NO;
         self.webFormButton.hidden = NO;
         self.messageImage.hidden = NO;
-        
+    
+//        self.tweetTouchCaptureImageView.hidden = NO;
+//        self.emailTouchCaptureImageView.hidden = NO;
+//        self.phoneTouchCaptureImageView.hidden = NO;
+//        self.webFormTouchCaptureImageView.hidden = NO;
+    
         // Hide all other fields
         self.locationButton.hidden = YES;
         self.zipCodeButton.hidden = YES;
@@ -105,7 +110,7 @@
         // Add information from congressional message iterm to properties of cell
         self.targetName.text = [NSString stringWithFormat:@"%@ /",[congressionalMessageItem valueForKey:@"fullName"]];
         self.targetTitleLabel.text = [congressionalMessageItem valueForKey:@"title"];
-        self.contantForm = [self.congressionalMessageItem valueForKey:@"contactForm"];
+        self.contactForm = [self.congressionalMessageItem valueForKey:@"contactForm"];
         self.phone = [self.congressionalMessageItem valueForKey:@"phone"];
         self.website = [self.congressionalMessageItem valueForKey:@"website"];
         self.openCongressEmail = [self.congressionalMessageItem valueForKey:@"openCongressEmail"];
@@ -127,7 +132,8 @@
         self.messageImage.layer.borderColor = [[UIColor blackColor] CGColor];
         self.messageImage.clipsToBounds = YES;
         self.messageImage.layer.cornerRadius = 3;
-    }
+//    }  // Lower bracket for isCollapsed above
+    
         [self.contentView setNeedsDisplay];
 }
 
@@ -142,7 +148,9 @@
     int inset = 10;
     frame.origin.x += inset; //equal to saying originx = originx + inset
     frame.size.width -= 2 * inset; //mult by 2 b/c taking from both sides
-    [super setFrame:frame];
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [super setFrame:frame];
+    });
     
 }
 

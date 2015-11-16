@@ -92,10 +92,32 @@ BOOL isLocationInfoAvailable = NO;
             
             dispatch_async(dispatch_get_main_queue(), ^{
                 
+                
+                
+//// TOGGLE OFF FOR PRODUCTION: -----------------------------------------------------
                 // 1)Grab results, and create deep copy of data
-                //NSLog(@" first deep copy:%@", self.messageListFromParseWithContacts);
-                self.messageListFromParseWithContacts = (NSMutableArray*)[self createDeepCopyOfData:objects];
+//                self.messageListFromParseWithContacts = (NSMutableArray*)[self createDeepCopyOfData:objects];
+                
+                
+////  TOGGLE ON FOR PRODUCTION:  --------------------------------------------------------------------------------------------
+//// 1.5 Deletes any cells labeled as experimental so I don't break the current build on app store.
+////  Toggle this code ON for deployment builds so that new categories do not break the MessageTableViewController
+//// COMMENT OUT DEEP COPY LINE DIRECTLY ABOVE IF ACTIVE - not a must, but more efficient to not make 2 deep copies
+//*******************************************************************************************************************************
 
+                NSMutableArray *nonExperimentalMutableArray = [[NSMutableArray alloc] initWithCapacity:10];
+                for (NSDictionary *dictionary in objects){
+                    NSNumber *isExperimentalNumber = [dictionary valueForKey:@"isExperimental"];
+                    bool isExperimentalBool = [isExperimentalNumber boolValue];
+                    if(!isExperimentalBool) {
+                        [nonExperimentalMutableArray addObject:dictionary];
+                    } else {
+                        NSLog(@"Object is experimental, don't add: %@",dictionary);
+                    }
+                }
+                self.messageListFromParseWithContacts = (NSMutableArray*)[self createDeepCopyOfData:nonExperimentalMutableArray];
+//*******************************************************************************************************************************
+                
                 
                 // 2) Check for message cell for category = "Local Representative"
                 isLocalRepMessageIncluded = [self isLocalRepIncluded];
@@ -176,7 +198,6 @@ BOOL isLocationInfoAvailable = NO;
 }
 
 
-
 # pragma mark - Prep Sections
 
 -(void)prepSections:messageList {
@@ -191,12 +212,12 @@ BOOL isLocationInfoAvailable = NO;
 //    }
 //    
 //    NSLog(@"arrayMessages%@",arrayMessages);
-    NSLog(@"Prep sections triggered, here is the self.messageOptionsList input:%@",self.messageOptionsList);
-    NSLog(@"Prep sections triggered, here is the self.parselistWithContacts %@",self.messageListFromParseWithContacts);
-    NSLog(@"Prep sections triggered, here is the messageList %@",[messageList firstObject]);
-    NSLog(@"Prep sections triggered, here is the self.menulist %@",[self.menuList lastObject]);
+//    NSLog(@"Prep sections triggered, here is the self.messageOptionsList input:%@",self.messageOptionsList);
+//    NSLog(@"Prep sections triggered, here is the self.parselistWithContacts %@",self.messageListFromParseWithContacts);
+//    NSLog(@"Prep sections triggered, here is the messageList %@",[messageList firstObject]);
+//    NSLog(@"Prep sections triggered, here is the self.menulist %@",[self.menuList lastObject]);
     
-    [self separateMessagesFromContacts:messageList]; //create self.messageList and self.contactList
+    [self separateMessagesFromContacts:messageList]; //create self.messageList and self.contactList and other
     [self createMenuList]; //creates self.menuList - these are th   e grouopings for sections
 
     
@@ -209,11 +230,11 @@ BOOL isLocationInfoAvailable = NO;
             self.sections = [NSMutableDictionary dictionary];
             self.sectionToCategoryMap = [NSMutableDictionary dictionary];
         }
-    //Loops through every messageItem in the messageList and creates 2 dictionaries with index values and categories.
+    //Loops through every Item in the messageList and creates 2 dictionaries with index values and categories.
     NSInteger section = 0;
     NSInteger rowIndex = 0; //now 1
-    for (MessageItem  *messageItem in self.menuList) {
-        NSString *category = [messageItem valueForKey:@"messageCategory"]; //retrieves category for each message -1st regulator
+    for (NSMutableDictionary *dictionaryItem in self.menuList) {
+        NSString *category = [dictionaryItem valueForKey:@"messageCategory"]; //retrieves category for each message -1st regulator
         NSMutableArray *objectsInSection = [self.sections objectForKey:category]; //assigns objectsInSection value of sections for current category
         if (!objectsInSection) {
             objectsInSection = [NSMutableArray array];  //if new create array
@@ -233,8 +254,8 @@ BOOL isLocationInfoAvailable = NO;
     self.messageTableViewController.messageOptionsList = self.messageOptionsList;
     
     
-    NSLog(@"1) self.messageTableViewController:%@",self.messageTableViewController);
-    NSLog(@"2) self.messageOptions:%@",[self.messageOptionsList firstObject]); //this one
+//    NSLog(@"1) self.messageTableViewController:%@",self.messageTableViewController);
+//    NSLog(@"2) self.messageOptions:%@",[self.messageOptionsList firstObject]); //this one
     
     self.messageTableViewController.expandSectionsKeyList = self.expandSectionsKeyList;
     
@@ -252,8 +273,12 @@ BOOL isLocationInfoAvailable = NO;
         MarkSentMessageAPI *markSentMessagesAPI = [[MarkSentMessageAPI alloc]init];
         markSentMessagesAPI.messageTableViewController = self.messageTableViewController;
         [markSentMessagesAPI markSentMessages];
+        
+        
     }
     self.isCongressLoaded = NO;
+    
+    
 }
 
 # pragma mark - Prep Sections Helper Methods
@@ -266,12 +291,17 @@ BOOL isLocationInfoAvailable = NO;
     
     NSMutableArray *messageTextList = [[NSMutableArray alloc]init];
     NSMutableArray *contactList = [[NSMutableArray alloc]init];
+    NSMutableArray *otherList = [[NSMutableArray alloc]init];
     
     for (NSDictionary *dictionary in messageListWithContactsSorted) {
+        NSLog(@"[dictionary valueForKey:@messageCategory]:%@",[dictionary valueForKey:@"messageCategory"]);
         NSNumber *isMessageNumber = [dictionary valueForKey:@"isMessage"];
         bool isMessageBool = [isMessageNumber boolValue];
         if(isMessageBool) {
             [messageTextList addObject:dictionary];
+        } else if ([[dictionary valueForKey:@"messageCategory"] isEqualToString:@"Long Form Email"]){
+            NSLog(@"[dictionary valueForKey:@messageCategory]:%@",[dictionary valueForKey:@"messageCategory"]);
+            [otherList addObject:dictionary];
         }else {
             [contactList addObject:dictionary];
         }
@@ -284,49 +314,45 @@ BOOL isLocationInfoAvailable = NO;
     }
     
     self.contactList = contactList;
+    self.otherList = otherList;
     //    NSLog(@"contactlist:%@ messageList: %@",contactList,messageTextList);
 }
 
 
 -(void)createMenuList{
     
+    // 1) Sep up objects
     if(self.menuList) {
         [self.menuList removeAllObjects];
     } else {
         self.menuList = [[NSMutableArray alloc]init];
     }
     
-    if(self.expandSectionsKeyList) {
-        [self.expandSectionsKeyList removeAllObjects];
-    } else {
-        self.expandSectionsKeyList = [[NSMutableArray alloc]init];
-    }
+//
+//    if(self.expandSectionsKeyList) {
+//        [self.expandSectionsKeyList removeAllObjects];
+//    } else {
+//        self.expandSectionsKeyList = [[NSMutableArray alloc]init];
+//    }
     
     NSString *category = @"";
     NSUInteger contactIndex = 0;
-    NSUInteger localRepIndex = 0;
     
-    // For every contact, goes to messageTextList and pulls first entry for display
+    // 2) For every section grabs 1 message, then fills in contacts beneath
     for (NSMutableDictionary *contactRow in self.contactList) {
         
         //add "success" bools
         [contactRow setValue:@NO forKey:@"isTweetSent"];
         
+        
         if(category != [contactRow valueForKey:@"messageCategory"]){
             category = [contactRow valueForKey:@"messageCategory"];
-            
-            
-            // Keep a count here.  if local rep, increment
-            if ([category  isEqual: @"Local Representative"]) {
-                localRepIndex ++;
-            }
             
             NSUInteger index = [self.messageTextList indexOfObjectPassingTest:
                                 ^BOOL(NSDictionary *dict, NSUInteger idx, BOOL *stop) {
                                     return [[dict objectForKey:@"messageCategory"] isEqual:category];
                                 }];
-            
-            MessageItem *messageToAdd = [self.messageTextList objectAtIndex:index];
+            NSMutableDictionary *messageToAdd = [self.messageTextList objectAtIndex:index];
             [self.menuList addObject:messageToAdd];
             //            [contactRow setValue:@NO forKey:@"isCollapsed"]; // makes sure at least one contact is expanded
             [self.menuList addObject:contactRow];
@@ -337,27 +363,16 @@ BOOL isLocationInfoAvailable = NO;
             //            [expandSectionTempDictionary setValue:category forKey:@"Category"];
             //            [expandSectionTempDictionary setValue:@YES forKey:@"isSectionExpanded"];
             //            [self.expandSectionsKeyList addObject:expandSectionTempDictionary];
-            
         } else {
-            
-            //            if ([category  isEqual: @"Local Representative"]) {
-            //                localRepIndex ++;
-            //            }
-            //
-            //            if(localRepIndex >= 3){
-            //                [contactRow setValue:@YES forKey:@"isCollapsed"];
-            //            }
-            
             [self.menuList addObject:contactRow];
         }
-        
         contactIndex++;
-        
     }
-    
+    [self.menuList addObjectsFromArray:self.otherList];
+    NSLog(@"self.otherList:%@",self.otherList);
+    NSLog(@"self.contactList:%@",self.contactList);
+    NSLog(@"self.messageList:%@",self.messageTextList);
 }
-
-
 
 
 # pragma mark - Helper Methods like sorting
@@ -437,8 +452,8 @@ BOOL isLocationInfoAvailable = NO;
     
     self.messageOptionsList = messagesDeepCopyArray;
     self.messageTableViewController.messageOptionsList = self.messageOptionsList;
-    NSLog(@"deep copy of messageOptionsList (deep copy):%@",[self.messageOptionsList firstObject]);
-        NSLog(@"self.messagetableviewcontroller.messageOptionsList last object(deep copy):%@",[self.messageTableViewController.messageOptionsList lastObject]);
+//    NSLog(@"deep copy of messageOptionsList (deep copy):%@",[self.messageOptionsList firstObject]);
+//        NSLog(@"self.messagetableviewcontroller.messageOptionsList last object(deep copy):%@",[self.messageTableViewController.messageOptionsList lastObject]);
     
     return allDataDeepCopyArray;
     

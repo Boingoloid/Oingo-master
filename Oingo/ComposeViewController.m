@@ -21,8 +21,6 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-
-    
     // Format messageTextView field
     self.messageTextView.layer.borderColor = [[UIColor whiteColor] CGColor];
     self.messageTextView.layer.borderWidth = 1.0;
@@ -64,6 +62,18 @@
 }
 */
 
+- (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
+    [super touchesBegan:touches withEvent:event];
+    
+    //hide the keyborad
+    UITouch *touch = [[event allTouches] anyObject];
+    if ([self.messageTextView isFirstResponder] && [touch view] != self.messageTextView) {
+        [self.messageTextView resignFirstResponder];
+    }
+    
+}
+
+
 - (IBAction)send:(id)sender {
     NSString *postMessage = self.messageTextView.text; // Nothing b/c sharing segment
     NSString *linkName = [NSString stringWithFormat:@"%@: %@",[self.selectedProgram valueForKey:@"programTitle"],[self.selectedSegment valueForKey:@"segmentTitle"]];  // Everything is the same except for this line.
@@ -82,7 +92,5 @@
 
     [self.navigationController popViewControllerAnimated:YES];
     
-// for modal, I think
-// [self.presentingViewController dismissViewControllerAnimated:NO completion:nil];
 }
 @end

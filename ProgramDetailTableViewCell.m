@@ -36,7 +36,6 @@
     self.purposeSummary.text = [segment valueForKey:@"purposeSummary"];
     [self.linkToContentButton setTitle:[segment valueForKey:@"linkToContent"] forState:UIControlStateNormal];
     
-    
     // Get the date
     NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
     [dateFormatter setDateStyle:NSDateFormatterShortStyle];

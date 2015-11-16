@@ -13,8 +13,7 @@
 #import "MessageItem.h"
 
 @interface EmailComposerViewController ()<MFMailComposeViewControllerDelegate, UINavigationControllerDelegate>
-//MFMessageComposeViewControllerDelegate
-// UILabel for displaying the result of the sending the message.
+
 @property (nonatomic, weak) IBOutlet UILabel *feedbackMsg;
 @end
 
@@ -44,26 +43,9 @@
 //  IBAction for the Compose Mail button.
 // -------------------------------------------------------------------------------
 - (void)showMailPicker:(NSString*)email withMessage:(NSString *)message {
-    
-
-
-    
-    
-    
-    // You must check that the current device can send email messages before you
-    // attempt to create an instance of MFMailComposeViewController.  If the
-    // device can not send email messages,
-    // [[MFMailComposeViewController alloc] init] will return nil.  Your app
-    // will crash when it calls -presentViewController:animated:completion: with
-    // a nil view controller.
-    if ([MFMailComposeViewController canSendMail])
-        // The device can send email.
-    {
+    if ([MFMailComposeViewController canSendMail]){
         [self displayMailComposerSheet:email withMessage:message];
-    }
-    else
-        // The device can not send email.
-    {
+    } else {
         self.feedbackMsg.hidden = NO;
         self.feedbackMsg.text = @"Device not configured to send mail.";
     }
@@ -81,13 +63,12 @@
 {
     MFMailComposeViewController *picker = [[MFMailComposeViewController alloc] init];
     picker.mailComposeDelegate = self;
-    
-
 
     NSString *subject = [NSString stringWithFormat:@"Message from local voter re: %@",[self.selectedSegment valueForKey:@"segmentTitle"]];
     [picker setSubject:subject];
     
     // Set up recipients
+    NSLog(@"email:%@",email);
     NSArray *toRecipients = [NSArray arrayWithObject:email];
 //    NSArray *ccRecipients = [NSArray arrayWithObjects:@"", nil];
 //    NSArray *bccRecipients = [NSArray arrayWithObject:@""];
@@ -102,13 +83,15 @@
 //    [picker addAttachmentData:myData mimeType:@"image/jpeg" fileName:@"rainy"];
     
     // Fill out the email body text
-
-    
-    NSString *pushThoughtFooter = @"Sent via PushThought App!";
     NSString *emailBody = message;
+    NSString *pushThoughtFooter = @"Sent via PushThought App!";
+    
     NSString *fullEmailBodyText =[NSString stringWithFormat:@"%@\n\nPlease check out this segment for background:%@\n\n%@",emailBody, [self.selectedSegment valueForKey:@"linkToContent"],pushThoughtFooter];
+
     [picker setMessageBody:fullEmailBodyText isHTML:NO];
     
+    
+//    [self.navigationController pushViewController:picker animated:YES];
     [self presentViewController:picker animated:YES completion:NULL];
     
     
@@ -133,17 +116,19 @@
     {
         case MFMailComposeResultCancelled:
             [self dismissViewControllerAnimated:YES completion:NULL];
-            [self dismissViewControllerAnimated:YES completion:NULL];
+            [self.navigationController popViewControllerAnimated:NO];
             NSLog(@"email canceled");
+            break;
         case MFMailComposeResultSaved:
 //            self.feedbackMsg.text = @"Result: Mail saved";
             [self dismissViewControllerAnimated:YES completion:NULL];
-            [self dismissViewControllerAnimated:YES completion:NULL];
+            [self.navigationController popViewControllerAnimated:NO];
             NSLog(@"email saved");
+            break;
         case MFMailComposeResultSent:{
 //            self.feedbackMsg.text = @"Result: Mail sent";
             [self dismissViewControllerAnimated:YES completion:NULL];
-            [self dismissViewControllerAnimated:YES completion:NULL];
+            [self.navigationController popViewControllerAnimated:NO];
             
             
             //  SAVING MESSAGE DATA TO PARSE
@@ -188,19 +173,19 @@
             [self.messageTableViewController viewDidLoad];
             
         }
-//            break;
+            break;
         case MFMailComposeResultFailed:
 //            self.feedbackMsg.text = @"Result: Mail sending failed";
             [self dismissViewControllerAnimated:YES completion:NULL];
-            [self dismissViewControllerAnimated:YES completion:NULL];
-//            break;
+            [self.navigationController popViewControllerAnimated:NO];
+            break;
         default:
 //            self.feedbackMsg.text = @"Result: Mail not sent";
             [self dismissViewControllerAnimated:YES completion:NULL];
-            [self dismissViewControllerAnimated:YES completion:NULL];
-//            break;
+            [self.navigationController popViewControllerAnimated:NO];
+            break;
     }
-//    [self dismissViewControllerAnimated:YES completion:NULL];
+
 }
 
 

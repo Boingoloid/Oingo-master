@@ -69,22 +69,42 @@
         self.targetTitleLabel.hidden = NO;
         self.messageImage.hidden = NO;
         self.sendCount.hidden = NO;
+    
+    
+    if([self.messageItem valueForKey:@"twitterID"]){
         self.tweetButton.hidden = NO;
-        
+    } else {
+        self.tweetButton.hidden = YES;
+    }
+
+    if([self.messageItem valueForKey:@"email"]){
+        self.emailButton.hidden = NO;
+    } else {
+        self.emailButton.hidden = YES;
+    }
+
+    
+//        //Touch Fields
+//        self.tweetTouchCaptureImageView.hidden = NO;
+//        self.emailTouchCaptureImageView.hidden = NO;
+//        self.phoneTouchCaptureImageView.hidden = NO;
+//        self.webFormTouchCaptureImageView.hidden = NO;
+    
         //Hide fields
         self.zipCodeButton.hidden = YES;
         self.locationButton.hidden = YES;
         self.zipLabel.hidden = YES;
 
-        self.emailButton.hidden = YES;
+
         self.phoneButton.hidden = YES;
         self.webFormButton.hidden = YES;
+    
         self.tweetSuccessImageView.hidden = YES;
         self.emailSuccessImageView.hidden = YES;
 
     
     // Success fields
-        //Twitter
+        //Twitter success
         NSNumber *sendTweetNumberBool = [messageItem valueForKey:@"isTweetSent"];
         bool sendTweetBool = [sendTweetNumberBool boolValue];
         if(sendTweetBool) {
@@ -93,7 +113,7 @@
             self.tweetSuccessImageView.hidden = YES;
         }
     
-        //Email
+        //Email success
         NSNumber *sendEmailNumberBool = [messageItem valueForKey:@"isEmailSent"];
         bool sendEmailBool = [sendEmailNumberBool boolValue];
         if(sendEmailBool) {
@@ -102,7 +122,7 @@
             self.emailSuccessImageView.hidden = YES;
         }
     
-        //Phone call
+        //Phone call success
         NSNumber *sendPhoneNumberBool = [messageItem valueForKey:@"isPhoneSent"];
         bool sendPhoneBool = [sendPhoneNumberBool boolValue];
         if(sendPhoneBool) {
@@ -115,14 +135,16 @@
         self.targetName.text = [NSString stringWithFormat:@"%@ /",[messageItem valueForKey:@"targetName"]];
         self.targetTitleLabel.text = [messageItem valueForKey:@"targetTitle"];
         
+        
         //load program image from Parse and format
         self.messageImage.image = [messageItem objectForKey:@"messageImage"];
         self.messageImage.layer.borderWidth = .5;
         self.messageImage.layer.borderColor = [[UIColor blackColor] CGColor];
         self.messageImage.layer.cornerRadius = 3.0;
         self.messageImage.clipsToBounds = YES;
-        [self.contentView layoutSubviews];
-        [self.contentView setNeedsDisplay];
+    
+//        [self.contentView layoutSubviews];
+//        [self.contentView setNeedsDisplay];
     
 //    }
 }
@@ -138,7 +160,9 @@
     int inset = 10;
     frame.origin.x += inset; //equal to saying originx = originx + inset
     frame.size.width -= 2 * inset; //mult by 2 b/c taking from both sides
-    [super setFrame:frame];
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [super setFrame:frame];
+    });
 
 }
 

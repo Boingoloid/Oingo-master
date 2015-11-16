@@ -12,6 +12,7 @@
 @implementation MarkSentMessageAPI
 
 
+
 -(void)markSentMessages{
     NSLog(@"Mark Sent Triggerd");
     PFUser *currentUser = [PFUser currentUser];
@@ -36,12 +37,11 @@
                     [self checkTwitterShareForSegment];
                     [self checkTwitterShareForContacts];
                     [self checkFacebookShareForSegment];
+                    [self checkLongFormEmail];
                     [self checkEmail];
                     [self checkPhone];
                     NSLog(@"reloading data from MarkSentMessages");
                     [self.messageTableViewController.tableView reloadData];
-
-
                 });
             } else {
                 NSLog(@"Error: %@ %@", error, [error userInfo]);
@@ -105,6 +105,31 @@
     }
 }
 
+-(void)checkLongFormEmail {
+    for (NSDictionary *dictionary in self.sentMessagesForSegment) {
+        if ([[dictionary valueForKey:@"messageType"] isEqualToString:@"Long Form Email"]){
+            
+            // if long form email I need to grab contact id and email icon on cell in menulist.
+
+            NSArray *menuList = self.messageTableViewController.menuList;            
+            
+            // find the index in menulist where contact is, change flag for twitter icon
+            NSUInteger index = [menuList indexOfObjectPassingTest:
+                                ^BOOL(NSDictionary *dict, NSUInteger idx, BOOL *stop) {
+                                    return [[dict valueForKey:@"messageCategory"] isEqualToString:@"Long Form Email"];  //but is it called contact id in menulist?
+                                }];
+            
+            if(index == NSNotFound){
+                //NSLog(@"no index sent found");
+                // Do nothing
+            } else {
+                [[self.messageTableViewController.menuList objectAtIndex:index] setValue:@YES forKey:@"isLongFormEmailSent"];
+            }
+        }
+    }
+
+}
+
 -(void)checkEmail{
     for (NSDictionary *dictionary in self.sentMessagesForSegment) {
         if ([[dictionary valueForKey:@"messageType"] isEqualToString:@"email"]){
@@ -157,9 +182,6 @@
         }
     }
 }
-
-
-
 
 
 @end

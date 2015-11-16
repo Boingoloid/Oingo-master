@@ -33,7 +33,7 @@
     self.zipCodeButton.layer.cornerRadius = 8;
     self.zipCodeButton.clipsToBounds = YES;
 //    [self.contentView layoutIfNeeded];
-    [self.contentView setNeedsDisplay];
+//    [self.contentView setNeedsDisplay];
 }
 
 
@@ -41,7 +41,9 @@
     int inset = 10;
     frame.origin.x += inset; //equal to saying originx = originx + inset
     frame.size.width -= 2 * inset; //mult by 2 b/c taking from both sides
-    [super setFrame:frame];
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [super setFrame:frame];
+    });
     
 }
 //- (void)prepareForReuse {
