@@ -29,6 +29,10 @@ Segment *segment;
 
 - (void) viewWillAppear:(BOOL)animated {
     [super viewWillAppear:YES];
+    [super viewDidAppear:animated];
+    [self.tableView setNeedsLayout];  //may not need these as I'm doing it in the cells individually.
+    [self.tableView layoutIfNeeded]; //may not need these as I'm doing it in the cells individually.
+    [self.tableView reloadData];
 
 }
 - (void)viewWillTransitionToSize:(CGSize)size withTransitionCoordinator:(id<UIViewControllerTransitionCoordinator>)coordinator
@@ -38,10 +42,15 @@ Segment *segment;
 }
 
 - (void)viewDidLoad {
+    [super viewDidLoad];
     
+
+    self.tableView.estimatedRowHeight = 100;
+    self.tableView.rowHeight = UITableViewAutomaticDimension;
     
     //Separator style for tableview
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+    
     
     //Pulling data for tablecell from Parse (filtered by selected program i.e. List of all associated with the Daily Show.)
     PFQuery *query = [PFQuery queryWithClassName:@"Segments"];
@@ -51,7 +60,6 @@ Segment *segment;
             self.segmentList = objects;
             dispatch_async(dispatch_get_main_queue(), ^{
                 [self prepSegmentSections:self.segmentList];
-                [self.tableView reloadData];
             });
         } else {
             NSLog(@"Error: %@ %@", error, [error userInfo]);
@@ -67,7 +75,7 @@ Segment *segment;
     NSString* padding = @"  "; // # of spaces
     self.programTitleHeaderLabel.text = [NSString stringWithFormat:@"%@%@%@", padding,[self.selectedProgram valueForKey:@"programTitle"], padding];
     
-    [super viewDidLoad];
+
     //Create gesture recognizer,
     UITapGestureRecognizer *tapRocognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(respondToTapGesture:)]; //connect recognizer to action method.
     tapRocognizer.delegate = self;
@@ -141,6 +149,8 @@ Segment *segment;
         [objectsInSection addObject:[NSNumber numberWithInt:(int)rowIndex++]]; //adds index number to objectsInSection temp array.
         [self.sections setObject:objectsInSection forKey:dateGroup]; //overwrite 1st object with new objects (2 regulatory objects).
     }
+    [self.tableView setNeedsLayout];
+    [self.tableView layoutIfNeeded];
     [self.tableView reloadData];
 }
 
@@ -168,12 +178,14 @@ Segment *segment;
     ProgramDetailTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"Cell" forIndexPath:indexPath];
     segment = [self.segmentList objectAtIndex:[rowIndex intValue]];
     [cell configSegmentCell:segment];
+    [cell setNeedsDisplay];
+    [cell layoutIfNeeded];
     return cell;
 }
-
-- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    return 112;
-}
+//
+//- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
+//    return 112;
+//}
 
 
 #pragma mark - Sections

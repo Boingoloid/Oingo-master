@@ -58,16 +58,21 @@ NSInteger headerHeight = 48;
 NSInteger footerHeight = 1;
 
 
-
 - (void)viewDidLoad {
     [super viewDidLoad];
     NSLog(@"viewDidLoad");
 
+    // Allows for auto resizing of row height
+    self.tableView.estimatedRowHeight = 100;
+    self.tableView.rowHeight = UITableViewAutomaticDimension;
+    
+    
     NSLog(@"isCongressLoaded:%d",self.isCongressLoaded);
 
-    //hidding tweet success
+    //hidding success icons
     self.segmentTweetButtonSuccessImageView.hidden = YES;
     self.segmentFacebookButtonSuccessImageView.hidden = YES;
+    
     
     // Format table header
     self.tableHeaderView.layer.borderColor = [[UIColor whiteColor] CGColor];
@@ -75,6 +80,11 @@ NSInteger footerHeight = 1;
     self.tableHeaderView.layer.backgroundColor = [[UIColor whiteColor] CGColor];
     self.tableHeaderView.layer.cornerRadius = 3;
     self.tableHeaderView.clipsToBounds = YES;
+
+//    NSLog(@"self.tableView.frame.width:%f",self.tableView.frame.size.width);
+//    [self.tableHeaderView setFrame:(CGRectMake(10, 0, self.tableView.frame.size.width - 20, 67))];
+    
+    // Assign header values
     NSString* padding = @"  "; // # of spaces
     self.tableHeaderLabel.text = [NSString stringWithFormat:@"%@%@%@", padding,[self.selectedSegment valueForKey:@"segmentTitle"], padding];
     self.tableHeaderSubLabel.text = [NSString stringWithFormat:@"%@%@%@", padding,[self.selectedProgram valueForKey:@"programTitle"], padding];
@@ -112,6 +122,10 @@ NSInteger footerHeight = 1;
 }
 - (void)viewWillTransitionToSize:(CGSize)size withTransitionCoordinator:(id<UIViewControllerTransitionCoordinator>)coordinator
 {
+    [self.tableView setNeedsDisplay];
+    [self.tableView setNeedsLayout];
+    [self.view layoutSubviews];
+    [self.tableView layoutSubviews];
     [self.tableView reloadData];
     [super viewWillTransitionToSize:size withTransitionCoordinator:coordinator];
 }
@@ -206,7 +220,8 @@ NSInteger footerHeight = 1;
         } else if (CGRectContainsPoint(cell.locationButton.frame, pointInCell)) {
             NSLog(@"touch in getUserLocation area");
             if(!cell.locationButton.hidden){
-                [self getUserLocation];
+                [self getUserLocationAlert];
+                //[self getUserLocation];
             }
         } else if (CGRectContainsPoint(cell.phoneButton.frame, pointInCell)) {
             NSLog(@"touch in phone area");
@@ -405,13 +420,37 @@ NSInteger footerHeight = 1;
 }
 
 
+-(void) getUserLocationAlert{
+    NSString *alertTitle = @"Let's get your Local Representatives!";
+    NSString *alertMessage = [NSString stringWithFormat:@"We will access your location one time only to get your current location."];
+    UIAlertController *alertController = [UIAlertController alertControllerWithTitle:alertTitle message:alertMessage preferredStyle:UIAlertControllerStyleAlert];
+    
+    UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:NSLocalizedString(@"cancel", @"cancel action") style:UIAlertActionStyleDefault handler:^(UIAlertAction *action){
+        NSLog(@"cancel action");
+    }];
+    [alertController addAction:cancelAction];
+    
+    UIAlertAction *okAction = [UIAlertAction actionWithTitle:NSLocalizedString(@"OK", @"OK") style:UIAlertActionStyleDefault handler:^(UIAlertAction *action){
+        [self getUserLocation];
+          }];
+    [alertController addAction:okAction];
+    
+    [self presentViewController:alertController animated:YES completion:nil];
+
+}
+
+
 -(void) getUserLocation {
+    
+
 //    LocationFinderAPI *locationFinderAPI = [[LocationFinderAPI alloc]init];
 //    locationFinderAPI.messageTableViewController = self;
 //    [locationFinderAPI findUserLocation];
     
+    if(self.locationManager == nil){
+        self.locationManager = [[CLLocationManager alloc] init];
+    }
     
-    self.locationManager = [[CLLocationManager alloc] init];
     self.locationManager.delegate = self;
     
     NSUInteger code = [CLLocationManager authorizationStatus];
@@ -443,49 +482,10 @@ NSInteger footerHeight = 1;
     [self.locationManager stopUpdatingLocation];
     
     //Set the location default
-    
     UpdateDefaults *updateDefaults = [[UpdateDefaults alloc]init];
     [updateDefaults saveCoordinatesToDefaultsWithLatitude:(double)newLocation.coordinate.latitude andLongitude:(double)newLocation.coordinate.longitude];
     [updateDefaults saveLocationDefaultsToUser];
     
-//    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-//    [defaults setObject:[NSString stringWithFormat:@"%f",newLocation.coordinate.latitude] forKey:@"latitude"];
-//    [defaults setObject:[NSString stringWithFormat:@"%f",newLocation.coordinate.longitude] forKey:@"longitude"];
-//    [defaults synchronize];
-//    NSLog(@"UPDATING DEFAULTS!!%@,%@",[defaults valueForKey:@"latitude"],[defaults valueForKey:@"longitude"]);
-    
-    //if current a user then save location info to account.
-    
-//    PFUser *currentUser = [PFUser currentUser];
-
-//    if(currentUser) {
-//        double latitude = newLocation.coordinate.latitude;
-//        double longitude = newLocation.coordinate.longitude;
-//        NSLog(@"latitude to be saved: %f",latitude);
-//        
-//        [currentUser setObject:[NSNumber numberWithDouble:latitude] forKey:@"latitude"];
-//        [currentUser setObject:[NSNumber numberWithDouble:longitude] forKey:@"longitude"];
-//        
-//        [currentUser saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) { //save currentUser to parse disk
-//            if(error){
-//                NSLog(@"error UPDATING COORDINATES!!");
-//            }
-//            else {
-//                NSLog(@"UPDATING COORDINATES!!");
-//            }
-//        }];
-
-        
-        
-//        [[PFUser currentUser] saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
-//            if(error) {
-//                NSLog(@"error UPDATING COORDINATES!!");
-//            } else{
-//                NSLog(@"UPDATING COORDINATES!!");
-//            }
-//        }];
-//    }
-//    }
     [self viewDidLoad];
 
 }
@@ -613,7 +613,9 @@ NSInteger footerHeight = 1;
         [self.tableView addSubview:cell];
         messageItem = [self.menuList objectAtIndex:[rowIndex intValue]];
         [cell configMessageCell:messageItem indexPath:indexPath];
-//        [cell.contentView layoutIfNeeded];
+        [cell.contentView layoutIfNeeded];
+        [cell setNeedsDisplay];
+        [cell layoutIfNeeded];
         return cell;
         
     } else if (isGetLocationBool) {
@@ -629,6 +631,9 @@ NSInteger footerHeight = 1;
         [self.tableView addSubview:cell];
         [cell configMessageCellNoZip:indexPath];
 //        [cell.contentView layoutIfNeeded];
+        
+        [cell setNeedsDisplay];
+        [cell layoutIfNeeded];
         return cell;
         
     } else if([category isEqualToString:@"Local Representative"]) {
@@ -645,6 +650,8 @@ NSInteger footerHeight = 1;
         [cell configMessageCellLocalRep:congressionalMessageItem indexPath:indexPath];
 //        [cell.contentView layoutIfNeeded];
         
+        [cell setNeedsDisplay];
+        [cell layoutIfNeeded];
         return cell;
         
     } else {
@@ -660,53 +667,57 @@ NSInteger footerHeight = 1;
         [cell configMessageContactCell:messageItem indexPath:indexPath];
 //        [cell.contentView layoutIfNeeded];
         
+        
+        [cell setNeedsDisplay];
+        [cell layoutIfNeeded];
+        [cell layoutSubviews];
         return cell;
     }
 }
 
 
-- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    NSString *category= [self categoryForSection:indexPath.section];
-    NSArray *rowIndecesInSection = [self.sections objectForKey:category];
-    NSNumber *rowIndex = [rowIndecesInSection objectAtIndex:indexPath.row]; //pulling the row indece from array above
-    
-    // Get bool value from current index on list.
-    NSDictionary *dictionary = [self.menuList objectAtIndex:[rowIndex intValue]];
-    NSNumber *isMessageNumber = [dictionary valueForKey:@"isMessage"];
-    bool isMessageBool = [isMessageNumber boolValue];
-    
-    NSNumber *isGetLocationNumber = [dictionary valueForKey:@"isGetLocationCell"];
-    bool isGetLocationBool = [isGetLocationNumber boolValue];
-    
-    NSNumber *isCollapsedNumber = [dictionary valueForKey:@"isCollapsed"];
-    bool isCollapsedBool = [isCollapsedNumber boolValue];
-
-    if(isMessageBool) {
-        NSString *messageText = [dictionary valueForKey:@"messageText"];
-        double charCount = messageText.length;
-        
-        int rowHeight = 50;
-            if (charCount < 50){
-                rowHeight = 25;
-
-            } else if (charCount < 100) {
-                rowHeight = 35;
-
-            } else {
-
-                rowHeight = 50;
-            }
-        return rowHeight;
-    } else if(isGetLocationBool) {
-        return 55;
-    } else if(isCollapsedBool) {
-        return .0001;
-    } else if([category isEqualToString:@"Local Representative"]) {
-        return 65;
-    } else { // normal contact cell
-        return 65;
-    }
-}
+//- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
+//    NSString *category= [self categoryForSection:indexPath.section];
+//    NSArray *rowIndecesInSection = [self.sections objectForKey:category];
+//    NSNumber *rowIndex = [rowIndecesInSection objectAtIndex:indexPath.row]; //pulling the row indece from array above
+//    
+//    // Get bool value from current index on list.
+//    NSDictionary *dictionary = [self.menuList objectAtIndex:[rowIndex intValue]];
+//    NSNumber *isMessageNumber = [dictionary valueForKey:@"isMessage"];
+//    bool isMessageBool = [isMessageNumber boolValue];
+//    
+//    NSNumber *isGetLocationNumber = [dictionary valueForKey:@"isGetLocationCell"];
+//    bool isGetLocationBool = [isGetLocationNumber boolValue];
+//    
+//    NSNumber *isCollapsedNumber = [dictionary valueForKey:@"isCollapsed"];
+//    bool isCollapsedBool = [isCollapsedNumber boolValue];
+//
+//    if(isMessageBool) {
+//        NSString *messageText = [dictionary valueForKey:@"messageText"];
+//        double charCount = messageText.length;
+//        
+//        int rowHeight = 50;
+//            if (charCount < 50){
+//                rowHeight = 25;
+//
+//            } else if (charCount < 100) {
+//                rowHeight = 35;
+//
+//            } else {
+//
+//                rowHeight = 50;
+//            }
+//        return rowHeight;
+//    } else if(isGetLocationBool) {
+//        return 55;
+//    } else if(isCollapsedBool) {
+//        return .0001;
+//    } else if([category isEqualToString:@"Local Representative"]) {
+//        return 65;
+//    } else { // normal contact cell
+//        return 65;
+//    }
+//}
 
 
 

@@ -30,6 +30,12 @@
 
 BOOL isNewAccountSignup = NO;
 
+- (void)viewWillTransitionToSize:(CGSize)size withTransitionCoordinator:(id<UIViewControllerTransitionCoordinator>)coordinator
+{
+    [self.view setNeedsLayout];
+    [super viewWillTransitionToSize:size withTransitionCoordinator:coordinator];
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     

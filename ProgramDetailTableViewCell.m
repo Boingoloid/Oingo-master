@@ -25,9 +25,16 @@
 
 - (void) configSegmentCell:segment {
     
+    //    // Design Helpers: Borders to see placement
+    //    self.segmentTitleLabel.layer.borderWidth = 1;
+    //    self.segmentTitleLabel.layer.borderColor = [[UIColor blackColor] CGColor];
+    //    self.dateLabel.layer.borderWidth = 1;
+    //    self.dateLabel.layer.borderColor = [[UIColor blackColor] CGColor];
+    
+    // Assign values
     self.segmentTitleLabel.text = [segment valueForKey:@"segmentTitle"];
     self.purposeSummary.text = [segment valueForKey:@"purposeSummary"];
-    self.linkToContentButton.titleLabel.text = [segment valueForKey:@"linkToContent"];
+    [self.linkToContentButton setTitle:[segment valueForKey:@"linkToContent"] forState:UIControlStateNormal];
     
     
     // Get the date
@@ -37,19 +44,15 @@
     NSDate *date =[segment valueForKey:@"dateReleased"];
     NSString *formattedDateString = [dateFormatter stringFromDate:date];
 //    NSLog(@"formattedDateString: %@", formattedDateString);
-
+//    [dateFormatter setDateFormat:@"EE MMM, dd"];
+//    NSString *todayString = [dateFormatter stringFromDate:today];
 
     self.dateLabel.text = formattedDateString;
-    
-    //[segment valueForKey:@"dateReleased"];
     
     // Get the image
     PFFile *theImage = [segment objectForKey:@"segmentImage"];
     NSData *imageData = [theImage getData];
     UIImage *image = [UIImage imageWithData:imageData];
-//    [dateFormatter setDateFormat:@"EE MMM, dd"];
-//    NSString *todayString = [dateFormatter stringFromDate:today];
-
     self.segmentImage.image = image;
 }
 

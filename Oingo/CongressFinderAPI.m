@@ -146,13 +146,10 @@
         [congressionalMessageItem setValue:[congresspersonObject valueForKey:@"last_name"] forKey:@"lastName"];
         congressionalMessageItem.fullName = [NSString stringWithFormat:@"%@ %@",congressionalMessageItem.firstName,congressionalMessageItem.lastName];
         
-
-
-        
-        //Senator, CA District 12
+        // State
         congressionalMessageItem.state = [congresspersonObject valueForKey:@"state"];
         
-        //load dummy images based on chamber
+        //Chamber and district + load images based on chamber
         if([[congresspersonObject valueForKey:@"chamber"] isEqualToString:@"senate"]) {
             congressionalMessageItem.chamber = @"Senator";
             congressionalMessageItem.title = [NSString stringWithFormat:@"%@, %@",congressionalMessageItem.chamber,congressionalMessageItem.state];
@@ -161,7 +158,7 @@
         } else {
             congressionalMessageItem.chamber = @"Representative";
             congressionalMessageItem.district = [congresspersonObject valueForKey:@"district"];
-            congressionalMessageItem.title = [NSString stringWithFormat:@"%@, %@ district %@",congressionalMessageItem.chamber,congressionalMessageItem.state,congressionalMessageItem.district];
+            congressionalMessageItem.title = [NSString stringWithFormat:@"Rep, %@ / d:%@",congressionalMessageItem.state,congressionalMessageItem.district];
             congressionalMessageItem.messageImageString = [NSString stringWithFormat:@"Seal_of_Congress_Cropped.png"];
         }
 
