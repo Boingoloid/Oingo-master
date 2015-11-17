@@ -47,7 +47,7 @@
                                             </variation>
                                         </imageView>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Program Title" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="S3D-Cs-veh">
-                                            <rect key="frame" x="0.0" y="5" width="103" height="19"/>
+                                            <rect key="frame" x="0.0" y="5" width="116" height="21"/>
                                             <color key="backgroundColor" white="0.19280337591240876" alpha="0.70999999999999996" colorSpace="calibratedWhite"/>
                                             <rect key="contentStretch" x="0.0" y="0.0" width="0.0" height="0.0"/>
                                             <constraints>
@@ -56,7 +56,7 @@
                                                 <constraint firstAttribute="height" constant="20" id="fl8-a9-RiC"/>
                                                 <constraint firstAttribute="width" constant="154" id="gDx-Jb-Ayi"/>
                                             </constraints>
-                                            <fontDescription key="fontDescription" name="Helvetica-Bold" family="Helvetica" pointSize="16"/>
+                                            <fontDescription key="fontDescription" name="Helvetica-Bold" family="Helvetica" pointSize="18"/>
                                             <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                                             <nil key="highlightedColor"/>
                                             <variation key="default">
@@ -217,15 +217,15 @@
                                     <rect key="frame" x="0.0" y="0.0" width="600" height="112"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" bounces="NO" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" indicatorStyle="black" editable="NO" text="Monsanto modifies plant genes so they can resist massive amounts of pesticides that end up in our soil and food supply." translatesAutoresizingMaskIntoConstraints="NO" id="NKo-ja-dvl">
-                                            <rect key="frame" x="67" y="24" width="505" height="50"/>
+                                        <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" ambiguous="YES" bounces="NO" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" indicatorStyle="black" editable="NO" text="Monsanto modifies plant genes so they can resist massive amounts of pesticides that end up in our soil and food supply." translatesAutoresizingMaskIntoConstraints="NO" id="NKo-ja-dvl">
+                                            <rect key="frame" x="67" y="26" width="505" height="52"/>
                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                             <constraints>
                                                 <constraint firstAttribute="height" relation="lessThanOrEqual" constant="100" id="Bg9-HF-bay"/>
                                                 <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="50" id="RiS-2U-enh"/>
                                                 <constraint firstAttribute="height" relation="greaterThanOrEqual" priority="200" constant="90" id="fY7-XR-qU3"/>
                                             </constraints>
-                                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                             <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                                             <variation key="default">
                                                 <mask key="constraints">
@@ -234,8 +234,8 @@
                                                 </mask>
                                             </variation>
                                         </textView>
-                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="monsanto gas apple.png" translatesAutoresizingMaskIntoConstraints="NO" id="QWG-RJ-9hI">
-                                            <rect key="frame" x="9" y="28" width="50" height="50"/>
+                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" image="monsanto gas apple.png" translatesAutoresizingMaskIntoConstraints="NO" id="QWG-RJ-9hI">
+                                            <rect key="frame" x="9" y="30" width="50" height="50"/>
                                             <constraints>
                                                 <constraint firstAttribute="height" constant="50" id="3r4-3p-88V"/>
                                                 <constraint firstAttribute="height" priority="999" constant="50" id="7eO-aU-DoP"/>
@@ -251,15 +251,15 @@
                                                 </mask>
                                             </variation>
                                         </imageView>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="TopLeft" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Genetically Modificed Food" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tlM-Jd-7yY">
-                                            <rect key="frame" x="9" y="8" width="165" height="16"/>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="TopLeft" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Genetically Modificed Food" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tlM-Jd-7yY">
+                                            <rect key="frame" x="9" y="8" width="191" height="18"/>
                                             <constraints>
                                                 <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="350" id="MkB-VI-TVK"/>
                                                 <constraint firstAttribute="width" constant="231" id="SyQ-oE-GRd"/>
                                                 <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="16" id="fbY-IE-pmZ"/>
                                                 <constraint firstAttribute="height" constant="16" id="i4P-Ff-Fz2"/>
                                             </constraints>
-                                            <fontDescription key="fontDescription" name="HelveticaNeue-Medium" family="Helvetica Neue" pointSize="13"/>
+                                            <fontDescription key="fontDescription" name="HelveticaNeue-Medium" family="Helvetica Neue" pointSize="15"/>
                                             <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                             <nil key="highlightedColor"/>
                                             <variation key="default">
@@ -271,9 +271,10 @@
                                             </variation>
                                         </label>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Date " textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3jQ-uc-33Q">
-                                            <rect key="frame" x="561" y="5" width="31" height="16"/>
+                                            <rect key="frame" x="551" y="5" width="41" height="16"/>
                                             <constraints>
-                                                <constraint firstAttribute="width" constant="60" id="kZa-Ob-9Je"/>
+                                                <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="41" id="4ag-WY-3Ke"/>
+                                                <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="40" id="kZa-Ob-9Je"/>
                                             </constraints>
                                             <fontDescription key="fontDescription" name="HelveticaNeue-Italic" family="Helvetica Neue" pointSize="13"/>
                                             <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
@@ -284,13 +285,13 @@
                                                 </mask>
                                             </variation>
                                         </label>
-                                        <button userInteractionEnabled="NO" contentMode="left" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="tailTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cDZ-re-iL0">
-                                            <rect key="frame" x="9" y="81" width="269" height="20"/>
+                                        <button userInteractionEnabled="NO" contentMode="left" ambiguous="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="tailTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cDZ-re-iL0">
+                                            <rect key="frame" x="9" y="83" width="311" height="18"/>
                                             <constraints>
                                                 <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="350" id="ASs-iW-eYz"/>
                                                 <constraint firstAttribute="height" constant="25" id="CpU-ps-2WY"/>
                                             </constraints>
-                                            <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="13"/>
+                                            <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="15"/>
                                             <state key="normal" title="https://www.linkToContent.com/newepisode...">
                                                 <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                             </state>
@@ -300,9 +301,12 @@
                                                     <exclude reference="CpU-ps-2WY"/>
                                                 </mask>
                                             </variation>
+                                            <connections>
+                                                <action selector="linkToContentClick:" destination="vic-Nv-Ulg" eventType="touchUpInside" id="7ep-3Y-OcM"/>
+                                            </connections>
                                         </button>
-                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="arrowDetailIcon.png" translatesAutoresizingMaskIntoConstraints="NO" id="Nbq-pC-o63">
-                                            <rect key="frame" x="572" y="34" width="20" height="30"/>
+                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" image="arrowDetailIcon.png" translatesAutoresizingMaskIntoConstraints="NO" id="Nbq-pC-o63">
+                                            <rect key="frame" x="572" y="37" width="20" height="30"/>
                                             <constraints>
                                                 <constraint firstAttribute="height" constant="30" id="2pN-EJ-LLh"/>
                                                 <constraint firstAttribute="width" constant="20" id="M1K-4B-bWQ"/>
@@ -2520,14 +2524,14 @@
                                             <rect key="frame" x="0.0" y="0.0" width="560" height="50"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="2" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IHC-zR-lzf">
-                                                    <rect key="frame" x="542" y="19" width="10" height="21"/>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="2" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IHC-zR-lzf">
+                                                    <rect key="frame" x="542" y="15" width="10" height="21"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Sample tweet message" textAlignment="natural" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="AEd-ja-nS3">
-                                                    <rect key="frame" x="8" y="0.0" width="178" height="58"/>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Sample tweet message" textAlignment="natural" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="AEd-ja-nS3">
+                                                    <rect key="frame" x="8" y="0.0" width="178" height="50"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                                     <nil key="highlightedColor"/>
@@ -2836,7 +2840,7 @@
     <resources>
         <image name="40-menu-alt-512.png" width="512" height="512"/>
         <image name="Web-frame2.png" width="2858" height="1950"/>
-        <image name="arrowDetailIcon.png" width="225" height="225"/>
+        <image name="arrowDetailIcon.png" width="200" height="225"/>
         <image name="document-xxl.png" width="256" height="256"/>
         <image name="facebookButtonIconGray.png" width="259" height="259"/>
         <image name="location-gray.png" width="228" height="228"/>
@@ -2848,6 +2852,6 @@
         <image name="tweetButtonIconGray.png" width="259" height="259"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="ncd-tE-Df4"/>
+        <segue reference="Xre-gW-P64"/>
     </inferredMetricsTieBreakers>
 </document>
