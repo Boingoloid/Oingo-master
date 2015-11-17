@@ -29,8 +29,7 @@ NSUInteger numberOfRows = 0;
 
 
 -(void)viewWillAppear:(BOOL)animated {
-       [super viewWillAppear:YES]; 
-
+       [super viewWillAppear:YES];
 }
 
 - (UIInterfaceOrientationMask)supportedInterfaceOrientations
@@ -82,9 +81,6 @@ NSUInteger numberOfRows = 0;
     if([searchText isEqualToString:@""]){
         
     }
-    
-    
-    
 }
 
 
@@ -99,27 +95,26 @@ NSUInteger numberOfRows = 0;
 
     // Return the number of sections.
     //isFinished BOOL used to flag when async query had returned data.
-    if (!isFinished) {
-        return 0;
-    } else {
+//    if (!isFinished) {
+//        return 0;
+//    } else {
         return 1;
-    }
+//    }
     
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
 
-    // Return the number of rows in the section.
-    if (!isFinished) {
-        return 0;
-    } else {
+//    // Return the number of rows in the section.
+//    if (!isFinished) {
+//        return 0;
+//    } else {
         return self.programList.count;
-    }
+//    }
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     ProgramsTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"Cell" forIndexPath:indexPath];
-
         program = [self.programList objectAtIndex:indexPath.row];
         [cell configProgramCell:program indexPath:indexPath isFinished:isFinished];
         return cell;
@@ -128,8 +123,6 @@ NSUInteger numberOfRows = 0;
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     UITableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
     [cell setSelected:0 animated:0];
-
-            
 }
 
 /*

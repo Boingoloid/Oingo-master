@@ -22,11 +22,6 @@
 		CE14A8AA1B211B7B0032664C /* SignUpViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CE14A8A91B211B7A0032664C /* SignUpViewController.m */; };
 		CE14A8AD1B2227C60032664C /* LogInViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CE14A8AC1B2227C60032664C /* LogInViewController.m */; };
 		CE14A8B31B22D20B0032664C /* TweetTableViewDemoTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CE14A8B21B22D20B0032664C /* TweetTableViewDemoTableViewController.m */; };
-		CE1BD8D21BDD5AE5001292A7 /* FBSDKCoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CE1BD8D01BDD5AE5001292A7 /* FBSDKCoreKit.framework */; settings = {ASSET_TAGS = (); }; };
-		CE1BD8D31BDD5AE5001292A7 /* FBSDKLoginKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CE1BD8D11BDD5AE5001292A7 /* FBSDKLoginKit.framework */; settings = {ASSET_TAGS = (); }; };
-		CE1BD8D51BDD5AF6001292A7 /* FBSDKShareKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CE1BD8D41BDD5AF6001292A7 /* FBSDKShareKit.framework */; settings = {ASSET_TAGS = (); }; };
-		CE1BD8D81BDD5B0A001292A7 /* FacebookSDKStrings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = CE1BD8D61BDD5B0A001292A7 /* FacebookSDKStrings.bundle */; settings = {ASSET_TAGS = (); }; };
-		CE1BD8D91BDD5B0A001292A7 /* FBAudienceNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CE1BD8D71BDD5B0A001292A7 /* FBAudienceNetwork.framework */; settings = {ASSET_TAGS = (); }; };
 		CE2029721B363D51005C079B /* CongressFinderAPI.m in Sources */ = {isa = PBXBuildFile; fileRef = CE2029711B363D51005C079B /* CongressFinderAPI.m */; };
 		CE241A421AEAE45A00F22144 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = CE241A411AEAE45A00F22144 /* main.m */; };
 		CE241A451AEAE45A00F22144 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = CE241A441AEAE45A00F22144 /* AppDelegate.m */; };
@@ -58,12 +53,6 @@
 		CE6073331B3AD475007B567C /* CongressPhotoFinderAPI.m in Sources */ = {isa = PBXBuildFile; fileRef = CE6073321B3AD475007B567C /* CongressPhotoFinderAPI.m */; };
 		CE6F71F41B2BCA9E0067E4DA /* SettingsTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CE6F71F31B2BCA9E0067E4DA /* SettingsTableViewController.m */; };
 		CE76D26F1B94E41A00AE3E21 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CE76D26E1B94E41A00AE3E21 /* QuartzCore.framework */; };
-		CE7800C01BDEAEA2008B9F37 /* LogoGlow58.png in Resources */ = {isa = PBXBuildFile; fileRef = CE7800B91BDEAEA2008B9F37 /* LogoGlow58.png */; settings = {ASSET_TAGS = (); }; };
-		CE7800C11BDEAEA2008B9F37 /* LogoGlow80.png in Resources */ = {isa = PBXBuildFile; fileRef = CE7800BA1BDEAEA2008B9F37 /* LogoGlow80.png */; settings = {ASSET_TAGS = (); }; };
-		CE7800C21BDEAEA2008B9F37 /* LogoGlow87.png in Resources */ = {isa = PBXBuildFile; fileRef = CE7800BB1BDEAEA2008B9F37 /* LogoGlow87.png */; settings = {ASSET_TAGS = (); }; };
-		CE7800C31BDEAEA2008B9F37 /* LogoGlow120-1.png in Resources */ = {isa = PBXBuildFile; fileRef = CE7800BC1BDEAEA2008B9F37 /* LogoGlow120-1.png */; settings = {ASSET_TAGS = (); }; };
-		CE7800C41BDEAEA2008B9F37 /* LogoGlow120.png in Resources */ = {isa = PBXBuildFile; fileRef = CE7800BD1BDEAEA2008B9F37 /* LogoGlow120.png */; settings = {ASSET_TAGS = (); }; };
-		CE7800C51BDEAEA2008B9F37 /* LogoGlow180.png in Resources */ = {isa = PBXBuildFile; fileRef = CE7800BE1BDEAEA2008B9F37 /* LogoGlow180.png */; settings = {ASSET_TAGS = (); }; };
 		CE7800C91BDEB142008B9F37 /* LogoGlow-1.png in Resources */ = {isa = PBXBuildFile; fileRef = CE7800C61BDEB142008B9F37 /* LogoGlow-1.png */; settings = {ASSET_TAGS = (); }; };
 		CE7800CA1BDEB142008B9F37 /* LogoGlow-2.png in Resources */ = {isa = PBXBuildFile; fileRef = CE7800C71BDEB142008B9F37 /* LogoGlow-2.png */; settings = {ASSET_TAGS = (); }; };
 		CE7800CB1BDEB142008B9F37 /* LogoGlow.png in Resources */ = {isa = PBXBuildFile; fileRef = CE7800C81BDEB142008B9F37 /* LogoGlow.png */; settings = {ASSET_TAGS = (); }; };
@@ -79,10 +68,6 @@
 		CE87CAC91AFAB9B70084C666 /* ProgramsTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CE87CAC81AFAB9B70084C666 /* ProgramsTableViewCell.m */; };
 		CE87CACC1AFABA920084C666 /* Program.m in Sources */ = {isa = PBXBuildFile; fileRef = CE87CACB1AFABA920084C666 /* Program.m */; };
 		CE9034861BC63C04000BE136 /* LongFormEmailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CE9034851BC63C04000BE136 /* LongFormEmailViewController.m */; settings = {ASSET_TAGS = (); }; };
-		CE968CFD1BE061BD005CF1F0 /* Fabric.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CE968CF91BE061BD005CF1F0 /* Fabric.framework */; settings = {ASSET_TAGS = (); }; };
-		CE968CFE1BE061BD005CF1F0 /* TwitterKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CE968CFA1BE061BD005CF1F0 /* TwitterKit.framework */; settings = {ASSET_TAGS = (); }; };
-		CE968CFF1BE061BD005CF1F0 /* TwitterKitResources.bundle in Resources */ = {isa = PBXBuildFile; fileRef = CE968CFB1BE061BD005CF1F0 /* TwitterKitResources.bundle */; settings = {ASSET_TAGS = (); }; };
-		CE968D001BE061BD005CF1F0 /* TwitterCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CE968CFC1BE061BD005CF1F0 /* TwitterCore.framework */; settings = {ASSET_TAGS = (); }; };
 		CE968D041BE14E28005CF1F0 /* arrowDetailIcon.png in Resources */ = {isa = PBXBuildFile; fileRef = CE968D031BE14E28005CF1F0 /* arrowDetailIcon.png */; settings = {ASSET_TAGS = (); }; };
 		CE99E3871B5EF1ED00ED9D33 /* MarkSentMessageAPI.m in Sources */ = {isa = PBXBuildFile; fileRef = CE99E3861B5EF1ED00ED9D33 /* MarkSentMessageAPI.m */; };
 		CE9D625E1BC3C10F00A244ED /* MessagePanelViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CE9D625D1BC3C10F00A244ED /* MessagePanelViewController.m */; settings = {ASSET_TAGS = (); }; };
@@ -94,6 +79,23 @@
 		CEB1BA261BC736DA00581EC6 /* libsqlite3.0.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = CEB1BA251BC736DA00581EC6 /* libsqlite3.0.tbd */; };
 		CEB1BA281BC7370200581EC6 /* libz.1.1.3.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = CEB1BA271BC7370200581EC6 /* libz.1.1.3.tbd */; };
 		CEB4ED8E1AF8305E0055D547 /* ProgramDetailTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CEB4ED8D1AF8305E0055D547 /* ProgramDetailTableViewController.m */; };
+		CEB9D4E71BFABB6500A6F565 /* FacebookSDKStrings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = CEB9D4E11BFABB6500A6F565 /* FacebookSDKStrings.bundle */; settings = {ASSET_TAGS = (); }; };
+		CEB9D4E81BFABB6500A6F565 /* FBAudienceNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CEB9D4E21BFABB6500A6F565 /* FBAudienceNetwork.framework */; settings = {ASSET_TAGS = (); }; };
+		CEB9D4E91BFABB6500A6F565 /* FBSDKCoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CEB9D4E31BFABB6500A6F565 /* FBSDKCoreKit.framework */; settings = {ASSET_TAGS = (); }; };
+		CEB9D4EA1BFABB6500A6F565 /* FBSDKLoginKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CEB9D4E41BFABB6500A6F565 /* FBSDKLoginKit.framework */; settings = {ASSET_TAGS = (); }; };
+		CEB9D4EB1BFABB6500A6F565 /* FBSDKMessengerShareKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CEB9D4E51BFABB6500A6F565 /* FBSDKMessengerShareKit.framework */; settings = {ASSET_TAGS = (); }; };
+		CEB9D4EC1BFABB6500A6F565 /* FBSDKShareKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CEB9D4E61BFABB6500A6F565 /* FBSDKShareKit.framework */; settings = {ASSET_TAGS = (); }; };
+		CEB9D5351BFAC2D100A6F565 /* Fabric.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CEB9D5311BFAC2D100A6F565 /* Fabric.framework */; settings = {ASSET_TAGS = (); }; };
+		CEB9D5361BFAC2D100A6F565 /* TwitterKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CEB9D5321BFAC2D100A6F565 /* TwitterKit.framework */; settings = {ASSET_TAGS = (); }; };
+		CEB9D5371BFAC2D100A6F565 /* TwitterKitResources.bundle in Resources */ = {isa = PBXBuildFile; fileRef = CEB9D5331BFAC2D100A6F565 /* TwitterKitResources.bundle */; settings = {ASSET_TAGS = (); }; };
+		CEB9D5381BFAC2D100A6F565 /* TwitterCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CEB9D5341BFAC2D100A6F565 /* TwitterCore.framework */; settings = {ASSET_TAGS = (); }; };
+		CEB9D5441BFAC78400A6F565 /* PFTwitterUtils+NativeTwitter in Resources */ = {isa = PBXBuildFile; fileRef = CEB9D5431BFAC78400A6F565 /* PFTwitterUtils+NativeTwitter */; settings = {ASSET_TAGS = (); }; };
+		CEB9D54B1BFAD45600A6F565 /* LogoGlow58.png in Resources */ = {isa = PBXBuildFile; fileRef = CEB9D5451BFAD45600A6F565 /* LogoGlow58.png */; settings = {ASSET_TAGS = (); }; };
+		CEB9D54C1BFAD45600A6F565 /* LogoGlow80.png in Resources */ = {isa = PBXBuildFile; fileRef = CEB9D5461BFAD45600A6F565 /* LogoGlow80.png */; settings = {ASSET_TAGS = (); }; };
+		CEB9D54D1BFAD45600A6F565 /* LogoGlow87.png in Resources */ = {isa = PBXBuildFile; fileRef = CEB9D5471BFAD45600A6F565 /* LogoGlow87.png */; settings = {ASSET_TAGS = (); }; };
+		CEB9D54E1BFAD45600A6F565 /* LogoGlow120-1.png in Resources */ = {isa = PBXBuildFile; fileRef = CEB9D5481BFAD45600A6F565 /* LogoGlow120-1.png */; settings = {ASSET_TAGS = (); }; };
+		CEB9D54F1BFAD45600A6F565 /* LogoGlow120.png in Resources */ = {isa = PBXBuildFile; fileRef = CEB9D5491BFAD45600A6F565 /* LogoGlow120.png */; settings = {ASSET_TAGS = (); }; };
+		CEB9D5501BFAD45600A6F565 /* LogoGlow180.png in Resources */ = {isa = PBXBuildFile; fileRef = CEB9D54A1BFAD45600A6F565 /* LogoGlow180.png */; settings = {ASSET_TAGS = (); }; };
 		CEC0C7441B45D6B400A9DD33 /* LocationFinderAPI.m in Sources */ = {isa = PBXBuildFile; fileRef = CEC0C7431B45D6B400A9DD33 /* LocationFinderAPI.m */; };
 		CEC0C7471B478E0500A9DD33 /* MessageTableViewMessageCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CEC0C7461B478E0500A9DD33 /* MessageTableViewMessageCell.m */; };
 		CED53C041BDD9F2800B34ED9 /* libz.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = CED53C031BDD9F2800B34ED9 /* libz.tbd */; };
@@ -170,11 +172,6 @@
 		CE14A8AC1B2227C60032664C /* LogInViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LogInViewController.m; sourceTree = "<group>"; };
 		CE14A8B11B22D20B0032664C /* TweetTableViewDemoTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TweetTableViewDemoTableViewController.h; sourceTree = "<group>"; };
 		CE14A8B21B22D20B0032664C /* TweetTableViewDemoTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TweetTableViewDemoTableViewController.m; sourceTree = "<group>"; };
-		CE1BD8D01BDD5AE5001292A7 /* FBSDKCoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FBSDKCoreKit.framework; sourceTree = "<group>"; };
-		CE1BD8D11BDD5AE5001292A7 /* FBSDKLoginKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FBSDKLoginKit.framework; sourceTree = "<group>"; };
-		CE1BD8D41BDD5AF6001292A7 /* FBSDKShareKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FBSDKShareKit.framework; sourceTree = "<group>"; };
-		CE1BD8D61BDD5B0A001292A7 /* FacebookSDKStrings.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = FacebookSDKStrings.bundle; sourceTree = "<group>"; };
-		CE1BD8D71BDD5B0A001292A7 /* FBAudienceNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FBAudienceNetwork.framework; sourceTree = "<group>"; };
 		CE2029701B363D51005C079B /* CongressFinderAPI.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CongressFinderAPI.h; sourceTree = "<group>"; };
 		CE2029711B363D51005C079B /* CongressFinderAPI.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CongressFinderAPI.m; sourceTree = "<group>"; };
 		CE241A3C1AEAE45A00F22144 /* Oingo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Oingo.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -224,12 +221,6 @@
 		CE6F71F21B2BCA9E0067E4DA /* SettingsTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingsTableViewController.h; sourceTree = "<group>"; };
 		CE6F71F31B2BCA9E0067E4DA /* SettingsTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingsTableViewController.m; sourceTree = "<group>"; };
 		CE76D26E1B94E41A00AE3E21 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
-		CE7800B91BDEAEA2008B9F37 /* LogoGlow58.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = LogoGlow58.png; path = Images.xcassets/AppIcon.appiconset/LogoGlow58.png; sourceTree = "<group>"; };
-		CE7800BA1BDEAEA2008B9F37 /* LogoGlow80.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = LogoGlow80.png; path = Images.xcassets/AppIcon.appiconset/LogoGlow80.png; sourceTree = "<group>"; };
-		CE7800BB1BDEAEA2008B9F37 /* LogoGlow87.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = LogoGlow87.png; path = Images.xcassets/AppIcon.appiconset/LogoGlow87.png; sourceTree = "<group>"; };
-		CE7800BC1BDEAEA2008B9F37 /* LogoGlow120-1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "LogoGlow120-1.png"; path = "Images.xcassets/AppIcon.appiconset/LogoGlow120-1.png"; sourceTree = "<group>"; };
-		CE7800BD1BDEAEA2008B9F37 /* LogoGlow120.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = LogoGlow120.png; path = Images.xcassets/AppIcon.appiconset/LogoGlow120.png; sourceTree = "<group>"; };
-		CE7800BE1BDEAEA2008B9F37 /* LogoGlow180.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = LogoGlow180.png; path = Images.xcassets/AppIcon.appiconset/LogoGlow180.png; sourceTree = "<group>"; };
 		CE7800C61BDEB142008B9F37 /* LogoGlow-1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "LogoGlow-1.png"; path = "Images.xcassets/Image.imageset/LogoGlow-1.png"; sourceTree = "<group>"; };
 		CE7800C71BDEB142008B9F37 /* LogoGlow-2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "LogoGlow-2.png"; path = "Images.xcassets/Image.imageset/LogoGlow-2.png"; sourceTree = "<group>"; };
 		CE7800C81BDEB142008B9F37 /* LogoGlow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = LogoGlow.png; path = Images.xcassets/Image.imageset/LogoGlow.png; sourceTree = "<group>"; };
@@ -251,10 +242,6 @@
 		CE87CACB1AFABA920084C666 /* Program.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Program.m; sourceTree = "<group>"; };
 		CE9034841BC63C04000BE136 /* LongFormEmailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LongFormEmailViewController.h; path = ../LongFormEmailViewController.h; sourceTree = "<group>"; };
 		CE9034851BC63C04000BE136 /* LongFormEmailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LongFormEmailViewController.m; path = ../LongFormEmailViewController.m; sourceTree = "<group>"; };
-		CE968CF91BE061BD005CF1F0 /* Fabric.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Fabric.framework; sourceTree = "<group>"; };
-		CE968CFA1BE061BD005CF1F0 /* TwitterKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = TwitterKit.framework; sourceTree = "<group>"; };
-		CE968CFB1BE061BD005CF1F0 /* TwitterKitResources.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; name = TwitterKitResources.bundle; path = TwitterKit.framework/Versions/A/Resources/TwitterKitResources.bundle; sourceTree = "<group>"; };
-		CE968CFC1BE061BD005CF1F0 /* TwitterCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = TwitterCore.framework; sourceTree = "<group>"; };
 		CE968D031BE14E28005CF1F0 /* arrowDetailIcon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = arrowDetailIcon.png; path = Images/arrowDetailIcon.png; sourceTree = "<group>"; };
 		CE99E3851B5EF1ED00ED9D33 /* MarkSentMessageAPI.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MarkSentMessageAPI.h; sourceTree = "<group>"; };
 		CE99E3861B5EF1ED00ED9D33 /* MarkSentMessageAPI.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MarkSentMessageAPI.m; sourceTree = "<group>"; };
@@ -283,6 +270,23 @@
 		CEB2924F1B4528CE00A4E8E0 /* TwitterAPITweet.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TwitterAPITweet.m; sourceTree = "<group>"; };
 		CEB4ED8C1AF8305E0055D547 /* ProgramDetailTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProgramDetailTableViewController.h; sourceTree = "<group>"; };
 		CEB4ED8D1AF8305E0055D547 /* ProgramDetailTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProgramDetailTableViewController.m; sourceTree = "<group>"; };
+		CEB9D4E11BFABB6500A6F565 /* FacebookSDKStrings.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = FacebookSDKStrings.bundle; sourceTree = "<group>"; };
+		CEB9D4E21BFABB6500A6F565 /* FBAudienceNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FBAudienceNetwork.framework; sourceTree = "<group>"; };
+		CEB9D4E31BFABB6500A6F565 /* FBSDKCoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FBSDKCoreKit.framework; sourceTree = "<group>"; };
+		CEB9D4E41BFABB6500A6F565 /* FBSDKLoginKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FBSDKLoginKit.framework; sourceTree = "<group>"; };
+		CEB9D4E51BFABB6500A6F565 /* FBSDKMessengerShareKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FBSDKMessengerShareKit.framework; sourceTree = "<group>"; };
+		CEB9D4E61BFABB6500A6F565 /* FBSDKShareKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FBSDKShareKit.framework; sourceTree = "<group>"; };
+		CEB9D5311BFAC2D100A6F565 /* Fabric.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Fabric.framework; path = ../frameworks/Fabric.framework; sourceTree = "<group>"; };
+		CEB9D5321BFAC2D100A6F565 /* TwitterKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = TwitterKit.framework; path = ../frameworks/TwitterKit.framework; sourceTree = "<group>"; };
+		CEB9D5331BFAC2D100A6F565 /* TwitterKitResources.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; name = TwitterKitResources.bundle; path = ../frameworks/TwitterKit.framework/Versions/A/Resources/TwitterKitResources.bundle; sourceTree = "<group>"; };
+		CEB9D5341BFAC2D100A6F565 /* TwitterCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = TwitterCore.framework; path = ../frameworks/TwitterCore.framework; sourceTree = "<group>"; };
+		CEB9D5431BFAC78400A6F565 /* PFTwitterUtils+NativeTwitter */ = {isa = PBXFileReference; lastKnownFileType = folder; path = "PFTwitterUtils+NativeTwitter"; sourceTree = "<group>"; };
+		CEB9D5451BFAD45600A6F565 /* LogoGlow58.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = LogoGlow58.png; sourceTree = "<group>"; };
+		CEB9D5461BFAD45600A6F565 /* LogoGlow80.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = LogoGlow80.png; sourceTree = "<group>"; };
+		CEB9D5471BFAD45600A6F565 /* LogoGlow87.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = LogoGlow87.png; sourceTree = "<group>"; };
+		CEB9D5481BFAD45600A6F565 /* LogoGlow120-1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "LogoGlow120-1.png"; sourceTree = "<group>"; };
+		CEB9D5491BFAD45600A6F565 /* LogoGlow120.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = LogoGlow120.png; sourceTree = "<group>"; };
+		CEB9D54A1BFAD45600A6F565 /* LogoGlow180.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = LogoGlow180.png; sourceTree = "<group>"; };
 		CEC0C73F1B45C80100A9DD33 /* FacebookAPIPost.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FacebookAPIPost.h; sourceTree = "<group>"; };
 		CEC0C7421B45D6B400A9DD33 /* LocationFinderAPI.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LocationFinderAPI.h; sourceTree = "<group>"; };
 		CEC0C7431B45D6B400A9DD33 /* LocationFinderAPI.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LocationFinderAPI.m; sourceTree = "<group>"; };
@@ -330,33 +334,34 @@
 				CED53C041BDD9F2800B34ED9 /* libz.tbd in Frameworks */,
 				CEB1BA281BC7370200581EC6 /* libz.1.1.3.tbd in Frameworks */,
 				CEB1BA261BC736DA00581EC6 /* libsqlite3.0.tbd in Frameworks */,
-				CE1BD8D31BDD5AE5001292A7 /* FBSDKLoginKit.framework in Frameworks */,
-				CE1BD8D21BDD5AE5001292A7 /* FBSDKCoreKit.framework in Frameworks */,
-				CE968CFD1BE061BD005CF1F0 /* Fabric.framework in Frameworks */,
 				CEA042261B9704BB00071518 /* UIKit.framework in Frameworks */,
+				CEB9D5361BFAC2D100A6F565 /* TwitterKit.framework in Frameworks */,
 				CE48FDB81B952C200086349A /* StoreKit.framework in Frameworks */,
-				CE1BD8D91BDD5B0A001292A7 /* FBAudienceNetwork.framework in Frameworks */,
 				CEED9BD51AF4165400402BC2 /* AudioToolbox.framework in Frameworks */,
 				CE76D26F1B94E41A00AE3E21 /* QuartzCore.framework in Frameworks */,
-				CE1BD8D51BDD5AF6001292A7 /* FBSDKShareKit.framework in Frameworks */,
+				CEB9D5381BFAC2D100A6F565 /* TwitterCore.framework in Frameworks */,
 				CE2BF9741B3E595000AB15AC /* MessageUI.framework in Frameworks */,
+				CEB9D4EC1BFABB6500A6F565 /* FBSDKShareKit.framework in Frameworks */,
 				CE06A2001B31F7C5000D3210 /* Bolts.framework in Frameworks */,
 				CEED9BD41AF4160300402BC2 /* Accounts.framework in Frameworks */,
 				CEED9BDB1AF4168E00402BC2 /* Foundation.framework in Frameworks */,
 				CE046CF61BF01E38004B95D6 /* Crashlytics.framework in Frameworks */,
+				CEB9D4EA1BFABB6500A6F565 /* FBSDKLoginKit.framework in Frameworks */,
 				CE06A2011B31F7C5000D3210 /* Parse.framework in Frameworks */,
 				CE06A2041B31F7C5000D3210 /* ParseFacebookUtilsV4.framework in Frameworks */,
 				CEED9BE21AF4168E00402BC2 /* CFNetwork.framework in Frameworks */,
 				CEED9BD91AF4168500402BC2 /* Social.framework in Frameworks */,
+				CEB9D5351BFAC2D100A6F565 /* Fabric.framework in Frameworks */,
 				CEED9BDF1AF4168E00402BC2 /* Security.framework in Frameworks */,
 				CEED9BD61AF4166000402BC2 /* CoreGraphics.framework in Frameworks */,
 				CEED9BD71AF4166A00402BC2 /* CoreLocation.framework in Frameworks */,
-				CE968D001BE061BD005CF1F0 /* TwitterCore.framework in Frameworks */,
+				CEB9D4EB1BFABB6500A6F565 /* FBSDKMessengerShareKit.framework in Frameworks */,
 				CEED9BDD1AF4168E00402BC2 /* SystemConfiguration.framework in Frameworks */,
 				CEED9BE11AF4168E00402BC2 /* MobileCoreServices.framework in Frameworks */,
 				CE06A2021B31F7C5000D3210 /* ParseCrashReporting.framework in Frameworks */,
+				CEB9D4E81BFABB6500A6F565 /* FBAudienceNetwork.framework in Frameworks */,
+				CEB9D4E91BFABB6500A6F565 /* FBSDKCoreKit.framework in Frameworks */,
 				CEED9BE31AF4169100402BC2 /* Twitter.framework in Frameworks */,
-				CE968CFE1BE061BD005CF1F0 /* TwitterKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -373,18 +378,20 @@
 		461A3BA50F675DAFB84D6483 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				CE968CF91BE061BD005CF1F0 /* Fabric.framework */,
-				CE968CFA1BE061BD005CF1F0 /* TwitterKit.framework */,
-				CE968CFB1BE061BD005CF1F0 /* TwitterKitResources.bundle */,
-				CE968CFC1BE061BD005CF1F0 /* TwitterCore.framework */,
+				CEB9D5431BFAC78400A6F565 /* PFTwitterUtils+NativeTwitter */,
+				CEB9D5311BFAC2D100A6F565 /* Fabric.framework */,
+				CEB9D5321BFAC2D100A6F565 /* TwitterKit.framework */,
+				CEB9D5331BFAC2D100A6F565 /* TwitterKitResources.bundle */,
+				CEB9D5341BFAC2D100A6F565 /* TwitterCore.framework */,
 				CED53C031BDD9F2800B34ED9 /* libz.tbd */,
-				CE1BD8D61BDD5B0A001292A7 /* FacebookSDKStrings.bundle */,
-				CE1BD8D71BDD5B0A001292A7 /* FBAudienceNetwork.framework */,
-				CE1BD8D41BDD5AF6001292A7 /* FBSDKShareKit.framework */,
-				CE1BD8D01BDD5AE5001292A7 /* FBSDKCoreKit.framework */,
-				CE1BD8D11BDD5AE5001292A7 /* FBSDKLoginKit.framework */,
 				CEB1BA271BC7370200581EC6 /* libz.1.1.3.tbd */,
 				CEB1BA251BC736DA00581EC6 /* libsqlite3.0.tbd */,
+				CEB9D4E11BFABB6500A6F565 /* FacebookSDKStrings.bundle */,
+				CEB9D4E21BFABB6500A6F565 /* FBAudienceNetwork.framework */,
+				CEB9D4E31BFABB6500A6F565 /* FBSDKCoreKit.framework */,
+				CEB9D4E41BFABB6500A6F565 /* FBSDKLoginKit.framework */,
+				CEB9D4E51BFABB6500A6F565 /* FBSDKMessengerShareKit.framework */,
+				CEB9D4E61BFABB6500A6F565 /* FBSDKShareKit.framework */,
 				CE5B98EF1B96F33400BFF14F /* UIKit.framework */,
 				CE48FDB71B952C200086349A /* StoreKit.framework */,
 				CE2BF9731B3E595000AB15AC /* MessageUI.framework */,
@@ -494,18 +501,18 @@
 		CE241A6A1AEAF0D300F22144 /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				CEB9D5451BFAD45600A6F565 /* LogoGlow58.png */,
+				CEB9D5461BFAD45600A6F565 /* LogoGlow80.png */,
+				CEB9D5471BFAD45600A6F565 /* LogoGlow87.png */,
+				CEB9D5481BFAD45600A6F565 /* LogoGlow120-1.png */,
+				CEB9D5491BFAD45600A6F565 /* LogoGlow120.png */,
+				CEB9D54A1BFAD45600A6F565 /* LogoGlow180.png */,
 				CE968D031BE14E28005CF1F0 /* arrowDetailIcon.png */,
 				CEDA11981B99946E0065ACDD /* Seal_of_Congress_Cropped.png */,
 				CEDA11991B99946E0065ACDD /* Seal_of_Senate_Cropped.png */,
 				CEDA11901B992A770065ACDD /* Seal_of_the_United_States_Congress.svg.png */,
 				CEDA11911B992A770065ACDD /* Seal_of_the_United_States_Senate.svg.png */,
 				CE0E805D1B9288070093453D /* settings.png */,
-				CE7800B91BDEAEA2008B9F37 /* LogoGlow58.png */,
-				CE7800BA1BDEAEA2008B9F37 /* LogoGlow80.png */,
-				CE7800BB1BDEAEA2008B9F37 /* LogoGlow87.png */,
-				CE7800BC1BDEAEA2008B9F37 /* LogoGlow120-1.png */,
-				CE7800BD1BDEAEA2008B9F37 /* LogoGlow120.png */,
-				CE7800BE1BDEAEA2008B9F37 /* LogoGlow180.png */,
 				CE7800C61BDEB142008B9F37 /* LogoGlow-1.png */,
 				CE7800C71BDEB142008B9F37 /* LogoGlow-2.png */,
 				CE7800C81BDEB142008B9F37 /* LogoGlow.png */,
@@ -739,34 +746,36 @@
 				CEDA11931B992A770065ACDD /* Seal_of_the_United_States_Senate.svg.png in Resources */,
 				CEEF250B1B0171BC00EFB257 /* Web-frame2.png in Resources */,
 				CE7800CA1BDEB142008B9F37 /* LogoGlow-2.png in Resources */,
+				CEB9D54C1BFAD45600A6F565 /* LogoGlow80.png in Resources */,
 				CEE04B9A1B34B9EC00AAF8EA /* lightGrayButtonBackground.png in Resources */,
+				CEB9D5371BFAC2D100A6F565 /* TwitterKitResources.bundle in Resources */,
 				CE46B13C1B044DF300A4D671 /* blackborder.png in Resources */,
 				CEE074441B5F027E00245C56 /* success-icon.png in Resources */,
+				CEB9D4E71BFABB6500A6F565 /* FacebookSDKStrings.bundle in Resources */,
 				CE7800CB1BDEB142008B9F37 /* LogoGlow.png in Resources */,
 				CE80B5D61AFC0EFB007D69FB /* dailyshow6cover.png in Resources */,
+				CEB9D54E1BFAD45600A6F565 /* LogoGlow120-1.png in Resources */,
 				CE29AA9A1B3F2BC900676563 /* pelosi.png in Resources */,
 				CE87CAC41AF9B5DE0084C666 /* vicecoverphoto.png in Resources */,
 				CEEF25001B0114C900EFB257 /* monsanto nutrition facts.png in Resources */,
-				CE7800C41BDEAEA2008B9F37 /* LogoGlow120.png in Resources */,
 				CEEF25091B016D5400EFB257 /* tweet button.png in Resources */,
-				CE7800C21BDEAEA2008B9F37 /* LogoGlow87.png in Resources */,
 				CE46B13E1B044EA700A4D671 /* carousell-borderblack.png in Resources */,
 				CEEF25021B011A4B00EFB257 /* monsanto gas apple.png in Resources */,
 				CEDA119A1B99946E0065ACDD /* Seal_of_Congress_Cropped.png in Resources */,
 				CEDA119B1B99946E0065ACDD /* Seal_of_Senate_Cropped.png in Resources */,
 				CE968D041BE14E28005CF1F0 /* arrowDetailIcon.png in Resources */,
-				CE968CFF1BE061BD005CF1F0 /* TwitterKitResources.bundle in Resources */,
+				CEB9D5501BFAD45600A6F565 /* LogoGlow180.png in Resources */,
 				CE6073291B3A85EB007B567C /* mail-icon-gray.png in Resources */,
 				CEF14C061B23AD6C00EC95A4 /* tweetButtonIconGray.png in Resources */,
+				CEB9D54B1BFAD45600A6F565 /* LogoGlow58.png in Resources */,
 				CE241A4E1AEAE45A00F22144 /* Main.storyboard in Resources */,
 				CE60732D1B3A8CAC007B567C /* document-xxl.png in Resources */,
-				CE7800C01BDEAEA2008B9F37 /* LogoGlow58.png in Resources */,
 				CE2BB67D1B8FEEB200568E16 /* light_bulb_white.png in Resources */,
 				CEE074421B5EFEE900245C56 /* success.png in Resources */,
 				CE60732B1B3A88FD007B567C /* phone-gray.png in Resources */,
 				CEF14C081B23AD7600EC95A4 /* facebookButtonIconGray.png in Resources */,
 				CED68DCC1B69AE8B0087546D /* 40-menu-alt-512.png in Resources */,
-				CE7800C11BDEAEA2008B9F37 /* LogoGlow80.png in Resources */,
+				CEB9D5441BFAC78400A6F565 /* PFTwitterUtils+NativeTwitter in Resources */,
 				CED68DCA1B6973520087546D /* arrow-down-gray-hi.png in Resources */,
 				CE2BD37D1B007FB30053A1B3 /* monsantocorngrenade.png in Resources */,
 				CE7B38581B584C77009107DD /* congressionalDishProgramCover.png in Resources */,
@@ -775,16 +784,15 @@
 				CE395D881AED5790006786C0 /* twittericon320.png in Resources */,
 				CE87CAC21AF9B2570084C666 /* vicegasmask.png in Resources */,
 				CE87CAC01AF9945B0084C666 /* last-night-660x330.png in Resources */,
+				CEB9D54F1BFAD45600A6F565 /* LogoGlow120.png in Resources */,
 				CE0E805E1B9288070093453D /* settings.png in Resources */,
 				CE29AA961B3F2BB400676563 /* boxer.png in Resources */,
 				CE29AA981B3F2BBD00676563 /* feinstein.png in Resources */,
+				CEB9D54D1BFAD45600A6F565 /* LogoGlow87.png in Resources */,
 				CE46B1381B043A8000A4D671 /* blue_arrow_png_by_maddielovesselly-d4ys3ti (1).png in Resources */,
 				CE87CAC61AF9B5F30084C666 /* lastweektonightcoverphoto.png in Resources */,
 				CE7800C91BDEB142008B9F37 /* LogoGlow-1.png in Resources */,
-				CE7800C51BDEAEA2008B9F37 /* LogoGlow180.png in Resources */,
-				CE7800C31BDEAEA2008B9F37 /* LogoGlow120-1.png in Resources */,
 				CEE772B41BA8C14D00E45842 /* settingswhite.png in Resources */,
-				CE1BD8D81BDD5B0A001292A7 /* FacebookSDKStrings.bundle in Resources */,
 				CE241A501AEAE45A00F22144 /* Images.xcassets in Resources */,
 				CEDA11921B992A770065ACDD /* Seal_of_the_United_States_Congress.svg.png in Resources */,
 			);
