@@ -15,21 +15,46 @@
 #import "Program.h"
 
 
-@interface ProgramsTableViewController () <UISearchResultsUpdating>
-- (IBAction)uploadPhotos:(id)sender;
-
+@interface ProgramsTableViewController () <UISearchResultsUpdating,UISearchControllerDelegate,UISearchDisplayDelegate, UISearchBarDelegate>
+//- (IBAction)uploadPhotos:(id)sender;  //Bulk congress photo upload, don't delete
 
 @end
 
 @implementation ProgramsTableViewController
 
 Program *program;
-BOOL isFinished = NO;
 NSUInteger numberOfRows = 0;
 
 
 -(void)viewWillAppear:(BOOL)animated {
-       [super viewWillAppear:YES];
+    self.navigationController.navigationBar.barStyle = UIBarStyleBlack;  // optional
+    self.navigationController.navigationBar.translucent = YES;
+
+    
+    
+
+
+}
+
+
+-(void)viewDidAppear:(BOOL)animated{
+    [super viewDidAppear:YES];
+    
+    self.searchController = [[UISearchController alloc] initWithSearchResultsController:nil];
+    self.searchController.searchResultsUpdater = self;
+    [self.searchController setDelegate:self];
+    
+    
+
+    self.searchController.dimsBackgroundDuringPresentation = NO;
+
+    
+    [self.searchController.searchBar setDelegate:self];
+    self.searchController.searchBar.scopeButtonTitles = @[@"Title",@"Network"];
+    [self.searchController.searchBar sizeToFit];
+    self.tableView.tableHeaderView = self.searchController.searchBar;
+    self.definesPresentationContext = YES;
+    self.searchController.searchBar.barTintColor = [UIColor blackColor];
 }
 
 - (UIInterfaceOrientationMask)supportedInterfaceOrientations
@@ -40,29 +65,15 @@ NSUInteger numberOfRows = 0;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
-    self.navigationController.navigationBar.barStyle = UIBarStyleBlack;  // optional
-    self.navigationController.navigationBar.translucent = YES;
-    
-    self.searchController = [[UISearchController alloc] initWithSearchResultsController:self];
-    self.searchController.searchResultsUpdater = self;
-    self.definesPresentationContext = YES;
-    self.searchController.dimsBackgroundDuringPresentation = NO;
-    [self.searchController.searchBar sizeToFit];
-    self.tableView.tableHeaderView = self.searchController.searchBar;
-    self.definesPresentationContext = true;
-    
-    self.searchController.searchBar.scopeButtonTitles = @[NSLocalizedString(@"ScopeButtonCountry",@"Country"),
-        NSLocalizedString(@"ScopeButtonCapital",@"Capital")];
-//    self.searchController.searchBar.delegate = self.tableView;
+    NSLog(@"viewdidload being called");
     
     PFQuery *query = [PFQuery queryWithClassName:@"Programs"];
 //    [query setCachePolicy:kPFCachePolicyCacheThenNetwork];  //This causes crash
     [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
         if (!error) {
+            self.programListFromDatabase = objects;
             self.programList = objects;
             dispatch_async(dispatch_get_main_queue(), ^{
-                isFinished = YES;
                 [self.tableView reloadData];
             });
         } else {
@@ -75,13 +86,67 @@ NSUInteger numberOfRows = 0;
 
 }
 
+typedef enum
+{
+    searchScopeProgramTitle = 0,
+    searchScopeNetwork = 1
+} ProgramListSearchScope;
+
 -(void)updateSearchResultsForSearchController:(UISearchController *)searchController {
-    NSString *searchText = searchController.searchBar.text;
+    NSString *searchString = searchController.searchBar.text;
     
-    if([searchText isEqualToString:@""]){
+    [self searchForText:searchString scope:(int)self.searchController.searchBar.selectedScopeButtonIndex];
+//    [self searchForText:searchString];
+    [self.searchController.searchBar sizeToFit];
+    [self.tableView reloadData];
+    
+}
+
+//- (void)searchForText:(NSString *)searchText
+- (void)searchForText:(NSString *)searchText scope:(ProgramListSearchScope)scopeOption
+{
+    if (self.programList)
+    {
+        NSString *predicateFormat = @"%K BEGINSWITH [cd] %@";
+        NSString *searchAttribute = @"programTitle";
         
+        if (scopeOption == 1)
+        {
+            searchAttribute = @"programNetwork";
+        }
+        
+        NSLog(@"searchTest:%@",searchText);
+        
+        NSArray *filteredArray;
+        
+        if([searchText  isEqual: @""]){
+            NSLog(@"YES search is empty");
+            filteredArray = self.programListFromDatabase;
+        } else {
+            filteredArray = [self.programListFromDatabase filteredArrayUsingPredicate:[NSPredicate predicateWithFormat:predicateFormat,searchAttribute, searchText]];
+        }
+        self.programList = (NSMutableArray*)filteredArray;
     }
 }
+
+
+//- (BOOL)searchBarShouldBeginEditing:(UISearchBar *)searchBar {
+//    searchBar.showsScopeBar = YES;
+//    [searchBar sizeToFit];
+//    [searchBar setShowsCancelButton:YES animated:YES];
+//    
+//    return YES;
+//}
+//
+//- (BOOL)searchBarShouldEndEditing:(UISearchBar *)searchBar {
+//    searchBar.showsScopeBar = NO;
+////    [searchBar sizeToFit];
+////    [searchBar setShowsCancelButton:NO animated:YES];
+//    
+//    return YES;
+//}
+
+
 
 
 - (void)didReceiveMemoryWarning {
@@ -93,30 +158,19 @@ NSUInteger numberOfRows = 0;
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
 
-    // Return the number of sections.
-    //isFinished BOOL used to flag when async query had returned data.
-//    if (!isFinished) {
-//        return 0;
-//    } else {
         return 1;
-//    }
     
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-
-//    // Return the number of rows in the section.
-//    if (!isFinished) {
-//        return 0;
-//    } else {
         return self.programList.count;
-//    }
+
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     ProgramsTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"Cell" forIndexPath:indexPath];
         program = [self.programList objectAtIndex:indexPath.row];
-        [cell configProgramCell:program indexPath:indexPath isFinished:isFinished];
+        [cell configProgramCell:program indexPath:indexPath];
         return cell;
 }
 
@@ -161,45 +215,6 @@ NSUInteger numberOfRows = 0;
 */
 
 
-#pragma mark - Data Entry
-// Method for uploading congress photos to Parse.
-// Add the below method to a button and run.
-- (IBAction)uploadPhotos:(id)sender {
-    
-    NSLog(@"hey");
-    
-    NSFileManager *fileManager = [NSFileManager defaultManager];
-    NSURL *bundleURL = [[NSBundle mainBundle] bundleURL];
-    NSArray *contents = [fileManager contentsOfDirectoryAtURL:bundleURL
-                                   includingPropertiesForKeys:@[]
-                                                      options:NSDirectoryEnumerationSkipsHiddenFiles
-                                                        error:nil];
-    
-    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"pathExtension ENDSWITH 'jpg'"];
-    for (NSString *path in [contents filteredArrayUsingPredicate:predicate]) {
-        NSLog(@"path name:%@",path);
-        
-        NSString *theFileName = [path lastPathComponent];
-        NSString *bioguideID = [[path lastPathComponent] stringByDeletingPathExtension];
-        
-        NSLog(@"the file name:%@",theFileName);
-        NSLog(@"bioguide:%@",bioguideID);
-        
-        UIImage *imageFile = [UIImage imageNamed:theFileName];
-        NSLog(@"image:%@",imageFile);
-        
-        NSData *imageData = UIImageJPEGRepresentation(imageFile, 1.0f);
-        PFFile *imageFileParse = [PFFile fileWithName:theFileName data:imageData];
-        
-        PFObject *imageObject = [PFObject objectWithClassName:@"CongressImages"];
-        imageObject[@"bioguideID"] = bioguideID;
-        imageObject[@"imageName"] = theFileName;
-        imageObject[@"imageFile"] = imageFileParse;
-        [imageObject saveInBackground];
-        
-        [NSThread sleepForTimeInterval:1];
-    }
-}
 
 
 #pragma mark - Navigation
@@ -212,6 +227,47 @@ NSUInteger numberOfRows = 0;
         viewController.selectedProgram = self.selectedProgram;
     }
 }
+
+#pragma mark - Data Entry
+// DON'T DELETE - CONGRESS BULK UPLOAD
+// Method for uploading congress photos to Parse.
+// Add the below method to a button and run.
+//- (IBAction)uploadPhotos:(id)sender {
+//    
+//    NSLog(@"hey");
+//    
+//    NSFileManager *fileManager = [NSFileManager defaultManager];
+//    NSURL *bundleURL = [[NSBundle mainBundle] bundleURL];
+//    NSArray *contents = [fileManager contentsOfDirectoryAtURL:bundleURL
+//                                   includingPropertiesForKeys:@[]
+//                                                      options:NSDirectoryEnumerationSkipsHiddenFiles
+//                                                        error:nil];
+//    
+//    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"pathExtension ENDSWITH 'jpg'"];
+//    for (NSString *path in [contents filteredArrayUsingPredicate:predicate]) {
+//        NSLog(@"path name:%@",path);
+//        
+//        NSString *theFileName = [path lastPathComponent];
+//        NSString *bioguideID = [[path lastPathComponent] stringByDeletingPathExtension];
+//        
+//        NSLog(@"the file name:%@",theFileName);
+//        NSLog(@"bioguide:%@",bioguideID);
+//        
+//        UIImage *imageFile = [UIImage imageNamed:theFileName];
+//        NSLog(@"image:%@",imageFile);
+//        
+//        NSData *imageData = UIImageJPEGRepresentation(imageFile, 1.0f);
+//        PFFile *imageFileParse = [PFFile fileWithName:theFileName data:imageData];
+//        
+//        PFObject *imageObject = [PFObject objectWithClassName:@"CongressImages"];
+//        imageObject[@"bioguideID"] = bioguideID;
+//        imageObject[@"imageName"] = theFileName;
+//        imageObject[@"imageFile"] = imageFileParse;
+//        [imageObject saveInBackground];
+//        
+//        [NSThread sleepForTimeInterval:1];
+//    }
+//}
 
 
 @end

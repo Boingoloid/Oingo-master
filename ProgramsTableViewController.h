@@ -13,8 +13,10 @@
 
 @interface ProgramsTableViewController : UITableViewController
 @property (nonatomic) NSArray *programList;
+@property (nonatomic) NSArray *programListFromDatabase;
 @property (nonatomic,strong) Program *selectedProgram;
 @property (strong, nonatomic) UISearchController *searchController;
+@property (strong, nonatomic) NSMutableArray *filteredList;
 
 
 @end

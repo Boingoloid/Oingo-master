@@ -32,8 +32,7 @@
     // Configure the view for the selected state
 }
 
-- (void)configProgramCell:program indexPath:(NSIndexPath *)indexPath isFinished:(BOOL)isFinished{
-    if (isFinished) {
+- (void)configProgramCell:program indexPath:(NSIndexPath *)indexPath{
         
         //load program image from Parse
         PFFile *theImage = [program objectForKey:@"programImage"];
@@ -45,9 +44,6 @@
         NSString* padding = @" "; // # of spaces
         self.programTitle.text = [NSString stringWithFormat:@"%@%@%@", padding, [program valueForKey:@"programTitle"], padding];
         self.programDescription.text = [program valueForKey:@"programDescription"];
-    }
-    else {
-        NSLog(@"in cell no option:%d",isFinished);
-    }
+
 }
 @end

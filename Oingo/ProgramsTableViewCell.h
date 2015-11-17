@@ -11,6 +11,7 @@
 
 @interface ProgramsTableViewCell : UITableViewCell
 
-- (void)configProgramCell:program indexPath:(NSIndexPath *)indexPath isFinished:(BOOL)isFinished;
+
+- (void)configProgramCell:program indexPath:(NSIndexPath *)indexPath;
 
 @end
