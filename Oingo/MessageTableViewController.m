@@ -766,7 +766,7 @@ NSInteger footerHeight = 1;
         [self.tableView addSubview:cell];
         congressionalMessageItem = [self.menuList objectAtIndex:[rowIndex intValue]];
         [cell configMessageCellLocalRep:congressionalMessageItem indexPath:indexPath];
-
+        
 //        [cell.contentView layoutIfNeeded];
 //        [cell setNeedsDisplay];
 //        [cell layoutIfNeeded];

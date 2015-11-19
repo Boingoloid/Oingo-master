@@ -15,8 +15,7 @@
     
     NSString *messageText = [NSString stringWithFormat:@"\"%@\"",[messageItem valueForKey:@"messageText"]];
     self.messageText.text = messageText;
-    //    [self.contentView layoutIfNeeded];
-    //    [self.contentView setNeedsDisplay];
+    [self.messageText sizeToFit];
 }
 
 

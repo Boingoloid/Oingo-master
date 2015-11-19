@@ -118,7 +118,7 @@ bool isUserLinkedToTwitter;
         if (result == TWTRComposerResultCancelled) {
             NSLog(@"Tweet composition cancelled");
         } else {
-            NSLog(@"Tweet is sent.");
+            NSLog(@"Tweet is sent:%ld",(long)result);
             [self saveSentMessage];
             //Need to save tweet result ID in callBack
         }
@@ -136,6 +136,29 @@ bool isUserLinkedToTwitter;
     [sentMessageItem setObject:[currentUser valueForKey:@"username"] forKey:@"username"];
     NSString *userObjectID = currentUser.objectId;
     [sentMessageItem setObject:userObjectID forKey:@"userObjectID"];
+    
+    NSString *category = [self.selectedMessageDictionary valueForKey:@"messageCategory"];
+    NSUInteger indexDefaultMessage = [self.messageOptionsList indexOfObjectPassingTest:
+                                ^BOOL(NSDictionary *dict, NSUInteger idx, BOOL *stop) {
+                                    return [[dict objectForKey:@"messageCategory"] isEqual:category];
+                                }];
+    if (indexDefaultMessage == NSNotFound){
+        NSLog(@"index not found");
+    } else {
+        NSString *defaultMessage =[self.messageOptionsList objectAtIndex:indexDefaultMessage];
+        
+        
+        NSLog(@"comparing default: %@ and sent message: %@",defaultMessage,self.messageText);
+        if([self.messageText isEqualToString:defaultMessage]) {
+            NSLog(@"comparison EQUAL");
+            [sentMessageItem setObject:@YES forKey:@"isDefaultMessage"];
+        }else{
+            NSLog(@"comparison NOT EQUAL");
+            [sentMessageItem setObject:@NO forKey:@"isDefaultMessage"];
+        }
+    }
+
+    
 
     [sentMessageItem saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) { //save sent message to parse
         if(error){
@@ -189,6 +212,28 @@ bool isUserLinkedToTwitter;
         [sentMessageItem setObject:targetName forKey:@"contactName"];
     }
     
+    
+    
+    NSString *category = [self.selectedMessageDictionary valueForKey:@"messageCategory"];
+    NSUInteger indexDefaultMessage = [self.messageOptionsList indexOfObjectPassingTest:
+                                      ^BOOL(NSDictionary *dict, NSUInteger idx, BOOL *stop) {
+                                          return [[dict objectForKey:@"messageCategory"] isEqual:category];
+                                      }];
+    if (indexDefaultMessage == NSNotFound){
+        NSLog(@"index not found");
+    } else {
+        NSString *defaultMessage =[[self.messageOptionsList objectAtIndex:indexDefaultMessage] valueForKey:@"messageText"];
+        
+        
+        NSLog(@"comparing default: %@ and sent message: %@",defaultMessage,self.messageText);
+        if([self.messageText isEqualToString:defaultMessage]) {
+            NSLog(@"comparison EQUAL");
+            [sentMessageItem setObject:@YES forKey:@"isDefaultMessage"];
+        }else{
+            NSLog(@"comparison NOT EQUAL");
+            [sentMessageItem setObject:@NO forKey:@"isDefaultMessage"];
+        }
+    }
     
     
     [sentMessageItem saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) { //save currentUser to parse disk

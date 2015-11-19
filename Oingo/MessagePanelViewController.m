@@ -31,33 +31,63 @@
     
 //    PFUser *currentUser = [PFUser currentUser];
     
-        NSString *selectedSegmentID = [self.messageTableViewController.selectedSegment valueForKey:@"segmentID"];
-        NSString *category = [self.selectedMessageDictionary valueForKey:@"messageCategory"];
+    NSString *selectedSegmentID = [self.messageTableViewController.selectedSegment valueForKey:@"segmentID"];
+    NSString *category = [self.selectedMessageDictionary valueForKey:@"messageCategory"];
 
-        
-        //get message data for segment menu
-        PFQuery *query = [PFQuery queryWithClassName:@"sentMessages"];
-        [query whereKey:@"segmentID" equalTo:selectedSegmentID];
-        [query whereKey:@"messageType" equalTo:@"twitter"];
-        [query whereKey:@"messageCategory" equalTo:category];
-        [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
-            if (!error) {
+    
+    //get message data for segment menu
+    PFQuery *query = [PFQuery queryWithClassName:@"sentMessages"];
+    [query whereKey:@"segmentID" equalTo:selectedSegmentID];
+    [query whereKey:@"messageType" equalTo:@"twitter"];
+    [query whereKey:@"messageCategory" equalTo:category];
+    [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
+        if (!error) {
+            dispatch_async(dispatch_get_main_queue(), ^{
+                self.sentMessagesForSegment = (NSMutableArray*)objects;
+                // create two arrays, add them.
                 
-                //get message from message 
+                // Get default message from messageOptionsList
+                NSString *category = [self.selectedMessageDictionary valueForKey:@"messageCategory"];
+                NSUInteger indexDefaultMessage = [self.messageOptionsList indexOfObjectPassingTest:
+                                                  ^BOOL(NSDictionary *dict, NSUInteger idx, BOOL *stop) {
+                                                      return [[dict objectForKey:@"messageCategory"] isEqual:category];
+                                                  }];
+                if (indexDefaultMessage == NSNotFound){
+                    NSLog(@"index not found");
+                } else {
+                    NSLog(@"found and working!!");
+                    NSString *defaultMessage =[[self.messageOptionsList objectAtIndex:indexDefaultMessage] valueForKey:@"messageText"];
+                    
+                    NSMutableDictionary *defaultMessageDictionary = [[NSMutableDictionary alloc]initWithObjectsAndKeys:defaultMessage, @"messageText", 0, @"messageCount", nil];
                 
+                    NSMutableArray *messageArray= [[NSMutableArray alloc]init];
+                    
+                    for(NSDictionary *sentMessageDict in objects){
+                        if([sentMessageDict valueForKey:@"isDefaultMessage"]){
+                            int newCount = [[defaultMessageDictionary valueForKey:@"messageCount"]intValue] +1;
+                            [defaultMessageDictionary setObject:[NSNumber numberWithInt:newCount] forKey:@"messageCount"];
+                        } else {
+                            [messageArray addObject:sentMessageDict];
+                        }
+                    }
+                    
+                    NSMutableArray *tableDataArray = [[NSMutableArray alloc]init];
+                    [tableDataArray addObject:defaultMessageDictionary];
+                    [tableDataArray addObjectsFromArray:messageArray];
+                    self.sentMessagesForSegment = tableDataArray;
                 
-                
-                dispatch_async(dispatch_get_main_queue(), ^{
-                    self.sentMessagesForSegment = objects;
-                    self.tableData = (NSMutableArray*)self.sentMessagesForSegment;
-                    //NSLog(@"loading data from sentMessagesList%@:",self.sentMessagesForSegment);
+                    
+                    NSLog(@"default:%@",defaultMessageDictionary);
+                    NSLog(@"default:%@",tableDataArray);
+                    
+                    self.tableData = self.sentMessagesForSegment;
+                    
                     [self getHashtagData];
-                });
-            } else {
-                NSLog(@"Error: %@ %@", error, [error userInfo]);
-            }
+                }
+            });
+        }
         }];
-
+    
     // Assign Values
     self.messageTextView.text = [[self.menuList objectAtIndex:[self.originRowIndex intValue]] valueForKey:@"messageText"];
     [self.includeLinkToggle setOn:YES animated:NO];
@@ -85,8 +115,6 @@
     [self.messageTextView setKeyboardType:UIKeyboardTypeTwitter];
     self.messageTextView.delegate = self;
  
-    
-    
     
     // Format Cancel Button
     self.cancelButton.layer.borderColor = [[UIColor colorWithRed:13/255.0 green:81/255.0 blue:183/255.0 alpha:1] CGColor];
@@ -263,9 +291,9 @@
     
 - (IBAction)toggleIncludeLink:(id)sender {
     if([self.includeLinkToggle isOn]){
-        [[self.messageTableViewController.menuList objectAtIndex:[self.originRowIndex intValue]] setValue:@YES  forKey:@"isLinkIncluded"];
+        [[self.messageTableViewController.menuList objectAtIndex:[self.originRowIndex intValue]] setValue:@YES forKey:@"isLinkIncluded"];
     }else {
-        [[self.messageTableViewController.menuList objectAtIndex:[self.originRowIndex intValue]] setValue:@NO  forKey:@"isLinkIncluded"];
+        [[self.messageTableViewController.menuList objectAtIndex:[self.originRowIndex intValue]] setValue:@NO forKey:@"isLinkIncluded"];
         NSLog(@"Link will not be included");
     }
 }

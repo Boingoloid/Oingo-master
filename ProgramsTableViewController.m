@@ -67,6 +67,11 @@ NSUInteger numberOfRows = 0;
     [super viewDidLoad];
     NSLog(@"viewdidload being called");
     
+    
+    
+    
+
+    
     PFQuery *query = [PFQuery queryWithClassName:@"Programs"];
 //    [query setCachePolicy:kPFCachePolicyCacheThenNetwork];  //This causes crash
     [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {

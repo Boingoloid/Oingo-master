@@ -47,7 +47,6 @@ Segment *segment;
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-//    self.view.translatesAutoresizingMaskIntoConstraints = NO;
     self.tableView.estimatedRowHeight = 44;
     self.tableView.rowHeight = UITableViewAutomaticDimension;
     

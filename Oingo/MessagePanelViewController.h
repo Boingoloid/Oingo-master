@@ -19,7 +19,7 @@
 @property (weak, nonatomic) IBOutlet UISwitch *includeLinkToggle;
 @property (weak, nonatomic) IBOutlet UIButton *signInButton;
 @property (weak, nonatomic) IBOutlet UILabel *charCountLabel;
-@property (nonatomic) NSArray *sentMessagesForSegment;
+@property (nonatomic) NSMutableArray *sentMessagesForSegment;
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (nonatomic) NSMutableArray *tableData;
 @property (nonatomic) NSMutableArray *hashtagList;
