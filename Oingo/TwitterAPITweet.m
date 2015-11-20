@@ -18,6 +18,9 @@
 #import "CongressionalMessageItem.h"
 #import "MarkSentMessageAPI.h"
 
+
+@interface TwitterAPITweet ()  <TWTRComposerViewControllerDelegate>
+@end
 @implementation TwitterAPITweet
 
 bool isUserLinkedToTwitter;
@@ -100,6 +103,7 @@ bool isUserLinkedToTwitter;
     NSData *imageData = [theImage getData];
     UIImage *image = [UIImage imageWithData:imageData];
     TWTRComposer *composer = [[TWTRComposer alloc] init];
+
     [composer setText:tweetText];
     [composer setImage:image];
     

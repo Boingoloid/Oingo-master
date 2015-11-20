@@ -368,7 +368,7 @@
     if(self.tableSegmentControl.selectedSegmentIndex == 0){
         self.messageTextView.text = cell.messageTextLabel.text;
     } else {
-        [self.messageTextView replaceRange:self.messageTextView.selectedTextRange withText:cell.messageTextLabel.text];
+        [self.messageTextView replaceRange:self.messageTextView.selectedTextRange withText:[NSString stringWithFormat:@" %@",cell.messageTextLabel.text]];
     }
 }
 
