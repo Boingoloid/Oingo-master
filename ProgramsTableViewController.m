@@ -44,10 +44,7 @@ NSUInteger numberOfRows = 0;
     self.searchController.searchResultsUpdater = self;
     [self.searchController setDelegate:self];
     
-    
-
     self.searchController.dimsBackgroundDuringPresentation = NO;
-
     
     [self.searchController.searchBar setDelegate:self];
     self.searchController.searchBar.scopeButtonTitles = @[@"Title",@"Network"];
@@ -67,13 +64,8 @@ NSUInteger numberOfRows = 0;
     [super viewDidLoad];
     NSLog(@"viewdidload being called");
     
-    
-    
-    
-
-    
     PFQuery *query = [PFQuery queryWithClassName:@"Programs"];
-//    [query setCachePolicy:kPFCachePolicyCacheThenNetwork];  //This causes crash
+    //[query setCachePolicy:kPFCachePolicyCacheThenNetwork];  //This causes crash
     [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
         if (!error) {
             self.programListFromDatabase = objects;
@@ -101,7 +93,6 @@ typedef enum
     NSString *searchString = searchController.searchBar.text;
     
     [self searchForText:searchString scope:(int)self.searchController.searchBar.selectedScopeButtonIndex];
-//    [self searchForText:searchString];
     [self.searchController.searchBar sizeToFit];
     [self.tableView reloadData];
     
@@ -112,7 +103,7 @@ typedef enum
 {
     if (self.programList)
     {
-        NSString *predicateFormat = @"%K BEGINSWITH [cd] %@";
+        NSString *predicateFormat = @"%K CONTAINS [cd] %@";
         NSString *searchAttribute = @"programTitle";
         
         if (scopeOption == 1)
