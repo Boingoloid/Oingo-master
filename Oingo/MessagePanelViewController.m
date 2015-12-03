@@ -105,11 +105,9 @@
     self.tableView.layer.cornerRadius = 3;
     self.tableView.clipsToBounds = YES;
     
-    
-    // Format messageTextView field
+    //Format messageTextView
     self.messageTextView.layer.borderColor = [[UIColor whiteColor] CGColor];
     self.messageTextView.layer.borderWidth = 0;
-    //self.messageTextView.layer.backgroundColor = [[UIColor colorWithRed:243/255.0 green:243/255.0 blue:243/255.0 alpha:1] CGColor];
     self.messageTextView.clipsToBounds = YES;
     self.messageTextView.layer.cornerRadius = 3;
     [self.messageTextView setKeyboardType:UIKeyboardTypeTwitter];
@@ -229,6 +227,7 @@
 
 -(void)viewWillAppear:(BOOL)animated{
 
+    
     //This button covers the entire text view. Sends to sign in if not a user.
     if([PFUser currentUser]){
         self.signInButton.hidden = YES;
@@ -308,6 +307,7 @@
     } else {
         self.tableData = (NSMutableArray*)self.hashtagList;
     }
+    
     [self.tableView reloadData];
 }
 
@@ -327,24 +327,7 @@
     [cell configureCellWithData:(NSDictionary*)[self.tableData objectAtIndex:indexPath.row]];
     
     [cell layoutIfNeeded];
-    return cell;
-
-//    
-//    if(self.tableSegmentControl.selectedSegmentIndex == 0){
-//        //self.frequencyLabel.hidden = true;
-//        
-//        NSDictionary *sentMessage = (NSDictionary*)[self.sentMessagesForSegment objectAtIndex:indexPath.row];
-//        cell.textLabel.text = [sentMessage valueForKey:@"messageText"];
-//        
-//        
-//    } else {
-//        //self.frequencyLabel.hidden = false;
-//        NSDictionary *hashtag = (NSDictionary*)[self.hashtagList objectAtIndex:indexPath.row];
-//        cell.textLabel.text = [hashtag valueForKey:@"hashtag"];
-//        cell.detailTextLabel.text = [NSString stringWithFormat:@"%@",[hashtag valueForKey:@"frequency"]];
-//
-//    }
-    
+    return cell;    
 
 }
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
@@ -352,12 +335,6 @@
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    // Number of rows is the number of time zones in the region for the specified section.
-//    if(self.tableSegmentControl.selectedSegmentIndex == 0){
-//        return [self.sentMessagesForSegment count];
-//    } else {
-//        return [self.hashtagList count];
-//    }
     return [self.tableData count];
 }
 
@@ -369,7 +346,7 @@
         self.messageTextView.text = cell.messageTextLabel.text;
     } else {
         [self.messageTextView replaceRange:self.messageTextView.selectedTextRange withText:[NSString stringWithFormat:@" %@",cell.messageTextLabel.text]];
-    }
+    } 
 }
 
 //- (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {

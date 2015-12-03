@@ -46,6 +46,7 @@
 		CE46B13E1B044EA700A4D671 /* carousell-borderblack.png in Resources */ = {isa = PBXBuildFile; fileRef = CE46B13D1B044EA700A4D671 /* carousell-borderblack.png */; };
 		CE48FDB61B9527C50086349A /* TWAPIManager.m in Sources */ = {isa = PBXBuildFile; fileRef = CE48FDB51B9527C50086349A /* TWAPIManager.m */; };
 		CE48FDB81B952C200086349A /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CE48FDB71B952C200086349A /* StoreKit.framework */; };
+		CE4BD0BD1C0FDC8D00442646 /* SegmentDataViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CE4BD0BC1C0FDC8D00442646 /* SegmentDataViewController.m */; settings = {ASSET_TAGS = (); }; };
 		CE5B5D0E1AF95A740033A668 /* ProgramDetailTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CE5B5D0D1AF95A740033A668 /* ProgramDetailTableViewCell.m */; };
 		CE6073291B3A85EB007B567C /* mail-icon-gray.png in Resources */ = {isa = PBXBuildFile; fileRef = CE6073281B3A85EB007B567C /* mail-icon-gray.png */; };
 		CE60732B1B3A88FD007B567C /* phone-gray.png in Resources */ = {isa = PBXBuildFile; fileRef = CE60732A1B3A88FD007B567C /* phone-gray.png */; };
@@ -210,6 +211,8 @@
 		CE48FDB41B9527C50086349A /* TWAPIManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TWAPIManager.h; sourceTree = "<group>"; };
 		CE48FDB51B9527C50086349A /* TWAPIManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TWAPIManager.m; sourceTree = "<group>"; };
 		CE48FDB71B952C200086349A /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
+		CE4BD0BB1C0FDC8D00442646 /* SegmentDataViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SegmentDataViewController.h; sourceTree = "<group>"; };
+		CE4BD0BC1C0FDC8D00442646 /* SegmentDataViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SegmentDataViewController.m; sourceTree = "<group>"; };
 		CE5B5D0C1AF95A740033A668 /* ProgramDetailTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ProgramDetailTableViewCell.h; path = ../ProgramDetailTableViewCell.h; sourceTree = "<group>"; };
 		CE5B5D0D1AF95A740033A668 /* ProgramDetailTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ProgramDetailTableViewCell.m; path = ../ProgramDetailTableViewCell.m; sourceTree = "<group>"; };
 		CE5B98EF1B96F33400BFF14F /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
@@ -429,6 +432,8 @@
 				CEE04BA01B3501B000AAF8EA /* Methods */,
 				CE6F71F11B2A5A670067E4DA /* objects */,
 				CE241A4C1AEAE45A00F22144 /* Main.storyboard */,
+				CE4BD0BB1C0FDC8D00442646 /* SegmentDataViewController.h */,
+				CE4BD0BC1C0FDC8D00442646 /* SegmentDataViewController.m */,
 				CE241A431AEAE45A00F22144 /* AppDelegate.h */,
 				CE241A441AEAE45A00F22144 /* AppDelegate.m */,
 				CE9D625C1BC3C10F00A244ED /* MessagePanelViewController.h */,
@@ -890,6 +895,7 @@
 				CE99E3871B5EF1ED00ED9D33 /* MarkSentMessageAPI.m in Sources */,
 				CE6F71F41B2BCA9E0067E4DA /* SettingsTableViewController.m in Sources */,
 				CED9B79E1B9E58C800B22396 /* FacebookAPIPost.m in Sources */,
+				CE4BD0BD1C0FDC8D00442646 /* SegmentDataViewController.m in Sources */,
 				CE9D625E1BC3C10F00A244ED /* MessagePanelViewController.m in Sources */,
 				CE87CAC91AFAB9B70084C666 /* ProgramsTableViewCell.m in Sources */,
 				CEC0C7441B45D6B400A9DD33 /* LocationFinderAPI.m in Sources */,

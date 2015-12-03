@@ -37,6 +37,8 @@
 @property(nonatomic) BOOL isCongressLoaded;
 @property(nonatomic) UpdateDefaults *updateDefaults;
 @property(nonatomic) BOOL isSentFromCongressFinderAPI;
+@property (weak, nonatomic) IBOutlet UISegmentedControl *segmentedControl;
+- (IBAction)segmentedControlChange:(id)sender;
 
 
 // Header

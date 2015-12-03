@@ -40,6 +40,7 @@
 #import "MessageTableViewEmailCell.h"
 #import "WebViewController.h"
 #import "MessagePanelViewController.h"
+#import "SegmentDataViewController.h"
 
 
 @interface MessageTableViewController () <UIGestureRecognizerDelegate,CLLocationManagerDelegate>
@@ -121,6 +122,7 @@ NSInteger footerHeight = 1;
 }
 
 -(void)viewWillAppear:(BOOL)animated {
+    self.segmentedControl.selectedSegmentIndex = 0;
     [super viewWillAppear:animated];
     NSLog(@"viewWillApper");
     
@@ -657,7 +659,8 @@ NSInteger footerHeight = 1;
                                     options:NSStringEnumerationByComposedCharacterSequences
                                  usingBlock:^(NSString *substring, NSRange substringRange, NSRange enclosingRange, BOOL *stop) {
                                      count++;
-                                 }];
+        }];
+        
         if(count != 5) {
             [self retryZipCode:zipCode count:count];
         } else {
@@ -669,11 +672,8 @@ NSInteger footerHeight = 1;
             [self viewDidLoad];
         }
     }];
-    
     [alertController addAction:lookUpAction];
-    
     [self presentViewController:alertController animated:YES completion:nil];
-    
     return zipCode;
 }
 
@@ -1038,7 +1038,13 @@ NSInteger footerHeight = 1;
     }];
 }
 
-
+- (IBAction)segmentedControlChange:(id)sender {
+    if(self.segmentedControl.selectedSegmentIndex == 0){
+    } else {
+        [self performSegueWithIdentifier:@"showSegmentData" sender:self];
+        
+    }
+}
 
 #pragma mark - Navigation
 
@@ -1102,11 +1108,14 @@ NSInteger footerHeight = 1;
                             }];
         if(index == NSNotFound){
             NSLog(@"did not find line");
-            
+        } else if ([segue.identifier isEqualToString:@"showSegmentData"]){
+            SegmentDataViewController *segmentDataViewController = [segue destinationViewController];
+            segmentDataViewController.messageTableViewController = self;
         } else {
             messagePanel.selectedMessageDictionary = [self.menuList objectAtIndex:index];
         }
     }
 }
+
 
 @end
