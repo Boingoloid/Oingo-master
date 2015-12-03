@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		CE035F631BC453D3008977E6 /* EmailItem.m in Sources */ = {isa = PBXBuildFile; fileRef = CE035F621BC453D3008977E6 /* EmailItem.m */; settings = {ASSET_TAGS = (); }; };
-		CE046CF61BF01E38004B95D6 /* Crashlytics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CE046CF51BF01E38004B95D6 /* Crashlytics.framework */; settings = {ASSET_TAGS = (); }; };
 		CE06A2001B31F7C5000D3210 /* Bolts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CE06A1FA1B31F7C5000D3210 /* Bolts.framework */; };
 		CE06A2011B31F7C5000D3210 /* Parse.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CE06A1FB1B31F7C5000D3210 /* Parse.framework */; };
 		CE06A2021B31F7C5000D3210 /* ParseCrashReporting.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CE06A1FC1B31F7C5000D3210 /* ParseCrashReporting.framework */; };
@@ -47,6 +46,7 @@
 		CE48FDB61B9527C50086349A /* TWAPIManager.m in Sources */ = {isa = PBXBuildFile; fileRef = CE48FDB51B9527C50086349A /* TWAPIManager.m */; };
 		CE48FDB81B952C200086349A /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CE48FDB71B952C200086349A /* StoreKit.framework */; };
 		CE4BD0BD1C0FDC8D00442646 /* SegmentDataViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CE4BD0BC1C0FDC8D00442646 /* SegmentDataViewController.m */; settings = {ASSET_TAGS = (); }; };
+		CE4BD0BF1C1105B000442646 /* Crashlytics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CE4BD0BE1C1105B000442646 /* Crashlytics.framework */; settings = {ASSET_TAGS = (); }; };
 		CE5B5D0E1AF95A740033A668 /* ProgramDetailTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CE5B5D0D1AF95A740033A668 /* ProgramDetailTableViewCell.m */; };
 		CE6073291B3A85EB007B567C /* mail-icon-gray.png in Resources */ = {isa = PBXBuildFile; fileRef = CE6073281B3A85EB007B567C /* mail-icon-gray.png */; };
 		CE60732B1B3A88FD007B567C /* phone-gray.png in Resources */ = {isa = PBXBuildFile; fileRef = CE60732A1B3A88FD007B567C /* phone-gray.png */; };
@@ -151,7 +151,6 @@
 /* Begin PBXFileReference section */
 		CE035F611BC453D3008977E6 /* EmailItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EmailItem.h; sourceTree = "<group>"; };
 		CE035F621BC453D3008977E6 /* EmailItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EmailItem.m; sourceTree = "<group>"; };
-		CE046CF51BF01E38004B95D6 /* Crashlytics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Crashlytics.framework; sourceTree = "<group>"; };
 		CE06A1FA1B31F7C5000D3210 /* Bolts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Bolts.framework; sourceTree = "<group>"; };
 		CE06A1FB1B31F7C5000D3210 /* Parse.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Parse.framework; sourceTree = "<group>"; };
 		CE06A1FC1B31F7C5000D3210 /* ParseCrashReporting.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = ParseCrashReporting.framework; sourceTree = "<group>"; };
@@ -213,6 +212,7 @@
 		CE48FDB71B952C200086349A /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
 		CE4BD0BB1C0FDC8D00442646 /* SegmentDataViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SegmentDataViewController.h; sourceTree = "<group>"; };
 		CE4BD0BC1C0FDC8D00442646 /* SegmentDataViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SegmentDataViewController.m; sourceTree = "<group>"; };
+		CE4BD0BE1C1105B000442646 /* Crashlytics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Crashlytics.framework; sourceTree = "<group>"; };
 		CE5B5D0C1AF95A740033A668 /* ProgramDetailTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ProgramDetailTableViewCell.h; path = ../ProgramDetailTableViewCell.h; sourceTree = "<group>"; };
 		CE5B5D0D1AF95A740033A668 /* ProgramDetailTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ProgramDetailTableViewCell.m; path = ../ProgramDetailTableViewCell.m; sourceTree = "<group>"; };
 		CE5B98EF1B96F33400BFF14F /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
@@ -348,13 +348,13 @@
 				CE06A2001B31F7C5000D3210 /* Bolts.framework in Frameworks */,
 				CEED9BD41AF4160300402BC2 /* Accounts.framework in Frameworks */,
 				CEED9BDB1AF4168E00402BC2 /* Foundation.framework in Frameworks */,
-				CE046CF61BF01E38004B95D6 /* Crashlytics.framework in Frameworks */,
 				CEB9D4EA1BFABB6500A6F565 /* FBSDKLoginKit.framework in Frameworks */,
 				CE06A2011B31F7C5000D3210 /* Parse.framework in Frameworks */,
 				CE06A2041B31F7C5000D3210 /* ParseFacebookUtilsV4.framework in Frameworks */,
 				CEED9BE21AF4168E00402BC2 /* CFNetwork.framework in Frameworks */,
 				CEED9BD91AF4168500402BC2 /* Social.framework in Frameworks */,
 				CEB9D5351BFAC2D100A6F565 /* Fabric.framework in Frameworks */,
+				CE4BD0BF1C1105B000442646 /* Crashlytics.framework in Frameworks */,
 				CEED9BDF1AF4168E00402BC2 /* Security.framework in Frameworks */,
 				CEED9BD61AF4166000402BC2 /* CoreGraphics.framework in Frameworks */,
 				CEED9BD71AF4166A00402BC2 /* CoreLocation.framework in Frameworks */,
@@ -606,7 +606,7 @@
 		CEA92FBB1AF377600042D0EE /* frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				CE046CF51BF01E38004B95D6 /* Crashlytics.framework */,
+				CE4BD0BE1C1105B000442646 /* Crashlytics.framework */,
 				CEED9BB61AF40A4000402BC2 /* Twitter.framework */,
 				CE76D26E1B94E41A00AE3E21 /* QuartzCore.framework */,
 				CE06A1FA1B31F7C5000D3210 /* Bolts.framework */,
@@ -1033,6 +1033,10 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = (
+					"$(ARCHS_STANDARD)",
+					i386,
+				);
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=*]" = "iPhone Developer";
@@ -1062,6 +1066,10 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = (
+					"$(ARCHS_STANDARD)",
+					i386,
+				);
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
