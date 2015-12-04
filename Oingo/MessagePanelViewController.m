@@ -224,7 +224,7 @@
         [self.charCountLabel setTextColor:[UIColor whiteColor]];
     }
 }
-
+//comment
 -(void)viewWillAppear:(BOOL)animated{
 
     
