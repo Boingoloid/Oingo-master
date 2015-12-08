@@ -35,7 +35,6 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
 
-    
 //    [NSThread sleepForTimeInterval:5];
 
     // Initialize Parse.
@@ -49,7 +48,6 @@
     [[Twitter sharedInstance] startWithConsumerKey:@"2dKhN7TgnxeEWqvQ8m0dcV9TH" consumerSecret:@"Gn0PbCgPa4Vt3WwclEZpu0iceKsHP41vJnCNAVIhEmIaLU8WqK"];
 
     [Fabric with:@[[Twitter class], [Crashlytics class]]];
-
 
     // [Optional] Track statistics around application opens.
     //[PFAnalytics trackAppOpenedWithLaunchOptions:launchOptions];

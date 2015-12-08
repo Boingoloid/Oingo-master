@@ -71,7 +71,7 @@ Segment *segment;
     }];
     
     // Format table header
-    self.tableHeaderView.layer.borderColor = [[UIColor whiteColor] CGColor];
+    self.tableHeaderView.layer.borderColor = [[UIColor lightGrayColor] CGColor];
     self.tableHeaderView.layer.borderWidth = .5;
     self.tableHeaderView.layer.backgroundColor = [[UIColor whiteColor] CGColor];
     self.tableHeaderView.layer.cornerRadius = 3;

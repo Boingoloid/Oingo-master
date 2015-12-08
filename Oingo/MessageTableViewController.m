@@ -83,7 +83,7 @@ NSInteger footerHeight = 1;
     
     
     // Format table header
-    self.tableHeaderView.layer.borderColor = [[UIColor whiteColor] CGColor];
+    self.tableHeaderView.layer.borderColor = [[UIColor lightGrayColor] CGColor];
     self.tableHeaderView.layer.borderWidth = .5;
     self.tableHeaderView.layer.backgroundColor = [[UIColor whiteColor] CGColor];
     self.tableHeaderView.layer.cornerRadius = 3;
@@ -884,7 +884,7 @@ NSInteger footerHeight = 1;
         sectionLabel.layer.cornerRadius = 3;
         sectionLabel.clipsToBounds = YES;
         NSString* padding = @"  "; // # of spaces
-        sectionLabel.text = [NSString stringWithFormat:@"%@%@%@", padding, [self categoryForSection:section], padding];
+        sectionLabel.text = [NSString stringWithFormat:@"%@Contact -> %@%@", padding, [self categoryForSection:section], padding];
         [view addSubview:sectionLabel];
         return view;
 }
