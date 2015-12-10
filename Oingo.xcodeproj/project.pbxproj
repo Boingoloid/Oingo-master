@@ -28,6 +28,7 @@
 		CE241A501AEAE45A00F22144 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CE241A4F1AEAE45A00F22144 /* Images.xcassets */; };
 		CE241A531AEAE45A00F22144 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = CE241A511AEAE45A00F22144 /* LaunchScreen.xib */; };
 		CE241A5F1AEAE45A00F22144 /* OingoTests.m in Sources */ = {isa = PBXBuildFile; fileRef = CE241A5E1AEAE45A00F22144 /* OingoTests.m */; };
+		CE2945CD1C18B88200B0DB31 /* ActionDashboardViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CE2945CC1C18B88200B0DB31 /* ActionDashboardViewController.m */; };
 		CE29AA961B3F2BB400676563 /* boxer.png in Resources */ = {isa = PBXBuildFile; fileRef = CE29AA951B3F2BB400676563 /* boxer.png */; };
 		CE29AA981B3F2BBD00676563 /* feinstein.png in Resources */ = {isa = PBXBuildFile; fileRef = CE29AA971B3F2BBD00676563 /* feinstein.png */; };
 		CE29AA9A1B3F2BC900676563 /* pelosi.png in Resources */ = {isa = PBXBuildFile; fileRef = CE29AA991B3F2BC900676563 /* pelosi.png */; };
@@ -185,6 +186,8 @@
 		CE241A581AEAE45A00F22144 /* OingoTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = OingoTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		CE241A5D1AEAE45A00F22144 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		CE241A5E1AEAE45A00F22144 /* OingoTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = OingoTests.m; sourceTree = "<group>"; };
+		CE2945CB1C18B88200B0DB31 /* ActionDashboardViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ActionDashboardViewController.h; sourceTree = "<group>"; };
+		CE2945CC1C18B88200B0DB31 /* ActionDashboardViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ActionDashboardViewController.m; sourceTree = "<group>"; };
 		CE29AA951B3F2BB400676563 /* boxer.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = boxer.png; path = Images/boxer.png; sourceTree = "<group>"; };
 		CE29AA971B3F2BBD00676563 /* feinstein.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = feinstein.png; path = Images/feinstein.png; sourceTree = "<group>"; };
 		CE29AA991B3F2BC900676563 /* pelosi.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = pelosi.png; path = Images/pelosi.png; sourceTree = "<group>"; };
@@ -432,6 +435,8 @@
 				CEE04BA01B3501B000AAF8EA /* Methods */,
 				CE6F71F11B2A5A670067E4DA /* objects */,
 				CE241A4C1AEAE45A00F22144 /* Main.storyboard */,
+				CE2945CB1C18B88200B0DB31 /* ActionDashboardViewController.h */,
+				CE2945CC1C18B88200B0DB31 /* ActionDashboardViewController.m */,
 				CE4BD0BB1C0FDC8D00442646 /* SegmentDataViewController.h */,
 				CE4BD0BC1C0FDC8D00442646 /* SegmentDataViewController.m */,
 				CE241A431AEAE45A00F22144 /* AppDelegate.h */,
@@ -888,6 +893,7 @@
 				CEB187911B18F8C400C86955 /* MessageOptionsTableTableViewController.m in Sources */,
 				CE9034861BC63C04000BE136 /* LongFormEmailViewController.m in Sources */,
 				CE2029721B363D51005C079B /* CongressFinderAPI.m in Sources */,
+				CE2945CD1C18B88200B0DB31 /* ActionDashboardViewController.m in Sources */,
 				CE6073331B3AD475007B567C /* CongressPhotoFinderAPI.m in Sources */,
 				CE241A421AEAE45A00F22144 /* main.m in Sources */,
 				CE48FDB61B9527C50086349A /* TWAPIManager.m in Sources */,
