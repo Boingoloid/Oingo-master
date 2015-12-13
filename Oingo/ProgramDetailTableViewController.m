@@ -16,6 +16,7 @@
 #import "MessageTableViewController.h"
 #import <UIKit/UIKit.h>
 #import "WebViewController.h"
+#import "ActionDashboardTableViewController.h"
 
 
 @interface ProgramDetailTableViewController () <UIGestureRecognizerDelegate>
@@ -120,12 +121,14 @@ Segment *segment;
             self.selectedLink = cell.linkToContentButton.titleLabel.text; //capture the link
             [self performSegueWithIdentifier:@"showWebViewController" sender:self];
 
-        } else {
-            // user tapped cell
+        } else if (CGRectContainsPoint(cell.altPathButton.frame, pointInCell)){
+            // user tapped altPath
             NSString *dateGroup = [self dateGroupForSection:indexPath.section];
             NSArray *rowIndecesInSection = [self.sections objectForKey:dateGroup];
             NSNumber *rowIndex = [rowIndecesInSection objectAtIndex:indexPath.row]; //pulling the row indece from array above
             self.selectedSegment = [self.segmentList objectAtIndex:[rowIndex intValue]];
+            [self performSegueWithIdentifier:@"showActionDashboard" sender:self];
+        } else {
             [self performSegueWithIdentifier:@"showMessages" sender:self];
         }
     }
@@ -295,22 +298,23 @@ Segment *segment;
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {  
     if ([segue.identifier isEqualToString:@"showMessages"]){
-        
         segment = self.segmentList[self.indexPath.row];
         MessageTableViewController *messageTableViewController = [segue destinationViewController];
         messageTableViewController.selectedSegment = self.selectedSegment;
         messageTableViewController.selectedProgram = self.selectedProgram;
-        
-        
     }
     if ([segue.identifier isEqualToString:@"showWebViewController"]){
         WebViewController *webViewController =  [segue destinationViewController];
         webViewController.selectedLink = self.selectedLink;
         NSLog(@"selected link program detail %@:",webViewController.selectedLink);
     }
-    
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
+    if ([segue.identifier isEqualToString:@"showActionDashboard"]){
+        ActionDashboardTableViewController *actionDashTVC = [segue destinationViewController];
+        actionDashTVC.programDetailTVC = self;
+        actionDashTVC.selectedProgram = self.selectedProgram;
+        actionDashTVC.selectedSegment = self.selectedSegment;
+
+    }
 }
 
 

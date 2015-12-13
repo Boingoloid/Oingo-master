@@ -32,4 +32,5 @@ dependencies: \
   Oingo/PFTwitterUtils+NativeTwitter.h \
   /Users/matthewacalin/Desktop/IphoneApps/PushThought/ProgramDetailTableViewCell.h \
   Oingo/MessageTableViewController.h Oingo/UpdateDefaults.h \
-  /Users/matthewacalin/Desktop/IphoneApps/PushThought/WebViewController.h
+  /Users/matthewacalin/Desktop/IphoneApps/PushThought/WebViewController.h \
+  Oingo/ActionDashboardTableViewController.h

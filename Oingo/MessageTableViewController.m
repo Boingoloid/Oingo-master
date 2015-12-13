@@ -41,6 +41,7 @@
 #import "WebViewController.h"
 #import "MessagePanelViewController.h"
 #import "SegmentDataViewController.h"
+#import "ActionDashboardTableViewController.h"
 
 
 @interface MessageTableViewController () <UIGestureRecognizerDelegate,CLLocationManagerDelegate>
