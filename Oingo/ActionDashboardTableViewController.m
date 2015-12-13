@@ -18,6 +18,9 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    // Hide separators in table
+    self.tableView.separatorColor = [UIColor clearColor];
+    
     // Assign header label values
     self.segmentTitleLabel.text = [self.selectedSegment valueForKey:@"segmentTitle"];
     self.programTitleLabel.text = [self.selectedProgram valueForKey:@"programTitle"];
@@ -68,8 +71,13 @@
         
     }
     NSLog(@"action array:%@",actionOptionsArray);
-    self.actionOptionsArray = actionOptionsArray;
     
+    // next steps
+//    1) put local rep first
+//    2) change cell headline based on action cat
+    
+
+    self.actionOptionsArray = actionOptionsArray;
 }
 
 -(void) fetchSentActionsForSegment {

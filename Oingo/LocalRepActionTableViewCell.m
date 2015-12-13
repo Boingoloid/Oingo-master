@@ -21,8 +21,22 @@
 }
 
 -(LocalRepActionTableViewCell*) configLocalRepActionCell:(NSMutableDictionary*)actionDict{
-    self.actionTitleLabel.text = [actionDict valueForKey:@"actionCategory"];
+    NSString *actionString = [actionDict valueForKey:@"actionCategory"];
+    self.actionTitleLabel.text = actionString;
+    self.layer.backgroundColor = [[UIColor blueColor] CGColor];
+    
+    
+    
     return self;
+}
+
+- (void)setFrame:(CGRect)frame {
+    int inset = 10;
+    frame.origin.x += inset; //equal to saying originx = originx + inset
+    frame.size.width -= 2 * inset; //mult by 2 b/c taking from both sides
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [super setFrame:frame];
+    });
 }
 
 @end

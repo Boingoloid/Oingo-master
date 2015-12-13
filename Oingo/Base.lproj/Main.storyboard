@@ -175,13 +175,13 @@
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="53" sectionHeaderHeight="28" sectionFooterHeight="28" id="jK4-MW-B8b">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="backgroundColor" white="0.95009251644736847" alpha="1" colorSpace="calibratedWhite"/>
                         <view key="tableHeaderView" contentMode="scaleToFill" id="NxI-Bi-Og5">
                             <rect key="frame" x="0.0" y="64" width="600" height="153"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <subviews>
                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="WPQ-Aj-UN9">
-                                    <rect key="frame" x="8" y="0.0" width="584" height="98"/>
+                                    <rect key="frame" x="8" y="3" width="584" height="98"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="VICE News" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bIN-Zt-72s">
                                             <rect key="frame" x="6" y="39" width="55" height="13"/>
@@ -272,7 +272,7 @@
                                 <constraint firstItem="U4N-S1-ixo" firstAttribute="centerX" secondItem="NxI-Bi-Og5" secondAttribute="centerX" id="Z1N-4k-TPN"/>
                                 <constraint firstItem="WPQ-Aj-UN9" firstAttribute="leading" secondItem="NxI-Bi-Og5" secondAttribute="leading" constant="8" id="lCX-7N-dVX"/>
                                 <constraint firstItem="U4N-S1-ixo" firstAttribute="centerX" secondItem="NxI-Bi-Og5" secondAttribute="centerX" id="mAx-s1-kMC"/>
-                                <constraint firstItem="WPQ-Aj-UN9" firstAttribute="top" secondItem="NxI-Bi-Og5" secondAttribute="top" id="n8I-uX-sjE"/>
+                                <constraint firstItem="WPQ-Aj-UN9" firstAttribute="top" secondItem="NxI-Bi-Og5" secondAttribute="top" constant="3" id="n8I-uX-sjE"/>
                                 <constraint firstAttribute="trailing" secondItem="WPQ-Aj-UN9" secondAttribute="trailing" constant="8" id="w9e-PC-mol"/>
                             </constraints>
                             <variation key="default">

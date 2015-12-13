@@ -64,7 +64,6 @@
     frame.origin.x += inset; //equal to saying originx = originx + inset
     frame.size.width -= 2 * inset; //mult by 2 b/c taking from both sides
     [super setFrame:frame];
-    
 }
 
 
