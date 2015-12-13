@@ -7,6 +7,7 @@
 //
 
 #import "ActionDashboardTableViewController.h"
+#import "LocalRepActionTableViewCell.h"
 
 @interface ActionDashboardTableViewController ()
 
@@ -36,13 +37,14 @@
     NSLog(@"selectedSegment:%@",self.selectedSegment);
     PFQuery *query = [PFQuery queryWithClassName:@"Messages"];
     [query whereKey:@"segmentID" equalTo:[self.selectedSegment valueForKey:@"segmentID"]];
-    [query orderByDescending:@"messageCategory"];
+    [query orderByDescending:@"actionCategory"];
     [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
         if(!error){
             dispatch_async(dispatch_get_main_queue(), ^{
                 self.actionsForSegment = objects;
                 [self createActionOptionsList:objects];
                 NSLog(@"Actions: %@",self.actionsForSegment);
+                [self.tableView reloadData];
             });
         } else {
             NSLog(@"Error: %@ %@", error, [error userInfo]);
@@ -51,14 +53,14 @@
 }
 
 -(void) createActionOptionsList:(NSArray*)objects{
-    NSLog(@"executing");
+    NSLog(@"creating options list");
     NSString *category = @"";
     NSMutableArray *actionOptionsArray = [[NSMutableArray alloc]init];
     
     // go through the array and every time cat changes, pull out the message Category
     for (NSDictionary *dictionary in objects){
         NSLog(@"print dict:%@",dictionary);
-        NSString *dictionaryCategory = [dictionary valueForKey:@"messageCategory"];
+        NSString *dictionaryCategory = [dictionary valueForKey:@"actionCategory"];
         if (![category isEqualToString:dictionaryCategory]){
             category = dictionaryCategory;
             [actionOptionsArray addObject:dictionary];
@@ -66,6 +68,7 @@
         
     }
     NSLog(@"action array:%@",actionOptionsArray);
+    self.actionOptionsArray = actionOptionsArray;
     
 }
 
@@ -80,7 +83,7 @@
         if (!error) {
             dispatch_async(dispatch_get_main_queue(), ^{
                 self.sentActionsForSegment = objects;
-                NSLog(@"sentActions: %@",self.sentActionsForSegment);
+                //NSLog(@"sentActions: %@",self.sentActionsForSegment);
             });
         } else {
             NSLog(@"Error: %@ %@", error, [error userInfo]);
@@ -97,24 +100,25 @@
 #pragma mark - Table view data source
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-#warning Incomplete implementation, return the number of sections
-    return 0;
+
+    return 1;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-#warning Incomplete implementation, return the number of rows
-    return 0;
+
+    return [self.actionOptionsArray count];
 }
 
-/*
+
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:<#@"reuseIdentifier"#> forIndexPath:indexPath];
+    LocalRepActionTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"Cell" forIndexPath:indexPath];
     
     // Configure the cell...
-    
-    return cell;
+    NSMutableDictionary *actionDict = [[NSMutableDictionary alloc]init];
+    actionDict = [self.actionOptionsArray objectAtIndex:indexPath.row];
+    return [cell configLocalRepActionCell:(NSMutableDictionary*)actionDict];
 }
-*/
+
 
 /*
 // Override to support conditional editing of the table view.

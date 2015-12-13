@@ -29,4 +29,7 @@
 @property (nonatomic) NSArray *actionsForSegment;
 @property (nonatomic) NSArray *sentActionsForSegment;
 
+//Created
+@property (nonatomic) NSMutableArray *actionOptionsArray;
+
 @end

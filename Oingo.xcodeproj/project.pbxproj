@@ -31,6 +31,7 @@
 		CE29AA961B3F2BB400676563 /* boxer.png in Resources */ = {isa = PBXBuildFile; fileRef = CE29AA951B3F2BB400676563 /* boxer.png */; };
 		CE29AA981B3F2BBD00676563 /* feinstein.png in Resources */ = {isa = PBXBuildFile; fileRef = CE29AA971B3F2BBD00676563 /* feinstein.png */; };
 		CE29AA9A1B3F2BC900676563 /* pelosi.png in Resources */ = {isa = PBXBuildFile; fileRef = CE29AA991B3F2BC900676563 /* pelosi.png */; };
+		CE2AB2411C1CFEF1002893C7 /* LocalRepActionTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CE2AB2401C1CFEF1002893C7 /* LocalRepActionTableViewCell.m */; };
 		CE2BB67D1B8FEEB200568E16 /* light_bulb_white.png in Resources */ = {isa = PBXBuildFile; fileRef = CE2BB67C1B8FEEB200568E16 /* light_bulb_white.png */; };
 		CE2BD37D1B007FB30053A1B3 /* monsantocorngrenade.png in Resources */ = {isa = PBXBuildFile; fileRef = CE2BD37C1B007FB30053A1B3 /* monsantocorngrenade.png */; };
 		CE2BF96F1B3E517700AB15AC /* MakePhoneCallAPI.m in Sources */ = {isa = PBXBuildFile; fileRef = CE2BF96E1B3E517700AB15AC /* MakePhoneCallAPI.m */; };
@@ -191,6 +192,8 @@
 		CE29AA951B3F2BB400676563 /* boxer.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = boxer.png; path = Images/boxer.png; sourceTree = "<group>"; };
 		CE29AA971B3F2BBD00676563 /* feinstein.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = feinstein.png; path = Images/feinstein.png; sourceTree = "<group>"; };
 		CE29AA991B3F2BC900676563 /* pelosi.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = pelosi.png; path = Images/pelosi.png; sourceTree = "<group>"; };
+		CE2AB23F1C1CFEF1002893C7 /* LocalRepActionTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LocalRepActionTableViewCell.h; sourceTree = "<group>"; };
+		CE2AB2401C1CFEF1002893C7 /* LocalRepActionTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LocalRepActionTableViewCell.m; sourceTree = "<group>"; };
 		CE2BB67C1B8FEEB200568E16 /* light_bulb_white.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = light_bulb_white.png; path = Images/light_bulb_white.png; sourceTree = "<group>"; };
 		CE2BD37C1B007FB30053A1B3 /* monsantocorngrenade.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = monsantocorngrenade.png; path = Images/monsantocorngrenade.png; sourceTree = "<group>"; };
 		CE2BF96D1B3E517700AB15AC /* MakePhoneCallAPI.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MakePhoneCallAPI.h; sourceTree = "<group>"; };
@@ -442,8 +445,7 @@
 				CE9B2E5E1C1CBD8000DEB7BC /* Message Panel */,
 				CE6F71F11B2A5A670067E4DA /* objects */,
 				CE241A4C1AEAE45A00F22144 /* Main.storyboard */,
-				CE9B2E521C1B6F9700DEB7BC /* ActionDashboardTableViewController.h */,
-				CE9B2E531C1B6F9700DEB7BC /* ActionDashboardTableViewController.m */,
+				CE2AB23E1C1CFE0D002893C7 /* Action Dashboard */,
 				CE241A431AEAE45A00F22144 /* AppDelegate.h */,
 				CE241A441AEAE45A00F22144 /* AppDelegate.m */,
 				CE44670A1B94C0DF001D46EB /* PFTwitterUtils+NativeTwitter.h */,
@@ -542,6 +544,17 @@
 			);
 			name = Images;
 			path = Oingo;
+			sourceTree = "<group>";
+		};
+		CE2AB23E1C1CFE0D002893C7 /* Action Dashboard */ = {
+			isa = PBXGroup;
+			children = (
+				CE9B2E521C1B6F9700DEB7BC /* ActionDashboardTableViewController.h */,
+				CE9B2E531C1B6F9700DEB7BC /* ActionDashboardTableViewController.m */,
+				CE2AB23F1C1CFEF1002893C7 /* LocalRepActionTableViewCell.h */,
+				CE2AB2401C1CFEF1002893C7 /* LocalRepActionTableViewCell.m */,
+			);
+			name = "Action Dashboard";
 			sourceTree = "<group>";
 		};
 		CE2BF9781B3E5A2F00AB15AC /* In process */ = {
@@ -741,7 +754,7 @@
 		CE241A341AEAE45A00F22144 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0700;
+				LastUpgradeCheck = 0710;
 				ORGANIZATIONNAME = "Oingo Inc.";
 				TargetAttributes = {
 					CE241A3B1AEAE45A00F22144 = {
@@ -932,6 +945,7 @@
 				CE99E3871B5EF1ED00ED9D33 /* MarkSentMessageAPI.m in Sources */,
 				CE6F71F41B2BCA9E0067E4DA /* SettingsTableViewController.m in Sources */,
 				CED9B79E1B9E58C800B22396 /* FacebookAPIPost.m in Sources */,
+				CE2AB2411C1CFEF1002893C7 /* LocalRepActionTableViewCell.m in Sources */,
 				CE4BD0BD1C0FDC8D00442646 /* SegmentDataViewController.m in Sources */,
 				CE9D625E1BC3C10F00A244ED /* MessagePanelViewController.m in Sources */,
 				CE87CAC91AFAB9B70084C666 /* ProgramsTableViewCell.m in Sources */,
@@ -1071,10 +1085,6 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				ARCHS = (
-					"$(ARCHS_STANDARD)",
-					i386,
-				);
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=*]" = "iPhone Developer";
@@ -1104,10 +1114,6 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				ARCHS = (
-					"$(ARCHS_STANDARD)",
-					i386,
-				);
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";

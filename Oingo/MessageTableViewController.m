@@ -82,14 +82,12 @@ NSInteger footerHeight = 1;
     self.segmentTweetButtonSuccessImageView.hidden = YES;
     self.segmentFacebookButtonSuccessImageView.hidden = YES;
     
-    
     // Format table header
     self.tableHeaderView.layer.borderColor = [[UIColor lightGrayColor] CGColor];
     self.tableHeaderView.layer.borderWidth = .5;
     self.tableHeaderView.layer.backgroundColor = [[UIColor whiteColor] CGColor];
     self.tableHeaderView.layer.cornerRadius = 3;
     self.tableHeaderView.clipsToBounds = YES;
-
     
     // Assign header values
     NSString* padding = @"  "; // # of spaces

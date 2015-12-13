@@ -79,8 +79,8 @@ BOOL isLocationInfoAvailable = NO;
     }
     
 
-    NSLog(@"defaults zip:%@ lat:%@ long:%@",[defaults valueForKey:@"zipCode"],[defaults valueForKey:@"latitude"],[defaults valueForKey:@"longitude"]);
-    NSLog(@"bool zip:%d lat:%d long:%d coordinate:%d location:%d", isZipAvailable ,isLatitude,isLongitude,isCoordinateInfoAvailable,isLocationInfoAvailable);
+//    NSLog(@"defaults zip:%@ lat:%@ long:%@",[defaults valueForKey:@"zipCode"],[defaults valueForKey:@"latitude"],[defaults valueForKey:@"longitude"]);
+//    NSLog(@"bool zip:%d lat:%d long:%d coordinate:%d location:%d", isZipAvailable ,isLatitude,isLongitude,isCoordinateInfoAvailable,isLocationInfoAvailable);
     
 
     

@@ -177,7 +177,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <view key="tableHeaderView" contentMode="scaleToFill" id="NxI-Bi-Og5">
-                            <rect key="frame" x="0.0" y="64" width="600" height="194"/>
+                            <rect key="frame" x="0.0" y="64" width="600" height="153"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <subviews>
                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="WPQ-Aj-UN9">
@@ -259,8 +259,8 @@
                                         </mask>
                                     </variation>
                                 </view>
-                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Take Action Below" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="U4N-S1-ixo">
-                                    <rect key="frame" x="230" y="171" width="140" height="21"/>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Take Action Below" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="U4N-S1-ixo">
+                                    <rect key="frame" x="224" y="132" width="140" height="21"/>
                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                     <nil key="highlightedColor"/>
@@ -281,9 +281,22 @@
                                 </mask>
                             </variation>
                         </view>
+                        <view key="tableFooterView" contentMode="scaleToFill" id="CDF-UW-7ID">
+                            <rect key="frame" x="0.0" y="298" width="600" height="44"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <subviews>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="footer" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tLi-vo-uiR">
+                                    <rect key="frame" x="22" y="15" width="46" height="21"/>
+                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                    <nil key="highlightedColor"/>
+                                </label>
+                            </subviews>
+                            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        </view>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="53" id="M7H-Jc-2ih">
-                                <rect key="frame" x="0.0" y="286" width="600" height="53"/>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="0.0" reuseIdentifier="Cell" rowHeight="53" id="M7H-Jc-2ih" customClass="LocalRepActionTableViewCell">
+                                <rect key="frame" x="0.0" y="245" width="600" height="53"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="M7H-Jc-2ih" id="Opd-ol-TVu">
                                     <rect key="frame" x="0.0" y="0.0" width="600" height="52"/>
@@ -301,6 +314,10 @@
                                         <constraint firstItem="5be-qp-vWP" firstAttribute="top" secondItem="Opd-ol-TVu" secondAttribute="topMargin" constant="7" id="pFT-KY-WJp"/>
                                     </constraints>
                                 </tableViewCellContentView>
+                                <inset key="separatorInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                <connections>
+                                    <outlet property="actionTitleLabel" destination="5be-qp-vWP" id="mNk-5d-dnB"/>
+                                </connections>
                             </tableViewCell>
                         </prototypes>
                         <connections>
@@ -3145,6 +3162,6 @@ Stay tuned, we are developing as fast as we can.  :D</string>
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="0rT-qH-uy3"/>
-        <segue reference="Xre-gW-P64"/>
+        <segue reference="ncd-tE-Df4"/>
     </inferredMetricsTieBreakers>
 </document>
