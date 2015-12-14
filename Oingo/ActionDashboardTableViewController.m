@@ -18,23 +18,27 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    // Format the header view
+    self.tableHeaderView.layer.borderColor = [[UIColor lightGrayColor] CGColor];
+    self.tableHeaderView.layer.borderWidth = 1;
+    self.tableHeaderView.layer.backgroundColor = [[UIColor whiteColor] CGColor];
+    self.tableHeaderView.layer.cornerRadius = 3;
+    self.tableHeaderView.clipsToBounds = YES;
+    
     // Hide separators in table
     self.tableView.separatorColor = [UIColor clearColor];
     
     // Assign header label values
     self.segmentTitleLabel.text = [self.selectedSegment valueForKey:@"segmentTitle"];
-    self.programTitleLabel.text = [self.selectedProgram valueForKey:@"programTitle"];
+    self.programTitleLabel.text = [NSString stringWithFormat:@"%@ / episode %@",[self.selectedProgram valueForKey:@"programTitle"],[self.selectedSegment valueForKey:@"episode"]];
     
     [self fetchActionsForSegment];
     
     if([PFUser currentUser]){
         [self fetchSentActionsForSegment];
     }
-
-    
-    
-    
 }
+
 
 -(void) fetchActionsForSegment {
     NSLog(@"selectedSegment:%@",self.selectedSegment);
@@ -66,15 +70,40 @@
         NSString *dictionaryCategory = [dictionary valueForKey:@"actionCategory"];
         if (![category isEqualToString:dictionaryCategory]){
             category = dictionaryCategory;
+
             [actionOptionsArray addObject:dictionary];
         }
         
     }
     NSLog(@"action array:%@",actionOptionsArray);
     
+    
+    
+    
+    
     // next steps
 //    1) put local rep first
 //    2) change cell headline based on action cat
+    
+    
+    
+    // Search if get location cell is there and if so delete it
+    NSUInteger index = [actionOptionsArray indexOfObjectPassingTest:
+                        ^BOOL(NSDictionary *dict, NSUInteger idx, BOOL *stop) {
+                            return [[dict objectForKey:@"actionCategory"] isEqual:@"Local Representative"];
+                        }];
+    if(index == NSNotFound){
+        NSLog(@"did not find 'local rep' line");
+    } else {
+        NSDictionary *movingActionDict = [actionOptionsArray objectAtIndex:index];
+        [actionOptionsArray insertObject:movingActionDict atIndex:0];
+        [actionOptionsArray removeObjectAtIndex:index+1];
+        NSLog(@"actionOptionsArray Reorder :%@",actionOptionsArray);
+    }
+    
+
+    
+    
     
 
     self.actionOptionsArray = actionOptionsArray;

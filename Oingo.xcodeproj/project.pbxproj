@@ -103,6 +103,9 @@
 		CEB9D5501BFAD45600A6F565 /* LogoGlow180.png in Resources */ = {isa = PBXBuildFile; fileRef = CEB9D54A1BFAD45600A6F565 /* LogoGlow180.png */; };
 		CEC0C7441B45D6B400A9DD33 /* LocationFinderAPI.m in Sources */ = {isa = PBXBuildFile; fileRef = CEC0C7431B45D6B400A9DD33 /* LocationFinderAPI.m */; };
 		CEC0C7471B478E0500A9DD33 /* MessageTableViewMessageCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CEC0C7461B478E0500A9DD33 /* MessageTableViewMessageCell.m */; };
+		CED1A3491C1E132300BB7D91 /* Congress-Seal.png in Resources */ = {isa = PBXBuildFile; fileRef = CED1A3481C1E132300BB7D91 /* Congress-Seal.png */; };
+		CED1A34B1C1E2D3B00BB7D91 /* regulator-flag-icon.png in Resources */ = {isa = PBXBuildFile; fileRef = CED1A34A1C1E2D3B00BB7D91 /* regulator-flag-icon.png */; };
+		CED1A34D1C1E3E2D00BB7D91 /* Message_chat_text_bubble_phone.png in Resources */ = {isa = PBXBuildFile; fileRef = CED1A34C1C1E3E2D00BB7D91 /* Message_chat_text_bubble_phone.png */; };
 		CED53C041BDD9F2800B34ED9 /* libz.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = CED53C031BDD9F2800B34ED9 /* libz.tbd */; };
 		CED53C051BDDA27500B34ED9 /* TwitterAPITweet.m in Sources */ = {isa = PBXBuildFile; fileRef = CEB2924F1B4528CE00A4E8E0 /* TwitterAPITweet.m */; };
 		CED68DCA1B6973520087546D /* arrow-down-gray-hi.png in Resources */ = {isa = PBXBuildFile; fileRef = CED68DC91B6973520087546D /* arrow-down-gray-hi.png */; };
@@ -305,6 +308,9 @@
 		CEC0C7431B45D6B400A9DD33 /* LocationFinderAPI.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LocationFinderAPI.m; sourceTree = "<group>"; };
 		CEC0C7451B478E0500A9DD33 /* MessageTableViewMessageCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MessageTableViewMessageCell.h; sourceTree = "<group>"; };
 		CEC0C7461B478E0500A9DD33 /* MessageTableViewMessageCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MessageTableViewMessageCell.m; sourceTree = "<group>"; };
+		CED1A3481C1E132300BB7D91 /* Congress-Seal.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Congress-Seal.png"; path = "Images/Congress-Seal.png"; sourceTree = "<group>"; };
+		CED1A34A1C1E2D3B00BB7D91 /* regulator-flag-icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "regulator-flag-icon.png"; path = "Images/regulator-flag-icon.png"; sourceTree = "<group>"; };
+		CED1A34C1C1E3E2D00BB7D91 /* Message_chat_text_bubble_phone.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Message_chat_text_bubble_phone.png; path = Images/Message_chat_text_bubble_phone.png; sourceTree = "<group>"; };
 		CED53C031BDD9F2800B34ED9 /* libz.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libz.tbd; path = usr/lib/libz.tbd; sourceTree = SDKROOT; };
 		CED68DC91B6973520087546D /* arrow-down-gray-hi.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "arrow-down-gray-hi.png"; path = "Images/arrow-down-gray-hi.png"; sourceTree = "<group>"; };
 		CED68DCB1B69AE8B0087546D /* 40-menu-alt-512.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "40-menu-alt-512.png"; path = "Images/40-menu-alt-512.png"; sourceTree = "<group>"; };
@@ -494,6 +500,9 @@
 		CE241A6A1AEAF0D300F22144 /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				CED1A34C1C1E3E2D00BB7D91 /* Message_chat_text_bubble_phone.png */,
+				CED1A34A1C1E2D3B00BB7D91 /* regulator-flag-icon.png */,
+				CED1A3481C1E132300BB7D91 /* Congress-Seal.png */,
 				CE9B2E5B1C1CACD700DEB7BC /* blackLightBulb.png */,
 				CE9B2E561C1BFFD400DEB7BC /* blackHumanIcon.png */,
 				CEB9D5451BFAD45600A6F565 /* LogoGlow58.png */,
@@ -806,6 +815,7 @@
 				CEE074441B5F027E00245C56 /* success-icon.png in Resources */,
 				CEB9D4E71BFABB6500A6F565 /* FacebookSDKStrings.bundle in Resources */,
 				CE7800CB1BDEB142008B9F37 /* LogoGlow.png in Resources */,
+				CED1A34D1C1E3E2D00BB7D91 /* Message_chat_text_bubble_phone.png in Resources */,
 				CE80B5D61AFC0EFB007D69FB /* dailyshow6cover.png in Resources */,
 				CE9B2E581C1BFFD400DEB7BC /* blackHumanIcon.png in Resources */,
 				CEB9D54E1BFAD45600A6F565 /* LogoGlow120-1.png in Resources */,
@@ -840,6 +850,7 @@
 				CE87CAC21AF9B2570084C666 /* vicegasmask.png in Resources */,
 				CE87CAC01AF9945B0084C666 /* last-night-660x330.png in Resources */,
 				CEB9D54F1BFAD45600A6F565 /* LogoGlow120.png in Resources */,
+				CED1A34B1C1E2D3B00BB7D91 /* regulator-flag-icon.png in Resources */,
 				CE0E805E1B9288070093453D /* settings.png in Resources */,
 				CE29AA961B3F2BB400676563 /* boxer.png in Resources */,
 				CE29AA981B3F2BBD00676563 /* feinstein.png in Resources */,
@@ -850,6 +861,7 @@
 				CEE772B41BA8C14D00E45842 /* settingswhite.png in Resources */,
 				CE241A501AEAE45A00F22144 /* Images.xcassets in Resources */,
 				CEDA11921B992A770065ACDD /* Seal_of_the_United_States_Congress.svg.png in Resources */,
+				CED1A3491C1E132300BB7D91 /* Congress-Seal.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

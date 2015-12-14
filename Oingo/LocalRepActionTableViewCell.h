@@ -9,7 +9,12 @@
 #import <UIKit/UIKit.h>
 
 @interface LocalRepActionTableViewCell : UITableViewCell
+
+// Controls
 @property (weak, nonatomic) IBOutlet UILabel *actionTitleLabel;
+@property (weak, nonatomic) IBOutlet UIImageView *actionImageView;
+
+
 @property (nonatomic) NSString *actioniCategory;
 @property (nonatomic) NSMutableArray *actionOptionsList;
 

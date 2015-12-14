@@ -22,6 +22,8 @@
 @property(nonatomic) ProgramDetailTableViewController *programDetailTVC;
 
 // Controls
+@property (weak, nonatomic) IBOutlet UIView *tableHeaderView;
+
 @property (weak, nonatomic) IBOutlet UILabel *segmentTitleLabel;
 @property (weak, nonatomic) IBOutlet UILabel *programTitleLabel;
 

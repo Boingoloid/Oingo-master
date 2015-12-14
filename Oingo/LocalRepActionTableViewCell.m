@@ -21,14 +21,50 @@
 }
 
 -(LocalRepActionTableViewCell*) configLocalRepActionCell:(NSMutableDictionary*)actionDict{
-    NSString *actionString = [actionDict valueForKey:@"actionCategory"];
-    self.actionTitleLabel.text = actionString;
-    self.layer.backgroundColor = [[UIColor blueColor] CGColor];
+    NSString *actionCategory = [actionDict valueForKey:@"actionCategory"];
     
+    //self.layer.backgroundColor = [[UIColor colorWithWhite:0.9f alpha:1] CGColor];
+    
+    
+    self.layer.borderColor = [[UIColor lightGrayColor] CGColor];
+    self.layer.cornerRadius = 3;
+    self.clipsToBounds = YES;
+    self.layer.borderWidth = .5;
+    
+    // Format cell based on actionCategory ___
+    NSString *actionString = [[NSString alloc]init];
+    
+    if ([actionCategory isEqualToString:@"Local Representative"]){
+        actionString = [NSString stringWithFormat:@"Contact your Local Representatives"];
+
+        
+    }else if ([actionCategory isEqualToString:@"Regulator"]){
+        actionString = [NSString stringWithFormat:@"Contact relevant Regulators"];
+        self.actionImageView.image = [UIImage imageNamed:@"regulator-flag-icon.png"];
+
+        // Image formatting
+        self.actionImageView.layer.borderWidth = .5;
+        self.actionImageView.layer.borderColor = [[UIColor blackColor] CGColor];
+        self.actionImageView.clipsToBounds = YES;
+        self.actionImageView.layer.cornerRadius = 3;
+    }else {
+        actionString = [NSString stringWithFormat:@"Contact other related people"];
+        self.actionImageView.image = [UIImage imageNamed:@"Message_chat_text_bubble_phone.png"];
+
+        // Image formatting
+//        self.actionImageView.layer.borderWidth = .5;
+//        self.actionImageView.layer.borderColor = [[UIColor blackColor] CGColor];
+//        self.actionImageView.clipsToBounds = YES;
+//        self.actionImageView.layer.cornerRadius = 3;
+        
+    }
+    self.actionTitleLabel.text = actionString;
+    // _______________________________
     
     
     return self;
 }
+
 
 - (void)setFrame:(CGRect)frame {
     int inset = 10;
