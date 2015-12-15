@@ -106,6 +106,7 @@
 		CED1A3491C1E132300BB7D91 /* Congress-Seal.png in Resources */ = {isa = PBXBuildFile; fileRef = CED1A3481C1E132300BB7D91 /* Congress-Seal.png */; };
 		CED1A34B1C1E2D3B00BB7D91 /* regulator-flag-icon.png in Resources */ = {isa = PBXBuildFile; fileRef = CED1A34A1C1E2D3B00BB7D91 /* regulator-flag-icon.png */; };
 		CED1A34D1C1E3E2D00BB7D91 /* Message_chat_text_bubble_phone.png in Resources */ = {isa = PBXBuildFile; fileRef = CED1A34C1C1E3E2D00BB7D91 /* Message_chat_text_bubble_phone.png */; };
+		CED1A3511C1F77EE00BB7D91 /* FetchDataParse.m in Sources */ = {isa = PBXBuildFile; fileRef = CED1A3501C1F77EE00BB7D91 /* FetchDataParse.m */; };
 		CED53C041BDD9F2800B34ED9 /* libz.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = CED53C031BDD9F2800B34ED9 /* libz.tbd */; };
 		CED53C051BDDA27500B34ED9 /* TwitterAPITweet.m in Sources */ = {isa = PBXBuildFile; fileRef = CEB2924F1B4528CE00A4E8E0 /* TwitterAPITweet.m */; };
 		CED68DCA1B6973520087546D /* arrow-down-gray-hi.png in Resources */ = {isa = PBXBuildFile; fileRef = CED68DC91B6973520087546D /* arrow-down-gray-hi.png */; };
@@ -311,6 +312,8 @@
 		CED1A3481C1E132300BB7D91 /* Congress-Seal.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Congress-Seal.png"; path = "Images/Congress-Seal.png"; sourceTree = "<group>"; };
 		CED1A34A1C1E2D3B00BB7D91 /* regulator-flag-icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "regulator-flag-icon.png"; path = "Images/regulator-flag-icon.png"; sourceTree = "<group>"; };
 		CED1A34C1C1E3E2D00BB7D91 /* Message_chat_text_bubble_phone.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Message_chat_text_bubble_phone.png; path = Images/Message_chat_text_bubble_phone.png; sourceTree = "<group>"; };
+		CED1A34F1C1F77EE00BB7D91 /* FetchDataParse.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FetchDataParse.h; sourceTree = "<group>"; };
+		CED1A3501C1F77EE00BB7D91 /* FetchDataParse.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FetchDataParse.m; sourceTree = "<group>"; };
 		CED53C031BDD9F2800B34ED9 /* libz.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libz.tbd; path = usr/lib/libz.tbd; sourceTree = SDKROOT; };
 		CED68DC91B6973520087546D /* arrow-down-gray-hi.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "arrow-down-gray-hi.png"; path = "Images/arrow-down-gray-hi.png"; sourceTree = "<group>"; };
 		CED68DCB1B69AE8B0087546D /* 40-menu-alt-512.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "40-menu-alt-512.png"; path = "Images/40-menu-alt-512.png"; sourceTree = "<group>"; };
@@ -558,6 +561,7 @@
 		CE2AB23E1C1CFE0D002893C7 /* Action Dashboard */ = {
 			isa = PBXGroup;
 			children = (
+				CED1A34E1C1F761F00BB7D91 /* ActionDash Methods */,
 				CE9B2E521C1B6F9700DEB7BC /* ActionDashboardTableViewController.h */,
 				CE9B2E531C1B6F9700DEB7BC /* ActionDashboardTableViewController.m */,
 				CE2AB23F1C1CFEF1002893C7 /* LocalRepActionTableViewCell.h */,
@@ -683,6 +687,15 @@
 				CEA92FA91AF376B50042D0EE /* CFNetwork.framework */,
 			);
 			name = frameworks;
+			sourceTree = "<group>";
+		};
+		CED1A34E1C1F761F00BB7D91 /* ActionDash Methods */ = {
+			isa = PBXGroup;
+			children = (
+				CED1A34F1C1F77EE00BB7D91 /* FetchDataParse.h */,
+				CED1A3501C1F77EE00BB7D91 /* FetchDataParse.m */,
+			);
+			name = "ActionDash Methods";
 			sourceTree = "<group>";
 		};
 		CEE04BA01B3501B000AAF8EA /* Methods */ = {
@@ -969,6 +982,7 @@
 				CE82943D1B38DB7C00B596E6 /* CongressionalMessageItem.m in Sources */,
 				CEEF250E1B017BAA00EFB257 /* MessageItem.m in Sources */,
 				CE2BF96F1B3E517700AB15AC /* MakePhoneCallAPI.m in Sources */,
+				CED1A3511C1F77EE00BB7D91 /* FetchDataParse.m in Sources */,
 				CEEF25071B015ACA00EFB257 /* MessageTableViewController.m in Sources */,
 				CE14A8B31B22D20B0032664C /* TweetTableViewDemoTableViewController.m in Sources */,
 				CEC0C7471B478E0500A9DD33 /* MessageTableViewMessageCell.m in Sources */,

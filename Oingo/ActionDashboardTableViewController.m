@@ -32,16 +32,21 @@
     self.segmentTitleLabel.text = [self.selectedSegment valueForKey:@"segmentTitle"];
     self.programTitleLabel.text = [NSString stringWithFormat:@"%@ / episode %@",[self.selectedProgram valueForKey:@"programTitle"],[self.selectedSegment valueForKey:@"episode"]];
     
+    
+    // Get Action data from Parse!
     [self fetchActionsForSegment];
     
+    // Get Sent Action data from Parse!
     if([PFUser currentUser]){
         [self fetchSentActionsForSegment];
     }
 }
 
+#pragma mark - Fetching Data
 
 -(void) fetchActionsForSegment {
-    NSLog(@"selectedSegment:%@",self.selectedSegment);
+    //[FetchDataParse fetchActionsForSegment:self.selectedSegment];
+    //NSLog(@"selectedSegment:%@",self.selectedSegment);
     PFQuery *query = [PFQuery queryWithClassName:@"Messages"];
     [query whereKey:@"segmentID" equalTo:[self.selectedSegment valueForKey:@"segmentID"]];
     [query orderByDescending:@"actionCategory"];
@@ -50,63 +55,13 @@
             dispatch_async(dispatch_get_main_queue(), ^{
                 self.actionsForSegment = objects;
                 [self createActionOptionsList:objects];
-                NSLog(@"Actions: %@",self.actionsForSegment);
+                //NSLog(@"Actions: %@",self.actionsForSegment);
                 [self.tableView reloadData];
             });
         } else {
             NSLog(@"Error: %@ %@", error, [error userInfo]);
         }
     }];
-}
-
--(void) createActionOptionsList:(NSArray*)objects{
-    NSLog(@"creating options list");
-    NSString *category = @"";
-    NSMutableArray *actionOptionsArray = [[NSMutableArray alloc]init];
-    
-    // go through the array and every time cat changes, pull out the message Category
-    for (NSDictionary *dictionary in objects){
-        NSLog(@"print dict:%@",dictionary);
-        NSString *dictionaryCategory = [dictionary valueForKey:@"actionCategory"];
-        if (![category isEqualToString:dictionaryCategory]){
-            category = dictionaryCategory;
-
-            [actionOptionsArray addObject:dictionary];
-        }
-        
-    }
-    NSLog(@"action array:%@",actionOptionsArray);
-    
-    
-    
-    
-    
-    // next steps
-//    1) put local rep first
-//    2) change cell headline based on action cat
-    
-    
-    
-    // Search if get location cell is there and if so delete it
-    NSUInteger index = [actionOptionsArray indexOfObjectPassingTest:
-                        ^BOOL(NSDictionary *dict, NSUInteger idx, BOOL *stop) {
-                            return [[dict objectForKey:@"actionCategory"] isEqual:@"Local Representative"];
-                        }];
-    if(index == NSNotFound){
-        NSLog(@"did not find 'local rep' line");
-    } else {
-        NSDictionary *movingActionDict = [actionOptionsArray objectAtIndex:index];
-        [actionOptionsArray insertObject:movingActionDict atIndex:0];
-        [actionOptionsArray removeObjectAtIndex:index+1];
-        NSLog(@"actionOptionsArray Reorder :%@",actionOptionsArray);
-    }
-    
-
-    
-    
-    
-
-    self.actionOptionsArray = actionOptionsArray;
 }
 
 -(void) fetchSentActionsForSegment {
@@ -120,14 +75,70 @@
         if (!error) {
             dispatch_async(dispatch_get_main_queue(), ^{
                 self.sentActionsForSegment = objects;
+                NSUInteger count = [objects count];
+                self.countUsersLabel.text = [NSString stringWithFormat:@"%ld",count];
+                self.countThoughtsLabel.text = [NSString stringWithFormat:@"%ld",count * 3];
+                NSLog(@"count:%ld",count);
                 //NSLog(@"sentActions: %@",self.sentActionsForSegment);
             });
         } else {
             NSLog(@"Error: %@ %@", error, [error userInfo]);
         }
     }];
-    
 }
+
+
+#pragma mark - Data Manipulation Action Options List
+
+
+-(void) createActionOptionsList:(NSArray*)objects{
+    //NSLog(@"creating options list");
+    NSString *category = @"";
+    NSMutableArray *actionOptionsArray = [[NSMutableArray alloc]init];
+    
+    // Loop, create unique list of actionCategories
+    for (NSDictionary *dictionary in objects){
+        //NSLog(@"print dict:%@",dictionary);
+        NSString *dictionaryCategory = [dictionary valueForKey:@"actionCategory"];
+        if (![category isEqualToString:dictionaryCategory]){
+            category = dictionaryCategory;
+            [actionOptionsArray addObject:dictionary];
+        }
+    }
+    
+    
+    //Pull Regulator actionCategory to top
+    NSUInteger indexReg = [actionOptionsArray indexOfObjectPassingTest:
+                        ^BOOL(NSDictionary *dict, NSUInteger idx, BOOL *stop) {
+                            return [[dict objectForKey:@"actionCategory"] isEqual:@"Regulator"];
+                        }];
+    if(indexReg == NSNotFound){
+        NSLog(@"did not find 'regulator' line");
+    } else {
+        NSDictionary *movingActionDict = [actionOptionsArray objectAtIndex:indexReg];
+        [actionOptionsArray insertObject:movingActionDict atIndex:0];
+        [actionOptionsArray removeObjectAtIndex:indexReg+1];
+    }
+
+    
+    //Pull Local Represetative actionCategory to top
+    NSUInteger index = [actionOptionsArray indexOfObjectPassingTest:
+                        ^BOOL(NSDictionary *dict, NSUInteger idx, BOOL *stop) {
+                            return [[dict objectForKey:@"actionCategory"] isEqual:@"Local Representative"];
+                        }];
+    if(index == NSNotFound){
+        NSLog(@"did not find 'local rep' line");
+    } else {
+        NSDictionary *movingActionDict = [actionOptionsArray objectAtIndex:index];
+        [actionOptionsArray insertObject:movingActionDict atIndex:0];
+        [actionOptionsArray removeObjectAtIndex:index+1];
+        //NSLog(@"actionOptionsArray Reorder :%@",actionOptionsArray);
+    }
+    
+    self.actionOptionsArray = actionOptionsArray;
+}
+
+
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
@@ -155,6 +166,7 @@
     actionDict = [self.actionOptionsArray objectAtIndex:indexPath.row];
     return [cell configLocalRepActionCell:(NSMutableDictionary*)actionDict];
 }
+
 
 
 /*

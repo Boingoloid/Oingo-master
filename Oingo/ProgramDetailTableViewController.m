@@ -73,7 +73,7 @@ Segment *segment;
     
     // Format table header
     self.tableHeaderView.layer.borderColor = [[UIColor lightGrayColor] CGColor];
-    self.tableHeaderView.layer.borderWidth = 1;
+    self.tableHeaderView.layer.borderWidth = 2;
     self.tableHeaderView.layer.backgroundColor = [[UIColor whiteColor] CGColor];
     self.tableHeaderView.layer.cornerRadius = 3;
     self.tableHeaderView.clipsToBounds = YES;
@@ -87,8 +87,6 @@ Segment *segment;
     tapRocognizer.numberOfTapsRequired = 1;
     tapRocognizer.numberOfTouchesRequired = 1;
     [self.tableView addGestureRecognizer:tapRocognizer];
-    
-
 }
 
 
@@ -129,6 +127,11 @@ Segment *segment;
             self.selectedSegment = [self.segmentList objectAtIndex:[rowIndex intValue]];
             [self performSegueWithIdentifier:@"showActionDashboard" sender:self];
         } else {
+            
+            NSString *dateGroup = [self dateGroupForSection:indexPath.section];
+            NSArray *rowIndecesInSection = [self.sections objectForKey:dateGroup];
+            NSNumber *rowIndex = [rowIndecesInSection objectAtIndex:indexPath.row]; //pulling the row indece from array above
+            self.selectedSegment = [self.segmentList objectAtIndex:[rowIndex intValue]];
             [self performSegueWithIdentifier:@"showMessages" sender:self];
         }
     }
@@ -243,6 +246,7 @@ Segment *segment;
 }
 
 
+
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
     //    NSString *category= [self categoryForSection:section];
     //    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
@@ -313,7 +317,6 @@ Segment *segment;
         actionDashTVC.programDetailTVC = self;
         actionDashTVC.selectedProgram = self.selectedProgram;
         actionDashTVC.selectedSegment = self.selectedSegment;
-
     }
 }
 

@@ -120,4 +120,4 @@ dependencies: \
   /Users/matthewacalin/Desktop/IphoneApps/PushThought/WebViewController.h \
   Oingo/MessagePanelViewController.h Oingo/SegmentDataViewController.h \
   Oingo/ActionDashboardTableViewController.h \
-  Oingo/ProgramDetailTableViewController.h
+  Oingo/ProgramDetailTableViewController.h Oingo/FetchDataParse.h
