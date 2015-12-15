@@ -1173,7 +1173,7 @@
                                                 <constraint firstAttribute="height" constant="22" id="E2o-XU-kQS"/>
                                                 <constraint firstAttribute="width" constant="25" id="sgx-dV-Gnf"/>
                                             </constraints>
-                                            <state key="normal" title="Button" image="document-xxl.png">
+                                            <state key="normal" title="Button" image="web-form-globe.png">
                                                 <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                             </state>
                                             <state key="selected" image="Web-frame2.png"/>
@@ -2991,6 +2991,7 @@ Stay tuned, we are developing as fast as we can.  :D</string>
         <image name="settingswhite.png" width="17" height="17"/>
         <image name="success.png" width="254" height="181"/>
         <image name="tweetButtonIconGray.png" width="259" height="259"/>
+        <image name="web-form-globe.png" width="651" height="576"/>
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="0rT-qH-uy3"/>
