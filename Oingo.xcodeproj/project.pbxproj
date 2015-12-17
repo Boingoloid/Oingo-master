@@ -144,6 +144,7 @@
 		CEF14C061B23AD6C00EC95A4 /* tweetButtonIconGray.png in Resources */ = {isa = PBXBuildFile; fileRef = CEF14C051B23AD6C00EC95A4 /* tweetButtonIconGray.png */; };
 		CEF14C081B23AD7600EC95A4 /* facebookButtonIconGray.png in Resources */ = {isa = PBXBuildFile; fileRef = CEF14C071B23AD7600EC95A4 /* facebookButtonIconGray.png */; };
 		CEF1C9011B0E7B79003EFAD1 /* WebViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CEF1C9001B0E7B79003EFAD1 /* WebViewController.m */; };
+		CEF9D1F01C233EA500B3DD41 /* FederalRepActionDashboardViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CEF9D1EF1C233EA500B3DD41 /* FederalRepActionDashboardViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -346,6 +347,8 @@
 		CEF14C071B23AD7600EC95A4 /* facebookButtonIconGray.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = facebookButtonIconGray.png; path = Images/facebookButtonIconGray.png; sourceTree = "<group>"; };
 		CEF1C8FF1B0E7B79003EFAD1 /* WebViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WebViewController.h; path = ../WebViewController.h; sourceTree = "<group>"; };
 		CEF1C9001B0E7B79003EFAD1 /* WebViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = WebViewController.m; path = ../WebViewController.m; sourceTree = "<group>"; };
+		CEF9D1EE1C233EA500B3DD41 /* FederalRepActionDashboardViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FederalRepActionDashboardViewController.h; sourceTree = "<group>"; };
+		CEF9D1EF1C233EA500B3DD41 /* FederalRepActionDashboardViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FederalRepActionDashboardViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -566,6 +569,8 @@
 				CE9B2E531C1B6F9700DEB7BC /* ActionDashboardTableViewController.m */,
 				CE2AB23F1C1CFEF1002893C7 /* LocalRepActionTableViewCell.h */,
 				CE2AB2401C1CFEF1002893C7 /* LocalRepActionTableViewCell.m */,
+				CEF9D1EE1C233EA500B3DD41 /* FederalRepActionDashboardViewController.h */,
+				CEF9D1EF1C233EA500B3DD41 /* FederalRepActionDashboardViewController.m */,
 			);
 			name = "Action Dashboard";
 			sourceTree = "<group>";
@@ -956,6 +961,7 @@
 				CE31B1A91B44923B0048A5B1 /* ParseAPI.m in Sources */,
 				CE12E4211B94DA75001B3E25 /* OAuthCore.m in Sources */,
 				CE87CABE1AF977120084C666 /* Segment.m in Sources */,
+				CEF9D1F01C233EA500B3DD41 /* FederalRepActionDashboardViewController.m in Sources */,
 				CEB4ED8E1AF8305E0055D547 /* ProgramDetailTableViewController.m in Sources */,
 				CE5B5D0E1AF95A740033A668 /* ProgramDetailTableViewCell.m in Sources */,
 				CE31B1A01B420C670048A5B1 /* MessageTableViewRepresentativeCell.m in Sources */,

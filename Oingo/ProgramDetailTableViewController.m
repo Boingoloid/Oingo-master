@@ -127,7 +127,6 @@ Segment *segment;
             self.selectedSegment = [self.segmentList objectAtIndex:[rowIndex intValue]];
             [self performSegueWithIdentifier:@"showActionDashboard" sender:self];
         } else {
-            
             NSString *dateGroup = [self dateGroupForSection:indexPath.section];
             NSArray *rowIndecesInSection = [self.sections objectForKey:dateGroup];
             NSNumber *rowIndex = [rowIndecesInSection objectAtIndex:indexPath.row]; //pulling the row indece from array above

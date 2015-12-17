@@ -9,7 +9,7 @@
 #import "ActionDashboardTableViewController.h"
 #import "LocalRepActionTableViewCell.h"
 
-@interface ActionDashboardTableViewController ()
+@interface ActionDashboardTableViewController () <UIGestureRecognizerDelegate,CLLocationManagerDelegate>
 
 @end
 
@@ -40,7 +40,60 @@
     if([PFUser currentUser]){
         [self fetchSentActionsForSegment];
     }
+    
+    // Create gesture recognizer
+    UITapGestureRecognizer *tapRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(respondToTapGesture:)]; //connect recognizer to action method.
+    tapRecognizer.delegate = self;
+    tapRecognizer.numberOfTapsRequired = 1;
+    tapRecognizer.numberOfTouchesRequired = 1;
+    [tapRecognizer setCancelsTouchesInView:NO];
+    [self.tableView addGestureRecognizer:tapRecognizer];
 }
+
+- (BOOL)gestureRecognizerShouldBegin:(UIGestureRecognizer *)gestureRecognizer
+{
+    UITableView *tableView = (UITableView *)gestureRecognizer.view;
+    CGPoint p = [gestureRecognizer locationInView:gestureRecognizer.view];
+    if ([tableView indexPathForRowAtPoint:p]) {
+        return YES;
+        
+    }
+    return NO;
+}
+
+- (void)respondToTapGesture:(UITapGestureRecognizer *)tap {
+    //*******
+    //This is what we use for user touches in the cells
+    //It grabs point coordinate of touch as finger lifted
+    //******************
+    
+    if (UIGestureRecognizerStateEnded == tap.state) {
+        // Collect data about tap location
+        UITableView *tableView = (UITableView *)tap.view;
+        CGPoint p = [tap locationInView:tap.view];
+        NSIndexPath* indexPath = [tableView indexPathForRowAtPoint:p];
+        NSLog(@"position with indexpath:%@",indexPath);
+        
+//        
+//        // Deselect the row
+        [self.tableView deselectRowAtIndexPath:indexPath animated:YES];
+//        [tableView deselectRowAtIndexPath:indexPath animated:NO];
+        
+        
+        // Gathering info about cell touched
+        UITableViewCell *cell = (UITableViewCell *)[tableView cellForRowAtIndexPath:indexPath];
+        CGPoint pointInCell = [tap locationInView:cell];
+
+        
+        //if(CGRectContainsPoint(cell.frame, pointInCell)) {
+            
+            [self performSegueWithIdentifier:@"showBuildMessage" sender:self];
+        //}
+    }
+}
+
+
+
 
 #pragma mark - Fetching Data
 
@@ -159,7 +212,12 @@
 
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+    
+    // Create cell
     LocalRepActionTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"Cell" forIndexPath:indexPath];
+    
+    // Turn off selection highlighting
+    cell.selectionStyle = UITableViewCellSelectionStyleNone;
     
     // Configure the cell...
     NSMutableDictionary *actionDict = [[NSMutableDictionary alloc]init];
@@ -203,15 +261,17 @@
 }
 */
 
-/*
+
 #pragma mark - Navigation
 
 // In a storyboard-based application, you will often want to do a little preparation before navigation
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+    
+    
     // Get the new view controller using [segue destinationViewController].
     // Pass the selected object to the new view controller.
 }
-*/
+
 
 @end
 
