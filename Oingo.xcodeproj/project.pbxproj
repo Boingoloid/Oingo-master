@@ -77,6 +77,7 @@
 		CE9B2E5C1C1CACD700DEB7BC /* blackLightBulb.png in Resources */ = {isa = PBXBuildFile; fileRef = CE9B2E5B1C1CACD700DEB7BC /* blackLightBulb.png */; };
 		CE9D625E1BC3C10F00A244ED /* MessagePanelViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CE9D625D1BC3C10F00A244ED /* MessagePanelViewController.m */; };
 		CEA042261B9704BB00071518 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CE5B98EF1B96F33400BFF14F /* UIKit.framework */; };
+		CEA072C11C23A8B600FAAF25 /* FedRepCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CEA072C01C23A8B600FAAF25 /* FedRepCell.m */; };
 		CEA79FD61AEC7C0D00535B06 /* ProgramsTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CEA79FD51AEC7C0D00535B06 /* ProgramsTableViewController.m */; };
 		CEACE5921B4F4BCC007B7D2D /* UpdateDefaults.m in Sources */ = {isa = PBXBuildFile; fileRef = CEACE5911B4F4BCC007B7D2D /* UpdateDefaults.m */; };
 		CEB187911B18F8C400C86955 /* MessageOptionsTableTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CEB187901B18F8C400C86955 /* MessageOptionsTableTableViewController.m */; };
@@ -123,6 +124,7 @@
 		CEE074441B5F027E00245C56 /* success-icon.png in Resources */ = {isa = PBXBuildFile; fileRef = CEE074431B5F027E00245C56 /* success-icon.png */; };
 		CEE691D41BF66A9600C11749 /* MessagePanelTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CEE691D31BF66A9600C11749 /* MessagePanelTableViewCell.m */; };
 		CEE772B41BA8C14D00E45842 /* settingswhite.png in Resources */ = {isa = PBXBuildFile; fileRef = CEE772B31BA8C14D00E45842 /* settingswhite.png */; };
+		CEE9D47D1C249BE300F37656 /* FetchDataFedReps.m in Sources */ = {isa = PBXBuildFile; fileRef = CEE9D47C1C249BE300F37656 /* FetchDataFedReps.m */; };
 		CEED9BD41AF4160300402BC2 /* Accounts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CE395D851AED5422006786C0 /* Accounts.framework */; };
 		CEED9BD51AF4165400402BC2 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CE40D7FF1AF382A5006F2D2E /* AudioToolbox.framework */; };
 		CEED9BD61AF4166000402BC2 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CEA92FA11AF368590042D0EE /* CoreGraphics.framework */; };
@@ -145,6 +147,10 @@
 		CEF14C081B23AD7600EC95A4 /* facebookButtonIconGray.png in Resources */ = {isa = PBXBuildFile; fileRef = CEF14C071B23AD7600EC95A4 /* facebookButtonIconGray.png */; };
 		CEF1C9011B0E7B79003EFAD1 /* WebViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CEF1C9001B0E7B79003EFAD1 /* WebViewController.m */; };
 		CEF9D1F01C233EA500B3DD41 /* FederalRepActionDashboardViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CEF9D1EF1C233EA500B3DD41 /* FederalRepActionDashboardViewController.m */; };
+		CEF9D1F21C234ABA00B3DD41 /* twitter-icon2.png in Resources */ = {isa = PBXBuildFile; fileRef = CEF9D1F11C234ABA00B3DD41 /* twitter-icon2.png */; };
+		CEF9D1F61C23512600B3DD41 /* segmentBarTweetPhone.png in Resources */ = {isa = PBXBuildFile; fileRef = CEF9D1F51C23512600B3DD41 /* segmentBarTweetPhone.png */; };
+		CEF9D1FA1C2353DC00B3DD41 /* twitter-icon-3.png in Resources */ = {isa = PBXBuildFile; fileRef = CEF9D1F91C2353DC00B3DD41 /* twitter-icon-3.png */; };
+		CEF9D1FC1C23581000B3DD41 /* twitter-icon-4.png in Resources */ = {isa = PBXBuildFile; fileRef = CEF9D1FB1C23581000B3DD41 /* twitter-icon-4.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -265,6 +271,8 @@
 		CE9B2E5B1C1CACD700DEB7BC /* blackLightBulb.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = blackLightBulb.png; path = Images/blackLightBulb.png; sourceTree = "<group>"; };
 		CE9D625C1BC3C10F00A244ED /* MessagePanelViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MessagePanelViewController.h; sourceTree = "<group>"; };
 		CE9D625D1BC3C10F00A244ED /* MessagePanelViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MessagePanelViewController.m; sourceTree = "<group>"; };
+		CEA072BF1C23A8B600FAAF25 /* FedRepCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FedRepCell.h; sourceTree = "<group>"; };
+		CEA072C01C23A8B600FAAF25 /* FedRepCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FedRepCell.m; sourceTree = "<group>"; };
 		CEA79FD41AEC7C0D00535B06 /* ProgramsTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ProgramsTableViewController.h; path = ../ProgramsTableViewController.h; sourceTree = "<group>"; };
 		CEA79FD51AEC7C0D00535B06 /* ProgramsTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ProgramsTableViewController.m; path = ../ProgramsTableViewController.m; sourceTree = "<group>"; };
 		CEA79FDA1AECA88C00535B06 /* Social.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Social.framework; path = System/Library/Frameworks/Social.framework; sourceTree = SDKROOT; };
@@ -332,6 +340,8 @@
 		CEE691D21BF66A9600C11749 /* MessagePanelTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MessagePanelTableViewCell.h; sourceTree = "<group>"; };
 		CEE691D31BF66A9600C11749 /* MessagePanelTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MessagePanelTableViewCell.m; sourceTree = "<group>"; };
 		CEE772B31BA8C14D00E45842 /* settingswhite.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = settingswhite.png; path = Oingo/Images/settingswhite.png; sourceTree = "<group>"; };
+		CEE9D47B1C249BE300F37656 /* FetchDataFedReps.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FetchDataFedReps.h; sourceTree = "<group>"; };
+		CEE9D47C1C249BE300F37656 /* FetchDataFedReps.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FetchDataFedReps.m; sourceTree = "<group>"; };
 		CEED9BB61AF40A4000402BC2 /* Twitter.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Twitter.framework; path = System/Library/Frameworks/Twitter.framework; sourceTree = SDKROOT; };
 		CEEF24FF1B0114C900EFB257 /* monsanto nutrition facts.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "monsanto nutrition facts.png"; sourceTree = "<group>"; };
 		CEEF25011B011A4B00EFB257 /* monsanto gas apple.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "monsanto gas apple.png"; sourceTree = "<group>"; };
@@ -349,6 +359,10 @@
 		CEF1C9001B0E7B79003EFAD1 /* WebViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = WebViewController.m; path = ../WebViewController.m; sourceTree = "<group>"; };
 		CEF9D1EE1C233EA500B3DD41 /* FederalRepActionDashboardViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FederalRepActionDashboardViewController.h; sourceTree = "<group>"; };
 		CEF9D1EF1C233EA500B3DD41 /* FederalRepActionDashboardViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FederalRepActionDashboardViewController.m; sourceTree = "<group>"; };
+		CEF9D1F11C234ABA00B3DD41 /* twitter-icon2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "twitter-icon2.png"; path = "Images/twitter-icon2.png"; sourceTree = "<group>"; };
+		CEF9D1F51C23512600B3DD41 /* segmentBarTweetPhone.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = segmentBarTweetPhone.png; path = Images/segmentBarTweetPhone.png; sourceTree = "<group>"; };
+		CEF9D1F91C2353DC00B3DD41 /* twitter-icon-3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "twitter-icon-3.png"; path = "Images/twitter-icon-3.png"; sourceTree = "<group>"; };
+		CEF9D1FB1C23581000B3DD41 /* twitter-icon-4.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "twitter-icon-4.png"; path = "Images/twitter-icon-4.png"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -506,6 +520,10 @@
 		CE241A6A1AEAF0D300F22144 /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				CEF9D1FB1C23581000B3DD41 /* twitter-icon-4.png */,
+				CEF9D1F91C2353DC00B3DD41 /* twitter-icon-3.png */,
+				CEF9D1F51C23512600B3DD41 /* segmentBarTweetPhone.png */,
+				CEF9D1F11C234ABA00B3DD41 /* twitter-icon2.png */,
 				CED1A34C1C1E3E2D00BB7D91 /* Message_chat_text_bubble_phone.png */,
 				CED1A34A1C1E2D3B00BB7D91 /* regulator-flag-icon.png */,
 				CED1A3481C1E132300BB7D91 /* Congress-Seal.png */,
@@ -571,6 +589,8 @@
 				CE2AB2401C1CFEF1002893C7 /* LocalRepActionTableViewCell.m */,
 				CEF9D1EE1C233EA500B3DD41 /* FederalRepActionDashboardViewController.h */,
 				CEF9D1EF1C233EA500B3DD41 /* FederalRepActionDashboardViewController.m */,
+				CEA072BF1C23A8B600FAAF25 /* FedRepCell.h */,
+				CEA072C01C23A8B600FAAF25 /* FedRepCell.m */,
 			);
 			name = "Action Dashboard";
 			sourceTree = "<group>";
@@ -699,6 +719,8 @@
 			children = (
 				CED1A34F1C1F77EE00BB7D91 /* FetchDataParse.h */,
 				CED1A3501C1F77EE00BB7D91 /* FetchDataParse.m */,
+				CEE9D47B1C249BE300F37656 /* FetchDataFedReps.h */,
+				CEE9D47C1C249BE300F37656 /* FetchDataFedReps.m */,
 			);
 			name = "ActionDash Methods";
 			sourceTree = "<group>";
@@ -827,15 +849,18 @@
 				CEEF250B1B0171BC00EFB257 /* Web-frame2.png in Resources */,
 				CE7800CA1BDEB142008B9F37 /* LogoGlow-2.png in Resources */,
 				CEB9D54C1BFAD45600A6F565 /* LogoGlow80.png in Resources */,
+				CEF9D1F61C23512600B3DD41 /* segmentBarTweetPhone.png in Resources */,
 				CEE04B9A1B34B9EC00AAF8EA /* lightGrayButtonBackground.png in Resources */,
 				CEB9D5371BFAC2D100A6F565 /* TwitterKitResources.bundle in Resources */,
 				CE46B13C1B044DF300A4D671 /* blackborder.png in Resources */,
+				CEF9D1FC1C23581000B3DD41 /* twitter-icon-4.png in Resources */,
 				CEE074441B5F027E00245C56 /* success-icon.png in Resources */,
 				CEB9D4E71BFABB6500A6F565 /* FacebookSDKStrings.bundle in Resources */,
 				CE7800CB1BDEB142008B9F37 /* LogoGlow.png in Resources */,
 				CED1A34D1C1E3E2D00BB7D91 /* Message_chat_text_bubble_phone.png in Resources */,
 				CE80B5D61AFC0EFB007D69FB /* dailyshow6cover.png in Resources */,
 				CE9B2E581C1BFFD400DEB7BC /* blackHumanIcon.png in Resources */,
+				CEF9D1F21C234ABA00B3DD41 /* twitter-icon2.png in Resources */,
 				CEB9D54E1BFAD45600A6F565 /* LogoGlow120-1.png in Resources */,
 				CE29AA9A1B3F2BC900676563 /* pelosi.png in Resources */,
 				CE87CAC41AF9B5DE0084C666 /* vicecoverphoto.png in Resources */,
@@ -855,6 +880,7 @@
 				CE2BB67D1B8FEEB200568E16 /* light_bulb_white.png in Resources */,
 				CEE074421B5EFEE900245C56 /* success.png in Resources */,
 				CE60732B1B3A88FD007B567C /* phone-gray.png in Resources */,
+				CEF9D1FA1C2353DC00B3DD41 /* twitter-icon-3.png in Resources */,
 				CEF14C081B23AD7600EC95A4 /* facebookButtonIconGray.png in Resources */,
 				CED68DCC1B69AE8B0087546D /* 40-menu-alt-512.png in Resources */,
 				CEB9D5441BFAC78400A6F565 /* PFTwitterUtils+NativeTwitter in Resources */,
@@ -969,6 +995,7 @@
 				CEB187911B18F8C400C86955 /* MessageOptionsTableTableViewController.m in Sources */,
 				CE9034861BC63C04000BE136 /* LongFormEmailViewController.m in Sources */,
 				CE2029721B363D51005C079B /* CongressFinderAPI.m in Sources */,
+				CEE9D47D1C249BE300F37656 /* FetchDataFedReps.m in Sources */,
 				CE6073331B3AD475007B567C /* CongressPhotoFinderAPI.m in Sources */,
 				CE241A421AEAE45A00F22144 /* main.m in Sources */,
 				CE48FDB61B9527C50086349A /* TWAPIManager.m in Sources */,
@@ -986,6 +1013,7 @@
 				CE9B2E541C1B6F9700DEB7BC /* ActionDashboardTableViewController.m in Sources */,
 				CEA79FD61AEC7C0D00535B06 /* ProgramsTableViewController.m in Sources */,
 				CE82943D1B38DB7C00B596E6 /* CongressionalMessageItem.m in Sources */,
+				CEA072C11C23A8B600FAAF25 /* FedRepCell.m in Sources */,
 				CEEF250E1B017BAA00EFB257 /* MessageItem.m in Sources */,
 				CE2BF96F1B3E517700AB15AC /* MakePhoneCallAPI.m in Sources */,
 				CED1A3511C1F77EE00BB7D91 /* FetchDataParse.m in Sources */,
