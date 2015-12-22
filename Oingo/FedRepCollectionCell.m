@@ -41,6 +41,12 @@
     // Load Rep Image
     self.imageView.image = [dictionary valueForKey:@"image"];
     
+    self.contentView.layer.borderColor = [[UIColor blackColor]CGColor];
+    self.contentView.layer.borderWidth = 2;
+    self.contentView.layer.cornerRadius = 10;
+    self.contentView.clipsToBounds = YES;
+    self.layer.cornerRadius = 10;
+    self.clipsToBounds = YES;
     // TwitterID
 //    NSString *twitterID = [actionDict valueForKey:@"twitter_id"];
 //    self.twitterID.text = [NSString stringWithFormat:@"@%@",twitterID];

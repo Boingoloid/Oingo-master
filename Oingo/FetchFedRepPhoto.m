@@ -38,8 +38,6 @@
 }
 
 
-
-
 -(void)addImages:objects ToArray:resultsArray{
     
     for (PFObject *object in objects) {

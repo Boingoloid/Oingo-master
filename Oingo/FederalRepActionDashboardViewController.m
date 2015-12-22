@@ -30,25 +30,29 @@ static NSString * const reuseIdentifier = @"Cell";
     // Set CollectionView delegate and Flow layout
     self.collectionView.delegate = self;
     self.collectionView.dataSource = self;
-    UICollectionViewFlowLayout *flowLayout = [[UICollectionViewFlowLayout alloc]init];
-    [flowLayout setScrollDirection:UICollectionViewScrollDirectionHorizontal];
-    flowLayout.minimumInteritemSpacing = 20;
-    flowLayout.minimumLineSpacing = 20;
-    [flowLayout setHeaderReferenceSize:CGSizeMake(20, 100)];
-    self.collectionView.collectionViewLayout = flowLayout;
+    
     
 
+    
+    self.automaticallyAdjustsScrollViewInsets = NO;
+    [self.collectionView setContentInset:UIEdgeInsetsMake(-20, 0, -20, 0)];
+    self.edgesForExtendedLayout = UIRectEdgeNone;
+    
+    UICollectionViewFlowLayout *flowLayout = [[UICollectionViewFlowLayout alloc]init];
+    [flowLayout setScrollDirection:UICollectionViewScrollDirectionHorizontal];
+    flowLayout.minimumInteritemSpacing = 10;
+    flowLayout.minimumLineSpacing = 10;
+    [flowLayout setHeaderReferenceSize:CGSizeMake(0, 100)];
+    [flowLayout setFooterReferenceSize:CGSizeMake(0, 100)];
+    self.collectionView.collectionViewLayout = flowLayout;
+    
     //Fetch Federal Rep data
     FetchDataFedReps *fetchData = [[FetchDataFedReps alloc]init];
     fetchData.viewController = self;
     [fetchData fetchRepsWithZip:@"94107"];
     
-    
-    
     // Set TextView Delegate
     self.textView.delegate=self;
-    
-
     
     // Format Push Thought suggestion
     self.pushthoughtTextView.layer.borderColor = [[UIColor lightGrayColor] CGColor];
@@ -173,6 +177,7 @@ static NSString * const reuseIdentifier = @"Cell";
     
     // Configure the cell
     [self.collectionView addSubview:cell];
+
      NSMutableDictionary *dictionary = [self.fedRepList objectAtIndex:indexPath.row];
     
     return [cell configCollectionCell:(NSMutableDictionary*)dictionary];
@@ -181,7 +186,7 @@ static NSString * const reuseIdentifier = @"Cell";
 #pragma mark <UICollectionViewDelegateFlowLayout>
 
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath {
-    return CGSizeMake(200, 100);
+    return CGSizeMake(200, 112);
 }
 
 @end
