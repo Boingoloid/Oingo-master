@@ -7,6 +7,7 @@
 //
 
 #import "FetchDataFedReps.h"
+#import "FetchFedRepPhoto.h"
 
 @interface FetchDataFedReps () <NSURLSessionDelegate>
 
@@ -54,11 +55,15 @@
     
 
     dispatch_async(dispatch_get_main_queue(), ^{
-    self.viewController.fedRepList = (NSMutableArray*)resultsArray;
-    NSLog(@"printing results array:%@",resultsArray);
-    NSLog(@"printing fedRepList array:%@",self.viewController.fedRepList);
-    
-    [self.viewController.tableView reloadData];
+        self.viewController.fedRepList = (NSMutableArray*)resultsArray;
+        NSLog(@"printing results array:%@",resultsArray);
+        NSLog(@"printing fedRepList array:%@",self.viewController.fedRepList);
+        
+        [self.viewController.tableView reloadData];
+            
+            FetchFedRepPhoto *fetchPhoto = [[FetchFedRepPhoto alloc] init];
+            fetchPhoto.viewController = self.viewController;
+            [fetchPhoto fetchPhotos:resultsArray];
     });
 }
 

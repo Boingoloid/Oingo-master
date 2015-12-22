@@ -8,48 +8,81 @@
 
 #import "FederalRepActionDashboardViewController.h"
 #import "FedRepCell.h"
+#import "FedRepCollectionCell.h"
 #import "FetchDataFedReps.h"
 
-@interface FederalRepActionDashboardViewController () <UITextViewDelegate,UITableViewDelegate,UITableViewDataSource>
+
+@interface FederalRepActionDashboardViewController () <UITextViewDelegate,UITableViewDelegate,UITableViewDataSource,UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout>
 
 @end
 
 @implementation FederalRepActionDashboardViewController
 
+static NSString * const reuseIdentifier = @"Cell";
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    // Set tableViewDelegate
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
     
+    // Set CollectionView delegate and Flow layout
+    self.collectionView.delegate = self;
+    self.collectionView.dataSource = self;
+    UICollectionViewFlowLayout *flowLayout = [[UICollectionViewFlowLayout alloc]init];
+    [flowLayout setScrollDirection:UICollectionViewScrollDirectionHorizontal];
+    flowLayout.minimumInteritemSpacing = 20;
+    flowLayout.minimumLineSpacing = 20;
+    [flowLayout setHeaderReferenceSize:CGSizeMake(20, 100)];
+    self.collectionView.collectionViewLayout = flowLayout;
+    
+
+    //Fetch Federal Rep data
     FetchDataFedReps *fetchData = [[FetchDataFedReps alloc]init];
     fetchData.viewController = self;
     [fetchData fetchRepsWithZip:@"94107"];
     
+    
+    
+    // Set TextView Delegate
     self.textView.delegate=self;
     
-    self.textView.layer.borderColor = [[UIColor lightGrayColor] CGColor];
-    self.textView.layer.borderWidth = 0;
-    self.textView.layer.cornerRadius = 15;
-    self.textView.clipsToBounds = YES;
 
     
-    
+    // Format Push Thought suggestion
     self.pushthoughtTextView.layer.borderColor = [[UIColor lightGrayColor] CGColor];
-    self.pushthoughtTextView.layer.borderWidth = 1;
+    self.pushthoughtTextView.layer.borderWidth = 0.5;
     self.pushthoughtTextView.layer.cornerRadius = 3;
     self.pushthoughtTextView.clipsToBounds = YES;
     
     
+    // Format Send Tweet Touch Area
+    self.sendTweet.layer.borderColor = [[UIColor colorWithRed:13/255.0 green:81/255.0 blue:183/255.0 alpha:1] CGColor];
+    self.sendTweet.layer.borderWidth = 0;
+    self.sendTweet.layer.cornerRadius = 3;
+    self.sendTweet.clipsToBounds = YES;
+
+    // Format Custom Text View
+    self.textView.layer.borderColor = [[UIColor lightGrayColor] CGColor];
+    self.textView.layer.borderWidth = .5;
+    self.textView.layer.cornerRadius = 15;
+    self.textView.clipsToBounds = YES;
     
+    
+    // Format Expanded Options Label
     self.otherOptionsLabel.layer.borderColor = [[UIColor lightGrayColor] CGColor];
-    self.otherOptionsLabel.layer.borderWidth = 1;
-    self.otherOptionsLabel.layer.cornerRadius = 15;
+    self.otherOptionsLabel.layer.borderWidth = 0;
+    self.otherOptionsLabel.layer.cornerRadius = 0;
     self.otherOptionsLabel.clipsToBounds = YES;
     // Do any additional setup after loading the view.
     
+    // Format placeholderTextLabel
     
-    self.tableView.layer.borderColor = [[UIColor lightGrayColor] CGColor];
+    
+    
+    // Format TableView
+    self.tableView.layer.borderColor = [[UIColor colorWithRed:13/255.0 green:81/255.0 blue:183/255.0 alpha:1] CGColor];
     self.tableView.layer.borderWidth = 1;
     self.tableView.layer.cornerRadius = 3;
     self.tableView.clipsToBounds = YES;
@@ -121,6 +154,34 @@
 - (void)textViewDidEndEditing:(UITextView *)textView
 {
     self.placeholderTextLabel.hidden = ([textView.text length] > 0);
+}
+
+#pragma mark <UICollectionViewDataSource>
+
+- (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView {
+
+    return 1;
+}
+
+- (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
+
+    return self.fedRepList.count;
+}
+
+- (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
+    FedRepCollectionCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:reuseIdentifier forIndexPath:indexPath];
+    
+    // Configure the cell
+    [self.collectionView addSubview:cell];
+     NSMutableDictionary *dictionary = [self.fedRepList objectAtIndex:indexPath.row];
+    
+    return [cell configCollectionCell:(NSMutableDictionary*)dictionary];
+}
+
+#pragma mark <UICollectionViewDelegateFlowLayout>
+
+- (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath {
+    return CGSizeMake(200, 100);
 }
 
 @end

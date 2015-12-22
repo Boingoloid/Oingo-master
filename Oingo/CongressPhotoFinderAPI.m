@@ -46,8 +46,8 @@
     }
     [self.messageTableViewController.view setNeedsDisplay];
     [self.messageTableViewController.tableView reloadData];
-    NSLog(@"reloading data from Congress Photo Finder");
     
+    NSLog(@"reloading data from Congress Photo Finder");
 }
 
 
@@ -69,7 +69,6 @@
             dispatch_async(dispatch_get_main_queue(),^{
             
             [self addImagesToMenuList:objects];
-            
             
             });
         }

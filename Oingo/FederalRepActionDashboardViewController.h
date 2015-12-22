@@ -9,6 +9,8 @@
 #import <UIKit/UIKit.h>
 #import "ActionDashboardTableViewController.h"
 
+
+
 @interface FederalRepActionDashboardViewController : UIViewController
 
 
@@ -20,6 +22,10 @@
 
 
 // Controls
+
+@property (weak, nonatomic) IBOutlet UICollectionView *collectionView;
+@property (weak, nonatomic) IBOutlet UIImageView *shortcutActionIconImageView;
+
 @property (weak, nonatomic) IBOutlet UIScrollView *scrollView;
 @property (weak, nonatomic) IBOutlet UIView *contentView;
 @property (weak, nonatomic) IBOutlet UITextView *textView;
@@ -27,11 +33,12 @@
 @property (weak, nonatomic) IBOutlet UITextView *pushthoughtTextView;
 @property (weak, nonatomic) IBOutlet UILabel *otherOptionsLabel;
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
+@property (weak, nonatomic) IBOutlet UIImageView *sendTweet;
+@property (weak, nonatomic) IBOutlet UIButton *sendTweetIcon;
+@property (weak, nonatomic) IBOutlet UILabel *sendTweetLabel;
+@property (weak, nonatomic) IBOutlet UIImageView *lineImageView;
 
 // Created with Fetched Data
 @property (nonatomic) NSMutableArray *fedRepList;
-
-
-
 
 @end
