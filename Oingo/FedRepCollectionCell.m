@@ -18,13 +18,13 @@
     NSString *firstName = [dictionary valueForKey:@"first_name"];
     NSString *lastName = [dictionary valueForKey:@"last_name"];
     NSString *fullName;
-    NSLog(@"%@ %@ %@ %@",nickName,firstName,lastName,fullName);
+    NSLog(@"nickname:%@ firstName:%@ lastname:%@ fullname:%@",nickName,firstName,lastName,fullName);
     if(![dictionary valueForKey:@"nickName"]){
         fullName = [NSString stringWithFormat:@"%@ %@",firstName,lastName];
     } else {
         fullName = [NSString stringWithFormat:@"%@ %@",firstName,lastName];
     }
-    self.name.text = [NSString stringWithFormat:@"%@ /",fullName];
+    self.name.text = [NSString stringWithFormat:@"%@",fullName];
     
     // Title and Placeholder Image load based on chamber
     NSString *chamber = [dictionary valueForKey:@"chamber"];
@@ -40,12 +40,15 @@
     
     // Load Rep Image
     self.imageView.image = [dictionary valueForKey:@"image"];
+    self.imageView.layer.cornerRadius = 2;
+    self.imageView.clipsToBounds = YES;
     
+    // Content View
     self.contentView.layer.borderColor = [[UIColor blackColor]CGColor];
-    self.contentView.layer.borderWidth = 2;
-    self.contentView.layer.cornerRadius = 10;
+    self.contentView.layer.borderWidth = 0;
+    self.contentView.layer.cornerRadius = 3;
     self.contentView.clipsToBounds = YES;
-    self.layer.cornerRadius = 10;
+    self.layer.cornerRadius = 3;
     self.clipsToBounds = YES;
     // TwitterID
 //    NSString *twitterID = [actionDict valueForKey:@"twitter_id"];

@@ -30,31 +30,48 @@ static NSString * const reuseIdentifier = @"Cell";
     // Set CollectionView delegate and Flow layout
     self.collectionView.delegate = self;
     self.collectionView.dataSource = self;
-    
-    
-
-    
     self.automaticallyAdjustsScrollViewInsets = NO;
-    [self.collectionView setContentInset:UIEdgeInsetsMake(-20, 0, -20, 0)];
+    [self.collectionView setContentInset:UIEdgeInsetsMake(-20, 10, -20, 0)];
     self.edgesForExtendedLayout = UIRectEdgeNone;
-    
     UICollectionViewFlowLayout *flowLayout = [[UICollectionViewFlowLayout alloc]init];
     [flowLayout setScrollDirection:UICollectionViewScrollDirectionHorizontal];
-    flowLayout.minimumInteritemSpacing = 10;
-    flowLayout.minimumLineSpacing = 10;
+    flowLayout.minimumInteritemSpacing = 3;
+    flowLayout.minimumLineSpacing = 3;
     [flowLayout setHeaderReferenceSize:CGSizeMake(0, 100)];
     [flowLayout setFooterReferenceSize:CGSizeMake(0, 100)];
     self.collectionView.collectionViewLayout = flowLayout;
     
+    
     //Fetch Federal Rep data
     FetchDataFedReps *fetchData = [[FetchDataFedReps alloc]init];
     fetchData.viewController = self;
-    [fetchData fetchRepsWithZip:@"94107"];
+    [fetchData fetchRepsWithZip:@"92807"];
     
+//    // Fetch Sent Action data
+//    
+//    NSString *selectedSegmentID = [self.selectedSegment valueForKey:@"segmentID"];
+//    
+//    PFQuery *query = [PFQuery queryWithClassName:@"sentMessages"];
+//    [query whereKey:@"segmentID" equalTo:selectedSegmentID];
+//    [query whereKey:@"messageType" equalTo:@"twitter"];
+//    [query whereKey:@"messageCategory" equalTo:@"Local Representative"];
+//    [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
+//        if (!error) {
+//            dispatch_async(dispatch_get_main_queue(), ^{
+//                self.sentMessagesForSegment = (NSMutableArray*)objects;
+//                
+//                
+//            });
+//        }
+//    }];
+    
+    
+            
     // Set TextView Delegate
     self.textView.delegate=self;
     
     // Format Push Thought suggestion
+    self.pushthoughtTextView.text = [self.selectedActionDict valueForKey:@"messageText"];
     self.pushthoughtTextView.layer.borderColor = [[UIColor lightGrayColor] CGColor];
     self.pushthoughtTextView.layer.borderWidth = 0.5;
     self.pushthoughtTextView.layer.cornerRadius = 3;
@@ -84,6 +101,15 @@ static NSString * const reuseIdentifier = @"Cell";
     // Format placeholderTextLabel
     
     
+    // tableview data
+    self.actionsForSegment; // apply prdicate
+    
+    
+    //        NSString *predicateFormat = @"%K CONTAINS [cd] %@";
+    //    NSString *searchAttribute = @"programTitle";
+    //            filteredArray = [self.programListFromDatabase filteredArrayUsingPredicate:[NSPredicate predicateWithFormat:predicateFormat,searchAttribute, searchText]];
+    
+    
     
     // Format TableView
     self.tableView.layer.borderColor = [[UIColor colorWithRed:13/255.0 green:81/255.0 blue:183/255.0 alpha:1] CGColor];
@@ -109,8 +135,7 @@ static NSString * const reuseIdentifier = @"Cell";
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     
-
-    return self.fedRepList.count;
+    return [self.tableData count];
 }
 
 
@@ -131,7 +156,6 @@ static NSString * const reuseIdentifier = @"Cell";
     [cell layoutIfNeeded];
     return [cell configCell:(NSMutableDictionary*)dictionary];
     
-    
 }
 
 /*
@@ -146,7 +170,6 @@ static NSString * const reuseIdentifier = @"Cell";
 
 - (void)textViewDidBeginEditing:(UITextView *)textView
 {
-    NSLog(@"FIRING");
     self.placeholderTextLabel.hidden = YES;
 }
 
@@ -159,6 +182,7 @@ static NSString * const reuseIdentifier = @"Cell";
 {
     self.placeholderTextLabel.hidden = ([textView.text length] > 0);
 }
+
 
 #pragma mark <UICollectionViewDataSource>
 
@@ -178,15 +202,20 @@ static NSString * const reuseIdentifier = @"Cell";
     // Configure the cell
     [self.collectionView addSubview:cell];
 
-     NSMutableDictionary *dictionary = [self.fedRepList objectAtIndex:indexPath.row];
+    NSMutableDictionary *dictionary = [self.fedRepList objectAtIndex:indexPath.row];
+    NSLog(@"dictionary for FedRep Coll Cell %@:",dictionary);
     
     return [cell configCollectionCell:(NSMutableDictionary*)dictionary];
+}
+
+- (BOOL)collectionView:(UICollectionView *)collectionView shouldSelectItemAtIndexPath:(NSIndexPath *)indexPath {
+    return YES;
 }
 
 #pragma mark <UICollectionViewDelegateFlowLayout>
 
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath {
-    return CGSizeMake(200, 112);
+    return CGSizeMake(100, 112);
 }
 
 @end

@@ -73,21 +73,15 @@
         UITableView *tableView = (UITableView *)tap.view;
         CGPoint p = [tap locationInView:tap.view];
         NSIndexPath* indexPath = [tableView indexPathForRowAtPoint:p];
-        NSLog(@"position with indexpath:%@",indexPath);
-        
-//        
-//        // Deselect the row
-        [self.tableView deselectRowAtIndexPath:indexPath animated:YES];
-//        [tableView deselectRowAtIndexPath:indexPath animated:NO];
-        
-        
-        // Gathering info about cell touched
+        self.selectedActionDict = [self.actionOptionsArray objectAtIndex:indexPath.row];
+        //NSLog(@"selected Action dict:%@",self.selectedActionDict);
         UITableViewCell *cell = (UITableViewCell *)[tableView cellForRowAtIndexPath:indexPath];
         CGPoint pointInCell = [tap locationInView:cell];
-
+        
+        // Deselect the row
+        [self.tableView deselectRowAtIndexPath:indexPath animated:YES];
         
         //if(CGRectContainsPoint(cell.frame, pointInCell)) {
-            
             [self performSegueWithIdentifier:@"showBuildMessage" sender:self];
         //}
     }
@@ -100,7 +94,6 @@
 
 -(void) fetchActionsForSegment {
     //[FetchDataParse fetchActionsForSegment:self.selectedSegment];
-    //NSLog(@"selectedSegment:%@",self.selectedSegment);
     PFQuery *query = [PFQuery queryWithClassName:@"Messages"];
     [query whereKey:@"segmentID" equalTo:[self.selectedSegment valueForKey:@"segmentID"]];
     [query orderByDescending:@"actionCategory"];
@@ -121,18 +114,18 @@
 -(void) fetchSentActionsForSegment {
     PFUser *currentUser = [PFUser currentUser];
     
-    //get message data for segment menu
+    //get message data for segment menu  //MAKE SURE ISMESSSAGE FIRST!
     PFQuery *query = [PFQuery queryWithClassName:@"sentMessages"];
     [query whereKey:@"segmentID" equalTo:[self.selectedSegment valueForKey:@"segmentID"]];
-    [query whereKey:@"userObjectID" equalTo:currentUser.objectId];
+    //[query whereKey:@"userObjectID" equalTo:currentUser.objectId];
     [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
         if (!error) {
             dispatch_async(dispatch_get_main_queue(), ^{
                 self.sentActionsForSegment = objects;
                 NSUInteger count = [objects count];
-                self.countUsersLabel.text = [NSString stringWithFormat:@"%ld",count];
-                self.countThoughtsLabel.text = [NSString stringWithFormat:@"%ld",count * 3];
-                NSLog(@"count:%ld",count);
+                //self.countUsersLabel.text = [NSString stringWithFormat:@"%ld",count];
+                //self.countThoughtsLabel.text = [NSString stringWithFormat:@"%ld",count * 3];
+                NSLog(@"count of sent message:%ld",count);
                 //NSLog(@"sentActions: %@",self.sentActionsForSegment);
             });
         } else {
@@ -152,8 +145,8 @@
     
     // Loop, create unique list of actionCategories
     for (NSDictionary *dictionary in objects){
-        //NSLog(@"print dict:%@",dictionary);
         NSString *dictionaryCategory = [dictionary valueForKey:@"actionCategory"];
+        
         if (![category isEqualToString:dictionaryCategory]){
             category = dictionaryCategory;
             [actionOptionsArray addObject:dictionary];
@@ -272,6 +265,11 @@
         fedRepActionVC.tableViewController = self;
         fedRepActionVC.selectedProgram = self.selectedProgram;
         fedRepActionVC.selectedSegment = self.selectedSegment;
+        fedRepActionVC.actionsForSegment = self.actionsForSegment;
+        fedRepActionVC.sentActionsForSegment = self.sentActionsForSegment;
+        fedRepActionVC.selectedActionDict = self.selectedActionDict;
+        //NSLog(@"sender: %@",sender);
+
     }
     
     // Get the new view controller using [segue destinationViewController].

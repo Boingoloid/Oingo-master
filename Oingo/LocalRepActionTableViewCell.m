@@ -21,17 +21,17 @@
 }
 
 -(LocalRepActionTableViewCell*) configLocalRepActionCell:(NSMutableDictionary*)actionDict{
+    
     NSString *actionCategory = [actionDict valueForKey:@"actionCategory"];
     
+    // Format cell border/background
     //self.layer.backgroundColor = [[UIColor colorWithWhite:0.9f alpha:1] CGColor];
-    
-    
     self.layer.borderColor = [[UIColor lightGrayColor] CGColor];
     self.layer.cornerRadius = 3;
     self.clipsToBounds = YES;
     self.layer.borderWidth = .5;
     
-    // Format cell based on actionCategory ___
+    // Format cell based on actionCategory ___________________________________
     NSString *actionString = [[NSString alloc]init];
     
     if ([actionCategory isEqualToString:@"Local Representative"]){
@@ -52,14 +52,14 @@
         self.actionImageView.image = [UIImage imageNamed:@"Message_chat_text_bubble_phone.png"];
 
         // Image formatting
-//        self.actionImageView.layer.borderWidth = .5;
-//        self.actionImageView.layer.borderColor = [[UIColor blackColor] CGColor];
-//        self.actionImageView.clipsToBounds = YES;
-//        self.actionImageView.layer.cornerRadius = 3;
+        //self.actionImageView.layer.borderWidth = .5;
+        //self.actionImageView.layer.borderColor = [[UIColor blackColor] CGColor];
+        //self.actionImageView.clipsToBounds = YES;
+        //self.actionImageView.layer.cornerRadius = 3;
         
     }
     self.actionTitleLabel.text = actionString;
-    // _______________________________
+    // _______________________________________________________
     
     
     return self;

@@ -37,5 +37,6 @@
 
 //Created
 @property (nonatomic) NSMutableArray *actionOptionsArray;
+@property (nonatomic) NSMutableDictionary *selectedActionDict;
 
 @end

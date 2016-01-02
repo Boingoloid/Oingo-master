@@ -10,14 +10,11 @@
 #import "FederalRepActionDashboardViewController.h"
 
 @interface FedRepCell : UITableViewCell
-@property (weak, nonatomic) IBOutlet UILabel *name;
-@property (weak, nonatomic) IBOutlet UILabel *title;
-@property (weak, nonatomic) IBOutlet UILabel *twitterID;
-@property (weak, nonatomic) IBOutlet UIButton *tweetButton;
-@property (weak, nonatomic) IBOutlet UIImageView *tweetTouchArea;
-@property (weak, nonatomic) IBOutlet UIImageView *tweetSuccessImage;
+
 
 @property (nonatomic) FederalRepActionDashboardViewController *viewController;
+@property (weak, nonatomic) IBOutlet UILabel *tableViewPrimaryLabel;
+@property (weak, nonatomic) IBOutlet UILabel *tableViewSecondaryLabel;
 
 -(FedRepCell*)configCell:(NSMutableDictionary*)actionDict;
     

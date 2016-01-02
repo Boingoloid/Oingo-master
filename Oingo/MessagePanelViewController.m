@@ -86,7 +86,7 @@
                 }
             });
         }
-        }];
+    }];
     
     // Assign Values
     self.messageTextView.text = [[self.menuList objectAtIndex:[self.originRowIndex intValue]] valueForKey:@"messageText"];
