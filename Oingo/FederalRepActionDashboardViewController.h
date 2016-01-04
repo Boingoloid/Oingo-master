@@ -45,9 +45,13 @@
 
 @property (nonatomic) NSArray *actionsForSegment;
 @property (nonatomic) NSArray *sentActionsForSegment;
+@property (nonatomic) NSMutableArray *filteredActionsForSegment;
+@property (nonatomic) NSMutableArray *filteredSentActionsForSegment;
+@property (nonatomic) NSMutableArray *filteredSentActionsForSegmentWithCount;
 
 // Created with Fetched Data
 @property (nonatomic) NSMutableArray *fedRepList;
 @property (nonatomic) NSMutableArray *sentMessagesForSegment;
+
 
 @end

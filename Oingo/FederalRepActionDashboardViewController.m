@@ -12,7 +12,7 @@
 #import "FetchDataFedReps.h"
 
 
-@interface FederalRepActionDashboardViewController () <UITextViewDelegate,UITableViewDelegate,UITableViewDataSource,UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout>
+@interface FederalRepActionDashboardViewController () <UITextViewDelegate,UITableViewDelegate,UITableViewDataSource,UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout, UIGestureRecognizerDelegate>
 
 @end
 
@@ -22,6 +22,8 @@ static NSString * const reuseIdentifier = @"Cell";
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    NSLog(@"FedrepAction Firing");
     
     // Set tableViewDelegate
     self.tableView.delegate = self;
@@ -40,6 +42,8 @@ static NSString * const reuseIdentifier = @"Cell";
     [flowLayout setHeaderReferenceSize:CGSizeMake(0, 100)];
     [flowLayout setFooterReferenceSize:CGSizeMake(0, 100)];
     self.collectionView.collectionViewLayout = flowLayout;
+    self.collectionView.allowsSelection = YES;
+    self.collectionView.allowsMultipleSelection = YES;
     
     
     //Fetch Federal Rep data
@@ -77,7 +81,6 @@ static NSString * const reuseIdentifier = @"Cell";
     self.pushthoughtTextView.layer.cornerRadius = 3;
     self.pushthoughtTextView.clipsToBounds = YES;
     
-    
     // Format Send Tweet Touch Area
     self.sendTweet.layer.borderColor = [[UIColor colorWithRed:13/255.0 green:81/255.0 blue:183/255.0 alpha:1] CGColor];
     self.sendTweet.layer.borderWidth = 0;
@@ -98,18 +101,41 @@ static NSString * const reuseIdentifier = @"Cell";
     self.otherOptionsLabel.clipsToBounds = YES;
     // Do any additional setup after loading the view.
     
-    // Format placeholderTextLabel
+
+    
+    NSArray *filteredActionList;
+    filteredActionList = [self.actionsForSegment filteredArrayUsingPredicate:[NSPredicate predicateWithFormat:@"messageCategory = %@", @"Local Representative"]];
+    NSLog(@"printing array count:%lu  value:%@",(unsigned long)filteredActionList.count,filteredActionList);
     
     
-    // tableview data
-    self.actionsForSegment; // apply prdicate
+    NSArray *filteredSentActionList;
+    filteredSentActionList = [self.sentActionsForSegment filteredArrayUsingPredicate:[NSPredicate predicateWithFormat:@"messageCategory = %@", @"Local Representative"]];
+    NSLog(@"printing sent array count:%lu  value:%@",(unsigned long)filteredSentActionList.count,filteredSentActionList);
+    
+    self.filteredActionsForSegment = (NSMutableArray*)filteredActionList;
+    self.filteredSentActionsForSegment = (NSMutableArray*)filteredSentActionList;
     
     
-    //        NSString *predicateFormat = @"%K CONTAINS [cd] %@";
-    //    NSString *searchAttribute = @"programTitle";
-    //            filteredArray = [self.programListFromDatabase filteredArrayUsingPredicate:[NSPredicate predicateWithFormat:predicateFormat,searchAttribute, searchText]];
+    // Adjust for default count
+    NSString *defaultMessage =[[self.filteredActionsForSegment objectAtIndex:0] valueForKey:@"messageText"];
+    NSMutableDictionary *defaultMessageDictionary = [[NSMutableDictionary alloc]initWithObjectsAndKeys:defaultMessage, @"messageText", 0, @"messageCount", nil];
     
+    NSMutableArray *messageArray= [[NSMutableArray alloc]init];
     
+    for(NSDictionary *sentMessageDict in self.filteredSentActionsForSegment){
+        if([sentMessageDict valueForKey:@"isDefaultMessage"]){
+            int newCount = [[defaultMessageDictionary valueForKey:@"messageCount"]intValue] +1;
+            [defaultMessageDictionary setObject:[NSNumber numberWithInt:newCount] forKey:@"messageCount"];
+        } else {
+            [sentMessageDict setValue:[NSNumber numberWithInt:0] forKey:@"messageCount"];
+            [messageArray addObject:(NSDictionary*)sentMessageDict];
+        }
+    }
+    
+    NSMutableArray *tableDataArray = [[NSMutableArray alloc]init];
+    [tableDataArray addObject:defaultMessageDictionary];
+    [tableDataArray addObjectsFromArray:messageArray];
+    self.filteredSentActionsForSegmentWithCount = tableDataArray;
     
     // Format TableView
     self.tableView.layer.borderColor = [[UIColor colorWithRed:13/255.0 green:81/255.0 blue:183/255.0 alpha:1] CGColor];
@@ -117,8 +143,17 @@ static NSString * const reuseIdentifier = @"Cell";
     self.tableView.layer.cornerRadius = 3;
     self.tableView.clipsToBounds = YES;
     
+    
+    
+    // Create gesture recognizer
+    UITapGestureRecognizer *tapRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(respondToTapGesture:)]; //connect recognizer to action method.
+    tapRecognizer.delegate = self;
+    tapRecognizer.numberOfTapsRequired = 1;
+    tapRecognizer.numberOfTouchesRequired = 1;
+    [tapRecognizer setCancelsTouchesInView:NO];
+    [self.view addGestureRecognizer:tapRecognizer];
+    
     [self.tableView reloadData];
-
 }
 
 - (void)didReceiveMemoryWarning {
@@ -135,7 +170,7 @@ static NSString * const reuseIdentifier = @"Cell";
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     
-    return [self.tableData count];
+    return [self.filteredSentActionsForSegmentWithCount count];
 }
 
 
@@ -147,16 +182,30 @@ static NSString * const reuseIdentifier = @"Cell";
     [self.tableView addSubview:cell];
     
     // Turn off selection highlighting
-    cell.selectionStyle = UITableViewCellSelectionStyleNone;
+    //cell.selectionStyle = UITableViewCellSelectionStyleNone;
     
     // Configure the cell...
-    NSMutableDictionary *dictionary = [self.fedRepList objectAtIndex:indexPath.row];
-    NSLog(@"fedreplist:%@",self.fedRepList);
+    NSMutableDictionary *dictionary = [self.filteredSentActionsForSegmentWithCount objectAtIndex:indexPath.row];
+
     
     [cell layoutIfNeeded];
     return [cell configCell:(NSMutableDictionary*)dictionary];
     
 }
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+    //[self.tableView deselectRowAtIndexPath:indexPath animated:YES];
+    FedRepCell *cell = (FedRepCell *)[tableView cellForRowAtIndexPath:indexPath];
+    self.pushthoughtTextView.text = cell.tableViewPrimaryLabel.text;
+    
+//    if(self.tableSegmentControl.selectedSegmentIndex == 0){
+//        self.messageTextView.text = cell.messageTextLabel.text;
+//    } else {
+//        [self.messageTextView replaceRange:self.messageTextView.selectedTextRange withText:[NSString stringWithFormat:@" %@",cell.messageTextLabel.text]];
+//    }
+}
+
+
 
 /*
 #pragma mark - Navigation
@@ -184,6 +233,54 @@ static NSString * const reuseIdentifier = @"Cell";
 }
 
 
+
+- (BOOL)gestureRecognizerShouldBegin:(UIGestureRecognizer *)gestureRecognizer
+{
+//    UITableView *tableView = (UITableView *)gestureRecognizer.view;
+//    CGPoint p = [gestureRecognizer locationInView:gestureRecognizer.view];
+//    if ([tableView indexPathForRowAtPoint:p]) {
+//        return YES;
+//        
+//    }
+//    return NO;
+    return YES;
+}
+
+- (void)respondToTapGesture:(UITapGestureRecognizer *)tap {
+    //*******
+    //This is what we use for user touches in the cells
+    //It grabs point coordinate of touch as finger lifted
+    //******************
+    
+    if (UIGestureRecognizerStateEnded == tap.state) {
+        // Collect data about tap location
+        //UITableView *tableView = (UITableView *)tap.view;
+        CGPoint p = [tap locationInView:tap.view];
+        NSIndexPath* indexPath = [self.tableView indexPathForRowAtPoint:p];
+        //self.selectedActionDict = [self.actionOptionsArray objectAtIndex:indexPath.row];
+        //NSLog(@"selected Action dict:%@",self.selectedActionDict);
+        if (CGRectContainsPoint(self.collectionView.frame, p)) {
+            NSLog(@"Touch point is in collectionView");
+        } else {
+            NSLog(@"Touch point is NOT in collectionView");
+        }
+        
+        NSLog(@"class check: %@",[tap.view class]);
+        
+//        UITableViewCell *cell = (UITableViewCell *)[tableView cellForRowAtIndexPath:indexPath];
+//        CGPoint pointInCell = [tap locationInView:cell];
+        
+        // Deselect the row
+        //[self.tableView deselectRowAtIndexPath:indexPath animated:YES];
+        
+        //if(CGRectContainsPoint(cell.frame, pointInCell)) {
+        //[self performSegueWithIdentifier:@"showBuildMessage" sender:self];
+        //}
+    }
+}
+
+
+
 #pragma mark <UICollectionViewDataSource>
 
 - (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView {
@@ -199,16 +296,37 @@ static NSString * const reuseIdentifier = @"Cell";
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
     FedRepCollectionCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:reuseIdentifier forIndexPath:indexPath];
     
+    // Turn on selection highlighting
+    
     // Configure the cell
     [self.collectionView addSubview:cell];
 
     NSMutableDictionary *dictionary = [self.fedRepList objectAtIndex:indexPath.row];
-    NSLog(@"dictionary for FedRep Coll Cell %@:",dictionary);
+    //NSLog(@"dictionary for FedRep Coll Cell %@:",dictionary);
     
     return [cell configCollectionCell:(NSMutableDictionary*)dictionary];
 }
 
 - (BOOL)collectionView:(UICollectionView *)collectionView shouldSelectItemAtIndexPath:(NSIndexPath *)indexPath {
+    return YES;
+    
+}
+
+
+ // Uncomment this method to specify if the specified item should be highlighted during tracking
+ - (BOOL)collectionView:(UICollectionView *)collectionView shouldHighlightItemAtIndexPath:(NSIndexPath *)indexPath {
+	return YES;
+ }
+
+/*
+ // Uncomment this method to specify if the specified item should be selected
+ - (BOOL)collectionView:(UICollectionView *)collectionView shouldSelectItemAtIndexPath:(NSIndexPath *)indexPath {
+ return YES;
+ }
+ */
+
+-(BOOL)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(nonnull NSIndexPath *)indexPath{
+//    FedRepCollectionCell *fedRepCollectionCell = collectionView
     return YES;
 }
 

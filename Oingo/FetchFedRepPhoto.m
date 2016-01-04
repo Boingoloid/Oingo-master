@@ -61,7 +61,7 @@
                 UIImage *image = [UIImage imageWithData:imageData];
                 [[resultsArray objectAtIndex:index] setValue:image forKey:@"image"];
                 // Load the photo only if file exists in project
-                NSLog(@"check:%@",[resultsArray objectAtIndex:index]);
+                //NSLog(@"check:%@",[resultsArray objectAtIndex:index]);
             } else {
                 //Do nothing, leave image string as is so dummy icons will load
             }
@@ -70,7 +70,7 @@
     self.viewController.fedRepList = resultsArray;
 
     
-    NSLog(@"reloading data from Congress Photo Finder, array rep list:%@",resultsArray);
+    NSLog(@"reloading data from Congress Photo Finder");
 }
 
 @end

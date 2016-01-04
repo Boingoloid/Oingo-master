@@ -112,7 +112,6 @@
     self.messageTextView.layer.cornerRadius = 3;
     [self.messageTextView setKeyboardType:UIKeyboardTypeTwitter];
     self.messageTextView.delegate = self;
- 
     
     // Format Cancel Button
     self.cancelButton.layer.borderColor = [[UIColor colorWithRed:13/255.0 green:81/255.0 blue:183/255.0 alpha:1] CGColor];

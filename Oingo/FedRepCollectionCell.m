@@ -13,18 +13,21 @@
 
 -(FedRepCollectionCell*)configCollectionCell:(NSMutableDictionary*)dictionary{
     
+    self.selected = NO;
+    
     // Full name
     NSString *nickName = [dictionary valueForKey:@"nickname"];
     NSString *firstName = [dictionary valueForKey:@"first_name"];
     NSString *lastName = [dictionary valueForKey:@"last_name"];
     NSString *fullName;
-    NSLog(@"nickname:%@ firstName:%@ lastname:%@ fullname:%@",nickName,firstName,lastName,fullName);
+
     if(![dictionary valueForKey:@"nickName"]){
         fullName = [NSString stringWithFormat:@"%@ %@",firstName,lastName];
     } else {
-        fullName = [NSString stringWithFormat:@"%@ %@",firstName,lastName];
+        fullName = [NSString stringWithFormat:@"%@ %@",nickName,lastName];
     }
     self.name.text = [NSString stringWithFormat:@"%@",fullName];
+
     
     // Title and Placeholder Image load based on chamber
     NSString *chamber = [dictionary valueForKey:@"chamber"];
@@ -53,6 +56,8 @@
     // TwitterID
 //    NSString *twitterID = [actionDict valueForKey:@"twitter_id"];
 //    self.twitterID.text = [NSString stringWithFormat:@"@%@",twitterID];
+    
+    self.selectedBackgroundView.backgroundColor = [UIColor blueColor];
 
     return self;
 }
