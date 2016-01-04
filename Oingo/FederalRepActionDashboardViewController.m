@@ -256,16 +256,26 @@ static NSString * const reuseIdentifier = @"Cell";
         // Collect data about tap location
         //UITableView *tableView = (UITableView *)tap.view;
         CGPoint p = [tap locationInView:tap.view];
-        NSIndexPath* indexPath = [self.tableView indexPathForRowAtPoint:p];
+        CGPoint pLocal = [tap locationInView:self.collectionView];
         //self.selectedActionDict = [self.actionOptionsArray objectAtIndex:indexPath.row];
         //NSLog(@"selected Action dict:%@",self.selectedActionDict);
         if (CGRectContainsPoint(self.collectionView.frame, p)) {
             NSLog(@"Touch point is in collectionView");
+            NSIndexPath* indexPath = [self.collectionView indexPathForItemAtPoint:pLocal];
+            NSLog(@"collectionview cell indexpath: %@",indexPath);
+            FedRepCollectionCell *cell = (FedRepCollectionCell *)[self.collectionView cellForItemAtIndexPath:indexPath];
+            if(cell.isSelected){
+                cell.isSelected = NO;
+                cell.layer.backgroundColor = [[UIColor whiteColor] CGColor];
+            } else {
+                cell.isSelected = YES;
+                cell.layer.backgroundColor = [[UIColor orangeColor] CGColor];
+            }
         } else {
             NSLog(@"Touch point is NOT in collectionView");
         }
-        
-        NSLog(@"class check: %@",[tap.view class]);
+
+        NSLog(@"point %@ local point:%@",NSStringFromCGPoint(p),NSStringFromCGPoint(pLocal));
         
 //        UITableViewCell *cell = (UITableViewCell *)[tableView cellForRowAtIndexPath:indexPath];
 //        CGPoint pointInCell = [tap locationInView:cell];
