@@ -56,10 +56,25 @@
 
     dispatch_async(dispatch_get_main_queue(), ^{
         self.viewController.fedRepList = (NSMutableArray*)resultsArray;
-        //NSLog(@"printing results array:%@",resultsArray);
-        //NSLog(@"printing fedRepList array:%@",self.viewController.fedRepList);
+
         
-        [self.viewController.tableView reloadData];
+        NSString *firstTwitterID = [[resultsArray firstObject] valueForKey:@"twitter_id"];
+        NSString *initialTextViewText = self.viewController.pushthoughtTextView.text;
+        
+//        
+//        NSString *newFullText = [NSString stringWithFormat:@"@%@, %@",firstTwitterID,initialTextViewText];
+//        
+//        NSMutableAttributedString *fullString = [[NSMutableAttributedString alloc] initWithString:newFullText];
+//        
+//        // Bold
+//        [fullString addAttribute: NSFontAttributeName value: [[NSFont  ]: @"Helvetica-Bold"] range: NSMakeRange(0, 4)];
+        
+        
+        
+        // Insert twitterID of first Rep in Tweet
+        self.viewController.pushthoughtTextView.text = [NSString stringWithFormat:@"%@ @%@",initialTextViewText,firstTwitterID];
+        [self.viewController textViewDidChange:self.viewController.pushthoughtTextView];
+        [self.viewController.collectionView reloadData];
             
             FetchFedRepPhoto *fetchPhoto = [[FetchFedRepPhoto alloc] init];
             fetchPhoto.viewController = self.viewController;

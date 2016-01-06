@@ -42,6 +42,7 @@
 		CE3571291C28D6CB00903ED0 /* FedRepCollectionCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CE3571281C28D6CB00903ED0 /* FedRepCollectionCell.m */; };
 		CE35712C1C28DEFE00903ED0 /* FetchFedRepPhoto.m in Sources */ = {isa = PBXBuildFile; fileRef = CE35712B1C28DEFE00903ED0 /* FetchFedRepPhoto.m */; };
 		CE35F87E1C330CAA0089E82C /* checked_checkbox.png in Resources */ = {isa = PBXBuildFile; fileRef = CE35F87D1C330CAA0089E82C /* checked_checkbox.png */; };
+		CE35F8801C3A35580089E82C /* darkBlueBorder.png in Resources */ = {isa = PBXBuildFile; fileRef = CE35F87F1C3A35580089E82C /* darkBlueBorder.png */; };
 		CE37EEB01C289C7200E2280F /* Twitter-icon-small.png in Resources */ = {isa = PBXBuildFile; fileRef = CE37EEAF1C289C7200E2280F /* Twitter-icon-small.png */; };
 		CE37EEB21C289E5C00E2280F /* mail-icon-gray-small.png in Resources */ = {isa = PBXBuildFile; fileRef = CE37EEB11C289E5C00E2280F /* mail-icon-gray-small.png */; };
 		CE395D881AED5790006786C0 /* twittericon320.png in Resources */ = {isa = PBXBuildFile; fileRef = CE395D871AED5790006786C0 /* twittericon320.png */; };
@@ -228,6 +229,7 @@
 		CE35712A1C28DEFE00903ED0 /* FetchFedRepPhoto.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FetchFedRepPhoto.h; sourceTree = "<group>"; };
 		CE35712B1C28DEFE00903ED0 /* FetchFedRepPhoto.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FetchFedRepPhoto.m; sourceTree = "<group>"; };
 		CE35F87D1C330CAA0089E82C /* checked_checkbox.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = checked_checkbox.png; path = Images/checked_checkbox.png; sourceTree = "<group>"; };
+		CE35F87F1C3A35580089E82C /* darkBlueBorder.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = darkBlueBorder.png; path = Images/darkBlueBorder.png; sourceTree = "<group>"; };
 		CE37EEAF1C289C7200E2280F /* Twitter-icon-small.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Twitter-icon-small.png"; path = "Images/Twitter-icon-small.png"; sourceTree = "<group>"; };
 		CE37EEB11C289E5C00E2280F /* mail-icon-gray-small.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "mail-icon-gray-small.png"; path = "Images/mail-icon-gray-small.png"; sourceTree = "<group>"; };
 		CE395D851AED5422006786C0 /* Accounts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accounts.framework; path = System/Library/Frameworks/Accounts.framework; sourceTree = SDKROOT; };
@@ -537,6 +539,7 @@
 		CE241A6A1AEAF0D300F22144 /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				CE35F87F1C3A35580089E82C /* darkBlueBorder.png */,
 				CE35F87D1C330CAA0089E82C /* checked_checkbox.png */,
 				CE37EEB11C289E5C00E2280F /* mail-icon-gray-small.png */,
 				CE37EEAF1C289C7200E2280F /* Twitter-icon-small.png */,
@@ -929,6 +932,7 @@
 				CE29AA961B3F2BB400676563 /* boxer.png in Resources */,
 				CE29AA981B3F2BBD00676563 /* feinstein.png in Resources */,
 				CEB9D54D1BFAD45600A6F565 /* LogoGlow87.png in Resources */,
+				CE35F8801C3A35580089E82C /* darkBlueBorder.png in Resources */,
 				CE46B1381B043A8000A4D671 /* blue_arrow_png_by_maddielovesselly-d4ys3ti (1).png in Resources */,
 				CE87CAC61AF9B5F30084C666 /* lastweektonightcoverphoto.png in Resources */,
 				CE7800C91BDEB142008B9F37 /* LogoGlow-1.png in Resources */,

@@ -53,5 +53,7 @@
 @property (nonatomic) NSMutableArray *fedRepList;
 @property (nonatomic) NSMutableArray *sentMessagesForSegment;
 
+- (void)textViewDidChange:(UITextView *)textView;
+
 
 @end

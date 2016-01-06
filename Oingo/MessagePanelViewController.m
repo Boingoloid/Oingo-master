@@ -275,7 +275,7 @@
 
 - (IBAction)loadMessage:(id)sender {
     
-    [[self.messageTableViewController.menuList objectAtIndex:[self.originRowIndex intValue]] setValue:self.messageTextView.text  forKey:@"messageText"];
+    [[self.messageTableViewController.menuList objectAtIndex:[self.originRowIndex intValue]] setValue:self.messageTextView.text forKey:@"messageText"];
     
     [self.messageTableViewController.tableView reloadData];
     [self.navigationController popViewControllerAnimated:YES];

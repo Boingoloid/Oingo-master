@@ -20,12 +20,17 @@
 
 static NSString * const reuseIdentifier = @"Cell";
 
+
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     
     NSLog(@"FedrepAction Firing");
     
-    // Set tableViewDelegate
+    // Set TextView Delegate
+    self.pushthoughtTextView.delegate = self;
+    
+    // Set Delegates / DataSource
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
     
@@ -33,23 +38,23 @@ static NSString * const reuseIdentifier = @"Cell";
     self.collectionView.delegate = self;
     self.collectionView.dataSource = self;
     self.automaticallyAdjustsScrollViewInsets = NO;
-    [self.collectionView setContentInset:UIEdgeInsetsMake(-20, 10, -20, 0)];
+    [self.collectionView setContentInset:UIEdgeInsetsMake(-20, 5, -20, 0)];
     self.edgesForExtendedLayout = UIRectEdgeNone;
     UICollectionViewFlowLayout *flowLayout = [[UICollectionViewFlowLayout alloc]init];
     [flowLayout setScrollDirection:UICollectionViewScrollDirectionHorizontal];
     flowLayout.minimumInteritemSpacing = 3;
     flowLayout.minimumLineSpacing = 3;
-    [flowLayout setHeaderReferenceSize:CGSizeMake(0, 100)];
+    [flowLayout setHeaderReferenceSize:CGSizeMake(0, 50)];
     [flowLayout setFooterReferenceSize:CGSizeMake(0, 100)];
     self.collectionView.collectionViewLayout = flowLayout;
     self.collectionView.allowsSelection = YES;
     self.collectionView.allowsMultipleSelection = YES;
     
     
-    //Fetch Federal Rep data
+    // Fetch Federal Rep data
     FetchDataFedReps *fetchData = [[FetchDataFedReps alloc]init];
     fetchData.viewController = self;
-    [fetchData fetchRepsWithZip:@"92807"];
+    [fetchData fetchRepsWithZip:@"94107"];
     
 //    // Fetch Sent Action data
 //    
@@ -71,8 +76,10 @@ static NSString * const reuseIdentifier = @"Cell";
     
     
             
-    // Set TextView Delegate
-    self.textView.delegate=self;
+
+    
+    
+    //insert twitter address first in collectionView
     
     // Format Push Thought suggestion
     self.pushthoughtTextView.text = [self.selectedActionDict valueForKey:@"messageText"];
@@ -142,7 +149,6 @@ static NSString * const reuseIdentifier = @"Cell";
     self.tableView.layer.borderWidth = 1;
     self.tableView.layer.cornerRadius = 3;
     self.tableView.clipsToBounds = YES;
-    
     
     
     // Create gesture recognizer
@@ -217,23 +223,51 @@ static NSString * const reuseIdentifier = @"Cell";
 }
 */
 
-- (void)textViewDidBeginEditing:(UITextView *)textView
-{
-    self.placeholderTextLabel.hidden = YES;
+//- (void)textViewDidBeginEditing:(UITextView *)textView
+//{
+//    self.placeholderTextLabel.hidden = YES;
+//}
+
+//- (void)textViewDidChange:(UITextView *)textView
+//{
+//    self.placeholderTextLabel.hidden = ([textView.text length] > 0);
+//}
+
+//- (void)textViewDidEndEditing:(UITextView *)textView
+//{
+//    self.placeholderTextLabel.hidden = ([textView.text length] > 0);
+//}
+
+
+- (void)textViewDidChange:(UITextView *)textView{
+    if(textView == self.pushthoughtTextView){
+        NSLog(@"YES");
+        NSString *string = self.pushthoughtTextView.text;
+        int count = 0;
+        
+        //search for tweet addreses in pushthoughtTextView
+        
+        for (NSDictionary *dictionary in self.fedRepList){
+            NSString *tweetAddress = [NSString stringWithFormat:@"@%@",[dictionary valueForKey:@"twitter_id"]];
+            
+            if ([string rangeOfString:tweetAddress].location == NSNotFound) {
+                NSLog(@"string does not contain address for:%@",tweetAddress);
+                //FedRepCollectionCell *cell = (FedRepCollectionCell*)[self.collectionView cellForItemAtIndexPath:path];
+                [[self.fedRepList objectAtIndex:count] setObject:@NO forKey:@"isSelected"];
+                count = count + 1;
+            } else {
+                //FedRepCollectionCell *cell = (FedRepCollectionCell*)[self.collectionView cellForItemAtIndexPath:path];
+                NSLog(@"string contains address:%@",tweetAddress);
+                [[self.fedRepList objectAtIndex:count] setObject:@YES forKey:@"isSelected"];
+                count = count +1;
+            }
+            NSLog(@"fedreplist:%@",self.fedRepList);
+            [self.collectionView reloadData];
+        }
+        
+    }
+    
 }
-
-- (void)textViewDidChange:(UITextView *)textView
-{
-    self.placeholderTextLabel.hidden = ([textView.text length] > 0);
-}
-
-- (void)textViewDidEndEditing:(UITextView *)textView
-{
-    self.placeholderTextLabel.hidden = ([textView.text length] > 0);
-}
-
-
-
 - (BOOL)gestureRecognizerShouldBegin:(UIGestureRecognizer *)gestureRecognizer
 {
 //    UITableView *tableView = (UITableView *)gestureRecognizer.view;
@@ -259,26 +293,62 @@ static NSString * const reuseIdentifier = @"Cell";
         CGPoint pLocal = [tap locationInView:self.collectionView];
         //self.selectedActionDict = [self.actionOptionsArray objectAtIndex:indexPath.row];
         //NSLog(@"selected Action dict:%@",self.selectedActionDict);
-        if (CGRectContainsPoint(self.collectionView.frame, p)) {
-            NSLog(@"Touch point is in collectionView");
+        
+        if (CGRectContainsPoint(self.clearTouchAreaImageView.frame, p)){
+            self.pushthoughtTextView.text = @"";
+            [self textViewDidChange:self.pushthoughtTextView];
+        } else if (CGRectContainsPoint(self.collectionView.frame, p)) {
+            //NSLog(@"Touch point is in collectionView");
             NSIndexPath* indexPath = [self.collectionView indexPathForItemAtPoint:pLocal];
-            NSLog(@"collectionview cell indexpath: %@",indexPath);
+            //NSLog(@"collectionview cell indexpath: %@",indexPath);
             FedRepCollectionCell *cell = (FedRepCollectionCell *)[self.collectionView cellForItemAtIndexPath:indexPath];
-            if(cell.isSelected){
-                cell.isSelected = NO;
-                cell.layer.backgroundColor = [[UIColor whiteColor] CGColor];
-            } else {
-                cell.isSelected = YES;
-                cell.layer.backgroundColor = [[UIColor orangeColor] CGColor];
+            
+            
+            
+        
+            //[[self.fedRepList objectAtIndex:indexPath.row] setObject:@YES forKey:@"isSelected"];
+            
+            NSDictionary *dictionary = [self.fedRepList objectAtIndex:indexPath.row];
+            NSNumber *number = [dictionary valueForKey:@"isSelected"];
+            int intValue = [number intValue];
+            
+            NSLog(@"number bool isSelected before: %d",intValue);
+            
+            if(!intValue){
+                NSLog(@"NO - isSelected is NOT active, so make active");
+                [[self.fedRepList objectAtIndex:indexPath.row] setObject:@YES forKey:@"isSelected"];
+                cell.selectionHighlightImageView.hidden = NO;
+                // add tweet address
+                
+                NSString *tweetAddressFrontSpace = [NSString stringWithFormat:@" @%@",[dictionary valueForKey:@"twitter_id"]];
+                [self.pushthoughtTextView replaceRange:self.pushthoughtTextView.selectedTextRange withText:tweetAddressFrontSpace];
+            
+            }  else {
+                NSLog(@"YES - isSelected is active, make inactive");
+                [[self.fedRepList objectAtIndex:indexPath.row] setObject:@NO forKey:@"isSelected"];
+                cell.selectionHighlightImageView.hidden = YES;
+                
+                // remove tweet address
+                NSString *tweetAddress = [NSString stringWithFormat:@"@%@",[dictionary valueForKey:@"twitter_id"]];
+                if ([self.pushthoughtTextView.text rangeOfString:tweetAddress].location == NSNotFound) {
+                    NSLog(@"string does not contain address for:%@",tweetAddress);
+                } else {
+                    self.pushthoughtTextView.text = [self.pushthoughtTextView.text stringByReplacingOccurrencesOfString:[NSString stringWithFormat:@" %@",tweetAddress] withString:@""];
+                    self.pushthoughtTextView.text = [self.pushthoughtTextView.text stringByReplacingOccurrencesOfString:tweetAddress withString:@""];
+                    // to do: add lines to take away spaces if there are any
+                    NSLog(@"string contains address:%@",tweetAddress);
+                }
             }
+            [self.collectionView reloadData];
+            
         } else {
-            NSLog(@"Touch point is NOT in collectionView");
+            //NSLog(@"Touch point is NOT in collectionView");
         }
 
-        NSLog(@"point %@ local point:%@",NSStringFromCGPoint(p),NSStringFromCGPoint(pLocal));
+        //NSLog(@"point %@ local point:%@",NSStringFromCGPoint(p),NSStringFromCGPoint(pLocal));
         
-//        UITableViewCell *cell = (UITableViewCell *)[tableView cellForRowAtIndexPath:indexPath];
-//        CGPoint pointInCell = [tap locationInView:cell];
+        //UITableViewCell *cell = (UITableViewCell *)[tableView cellForRowAtIndexPath:indexPath];
+        //CGPoint pointInCell = [tap locationInView:cell];
         
         // Deselect the row
         //[self.tableView deselectRowAtIndexPath:indexPath animated:YES];
@@ -307,12 +377,15 @@ static NSString * const reuseIdentifier = @"Cell";
     FedRepCollectionCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:reuseIdentifier forIndexPath:indexPath];
     
     // Turn on selection highlighting
-    
     // Configure the cell
-    [self.collectionView addSubview:cell];
 
     NSMutableDictionary *dictionary = [self.fedRepList objectAtIndex:indexPath.row];
-    //NSLog(@"dictionary for FedRep Coll Cell %@:",dictionary);
+    
+    [self.collectionView addSubview:cell];
+//    if(indexPath.row == 0){
+//        cell.isSelected = YES;
+//        cell.selectionHighlightImageView.hidden = NO;
+//    }
     
     return [cell configCollectionCell:(NSMutableDictionary*)dictionary];
 }
@@ -324,9 +397,9 @@ static NSString * const reuseIdentifier = @"Cell";
 
 
  // Uncomment this method to specify if the specified item should be highlighted during tracking
- - (BOOL)collectionView:(UICollectionView *)collectionView shouldHighlightItemAtIndexPath:(NSIndexPath *)indexPath {
-	return YES;
- }
+// - (BOOL)collectionView:(UICollectionView *)collectionView shouldHighlightItemAtIndexPath:(NSIndexPath *)indexPath {
+//	return YES;
+// }
 
 /*
  // Uncomment this method to specify if the specified item should be selected
@@ -335,15 +408,11 @@ static NSString * const reuseIdentifier = @"Cell";
  }
  */
 
--(BOOL)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(nonnull NSIndexPath *)indexPath{
-//    FedRepCollectionCell *fedRepCollectionCell = collectionView
-    return YES;
-}
 
 #pragma mark <UICollectionViewDelegateFlowLayout>
 
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath {
-    return CGSizeMake(100, 112);
+    return CGSizeMake(120, 114);
 }
 
 @end

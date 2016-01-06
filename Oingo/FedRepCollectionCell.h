@@ -14,6 +14,8 @@
 @property (weak, nonatomic) IBOutlet UILabel *name;
 @property (weak, nonatomic) IBOutlet UILabel *title;
 @property (nonatomic) BOOL isSelected;
+@property (weak, nonatomic) IBOutlet UIImageView *selectionHighlightImageView;
+@property (weak, nonatomic) IBOutlet UILabel *firstName;
 
 
 -(FedRepCollectionCell*)configCollectionCell:(NSMutableDictionary*)dictionary;
