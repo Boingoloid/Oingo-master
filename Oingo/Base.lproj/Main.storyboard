@@ -585,6 +585,9 @@
                                                     <segment title="#'s"/>
                                                 </segments>
                                                 <color key="tintColor" red="0.050980392159999999" green="0.31764705879999999" blue="0.71764705880000002" alpha="1" colorSpace="calibratedRGB"/>
+                                                <connections>
+                                                    <action selector="segmentedControlTableViewClick:" destination="4mx-r7-jOL" eventType="valueChanged" id="4dR-2G-dcJ"/>
+                                                </connections>
                                             </segmentedControl>
                                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="Bcu-mK-Lvg">
                                                 <rect key="frame" x="-1" y="171" width="600" height="116"/>
@@ -743,12 +746,6 @@
                                                                 <exclude reference="bBS-gU-axZ"/>
                                                                 <exclude reference="rLL-bA-1pt"/>
                                                                 <exclude reference="yh4-4n-Q1j"/>
-                                                                <exclude reference="BbS-9T-Ybr"/>
-                                                                <exclude reference="Lpt-z9-Pqu"/>
-                                                                <exclude reference="ViW-lX-jc5"/>
-                                                                <exclude reference="WQR-Oe-LWh"/>
-                                                                <exclude reference="uX9-5z-5Cr"/>
-                                                                <exclude reference="zVF-8j-ynh"/>
                                                                 <exclude reference="6yy-Bg-0Z6"/>
                                                                 <exclude reference="8tx-aJ-dbD"/>
                                                                 <exclude reference="Do1-oQ-FOM"/>
@@ -757,6 +754,12 @@
                                                                 <exclude reference="f1n-qP-wkV"/>
                                                                 <exclude reference="mtP-dF-Fw1"/>
                                                                 <exclude reference="xdb-3K-qVr"/>
+                                                                <exclude reference="BbS-9T-Ybr"/>
+                                                                <exclude reference="Lpt-z9-Pqu"/>
+                                                                <exclude reference="ViW-lX-jc5"/>
+                                                                <exclude reference="WQR-Oe-LWh"/>
+                                                                <exclude reference="uX9-5z-5Cr"/>
+                                                                <exclude reference="zVF-8j-ynh"/>
                                                             </mask>
                                                         </variation>
                                                         <connections>
@@ -879,6 +882,7 @@
                         <outlet property="lineImageView" destination="Be0-9S-MQ7" id="HdS-S0-iFN"/>
                         <outlet property="pushthoughtTextView" destination="vOf-6F-3st" id="liU-0C-zFg"/>
                         <outlet property="scrollView" destination="e6r-yb-L2Q" id="wCw-xf-h2w"/>
+                        <outlet property="segmentedControlTableView" destination="5ZF-C6-qtk" id="UE8-8y-eLe"/>
                         <outlet property="sendTweet" destination="z3N-SC-KGV" id="V7r-J6-tGz"/>
                         <outlet property="shortcutActionIconImageView" destination="lq1-Xw-cqd" id="tU3-qG-WJz"/>
                         <outlet property="tableView" destination="v2g-OP-i18" id="My0-Jg-aXR"/>

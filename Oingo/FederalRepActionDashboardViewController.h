@@ -36,12 +36,15 @@
 @property (weak, nonatomic) IBOutlet UIImageView *lineImageView;
 @property (weak, nonatomic) IBOutlet UIImageView *clearTouchAreaImageView;
 
+
 // tableview
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (nonatomic) NSMutableArray *tableData;
 @property (nonatomic) NSMutableArray *hashtagList;
 @property (nonatomic) NSMutableArray *tableSourceArray;
-@property (weak, nonatomic) IBOutlet UISegmentedControl *tableSegmentControl;
+@property (weak, nonatomic) IBOutlet UISegmentedControl *segmentedControlTableView;
+- (IBAction)segmentedControlTableViewClick:(id)sender;
+
 
 @property (nonatomic) NSArray *actionsForSegment;
 @property (nonatomic) NSArray *sentActionsForSegment;

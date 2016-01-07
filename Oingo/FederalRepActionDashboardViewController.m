@@ -50,37 +50,17 @@ static NSString * const reuseIdentifier = @"Cell";
     self.collectionView.allowsSelection = YES;
     self.collectionView.allowsMultipleSelection = YES;
     
+
     
     // Fetch Federal Rep data
     FetchDataFedReps *fetchData = [[FetchDataFedReps alloc]init];
     fetchData.viewController = self;
     [fetchData fetchRepsWithZip:@"94107"];
     
-//    // Fetch Sent Action data
-//    
-//    NSString *selectedSegmentID = [self.selectedSegment valueForKey:@"segmentID"];
-//    
-//    PFQuery *query = [PFQuery queryWithClassName:@"sentMessages"];
-//    [query whereKey:@"segmentID" equalTo:selectedSegmentID];
-//    [query whereKey:@"messageType" equalTo:@"twitter"];
-//    [query whereKey:@"messageCategory" equalTo:@"Local Representative"];
-//    [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
-//        if (!error) {
-//            dispatch_async(dispatch_get_main_queue(), ^{
-//                self.sentMessagesForSegment = (NSMutableArray*)objects;
-//                
-//                
-//            });
-//        }
-//    }];
-    
-    
-            
-
-    
+    // Fetch hashtag data
+    [self getHashtagData];
     
     //insert twitter address first in collectionView
-    
     // Format Push Thought suggestion
     self.pushthoughtTextView.text = [self.selectedActionDict valueForKey:@"messageText"];
     self.pushthoughtTextView.layer.borderColor = [[UIColor lightGrayColor] CGColor];
@@ -108,8 +88,15 @@ static NSString * const reuseIdentifier = @"Cell";
     self.otherOptionsLabel.clipsToBounds = YES;
     // Do any additional setup after loading the view.
     
-
     
+    // Format TableView
+    self.tableView.layer.borderColor = [[UIColor colorWithRed:13/255.0 green:81/255.0 blue:183/255.0 alpha:1] CGColor];
+    self.tableView.layer.borderWidth = 1;
+    self.tableView.layer.cornerRadius = 3;
+    self.tableView.clipsToBounds = YES;
+    
+
+    // Format Sent Message Data -----------------------------------------------------------------------------------
     NSArray *filteredActionList;
     filteredActionList = [self.actionsForSegment filteredArrayUsingPredicate:[NSPredicate predicateWithFormat:@"messageCategory = %@", @"Local Representative"]];
     NSLog(@"printing array count:%lu  value:%@",(unsigned long)filteredActionList.count,filteredActionList);
@@ -144,11 +131,15 @@ static NSString * const reuseIdentifier = @"Cell";
     [tableDataArray addObjectsFromArray:messageArray];
     self.filteredSentActionsForSegmentWithCount = tableDataArray;
     
-    // Format TableView
-    self.tableView.layer.borderColor = [[UIColor colorWithRed:13/255.0 green:81/255.0 blue:183/255.0 alpha:1] CGColor];
-    self.tableView.layer.borderWidth = 1;
-    self.tableView.layer.cornerRadius = 3;
-    self.tableView.clipsToBounds = YES;
+    // Set self.tableData default to sent messages
+    self.tableData = self.filteredSentActionsForSegmentWithCount;
+    
+    [self.tableView reloadData];
+    
+    //----------------------------------------------------------------------------------------------------------------
+    
+    
+
     
     
     // Create gesture recognizer
@@ -159,7 +150,7 @@ static NSString * const reuseIdentifier = @"Cell";
     [tapRecognizer setCancelsTouchesInView:NO];
     [self.view addGestureRecognizer:tapRecognizer];
     
-    [self.tableView reloadData];
+
 }
 
 - (void)didReceiveMemoryWarning {
@@ -167,16 +158,82 @@ static NSString * const reuseIdentifier = @"Cell";
     // Dispose of any resources that can be recreated.
 }
 
+
+-(void) getHashtagData{
+    
+    //**************  This should  be moved to Cloud Code at some point.  Pointless to do all this work as the UI is loading when I just need the grouped/summed table
+    //get message data for segment menu
+    NSString *selectedSegmentID = [self.selectedSegment valueForKey:@"segmentID"];
+    PFQuery *queryHashtags = [PFQuery queryWithClassName:@"Hashtags"];
+    [queryHashtags whereKey:@"segmentID" equalTo:selectedSegmentID];
+    [queryHashtags orderByAscending:@"hashtag"];
+    [queryHashtags findObjectsInBackgroundWithBlock:^(NSArray *objectsHash, NSError *error) {
+        if (!error) {
+            
+            NSString *hashtag = @"";
+            NSMutableArray *hashtagGroupedArray = [[NSMutableArray alloc]init];
+            
+            for(NSDictionary *hashtagDict in objectsHash){
+                //NSLog(@"hashtag:%@",hashtag);
+                //NSLog(@"hashtagDict hashtag:%@",[[hashtagDict valueForKey:@"hashtag"] lowercaseString]);
+                
+                if([hashtag caseInsensitiveCompare:[hashtagDict valueForKey:@"hashtag"]]){
+                    //NSLog(@"different"); //add new item to list
+                    hashtag = [hashtagDict valueForKey:@"hashtag"];
+                    int frequency = [[hashtagDict valueForKey:@"frequency"]intValue];
+                    //NSLog(@"frequency from parse %d",frequency);
+                    NSMutableDictionary *hashtagInsertDictionary = [[NSMutableDictionary alloc]init];
+                    [hashtagInsertDictionary setValue:hashtag forKey:@"hashtag"];
+                    [hashtagInsertDictionary setValue:[NSNumber numberWithInt:frequency] forKey:@"frequency"];
+                    [hashtagGroupedArray addObject:hashtagInsertDictionary];
+                    
+                } else {
+                    //NSLog(@"same, increment 1"); //no add, just increment 1
+                    
+                    int frequency = [[[hashtagGroupedArray lastObject] valueForKey:@"frequency"] intValue] + 1;
+                    //NSLog(@"frequency from array value %d",frequency);
+                    [[hashtagGroupedArray lastObject] setValue:[NSNumber numberWithInt:frequency] forKey:@"frequency"];
+                }
+            }
+            //NSLog(@"hashtagGroupedArray:%@",hashtagGroupedArray);
+            NSSortDescriptor *frequncySortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"frequency" ascending:NO];
+            NSArray *sortDescriptors = [NSArray arrayWithObjects:frequncySortDescriptor, nil];
+            NSArray *hashtagSortedArray = [hashtagGroupedArray sortedArrayUsingDescriptors:sortDescriptors];
+            
+            dispatch_async(dispatch_get_main_queue(), ^{
+                self.hashtagList = (NSMutableArray*)hashtagSortedArray;
+                //NSLog(@"reloading data from hashtag func: %@",[self.sentMessagesForSegment firstObject]);
+                [self.tableView reloadData];
+            });
+        } else {
+            NSLog(@"Error: %@ %@", error, [error userInfo]);
+        }
+    }];
+    //*****************
+    
+}
+
 #pragma mark - Table view data source
 
-- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
+
+- (IBAction)segmentedControlTableViewClick:(id)sender {
+    if(self.segmentedControlTableView.selectedSegmentIndex == 0){
+        self.tableData = (NSMutableArray*)self.filteredSentActionsForSegmentWithCount;
+    } else {
+        self.tableData = (NSMutableArray*)self.hashtagList;
+    }
     
+    [self.tableView reloadData];
+    
+    
+}
+
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
     return 1;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    
-    return [self.filteredSentActionsForSegmentWithCount count];
+    return [self.tableData count];
 }
 
 
@@ -191,7 +248,7 @@ static NSString * const reuseIdentifier = @"Cell";
     //cell.selectionStyle = UITableViewCellSelectionStyleNone;
     
     // Configure the cell...
-    NSMutableDictionary *dictionary = [self.filteredSentActionsForSegmentWithCount objectAtIndex:indexPath.row];
+    NSMutableDictionary *dictionary = [self.tableData objectAtIndex:indexPath.row];
 
     
     [cell layoutIfNeeded];
@@ -202,13 +259,12 @@ static NSString * const reuseIdentifier = @"Cell";
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     //[self.tableView deselectRowAtIndexPath:indexPath animated:YES];
     FedRepCell *cell = (FedRepCell *)[tableView cellForRowAtIndexPath:indexPath];
-    self.pushthoughtTextView.text = cell.tableViewPrimaryLabel.text;
     
-//    if(self.tableSegmentControl.selectedSegmentIndex == 0){
-//        self.messageTextView.text = cell.messageTextLabel.text;
-//    } else {
-//        [self.messageTextView replaceRange:self.messageTextView.selectedTextRange withText:[NSString stringWithFormat:@" %@",cell.messageTextLabel.text]];
-//    }
+    if(self.segmentedControlTableView.selectedSegmentIndex == 0){
+        self.pushthoughtTextView.text = cell.tableViewPrimaryLabel.text;
+    } else {
+        [self.pushthoughtTextView replaceRange:self.pushthoughtTextView.selectedTextRange withText:[NSString stringWithFormat:@" %@",cell.tableViewPrimaryLabel.text]];
+    }
 }
 
 
@@ -250,13 +306,11 @@ static NSString * const reuseIdentifier = @"Cell";
         for (NSDictionary *dictionary in self.fedRepList){
             NSString *tweetAddress = [NSString stringWithFormat:@"@%@",[dictionary valueForKey:@"twitter_id"]];
             
-            if ([string rangeOfString:tweetAddress].location == NSNotFound) {
+            if ([string rangeOfString:tweetAddress options:NSCaseInsensitiveSearch].location == NSNotFound) {
                 NSLog(@"string does not contain address for:%@",tweetAddress);
-                //FedRepCollectionCell *cell = (FedRepCollectionCell*)[self.collectionView cellForItemAtIndexPath:path];
                 [[self.fedRepList objectAtIndex:count] setObject:@NO forKey:@"isSelected"];
                 count = count + 1;
             } else {
-                //FedRepCollectionCell *cell = (FedRepCollectionCell*)[self.collectionView cellForItemAtIndexPath:path];
                 NSLog(@"string contains address:%@",tweetAddress);
                 [[self.fedRepList objectAtIndex:count] setObject:@YES forKey:@"isSelected"];
                 count = count +1;
@@ -304,8 +358,6 @@ static NSString * const reuseIdentifier = @"Cell";
             FedRepCollectionCell *cell = (FedRepCollectionCell *)[self.collectionView cellForItemAtIndexPath:indexPath];
             
             
-            
-        
             //[[self.fedRepList objectAtIndex:indexPath.row] setObject:@YES forKey:@"isSelected"];
             
             NSDictionary *dictionary = [self.fedRepList objectAtIndex:indexPath.row];
@@ -321,8 +373,7 @@ static NSString * const reuseIdentifier = @"Cell";
                 // add tweet address
                 
                 NSString *tweetAddressFrontSpace = [NSString stringWithFormat:@" @%@",[dictionary valueForKey:@"twitter_id"]];
-                [self.pushthoughtTextView replaceRange:self.pushthoughtTextView.selectedTextRange withText:tweetAddressFrontSpace];
-            
+                [self.pushthoughtTextView replaceRange:self.pushthoughtTextView.selectedTextRange withText:tweetAddressFrontSpace ];
             }  else {
                 NSLog(@"YES - isSelected is active, make inactive");
                 [[self.fedRepList objectAtIndex:indexPath.row] setObject:@NO forKey:@"isSelected"];
@@ -330,10 +381,10 @@ static NSString * const reuseIdentifier = @"Cell";
                 
                 // remove tweet address
                 NSString *tweetAddress = [NSString stringWithFormat:@"@%@",[dictionary valueForKey:@"twitter_id"]];
-                if ([self.pushthoughtTextView.text rangeOfString:tweetAddress].location == NSNotFound) {
+                if ([self.pushthoughtTextView.text rangeOfString:tweetAddress options:NSCaseInsensitiveSearch].location == NSNotFound) {
                     NSLog(@"string does not contain address for:%@",tweetAddress);
                 } else {
-                    self.pushthoughtTextView.text = [self.pushthoughtTextView.text stringByReplacingOccurrencesOfString:[NSString stringWithFormat:@" %@",tweetAddress] withString:@""];
+                    self.pushthoughtTextView.text = [self.pushthoughtTextView.text stringByReplacingOccurrencesOfString:[NSString stringWithFormat:@" %@",tweetAddress] withString:@"" options:NSCaseInsensitiveSearch range:NSMakeRange(0, [self.pushthoughtTextView.text length])];
                     self.pushthoughtTextView.text = [self.pushthoughtTextView.text stringByReplacingOccurrencesOfString:tweetAddress withString:@""];
                     // to do: add lines to take away spaces if there are any
                     NSLog(@"string contains address:%@",tweetAddress);
@@ -414,5 +465,6 @@ static NSString * const reuseIdentifier = @"Cell";
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath {
     return CGSizeMake(120, 114);
 }
+
 
 @end
