@@ -385,7 +385,8 @@ static NSString * const reuseIdentifier = @"Cell";
                     NSLog(@"string does not contain address for:%@",tweetAddress);
                 } else {
                     self.pushthoughtTextView.text = [self.pushthoughtTextView.text stringByReplacingOccurrencesOfString:[NSString stringWithFormat:@" %@",tweetAddress] withString:@"" options:NSCaseInsensitiveSearch range:NSMakeRange(0, [self.pushthoughtTextView.text length])];
-                    self.pushthoughtTextView.text = [self.pushthoughtTextView.text stringByReplacingOccurrencesOfString:tweetAddress withString:@""];
+                    self.pushthoughtTextView.text = [self.pushthoughtTextView.text stringByReplacingOccurrencesOfString:[NSString stringWithFormat:@"%@",tweetAddress] withString:@"" options:NSCaseInsensitiveSearch range:NSMakeRange(0, [self.pushthoughtTextView.text length])];
+        
                     // to do: add lines to take away spaces if there are any
                     NSLog(@"string contains address:%@",tweetAddress);
                 }

@@ -28,6 +28,9 @@
 		CE241A501AEAE45A00F22144 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CE241A4F1AEAE45A00F22144 /* Images.xcassets */; };
 		CE241A531AEAE45A00F22144 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = CE241A511AEAE45A00F22144 /* LaunchScreen.xib */; };
 		CE241A5F1AEAE45A00F22144 /* OingoTests.m in Sources */ = {isa = PBXBuildFile; fileRef = CE241A5E1AEAE45A00F22144 /* OingoTests.m */; };
+		CE2441DA1C3F35DC00C1E0C0 /* message_chat_25px.png in Resources */ = {isa = PBXBuildFile; fileRef = CE2441D91C3F35DC00C1E0C0 /* message_chat_25px.png */; };
+		CE2441DC1C3F36E400C1E0C0 /* hashtag_icon_segmentControl.png in Resources */ = {isa = PBXBuildFile; fileRef = CE2441DB1C3F36E400C1E0C0 /* hashtag_icon_segmentControl.png */; };
+		CE2441DE1C3F375100C1E0C0 /* phone_icon_segmentedControl.png in Resources */ = {isa = PBXBuildFile; fileRef = CE2441DD1C3F375100C1E0C0 /* phone_icon_segmentedControl.png */; };
 		CE29AA961B3F2BB400676563 /* boxer.png in Resources */ = {isa = PBXBuildFile; fileRef = CE29AA951B3F2BB400676563 /* boxer.png */; };
 		CE29AA981B3F2BBD00676563 /* feinstein.png in Resources */ = {isa = PBXBuildFile; fileRef = CE29AA971B3F2BBD00676563 /* feinstein.png */; };
 		CE29AA9A1B3F2BC900676563 /* pelosi.png in Resources */ = {isa = PBXBuildFile; fileRef = CE29AA991B3F2BC900676563 /* pelosi.png */; };
@@ -208,6 +211,9 @@
 		CE241A581AEAE45A00F22144 /* OingoTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = OingoTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		CE241A5D1AEAE45A00F22144 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		CE241A5E1AEAE45A00F22144 /* OingoTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = OingoTests.m; sourceTree = "<group>"; };
+		CE2441D91C3F35DC00C1E0C0 /* message_chat_25px.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = message_chat_25px.png; path = Images/message_chat_25px.png; sourceTree = "<group>"; };
+		CE2441DB1C3F36E400C1E0C0 /* hashtag_icon_segmentControl.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = hashtag_icon_segmentControl.png; path = Images/hashtag_icon_segmentControl.png; sourceTree = "<group>"; };
+		CE2441DD1C3F375100C1E0C0 /* phone_icon_segmentedControl.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = phone_icon_segmentedControl.png; path = Images/phone_icon_segmentedControl.png; sourceTree = "<group>"; };
 		CE29AA951B3F2BB400676563 /* boxer.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = boxer.png; path = Images/boxer.png; sourceTree = "<group>"; };
 		CE29AA971B3F2BBD00676563 /* feinstein.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = feinstein.png; path = Images/feinstein.png; sourceTree = "<group>"; };
 		CE29AA991B3F2BC900676563 /* pelosi.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = pelosi.png; path = Images/pelosi.png; sourceTree = "<group>"; };
@@ -539,6 +545,9 @@
 		CE241A6A1AEAF0D300F22144 /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				CE2441DD1C3F375100C1E0C0 /* phone_icon_segmentedControl.png */,
+				CE2441DB1C3F36E400C1E0C0 /* hashtag_icon_segmentControl.png */,
+				CE2441D91C3F35DC00C1E0C0 /* message_chat_25px.png */,
 				CE35F87F1C3A35580089E82C /* darkBlueBorder.png */,
 				CE35F87D1C330CAA0089E82C /* checked_checkbox.png */,
 				CE37EEB11C289E5C00E2280F /* mail-icon-gray-small.png */,
@@ -914,8 +923,10 @@
 				CE60732B1B3A88FD007B567C /* phone-gray.png in Resources */,
 				CEF9D1FA1C2353DC00B3DD41 /* twitter-icon-3.png in Resources */,
 				CEF14C081B23AD7600EC95A4 /* facebookButtonIconGray.png in Resources */,
+				CE2441DE1C3F375100C1E0C0 /* phone_icon_segmentedControl.png in Resources */,
 				CED68DCC1B69AE8B0087546D /* 40-menu-alt-512.png in Resources */,
 				CEB9D5441BFAC78400A6F565 /* PFTwitterUtils+NativeTwitter in Resources */,
+				CE2441DA1C3F35DC00C1E0C0 /* message_chat_25px.png in Resources */,
 				CED68DCA1B6973520087546D /* arrow-down-gray-hi.png in Resources */,
 				CE2BD37D1B007FB30053A1B3 /* monsantocorngrenade.png in Resources */,
 				CE37EEB21C289E5C00E2280F /* mail-icon-gray-small.png in Resources */,
@@ -935,6 +946,7 @@
 				CE35F8801C3A35580089E82C /* darkBlueBorder.png in Resources */,
 				CE46B1381B043A8000A4D671 /* blue_arrow_png_by_maddielovesselly-d4ys3ti (1).png in Resources */,
 				CE87CAC61AF9B5F30084C666 /* lastweektonightcoverphoto.png in Resources */,
+				CE2441DC1C3F36E400C1E0C0 /* hashtag_icon_segmentControl.png in Resources */,
 				CE7800C91BDEB142008B9F37 /* LogoGlow-1.png in Resources */,
 				CEE772B41BA8C14D00E45842 /* settingswhite.png in Resources */,
 				CE8492631C26613400820331 /* Twitter-icon.png in Resources */,
