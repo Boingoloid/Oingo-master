@@ -50,8 +50,6 @@ static NSString * const reuseIdentifier = @"Cell";
     self.collectionView.allowsSelection = YES;
     self.collectionView.allowsMultipleSelection = YES;
     
-
-    
     // Fetch Federal Rep data
     FetchDataFedReps *fetchData = [[FetchDataFedReps alloc]init];
     fetchData.viewController = self;
@@ -60,13 +58,24 @@ static NSString * const reuseIdentifier = @"Cell";
     // Fetch hashtag data
     [self getHashtagData];
     
-    //insert twitter address first in collectionView
     // Format Push Thought suggestion
     self.pushthoughtTextView.text = [self.selectedActionDict valueForKey:@"messageText"];
-    self.pushthoughtTextView.layer.borderColor = [[UIColor lightGrayColor] CGColor];
-    self.pushthoughtTextView.layer.borderWidth = 0.5;
+    self.pushthoughtTextView.layer.borderColor = [[UIColor grayColor] CGColor];
+    self.pushthoughtTextView.layer.borderWidth = 0.0;
     self.pushthoughtTextView.layer.cornerRadius = 3;
     self.pushthoughtTextView.clipsToBounds = YES;
+    
+    // Format textView Container
+    self.textViewContainer.layer.borderColor = [[UIColor grayColor] CGColor];
+    self.textViewContainer.layer.borderWidth = 0.5;
+    self.textViewContainer.layer.cornerRadius = 3;
+    self.textViewContainer.clipsToBounds = YES;
+    
+    // Format Button Container
+    self.buttonContainerImageView.layer.borderColor = [[UIColor grayColor] CGColor];
+    self.buttonContainerImageView.layer.borderWidth = 0.5;
+    self.buttonContainerImageView.layer.cornerRadius = 3;
+    self.buttonContainerImageView.clipsToBounds = YES;
     
     // Format Send Tweet Touch Area
     self.sendTweet.layer.borderColor = [[UIColor colorWithRed:13/255.0 green:81/255.0 blue:183/255.0 alpha:1] CGColor];
@@ -94,6 +103,9 @@ static NSString * const reuseIdentifier = @"Cell";
     self.tableView.layer.borderWidth = 1;
     self.tableView.layer.cornerRadius = 3;
     self.tableView.clipsToBounds = YES;
+    
+    // Set link Checkbox State
+    self.linkState = 1;
     
 
     // Format Sent Message Data -----------------------------------------------------------------------------------
@@ -300,9 +312,7 @@ static NSString * const reuseIdentifier = @"Cell";
         NSLog(@"YES");
         NSString *string = self.pushthoughtTextView.text;
         int count = 0;
-        
-        //search for tweet addreses in pushthoughtTextView
-        
+
         for (NSDictionary *dictionary in self.fedRepList){
             NSString *tweetAddress = [NSString stringWithFormat:@"@%@",[dictionary valueForKey:@"twitter_id"]];
             
@@ -319,8 +329,14 @@ static NSString * const reuseIdentifier = @"Cell";
             [self.collectionView reloadData];
         }
         
+        self.characterCount.text = [NSString stringWithFormat:@"%lu",[self.pushthoughtTextView.text length]];
+        self.characterCountSecondary.text = [NSString stringWithFormat:@"%lu",[self.pushthoughtTextView.text length] + 23];
+        
     }
     
+}
+
+- (IBAction)segmentedControlCummunicationTypeClick:(id)sender {
 }
 - (BOOL)gestureRecognizerShouldBegin:(UIGestureRecognizer *)gestureRecognizer
 {
@@ -351,14 +367,23 @@ static NSString * const reuseIdentifier = @"Cell";
         if (CGRectContainsPoint(self.clearTouchAreaImageView.frame, p)){
             self.pushthoughtTextView.text = @"";
             [self textViewDidChange:self.pushthoughtTextView];
+        } else if (CGRectContainsPoint(self.linkTouchArea.frame, p)) {
+            if(self.linkState == 1){
+                self.linkState = 0;
+                self.linkCheckbox.image = [UIImage imageNamed:@"checkbox_unchecked.png"];
+                self.characterCountSecondary.hidden = YES;
+            } else {
+                self.linkState = 1;
+                self.linkCheckbox.image = [UIImage imageNamed:@"checked_checkbox.png"];
+                self.characterCountSecondary.hidden = NO;
+            }
+            
+            
         } else if (CGRectContainsPoint(self.collectionView.frame, p)) {
             //NSLog(@"Touch point is in collectionView");
             NSIndexPath* indexPath = [self.collectionView indexPathForItemAtPoint:pLocal];
             //NSLog(@"collectionview cell indexpath: %@",indexPath);
             FedRepCollectionCell *cell = (FedRepCollectionCell *)[self.collectionView cellForItemAtIndexPath:indexPath];
-            
-            
-            //[[self.fedRepList objectAtIndex:indexPath.row] setObject:@YES forKey:@"isSelected"];
             
             NSDictionary *dictionary = [self.fedRepList objectAtIndex:indexPath.row];
             NSNumber *number = [dictionary valueForKey:@"isSelected"];

@@ -20,6 +20,8 @@
 @property(nonatomic) ActionDashboardTableViewController *tableViewController;
 
 // Controls
+@property (weak, nonatomic) IBOutlet UISegmentedControl *segmentedControlCommunicationType;
+@property (weak, nonatomic) IBOutlet UIImageView *linkCheckbox;
 @property (weak, nonatomic) IBOutlet UICollectionView *collectionView;
 @property (weak, nonatomic) IBOutlet UIImageView *shortcutActionIconImageView;
 
@@ -35,6 +37,12 @@
 @property (weak, nonatomic) IBOutlet UILabel *sendTweetLabel;
 @property (weak, nonatomic) IBOutlet UIImageView *lineImageView;
 @property (weak, nonatomic) IBOutlet UIImageView *clearTouchAreaImageView;
+@property (weak, nonatomic) IBOutlet UIImageView *buttonContainerImageView;
+@property (weak, nonatomic) IBOutlet UIImageView *textViewContainer;
+@property (weak, nonatomic) IBOutlet UILabel *characterCount;
+@property (weak, nonatomic) IBOutlet UILabel *characterCountSecondary;
+@property (weak, nonatomic) IBOutlet UIImageView *linkTouchArea;
+@property (nonatomic) int linkState;
 
 
 // tableview
@@ -57,6 +65,7 @@
 @property (nonatomic) NSMutableArray *sentMessagesForSegment;
 
 - (void)textViewDidChange:(UITextView *)textView;
+- (IBAction)segmentedControlCummunicationTypeClick:(id)sender;
 
 
 @end

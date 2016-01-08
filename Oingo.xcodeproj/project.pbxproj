@@ -31,6 +31,7 @@
 		CE2441DA1C3F35DC00C1E0C0 /* message_chat_25px.png in Resources */ = {isa = PBXBuildFile; fileRef = CE2441D91C3F35DC00C1E0C0 /* message_chat_25px.png */; };
 		CE2441DC1C3F36E400C1E0C0 /* hashtag_icon_segmentControl.png in Resources */ = {isa = PBXBuildFile; fileRef = CE2441DB1C3F36E400C1E0C0 /* hashtag_icon_segmentControl.png */; };
 		CE2441DE1C3F375100C1E0C0 /* phone_icon_segmentedControl.png in Resources */ = {isa = PBXBuildFile; fileRef = CE2441DD1C3F375100C1E0C0 /* phone_icon_segmentedControl.png */; };
+		CE2441E01C4031B100C1E0C0 /* checkbox_unchecked.png in Resources */ = {isa = PBXBuildFile; fileRef = CE2441DF1C4031B100C1E0C0 /* checkbox_unchecked.png */; };
 		CE29AA961B3F2BB400676563 /* boxer.png in Resources */ = {isa = PBXBuildFile; fileRef = CE29AA951B3F2BB400676563 /* boxer.png */; };
 		CE29AA981B3F2BBD00676563 /* feinstein.png in Resources */ = {isa = PBXBuildFile; fileRef = CE29AA971B3F2BBD00676563 /* feinstein.png */; };
 		CE29AA9A1B3F2BC900676563 /* pelosi.png in Resources */ = {isa = PBXBuildFile; fileRef = CE29AA991B3F2BC900676563 /* pelosi.png */; };
@@ -214,6 +215,7 @@
 		CE2441D91C3F35DC00C1E0C0 /* message_chat_25px.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = message_chat_25px.png; path = Images/message_chat_25px.png; sourceTree = "<group>"; };
 		CE2441DB1C3F36E400C1E0C0 /* hashtag_icon_segmentControl.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = hashtag_icon_segmentControl.png; path = Images/hashtag_icon_segmentControl.png; sourceTree = "<group>"; };
 		CE2441DD1C3F375100C1E0C0 /* phone_icon_segmentedControl.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = phone_icon_segmentedControl.png; path = Images/phone_icon_segmentedControl.png; sourceTree = "<group>"; };
+		CE2441DF1C4031B100C1E0C0 /* checkbox_unchecked.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = checkbox_unchecked.png; path = Images/checkbox_unchecked.png; sourceTree = "<group>"; };
 		CE29AA951B3F2BB400676563 /* boxer.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = boxer.png; path = Images/boxer.png; sourceTree = "<group>"; };
 		CE29AA971B3F2BBD00676563 /* feinstein.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = feinstein.png; path = Images/feinstein.png; sourceTree = "<group>"; };
 		CE29AA991B3F2BC900676563 /* pelosi.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = pelosi.png; path = Images/pelosi.png; sourceTree = "<group>"; };
@@ -545,6 +547,7 @@
 		CE241A6A1AEAF0D300F22144 /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				CE2441DF1C4031B100C1E0C0 /* checkbox_unchecked.png */,
 				CE2441DD1C3F375100C1E0C0 /* phone_icon_segmentedControl.png */,
 				CE2441DB1C3F36E400C1E0C0 /* hashtag_icon_segmentControl.png */,
 				CE2441D91C3F35DC00C1E0C0 /* message_chat_25px.png */,
@@ -947,6 +950,7 @@
 				CE46B1381B043A8000A4D671 /* blue_arrow_png_by_maddielovesselly-d4ys3ti (1).png in Resources */,
 				CE87CAC61AF9B5F30084C666 /* lastweektonightcoverphoto.png in Resources */,
 				CE2441DC1C3F36E400C1E0C0 /* hashtag_icon_segmentControl.png in Resources */,
+				CE2441E01C4031B100C1E0C0 /* checkbox_unchecked.png in Resources */,
 				CE7800C91BDEB142008B9F37 /* LogoGlow-1.png in Resources */,
 				CEE772B41BA8C14D00E45842 /* settingswhite.png in Resources */,
 				CE8492631C26613400820331 /* Twitter-icon.png in Resources */,
