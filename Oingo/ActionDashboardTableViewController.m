@@ -31,7 +31,7 @@
     
     // Assign header label values
     self.segmentTitleLabel.text = [self.selectedSegment valueForKey:@"segmentTitle"];
-    self.programTitleLabel.text = [NSString stringWithFormat:@"%@ / episode %@",[self.selectedProgram valueForKey:@"programTitle"],[self.selectedSegment valueForKey:@"episode"]];
+    self.programTitleLabel.text = [NSString stringWithFormat:@"/ %@ / %@",[self.selectedProgram valueForKey:@"programTitle"],[self.selectedSegment valueForKey:@"segmentTitle"]];
     
     
     // Get Action data from Parse!
@@ -112,7 +112,7 @@
 }
 
 -(void) fetchSentActionsForSegment {
-    PFUser *currentUser = [PFUser currentUser];
+    //PFUser *currentUser = [PFUser currentUser];
     
     //get message data for segment menu  //MAKE SURE ISMESSSAGE FIRST!
     PFQuery *query = [PFQuery queryWithClassName:@"sentMessages"];
