@@ -277,6 +277,9 @@ static NSString * const reuseIdentifier = @"Cell";
     } else {
         [self.pushthoughtTextView replaceRange:self.pushthoughtTextView.selectedTextRange withText:[NSString stringWithFormat:@" %@",cell.tableViewPrimaryLabel.text]];
     }
+    
+    [self textViewDidChange:self.pushthoughtTextView];
+
 }
 
 
