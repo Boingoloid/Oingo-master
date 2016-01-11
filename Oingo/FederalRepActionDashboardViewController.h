@@ -40,7 +40,6 @@
 @property (weak, nonatomic) IBOutlet UIImageView *buttonContainerImageView;
 @property (weak, nonatomic) IBOutlet UIImageView *textViewContainer;
 @property (weak, nonatomic) IBOutlet UILabel *characterCount;
-@property (weak, nonatomic) IBOutlet UILabel *characterCountSecondary;
 @property (weak, nonatomic) IBOutlet UIImageView *linkTouchArea;
 @property (nonatomic) int linkState;
 

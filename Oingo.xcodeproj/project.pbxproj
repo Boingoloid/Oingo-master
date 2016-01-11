@@ -490,6 +490,7 @@
 		CE241A3E1AEAE45A00F22144 /* Oingo */ = {
 			isa = PBXGroup;
 			children = (
+				CE241A4C1AEAE45A00F22144 /* Main.storyboard */,
 				CE9B2E5F1C1CBDB000DEB7BC /* Segment Selection */,
 				CE2BF9781B3E5A2F00AB15AC /* In process */,
 				CE82943E1B38DB9300B596E6 /* Login/Signup/settings */,
@@ -497,7 +498,6 @@
 				CE9B2E5D1C1CBD0500DEB7BC /* MessageTableView */,
 				CE9B2E5E1C1CBD8000DEB7BC /* Message Panel */,
 				CE6F71F11B2A5A670067E4DA /* objects */,
-				CE241A4C1AEAE45A00F22144 /* Main.storyboard */,
 				CE2AB23E1C1CFE0D002893C7 /* Action Dashboard */,
 				CE241A431AEAE45A00F22144 /* AppDelegate.h */,
 				CE241A441AEAE45A00F22144 /* AppDelegate.m */,

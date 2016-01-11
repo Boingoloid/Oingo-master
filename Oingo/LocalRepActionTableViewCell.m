@@ -35,11 +35,10 @@
     NSString *actionString = [[NSString alloc]init];
     
     if ([actionCategory isEqualToString:@"Local Representative"]){
-        actionString = [NSString stringWithFormat:@"Contact your Local Representatives"];
-
+        actionString = [NSString stringWithFormat:@"Federal Representatives"];
         
     }else if ([actionCategory isEqualToString:@"Regulator"]){
-        actionString = [NSString stringWithFormat:@"Contact relevant Regulators"];
+        actionString = [NSString stringWithFormat:@"Regulators"];
         self.actionImageView.image = [UIImage imageNamed:@"regulator-flag-icon.png"];
 
         // Image formatting
@@ -48,7 +47,7 @@
         self.actionImageView.clipsToBounds = YES;
         self.actionImageView.layer.cornerRadius = 3;
     }else {
-        actionString = [NSString stringWithFormat:@"Contact other related people"];
+        actionString = [NSString stringWithFormat:@"Sign Petition"];
         self.actionImageView.image = [UIImage imageNamed:@"Message_chat_text_bubble_phone.png"];
 
         // Image formatting

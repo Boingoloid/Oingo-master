@@ -227,22 +227,22 @@ Segment *segment;
     return [rowIndecesInSection count];
 }
 
--(UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
-    UIView *view = [[UIView alloc] initWithFrame:CGRectMake(7, 0, tableView.frame.size.width -14 , 16)];
-    UILabel *sectionLabel = [[UILabel alloc] init];
-    sectionLabel.frame = CGRectMake(7, 0, tableView.frame.size.width -14, 16);
-    sectionLabel.backgroundColor = [UIColor colorWithRed:.96 green:.96 blue:.96 alpha:1];
-    sectionLabel.layer.borderWidth = .5;
-    sectionLabel.layer.borderColor = [[UIColor blackColor] CGColor];
-    sectionLabel.font = [UIFont boldSystemFontOfSize:11];
-    sectionLabel.textColor = [UIColor blackColor];
-    sectionLabel.layer.cornerRadius = 3;
-    sectionLabel.clipsToBounds = YES;
-    NSString* padding = @"  "; // # of spaces
-    sectionLabel.text = [NSString stringWithFormat:@"%@%@%@", padding, [self dateGroupForSection:section], padding];
-    [view addSubview:sectionLabel];
-    return view;
-}
+//-(UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
+//    UIView *view = [[UIView alloc] initWithFrame:CGRectMake(7, 0, tableView.frame.size.width -14 , 16)];
+//    UILabel *sectionLabel = [[UILabel alloc] init];
+//    sectionLabel.frame = CGRectMake(7, 0, tableView.frame.size.width -14, 16);
+//    sectionLabel.backgroundColor = [UIColor colorWithRed:.96 green:.96 blue:.96 alpha:1];
+//    sectionLabel.layer.borderWidth = .5;
+//    sectionLabel.layer.borderColor = [[UIColor blackColor] CGColor];
+//    sectionLabel.font = [UIFont boldSystemFontOfSize:11];
+//    sectionLabel.textColor = [UIColor blackColor];
+//    sectionLabel.layer.cornerRadius = 3;
+//    sectionLabel.clipsToBounds = YES;
+//    NSString* padding = @"  "; // # of spaces
+//    sectionLabel.text = [NSString stringWithFormat:@"%@%@%@", padding, [self dateGroupForSection:section], padding];
+//    [view addSubview:sectionLabel];
+//    return view;
+//}
 
 
 
@@ -254,12 +254,12 @@ Segment *segment;
     //    } else if([category isEqualToString:@"Local Representative"]) {
     //        return localRepSectionHeaderHeight + 3;
     //    } else {
-    return 16;
+    return 0;
     //    }
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section {
-    return 1;
+    return 0;
 }
 
 /*

@@ -329,9 +329,11 @@ static NSString * const reuseIdentifier = @"Cell";
             [self.collectionView reloadData];
         }
         
-        self.characterCount.text = [NSString stringWithFormat:@"%lu",[self.pushthoughtTextView.text length]];
-        self.characterCountSecondary.text = [NSString stringWithFormat:@"%lu",[self.pushthoughtTextView.text length] + 23];
-        
+        if(self.linkState == 1){
+            self.characterCount.text = [NSString stringWithFormat:@"%lu",[self.pushthoughtTextView.text length] + 23];
+        } else {
+            self.characterCount.text = [NSString stringWithFormat:@"%lu",[self.pushthoughtTextView.text length]];
+        }
     }
     
 }
@@ -371,11 +373,11 @@ static NSString * const reuseIdentifier = @"Cell";
             if(self.linkState == 1){
                 self.linkState = 0;
                 self.linkCheckbox.image = [UIImage imageNamed:@"checkbox_unchecked.png"];
-                self.characterCountSecondary.hidden = YES;
+                self.characterCount.text = [NSString stringWithFormat:@"%lu",[self.pushthoughtTextView.text length]];
             } else {
                 self.linkState = 1;
                 self.linkCheckbox.image = [UIImage imageNamed:@"checked_checkbox.png"];
-                self.characterCountSecondary.hidden = NO;
+                self.characterCount.text = [NSString stringWithFormat:@"%lu",[self.pushthoughtTextView.text length] + 23];
             }
             
             
