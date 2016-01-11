@@ -51,8 +51,6 @@ Segment *segment;
     self.tableView.estimatedRowHeight = 44;
     self.tableView.rowHeight = UITableViewAutomaticDimension;
     
-    
-    
     //Separator style for tableview
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     
@@ -77,7 +75,7 @@ Segment *segment;
     self.tableHeaderView.layer.backgroundColor = [[UIColor whiteColor] CGColor];
     self.tableHeaderView.layer.cornerRadius = 3;
     self.tableHeaderView.clipsToBounds = YES;
-    NSString* padding = @"  "; // # of spaces
+    NSString* padding = @""; // # of spaces
     self.programTitleHeaderLabel.text = [NSString stringWithFormat:@"%@%@%@", padding,[self.selectedProgram valueForKey:@"programTitle"], padding];
     
 
@@ -254,12 +252,12 @@ Segment *segment;
     //    } else if([category isEqualToString:@"Local Representative"]) {
     //        return localRepSectionHeaderHeight + 3;
     //    } else {
-    return 0;
+    return 0.01;
     //    }
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section {
-    return 0;
+    return 5;
 }
 
 /*

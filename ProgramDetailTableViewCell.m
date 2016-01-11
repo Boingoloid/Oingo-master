@@ -31,6 +31,13 @@
     //    self.dateLabel.layer.borderWidth = 1;
     //    self.dateLabel.layer.borderColor = [[UIColor blackColor] CGColor];
     
+    // Format contentView
+//    self.contentView.layer.borderColor = [[UIColor blackColor] CGColor];
+//    self.contentView.layer.borderWidth = .5;
+    self.contentView.layer.cornerRadius = 3;
+    self.contentView.clipsToBounds = YES;
+    
+    
     // Assign values
     self.segmentTitleLabel.text = [segment valueForKey:@"segmentTitle"];
     self.purposeSummary.text = [segment valueForKey:@"purposeSummary"];
