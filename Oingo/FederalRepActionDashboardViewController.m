@@ -26,6 +26,7 @@ static NSString * const reuseIdentifier = @"Cell";
     [super viewDidLoad];
     
     NSLog(@"FedrepAction Firing");
+    NSLog(@"sent ACTS: %@", self.sentActionsForSegment);
     
     // Set TextView Delegate
     self.pushthoughtTextView.delegate = self;
@@ -111,7 +112,7 @@ static NSString * const reuseIdentifier = @"Cell";
     // Format Sent Message Data -----------------------------------------------------------------------------------
     NSArray *filteredActionList;
     filteredActionList = [self.actionsForSegment filteredArrayUsingPredicate:[NSPredicate predicateWithFormat:@"messageCategory = %@", @"Local Representative"]];
-    NSLog(@"printing array count:%lu  value:%@",(unsigned long)filteredActionList.count,filteredActionList);
+    //NSLog(@"printing array count:%lu  value:%@",(unsigned long)filteredActionList.count,filteredActionList);
     
     
     NSArray *filteredSentActionList;
@@ -141,10 +142,12 @@ static NSString * const reuseIdentifier = @"Cell";
     NSMutableArray *tableDataArray = [[NSMutableArray alloc]init];
     [tableDataArray addObject:defaultMessageDictionary];
     [tableDataArray addObjectsFromArray:messageArray];
+    NSLog(@"message Array:%@",messageArray);
     self.filteredSentActionsForSegmentWithCount = tableDataArray;
     
     // Set self.tableData default to sent messages
     self.tableData = self.filteredSentActionsForSegmentWithCount;
+    
     
     [self.tableView reloadData];
     
@@ -277,6 +280,7 @@ static NSString * const reuseIdentifier = @"Cell";
     } else {
         [self.pushthoughtTextView replaceRange:self.pushthoughtTextView.selectedTextRange withText:[NSString stringWithFormat:@" %@",cell.tableViewPrimaryLabel.text]];
     }
+    [self textViewDidChange:self.pushthoughtTextView];
 }
 
 
@@ -324,7 +328,7 @@ static NSString * const reuseIdentifier = @"Cell";
                 [[self.fedRepList objectAtIndex:count] setObject:@YES forKey:@"isSelected"];
                 count = count +1;
             }
-            NSLog(@"fedreplist:%@",self.fedRepList);
+            //NSLog(@"fedreplist:%@",self.fedRepList);
             [self.collectionView reloadData];
         }
         

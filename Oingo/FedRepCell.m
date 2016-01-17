@@ -22,6 +22,8 @@
 
 
 -(FedRepCell*)configCell:(NSMutableDictionary*)actionDict{
+    self.tableViewPrimaryLabel.hidden = NO;
+    self.tableViewSecondaryLabel.hidden = NO;
     
     if(self.viewController.segmentedControlTableView.selectedSegmentIndex == 0){
         

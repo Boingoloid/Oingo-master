@@ -43,9 +43,8 @@
     [self fetchActionsForSegment];
     
     // Get Sent Action data from Parse!
-    if([PFUser currentUser]){
-        [self fetchSentActionsForSegment];
-    }
+    [self fetchSentActionsForSegment];
+    
     
     // Create gesture recognizer
     UITapGestureRecognizer *tapRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(respondToTapGesture:)]; //connect recognizer to action method.
