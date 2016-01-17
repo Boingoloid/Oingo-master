@@ -24,10 +24,11 @@
 
 // Controls
 @property (weak, nonatomic) IBOutlet UIView *tableHeaderView;
-@property (weak, nonatomic) IBOutlet UILabel *segmentTitleLabel;
+
 @property (weak, nonatomic) IBOutlet UILabel *programTitleLabel;
-@property (weak, nonatomic) IBOutlet UILabel *countUsersLabel;
-@property (weak, nonatomic) IBOutlet UILabel *countThoughtsLabel;
+@property (weak, nonatomic) IBOutlet UITextView *textView;
+
+
 
 
 

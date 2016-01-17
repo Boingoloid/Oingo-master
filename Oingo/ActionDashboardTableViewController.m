@@ -15,13 +15,17 @@
 @end
 
 @implementation ActionDashboardTableViewController
+- (void) viewDidAppear:(BOOL)animated {
+    [self.textView setContentOffset:CGPointZero animated:NO];
+
+}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     
     // Format the header view
     self.tableHeaderView.layer.borderColor = [[UIColor lightGrayColor] CGColor];
-    self.tableHeaderView.layer.borderWidth = 1;
+    self.tableHeaderView.layer.borderWidth = 0;
     self.tableHeaderView.layer.backgroundColor = [[UIColor whiteColor] CGColor];
     self.tableHeaderView.layer.cornerRadius = 3;
     self.tableHeaderView.clipsToBounds = YES;
@@ -30,9 +34,10 @@
     self.tableView.separatorColor = [UIColor clearColor];
     
     // Assign header label values
-    self.segmentTitleLabel.text = [self.selectedSegment valueForKey:@"segmentTitle"];
+    //self.segmentTitleLabel.text = [self.selectedSegment valueForKey:@"segmentTitle"];
     self.programTitleLabel.text = [NSString stringWithFormat:@"/ %@ / %@",[self.selectedProgram valueForKey:@"programTitle"],[self.selectedSegment valueForKey:@"segmentTitle"]];
-    
+    //NSLog(@"purpose Summary: %@",[self.selectedProgram valueForKey:@"purposeSummary"]);
+    self.textView.text = [self.selectedSegment valueForKey:@"purposeSummary"];
     
     // Get Action data from Parse!
     [self fetchActionsForSegment];
@@ -123,8 +128,6 @@
             dispatch_async(dispatch_get_main_queue(), ^{
                 self.sentActionsForSegment = objects;
                 NSUInteger count = [objects count];
-                //self.countUsersLabel.text = [NSString stringWithFormat:@"%ld",count];
-                //self.countThoughtsLabel.text = [NSString stringWithFormat:@"%ld",count * 3];
                 NSLog(@"count of sent message:%ld",count);
                 //NSLog(@"sentActions: %@",self.sentActionsForSegment);
             });
