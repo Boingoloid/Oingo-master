@@ -15,6 +15,7 @@
 @property (nonatomic) FederalRepActionDashboardViewController *viewController;
 @property (weak, nonatomic) IBOutlet UILabel *tableViewPrimaryLabel;
 @property (weak, nonatomic) IBOutlet UILabel *tableViewSecondaryLabel;
+@property (weak, nonatomic) IBOutlet UILabel *tableViewNameLabel;
 
 -(FedRepCell*)configCell:(NSMutableDictionary*)actionDict;
     

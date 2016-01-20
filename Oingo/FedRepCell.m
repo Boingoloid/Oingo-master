@@ -24,6 +24,7 @@
 -(FedRepCell*)configCell:(NSMutableDictionary*)actionDict{
     self.tableViewPrimaryLabel.hidden = NO;
     self.tableViewSecondaryLabel.hidden = NO;
+    self.tableViewNameLabel.hidden = NO;
     
     if(self.viewController.segmentedControlTableView.selectedSegmentIndex == 0){
         
@@ -42,11 +43,21 @@
             self.tableViewSecondaryLabel.hidden = YES;
             //NSLog(@"NO");
         }
+        
+        // set name label
+
+        if([actionDict valueForKey:@"twitterId"]){
+            self.tableViewNameLabel.text = [actionDict valueForKey:@"twitterId"];
+        } else {
+            self.tableViewNameLabel.text = @"user093627584";
+        }
+        
     } else {
         NSDictionary *hashtag = (NSDictionary*)actionDict;
         self.tableViewPrimaryLabel.text = [hashtag valueForKey:@"hashtag"];
         self.tableViewSecondaryLabel.text = [NSString stringWithFormat:@"%@",[hashtag valueForKey:@"frequency"]];
         self.tableViewSecondaryLabel.hidden = NO;
+        self.tableViewNameLabel.hidden = YES;
     }
 //    // TwitterID
 //    NSString *twitterID = [actionDict valueForKey:@"twitter_id"];

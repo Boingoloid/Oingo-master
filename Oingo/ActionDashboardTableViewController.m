@@ -99,6 +99,7 @@
 -(void) fetchActionsForSegment {
     //[FetchDataParse fetchActionsForSegment:self.selectedSegment];
     PFQuery *query = [PFQuery queryWithClassName:@"Messages"];
+    query.limit=1000;
     [query whereKey:@"segmentID" equalTo:[self.selectedSegment valueForKey:@"segmentID"]];
     [query orderByDescending:@"actionCategory"];
     [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
@@ -120,8 +121,9 @@
     
     //get message data for segment menu  //MAKE SURE ISMESSSAGE FIRST!
     PFQuery *query = [PFQuery queryWithClassName:@"sentMessages"];
+    query.limit=1000;
+    [query orderByDescending:@"createdAt"];
     [query whereKey:@"segmentID" equalTo:[self.selectedSegment valueForKey:@"segmentID"]];
-    //[query whereKey:@"userObjectID" equalTo:currentUser.objectId];
     [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
         if (!error) {
             dispatch_async(dispatch_get_main_queue(), ^{
@@ -270,6 +272,7 @@
         fedRepActionVC.actionsForSegment = self.actionsForSegment;
         fedRepActionVC.sentActionsForSegment = self.sentActionsForSegment;
         fedRepActionVC.selectedActionDict = self.selectedActionDict;
+        NSLog(@"selected Action dict:%@",self.selectedActionDict);
         //NSLog(@"sender: %@",sender);
 
     }

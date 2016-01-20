@@ -10,9 +10,10 @@
 #import "FedRepCell.h"
 #import "FedRepCollectionCell.h"
 #import "FetchDataFedReps.h"
+#import <TwitterKit/TwitterKit.h>
 
 
-@interface FederalRepActionDashboardViewController () <UITextViewDelegate,UITableViewDelegate,UITableViewDataSource,UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout, UIGestureRecognizerDelegate>
+@interface FederalRepActionDashboardViewController () <UITextViewDelegate,UITableViewDelegate,UITableViewDataSource,UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout, UIGestureRecognizerDelegate, NSURLSessionDelegate>
 
 @end
 
@@ -26,7 +27,6 @@ static NSString * const reuseIdentifier = @"Cell";
     [super viewDidLoad];
     
     NSLog(@"FedrepAction Firing");
-    NSLog(@"sent ACTS: %@", self.sentActionsForSegment);
     
     // Set TextView Delegate
     self.pushthoughtTextView.delegate = self;
@@ -100,6 +100,8 @@ static NSString * const reuseIdentifier = @"Cell";
     
     
     // Format TableView
+    self.tableView.estimatedRowHeight = 150.0;
+    self.tableView.rowHeight = UITableViewAutomaticDimension;
     self.tableView.layer.borderColor = [[UIColor colorWithRed:13/255.0 green:81/255.0 blue:183/255.0 alpha:1] CGColor];
     self.tableView.layer.borderWidth = 1;
     self.tableView.layer.cornerRadius = 3;
@@ -111,43 +113,43 @@ static NSString * const reuseIdentifier = @"Cell";
 
     // Format Sent Message Data -----------------------------------------------------------------------------------
     NSArray *filteredActionList;
-    filteredActionList = [self.actionsForSegment filteredArrayUsingPredicate:[NSPredicate predicateWithFormat:@"messageCategory = %@", @"Local Representative"]];
+    filteredActionList = [self.sentActionsForSegment filteredArrayUsingPredicate:[NSPredicate predicateWithFormat:@"messageCategory = %@", @"Local Representative"]];
     //NSLog(@"printing array count:%lu  value:%@",(unsigned long)filteredActionList.count,filteredActionList);
     
     
     NSArray *filteredSentActionList;
     filteredSentActionList = [self.sentActionsForSegment filteredArrayUsingPredicate:[NSPredicate predicateWithFormat:@"messageCategory = %@", @"Local Representative"]];
-    NSLog(@"printing sent array count:%lu  value:%@",(unsigned long)filteredSentActionList.count,filteredSentActionList);
+    //NSLog(@"printing sent array count:%lu  value:%@",(unsigned long)filteredSentActionList.count,filteredSentActionList);
     
     self.filteredActionsForSegment = (NSMutableArray*)filteredActionList;
     self.filteredSentActionsForSegment = (NSMutableArray*)filteredSentActionList;
     
     
-    // Adjust for default count
-    NSString *defaultMessage =[[self.filteredActionsForSegment objectAtIndex:0] valueForKey:@"messageText"];
-    NSMutableDictionary *defaultMessageDictionary = [[NSMutableDictionary alloc]initWithObjectsAndKeys:defaultMessage, @"messageText", 0, @"messageCount", nil];
-    
-    NSMutableArray *messageArray= [[NSMutableArray alloc]init];
-    
-    for(NSDictionary *sentMessageDict in self.filteredSentActionsForSegment){
-        if([sentMessageDict valueForKey:@"isDefaultMessage"]){
-            int newCount = [[defaultMessageDictionary valueForKey:@"messageCount"]intValue] +1;
-            [defaultMessageDictionary setObject:[NSNumber numberWithInt:newCount] forKey:@"messageCount"];
-        } else {
-            [sentMessageDict setValue:[NSNumber numberWithInt:0] forKey:@"messageCount"];
-            [messageArray addObject:(NSDictionary*)sentMessageDict];
-        }
-    }
-    
-    NSMutableArray *tableDataArray = [[NSMutableArray alloc]init];
-    [tableDataArray addObject:defaultMessageDictionary];
-    [tableDataArray addObjectsFromArray:messageArray];
-    NSLog(@"message Array:%@",messageArray);
-    self.filteredSentActionsForSegmentWithCount = tableDataArray;
+//    // Adjust for default count
+//    NSString *defaultMessage =[[self.filteredActionsForSegment objectAtIndex:0] valueForKey:@"messageText"];
+//    NSMutableDictionary *defaultMessageDictionary = [[NSMutableDictionary alloc]initWithObjectsAndKeys:defaultMessage, @"messageText", 0, @"messageCount", nil];
+//    
+//    NSMutableArray *messageArray= [[NSMutableArray alloc]init];
+//    
+//    for(NSDictionary *sentMessageDict in self.filteredSentActionsForSegment){
+//        if([sentMessageDict valueForKey:@"isDefaultMessage"]){
+//            int newCount = [[defaultMessageDictionary valueForKey:@"messageCount"]intValue] +1;
+//            [defaultMessageDictionary setObject:[NSNumber numberWithInt:newCount] forKey:@"messageCount"];
+//        } else {
+//            [sentMessageDict setValue:[NSNumber numberWithInt:0] forKey:@"messageCount"];
+//            [messageArray addObject:(NSDictionary*)sentMessageDict];
+//        }
+//    }
+//    
+//    NSMutableArray *tableDataArray = [[NSMutableArray alloc]init];
+//    [tableDataArray addObject:defaultMessageDictionary];
+//    [tableDataArray addObjectsFromArray:messageArray];
+//    NSLog(@"message Array:%@",messageArray);
+//    self.filteredSentActionsForSegmentWithCount = tableDataArray;
     
     // Set self.tableData default to sent messages
-    self.tableData = self.filteredSentActionsForSegmentWithCount;
-    
+//    self.tableData = self.filteredSentActionsForSegmentWithCount;
+    self.tableData = self.filteredSentActionsForSegment;  //REMOVE THIS LINE when you reinitialize count above
     
     [self.tableView reloadData];
     
@@ -233,7 +235,7 @@ static NSString * const reuseIdentifier = @"Cell";
 
 - (IBAction)segmentedControlTableViewClick:(id)sender {
     if(self.segmentedControlTableView.selectedSegmentIndex == 0){
-        self.tableData = (NSMutableArray*)self.filteredSentActionsForSegmentWithCount;
+        self.tableData = (NSMutableArray*)self.filteredSentActionsForSegment;
     } else {
         self.tableData = (NSMutableArray*)self.hashtagList;
     }
@@ -272,7 +274,7 @@ static NSString * const reuseIdentifier = @"Cell";
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
-    //[self.tableView deselectRowAtIndexPath:indexPath animated:YES];
+    [self.tableView deselectRowAtIndexPath:indexPath animated:YES];
     FedRepCell *cell = (FedRepCell *)[tableView cellForRowAtIndexPath:indexPath];
     
     if(self.segmentedControlTableView.selectedSegmentIndex == 0){
@@ -312,7 +314,6 @@ static NSString * const reuseIdentifier = @"Cell";
 
 - (void)textViewDidChange:(UITextView *)textView{
     if(textView == self.pushthoughtTextView){
-        NSLog(@"YES");
         NSString *string = self.pushthoughtTextView.text;
         int count = 0;
 
@@ -320,11 +321,11 @@ static NSString * const reuseIdentifier = @"Cell";
             NSString *tweetAddress = [NSString stringWithFormat:@"@%@",[dictionary valueForKey:@"twitter_id"]];
             
             if ([string rangeOfString:tweetAddress options:NSCaseInsensitiveSearch].location == NSNotFound) {
-                NSLog(@"string does not contain address for:%@",tweetAddress);
+                //NSLog(@"string does not contain address for:%@",tweetAddress);
                 [[self.fedRepList objectAtIndex:count] setObject:@NO forKey:@"isSelected"];
                 count = count + 1;
             } else {
-                NSLog(@"string contains address:%@",tweetAddress);
+                //NSLog(@"string contains address:%@",tweetAddress);
                 [[self.fedRepList objectAtIndex:count] setObject:@YES forKey:@"isSelected"];
                 count = count +1;
             }
@@ -333,10 +334,17 @@ static NSString * const reuseIdentifier = @"Cell";
         }
         
         if(self.linkState == 1){
-            self.characterCount.text = [NSString stringWithFormat:@"%lu",[self.pushthoughtTextView.text length] + 23];
+            NSInteger lengthNumber = [self.pushthoughtTextView.text length];
+            NSInteger countNumber =(int)140-47-lengthNumber;
+            self.characterCount.text = [NSString stringWithFormat:@"%ld",countNumber];
+
         } else {
-            self.characterCount.text = [NSString stringWithFormat:@"%lu",[self.pushthoughtTextView.text length]];
+            NSInteger lengthNumber = [self.pushthoughtTextView.text length];
+            NSInteger countNumber =(int)140-lengthNumber;
+            self.characterCount.text = [NSString stringWithFormat:@"%ld",countNumber];
         }
+        
+        
     }
     
 }
@@ -355,6 +363,199 @@ static NSString * const reuseIdentifier = @"Cell";
     return YES;
 }
 
+-(void) logIn{
+    NSLog(@"login called");
+
+    [PFTwitterUtils logInWithBlock:^(PFUser *user, NSError *error) {
+        if (!user) {
+            NSLog(@"Uh oh. The user cancelled the Twitter login.");
+            return;
+        } else if (user.isNew) {
+            NSLog(@"User signed up and logged in with Twitter!");
+            // send
+            [self sendTweetwithComposer];
+        } else {
+            NSLog(@"User logged in with Twitter!");
+            // send
+            [self sendTweetwithComposer];
+        }
+    }];
+
+}
+
+
+-(void)sendTweetwithComposer{
+    NSLog(@"tweet sent");
+    
+    NSString *tweetText = [NSString stringWithFormat:@"%@", self.pushthoughtTextView.text];
+    NSURL *tweetURL = [NSURL URLWithString:[self.selectedSegment valueForKey:@"linkToContent"]];
+    PFFile *theImage = [self.selectedSegment valueForKey:@"segmentImage"];
+    NSData *imageData = [theImage getData];
+    UIImage *image = [UIImage imageWithData:imageData];
+    TWTRComposer *composer = [[TWTRComposer alloc] init];
+    
+    [composer setText:tweetText];
+
+    if (self.linkState == 1){
+        [composer setURL:tweetURL];
+        [composer setImage:image];
+    }
+    
+    [composer showFromViewController:self completion:^(TWTRComposerResult result) {
+        if (result == TWTRComposerResultCancelled) {
+            NSLog(@"Tweet composition cancelled");
+        } else {
+            NSLog(@"Tweet is sent:%ld",(long)result);
+            [self saveSentMessage];
+            //Need to save tweet result ID in callBack
+        }
+    }];
+    
+//    https://api.twitter.com/1.1/statuses/update.json
+    
+
+//    NSString *baseURL = @"https://api.twitter.com/1.1/statuses/update.json";
+//    NSString *method =@"?status=";
+//    NSString *status =@"This is a test Tweet";
+//    NSString *urlString = [NSString stringWithFormat:@"%@%@",baseURL,method];
+//    
+//    NSLog(@"urlString:%@",urlString);
+//    
+//    
+//    NSString *urlEncodedString =
+//    [[NSURL URLWithDataRepresentation:[status dataUsingEncoding:NSUTF8StringEncoding] relativeToURL:nil] relativeString];
+//    // API: Uses URL,
+//    //NSString *urlEncodedString = [status stringByReplacingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+//    NSLog(@"urlEncodedString:%@",urlEncodedString);
+//    
+//    NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"%@%@",urlString,urlEncodedString]];
+//    
+//    //[NSURL URLWithString:urlEncodedString];
+//    NSLog(@"url:%@",url);
+//    
+//    //configure the session
+//    NSURLSessionConfiguration *sessionConfig = [NSURLSessionConfiguration defaultSessionConfiguration];
+//    [sessionConfig setHTTPAdditionalHeaders: @{@"Accept": @"application/json"}];
+//    sessionConfig.timeoutIntervalForRequest = 30.0;
+//    sessionConfig.timeoutIntervalForResource = 60.0;
+//    sessionConfig.HTTPMaximumConnectionsPerHost = 1;
+//    
+//    //create session with configuration
+//    NSURLSession *session = [NSURLSession sessionWithConfiguration:sessionConfig
+//                                                          delegate:self
+//                                                     delegateQueue:nil];
+//    //get congress data using url
+//    NSURLSessionDataTask *dataTask = [session dataTaskWithURL:url];
+//    [dataTask resume];
+
+    
+//    [[[FBSDKGraphRequest alloc]
+//      initWithGraphPath:@"me/feed"
+//      parameters: parameters
+//      HTTPMethod:@"POST"]
+//     //list of parameters: https://developers.facebook.com/docs/graph-api/reference/
+//
+//     startWithCompletionHandler:^(FBSDKGraphRequestConnection *connection, id result, NSError *error) {
+//         if (!error) {
+//             NSLog(@"Post id:%@", result[@"id"]);
+//             [self saveSentMessageSegment:result[@"id"]];
+//             [self.messageTableViewController.navigationController popViewControllerAnimated:YES];
+//         }
+//     }];
+}
+
+-(void) saveSentMessage{
+    
+    //  SAVING MESSAGE DATA TO PARSE
+    PFUser *currentUser = [PFUser currentUser];
+    
+    //NSLog(@"printing shit - program:%@ | segment:%@ | actionDict:%@",self.selectedProgram,self.selectedSegment,self.selectedActionDict);
+    PFObject *sentMessageItem = [PFObject objectWithClassName:@"sentMessages"];
+    [sentMessageItem setObject:self.pushthoughtTextView.text forKey:@"messageText"];
+    [sentMessageItem setObject:[self.selectedActionDict valueForKey:@"messageCategory"] forKey:@"messageCategory"];
+    [sentMessageItem setObject:[self.selectedActionDict valueForKey:@"actionCategory"] forKey:@"actionCategory"];
+    [sentMessageItem setObject:@"twitter" forKey:@"messageType"];
+    
+    //Program and segment info
+    [sentMessageItem setObject:[self.selectedSegment valueForKey:@"segmentID"] forKey:@"segmentID"];
+    [sentMessageItem setObject:[self.selectedSegment valueForKey:@"objectId"] forKey:@"segmentObjectId"];
+    [sentMessageItem setObject:[self.selectedProgram valueForKey:@"objectId"] forKey:@"programObjectId"];
+    
+    //user
+    [sentMessageItem setObject:currentUser.objectId forKey:@"userObjectId"];
+    [sentMessageItem setObject:[currentUser valueForKey:@"username"] forKey:@"username"];
+    NSMutableDictionary *authDict = [currentUser valueForKey:@"authData"];
+    [sentMessageItem setObject:authDict[@"twitter"][@"screen_name"] forKey:@"twitterId"];
+    
+//    This code adds info about the rep or person contacted
+//    if ([self.selectedActionDict isKindOfClass:[CongressionalMessageItem class]]) {
+//        NSLog(@"Congressional Message Item Class");
+//        NSString *bioguide_id = [self.selectedContact valueForKey:@"bioguide_id"];
+//        NSString *fullName = [self.selectedContact valueForKey:@"fullName"];
+//        [sentMessageItem setObject:bioguide_id forKey:@"contactID"];
+//        [sentMessageItem setObject:fullName forKey:@"contactName"];
+//    } else {
+//        NSLog(@"Regular Contact Item Class");
+//        NSString *contactID = [self.selectedContact valueForKey:@"contactID"];
+//        NSString *targetName = [self.selectedContact valueForKey:@"targetName"];
+//        [sentMessageItem setObject:contactID forKey:@"contactID"];
+//        [sentMessageItem setObject:targetName forKey:@"contactName"];
+//    }
+    
+//    This code adds the default message flag
+//    NSString *category = [self.selectedActionDict valueForKey:@"messageCategory"];
+//    NSString *messageText = self.pushthoughtTextView.text;
+//    NSString *defaultMessage =[self.selectedActionDict valueForKey:@"messageText"];
+//    NSLog(@"comparing default: %@ and sent message: %@",defaultMessage,self.selectedActionDict);
+//    
+//    if([messageText isEqualToString:defaultMessage]) {
+//        NSLog(@"comparison EQUAL");
+//        [sentMessageItem setObject:@YES forKey:@"isDefaultMessage"];
+//    }else{
+//        NSLog(@"comparison NOT EQUAL");
+//        [sentMessageItem setObject:@NO forKey:@"isDefaultMessage"];
+//    }
+    
+    [sentMessageItem saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) { //save currentUser to parse disk
+        if(error){
+            NSLog(@"error, message not saved");
+        }
+        else {
+            NSLog(@"no error, message saved");
+//            NSLog(@"Got here in the save 2:%@",sentMessageItem);
+//            MarkSentMessageAPI *markSentMessagesAPI = [[MarkSentMessageAPI alloc]init];
+//            markSentMessagesAPI.messageTableViewController = self.messageTableViewController;
+//            [markSentMessagesAPI markSentMessages];
+            //[self saveHashtags];
+        }
+    }];
+    
+    
+}
+
+-(void) saveHashtags {
+    NSString *messageText = self.pushthoughtTextView.text;
+    NSMutableArray *hashtagList = [[NSMutableArray alloc]init];
+    
+    NSError *error = nil;
+    NSRegularExpression *regex = [NSRegularExpression regularExpressionWithPattern:@"#(\\w+)" options:0 error:&error];
+    NSArray *matches = [regex matchesInString:messageText options:0 range:NSMakeRange(0, messageText.length)];
+    
+    
+    for (NSTextCheckingResult *match in matches) {
+        NSRange wordRange = [match rangeAtIndex:0];
+        NSString* word = [messageText substringWithRange:wordRange];
+        PFObject *parseHashtagDict = [PFObject objectWithClassName:@"Hashtags"];
+        [parseHashtagDict setValue:word forKey:@"hashtag"];
+        [parseHashtagDict setValue:[self.selectedSegment valueForKey:@"segmentID"] forKey:@"segmentID"];
+        [parseHashtagDict setValue:[NSNumber numberWithInt:1] forKey:@"frequency"];
+        NSLog(@"Found tag %@", word);
+        [hashtagList addObject:parseHashtagDict];
+    }
+    
+    [PFObject saveAll:(NSArray*)hashtagList];
+}
+
 - (void)respondToTapGesture:(UITapGestureRecognizer *)tap {
     //*******
     //This is what we use for user touches in the cells
@@ -362,6 +563,7 @@ static NSString * const reuseIdentifier = @"Cell";
     //******************
     
     if (UIGestureRecognizerStateEnded == tap.state) {
+
         // Collect data about tap location
         //UITableView *tableView = (UITableView *)tap.view;
         CGPoint p = [tap locationInView:tap.view];
@@ -372,17 +574,43 @@ static NSString * const reuseIdentifier = @"Cell";
         if (CGRectContainsPoint(self.clearTouchAreaImageView.frame, p)){
             self.pushthoughtTextView.text = @"";
             [self textViewDidChange:self.pushthoughtTextView];
+            
         } else if (CGRectContainsPoint(self.linkTouchArea.frame, p)) {
             if(self.linkState == 1){
                 self.linkState = 0;
                 self.linkCheckbox.image = [UIImage imageNamed:@"checkbox_unchecked.png"];
-                self.characterCount.text = [NSString stringWithFormat:@"%lu",[self.pushthoughtTextView.text length]];
             } else {
                 self.linkState = 1;
                 self.linkCheckbox.image = [UIImage imageNamed:@"checked_checkbox.png"];
-                self.characterCount.text = [NSString stringWithFormat:@"%lu",[self.pushthoughtTextView.text length] + 23];
             }
+        [self textViewDidChange:self.pushthoughtTextView];
             
+        } else if (CGRectContainsPoint(self.sendTweet.frame, p)) {
+            //log in anon
+            //log into twitter
+            NSLog(@"touch in tweet:");
+            
+            if([PFUser currentUser]){
+//                TWTRShareEmailViewController* shareEmailViewController = [[TWTRShareEmailViewController alloc] initWithCompletion:^(NSString* email, NSError* error) {
+//                    NSLog(@"Email %@, Error: %@", email, error);
+//                }];
+//                [self.navigationController presentViewController:shareEmailViewController animated:YES completion:nil];
+//                //[self presentViewController:shareEmailViewController animated:YES completion:nil];
+                
+                if([PFTwitterUtils isLinkedWithUser:[PFUser currentUser]]){
+                    // just send it
+                    
+                    
+                    
+                    
+                    [self sendTweetwithComposer];
+                } else {
+                    // link to a twitter account
+                    [self logIn];
+                }
+            } else {
+            [self logIn];
+            }
             
         } else if (CGRectContainsPoint(self.collectionView.frame, p)) {
             //NSLog(@"Touch point is in collectionView");
@@ -394,34 +622,32 @@ static NSString * const reuseIdentifier = @"Cell";
             NSNumber *number = [dictionary valueForKey:@"isSelected"];
             int intValue = [number intValue];
             
-            NSLog(@"number bool isSelected before: %d",intValue);
+            //NSLog(@"number bool isSelected before: %d",intValue);
             
             if(!intValue){
-                NSLog(@"NO - isSelected is NOT active, so make active");
+                //NSLog(@"NO - isSelected is NOT active, so make active");
                 [[self.fedRepList objectAtIndex:indexPath.row] setObject:@YES forKey:@"isSelected"];
                 cell.selectionHighlightImageView.hidden = NO;
                 // add tweet address
-                
                 NSString *tweetAddressFrontSpace = [NSString stringWithFormat:@" @%@",[dictionary valueForKey:@"twitter_id"]];
                 [self.pushthoughtTextView replaceRange:self.pushthoughtTextView.selectedTextRange withText:tweetAddressFrontSpace ];
             }  else {
-                NSLog(@"YES - isSelected is active, make inactive");
+                //NSLog(@"YES - isSelected is active, make inactive");
                 [[self.fedRepList objectAtIndex:indexPath.row] setObject:@NO forKey:@"isSelected"];
                 cell.selectionHighlightImageView.hidden = YES;
-                
                 // remove tweet address
                 NSString *tweetAddress = [NSString stringWithFormat:@"@%@",[dictionary valueForKey:@"twitter_id"]];
                 if ([self.pushthoughtTextView.text rangeOfString:tweetAddress options:NSCaseInsensitiveSearch].location == NSNotFound) {
-                    NSLog(@"string does not contain address for:%@",tweetAddress);
+                    //NSLog(@"string does not contain address for:%@",tweetAddress);
                 } else {
                     self.pushthoughtTextView.text = [self.pushthoughtTextView.text stringByReplacingOccurrencesOfString:[NSString stringWithFormat:@" %@",tweetAddress] withString:@"" options:NSCaseInsensitiveSearch range:NSMakeRange(0, [self.pushthoughtTextView.text length])];
                     self.pushthoughtTextView.text = [self.pushthoughtTextView.text stringByReplacingOccurrencesOfString:[NSString stringWithFormat:@"%@",tweetAddress] withString:@"" options:NSCaseInsensitiveSearch range:NSMakeRange(0, [self.pushthoughtTextView.text length])];
-        
                     // to do: add lines to take away spaces if there are any
-                    NSLog(@"string contains address:%@",tweetAddress);
+                    //NSLog(@"string contains address:%@",tweetAddress);
                 }
             }
             [self.collectionView reloadData];
+            [self textViewDidChange:self.pushthoughtTextView];
             
         } else {
             //NSLog(@"Touch point is NOT in collectionView");
@@ -440,8 +666,6 @@ static NSString * const reuseIdentifier = @"Cell";
         //}
     }
 }
-
-
 
 #pragma mark <UICollectionViewDataSource>
 

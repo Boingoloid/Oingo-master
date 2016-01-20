@@ -39,14 +39,12 @@
     
     self.messageList = messageList;
     
-    
     NSString *sunlightLabsAPIKey = @"ed7f6bb54edc4577943dcc588664c89f";
     NSString *baseURL = @"https://congress.api.sunlightfoundation.com";
     NSString *method =@"/legislators/locate?";
     NSString *urlString = [NSString stringWithFormat:@"%@%@latitude=%%2B%f&longitude=%f&apikey=%@",baseURL,method,latitude,longitude,sunlightLabsAPIKey];
     [self getCongressData:urlString];
 }
-
 
 -(void) getCongress:zipCode addToMessageList:(NSMutableArray*)messageList {
 // Method called when finding representatives by zipCode
