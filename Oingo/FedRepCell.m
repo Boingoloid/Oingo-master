@@ -45,7 +45,6 @@
         }
         
         // set name label
-
         if([actionDict valueForKey:@"twitterId"]){
             self.tableViewNameLabel.text = [actionDict valueForKey:@"twitterId"];
         } else {

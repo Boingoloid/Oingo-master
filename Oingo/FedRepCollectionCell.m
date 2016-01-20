@@ -14,7 +14,6 @@
 -(FedRepCollectionCell*)configCollectionCell:(NSMutableDictionary*)dictionary{
     
     self.selectionHighlightImageView.hidden = YES;
-    
 
     NSNumber *number = [dictionary objectForKey:@"isSelected"];
     
@@ -34,13 +33,6 @@
     NSString *lastName = [dictionary valueForKey:@"last_name"];
     NSString *fullName;
 
-//    if(![dictionary valueForKey:@"nickName"]){
-//        fullName = [NSString stringWithFormat:@"%@ %@",firstName,lastName];
-//    } else {
-//        fullName = [NSString stringWithFormat:@"%@ %@",nickName,lastName];
-//    }
-//    self.name.text = [NSString stringWithFormat:@"%@",fullName];
-
     // Substitute nickName if they have one
     if(![dictionary valueForKey:@"nickName"]){
         firstName = [NSString stringWithFormat:@"%@",firstName];
@@ -55,13 +47,13 @@
     
     // Title and Placeholder Image load based on chamber
     NSString *chamber = [dictionary valueForKey:@"chamber"];
-    NSString *state = [dictionary valueForKey:@"state"];
-    NSString *district = [dictionary valueForKey:@"district"];
+    //NSString *state = [dictionary valueForKey:@"state"];
+    //NSString *district = [dictionary valueForKey:@"district"];
     if([chamber isEqualToString:@"senate"]) {
-        self.title.text = [NSString stringWithFormat:@"Senator,%@",state];
+        //self.title.text = [NSString stringWithFormat:@"Senator,%@",state];
         self.imageView.image = [UIImage imageNamed:@"Seal_of_Senate_Cropped.png"];
     } else {
-        self.title.text = [NSString stringWithFormat:@"Rep, %@ / d:%@",state,district];
+        //self.title.text = [NSString stringWithFormat:@"Rep, %@ / d:%@",state,district];
         self.imageView.image = [UIImage imageNamed:@"Seal_of_Congress_Cropped.png"];
     }
     

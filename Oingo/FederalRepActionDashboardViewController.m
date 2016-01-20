@@ -7,6 +7,7 @@
 //
 
 #import "FederalRepActionDashboardViewController.h"
+#import "FedRepPhoneTableViewController.h"
 #import "FedRepCell.h"
 #import "FedRepCollectionCell.h"
 #import "FetchDataFedReps.h"
@@ -175,6 +176,14 @@ static NSString * const reuseIdentifier = @"Cell";
     // Dispose of any resources that can be recreated.
 }
 
+- (IBAction)segmentedControlCummunicationTypeClick:(id)sender {
+    if(self.segmentedControlCommunicationType.selectedSegmentIndex == 0){
+        // do nothing
+    } else {
+        [self performSegueWithIdentifier:@"showFedRepPhone" sender:self];
+        
+    }
+}
 
 -(void) getHashtagData{
     
@@ -286,15 +295,7 @@ static NSString * const reuseIdentifier = @"Cell";
 }
 
 
-/*
-#pragma mark - Navigation
 
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
 
 //- (void)textViewDidBeginEditing:(UITextView *)textView
 //{
@@ -349,19 +350,8 @@ static NSString * const reuseIdentifier = @"Cell";
     
 }
 
-- (IBAction)segmentedControlCummunicationTypeClick:(id)sender {
-}
-- (BOOL)gestureRecognizerShouldBegin:(UIGestureRecognizer *)gestureRecognizer
-{
-//    UITableView *tableView = (UITableView *)gestureRecognizer.view;
-//    CGPoint p = [gestureRecognizer locationInView:gestureRecognizer.view];
-//    if ([tableView indexPathForRowAtPoint:p]) {
-//        return YES;
-//        
-//    }
-//    return NO;
-    return YES;
-}
+
+
 
 -(void) logIn{
     NSLog(@"login called");
@@ -555,7 +545,17 @@ static NSString * const reuseIdentifier = @"Cell";
     
     [PFObject saveAll:(NSArray*)hashtagList];
 }
-
+- (BOOL)gestureRecognizerShouldBegin:(UIGestureRecognizer *)gestureRecognizer
+{
+    //    UITableView *tableView = (UITableView *)gestureRecognizer.view;
+    //    CGPoint p = [gestureRecognizer locationInView:gestureRecognizer.view];
+    //    if ([tableView indexPathForRowAtPoint:p]) {
+    //        return YES;
+    //
+    //    }
+    //    return NO;
+    return YES;
+}
 - (void)respondToTapGesture:(UITapGestureRecognizer *)tap {
     //*******
     //This is what we use for user touches in the cells
@@ -721,5 +721,24 @@ static NSString * const reuseIdentifier = @"Cell";
     return CGSizeMake(120, 114);
 }
 
+#pragma mark - Navigation
+
+
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+    if([segue.identifier isEqualToString:@"showFedRepPhone"]){
+        FedRepPhoneTableViewController *fedRepPhoneTVC = segue.destinationViewController;
+        fedRepPhoneTVC.tableViewController = self;
+        fedRepPhoneTVC.selectedProgram = self.selectedProgram;
+        fedRepPhoneTVC.selectedSegment = self.selectedSegment;
+        fedRepPhoneTVC.actionsForSegment = self.actionsForSegment;
+        fedRepPhoneTVC.sentActionsForSegment = self.sentActionsForSegment;
+        fedRepPhoneTVC.selectedActionDict = self.selectedActionDict;
+        fedRepPhoneTVC.fedRepList = self.fedRepList;
+        NSLog(@"selected Action dict:%@",self.selectedActionDict);
+    }
+    
+    // Get the new view controller using [segue destinationViewController].
+    // Pass the selected object to the new view controller.
+}
 
 @end

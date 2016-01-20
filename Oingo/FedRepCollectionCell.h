@@ -12,7 +12,6 @@
 
 @property (weak, nonatomic) IBOutlet UIImageView *imageView;
 @property (weak, nonatomic) IBOutlet UILabel *name;
-@property (weak, nonatomic) IBOutlet UILabel *title;
 @property (nonatomic) BOOL isSelected;
 @property (weak, nonatomic) IBOutlet UIImageView *selectionHighlightImageView;
 @property (weak, nonatomic) IBOutlet UILabel *firstName;

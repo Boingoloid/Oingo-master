@@ -23,7 +23,6 @@
 /Users/matthewacalin/Desktop/IphoneApps/PushThought/DerivedData/Oingo/Build/Intermediates/Oingo.build/Debug-iphonesimulator/Oingo.build/Objects-normal/x86_64/ComposeViewController.o
 /Users/matthewacalin/Desktop/IphoneApps/PushThought/DerivedData/Oingo/Build/Intermediates/Oingo.build/Debug-iphonesimulator/Oingo.build/Objects-normal/x86_64/MessageOptionsTableTableViewController.o
 /Users/matthewacalin/Desktop/IphoneApps/PushThought/DerivedData/Oingo/Build/Intermediates/Oingo.build/Debug-iphonesimulator/Oingo.build/Objects-normal/x86_64/LongFormEmailViewController.o
-/Users/matthewacalin/Desktop/IphoneApps/PushThought/DerivedData/Oingo/Build/Intermediates/Oingo.build/Debug-iphonesimulator/Oingo.build/Objects-normal/x86_64/CollectionViewCollectionViewController.o
 /Users/matthewacalin/Desktop/IphoneApps/PushThought/DerivedData/Oingo/Build/Intermediates/Oingo.build/Debug-iphonesimulator/Oingo.build/Objects-normal/x86_64/CongressFinderAPI.o
 /Users/matthewacalin/Desktop/IphoneApps/PushThought/DerivedData/Oingo/Build/Intermediates/Oingo.build/Debug-iphonesimulator/Oingo.build/Objects-normal/x86_64/FetchDataFedReps.o
 /Users/matthewacalin/Desktop/IphoneApps/PushThought/DerivedData/Oingo/Build/Intermediates/Oingo.build/Debug-iphonesimulator/Oingo.build/Objects-normal/x86_64/CongressPhotoFinderAPI.o
@@ -43,6 +42,7 @@
 /Users/matthewacalin/Desktop/IphoneApps/PushThought/DerivedData/Oingo/Build/Intermediates/Oingo.build/Debug-iphonesimulator/Oingo.build/Objects-normal/x86_64/ActionDashboardTableViewController.o
 /Users/matthewacalin/Desktop/IphoneApps/PushThought/DerivedData/Oingo/Build/Intermediates/Oingo.build/Debug-iphonesimulator/Oingo.build/Objects-normal/x86_64/ProgramsTableViewController.o
 /Users/matthewacalin/Desktop/IphoneApps/PushThought/DerivedData/Oingo/Build/Intermediates/Oingo.build/Debug-iphonesimulator/Oingo.build/Objects-normal/x86_64/CongressionalMessageItem.o
+/Users/matthewacalin/Desktop/IphoneApps/PushThought/DerivedData/Oingo/Build/Intermediates/Oingo.build/Debug-iphonesimulator/Oingo.build/Objects-normal/x86_64/FedRepPhoneTableViewController.o
 /Users/matthewacalin/Desktop/IphoneApps/PushThought/DerivedData/Oingo/Build/Intermediates/Oingo.build/Debug-iphonesimulator/Oingo.build/Objects-normal/x86_64/FedRepCell.o
 /Users/matthewacalin/Desktop/IphoneApps/PushThought/DerivedData/Oingo/Build/Intermediates/Oingo.build/Debug-iphonesimulator/Oingo.build/Objects-normal/x86_64/MessageItem.o
 /Users/matthewacalin/Desktop/IphoneApps/PushThought/DerivedData/Oingo/Build/Intermediates/Oingo.build/Debug-iphonesimulator/Oingo.build/Objects-normal/x86_64/MakePhoneCallAPI.o
@@ -52,3 +52,4 @@
 /Users/matthewacalin/Desktop/IphoneApps/PushThought/DerivedData/Oingo/Build/Intermediates/Oingo.build/Debug-iphonesimulator/Oingo.build/Objects-normal/x86_64/MessageTableViewMessageCell.o
 /Users/matthewacalin/Desktop/IphoneApps/PushThought/DerivedData/Oingo/Build/Intermediates/Oingo.build/Debug-iphonesimulator/Oingo.build/Objects-normal/x86_64/MessageTableViewEmailCell.o
 /Users/matthewacalin/Desktop/IphoneApps/PushThought/DerivedData/Oingo/Build/Intermediates/Oingo.build/Debug-iphonesimulator/Oingo.build/Objects-normal/x86_64/LeaveFeedbackViewController.o
+/Users/matthewacalin/Desktop/IphoneApps/PushThought/DerivedData/Oingo/Build/Intermediates/Oingo.build/Debug-iphonesimulator/Oingo.build/Objects-normal/x86_64/FedRepPhoneTableViewCell.o

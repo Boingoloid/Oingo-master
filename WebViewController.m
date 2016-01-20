@@ -35,7 +35,8 @@
     NSURLRequest *requestURL = [NSURLRequest requestWithURL:url];
     [self.webView loadRequest:requestURL];
     
-    loadingView = [[UIView alloc]initWithFrame:CGRectMake(100, 400, 80, 80)];
+    
+    loadingView = [[UIView alloc]initWithFrame:CGRectMake(100, 100, 80, 80)];
     loadingView.backgroundColor = [UIColor colorWithWhite:0. alpha:0.6];
     loadingView.layer.cornerRadius = 5;
     

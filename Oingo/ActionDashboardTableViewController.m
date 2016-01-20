@@ -274,7 +274,6 @@
         fedRepActionVC.selectedActionDict = self.selectedActionDict;
         NSLog(@"selected Action dict:%@",self.selectedActionDict);
         //NSLog(@"sender: %@",sender);
-
     }
     
     // Get the new view controller using [segue destinationViewController].
