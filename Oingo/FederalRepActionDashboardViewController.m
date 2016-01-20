@@ -270,8 +270,6 @@ static NSString * const reuseIdentifier = @"Cell";
     cell.viewController = self;
     [self.tableView addSubview:cell];
     
-    // Turn off selection highlighting
-    //cell.selectionStyle = UITableViewCellSelectionStyleNone;
     
     // Configure the cell...
     NSMutableDictionary *dictionary = [self.tableData objectAtIndex:indexPath.row];
@@ -586,23 +584,10 @@ static NSString * const reuseIdentifier = @"Cell";
         [self textViewDidChange:self.pushthoughtTextView];
             
         } else if (CGRectContainsPoint(self.sendTweet.frame, p)) {
-            //log in anon
-            //log into twitter
             NSLog(@"touch in tweet:");
-            
             if([PFUser currentUser]){
-//                TWTRShareEmailViewController* shareEmailViewController = [[TWTRShareEmailViewController alloc] initWithCompletion:^(NSString* email, NSError* error) {
-//                    NSLog(@"Email %@, Error: %@", email, error);
-//                }];
-//                [self.navigationController presentViewController:shareEmailViewController animated:YES completion:nil];
-//                //[self presentViewController:shareEmailViewController animated:YES completion:nil];
-                
                 if([PFTwitterUtils isLinkedWithUser:[PFUser currentUser]]){
                     // just send it
-                    
-                    
-                    
-                    
                     [self sendTweetwithComposer];
                 } else {
                     // link to a twitter account

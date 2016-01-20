@@ -9,6 +9,8 @@
 #import "ActionDashboardTableViewController.h"
 #import "LocalRepActionTableViewCell.h"
 #import "FederalRepActionDashboardViewController.h"
+#import "SignUpViewController.h"
+#import "GetLocationViewController.h"
 
 @interface ActionDashboardTableViewController () <UIGestureRecognizerDelegate,CLLocationManagerDelegate>
 
@@ -67,32 +69,88 @@
 }
 
 - (void)respondToTapGesture:(UITapGestureRecognizer *)tap {
-    //*******
-    //This is what we use for user touches in the cells
-    //It grabs point coordinate of touch as finger lifted
-    //******************
     
     if (UIGestureRecognizerStateEnded == tap.state) {
         // Collect data about tap location
         UITableView *tableView = (UITableView *)tap.view;
         CGPoint p = [tap locationInView:tap.view];
-        NSIndexPath* indexPath = [tableView indexPathForRowAtPoint:p];
-        self.selectedActionDict = [self.actionOptionsArray objectAtIndex:indexPath.row];
-        //NSLog(@"selected Action dict:%@",self.selectedActionDict);
-        UITableViewCell *cell = (UITableViewCell *)[tableView cellForRowAtIndexPath:indexPath];
-        CGPoint pointInCell = [tap locationInView:cell];
+        if(CGRectContainsPoint(self.tableView.frame, p)) {
         
-        // Deselect the row
-        [self.tableView deselectRowAtIndexPath:indexPath animated:YES];
+            NSIndexPath* indexPath = [tableView indexPathForRowAtPoint:p];
+            self.selectedActionDict = [self.actionOptionsArray objectAtIndex:indexPath.row];
+            //NSLog(@"selected Action dict:%@",self.selectedActionDict);
+            UITableViewCell *cell = (UITableViewCell *)[tableView cellForRowAtIndexPath:indexPath];
+            CGPoint pointInCell = [tap locationInView:cell];
+            
+            // Deselect the row
+            [self.tableView deselectRowAtIndexPath:indexPath animated:YES];
         
-        //if(CGRectContainsPoint(cell.frame, pointInCell)) {
-            [self performSegueWithIdentifier:@"showBuildMessage" sender:self];
-        //}
+            [self showLocationCapture];
+//            GetLocationViewController *getLocationVC = [self.storyboard instantiateViewControllerWithIdentifier:@"GetLocationViewController"];
+//            getLocationVC.view.frame = CGRectMake(0, 0, 100, 100);
+//            [self presentViewController:getLocationVC animated:YES completion:nil];
+
+        }
     }
 }
 
 
+-(void)showLocationCapture{
+    
+    NSString *alertTitle = @"Enter your location";
+    NSString *alertMessage = [NSString stringWithFormat:@"Reps only listen to the voters in their district.  Enter your location and we will load your reps automatically!"];
+    
+    UIAlertController *alertController = [UIAlertController alertControllerWithTitle:alertTitle message:alertMessage preferredStyle:UIAlertControllerStyleAlert];
+    
+    
+    UIAlertAction *currentLocationAction = [UIAlertAction actionWithTitle:NSLocalizedString(@"Use Current Location", @"currentLocation action") style:UIAlertActionStyleDefault handler:^(UIAlertAction *action){
+        NSLog(@"use current location");
+        //run current location method
+        
+        //save in user, save in defaults
+    }];
+    [alertController addAction:currentLocationAction];
+    
+    UIAlertAction *enterZipAction = [UIAlertAction actionWithTitle:NSLocalizedString(@"Enter Zip", @"enterZip action") style:UIAlertActionStyleDefault handler:^(UIAlertAction *action){
+        NSLog(@"enter zip");
+        [self showZipCapture];
+    }];
+    [alertController addAction:enterZipAction];
+    [self presentViewController:alertController animated:YES completion:nil];
+    
+}
 
+-(void)showZipCapture{
+    NSString *alertTitle = @"Enter your Zip Code";
+    NSString *alertMessage = @"";
+    
+    UIAlertController *alertController = [UIAlertController alertControllerWithTitle:alertTitle message:alertMessage preferredStyle:UIAlertControllerStyleAlert];
+    
+    [alertController addTextFieldWithConfigurationHandler:^(UITextField *textField)
+     {
+         textField.placeholder = NSLocalizedString(@"98765", @"Zip");
+     }];
+    
+    
+    UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:NSLocalizedString(@"Cancel", @"Cancel action") style:UIAlertActionStyleDefault handler:^(UIAlertAction *action){
+        NSLog(@"cancel");
+    }];
+    [alertController addAction:cancelAction];
+    [self presentViewController:alertController animated:YES completion:nil];
+    
+    
+    UIAlertAction *OKAction = [UIAlertAction actionWithTitle:NSLocalizedString(@"OK", @"OK action") style:UIAlertActionStyleDefault handler:^(UIAlertAction *action){
+        NSLog(@"OK, submitting Zip");
+        //run current location method
+        
+        //save in user, save in defaults
+    }];
+    [alertController addAction:OKAction];
+    
+    
+
+    
+}
 
 #pragma mark - Fetching Data
 
