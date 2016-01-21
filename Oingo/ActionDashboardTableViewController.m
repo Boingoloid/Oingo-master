@@ -15,12 +15,13 @@
 
 @interface ActionDashboardTableViewController () <UIGestureRecognizerDelegate,CLLocationManagerDelegate>
 
+@property(nonatomic) CLLocationManager *locationManager;
+
 @end
 
 @implementation ActionDashboardTableViewController
 - (void) viewDidAppear:(BOOL)animated {
     [self.textView setContentOffset:CGPointZero animated:NO];
-
 }
 
 - (void)viewDidLoad {
@@ -32,21 +33,18 @@
     self.tableHeaderView.layer.backgroundColor = [[UIColor whiteColor] CGColor];
     self.tableHeaderView.layer.cornerRadius = 3;
     self.tableHeaderView.clipsToBounds = YES;
-
     
     // Hide separators in table
     self.tableView.separatorColor = [UIColor clearColor];
     
     self.programTitleLabel.text = [NSString stringWithFormat:@"/ %@ / %@",[self.selectedProgram valueForKey:@"programTitle"],[self.selectedSegment valueForKey:@"segmentTitle"]];
-    //NSLog(@"purpose Summary: %@",[self.selectedProgram valueForKey:@"purposeSummary"]);
     self.textView.text = [self.selectedSegment valueForKey:@"purposeSummary"];
     
-    // Get Action data from Parse!
+    // Fetch Action data from Parse!
     [self fetchActionsForSegment];
     
-    // Get Sent Action data from Parse!
+    // Fetch Sent Action data from Parse!
     [self fetchSentActionsForSegment];
-    
     
     // Create gesture recognizer
     UITapGestureRecognizer *tapRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(respondToTapGesture:)]; //connect recognizer to action method.
@@ -63,7 +61,6 @@
     CGPoint p = [gestureRecognizer locationInView:gestureRecognizer.view];
     if ([tableView indexPathForRowAtPoint:p]) {
         return YES;
-        
     }
     return NO;
 }
@@ -91,7 +88,6 @@
                 if([UpdateDefaults isLocationInUser]){
                     //Load user locaqtion into defaults
                     [UpdateDefaults updateLocationDefaultsFromUser];
-                    [self performSegueWithIdentifier:@"showBuildMessage" sender:nil];
                 } else {
                     [self showLocationCapture];
                 }
@@ -111,17 +107,19 @@
     
     UIAlertAction *currentLocationAction = [UIAlertAction actionWithTitle:NSLocalizedString(@"Use Current Location", @"currentLocation action") style:UIAlertActionStyleDefault handler:^(UIAlertAction *action){
         NSLog(@"use current location");
-        //run current location method
-        
-        //save in user, save in defaults
+        [self captureCoordinates];
+
     }];
     [alertController addAction:currentLocationAction];
     
     UIAlertAction *enterZipAction = [UIAlertAction actionWithTitle:NSLocalizedString(@"Enter Zip", @"enterZip action") style:UIAlertActionStyleDefault handler:^(UIAlertAction *action){
         NSLog(@"enter zip");
         [self showZipCapture];
+        [self performSegueWithIdentifier:@"showBuildMessage" sender:nil];
     }];
     [alertController addAction:enterZipAction];
+    
+    
     [self presentViewController:alertController animated:YES completion:nil];
     
 }
@@ -163,10 +161,7 @@
             self.alertMessage = @"Your Zip must be 5 digits";
             self.zipCodeSubmission = zipCode;
             [self showZipCapture];
-            //[self retryZipCode:zipCode count:count];
         } else {
-            //set user default zipCode and save to user
-            //send to FedRepActionVC
             UpdateDefaults *updateDefaults = [[UpdateDefaults alloc]init];
             [updateDefaults saveZipCodeToDefaultsWithZip:zipCode];
             if([PFUser currentUser]){
@@ -187,6 +182,53 @@
     [self presentViewController:alertController animated:YES completion:nil];
 }
 
+
+-(void) captureCoordinates {
+
+    
+    if(self.locationManager == nil){
+        self.locationManager = [[CLLocationManager alloc] init];
+    }
+    
+    self.locationManager.delegate = self;
+    
+    NSUInteger code = [CLLocationManager authorizationStatus];
+    if (code == kCLAuthorizationStatusNotDetermined && ([self.locationManager respondsToSelector:@selector(requestAlwaysAuthorization)] || [self.locationManager respondsToSelector:@selector(requestWhenInUseAuthorization)])) {
+        if([[NSBundle mainBundle] objectForInfoDictionaryKey:@"NSLocationWhenInUseUsageDescription"]){
+            [self.locationManager requestWhenInUseAuthorization];
+        } else {
+            NSLog(@"Info.plist does not contain NSLocationAlwaysUsageDescription or NSLocationWhenInUseUsageDescription");
+        }
+    }
+    [self.locationManager startUpdatingLocation];
+}
+
+
+#pragma mark - CLLocationManagerDelegate
+- (void)locationManager:(CLLocationManager *)manager didFailWithError:(NSError *)error
+{
+    NSLog(@"didFailWithError: %@", error);
+    UIAlertView *errorAlert = [[UIAlertView alloc]
+                               initWithTitle:@"Error" message:@"Failed to Get Your Location" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
+    [errorAlert show];
+}
+
+
+
+- (void)locationManager:(CLLocationManager *)manager didUpdateToLocation:(CLLocation *)newLocation fromLocation:(CLLocation *)oldLocation
+{
+    [self.locationManager stopUpdatingLocation];
+    
+    //Set the location default
+    UpdateDefaults *updateDefaults = [[UpdateDefaults alloc]init];
+    [updateDefaults saveCoordinatesToDefaultsWithLatitude:(double)newLocation.coordinate.latitude andLongitude:(double)newLocation.coordinate.longitude];
+    [UpdateDefaults saveLocationDefaultsToUser];
+    [self performSegueWithIdentifier:@"showBuildMessage" sender:nil];
+}
+
+
+
+
 #pragma mark - Fetching Data
 
 -(void) fetchActionsForSegment {
@@ -199,6 +241,7 @@
         if(!error){
             dispatch_async(dispatch_get_main_queue(), ^{
                 self.actionsForSegment = objects;
+                NSLog(@"objects:%@",objects);
                 [self createActionOptionsList:objects];
                 //NSLog(@"Actions: %@",self.actionsForSegment);
                 [self.tableView reloadData];
@@ -212,7 +255,7 @@
 -(void) fetchSentActionsForSegment {
     //PFUser *currentUser = [PFUser currentUser];
     
-    //get message data for segment menu  //MAKE SURE ISMESSSAGE FIRST!
+    //get message data for segment menu  //MAKE SURE IS MESSSAGE FIRST!
     PFQuery *query = [PFQuery queryWithClassName:@"sentMessages"];
     query.limit=1000;
     [query orderByDescending:@"createdAt"];
@@ -250,14 +293,13 @@
         }
     }
     
-    
     //Pull Regulator actionCategory to top
     NSUInteger indexReg = [actionOptionsArray indexOfObjectPassingTest:
                         ^BOOL(NSDictionary *dict, NSUInteger idx, BOOL *stop) {
-                            return [[dict objectForKey:@"actionCategory"] isEqual:@"Regulator"];
+                            return [[dict objectForKey:@"actionCategory"] isEqual:@"Regulators"];
                         }];
     if(indexReg == NSNotFound){
-        NSLog(@"did not find 'regulator' line");
+        NSLog(@"did not find 'regulators' line");
     } else {
         NSDictionary *movingActionDict = [actionOptionsArray objectAtIndex:indexReg];
         [actionOptionsArray insertObject:movingActionDict atIndex:0];
@@ -280,6 +322,8 @@
     }
     
     self.actionOptionsArray = actionOptionsArray;
+    NSLog(@"action Options:%@",self.actionOptionsArray);
+    
 }
 
 

@@ -13,6 +13,7 @@
 #import "ProgramDetailTableViewController.h"
 #import "ProgramDetailTableViewCell.h"
 #import "Program.h"
+#import "UpdateDefaults.h"
 
 
 @interface ProgramsTableViewController () <UISearchResultsUpdating,UISearchControllerDelegate,UISearchDisplayDelegate, UISearchBarDelegate>
@@ -30,9 +31,14 @@ NSUInteger numberOfRows = 0;
     self.navigationController.navigationBar.barStyle = UIBarStyleBlack;  // optional
     self.navigationController.navigationBar.translucent = YES;
 
-    
-    
-
+//    NSLog(@"long:%@",[UpdateDefaults getLongitudeFromDefaults]);
+//    NSLog(@"lat:%@",[UpdateDefaults getLatitudeFromDefaults]);
+//    
+//    if([UpdateDefaults getLongitudeFromDefaults] == nil){
+//        NSLog(@"YES, long check TRUE");
+//    } else {
+//        NSLog(@"NO, long check FALSE");
+//    }
 
 }
 

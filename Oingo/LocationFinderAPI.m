@@ -26,9 +26,9 @@
 static CLLocationManager *locationManager;
 
 -(void) findUserLocation {
-    self.cLLocationManager = locationManager;
-    NSLog(@"find user location going");
-    self.cLLocationManager = [[CLLocationManager alloc] init];
+    //self.cLLocationManager = locationManager;
+    NSLog(@"find user location triggered");
+    //self.cLLocationManager = [[CLLocationManager alloc] init];
     self.cLLocationManager.delegate = self;
     
     //check for permissions, either "when in user" or "always" and it's good to move on.
@@ -86,10 +86,10 @@ static CLLocationManager *locationManager;
     
     
     ParseAPI *parseAPI = [[ParseAPI alloc]init];
-    parseAPI.messageTableViewController = self.messageTableViewController;
+    parseAPI.messageTableViewController = self.viewController;
     CongressFinderAPI *congressFinder = [[CongressFinderAPI alloc]init];
-    congressFinder.messageTableViewController = self.messageTableViewController;
-    [congressFinder getCongressWithLatitude:newLocation.coordinate.latitude andLongitude:newLocation.coordinate.longitude addToMessageList:(NSMutableArray*)self.messageTableViewController.messageList];
+    congressFinder.messageTableViewController = self.viewController;
+    [congressFinder getCongressWithLatitude:newLocation.coordinate.latitude andLongitude:newLocation.coordinate.longitude addToMessageList:(NSMutableArray*)self.viewController.messageList];
     
 }
 

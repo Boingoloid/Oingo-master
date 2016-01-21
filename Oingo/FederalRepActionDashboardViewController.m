@@ -27,8 +27,29 @@ static NSString * const reuseIdentifier = @"Cell";
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
     NSLog(@"FedrepAction Firing");
+    
+    // Fetch Federal Rep data, try Coordinates first, then Zip
+    FetchDataFedReps *fetchDataFedReps = [[FetchDataFedReps alloc]init];
+    fetchDataFedReps.viewController = self;
+    if([UpdateDefaults isLocationInDefaults]){
+        if([UpdateDefaults isCoordinatesInDefaults]){
+            double latitude = [[UpdateDefaults getLatitudeFromDefaults] doubleValue];
+            double longitude = [[UpdateDefaults getLongitudeFromDefaults] doubleValue];
+            [fetchDataFedReps getCongressWithLatitude:latitude andLongitude:longitude];
+            NSLog(@"Fetching Reps by coordinates, lat/long:%f | %f",latitude,longitude);
+        } else {
+            [fetchDataFedReps fetchRepsWithZip:[UpdateDefaults getZipFromDefaults]];
+            NSLog(@"Fetching Reps by Zip, zip:%@",[UpdateDefaults getZipFromDefaults]);
+        }
+
+    } else {
+        NSLog(@"location info shoudld area be there before this page, error");
+    }
+    
+    // Fetch hashtag data
+    [self getHashtagData];
+    
     
 
     
@@ -55,20 +76,7 @@ static NSString * const reuseIdentifier = @"Cell";
     self.collectionView.allowsSelection = YES;
     self.collectionView.allowsMultipleSelection = YES;
     
-    // Fetch Federal Rep data
-    FetchDataFedReps *fetchData = [[FetchDataFedReps alloc]init];
-    fetchData.viewController = self;
-    
-    if([UpdateDefaults isLocationInDefaults]){
-        [fetchData fetchRepsWithZip:[UpdateDefaults getZipFromDefaults]];
-        NSLog(@"Fetching Reps - location in defaluts, zip:%@",[UpdateDefaults getZipFromDefaults]);
-    } else {
-        NSLog(@"location info shoudld area be there before this page, error");
-    }
 
-    
-    // Fetch hashtag data
-    [self getHashtagData];
     
     // Format Breadcrumb label
     self.breadcrumbsLabel.text = [NSString stringWithFormat:@"/ %@ / %@",[self.selectedProgram valueForKey:@"programTitle"],[self.selectedSegment valueForKey:@"segmentTitle"]];
@@ -128,7 +136,7 @@ static NSString * const reuseIdentifier = @"Cell";
     // Format Sent Message Data -----------------------------------------------------------------------------------
     NSArray *filteredActionList;
     filteredActionList = [self.sentActionsForSegment filteredArrayUsingPredicate:[NSPredicate predicateWithFormat:@"messageCategory = %@", @"Local Representative"]];
-    //NSLog(@"printing array count:%lu  value:%@",(unsigned long)filteredActionList.count,filteredActionList);
+    // NSLog(@"printing array count:%lu  value:%@",(unsigned long)filteredActionList.count,filteredActionList);
     
     
     NSArray *filteredSentActionList;
@@ -675,18 +683,12 @@ static NSString * const reuseIdentifier = @"Cell";
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
     FedRepCollectionCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:reuseIdentifier forIndexPath:indexPath];
-    
-    // Turn on selection highlighting
-    // Configure the cell
+
 
     NSMutableDictionary *dictionary = [self.fedRepList objectAtIndex:indexPath.row];
     
     [self.collectionView addSubview:cell];
-//    if(indexPath.row == 0){
-//        cell.isSelected = YES;
-//        cell.selectionHighlightImageView.hidden = NO;
-//    }
-    
+
     return [cell configCollectionCell:(NSMutableDictionary*)dictionary];
 }
 
@@ -694,19 +696,6 @@ static NSString * const reuseIdentifier = @"Cell";
     return NO;
     
 }
-
-
- // Uncomment this method to specify if the specified item should be highlighted during tracking
-// - (BOOL)collectionView:(UICollectionView *)collectionView shouldHighlightItemAtIndexPath:(NSIndexPath *)indexPath {
-//	return YES;
-// }
-
-/*
- // Uncomment this method to specify if the specified item should be selected
- - (BOOL)collectionView:(UICollectionView *)collectionView shouldSelectItemAtIndexPath:(NSIndexPath *)indexPath {
- return YES;
- }
- */
 
 
 #pragma mark <UICollectionViewDelegateFlowLayout>

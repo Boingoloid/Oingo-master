@@ -25,7 +25,6 @@
     NSString *actionCategory = [actionDict valueForKey:@"actionCategory"];
     
     // Format cell border/background
-    //self.layer.backgroundColor = [[UIColor colorWithWhite:0.9f alpha:1] CGColor];
     self.layer.borderColor = [[UIColor lightGrayColor] CGColor];
     self.layer.cornerRadius = 3;
     self.clipsToBounds = YES;
@@ -36,26 +35,27 @@
     
     if ([actionCategory isEqualToString:@"Local Representative"]){
         actionString = [NSString stringWithFormat:@"Federal Representatives"];
-        
-    }else if ([actionCategory isEqualToString:@"Regulator"]){
-        actionString = [NSString stringWithFormat:@"Regulators"];
         self.actionImageView.image = [UIImage imageNamed:@"regulator-flag-icon.png"];
+        
+    }else if ([actionCategory isEqualToString:@"Regulators"]){
+        actionString = actionCategory;
+        self.actionImageView.image = [UIImage imageNamed:@"scales.png"];
 
+    }else if ([actionCategory isEqualToString:@"Corporations"]){
+        actionString = actionCategory;
+        self.actionImageView.image = [UIImage imageNamed:@"corporationIcon.png"];
+
+    }else if ([actionCategory isEqualToString:@"Petition"]){
+        actionString = [NSString stringWithFormat:@"Change.org Petition"];
+        self.actionImageView.image = [UIImage imageNamed:@"changeOrgLogoSquare.png"];
         // Image formatting
         self.actionImageView.layer.borderWidth = .5;
         self.actionImageView.layer.borderColor = [[UIColor blackColor] CGColor];
         self.actionImageView.clipsToBounds = YES;
         self.actionImageView.layer.cornerRadius = 3;
     }else {
-        actionString = [NSString stringWithFormat:@"Sign Petition"];
+        actionString = [NSString stringWithFormat:@"Other Actions"];
         self.actionImageView.image = [UIImage imageNamed:@"Message_chat_text_bubble_phone.png"];
-
-        // Image formatting
-        //self.actionImageView.layer.borderWidth = .5;
-        //self.actionImageView.layer.borderColor = [[UIColor blackColor] CGColor];
-        //self.actionImageView.clipsToBounds = YES;
-        //self.actionImageView.layer.cornerRadius = 3;
-        
     }
     self.actionTitleLabel.text = actionString;
     // _______________________________________________________

@@ -10,6 +10,6 @@
 #import "MessageTableViewController.h"
 
 @interface LocationFinderAPI : NSObject
-@property(nonatomic) MessageTableViewController *messageTableViewController;
+@property(nonatomic) MessageTableViewController *viewController;
 -(void) findUserLocation;
 @end

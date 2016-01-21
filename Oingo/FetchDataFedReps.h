@@ -14,6 +14,7 @@
 
 @property (nonatomic) FederalRepActionDashboardViewController *viewController;
 
+-(void)getCongressWithLatitude:(double)latitude andLongitude:(double)longitude;
 -(void)fetchRepsWithZip:zipCode;
 
 @end
