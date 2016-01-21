@@ -12,6 +12,7 @@
 #import "FedRepCollectionCell.h"
 #import "FetchDataFedReps.h"
 #import <TwitterKit/TwitterKit.h>
+#import "UpdateDefaults.h"
 
 
 @interface FederalRepActionDashboardViewController () <UITextViewDelegate,UITableViewDelegate,UITableViewDataSource,UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout, UIGestureRecognizerDelegate, NSURLSessionDelegate>
@@ -28,6 +29,8 @@ static NSString * const reuseIdentifier = @"Cell";
     [super viewDidLoad];
     
     NSLog(@"FedrepAction Firing");
+    
+
     
     // Set TextView Delegate
     self.pushthoughtTextView.delegate = self;
@@ -55,10 +58,20 @@ static NSString * const reuseIdentifier = @"Cell";
     // Fetch Federal Rep data
     FetchDataFedReps *fetchData = [[FetchDataFedReps alloc]init];
     fetchData.viewController = self;
-    [fetchData fetchRepsWithZip:@"94107"];
+    
+    if([UpdateDefaults isLocationInDefaults]){
+        [fetchData fetchRepsWithZip:[UpdateDefaults getZipFromDefaults]];
+        NSLog(@"Fetching Reps - location in defaluts, zip:%@",[UpdateDefaults getZipFromDefaults]);
+    } else {
+        NSLog(@"location info shoudld area be there before this page, error");
+    }
+
     
     // Fetch hashtag data
     [self getHashtagData];
+    
+    // Format Breadcrumb label
+    self.breadcrumbsLabel.text = [NSString stringWithFormat:@"/ %@ / %@",[self.selectedProgram valueForKey:@"programTitle"],[self.selectedSegment valueForKey:@"segmentTitle"]];
     
     // Format Push Thought suggestion
     self.pushthoughtTextView.text = [self.selectedActionDict valueForKey:@"messageText"];
@@ -181,7 +194,6 @@ static NSString * const reuseIdentifier = @"Cell";
         // do nothing
     } else {
         [self performSegueWithIdentifier:@"showFedRepPhone" sender:self];
-        
     }
 }
 
@@ -342,8 +354,6 @@ static NSString * const reuseIdentifier = @"Cell";
             NSInteger countNumber =(int)140-lengthNumber;
             self.characterCount.text = [NSString stringWithFormat:@"%ld",countNumber];
         }
-        
-        
     }
     
 }
@@ -360,15 +370,14 @@ static NSString * const reuseIdentifier = @"Cell";
             return;
         } else if (user.isNew) {
             NSLog(@"User signed up and logged in with Twitter!");
-            // send
+            [UpdateDefaults saveLocationDefaultsToUser];
             [self sendTweetwithComposer];
         } else {
             NSLog(@"User logged in with Twitter!");
-            // send
+            [UpdateDefaults updateLocationDefaultsFromUser];
             [self sendTweetwithComposer];
         }
     }];
-
 }
 
 
@@ -682,7 +691,7 @@ static NSString * const reuseIdentifier = @"Cell";
 }
 
 - (BOOL)collectionView:(UICollectionView *)collectionView shouldSelectItemAtIndexPath:(NSIndexPath *)indexPath {
-    return YES;
+    return NO;
     
 }
 
@@ -719,7 +728,6 @@ static NSString * const reuseIdentifier = @"Cell";
         fedRepPhoneTVC.sentActionsForSegment = self.sentActionsForSegment;
         fedRepPhoneTVC.selectedActionDict = self.selectedActionDict;
         fedRepPhoneTVC.fedRepList = self.fedRepList;
-        NSLog(@"selected Action dict:%@",self.selectedActionDict);
     }
     
     // Get the new view controller using [segue destinationViewController].

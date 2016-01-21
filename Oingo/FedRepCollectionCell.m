@@ -18,14 +18,20 @@
     NSNumber *number = [dictionary objectForKey:@"isSelected"];
     
     int intValue = [number intValue];
-    
-    //NSLog(@"isSelected Collection cell number:%@ intvalue:%d with dict:%@",number,intValue,dictionary);
                   
     if(!intValue){
         self.selectionHighlightImageView.hidden = YES;
     }  else {
         self.selectionHighlightImageView.hidden = NO;
     }
+    
+    // Format selectionHighlight ImageView
+    self.selectionHighlightImageView.layer.borderColor = [[UIColor darkGrayColor] CGColor];
+    self.selectionHighlightImageView.layer.borderWidth = 2;
+    self.selectionHighlightImageView.layer.shadowRadius = 5;
+    self.selectionHighlightImageView.layer.shadowColor = [[UIColor whiteColor] CGColor];
+    self.selectionHighlightImageView.layer.cornerRadius = 3;
+    self.selectionHighlightImageView.clipsToBounds = YES;
     
     // Full name
     NSString *nickName = [dictionary valueForKey:@"nickname"];

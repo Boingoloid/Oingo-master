@@ -93,8 +93,7 @@ BOOL isNewAccount = NO;
                 NSLog(@"User logged in successfully");
                 
                 dispatch_async(dispatch_get_main_queue(), ^{
-                    UpdateDefaults *updateDefaults = [[UpdateDefaults alloc]init];
-                    [updateDefaults updateLocationDefaultsFromUser];
+                    [UpdateDefaults updateLocationDefaultsFromUser];
                     [self.messageTableViewController viewDidLoad];
                     NSLog(@"viewDidLoad from Login");
                     [self popToMessagesController];
@@ -128,8 +127,7 @@ BOOL isNewAccount = NO;
                 [self updateFacebookUserData];
                 
                 dispatch_async(dispatch_get_main_queue(), ^{
-                    UpdateDefaults *updateDefaults = [[UpdateDefaults alloc]init];
-                    [updateDefaults updateLocationDefaultsFromUser];
+                    [UpdateDefaults updateLocationDefaultsFromUser];
                     [self.messageTableViewController viewDidLoad];
                     NSLog(@"viewDidLoad from Login");
                     [self popToMessagesController];
@@ -159,8 +157,7 @@ BOOL isNewAccount = NO;
                 [self updateFacebookUserData];
                 
                 dispatch_async(dispatch_get_main_queue(), ^{
-                    UpdateDefaults *updateDefaults = [[UpdateDefaults alloc]init];
-                    [updateDefaults updateLocationDefaultsFromUser];
+                    [UpdateDefaults updateLocationDefaultsFromUser];
                     [self.messageTableViewController viewDidLoad];
                     NSLog(@"viewDidLoad from Login");
                     [self popToMessagesController];

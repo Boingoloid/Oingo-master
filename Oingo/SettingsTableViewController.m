@@ -315,8 +315,8 @@
             //set user default zipCode and save to user
             UpdateDefaults *updateDefaults = [[UpdateDefaults alloc]init];
             [updateDefaults saveZipCodeToDefaultsWithZip:zipCode];
-            [updateDefaults saveLocationDefaultsToUser];
-            [updateDefaults deleteCoordinates]; //purges lat/long from Defaults and currentUser(if neccesary)
+            [UpdateDefaults saveLocationDefaultsToUser];
+            [UpdateDefaults deleteCoordinates]; //purges lat/long from Defaults and currentUser(if neccesary)
             // Deleting coordinates in case they conflict with zipCode
             
             // Send back to MessageTableViewController
@@ -362,8 +362,8 @@
             //set user default zipCode and save to user
             UpdateDefaults *updateDefaults = [[UpdateDefaults alloc]init];
             [updateDefaults saveZipCodeToDefaultsWithZip:zipCode];
-            [updateDefaults saveLocationDefaultsToUser];
-            [updateDefaults deleteCoordinates]; //purges lat/long from Defaults and currentUser(if neccesary)
+            [UpdateDefaults saveLocationDefaultsToUser];
+            [UpdateDefaults deleteCoordinates]; //purges lat/long from Defaults and currentUser(if neccesary)
             // Deleting coordinates in case they conflict with zipCode
 
             // Send back to MessageTableViewController

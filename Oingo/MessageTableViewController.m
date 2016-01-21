@@ -583,7 +583,7 @@ NSInteger footerHeight = 1;
     //Set the location default
     UpdateDefaults *updateDefaults = [[UpdateDefaults alloc]init];
     [updateDefaults saveCoordinatesToDefaultsWithLatitude:(double)newLocation.coordinate.latitude andLongitude:(double)newLocation.coordinate.longitude];
-    [updateDefaults saveLocationDefaultsToUser];
+    [UpdateDefaults saveLocationDefaultsToUser];
     
     [self viewDidLoad];
 
@@ -621,7 +621,7 @@ NSInteger footerHeight = 1;
             //set user default zipCode and save to user
             UpdateDefaults *updateDefaults = [[UpdateDefaults alloc]init];
             [updateDefaults saveZipCodeToDefaultsWithZip:zipCode];
-            [updateDefaults saveLocationDefaultsToUser];
+            [UpdateDefaults saveLocationDefaultsToUser];
             
             [self viewDidLoad];
         }
@@ -665,7 +665,7 @@ NSInteger footerHeight = 1;
             //set user default zipCode and save to user
             UpdateDefaults *updateDefaults = [[UpdateDefaults alloc]init];
             [updateDefaults saveZipCodeToDefaultsWithZip:zipCode];
-            [updateDefaults saveLocationDefaultsToUser];
+            [UpdateDefaults saveLocationDefaultsToUser];
 
             [self viewDidLoad];
         }

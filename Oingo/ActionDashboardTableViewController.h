@@ -24,12 +24,13 @@
 
 // Controls
 @property (weak, nonatomic) IBOutlet UIView *tableHeaderView;
-
 @property (weak, nonatomic) IBOutlet UILabel *programTitleLabel;
 @property (weak, nonatomic) IBOutlet UITextView *textView;
 
 
-
+// Variables
+@property (weak, nonatomic) NSString *alertMessage;
+@property (weak, nonatomic) NSString *zipCodeSubmission;
 
 
 // Fetched Data

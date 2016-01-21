@@ -113,8 +113,9 @@ BOOL isNewAccountSignup = NO;
                 [self updateFacebookUserData];
                 
                 dispatch_async(dispatch_get_main_queue(), ^{
-                    UpdateDefaults *updateDefaults = [[UpdateDefaults alloc]init];
-                    [updateDefaults updateLocationDefaultsFromUser];
+                    //UpdateDefaults *updateDefaults = [[UpdateDefaults alloc]init];
+                    //[updateDefaults updateLocationDefaultsFromUser];
+                    [UpdateDefaults updateLocationDefaultsFromUser];
                     [self.messageTableViewController viewDidLoad];
                     NSLog(@"viewDidLoad from SignUp");
                     [self popToMessagesController];

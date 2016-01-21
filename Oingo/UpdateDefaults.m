@@ -11,9 +11,63 @@
 
 @implementation UpdateDefaults
 
--(void)updateLocationDefaultsFromUser {
++(BOOL)isZipCodeInDefaults{
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    if([[defaults valueForKey:@"zipCode"] length] == 0){
+        return NO;
+    } else {
+        return YES;
+    }
+}
++(BOOL)isCoordinatesInDefaults{
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    if([[defaults valueForKey:@"longitude"] length] == 0 || [[defaults valueForKey:@"latitude"] length] == 0){
+        return NO;
+    } else {
+        return YES;
+    }
+}
 
++(BOOL)isLocationInDefaults{
     
+    if([UpdateDefaults isZipCodeInDefaults] || [UpdateDefaults isCoordinatesInDefaults]){
+        return YES;
+    } else {
+        return NO;
+    }
+    
+//    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+//    NSLog(@"locations in defaults check - zip:%@ longitude:%@",[defaults valueForKey:@"zipCode"],[defaults valueForKey:@"longitude"]);
+//    
+//    if([[defaults valueForKey:@"zipCode"] length] == 0 && [[defaults valueForKey:@"longitude"] length] == 0){
+//        return NO;
+//    } else {
+//        return YES;
+//    }
+    
+}
+
++(BOOL)isLocationInUser{
+    PFUser *currentUser = [PFUser currentUser];
+    if(!currentUser){
+        return NO;
+    } else {
+        if([currentUser valueForKey:@"zipCode"] != nil && [currentUser valueForKey:@"longitude"]){
+            return NO;
+        } else {
+            return YES;
+        }
+    }
+}
+
++(NSString*)getZipFromDefaults{
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    return [defaults valueForKey:@"zipCode"];
+}
+
+
+// Loads FROM currentUser, TO defaults (Use at the outset to load the currentUser location preference)
++(void)updateLocationDefaultsFromUser {
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     PFUser *currentUser = [PFUser currentUser];
     
@@ -36,6 +90,7 @@
     }
 }
 
+
 -(void)saveZipCodeToDefaultsWithZip:zipCode{
     NSLog(@"inputs, zipCode:%@",zipCode);
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
@@ -43,7 +98,7 @@
     [defaults synchronize];
     
     //test
-    NSLog(@"Save zipCode to defaults zipCode:%@",[defaults valueForKey:@"zipCode"]);
+    NSLog(@"just saved in defaults - zipCode:%@",[defaults valueForKey:@"zipCode"]);
     
     
 }
@@ -59,9 +114,13 @@
     NSLog(@"Save coordinates to defaults lat:%@ long:%@",[defaults valueForKey:@"latitude"],[defaults valueForKey:@"longitude"]);
 }
 
--(void)saveLocationDefaultsToUser{
+// Loads FROM defaults to currentUser and Parse.
++(void)saveLocationDefaultsToUser{
     PFUser *currentUser = [PFUser currentUser];
-    if (currentUser){
+    
+    if (!currentUser){
+        NSLog(@"Not a user");
+    } else {
         NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
         
         if([defaults valueForKey:@"latitude"] != nil){

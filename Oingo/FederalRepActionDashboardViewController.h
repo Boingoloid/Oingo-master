@@ -20,6 +20,7 @@
 @property(nonatomic) ActionDashboardTableViewController *tableViewController;
 
 // Controls
+@property (weak, nonatomic) IBOutlet UILabel *breadcrumbsLabel;
 @property (weak, nonatomic) IBOutlet UISegmentedControl *segmentedControlCommunicationType;
 @property (weak, nonatomic) IBOutlet UIImageView *linkCheckbox;
 @property (weak, nonatomic) IBOutlet UICollectionView *collectionView;

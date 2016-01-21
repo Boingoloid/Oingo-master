@@ -11,6 +11,7 @@
 #import "FederalRepActionDashboardViewController.h"
 #import "SignUpViewController.h"
 #import "GetLocationViewController.h"
+#import <Parse/Parse.h>
 
 @interface ActionDashboardTableViewController () <UIGestureRecognizerDelegate,CLLocationManagerDelegate>
 
@@ -27,16 +28,15 @@
     
     // Format the header view
     self.tableHeaderView.layer.borderColor = [[UIColor lightGrayColor] CGColor];
-    self.tableHeaderView.layer.borderWidth = 0;
+    self.tableHeaderView.layer.borderWidth = .5;
     self.tableHeaderView.layer.backgroundColor = [[UIColor whiteColor] CGColor];
     self.tableHeaderView.layer.cornerRadius = 3;
     self.tableHeaderView.clipsToBounds = YES;
+
     
     // Hide separators in table
     self.tableView.separatorColor = [UIColor clearColor];
     
-    // Assign header label values
-    //self.segmentTitleLabel.text = [self.selectedSegment valueForKey:@"segmentTitle"];
     self.programTitleLabel.text = [NSString stringWithFormat:@"/ %@ / %@",[self.selectedProgram valueForKey:@"programTitle"],[self.selectedSegment valueForKey:@"segmentTitle"]];
     //NSLog(@"purpose Summary: %@",[self.selectedProgram valueForKey:@"purposeSummary"]);
     self.textView.text = [self.selectedSegment valueForKey:@"purposeSummary"];
@@ -85,16 +85,22 @@
             // Deselect the row
             [self.tableView deselectRowAtIndexPath:indexPath animated:YES];
         
-            [self showLocationCapture];
-//            GetLocationViewController *getLocationVC = [self.storyboard instantiateViewControllerWithIdentifier:@"GetLocationViewController"];
-//            getLocationVC.view.frame = CGRectMake(0, 0, 100, 100);
-//            [self presentViewController:getLocationVC animated:YES completion:nil];
-
+            if([UpdateDefaults isLocationInDefaults]){
+                [self performSegueWithIdentifier:@"showBuildMessage" sender:nil];
+            } else {
+                if([UpdateDefaults isLocationInUser]){
+                    //Load user locaqtion into defaults
+                    [UpdateDefaults updateLocationDefaultsFromUser];
+                    [self performSegueWithIdentifier:@"showBuildMessage" sender:nil];
+                } else {
+                    [self showLocationCapture];
+                }
+            }
         }
     }
 }
 
-
+#pragma mark - Location Capture
 -(void)showLocationCapture{
     
     NSString *alertTitle = @"Enter your location";
@@ -122,13 +128,18 @@
 
 -(void)showZipCapture{
     NSString *alertTitle = @"Enter your Zip Code";
-    NSString *alertMessage = @"";
+    NSString *alertMessage = self.alertMessage;
+    self.alertMessage = @"";
+    
     
     UIAlertController *alertController = [UIAlertController alertControllerWithTitle:alertTitle message:alertMessage preferredStyle:UIAlertControllerStyleAlert];
     
-    [alertController addTextFieldWithConfigurationHandler:^(UITextField *textField)
-     {
-         textField.placeholder = NSLocalizedString(@"98765", @"Zip");
+    [alertController addTextFieldWithConfigurationHandler:^(UITextField *textField){
+        textField.placeholder = NSLocalizedString(@"98765", @"Zip");
+        textField.text = self.zipCodeSubmission;
+        self.zipCodeSubmission = @"";
+        [textField becomeFirstResponder];
+        textField.keyboardType = UIKeyboardTypeNumberPad;
      }];
     
     
@@ -136,20 +147,44 @@
         NSLog(@"cancel");
     }];
     [alertController addAction:cancelAction];
-    [self presentViewController:alertController animated:YES completion:nil];
-    
-    
+
     UIAlertAction *OKAction = [UIAlertAction actionWithTitle:NSLocalizedString(@"OK", @"OK action") style:UIAlertActionStyleDefault handler:^(UIAlertAction *action){
         NSLog(@"OK, submitting Zip");
-        //run current location method
+        UITextField *zipCodeField = alertController.textFields.firstObject;
+        NSString *zipCode = zipCodeField.text;
         
+        __block NSUInteger count = 0;
+        [zipCode enumerateSubstringsInRange:NSMakeRange(0, [zipCode length])
+                                    options:NSStringEnumerationByComposedCharacterSequences
+                                 usingBlock:^(NSString *substring, NSRange substringRange, NSRange enclosingRange, BOOL *stop) {
+                                     count++;
+                                 }];
+        if(count != 5) {
+            self.alertMessage = @"Your Zip must be 5 digits";
+            self.zipCodeSubmission = zipCode;
+            [self showZipCapture];
+            //[self retryZipCode:zipCode count:count];
+        } else {
+            //set user default zipCode and save to user
+            //send to FedRepActionVC
+            UpdateDefaults *updateDefaults = [[UpdateDefaults alloc]init];
+            [updateDefaults saveZipCodeToDefaultsWithZip:zipCode];
+            if([PFUser currentUser]){
+                [UpdateDefaults saveLocationDefaultsToUser];
+            }
+            [self performSegueWithIdentifier:@"showBuildMessage" sender:self];
+        }
+        
+        NSLog(@"zipCode:%@",zipCodeField.text);
+        //run current location method
         //save in user, save in defaults
+        
+        
     }];
+    
     [alertController addAction:OKAction];
     
-    
-
-    
+    [self presentViewController:alertController animated:YES completion:nil];
 }
 
 #pragma mark - Fetching Data
@@ -330,7 +365,6 @@
         fedRepActionVC.actionsForSegment = self.actionsForSegment;
         fedRepActionVC.sentActionsForSegment = self.sentActionsForSegment;
         fedRepActionVC.selectedActionDict = self.selectedActionDict;
-        NSLog(@"selected Action dict:%@",self.selectedActionDict);
         //NSLog(@"sender: %@",sender);
     }
     
