@@ -209,9 +209,9 @@ static NSString * const reuseIdentifier = @"Cell";
     
     //**************  This should  be moved to Cloud Code at some point.  Pointless to do all this work as the UI is loading when I just need the grouped/summed table
     //get message data for segment menu
-    NSString *selectedSegmentID = [self.selectedSegment valueForKey:@"segmentID"];
+    NSString *selectedSegmentID = [self.selectedSegment valueForKey:@"objectId"];
     PFQuery *queryHashtags = [PFQuery queryWithClassName:@"Hashtags"];
-    [queryHashtags whereKey:@"segmentID" equalTo:selectedSegmentID];
+    [queryHashtags whereKey:@"segmentObjectId" equalTo:selectedSegmentID];
     [queryHashtags orderByAscending:@"hashtag"];
     [queryHashtags findObjectsInBackgroundWithBlock:^(NSArray *objectsHash, NSError *error) {
         if (!error) {
@@ -330,7 +330,7 @@ static NSString * const reuseIdentifier = @"Cell";
 //    self.placeholderTextLabel.hidden = ([textView.text length] > 0);
 //}
 
-
+#pragma mark - TextView Delegate
 - (void)textViewDidChange:(UITextView *)textView{
     if(textView == self.pushthoughtTextView){
         NSString *string = self.pushthoughtTextView.text;
@@ -368,7 +368,7 @@ static NSString * const reuseIdentifier = @"Cell";
 
 
 
-
+#pragma mark - User Login Twitter
 -(void) logIn{
     NSLog(@"login called");
 
@@ -388,7 +388,7 @@ static NSString * const reuseIdentifier = @"Cell";
     }];
 }
 
-
+#pragma mark - Tweeting, Send and Save
 -(void)sendTweetwithComposer{
     NSLog(@"tweet sent");
     
@@ -527,39 +527,68 @@ static NSString * const reuseIdentifier = @"Cell";
         }
         else {
             NSLog(@"no error, message saved");
-//            NSLog(@"Got here in the save 2:%@",sentMessageItem);
-//            MarkSentMessageAPI *markSentMessagesAPI = [[MarkSentMessageAPI alloc]init];
-//            markSentMessagesAPI.messageTableViewController = self.messageTableViewController;
-//            [markSentMessagesAPI markSentMessages];
-            //[self saveHashtags];
+            [self saveHashtags];
+            [self saveTwitterTargets];
+            //NSLog(@"Got here in the save 2:%@",sentMessageItem);
+            //MarkSentMessageAPI *markSentMessagesAPI = [[MarkSentMessageAPI alloc]init];
+            //markSentMessagesAPI.messageTableViewController = self.messageTableViewController;
+            //[markSentMessagesAPI markSentMessages];
         }
     }];
-    
-    
 }
 
+# pragma mark - Save # and @ Methods
 -(void) saveHashtags {
     NSString *messageText = self.pushthoughtTextView.text;
     NSMutableArray *hashtagList = [[NSMutableArray alloc]init];
     
     NSError *error = nil;
-    NSRegularExpression *regex = [NSRegularExpression regularExpressionWithPattern:@"#(\\w+)" options:0 error:&error];
+    NSRegularExpression *regex = [NSRegularExpression regularExpressionWithPattern:@"#\\w+" options:0 error:&error];
     NSArray *matches = [regex matchesInString:messageText options:0 range:NSMakeRange(0, messageText.length)];
-    
     
     for (NSTextCheckingResult *match in matches) {
         NSRange wordRange = [match rangeAtIndex:0];
         NSString* word = [messageText substringWithRange:wordRange];
         PFObject *parseHashtagDict = [PFObject objectWithClassName:@"Hashtags"];
         [parseHashtagDict setValue:word forKey:@"hashtag"];
-        [parseHashtagDict setValue:[self.selectedSegment valueForKey:@"segmentID"] forKey:@"segmentID"];
+        [parseHashtagDict setValue:[self.selectedSegment valueForKey:@"objectId"] forKey:@"segmentObjectId"];
+        [parseHashtagDict setValue:[self.selectedProgram valueForKey:@"objectId"] forKey:@"programObjectId"];
         [parseHashtagDict setValue:[NSNumber numberWithInt:1] forKey:@"frequency"];
         NSLog(@"Found tag %@", word);
         [hashtagList addObject:parseHashtagDict];
     }
-    
     [PFObject saveAll:(NSArray*)hashtagList];
 }
+
+-(void) saveTwitterTargets {
+    NSString *messageText = self.pushthoughtTextView.text;
+    NSMutableArray *targetArray = [[NSMutableArray alloc]init];
+    
+    NSError *error = nil;
+    NSRegularExpression *regex = [NSRegularExpression regularExpressionWithPattern:@"@\\w+" options:0 error:&error];
+    NSArray *matches = [regex matchesInString:messageText options:0 range:NSMakeRange(0, messageText.length)];
+    
+    for (NSTextCheckingResult *match in matches) {
+        NSRange wordRange = [match rangeAtIndex:0];
+        NSString *word = [messageText substringWithRange:wordRange];
+        PFObject *parseHashtagDict = [PFObject objectWithClassName:@"TargetTwitterNames"];
+        [parseHashtagDict setValue:word forKey:@"TwitterName"];
+        [parseHashtagDict setValue:[self.selectedSegment valueForKey:@"objectId"] forKey:@"segmentObjectId"];
+        [parseHashtagDict setValue:[self.selectedProgram valueForKey:@"objectId"] forKey:@"programObjectId"];
+        [parseHashtagDict setValue:[NSNumber numberWithInt:1] forKey:@"frequency"];
+        NSLog(@"Found Twitter target:%@", word);
+        [targetArray addObject:parseHashtagDict];
+    }
+    
+    [PFObject saveAll:(NSArray*)targetArray];
+}
+
+
+
+
+//   ((?:^|\s)(?:@){1}[0-9a-zA-Z_]{1,15})
+
+# pragma mark - Gesture Recognizer
 - (BOOL)gestureRecognizerShouldBegin:(UIGestureRecognizer *)gestureRecognizer
 {
     //    UITableView *tableView = (UITableView *)gestureRecognizer.view;
@@ -611,7 +640,7 @@ static NSString * const reuseIdentifier = @"Cell";
                     [self logIn];
                 }
             } else {
-            [self logIn];
+                [self logIn];
             }
             
         } else if (CGRectContainsPoint(self.collectionView.frame, p)) {
@@ -669,7 +698,7 @@ static NSString * const reuseIdentifier = @"Cell";
     }
 }
 
-#pragma mark <UICollectionViewDataSource>
+#pragma mark - UICollectionViewDataSource
 
 - (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView {
 

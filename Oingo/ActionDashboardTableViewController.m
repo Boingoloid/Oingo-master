@@ -119,9 +119,7 @@
     }];
     [alertController addAction:enterZipAction];
     
-    
     [self presentViewController:alertController animated:YES completion:nil];
-    
 }
 
 -(void)showZipCapture{
