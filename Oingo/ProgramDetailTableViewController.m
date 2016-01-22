@@ -63,6 +63,8 @@ Segment *segment;
             self.segmentList = objects;
             dispatch_async(dispatch_get_main_queue(), ^{
                 [self prepSegmentSections:self.segmentList];
+                [self fetchSentActionStats];
+                // get data and display by adding to prep sections data
             });
         } else {
             NSLog(@"Error: %@ %@", error, [error userInfo]);
@@ -85,9 +87,46 @@ Segment *segment;
     tapRocognizer.numberOfTapsRequired = 1;
     tapRocognizer.numberOfTouchesRequired = 1;
     [self.tableView addGestureRecognizer:tapRocognizer];
+    
+
 }
 
+#pragma mark - Fetch Sent Action Stats
+-(void) fetchSentActionStats {
+    //PFUser *currentUser = [PFUser currentUser];
+    
+    //get message data for segment menu  //MAKE SURE IS MESSSAGE FIRST!
+    PFQuery *query = [PFQuery queryWithClassName:@"SegmentStats"];
+    query.limit=1000;
+    [query orderByDescending:@"updatedAt"];
+    [query whereKey:@"programObjectId" equalTo:[self.selectedProgram valueForKey:@"objectId"]];
+    [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
+        if (!error) {
+            dispatch_async(dispatch_get_main_queue(), ^{
+                for (NSDictionary *dictionary in self.segmentList){
+                    NSString *segmentId = [dictionary valueForKey:@"objectId"];
+                    NSUInteger index = [objects indexOfObjectPassingTest:
+                                        ^BOOL(NSDictionary *dict, NSUInteger idx, BOOL *stop) {
+                                            return [[dict objectForKey:@"segmentObjectId"] isEqual:segmentId];
+                                        }];
+                    if(index == NSNotFound){
+                        NSLog(@"did not find stats for segment");
+                    } else {
+                        NSMutableDictionary *statDict = [objects objectAtIndex:index];
+                        [dictionary setValue:[statDict valueForKey:@"actionCount"] forKey:@"actionCount"];
+                        NSLog(@"found stats for segment");
+                        NSLog(@"comparing segmentlist:%@ and statentry:%@",self.segmentList,objects);
+                    }
+                }
+                [self.tableView reloadData];
+            });
+        } else {
+            NSLog(@"Error: %@ %@", error, [error userInfo]);
+        }
+    }];
+}
 
+#pragma mark - Gesture Recognizer
 - (BOOL)gestureRecognizerShouldBegin:(UIGestureRecognizer *)gestureRecognizer
 {
     UITableView *tableView = (UITableView *)gestureRecognizer.view;
@@ -134,6 +173,7 @@ Segment *segment;
     }
 }
 
+#pragma mark - Prep Sections
 -(void)prepSegmentSections:segmentList {
     
     if(self.sections){
@@ -213,7 +253,6 @@ Segment *segment;
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-
     // Return the number of sections.
     return (unsigned long)self.sections.allKeys.count;
 }
@@ -225,35 +264,8 @@ Segment *segment;
     return [rowIndecesInSection count];
 }
 
-//-(UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
-//    UIView *view = [[UIView alloc] initWithFrame:CGRectMake(7, 0, tableView.frame.size.width -14 , 16)];
-//    UILabel *sectionLabel = [[UILabel alloc] init];
-//    sectionLabel.frame = CGRectMake(7, 0, tableView.frame.size.width -14, 16);
-//    sectionLabel.backgroundColor = [UIColor colorWithRed:.96 green:.96 blue:.96 alpha:1];
-//    sectionLabel.layer.borderWidth = .5;
-//    sectionLabel.layer.borderColor = [[UIColor blackColor] CGColor];
-//    sectionLabel.font = [UIFont boldSystemFontOfSize:11];
-//    sectionLabel.textColor = [UIColor blackColor];
-//    sectionLabel.layer.cornerRadius = 3;
-//    sectionLabel.clipsToBounds = YES;
-//    NSString* padding = @"  "; // # of spaces
-//    sectionLabel.text = [NSString stringWithFormat:@"%@%@%@", padding, [self dateGroupForSection:section], padding];
-//    [view addSubview:sectionLabel];
-//    return view;
-//}
-
-
-
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
-    //    NSString *category= [self categoryForSection:section];
-    //    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-    //    if([category isEqualToString:@"Local Representative"] && ![defaults valueForKey:@"zipCode"] && ![defaults valueForKey:@"latitude"]) {
-    //        return sectionHeaderHeight;
-    //    } else if([category isEqualToString:@"Local Representative"]) {
-    //        return localRepSectionHeaderHeight + 3;
-    //    } else {
     return 0.01;
-    //    }
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section {

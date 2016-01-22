@@ -40,7 +40,6 @@
         self.fedRepPortrait.image = [UIImage imageNamed:@"Seal_of_Congress_Cropped.png"];
     }
     
-    
     // Load Rep Image - if available
     if([dictionary valueForKey:@"image"]){
         self.fedRepPortrait.image = [dictionary valueForKey:@"image"];
@@ -79,5 +78,7 @@
 
     // Configure the view for the selected state
 }
+
+
 
 @end

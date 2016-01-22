@@ -239,7 +239,6 @@
         if(!error){
             dispatch_async(dispatch_get_main_queue(), ^{
                 self.actionsForSegment = objects;
-                NSLog(@"objects:%@",objects);
                 [self createActionOptionsList:objects];
                 //NSLog(@"Actions: %@",self.actionsForSegment);
                 [self.tableView reloadData];

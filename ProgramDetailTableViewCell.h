@@ -19,6 +19,11 @@
 @property (weak, nonatomic) IBOutlet UIImageView *segmentTypeImage;
 @property (weak, nonatomic) IBOutlet UILabel *segmentTitleLabel;
 @property (weak, nonatomic) IBOutlet UIButton *altPathButton;
+
+//Counts
+@property (weak, nonatomic) IBOutlet UITextField *countPeople;
+@property (weak, nonatomic) IBOutlet UITextField *countActions;
+
 - (void)configSegmentCell:segment;
 
 @end

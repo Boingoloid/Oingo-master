@@ -50,9 +50,6 @@ static NSString * const reuseIdentifier = @"Cell";
     // Fetch hashtag data
     [self getHashtagData];
     
-    
-
-    
     // Set TextView Delegate
     self.pushthoughtTextView.delegate = self;
     
@@ -529,10 +526,51 @@ static NSString * const reuseIdentifier = @"Cell";
             NSLog(@"no error, message saved");
             [self saveHashtags];
             [self saveTwitterTargets];
+            [self saveSegmentStats];
             //NSLog(@"Got here in the save 2:%@",sentMessageItem);
             //MarkSentMessageAPI *markSentMessagesAPI = [[MarkSentMessageAPI alloc]init];
             //markSentMessagesAPI.messageTableViewController = self.messageTableViewController;
             //[markSentMessagesAPI markSentMessages];
+        }
+    }];
+    
+
+}
+
+-(void)saveSegmentStats{
+    //go to segment in table and add one then save
+    PFQuery *query = [PFQuery queryWithClassName:@"sentMessages"];
+    [query whereKey:@"segmentObjectId" equalTo:[self.selectedSegment valueForKey:@"objectId"]];
+    [query countObjectsInBackgroundWithBlock:^(int count, NSError *error) {
+        //Now update query with count
+        if(!error) {
+            NSNumber *countNumber = [[NSNumber alloc]initWithInt:count];
+            NSLog(@"count of objects in sentMessage for Segment:%@",countNumber);
+            
+            PFQuery *queryCount = [PFQuery queryWithClassName:@"SegmentStats"];
+            [queryCount whereKey:@"segmentObjectId" equalTo:[self.selectedSegment valueForKey:@"objectId"]];
+            [queryCount getFirstObjectInBackgroundWithBlock:^(PFObject *segmentStatDict, NSError *error) {
+                if (!error) {
+                    NSLog(@"Segment Stats Dict from Parse:%@",segmentStatDict);
+                    [segmentStatDict setObject:countNumber forKey:@"actionCount"];
+                    NSLog(@"New Segment Stats Dict to Parse:%@",segmentStatDict);
+                    // Save
+                    [segmentStatDict saveInBackground];
+                } else {
+                    // Did not find any actionStats for this segment, create NEW entry
+                    PFObject *statObject = [PFObject objectWithClassName:@"SegmentStats"];
+                    [statObject setObject:[self.selectedSegment valueForKey:@"objectId"] forKey:@"segmentObjectId"];
+                    [statObject setObject:[self.selectedProgram valueForKey:@"objectId"] forKey:@"programObjectId"];
+                    
+                    if(countNumber == 0){
+                        [statObject setObject:countNumber forKey:@"actionCount"];
+                    } else {
+                        [statObject setObject:@(1) forKey:@"actionCount"];
+                    }
+                    NSLog(@"Error:%@, nothing in Parse, adding new statObjec:%@", error, statObject);
+                    [statObject saveInBackground];
+                }
+            }];
         }
     }];
 }

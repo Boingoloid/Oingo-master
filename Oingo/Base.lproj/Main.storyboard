@@ -441,32 +441,32 @@
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="58" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="v2g-OP-i18">
-                                                <rect key="frame" x="16" y="332" width="570" height="383"/>
+                                                <rect key="frame" x="8" y="332" width="584" height="383"/>
                                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="383" id="mz4-mJ-wwD"/>
                                                 </constraints>
                                                 <prototypes>
                                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="FedRepCell" id="if5-sM-ps9" customClass="FedRepCell">
-                                                        <rect key="frame" x="0.0" y="28" width="570" height="58"/>
+                                                        <rect key="frame" x="0.0" y="28" width="584" height="58"/>
                                                         <autoresizingMask key="autoresizingMask"/>
                                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="if5-sM-ps9" id="Vlj-eH-lYO">
-                                                            <rect key="frame" x="0.0" y="0.0" width="570" height="58"/>
+                                                            <rect key="frame" x="0.0" y="0.0" width="584" height="58"/>
                                                             <autoresizingMask key="autoresizingMask"/>
                                                             <subviews>
-                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" text="45" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BOC-eB-v7k">
+                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" misplaced="YES" text="45" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BOC-eB-v7k">
                                                                     <rect key="frame" x="539" y="20" width="18" height="17"/>
                                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                                     <nil key="highlightedColor"/>
                                                                 </label>
-                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="top" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="This is the default message" textAlignment="natural" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Yj0-Qi-cGz">
+                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="top" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="This is the default message" textAlignment="natural" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Yj0-Qi-cGz">
                                                                     <rect key="frame" x="8" y="23" width="549" height="27"/>
                                                                     <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                                                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                                     <nil key="highlightedColor"/>
                                                                 </label>
-                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="twittername" lineBreakMode="wordWrap" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yBQ-mg-4SN">
+                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="twittername" lineBreakMode="wordWrap" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yBQ-mg-4SN">
                                                                     <rect key="frame" x="6" y="6" width="551" height="15"/>
                                                                     <constraints>
                                                                         <constraint firstAttribute="height" constant="15" id="Rp0-f0-qIc"/>
@@ -523,7 +523,7 @@
                                                 </prototypes>
                                             </tableView>
                                             <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="bordered" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="5ZF-C6-qtk">
-                                                <rect key="frame" x="436" y="304" width="150" height="29"/>
+                                                <rect key="frame" x="442" y="304" width="150" height="29"/>
                                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" constant="150" id="tI8-Et-HC0"/>
@@ -863,13 +863,13 @@ Episode Link</string>
                                             <constraint firstAttribute="bottom" secondItem="l9K-4L-a9b" secondAttribute="bottom" constant="1" id="F46-EV-cNb"/>
                                             <constraint firstItem="dWn-bT-9ai" firstAttribute="top" secondItem="vOf-6F-3st" secondAttribute="bottom" constant="2" id="GPE-hw-EVR"/>
                                             <constraint firstAttribute="trailing" secondItem="Bzi-Pl-ruK" secondAttribute="trailing" constant="14" id="JPr-RW-1SR"/>
-                                            <constraint firstAttribute="trailing" secondItem="v2g-OP-i18" secondAttribute="trailing" constant="14" id="JSj-x4-bkW"/>
+                                            <constraint firstAttribute="trailing" secondItem="v2g-OP-i18" secondAttribute="trailing" constant="8" id="JSj-x4-bkW"/>
                                             <constraint firstItem="v2g-OP-i18" firstAttribute="top" secondItem="q2J-IX-Pvd" secondAttribute="top" constant="249" id="Kq0-5h-YUk"/>
                                             <constraint firstAttribute="trailing" secondItem="vOf-6F-3st" secondAttribute="trailing" constant="55" id="LNd-gT-Wua"/>
                                             <constraint firstItem="Bcu-mK-Lvg" firstAttribute="top" secondItem="Be0-9S-MQ7" secondAttribute="bottom" constant="1" id="LPe-RU-2SM"/>
                                             <constraint firstItem="JYH-nf-nqd" firstAttribute="top" secondItem="vOf-6F-3st" secondAttribute="bottom" constant="2" id="NCT-o1-1t8"/>
                                             <constraint firstItem="JYH-nf-nqd" firstAttribute="top" secondItem="vOf-6F-3st" secondAttribute="bottom" constant="2" id="P7e-jK-h0O"/>
-                                            <constraint firstAttribute="trailing" secondItem="5ZF-C6-qtk" secondAttribute="trailing" constant="14" id="Pfe-4y-TpJ"/>
+                                            <constraint firstAttribute="trailing" secondItem="5ZF-C6-qtk" secondAttribute="trailing" constant="8" id="Pfe-4y-TpJ"/>
                                             <constraint firstAttribute="height" constant="740" id="Q26-n2-siS"/>
                                             <constraint firstItem="M7h-1i-bNu" firstAttribute="top" secondItem="BMn-Uy-ojU" secondAttribute="top" id="Qv2-Vq-lcH"/>
                                             <constraint firstItem="4TM-TS-WTW" firstAttribute="leading" secondItem="vOf-6F-3st" secondAttribute="leading" id="RzB-Tz-LRz"/>
@@ -895,7 +895,7 @@ Episode Link</string>
                                             <constraint firstItem="ewk-9a-tej" firstAttribute="centerY" secondItem="JYH-nf-nqd" secondAttribute="centerY" id="fgH-mW-vGF"/>
                                             <constraint firstItem="zlV-4B-W9U" firstAttribute="centerY" secondItem="BMn-Uy-ojU" secondAttribute="centerY" id="g3n-2Q-VBQ"/>
                                             <constraint firstItem="Sd7-BW-Sr7" firstAttribute="centerY" secondItem="5ZF-C6-qtk" secondAttribute="centerY" id="hr1-ib-swC"/>
-                                            <constraint firstItem="v2g-OP-i18" firstAttribute="leading" secondItem="q2J-IX-Pvd" secondAttribute="leading" constant="16" id="iAP-y8-RHo"/>
+                                            <constraint firstItem="v2g-OP-i18" firstAttribute="leading" secondItem="q2J-IX-Pvd" secondAttribute="leading" constant="8" id="iAP-y8-RHo"/>
                                             <constraint firstAttribute="trailing" secondItem="dWn-bT-9ai" secondAttribute="trailing" constant="8" id="iS9-Jp-VdC"/>
                                             <constraint firstItem="Bzi-Pl-ruK" firstAttribute="leading" secondItem="4TM-TS-WTW" secondAttribute="trailing" constant="-28" id="jBP-Va-0v7"/>
                                             <constraint firstItem="z3N-SC-KGV" firstAttribute="top" secondItem="vOf-6F-3st" secondAttribute="top" id="jD1-Sc-7o7"/>
@@ -1444,22 +1444,22 @@ Episode Link</string>
                                             </constraints>
                                             <state key="normal" title="Alt Path"/>
                                         </button>
-                                        <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="35" textAlignment="right" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="UB5-g2-cS5">
+                                        <textField hidden="YES" opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="35" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="UB5-g2-cS5">
                                             <rect key="frame" x="126" y="54" width="26" height="22"/>
                                             <fontDescription key="fontDescription" type="system" weight="thin" pointSize="18"/>
                                             <textInputTraits key="textInputTraits"/>
                                         </textField>
-                                        <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="52" textAlignment="right" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="BLy-qs-iaa">
+                                        <textField opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="--" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="BLy-qs-iaa">
                                             <rect key="frame" x="127" y="81" width="26" height="22"/>
                                             <fontDescription key="fontDescription" type="system" weight="thin" pointSize="18"/>
                                             <textInputTraits key="textInputTraits"/>
                                         </textField>
-                                        <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="actions taken" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="5FR-eI-LPb">
+                                        <textField opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="actions taken" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="5FR-eI-LPb">
                                             <rect key="frame" x="160" y="84" width="96" height="18"/>
                                             <fontDescription key="fontDescription" type="system" weight="thin" pointSize="15"/>
                                             <textInputTraits key="textInputTraits"/>
                                         </textField>
-                                        <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="people" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="DcL-Cp-Mfn">
+                                        <textField hidden="YES" opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="people" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="DcL-Cp-Mfn">
                                             <rect key="frame" x="160" y="57" width="51" height="18"/>
                                             <fontDescription key="fontDescription" type="system" weight="thin" pointSize="15"/>
                                             <textInputTraits key="textInputTraits"/>
@@ -1582,6 +1582,8 @@ Episode Link</string>
                                 </tableViewCellContentView>
                                 <connections>
                                     <outlet property="altPathButton" destination="QZH-na-Any" id="6eS-1V-8iB"/>
+                                    <outlet property="countActions" destination="BLy-qs-iaa" id="QfB-cn-DA0"/>
+                                    <outlet property="countPeople" destination="UB5-g2-cS5" id="1wf-RQ-r5h"/>
                                     <outlet property="dateLabel" destination="3jQ-uc-33Q" id="xvW-hB-5Sh"/>
                                     <outlet property="linkToContentButton" destination="cDZ-re-iL0" id="APd-ol-aQC"/>
                                     <outlet property="purposeSummary" destination="NKo-ja-dvl" id="Vnu-Ks-N4Q"/>
