@@ -43,6 +43,7 @@
 @property (weak, nonatomic) IBOutlet UILabel *characterCount;
 @property (weak, nonatomic) IBOutlet UIImageView *linkTouchArea;
 @property (nonatomic) int linkState;
+@property (weak, nonatomic) IBOutlet UILabel *tableViewTitleLabel;
 
 
 // tableview

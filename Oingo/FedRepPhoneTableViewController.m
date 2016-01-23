@@ -15,13 +15,14 @@
 
 @implementation FedRepPhoneTableViewController
 
+-(void)viewWillAppear{
+    self.segmentedControlCommunicationType.selectedSegmentIndex = 1;
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     
     self.segmentedControlCommunicationType.selectedSegmentIndex = 1;
-    
-     [self.navigationItem setHidesBackButton:YES];
-    
     
     // Format prompt label
     self.promptView.layer.borderColor = [[UIColor grayColor] CGColor];
@@ -36,7 +37,7 @@
     tapRecognizer.numberOfTouchesRequired = 1;
     [tapRecognizer setCancelsTouchesInView:NO];
     [self.view addGestureRecognizer:tapRecognizer];
-    
+
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;
     

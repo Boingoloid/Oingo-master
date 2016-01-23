@@ -10,8 +10,8 @@
 #import "LocalRepActionTableViewCell.h"
 #import "FederalRepActionDashboardViewController.h"
 #import "SignUpViewController.h"
-#import "GetLocationViewController.h"
 #import <Parse/Parse.h>
+#import "WebViewController.h"
 
 @interface ActionDashboardTableViewController () <UIGestureRecognizerDelegate,CLLocationManagerDelegate>
 
@@ -55,6 +55,10 @@
     [self.tableView addGestureRecognizer:tapRecognizer];
 }
 
+
+
+#pragma mark - Gesture Recognizer
+
 - (BOOL)gestureRecognizerShouldBegin:(UIGestureRecognizer *)gestureRecognizer
 {
     UITableView *tableView = (UITableView *)gestureRecognizer.view;
@@ -71,26 +75,31 @@
         // Collect data about tap location
         UITableView *tableView = (UITableView *)tap.view;
         CGPoint p = [tap locationInView:tap.view];
-        if(CGRectContainsPoint(self.tableView.frame, p)) {
         
+        if(CGRectContainsPoint(self.tableView.frame, p)) {
             NSIndexPath* indexPath = [tableView indexPathForRowAtPoint:p];
             self.selectedActionDict = [self.actionOptionsArray objectAtIndex:indexPath.row];
-            //NSLog(@"selected Action dict:%@",self.selectedActionDict);
+            NSString *category = [self.selectedActionDict valueForKey:@"actionCategory"];
+            NSLog(@"actionCategory:%@",category);
             UITableViewCell *cell = (UITableViewCell *)[tableView cellForRowAtIndexPath:indexPath];
             CGPoint pointInCell = [tap locationInView:cell];
             
             // Deselect the row
             [self.tableView deselectRowAtIndexPath:indexPath animated:YES];
-        
-            if([UpdateDefaults isLocationInDefaults]){
-                [self performSegueWithIdentifier:@"showBuildMessage" sender:nil];
-            } else {
-                if([UpdateDefaults isLocationInUser]){
-                    //Load user locaqtion into defaults
-                    [UpdateDefaults updateLocationDefaultsFromUser];
+            
+            if([category isEqualToString:@"Local Representative"]){
+                if([UpdateDefaults isLocationInDefaults]){
+                    [self performSegueWithIdentifier:@"showFedRepVC" sender:nil];
                 } else {
-                    [self showLocationCapture];
+                    if([UpdateDefaults isLocationInUser]){
+                        //Load user locaqtion into defaults
+                        [UpdateDefaults updateLocationDefaultsFromUser];
+                    } else {
+                        [self showLocationCapture];
+                    }
                 }
+            } else if ([category isEqualToString:@"Petition"]){
+                [self performSegueWithIdentifier:@"showChangeORGWebView" sender:self];
             }
         }
     }
@@ -115,7 +124,7 @@
     UIAlertAction *enterZipAction = [UIAlertAction actionWithTitle:NSLocalizedString(@"Enter Zip", @"enterZip action") style:UIAlertActionStyleDefault handler:^(UIAlertAction *action){
         NSLog(@"enter zip");
         [self showZipCapture];
-        [self performSegueWithIdentifier:@"showBuildMessage" sender:nil];
+        [self performSegueWithIdentifier:@"showFedRepVC" sender:nil];
     }];
     [alertController addAction:enterZipAction];
     
@@ -165,7 +174,7 @@
             if([PFUser currentUser]){
                 [UpdateDefaults saveLocationDefaultsToUser];
             }
-            [self performSegueWithIdentifier:@"showBuildMessage" sender:self];
+            [self performSegueWithIdentifier:@"showFedRepVC" sender:self];
         }
         
         NSLog(@"zipCode:%@",zipCodeField.text);
@@ -221,7 +230,7 @@
     UpdateDefaults *updateDefaults = [[UpdateDefaults alloc]init];
     [updateDefaults saveCoordinatesToDefaultsWithLatitude:(double)newLocation.coordinate.latitude andLongitude:(double)newLocation.coordinate.longitude];
     [UpdateDefaults saveLocationDefaultsToUser];
-    [self performSegueWithIdentifier:@"showBuildMessage" sender:nil];
+    [self performSegueWithIdentifier:@"showFedRepVC" sender:nil];
 }
 
 
@@ -273,7 +282,7 @@
 
 
 #pragma mark - Data Manipulation Action Options List
-
+//HERE CREATE ONE LIST FOR OPTIONS W/ MESSAGE LINES, THEN ANOTHER FOR CONTACTS FOR TABLEVIEW IN PLACE OF FED REP LISTS.
 
 -(void) createActionOptionsList:(NSArray*)objects{
     //NSLog(@"creating options list");
@@ -303,7 +312,6 @@
         [actionOptionsArray removeObjectAtIndex:indexReg+1];
     }
 
-    
     //Pull Local Represetative actionCategory to top
     NSUInteger index = [actionOptionsArray indexOfObjectPassingTest:
                         ^BOOL(NSDictionary *dict, NSUInteger idx, BOOL *stop) {
@@ -319,7 +327,7 @@
     }
     
     self.actionOptionsArray = actionOptionsArray;
-    NSLog(@"action Options:%@",self.actionOptionsArray);
+    //NSLog(@"action Options:%@",self.actionOptionsArray);
     
 }
 
@@ -398,7 +406,7 @@
 
 // In a storyboard-based application, you will often want to do a little preparation before navigation
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    if([segue.identifier isEqualToString:@"showBuildMessage"]){
+    if([segue.identifier isEqualToString:@"showFedRepVC"]){
         FederalRepActionDashboardViewController *fedRepActionVC = segue.destinationViewController;
         fedRepActionVC.tableViewController = self;
         fedRepActionVC.selectedProgram = self.selectedProgram;
@@ -407,6 +415,9 @@
         fedRepActionVC.sentActionsForSegment = self.sentActionsForSegment;
         fedRepActionVC.selectedActionDict = self.selectedActionDict;
         //NSLog(@"sender: %@",sender);
+    } else if ([segue.identifier isEqualToString:@"showChangeORGWebView"]){
+        WebViewController *webVC = segue.destinationViewController;
+        webVC.selectedLink = [self.selectedActionDict valueForKey:@"petitionURL"];
     }
     
     // Get the new view controller using [segue destinationViewController].

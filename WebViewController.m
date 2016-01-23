@@ -32,9 +32,9 @@
 
 - (void)viewWillAppear:(BOOL)animated {
     NSURL *url = [NSURL URLWithString:self.selectedLink];
+    NSLog(@"%@",url);
     NSURLRequest *requestURL = [NSURLRequest requestWithURL:url];
     [self.webView loadRequest:requestURL];
-    
     
     loadingView = [[UIView alloc]initWithFrame:CGRectMake(100, 100, 80, 80)];
     loadingView.backgroundColor = [UIColor colorWithWhite:0. alpha:0.6];

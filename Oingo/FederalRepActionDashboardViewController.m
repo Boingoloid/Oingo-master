@@ -23,7 +23,9 @@
 
 static NSString * const reuseIdentifier = @"Cell";
 
-
+-(void)viewWillAppear{
+    self.segmentedControlCommunicationType.selectedSegmentIndex = 0;
+}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -47,7 +49,7 @@ static NSString * const reuseIdentifier = @"Cell";
         NSLog(@"location info shoudld area be there before this page, error");
     }
     
-    // Fetch hashtag data
+    // Fetch hashtag data - async
     [self getHashtagData];
     
     // Set TextView Delegate
@@ -72,8 +74,6 @@ static NSString * const reuseIdentifier = @"Cell";
     self.collectionView.collectionViewLayout = flowLayout;
     self.collectionView.allowsSelection = YES;
     self.collectionView.allowsMultipleSelection = YES;
-    
-
     
     // Format Breadcrumb label
     self.breadcrumbsLabel.text = [NSString stringWithFormat:@"/ %@ / %@",[self.selectedProgram valueForKey:@"programTitle"],[self.selectedSegment valueForKey:@"segmentTitle"]];
@@ -128,20 +128,39 @@ static NSString * const reuseIdentifier = @"Cell";
     
     // Set link Checkbox State
     self.linkState = 1;
-    
 
     // Format Sent Message Data -----------------------------------------------------------------------------------
+    NSString *category = [self.selectedActionDict valueForKey:@"actionCategory"];
     NSArray *filteredActionList;
-    filteredActionList = [self.sentActionsForSegment filteredArrayUsingPredicate:[NSPredicate predicateWithFormat:@"messageCategory = %@", @"Local Representative"]];
+    
+    //COULD JUST PUT THE CATEGORY BELOW IN THE PREDICATE, THEN IT WOULD FILTER ON WHATEVER
+    
+    filteredActionList = [self.sentActionsForSegment filteredArrayUsingPredicate:[NSPredicate predicateWithFormat:@"actionCategory = %@", category]];
     // NSLog(@"printing array count:%lu  value:%@",(unsigned long)filteredActionList.count,filteredActionList);
     
     
     NSArray *filteredSentActionList;
-    filteredSentActionList = [self.sentActionsForSegment filteredArrayUsingPredicate:[NSPredicate predicateWithFormat:@"messageCategory = %@", @"Local Representative"]];
+    filteredSentActionList = [self.sentActionsForSegment filteredArrayUsingPredicate:[NSPredicate predicateWithFormat:@"actionCategory = %@", category]];
+
+    // strip hidden and count
+    int count = 0;
+    NSMutableArray *filteredSentActionsHiddenRemoved = [[NSMutableArray alloc]init];
+    for(NSDictionary *dict in filteredSentActionList){
+        if([[dict valueForKey:@"isHidden"] boolValue]){
+            count++;
+        } else{
+            [filteredSentActionsHiddenRemoved addObject:dict];
+            count++;
+        }
+    }
+    
+    //apply count to
+    self.tableViewTitleLabel.text = [NSString stringWithFormat:@"Recent Tweets: %d", count];
+    
     //NSLog(@"printing sent array count:%lu  value:%@",(unsigned long)filteredSentActionList.count,filteredSentActionList);
     
     self.filteredActionsForSegment = (NSMutableArray*)filteredActionList;
-    self.filteredSentActionsForSegment = (NSMutableArray*)filteredSentActionList;
+    self.filteredSentActionsForSegment = (NSMutableArray*)filteredSentActionsHiddenRemoved;
     
     
 //    // Adjust for default count
@@ -173,10 +192,6 @@ static NSString * const reuseIdentifier = @"Cell";
     [self.tableView reloadData];
     
     //----------------------------------------------------------------------------------------------------------------
-    
-    
-
-    
     
     // Create gesture recognizer
     UITapGestureRecognizer *tapRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(respondToTapGesture:)]; //connect recognizer to action method.
@@ -265,10 +280,7 @@ static NSString * const reuseIdentifier = @"Cell";
     } else {
         self.tableData = (NSMutableArray*)self.hashtagList;
     }
-    
     [self.tableView reloadData];
-    
-    
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
@@ -408,7 +420,7 @@ static NSString * const reuseIdentifier = @"Cell";
             NSLog(@"Tweet composition cancelled");
         } else {
             NSLog(@"Tweet is sent:%ld",(long)result);
-            [self saveSentMessage];
+            [self showTweetDisclosureAlert];
             //Need to save tweet result ID in callBack
         }
     }];
@@ -466,7 +478,32 @@ static NSString * const reuseIdentifier = @"Cell";
 //     }];
 }
 
--(void) saveSentMessage{
+-(void)showTweetDisclosureAlert{
+    NSString *alertTitle = @"Way to go!";
+    NSString *alertMessage = [NSString stringWithFormat:@"Your tweet will be displayed anonymously below to inspire others.  Is that OK with you?"];
+    
+    UIAlertController *alertController = [UIAlertController alertControllerWithTitle:alertTitle message:alertMessage preferredStyle:UIAlertControllerStyleAlert];
+    
+    UIAlertAction *OKAction = [UIAlertAction actionWithTitle:NSLocalizedString(@"OK", @"OK action") style:UIAlertActionStyleDefault handler:^(UIAlertAction *action){
+        NSLog(@"OK");
+        // just save
+        [self saveSentMessageWithHidden:NO];
+    }];
+    [alertController addAction:OKAction];
+    
+    UIAlertAction *cancel = [UIAlertAction actionWithTitle:NSLocalizedString(@"No, do not display my message at all", @"cancel action") style:UIAlertActionStyleDefault handler:^(UIAlertAction *action){
+        NSLog(@"no, don't show");
+        [self saveSentMessageWithHidden:YES];
+        // update defaults for hide
+    }];
+    [alertController addAction:cancel];
+    
+    [self presentViewController:alertController animated:YES completion:nil];
+}
+
+-(void) saveSentMessageWithHidden:(BOOL)isHidden{
+    
+    // add check defaults to hide bool
     
     //  SAVING MESSAGE DATA TO PARSE
     PFUser *currentUser = [PFUser currentUser];
@@ -478,12 +515,19 @@ static NSString * const reuseIdentifier = @"Cell";
     [sentMessageItem setObject:[self.selectedActionDict valueForKey:@"actionCategory"] forKey:@"actionCategory"];
     [sentMessageItem setObject:@"twitter" forKey:@"messageType"];
     
+    // Set isHidden
+    if(isHidden){
+        [sentMessageItem setObject:@YES forKey:@"isHidden"];
+    }else {
+        [sentMessageItem setObject:@NO forKey:@"isHidden"];
+    }
+    
     //Program and segment info
     [sentMessageItem setObject:[self.selectedSegment valueForKey:@"segmentID"] forKey:@"segmentID"];
     [sentMessageItem setObject:[self.selectedSegment valueForKey:@"objectId"] forKey:@"segmentObjectId"];
     [sentMessageItem setObject:[self.selectedProgram valueForKey:@"objectId"] forKey:@"programObjectId"];
     
-    //user
+    //user info
     [sentMessageItem setObject:currentUser.objectId forKey:@"userObjectId"];
     [sentMessageItem setObject:[currentUser valueForKey:@"username"] forKey:@"username"];
     NSMutableDictionary *authDict = [currentUser valueForKey:@"authData"];
@@ -518,7 +562,7 @@ static NSString * const reuseIdentifier = @"Cell";
 //        [sentMessageItem setObject:@NO forKey:@"isDefaultMessage"];
 //    }
     
-    [sentMessageItem saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) { //save currentUser to parse disk
+    [sentMessageItem saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) { //save
         if(error){
             NSLog(@"error, message not saved");
         }
@@ -561,7 +605,6 @@ static NSString * const reuseIdentifier = @"Cell";
                     PFObject *statObject = [PFObject objectWithClassName:@"SegmentStats"];
                     [statObject setObject:[self.selectedSegment valueForKey:@"objectId"] forKey:@"segmentObjectId"];
                     [statObject setObject:[self.selectedProgram valueForKey:@"objectId"] forKey:@"programObjectId"];
-                    
                     if(countNumber == 0){
                         [statObject setObject:countNumber forKey:@"actionCount"];
                     } else {
@@ -574,6 +617,7 @@ static NSString * const reuseIdentifier = @"Cell";
         }
     }];
 }
+
 
 # pragma mark - Save # and @ Methods
 -(void) saveHashtags {
@@ -731,7 +775,7 @@ static NSString * const reuseIdentifier = @"Cell";
         //[self.tableView deselectRowAtIndexPath:indexPath animated:YES];
         
         //if(CGRectContainsPoint(cell.frame, pointInCell)) {
-        //[self performSegueWithIdentifier:@"showBuildMessage" sender:self];
+        //[self performSegueWithIdentifier:@"showFedRepVC" sender:self];
         //}
     }
 }

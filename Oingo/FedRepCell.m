@@ -45,12 +45,23 @@
         }
         
         // set name label
-        if([actionDict valueForKey:@"twitterId"]){
-            self.tableViewNameLabel.text = [actionDict valueForKey:@"twitterId"];
-        } else {
-            self.tableViewNameLabel.text = @"user093627584";
-        }
         
+        // if user default is set to hide
+        // then height = 0
+        // else if bool set to hide
+        
+        BOOL isHidden = [[actionDict objectForKey:@"isHidden"] boolValue];
+        NSLog(@"isHiddenBool:%d WithMessage:%@",isHidden,[sentMessage valueForKey:@"messageText"]);
+        int randomUserNumber = [self randomNumberBetween:10000000 maxNumber:99999999];
+        
+        if(!isHidden){
+            //self.tableViewNameLabel.text = [actionDict valueForKey:@"twitterId"];
+            self.tableViewNameLabel.text = [NSString stringWithFormat:@"user%d",randomUserNumber];
+        } else {
+            self.tableViewPrimaryLabel.hidden = YES;
+            self.tableViewSecondaryLabel.hidden = YES;
+            self.tableViewNameLabel.hidden = YES;
+        }
     } else {
         NSDictionary *hashtag = (NSDictionary*)actionDict;
         self.tableViewPrimaryLabel.text = [hashtag valueForKey:@"hashtag"];
@@ -67,7 +78,10 @@
     return self;
 }
 
-
+- (int)randomNumberBetween:(int)min maxNumber:(int)max
+{
+    return min + arc4random_uniform(max - min + 1);
+}
 
 
 

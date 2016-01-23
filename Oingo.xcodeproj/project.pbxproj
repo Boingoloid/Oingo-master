@@ -46,7 +46,6 @@
 		CE31B1A01B420C670048A5B1 /* MessageTableViewRepresentativeCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CE31B19F1B420C670048A5B1 /* MessageTableViewRepresentativeCell.m */; };
 		CE31B1A91B44923B0048A5B1 /* ParseAPI.m in Sources */ = {isa = PBXBuildFile; fileRef = CE31B1A81B44923B0048A5B1 /* ParseAPI.m */; };
 		CE31CF741C5003C200C49C2B /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CE31CF721C5003C200C49C2B /* Main.storyboard */; };
-		CE31CF771C501C2B00C49C2B /* GetLocationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CE31CF761C501C2B00C49C2B /* GetLocationViewController.m */; };
 		CE3571291C28D6CB00903ED0 /* FedRepCollectionCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CE3571281C28D6CB00903ED0 /* FedRepCollectionCell.m */; };
 		CE35712C1C28DEFE00903ED0 /* FetchFedRepPhoto.m in Sources */ = {isa = PBXBuildFile; fileRef = CE35712B1C28DEFE00903ED0 /* FetchFedRepPhoto.m */; };
 		CE35F87E1C330CAA0089E82C /* checked_checkbox.png in Resources */ = {isa = PBXBuildFile; fileRef = CE35F87D1C330CAA0089E82C /* checked_checkbox.png */; };
@@ -243,8 +242,6 @@
 		CE31B1A71B44923B0048A5B1 /* ParseAPI.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ParseAPI.h; sourceTree = "<group>"; };
 		CE31B1A81B44923B0048A5B1 /* ParseAPI.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ParseAPI.m; sourceTree = "<group>"; };
 		CE31CF731C5003C200C49C2B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
-		CE31CF751C501C2A00C49C2B /* GetLocationViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GetLocationViewController.h; sourceTree = "<group>"; };
-		CE31CF761C501C2B00C49C2B /* GetLocationViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GetLocationViewController.m; sourceTree = "<group>"; };
 		CE3571271C28D6CB00903ED0 /* FedRepCollectionCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FedRepCollectionCell.h; sourceTree = "<group>"; };
 		CE3571281C28D6CB00903ED0 /* FedRepCollectionCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FedRepCollectionCell.m; sourceTree = "<group>"; };
 		CE35712A1C28DEFE00903ED0 /* FetchFedRepPhoto.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FetchFedRepPhoto.h; sourceTree = "<group>"; };
@@ -509,8 +506,6 @@
 			isa = PBXGroup;
 			children = (
 				CE31CF721C5003C200C49C2B /* Main.storyboard */,
-				CE31CF751C501C2A00C49C2B /* GetLocationViewController.h */,
-				CE31CF761C501C2B00C49C2B /* GetLocationViewController.m */,
 				CE9B2E5F1C1CBDB000DEB7BC /* Segment Selection */,
 				CE2BF9781B3E5A2F00AB15AC /* In process */,
 				CE82943E1B38DB9300B596E6 /* Login/Signup/settings */,
@@ -1094,7 +1089,6 @@
 				CE4BD0BD1C0FDC8D00442646 /* SegmentDataViewController.m in Sources */,
 				CE9D625E1BC3C10F00A244ED /* MessagePanelViewController.m in Sources */,
 				CE87CAC91AFAB9B70084C666 /* ProgramsTableViewCell.m in Sources */,
-				CE31CF771C501C2B00C49C2B /* GetLocationViewController.m in Sources */,
 				CEC0C7441B45D6B400A9DD33 /* LocationFinderAPI.m in Sources */,
 				CEB187941B18FAD600C86955 /* MessageOptionsTableViewCell.m in Sources */,
 				CE14A8AD1B2227C60032664C /* LogInViewController.m in Sources */,

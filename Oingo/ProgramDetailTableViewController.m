@@ -110,12 +110,12 @@ Segment *segment;
                                             return [[dict objectForKey:@"segmentObjectId"] isEqual:segmentId];
                                         }];
                     if(index == NSNotFound){
-                        NSLog(@"did not find stats for segment");
+                        //NSLog(@"did not find stats for segment");
                     } else {
                         NSMutableDictionary *statDict = [objects objectAtIndex:index];
                         [dictionary setValue:[statDict valueForKey:@"actionCount"] forKey:@"actionCount"];
-                        NSLog(@"found stats for segment");
-                        NSLog(@"comparing segmentlist:%@ and statentry:%@",self.segmentList,objects);
+                        //NSLog(@"found stats for segment");
+                        //NSLog(@"comparing segmentlist:%@ and statentry:%@",self.segmentList,objects);
                     }
                 }
                 [self.tableView reloadData];
