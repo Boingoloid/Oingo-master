@@ -162,7 +162,6 @@ static NSString * const reuseIdentifier = @"Cell";
     self.filteredActionsForSegment = (NSMutableArray*)filteredActionList;
     self.filteredSentActionsForSegment = (NSMutableArray*)filteredSentActionsHiddenRemoved;
     
-    
 //    // Adjust for default count
 //    NSString *defaultMessage =[[self.filteredActionsForSegment objectAtIndex:0] valueForKey:@"messageText"];
 //    NSMutableDictionary *defaultMessageDictionary = [[NSMutableDictionary alloc]initWithObjectsAndKeys:defaultMessage, @"messageText", 0, @"messageCount", nil];

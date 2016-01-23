@@ -239,17 +239,15 @@
 #pragma mark - Fetching Data
 
 -(void) fetchActionsForSegment {
-    //[FetchDataParse fetchActionsForSegment:self.selectedSegment];
     PFQuery *query = [PFQuery queryWithClassName:@"Messages"];
-    query.limit=1000;
     [query whereKey:@"segmentID" equalTo:[self.selectedSegment valueForKey:@"segmentID"]];
-    [query orderByDescending:@"actionCategory"];
+    [query orderByDescending:@"actionCategory,isMessage"];
+    query.limit=1000;
     [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
         if(!error){
             dispatch_async(dispatch_get_main_queue(), ^{
                 self.actionsForSegment = objects;
                 [self createActionOptionsList:objects];
-                //NSLog(@"Actions: %@",self.actionsForSegment);
                 [self.tableView reloadData];
             });
         } else {
@@ -259,20 +257,16 @@
 }
 
 -(void) fetchSentActionsForSegment {
-    //PFUser *currentUser = [PFUser currentUser];
-    
-    //get message data for segment menu  //MAKE SURE IS MESSSAGE FIRST!
     PFQuery *query = [PFQuery queryWithClassName:@"sentMessages"];
-    query.limit=1000;
     [query orderByDescending:@"createdAt"];
     [query whereKey:@"segmentID" equalTo:[self.selectedSegment valueForKey:@"segmentID"]];
+    query.limit=1000;
     [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
         if (!error) {
             dispatch_async(dispatch_get_main_queue(), ^{
                 self.sentActionsForSegment = objects;
                 NSUInteger count = [objects count];
                 NSLog(@"count of sent message:%ld",count);
-                //NSLog(@"sentActions: %@",self.sentActionsForSegment);
             });
         } else {
             NSLog(@"Error: %@ %@", error, [error userInfo]);
@@ -283,6 +277,26 @@
 
 #pragma mark - Data Manipulation Action Options List
 //HERE CREATE ONE LIST FOR OPTIONS W/ MESSAGE LINES, THEN ANOTHER FOR CONTACTS FOR TABLEVIEW IN PLACE OF FED REP LISTS.
+
+-(void) separateMessagesFromContacts:(NSArray*)objects {
+    
+    NSMutableArray *actionOptions = [[NSMutableArray alloc]init];
+    NSMutableArray *contacts = [[NSMutableArray alloc]init];
+    
+    for (NSDictionary *dictionary in objects) {
+        //NSLog(@"[dictionary valueForKey:@messageCategory]:%@",[dictionary valueForKey:@"messageCategory"]);
+        bool isMessageBool = [[dictionary valueForKey:@"isMessage"] boolValue];
+        if(isMessageBool) {
+            [dictionary setValue:@YES forKey:@"isLinkIncluded"]; // Set Link Default
+            [actionOptions addObject:dictionary];
+        } else {
+            [contacts addObject:dictionary];
+        }
+    }
+    
+    self.contacts = contacts;
+}
+
 
 -(void) createActionOptionsList:(NSArray*)objects{
     //NSLog(@"creating options list");

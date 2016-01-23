@@ -40,5 +40,6 @@
 //Created
 @property (nonatomic) NSMutableArray *actionOptionsArray;
 @property (nonatomic) NSMutableDictionary *selectedActionDict;
+@property (nonatomic) NSMutableArray *contacts;
 
 @end
