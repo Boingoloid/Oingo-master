@@ -81,8 +81,8 @@
             self.selectedActionDict = [self.actionOptionsArray objectAtIndex:indexPath.row];
             NSString *category = [self.selectedActionDict valueForKey:@"actionCategory"];
             NSLog(@"actionCategory:%@",category);
-            UITableViewCell *cell = (UITableViewCell *)[tableView cellForRowAtIndexPath:indexPath];
-            CGPoint pointInCell = [tap locationInView:cell];
+            //UITableViewCell *cell = (UITableViewCell *)[tableView cellForRowAtIndexPath:indexPath];
+            //CGPoint pointInCell = [tap locationInView:cell];
             
             // Deselect the row
             [self.tableView deselectRowAtIndexPath:indexPath animated:YES];
@@ -100,7 +100,7 @@
                 }
             } else if ([category isEqualToString:@"Petition"]){
                 [self performSegueWithIdentifier:@"showChangeORGWebView" sender:self];
-            }
+            }  ///// HERE IS WHERE THE CODE GOES FOR OTHER COMM CATEGORIES
         }
     }
 }
@@ -247,7 +247,7 @@
         if(!error){
             dispatch_async(dispatch_get_main_queue(), ^{
                 self.actionsForSegment = objects;
-                [self createActionOptionsList:objects];
+                [self createActionOptionsAndContacts:objects];
                 [self.tableView reloadData];
             });
         } else {
@@ -278,7 +278,7 @@
 #pragma mark - Data Manipulation Action Options List
 //HERE CREATE ONE LIST FOR OPTIONS W/ MESSAGE LINES, THEN ANOTHER FOR CONTACTS FOR TABLEVIEW IN PLACE OF FED REP LISTS.
 
--(void) separateMessagesFromContacts:(NSArray*)objects {
+-(void) createActionOptionsAndContacts:(NSArray*)objects {
     
     NSMutableArray *actionOptions = [[NSMutableArray alloc]init];
     NSMutableArray *contacts = [[NSMutableArray alloc]init];
@@ -293,56 +293,70 @@
             [contacts addObject:dictionary];
         }
     }
-    
+    self.actionOptionsArray = [self makeActionOptionsUnique:actionOptions];
+    self.actionOptionsArray = [self reorderActionOptions:self.actionOptionsArray];
     self.contacts = contacts;
 }
 
-
--(void) createActionOptionsList:(NSArray*)objects{
-    //NSLog(@"creating options list");
+-(NSMutableArray*)makeActionOptionsUnique:(NSMutableArray*)actionOptions{
+    NSMutableArray *uniqueActionOptions = [[NSMutableArray alloc]init];
     NSString *category = @"";
-    NSMutableArray *actionOptionsArray = [[NSMutableArray alloc]init];
     
     // Loop, create unique list of actionCategories
-    for (NSDictionary *dictionary in objects){
+    for (NSDictionary *dictionary in actionOptions){
         NSString *dictionaryCategory = [dictionary valueForKey:@"actionCategory"];
-        
         if (![category isEqualToString:dictionaryCategory]){
             category = dictionaryCategory;
-            [actionOptionsArray addObject:dictionary];
+            [uniqueActionOptions addObject:dictionary];
         }
     }
-    
-    //Pull Regulator actionCategory to top
-    NSUInteger indexReg = [actionOptionsArray indexOfObjectPassingTest:
-                        ^BOOL(NSDictionary *dict, NSUInteger idx, BOOL *stop) {
-                            return [[dict objectForKey:@"actionCategory"] isEqual:@"Regulators"];
-                        }];
-    if(indexReg == NSNotFound){
-        NSLog(@"did not find 'regulators' line");
-    } else {
-        NSDictionary *movingActionDict = [actionOptionsArray objectAtIndex:indexReg];
-        [actionOptionsArray insertObject:movingActionDict atIndex:0];
-        [actionOptionsArray removeObjectAtIndex:indexReg+1];
-    }
+    return uniqueActionOptions;
+}
+
+
+-(NSMutableArray*) reorderActionOptions:(NSMutableArray*)actionOptions{
+//    //NSLog(@"creating options list");
+//    NSString *category = @"";
+//    NSMutableArray *actionOptionsArray = [[NSMutableArray alloc]init];
+//    
+//    // Loop, create unique list of actionCategories
+//    for (NSDictionary *dictionary in objects){
+//        NSString *dictionaryCategory = [dictionary valueForKey:@"actionCategory"];
+//        
+//        if (![category isEqualToString:dictionaryCategory]){
+//            category = dictionaryCategory;
+//            [actionOptionsArray addObject:dictionary];
+//        }
+//    }
+//    
+//    //Pull Regulator actionCategory to top
+//    NSUInteger indexReg = [actionOptionsArray indexOfObjectPassingTest:
+//                        ^BOOL(NSDictionary *dict, NSUInteger idx, BOOL *stop) {
+//                            return [[dict objectForKey:@"actionCategory"] isEqual:@"Regulators"];
+//                        }];
+//    if(indexReg == NSNotFound){
+//        NSLog(@"did not find 'regulators' line");
+//    } else {
+//        NSDictionary *movingActionDict = [actionOptionsArray objectAtIndex:indexReg];
+//        [actionOptionsArray insertObject:movingActionDict atIndex:0];
+//        [actionOptionsArray removeObjectAtIndex:indexReg+1];
+//    }
 
     //Pull Local Represetative actionCategory to top
-    NSUInteger index = [actionOptionsArray indexOfObjectPassingTest:
+    NSUInteger index = [actionOptions indexOfObjectPassingTest:
                         ^BOOL(NSDictionary *dict, NSUInteger idx, BOOL *stop) {
                             return [[dict objectForKey:@"actionCategory"] isEqual:@"Local Representative"];
                         }];
     if(index == NSNotFound){
         NSLog(@"did not find 'local rep' line");
     } else {
-        NSDictionary *movingActionDict = [actionOptionsArray objectAtIndex:index];
-        [actionOptionsArray insertObject:movingActionDict atIndex:0];
-        [actionOptionsArray removeObjectAtIndex:index+1];
+        NSDictionary *movingActionDict = [actionOptions objectAtIndex:index];
+        [actionOptions insertObject:movingActionDict atIndex:0];
+        [actionOptions removeObjectAtIndex:index+1];
         //NSLog(@"actionOptionsArray Reorder :%@",actionOptionsArray);
     }
     
-    self.actionOptionsArray = actionOptionsArray;
-    //NSLog(@"action Options:%@",self.actionOptionsArray);
-    
+    return actionOptions;
 }
 
 
