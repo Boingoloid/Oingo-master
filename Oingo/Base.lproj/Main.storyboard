@@ -341,11 +341,11 @@
                         <viewControllerLayoutGuide type="bottom" id="V8a-eM-mFe"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="0Oc-R4-RfE">
-                        <rect key="frame" x="0.0" y="64" width="600" height="536"/>
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="e6r-yb-L2Q">
-                                <rect key="frame" x="0.0" y="0.0" width="600" height="536"/>
+                                <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="q2J-IX-Pvd">
                                         <rect key="frame" x="0.0" y="0.0" width="600" height="740"/>
@@ -362,6 +362,7 @@
                                                 <segments>
                                                     <segment title="" image="Twitter-icon-small.png"/>
                                                     <segment title="" image="phone_icon_segmentedControl.png"/>
+                                                    <segment title="" image="icn_close.png"/>
                                                 </segments>
                                                 <color key="tintColor" red="0.052346804859999999" green="0.31878997590000002" blue="0.71888809970000001" alpha="1" colorSpace="calibratedRGB"/>
                                                 <connections>
@@ -992,7 +993,7 @@ Episode Link</string>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <view key="tableHeaderView" contentMode="scaleToFill" id="M9G-hv-4Z1" userLabel="Header View">
-                            <rect key="frame" x="0.0" y="64" width="600" height="154"/>
+                            <rect key="frame" x="0.0" y="0.0" width="600" height="154"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <subviews>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="/ VICE News / Genetically Modified Foods" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Dkk-za-IhC" userLabel="Breadcrumbs Label">
@@ -1004,14 +1005,15 @@ Episode Link</string>
                                     <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                     <nil key="highlightedColor"/>
                                 </label>
-                                <segmentedControl opaque="NO" contentMode="center" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="aud-z2-YOa">
-                                    <rect key="frame" x="8" y="24" width="584" height="30"/>
+                                <segmentedControl opaque="NO" contentMode="center" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="aud-z2-YOa">
+                                    <rect key="frame" x="8" y="24" width="584" height="29"/>
                                     <constraints>
                                         <constraint firstAttribute="height" constant="29" id="ZId-wl-J7m"/>
                                     </constraints>
                                     <segments>
                                         <segment title="" image="Twitter-icon-small.png"/>
                                         <segment title="" image="phone_icon_segmentedControl.png"/>
+                                        <segment title="" image="icn_close.png"/>
                                     </segments>
                                     <color key="tintColor" red="0.052346804859999999" green="0.31878997590000002" blue="0.71888809970000001" alpha="1" colorSpace="calibratedRGB"/>
                                     <connections>
@@ -1067,7 +1069,7 @@ Episode Link</string>
                         </view>
                         <prototypes>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="Cell" rowHeight="127" id="vxg-68-3tz" customClass="FedRepPhoneTableViewCell">
-                                <rect key="frame" x="0.0" y="246" width="600" height="127"/>
+                                <rect key="frame" x="0.0" y="182" width="600" height="127"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="vxg-68-3tz" id="bO7-Hx-FUC">
                                     <rect key="frame" x="0.0" y="0.0" width="600" height="126"/>
@@ -4099,6 +4101,7 @@ Stay tuned, we are developing as fast as we can.  :D</string>
         <image name="document-xxl.png" width="256" height="256"/>
         <image name="facebookButtonIconGray.png" width="259" height="259"/>
         <image name="hashtag_icon_segmentControl.png" width="20" height="20"/>
+        <image name="icn_close.png" width="16" height="15"/>
         <image name="location-gray.png" width="228" height="228"/>
         <image name="mail-icon-gray.png" width="256" height="256"/>
         <image name="message_chat_25px.png" width="20" height="20"/>
@@ -4111,8 +4114,8 @@ Stay tuned, we are developing as fast as we can.  :D</string>
         <image name="tweetButtonIconGray.png" width="259" height="259"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="AKR-dC-3lw"/>
         <segue reference="2P0-0P-jdz"/>
         <segue reference="YnL-03-dNS"/>
+        <segue reference="VbF-q2-z6y"/>
     </inferredMetricsTieBreakers>
 </document>

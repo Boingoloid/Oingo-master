@@ -72,6 +72,7 @@
 		CE7800CA1BDEB142008B9F37 /* LogoGlow-2.png in Resources */ = {isa = PBXBuildFile; fileRef = CE7800C71BDEB142008B9F37 /* LogoGlow-2.png */; };
 		CE7800CB1BDEB142008B9F37 /* LogoGlow.png in Resources */ = {isa = PBXBuildFile; fileRef = CE7800C81BDEB142008B9F37 /* LogoGlow.png */; };
 		CE7B38581B584C77009107DD /* congressionalDishProgramCover.png in Resources */ = {isa = PBXBuildFile; fileRef = CE7B38571B584C77009107DD /* congressionalDishProgramCover.png */; };
+		CE7D65431C55ADEF003DC313 /* EmailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CE7D65421C55ADEF003DC313 /* EmailViewController.m */; };
 		CE7FEA401C4F56FA00C142B0 /* phoneIcon20_20.png in Resources */ = {isa = PBXBuildFile; fileRef = CE7FEA3E1C4F56FA00C142B0 /* phoneIcon20_20.png */; };
 		CE7FEA411C4F56FA00C142B0 /* phoneIconQuiet.png in Resources */ = {isa = PBXBuildFile; fileRef = CE7FEA3F1C4F56FA00C142B0 /* phoneIconQuiet.png */; };
 		CE7FEA431C4F59A900C142B0 /* phoneIconBlue.png in Resources */ = {isa = PBXBuildFile; fileRef = CE7FEA421C4F59A900C142B0 /* phoneIconBlue.png */; };
@@ -279,6 +280,8 @@
 		CE7800C71BDEB142008B9F37 /* LogoGlow-2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "LogoGlow-2.png"; path = "Images.xcassets/Image.imageset/LogoGlow-2.png"; sourceTree = "<group>"; };
 		CE7800C81BDEB142008B9F37 /* LogoGlow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = LogoGlow.png; path = Images.xcassets/Image.imageset/LogoGlow.png; sourceTree = "<group>"; };
 		CE7B38571B584C77009107DD /* congressionalDishProgramCover.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = congressionalDishProgramCover.png; path = Images/congressionalDishProgramCover.png; sourceTree = "<group>"; };
+		CE7D65411C55ADEF003DC313 /* EmailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EmailViewController.h; sourceTree = "<group>"; };
+		CE7D65421C55ADEF003DC313 /* EmailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EmailViewController.m; sourceTree = "<group>"; };
 		CE7FEA3E1C4F56FA00C142B0 /* phoneIcon20_20.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = phoneIcon20_20.png; path = Images/phoneIcon20_20.png; sourceTree = "<group>"; };
 		CE7FEA3F1C4F56FA00C142B0 /* phoneIconQuiet.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = phoneIconQuiet.png; path = Images/phoneIconQuiet.png; sourceTree = "<group>"; };
 		CE7FEA421C4F59A900C142B0 /* phoneIconBlue.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = phoneIconBlue.png; path = Images/phoneIconBlue.png; sourceTree = "<group>"; };
@@ -648,6 +651,8 @@
 				CEF9D1EF1C233EA500B3DD41 /* FederalRepActionDashboardViewController.m */,
 				CEB57EE51C4F3C2700DE52CF /* FedRepPhoneTableViewController.h */,
 				CEB57EE61C4F3C2700DE52CF /* FedRepPhoneTableViewController.m */,
+				CE7D65411C55ADEF003DC313 /* EmailViewController.h */,
+				CE7D65421C55ADEF003DC313 /* EmailViewController.m */,
 				CEA072BF1C23A8B600FAAF25 /* FedRepCell.h */,
 				CEA072C01C23A8B600FAAF25 /* FedRepCell.m */,
 				CE3571271C28D6CB00903ED0 /* FedRepCollectionCell.h */,
@@ -1058,6 +1063,7 @@
 				CEF1C9011B0E7B79003EFAD1 /* WebViewController.m in Sources */,
 				CE87CACC1AFABA920084C666 /* Program.m in Sources */,
 				CE44670C1B94C0DF001D46EB /* PFTwitterUtils+NativeTwitter.m in Sources */,
+				CE7D65431C55ADEF003DC313 /* EmailViewController.m in Sources */,
 				CE035F631BC453D3008977E6 /* EmailItem.m in Sources */,
 				CE0E80561B9129B80093453D /* MessageTableViewNoZipCell.m in Sources */,
 				CE2BF9771B3E5A1700AB15AC /* EmailComposerViewController.m in Sources */,

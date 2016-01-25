@@ -13,6 +13,7 @@
 #import "FetchDataFedReps.h"
 #import <TwitterKit/TwitterKit.h>
 #import "UpdateDefaults.h"
+#import "EmailViewController.h"
 
 
 @interface FederalRepActionDashboardViewController () <UITextViewDelegate,UITableViewDelegate,UITableViewDataSource,UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout, UIGestureRecognizerDelegate, NSURLSessionDelegate>
@@ -211,8 +212,20 @@ static NSString * const reuseIdentifier = @"Cell";
 - (IBAction)segmentedControlCummunicationTypeClick:(id)sender {
     if(self.segmentedControlCommunicationType.selectedSegmentIndex == 0){
         // do nothing
-    } else {
+    } else if(self.segmentedControlCommunicationType.selectedSegmentIndex == 1) {
+        self.segmentedControlCommunicationType.selectedSegmentIndex = 0;
         [self performSegueWithIdentifier:@"showFedRepPhone" sender:self];
+    } else {
+        self.segmentedControlCommunicationType.selectedSegmentIndex = 0;
+        EmailViewController *emailVC = [[EmailViewController alloc]init];
+        emailVC.selectedSegment = (NSMutableDictionary*)self.selectedSegment;
+        emailVC.selectedProgram = (NSMutableDictionary*)self.selectedProgram;
+        emailVC.selectedAction = self.selectedActionDict;
+        emailVC.fedRepList = self.fedRepList;
+        
+        [self.navigationController pushViewController:emailVC animated:YES];
+        //[self presentViewController:emailVC animated:YES completion:nil];
+        
     }
 }
 

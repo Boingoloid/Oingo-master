@@ -8,6 +8,7 @@
 
 #import "FedRepPhoneTableViewController.h"
 #import "FedRepPhoneTableViewCell.h"
+#import "EmailViewController.h"
 
 @interface FedRepPhoneTableViewController () <UIGestureRecognizerDelegate>
 
@@ -259,7 +260,19 @@
 - (IBAction)segmentedControlCommunicationTypeClick:(id)sender {
     if(self.segmentedControlCommunicationType.selectedSegmentIndex == 0){
         [self.navigationController popViewControllerAnimated:NO];
+    } else if(self.segmentedControlCommunicationType.selectedSegmentIndex == 1){
+        //do nothing
+    } else {
+        self.segmentedControlCommunicationType.selectedSegmentIndex = 1;
+        EmailViewController *emailVC = [[EmailViewController alloc]init];
+        emailVC.selectedSegment = (NSMutableDictionary*)self.selectedSegment;
+        emailVC.selectedProgram = (NSMutableDictionary*)self.selectedProgram;
+        emailVC.selectedAction = self.selectedActionDict;
+        emailVC.fedRepList = self.fedRepList;
+        
+        [self.navigationController pushViewController:emailVC animated:YES];
+        //[self presentViewController:emailVC animated:YES completion:nil];
+        
     }
-    self.tableViewController.segmentedControlCommunicationType.selectedSegmentIndex = 0;
 }
 @end
