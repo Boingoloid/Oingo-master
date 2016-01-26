@@ -7,15 +7,17 @@
 //
 
 #import "FedRepCollectionCell.h"
+#import <Parse/Parse.h>
 
 @implementation FedRepCollectionCell
 
 
 -(FedRepCollectionCell*)configCollectionCell:(NSMutableDictionary*)dictionary{
-    
+    NSLog(@"print dict in cell:%@",dictionary);
     self.selectionHighlightImageView.hidden = YES;
 
     NSNumber *number = [dictionary objectForKey:@"isSelected"];
+
     
     int intValue = [number intValue];
                   
@@ -64,6 +66,8 @@
     }
     
     // Load Rep Image
+    self.imageView.hidden = NO;
+    self.squareImageView.hidden = YES;
     self.imageView.image = [dictionary valueForKey:@"image"];
     self.imageView.layer.cornerRadius = 2;
     self.imageView.clipsToBounds = YES;
@@ -80,6 +84,25 @@
     // TwitterID
 //    NSString *twitterID = [actionDict valueForKey:@"twitter_id"];
 //    self.twitterID.text = [NSString stringWithFormat:@"@%@",twitterID];
+    
+    NSString *category = [dictionary valueForKey:@"messageCategory"];
+    NSString *objectCategory = [dictionary objectForKey:@"messageCategory"];
+    NSLog(@"category:%@ - objectCategory:%@",category,objectCategory);
+
+
+    if(![dictionary valueForKey:@"bioguide_id"]){
+        self.imageView.hidden = YES;
+        self.squareImageView.hidden = NO;
+        
+        self.firstName.text = [dictionary valueForKey:@"targetName"];
+        self.name.text = [dictionary valueForKey:@"targetTitle"];
+
+        
+        PFFile *theImage = [dictionary objectForKey:@"messageImage"];
+        NSData *imageData = [theImage getData];
+        self.squareImageView.image = [UIImage imageWithData:imageData];
+        
+    }
 
     return self;
 }

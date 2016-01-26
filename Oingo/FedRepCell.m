@@ -51,7 +51,6 @@
         // else if bool set to hide
         
         BOOL isHidden = [[actionDict objectForKey:@"isHidden"] boolValue];
-        NSLog(@"isHiddenBool:%d WithMessage:%@",isHidden,[sentMessage valueForKey:@"messageText"]);
         int randomUserNumber = [self randomNumberBetween:10000000 maxNumber:99999999];
         
         if(!isHidden){

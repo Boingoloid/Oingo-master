@@ -68,6 +68,7 @@
         }
     }
     self.viewController.fedRepList = resultsArray;
+    self.viewController.collectionData = resultsArray;
 
     
     NSLog(@"reloading data from Congress Photo Finder");

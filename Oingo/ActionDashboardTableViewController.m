@@ -98,6 +98,8 @@
                         [self showLocationCapture];
                     }
                 }
+            } else if ([category isEqualToString:@"Regulators"]){
+                    [self performSegueWithIdentifier:@"showFedRepVC" sender:nil];
             } else if ([category isEqualToString:@"Petition"]){
                 [self performSegueWithIdentifier:@"showChangeORGWebView" sender:self];
             }  ///// HERE IS WHERE THE CODE GOES FOR OTHER COMM CATEGORIES
@@ -234,8 +236,6 @@
 }
 
 
-
-
 #pragma mark - Fetching Data
 
 -(void) fetchActionsForSegment {
@@ -284,10 +284,8 @@
     NSMutableArray *contacts = [[NSMutableArray alloc]init];
     
     for (NSDictionary *dictionary in objects) {
-        //NSLog(@"[dictionary valueForKey:@messageCategory]:%@",[dictionary valueForKey:@"messageCategory"]);
         bool isMessageBool = [[dictionary valueForKey:@"isMessage"] boolValue];
         if(isMessageBool) {
-            [dictionary setValue:@YES forKey:@"isLinkIncluded"]; // Set Link Default
             [actionOptions addObject:dictionary];
         } else {
             [contacts addObject:dictionary];
@@ -442,6 +440,7 @@
         fedRepActionVC.actionsForSegment = self.actionsForSegment;
         fedRepActionVC.sentActionsForSegment = self.sentActionsForSegment;
         fedRepActionVC.selectedActionDict = self.selectedActionDict;
+        fedRepActionVC.contacts = self.contacts;
         //NSLog(@"sender: %@",sender);
     } else if ([segue.identifier isEqualToString:@"showChangeORGWebView"]){
         WebViewController *webVC = segue.destinationViewController;
@@ -475,7 +474,7 @@
 //             }
 //         }];
 //    }
-//
+
 
 //    [[[FBSDKGraphRequest alloc]
 //      initWithGraphPath:@"me/feed"

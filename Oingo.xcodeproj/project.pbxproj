@@ -61,6 +61,7 @@
 		CE48FDB81B952C200086349A /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CE48FDB71B952C200086349A /* StoreKit.framework */; };
 		CE4BD0BD1C0FDC8D00442646 /* SegmentDataViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CE4BD0BC1C0FDC8D00442646 /* SegmentDataViewController.m */; };
 		CE4BD0BF1C1105B000442646 /* Crashlytics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CE4BD0BE1C1105B000442646 /* Crashlytics.framework */; };
+		CE4BFA411C56DAAF000B0EB2 /* Email-icon.png in Resources */ = {isa = PBXBuildFile; fileRef = CE4BFA401C56DAAF000B0EB2 /* Email-icon.png */; };
 		CE5B5D0E1AF95A740033A668 /* ProgramDetailTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CE5B5D0D1AF95A740033A668 /* ProgramDetailTableViewCell.m */; };
 		CE6073291B3A85EB007B567C /* mail-icon-gray.png in Resources */ = {isa = PBXBuildFile; fileRef = CE6073281B3A85EB007B567C /* mail-icon-gray.png */; };
 		CE60732B1B3A88FD007B567C /* phone-gray.png in Resources */ = {isa = PBXBuildFile; fileRef = CE60732A1B3A88FD007B567C /* phone-gray.png */; };
@@ -265,6 +266,7 @@
 		CE4BD0BB1C0FDC8D00442646 /* SegmentDataViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SegmentDataViewController.h; sourceTree = "<group>"; };
 		CE4BD0BC1C0FDC8D00442646 /* SegmentDataViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SegmentDataViewController.m; sourceTree = "<group>"; };
 		CE4BD0BE1C1105B000442646 /* Crashlytics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Crashlytics.framework; sourceTree = "<group>"; };
+		CE4BFA401C56DAAF000B0EB2 /* Email-icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Email-icon.png"; path = "Images/Email-icon.png"; sourceTree = "<group>"; };
 		CE5B5D0C1AF95A740033A668 /* ProgramDetailTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ProgramDetailTableViewCell.h; path = ../ProgramDetailTableViewCell.h; sourceTree = "<group>"; };
 		CE5B5D0D1AF95A740033A668 /* ProgramDetailTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ProgramDetailTableViewCell.m; path = ../ProgramDetailTableViewCell.m; sourceTree = "<group>"; };
 		CE5B98EF1B96F33400BFF14F /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
@@ -384,7 +386,7 @@
 		CEE074431B5F027E00245C56 /* success-icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "success-icon.png"; sourceTree = "<group>"; };
 		CEE691D21BF66A9600C11749 /* MessagePanelTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MessagePanelTableViewCell.h; sourceTree = "<group>"; };
 		CEE691D31BF66A9600C11749 /* MessagePanelTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MessagePanelTableViewCell.m; sourceTree = "<group>"; };
-		CEE772B31BA8C14D00E45842 /* settingswhite.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = settingswhite.png; path = Oingo/Images/settingswhite.png; sourceTree = "<group>"; };
+		CEE772B31BA8C14D00E45842 /* settingswhite.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = settingswhite.png; path = Images/settingswhite.png; sourceTree = "<group>"; };
 		CEE9D47B1C249BE300F37656 /* FetchDataFedReps.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FetchDataFedReps.h; sourceTree = "<group>"; };
 		CEE9D47C1C249BE300F37656 /* FetchDataFedReps.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FetchDataFedReps.m; sourceTree = "<group>"; };
 		CEED9BB61AF40A4000402BC2 /* Twitter.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Twitter.framework; path = System/Library/Frameworks/Twitter.framework; sourceTree = SDKROOT; };
@@ -491,7 +493,6 @@
 				CE241A3D1AEAE45A00F22144 /* Products */,
 				CEA92FBB1AF377600042D0EE /* frameworks */,
 				CE241A6A1AEAF0D300F22144 /* Images */,
-				CEE772B31BA8C14D00E45842 /* settingswhite.png */,
 				461A3BA50F675DAFB84D6483 /* Frameworks */,
 			);
 			sourceTree = "<group>";
@@ -565,6 +566,8 @@
 		CE241A6A1AEAF0D300F22144 /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				CE4BFA401C56DAAF000B0EB2 /* Email-icon.png */,
+				CEE772B31BA8C14D00E45842 /* settingswhite.png */,
 				CE233AB71C516262005D552D /* corporationIcon.png */,
 				CE233AB51C516066005D552D /* scales.png */,
 				CE233AB31C51456E005D552D /* changeOrgLogoSquare.png */,
@@ -930,6 +933,7 @@
 				CE35F87E1C330CAA0089E82C /* checked_checkbox.png in Resources */,
 				CEB9D4E71BFABB6500A6F565 /* FacebookSDKStrings.bundle in Resources */,
 				CE7800CB1BDEB142008B9F37 /* LogoGlow.png in Resources */,
+				CE4BFA411C56DAAF000B0EB2 /* Email-icon.png in Resources */,
 				CED1A34D1C1E3E2D00BB7D91 /* Message_chat_text_bubble_phone.png in Resources */,
 				CE80B5D61AFC0EFB007D69FB /* dailyshow6cover.png in Resources */,
 				CE9B2E581C1BFFD400DEB7BC /* blackHumanIcon.png in Resources */,

@@ -17,6 +17,8 @@
 @property(nonatomic) Program *selectedProgram;
 @property(nonatomic) Segment *selectedSegment;
 @property(nonatomic) NSMutableDictionary *selectedActionDict;
+@property(nonatomic) NSMutableArray *contacts;
+@property(nonatomic) NSMutableArray *contactsForAction;
 @property(nonatomic) ActionDashboardTableViewController *tableViewController;
 
 // Controls
@@ -49,6 +51,7 @@
 // tableview
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (nonatomic) NSMutableArray *tableData;
+@property (nonatomic) NSMutableArray *collectionData;
 @property (nonatomic) NSMutableArray *hashtagList;
 @property (nonatomic) NSMutableArray *tableSourceArray;
 @property (weak, nonatomic) IBOutlet UISegmentedControl *segmentedControlTableView;

@@ -99,6 +99,7 @@
     } else {
         dispatch_async(dispatch_get_main_queue(), ^{
             self.viewController.fedRepList = (NSMutableArray*)resultsArray;
+            self.viewController.collectionData = (NSMutableArray*)resultsArray;
             
             // Insert twitterID of first Rep in Tweet
             NSString *firstTwitterID = [[resultsArray firstObject] valueForKey:@"twitter_id"];

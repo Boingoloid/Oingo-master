@@ -11,6 +11,7 @@
 @interface FedRepCollectionCell : UICollectionViewCell
 
 @property (weak, nonatomic) IBOutlet UIImageView *imageView;
+@property (weak, nonatomic) IBOutlet UIImageView *squareImageView;
 @property (weak, nonatomic) IBOutlet UILabel *name;
 @property (nonatomic) BOOL isSelected;
 @property (weak, nonatomic) IBOutlet UIImageView *selectionHighlightImageView;

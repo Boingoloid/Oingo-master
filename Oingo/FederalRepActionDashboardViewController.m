@@ -31,23 +31,47 @@ static NSString * const reuseIdentifier = @"Cell";
 - (void)viewDidLoad {
     [super viewDidLoad];
     NSLog(@"FedrepAction Firing");
+    NSString *category = [self.selectedActionDict valueForKey:@"messageCategory"];
     
-    // Fetch Federal Rep data, try Coordinates first, then Zip
-    FetchDataFedReps *fetchDataFedReps = [[FetchDataFedReps alloc]init];
-    fetchDataFedReps.viewController = self;
-    if([UpdateDefaults isLocationInDefaults]){
-        if([UpdateDefaults isCoordinatesInDefaults]){
-            double latitude = [[UpdateDefaults getLatitudeFromDefaults] doubleValue];
-            double longitude = [[UpdateDefaults getLongitudeFromDefaults] doubleValue];
-            [fetchDataFedReps getCongressWithLatitude:latitude andLongitude:longitude];
-            NSLog(@"Fetching Reps by coordinates, lat/long:%f | %f",latitude,longitude);
+    if([category isEqualToString:@"Local Representative"]){
+        // Fetch Federal Rep data, try Coordinates first, then Zip
+        FetchDataFedReps *fetchDataFedReps = [[FetchDataFedReps alloc]init];
+        fetchDataFedReps.viewController = self;
+        if([UpdateDefaults isLocationInDefaults]){
+            if([UpdateDefaults isCoordinatesInDefaults]){
+                double latitude = [[UpdateDefaults getLatitudeFromDefaults] doubleValue];
+                double longitude = [[UpdateDefaults getLongitudeFromDefaults] doubleValue];
+                [fetchDataFedReps getCongressWithLatitude:latitude andLongitude:longitude];
+                NSLog(@"Fetching Reps by coordinates, lat/long:%f | %f",latitude,longitude);
+            } else {
+                [fetchDataFedReps fetchRepsWithZip:[UpdateDefaults getZipFromDefaults]];
+                NSLog(@"Fetching Reps by Zip, zip:%@",[UpdateDefaults getZipFromDefaults]);
+            }
+            
         } else {
-            [fetchDataFedReps fetchRepsWithZip:[UpdateDefaults getZipFromDefaults]];
-            NSLog(@"Fetching Reps by Zip, zip:%@",[UpdateDefaults getZipFromDefaults]);
+            NSLog(@"location info shoudld area be there before this page, error");
         }
-
     } else {
-        NSLog(@"location info shoudld area be there before this page, error");
+        // Filter contacts list for the selectedAction
+        NSMutableArray *contactsForAction = [[NSMutableArray alloc]init];
+        for (NSDictionary *dict in self.contacts){
+            NSString *dictCategory = [dict valueForKey:@"messageCategory"];
+            if([category isEqualToString:dictCategory]){
+                [contactsForAction addObject:dict];
+            }
+        }
+        self.contactsForAction = contactsForAction;
+        self.collectionData = contactsForAction;
+        
+        
+        // Insert twitterID of first Rep in Tweet
+//        NSString *firstTwitterID = [[self.collectionData firstObject] valueForKey:@"twitterID"];
+//        NSString *initialTextViewText = self.pushthoughtTextView.text;
+//        self.pushthoughtTextView.text = [NSString stringWithFormat:@"%@ @%@",initialTextViewText,firstTwitterID];
+//        [self textViewDidChange:self.pushthoughtTextView];
+//        [self.collectionView reloadData];
+        
+        //NSLog(@"contactsForAction:%@",self.contactsForAction);
     }
     
     // Fetch hashtag data - async
@@ -128,14 +152,12 @@ static NSString * const reuseIdentifier = @"Cell";
     self.tableView.clipsToBounds = YES;
     
     // Set link Checkbox State
-    self.linkState = 1;
+    self.linkState = 0;
 
     // Format Sent Message Data -----------------------------------------------------------------------------------
-    NSString *category = [self.selectedActionDict valueForKey:@"actionCategory"];
     NSArray *filteredActionList;
     
     //COULD JUST PUT THE CATEGORY BELOW IN THE PREDICATE, THEN IT WOULD FILTER ON WHATEVER
-    
     filteredActionList = [self.sentActionsForSegment filteredArrayUsingPredicate:[NSPredicate predicateWithFormat:@"actionCategory = %@", category]];
     // NSLog(@"printing array count:%lu  value:%@",(unsigned long)filteredActionList.count,filteredActionList);
     
@@ -589,8 +611,6 @@ static NSString * const reuseIdentifier = @"Cell";
             //[markSentMessagesAPI markSentMessages];
         }
     }];
-    
-
 }
 
 -(void)saveSegmentStats{
@@ -607,9 +627,9 @@ static NSString * const reuseIdentifier = @"Cell";
             [queryCount whereKey:@"segmentObjectId" equalTo:[self.selectedSegment valueForKey:@"objectId"]];
             [queryCount getFirstObjectInBackgroundWithBlock:^(PFObject *segmentStatDict, NSError *error) {
                 if (!error) {
-                    NSLog(@"Segment Stats Dict from Parse:%@",segmentStatDict);
+                    //NSLog(@"Segment Stats Dict from Parse:%@",segmentStatDict);
                     [segmentStatDict setObject:countNumber forKey:@"actionCount"];
-                    NSLog(@"New Segment Stats Dict to Parse:%@",segmentStatDict);
+                    //NSLog(@"New Segment Stats Dict to Parse:%@",segmentStatDict);
                     // Save
                     [segmentStatDict saveInBackground];
                 } else {
@@ -743,25 +763,33 @@ static NSString * const reuseIdentifier = @"Cell";
             //NSLog(@"collectionview cell indexpath: %@",indexPath);
             FedRepCollectionCell *cell = (FedRepCollectionCell *)[self.collectionView cellForItemAtIndexPath:indexPath];
             
-            NSDictionary *dictionary = [self.fedRepList objectAtIndex:indexPath.row];
+            NSDictionary *dictionary = [self.collectionData objectAtIndex:indexPath.row];
             NSNumber *number = [dictionary valueForKey:@"isSelected"];
             int intValue = [number intValue];
+            
+            NSString *tweetAddress = [[NSString alloc]init];
+            NSString *tweetAddressFrontSpace = [[NSString alloc]init];
+            if([dictionary valueForKey:@"bioguide_id"]){
+                tweetAddress = [NSString stringWithFormat:@"@%@",[dictionary valueForKey:@"twitter_id"]];
+                tweetAddressFrontSpace = [NSString stringWithFormat:@" @%@",[dictionary valueForKey:@"twitter_id"]];
+            } else {
+                tweetAddressFrontSpace = [NSString stringWithFormat:@" @%@",[dictionary valueForKey:@"twitterID"]];
+                tweetAddress = [NSString stringWithFormat:@"@%@",[dictionary valueForKey:@"twitterID"]];
+            }
             
             //NSLog(@"number bool isSelected before: %d",intValue);
             
             if(!intValue){
                 //NSLog(@"NO - isSelected is NOT active, so make active");
-                [[self.fedRepList objectAtIndex:indexPath.row] setObject:@YES forKey:@"isSelected"];
+                [[self.collectionData objectAtIndex:indexPath.row] setObject:@YES forKey:@"isSelected"];
                 cell.selectionHighlightImageView.hidden = NO;
                 // add tweet address
-                NSString *tweetAddressFrontSpace = [NSString stringWithFormat:@" @%@",[dictionary valueForKey:@"twitter_id"]];
                 [self.pushthoughtTextView replaceRange:self.pushthoughtTextView.selectedTextRange withText:tweetAddressFrontSpace ];
             }  else {
                 //NSLog(@"YES - isSelected is active, make inactive");
-                [[self.fedRepList objectAtIndex:indexPath.row] setObject:@NO forKey:@"isSelected"];
+                [[self.collectionData objectAtIndex:indexPath.row] setObject:@NO forKey:@"isSelected"];
                 cell.selectionHighlightImageView.hidden = YES;
                 // remove tweet address
-                NSString *tweetAddress = [NSString stringWithFormat:@"@%@",[dictionary valueForKey:@"twitter_id"]];
                 if ([self.pushthoughtTextView.text rangeOfString:tweetAddress options:NSCaseInsensitiveSearch].location == NSNotFound) {
                     //NSLog(@"string does not contain address for:%@",tweetAddress);
                 } else {
@@ -795,36 +823,40 @@ static NSString * const reuseIdentifier = @"Cell";
 #pragma mark - UICollectionViewDataSource
 
 - (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView {
-
     return 1;
 }
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
-
-    return self.fedRepList.count;
+    // adjust based on category
+    return self.collectionData.count;
 }
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
     FedRepCollectionCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:reuseIdentifier forIndexPath:indexPath];
 
-
-    NSMutableDictionary *dictionary = [self.fedRepList objectAtIndex:indexPath.row];
-    
+    // adjust based on category
+    NSMutableDictionary *dictionary = [self.collectionData objectAtIndex:indexPath.row];
     [self.collectionView addSubview:cell];
-
     return [cell configCollectionCell:(NSMutableDictionary*)dictionary];
 }
 
 - (BOOL)collectionView:(UICollectionView *)collectionView shouldSelectItemAtIndexPath:(NSIndexPath *)indexPath {
     return NO;
-    
 }
 
 
 #pragma mark <UICollectionViewDelegateFlowLayout>
 
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath {
-    return CGSizeMake(120, 114);
+    
+    // adjust based on category
+    
+    NSMutableDictionary *dictionary = [self.collectionData objectAtIndex:indexPath.row];
+    if([dictionary valueForKey:@"bioguide_id"]){
+        return CGSizeMake(120, 114);
+    } else {
+        return CGSizeMake(160, 114);
+    }
 }
 
 #pragma mark - Navigation
