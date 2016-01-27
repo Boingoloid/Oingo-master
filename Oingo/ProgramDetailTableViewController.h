@@ -22,7 +22,7 @@
 @property (nonatomic, retain) NSMutableDictionary *sectionToCategoryMap;
 @property (weak, nonatomic) IBOutlet UILabel *programTitleHeaderLabel;
 @property (weak, nonatomic) IBOutlet UIView *tableHeaderView;
-@property (weak, nonatomic) IBOutlet UIButton *altButton;
+
 
 
 

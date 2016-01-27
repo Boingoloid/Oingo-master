@@ -33,6 +33,7 @@ static NSString * const reuseIdentifier = @"Cell";
     NSLog(@"FedrepAction Firing");
     NSString *category = [self.selectedActionDict valueForKey:@"messageCategory"];
     
+    // Load Reps OR Contacts, depends on category
     if([category isEqualToString:@"Local Representative"]){
         // Fetch Federal Rep data, try Coordinates first, then Zip
         FetchDataFedReps *fetchDataFedReps = [[FetchDataFedReps alloc]init];
@@ -232,22 +233,35 @@ static NSString * const reuseIdentifier = @"Cell";
 }
 
 - (IBAction)segmentedControlCummunicationTypeClick:(id)sender {
-    if(self.segmentedControlCommunicationType.selectedSegmentIndex == 0){
-        // do nothing
-    } else if(self.segmentedControlCommunicationType.selectedSegmentIndex == 1) {
-        self.segmentedControlCommunicationType.selectedSegmentIndex = 0;
-        [self performSegueWithIdentifier:@"showFedRepPhone" sender:self];
-    } else {
-        self.segmentedControlCommunicationType.selectedSegmentIndex = 0;
-        EmailViewController *emailVC = [[EmailViewController alloc]init];
-        emailVC.selectedSegment = (NSMutableDictionary*)self.selectedSegment;
-        emailVC.selectedProgram = (NSMutableDictionary*)self.selectedProgram;
-        emailVC.selectedAction = self.selectedActionDict;
-        emailVC.fedRepList = self.fedRepList;
+    
+    if([[self.collectionData firstObject] valueForKey:@"bioguide_id"]){
         
-        [self.navigationController pushViewController:emailVC animated:YES];
-        //[self presentViewController:emailVC animated:YES completion:nil];
-        
+        if(self.segmentedControlCommunicationType.selectedSegmentIndex == 0){
+            // do nothing
+        } else if(self.segmentedControlCommunicationType.selectedSegmentIndex == 1) {
+            self.segmentedControlCommunicationType.selectedSegmentIndex = 0;
+            [self performSegueWithIdentifier:@"showFedRepPhone" sender:self];
+        } else {
+            self.segmentedControlCommunicationType.selectedSegmentIndex = 0;
+            EmailViewController *emailVC = [[EmailViewController alloc]init];
+            emailVC.selectedSegment = (NSMutableDictionary*)self.selectedSegment;
+            emailVC.selectedProgram = (NSMutableDictionary*)self.selectedProgram;
+            emailVC.selectedAction = self.selectedActionDict;
+            emailVC.fedRepList = self.fedRepList;
+            
+            [self.navigationController pushViewController:emailVC animated:YES];
+            //[self presentViewController:emailVC animated:YES completion:nil];
+        }
+    }else {
+        if(self.segmentedControlCommunicationType.selectedSegmentIndex == 0){
+            // do nothing
+        } else if(self.segmentedControlCommunicationType.selectedSegmentIndex == 1) {
+            [self performSegueWithIdentifier:@"showFedRepPhone" sender:self];
+            self.segmentedControlCommunicationType.selectedSegmentIndex = 0;
+        } else {
+            [self performSegueWithIdentifier:@"showFedRepPhone" sender:self];
+            self.segmentedControlCommunicationType.selectedSegmentIndex = 0;
+        }
     }
 }
 
@@ -872,6 +886,10 @@ static NSString * const reuseIdentifier = @"Cell";
         fedRepPhoneTVC.sentActionsForSegment = self.sentActionsForSegment;
         fedRepPhoneTVC.selectedActionDict = self.selectedActionDict;
         fedRepPhoneTVC.fedRepList = self.fedRepList;
+        fedRepPhoneTVC.collectionData = self.collectionData;
+        fedRepPhoneTVC.segmentedControlValue = (int)self.segmentedControlCommunicationType.selectedSegmentIndex;
+        NSLog(@"selected segment index on tweet:%ld",self.segmentedControlCommunicationType.selectedSegmentIndex);
+        NSLog(@"selected segment index on phone:%ld",self.segmentedControlCommunicationType.selectedSegmentIndex);
     }
     
     // Get the new view controller using [segue destinationViewController].

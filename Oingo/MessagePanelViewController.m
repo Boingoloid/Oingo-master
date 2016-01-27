@@ -225,7 +225,7 @@
 }
 //comment
 -(void)viewWillAppear:(BOOL)animated{
-
+    [super viewWillAppear:YES];
     
     //This button covers the entire text view. Sends to sign in if not a user.
     if([PFUser currentUser]){

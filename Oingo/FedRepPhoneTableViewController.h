@@ -13,7 +13,10 @@
 @interface FedRepPhoneTableViewController : UITableViewController
 @property (weak, nonatomic) IBOutlet UISegmentedControl *segmentedControlCommunicationType;
 @property (weak, nonatomic) IBOutlet UIView *promptView;
+@property (nonatomic) NSString *promptText;
 @property (weak, nonatomic) IBOutlet UILabel *promptLabel;
+@property (weak, nonatomic) IBOutlet UIButton *openEmailDraftButton;
+- (IBAction)openEmailDraftClick:(id)sender;
 
 // Data from MessageTVC
 @property(nonatomic) Program *selectedProgram;
@@ -24,6 +27,12 @@
 @property (nonatomic) NSArray *actionsForSegment;
 @property (nonatomic) NSArray *sentActionsForSegment;
 @property (nonatomic) NSMutableArray *fedRepList;
+@property (nonatomic) NSMutableArray *collectionData;
+@property (nonatomic) int segmentedControlValue;
+
+// Tableview
+@property (nonatomic) NSMutableArray *tableViewData;
+
 
 - (IBAction)segmentedControlCommunicationTypeClick:(id)sender;
 

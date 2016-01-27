@@ -17,19 +17,66 @@
 @implementation FedRepPhoneTableViewController
 
 -(void)viewWillAppear{
-    self.segmentedControlCommunicationType.selectedSegmentIndex = 1;
+
+
 }
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    self.segmentedControlCommunicationType.selectedSegmentIndex = 1;
+    NSLog(@"self:%d",self.segmentedControlValue);
+    self.segmentedControlCommunicationType.selectedSegmentIndex = self.segmentedControlValue;
+    
+    if([[self.collectionData firstObject] valueForKey:@"bioguide_id"]){
+        // it is fed reps
+        self.tableViewData = self.collectionData;
+    } else{
+        // not fed, eliminate those that don't have phone
+        NSMutableArray *tableViewData = [[NSMutableArray alloc]init];
+        for(NSDictionary *dict in self.collectionData){
+            NSString *phoneString = [[NSString alloc]init];
+            phoneString = [dict valueForKey:@"phone"];
+            int length = (int)[phoneString length];
+            NSLog(@"phone string on phone:%@ - %lu",phoneString,(unsigned long)[phoneString length]);
+            if(length>0){
+                [tableViewData addObject:dict];
+                //NSLog(@"adding object:%@ - %@",phoneString,tableViewData);
+            } else {
+                NSLog(@"not adding%@, tableview data:%@",phoneString,self.tableViewData);
+                // don't add
+            }
+        }
+        
+        self.tableViewData = tableViewData;
+        int count = (int)[tableViewData count];
+        if(count == 0){
+            NSLog(@"Sorry, no phone numbers preloaded");
+            
+            [self.navigationController popViewControllerAnimated:YES];
+        }
+        
+    }
     
     // Format prompt label
+    self.promptText = self.promptLabel.text;
+    if(self.segmentedControlValue == 2){
+        self.promptLabel.text = @"Select Recipients Below";
+    }
     self.promptView.layer.borderColor = [[UIColor grayColor] CGColor];
     self.promptView.layer.borderWidth = 0.5;
     self.promptView.layer.cornerRadius = 3;
     self.promptView.clipsToBounds = YES;
+    
+    
+    //openEmailButton
+    self.openEmailDraftButton.layer.borderColor = [[UIColor grayColor] CGColor];
+    self.openEmailDraftButton.layer.borderWidth = 0;
+    self.openEmailDraftButton.layer.cornerRadius = 3;
+    self.openEmailDraftButton.clipsToBounds = YES;
+    self.openEmailDraftButton.hidden = YES;
+    if(self.segmentedControlValue == 2){
+        self.openEmailDraftButton.hidden = NO;
+    }
     
     // Create gesture recognizer
     UITapGestureRecognizer *tapRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(respondToTapGesture:)]; //connect recognizer to action method.
@@ -44,6 +91,10 @@
     
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
+}
+
+-(void)noPhonePreloadedAlert{
+    
 }
 
 - (void)didReceiveMemoryWarning {
@@ -71,20 +122,41 @@
     if (UIGestureRecognizerStateEnded == tap.state) {
         
         // Collect data about tap location
-        //UITableView *tableView = (UITableView *)tap.view;
         CGPoint p = [tap locationInView:tap.view];
-        NSIndexPath* indexPath = [self.tableView indexPathForRowAtPoint:p];
-        //CGPoint pLocal = [tap locationInView:self.tableView];
-        //self.selectedActionDict = [self.actionOptionsArray objectAtIndex:indexPath.row];
-        //NSLog(@"selected Action dict:%@",self.selectedActionDict);
+        //NSLog(@"tap.view:%@",tap.view);
         
         if (CGRectContainsPoint(self.tableView.frame, p)){
-            NSLog(@"tableView touched");
+            NSIndexPath *indexPath = [self.tableView indexPathForRowAtPoint:p];
+            //NSLog(@"tableView touched indexpath:%@",indexPath);
             FedRepPhoneTableViewCell *cell = (FedRepPhoneTableViewCell *)[self.tableView cellForRowAtIndexPath:indexPath];
             CGPoint pointInCell = [tap locationInView:cell];
+            //NSLog(@"point:%@ pointincell:%@",NSStringFromCGPoint(p),NSStringFromCGPoint(pointInCell));
 
-        
-            if (CGRectContainsPoint(cell.phoneTouchArea.frame, pointInCell)){
+//            if (CGRectContainsPoint(self.openEmailButton.frame, p)) {
+//                EmailViewController *emailVC = [[EmailViewController alloc]init];
+//                emailVC.selectedSegment = (NSMutableDictionary*)self.selectedSegment;
+//                emailVC.selectedProgram = (NSMutableDictionary*)self.selectedProgram;
+//                emailVC.selectedAction = self.selectedActionDict;
+//                emailVC.collectionData = self.collectionData;
+//                NSLog(@"selectedAction:%@", self.selectedActionDict);
+//                [self presentViewController:emailVC animated:YES completion:nil];
+            if (CGRectContainsPoint(cell.contentView.frame, pointInCell) && !cell.checkBox.hidden){
+                if(cell.isSelected == 0){
+                    cell.isSelected = 1;
+                    cell.checkBox.image = [UIImage imageNamed:@"checked_checkbox.png"];
+                    NSMutableDictionary *dictionary = [[NSMutableDictionary alloc]init];
+                    dictionary = [self.collectionData objectAtIndex:[indexPath row]];
+                    [dictionary setObject:@1 forKey:@"isSelected"];
+                    //NSLog(@"dictionary:%@ + object:%@",dictionary,[self.collectionData objectAtIndex:[indexPath row]]);
+                } else {
+                    cell.isSelected = 0;
+                    cell.checkBox.image = [UIImage imageNamed:@"checkbox_unchecked.png"];
+                    NSMutableDictionary *dictionary = [[NSMutableDictionary alloc]init];
+                    dictionary = [self.collectionData objectAtIndex:[indexPath row]];
+                    [dictionary setObject:@0 forKey:@"isSelected"];
+                    //NSLog(@"dictionary:%@",dictionary);
+                }
+            } else if (CGRectContainsPoint(cell.phoneTouchArea.frame, pointInCell) && !cell.phoneTouchArea.hidden){
                 NSLog(@"phone area touched!!!!!!!");
                 //NSDictionary *dictionary = [self.fedRepList objectAtIndex:indexPath.row];
                 NSURL *phoneUrl = [NSURL URLWithString:[NSString  stringWithFormat:@"tel://%@",cell.phoneNumberDC.text]];
@@ -193,7 +265,7 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
 
-    return [self.fedRepList count];
+    return [self.tableViewData count];
 }
 
 
@@ -201,8 +273,8 @@
     FedRepPhoneTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"Cell" forIndexPath:indexPath];
     
     // Configure the cell...
-    
-    NSMutableDictionary *dictionary = [self.fedRepList objectAtIndex:indexPath.row];
+    cell.viewController = self;
+    NSMutableDictionary *dictionary = [self.tableViewData objectAtIndex:indexPath.row];
 
     return [cell configCell:(NSMutableDictionary*)dictionary];
 
@@ -212,6 +284,8 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     [self.tableView deselectRowAtIndexPath:indexPath animated:YES];
 }
+
+//-(void)tableView:(UITableView *)tableView v
 
 /*
 // Override to support conditional editing of the table view.
@@ -258,21 +332,52 @@
 */
 
 - (IBAction)segmentedControlCommunicationTypeClick:(id)sender {
-    if(self.segmentedControlCommunicationType.selectedSegmentIndex == 0){
-        [self.navigationController popViewControllerAnimated:NO];
-    } else if(self.segmentedControlCommunicationType.selectedSegmentIndex == 1){
-        //do nothing
+    
+    if(![[self.collectionData firstObject] valueForKey:@"bioguide_id"]){
+        if(self.segmentedControlCommunicationType.selectedSegmentIndex == 0){
+            [self.navigationController popViewControllerAnimated:NO];
+        } else if(self.segmentedControlCommunicationType.selectedSegmentIndex == 1){
+            self.promptLabel.text = self.promptText;
+            self.openEmailDraftButton.hidden = YES;
+            self.segmentedControlValue = 1;
+            [self.tableView reloadData];
+            //do nothing
+        } else {
+            self.promptLabel.text = @"Select Recipients Below";
+            self.openEmailDraftButton.hidden = NO;
+            self.segmentedControlValue = 2;
+            [self.tableView reloadData];
+            
+        }
     } else {
-        self.segmentedControlCommunicationType.selectedSegmentIndex = 1;
-        EmailViewController *emailVC = [[EmailViewController alloc]init];
-        emailVC.selectedSegment = (NSMutableDictionary*)self.selectedSegment;
-        emailVC.selectedProgram = (NSMutableDictionary*)self.selectedProgram;
-        emailVC.selectedAction = self.selectedActionDict;
-        emailVC.fedRepList = self.fedRepList;
-        
-        [self.navigationController pushViewController:emailVC animated:YES];
-        //[self presentViewController:emailVC animated:YES completion:nil];
-        
+        if(self.segmentedControlCommunicationType.selectedSegmentIndex == 0){
+            [self.navigationController popViewControllerAnimated:NO];
+        } else if(self.segmentedControlCommunicationType.selectedSegmentIndex == 1){
+            self.promptLabel.text = self.promptText;
+            [self.tableView reloadData];
+        } else {
+            self.segmentedControlCommunicationType.selectedSegmentIndex = 1;
+            EmailViewController *emailVC = [[EmailViewController alloc]init];
+            emailVC.selectedSegment = (NSMutableDictionary*)self.selectedSegment;
+            emailVC.selectedProgram = (NSMutableDictionary*)self.selectedProgram;
+            emailVC.selectedAction = self.selectedActionDict;
+            emailVC.fedRepList = self.fedRepList;
+            
+            [self.navigationController pushViewController:emailVC animated:YES];
+            [self presentViewController:emailVC animated:YES completion:nil];
+        }
     }
+    
+}
+- (IBAction)openEmailDraftClick:(id)sender {
+    
+    EmailViewController *emailVC = [[EmailViewController alloc]init];
+    emailVC.selectedSegment = (NSMutableDictionary*)self.selectedSegment;
+    emailVC.selectedProgram = (NSMutableDictionary*)self.selectedProgram;
+    emailVC.selectedAction = self.selectedActionDict;
+    emailVC.collectionData = self.collectionData;
+    NSLog(@"selectedAction:%@", self.selectedActionDict);
+    [self presentViewController:emailVC animated:YES completion:nil];
+    NSLog(@"Yo Bitch!");
 }
 @end

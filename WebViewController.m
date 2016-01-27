@@ -31,6 +31,7 @@
 }
 
 - (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:YES];
     NSURL *url = [NSURL URLWithString:self.selectedLink];
     NSLog(@"%@",url);
     NSURLRequest *requestURL = [NSURLRequest requestWithURL:url];

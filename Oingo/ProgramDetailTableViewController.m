@@ -31,16 +31,12 @@ Segment *segment;
 - (void) viewWillAppear:(BOOL)animated {
     [super viewWillAppear:YES];
     [super viewDidAppear:animated];
-//    [self.tableView setNeedsLayout];  //may not need these as I'm doing it in the cells individually.
-//    [self.tableView layoutIfNeeded]; //may not need these as I'm doing it in the cells individually.
-//    [self.tableView reloadData];
+
 
 }
 - (void)viewWillTransitionToSize:(CGSize)size withTransitionCoordinator:(id<UIViewControllerTransitionCoordinator>)coordinator
 {
-//    [self.tableView setNeedsDisplay];
-//    [self.tableView setNeedsLayout];
-//    [self.tableView layoutIfNeeded];
+
     [self.tableView reloadData];
     [super viewWillTransitionToSize:size withTransitionCoordinator:coordinator];
 }
@@ -64,7 +60,6 @@ Segment *segment;
             dispatch_async(dispatch_get_main_queue(), ^{
                 [self prepSegmentSections:self.segmentList];
                 [self fetchSentActionStats];
-                // get data and display by adding to prep sections data
             });
         } else {
             NSLog(@"Error: %@ %@", error, [error userInfo]);
@@ -150,25 +145,13 @@ Segment *segment;
         
         ProgramDetailTableViewCell *cell = (ProgramDetailTableViewCell *)[tableView cellForRowAtIndexPath:indexPath];
         CGPoint pointInCell = [tap locationInView:cell];
-        
-        if (CGRectContainsPoint(cell.linkToContentButton.frame, pointInCell)) {
-            // user tapped link
-            self.selectedLink = cell.linkToContentButton.titleLabel.text; //capture the link
-            [self performSegueWithIdentifier:@"showWebViewController" sender:self];
 
-        } else if (CGRectContainsPoint(cell.altPathButton.frame, pointInCell)){
-            // user tapped altPath
+        if (CGRectContainsPoint(self.tableView.frame, pointInCell)){
             NSString *dateGroup = [self dateGroupForSection:indexPath.section];
             NSArray *rowIndecesInSection = [self.sections objectForKey:dateGroup];
             NSNumber *rowIndex = [rowIndecesInSection objectAtIndex:indexPath.row]; //pulling the row indece from array above
             self.selectedSegment = [self.segmentList objectAtIndex:[rowIndex intValue]];
             [self performSegueWithIdentifier:@"showActionDashboard" sender:self];
-        } else {
-            NSString *dateGroup = [self dateGroupForSection:indexPath.section];
-            NSArray *rowIndecesInSection = [self.sections objectForKey:dateGroup];
-            NSNumber *rowIndex = [rowIndecesInSection objectAtIndex:indexPath.row]; //pulling the row indece from array above
-            self.selectedSegment = [self.segmentList objectAtIndex:[rowIndex intValue]];
-            [self performSegueWithIdentifier:@"showMessages" sender:self];
         }
     }
 }

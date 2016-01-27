@@ -21,6 +21,7 @@
 
 @implementation ActionDashboardTableViewController
 - (void) viewDidAppear:(BOOL)animated {
+    [super viewDidAppear:YES];
     [self.textView setContentOffset:CGPointZero animated:NO];
 }
 
@@ -266,7 +267,7 @@
             dispatch_async(dispatch_get_main_queue(), ^{
                 self.sentActionsForSegment = objects;
                 NSUInteger count = [objects count];
-                NSLog(@"count of sent message:%ld",count);
+                NSLog(@"count of sent message:%ld",(unsigned long)count);
             });
         } else {
             NSLog(@"Error: %@ %@", error, [error userInfo]);

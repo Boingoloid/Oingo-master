@@ -28,7 +28,7 @@ NSString *tweetID = @"606879860234035200";
 
 
 - (void)viewDidLoad {
-//    [super viewDidLoad];
+    [super viewDidLoad];
 //    [[[Twitter sharedInstance] APIClient] loadTweetWithID:tweetID completion:^(TWTRTweet *tweetFeed, NSError *error) {
 //        if (tweetFeed) { //if we have tweets to display, we create a TweetView
 //            TWTRTweetView *feedView = [[TWTRTweetView alloc] initWithTweet:tweetFeed];

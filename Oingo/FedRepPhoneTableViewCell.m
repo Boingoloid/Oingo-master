@@ -7,12 +7,22 @@
 //
 
 #import "FedRepPhoneTableViewCell.h"
+#import <Parse/Parse.h>
 
 @implementation FedRepPhoneTableViewCell
 
 
 -(FedRepPhoneTableViewCell*)configCell:(NSMutableDictionary*)dictionary{
     //NSLog(@"dictionary printing FedRepPhone:%@",dictionary);
+    
+    self.fedRepPortrait.hidden = NO;
+    self.squareImageView.hidden = YES;
+    self.phoneIcon.hidden = NO;
+    self.phoneTouchArea.hidden = NO;
+    self.locationDCLabel.hidden = NO;
+    self.phoneNumberDC.hidden = NO;
+    self.emailLabel.hidden = YES;
+    self.checkBox.hidden = YES;
     
     // Full name
     NSString *nickName = [dictionary valueForKey:@"nickname"];
@@ -56,7 +66,7 @@
     self.phoneTouchArea.layer.cornerRadius = 2;
     self.phoneTouchArea.clipsToBounds = YES;
     self.phoneTouchArea.layer.borderColor = [[UIColor blackColor]CGColor];
-    self.phoneTouchArea.layer.borderWidth = 1;
+    self.phoneTouchArea.layer.borderWidth = 0;
     
     // Content View
     self.contentView.layer.borderColor = [[UIColor blackColor]CGColor];
@@ -65,6 +75,36 @@
     self.contentView.clipsToBounds = YES;
     self.layer.cornerRadius = 3;
     self.clipsToBounds = YES;
+    
+    
+    if(![dictionary valueForKey:@"bioguide_id"]){
+        self.fedRepPortrait.hidden = YES;
+        self.squareImageView.hidden = NO;
+        
+        self.nameLabel.text = [dictionary valueForKey:@"targetName"];
+        self.titleLabel.text = [dictionary valueForKey:@"targetTitle"];
+
+        PFFile *theImage = [dictionary objectForKey:@"messageImage"];
+        NSData *imageData = [theImage getData];
+        self.squareImageView.image = [UIImage imageWithData:imageData];
+        
+        if(self.viewController.segmentedControlValue == 2){
+            
+            self.locationDCLabel.hidden = YES;
+            self.phoneIcon.hidden = YES;
+            self.phoneTouchArea.hidden = YES;
+            self.phoneNumberDC.hidden = YES;
+            self.emailLabel.hidden = NO;
+            self.emailLabel.text = [dictionary valueForKey:@"email"];
+            NSLog(@"email:%@",[dictionary valueForKey:@"email"]);
+            self.checkBox.hidden = NO;
+            if(self.isSelected == 1){
+                self.checkBox.image = [UIImage imageNamed:@"checked_checkbox.png"];
+            } else {
+                self.checkBox.image = [UIImage imageNamed:@"checkbox_unchecked.png"];
+            }
+        }
+    }
     
     return self;
 }

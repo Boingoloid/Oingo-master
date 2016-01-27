@@ -82,12 +82,8 @@
     self.layer.cornerRadius = 3;
     self.clipsToBounds = YES;
     // TwitterID
-//    NSString *twitterID = [actionDict valueForKey:@"twitter_id"];
-//    self.twitterID.text = [NSString stringWithFormat:@"@%@",twitterID];
-    
-    NSString *category = [dictionary valueForKey:@"messageCategory"];
-    NSString *objectCategory = [dictionary objectForKey:@"messageCategory"];
-    NSLog(@"category:%@ - objectCategory:%@",category,objectCategory);
+    //NSString *twitterID = [actionDict valueForKey:@"twitter_id"];
+    //self.twitterID.text = [NSString stringWithFormat:@"@%@",twitterID];
 
 
     if(![dictionary valueForKey:@"bioguide_id"]){

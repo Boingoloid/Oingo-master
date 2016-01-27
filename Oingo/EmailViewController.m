@@ -68,56 +68,84 @@
 - (void)displayMailComposerSheet:(NSMutableDictionary*)selectedAction
 {
     
+    
     MFMailComposeViewController *picker = [[MFMailComposeViewController alloc] init];
     picker.mailComposeDelegate = self;
-
     NSString *header;
     NSString *subject;
     
-    subject = [self.selectedAction valueForKey:@"emailSubject"];
-    header = [NSString stringWithFormat:@"To those who represent me,"];
+    if([[self.collectionData firstObject] valueForKey:@"bioguide_id"]){
     
-    NSString *body = [self.selectedAction valueForKey:@"emailMessageText"];
-    
-    NSString *linkToContent = [NSString stringWithFormat:@"Here is a link to some content I found interesting: %@",[self.selectedSegment valueForKey:@"linkToContent"]];
-    
-    //NSNumber *isLinkIncludedNumber = [self.selectedMessageDictionary valueForKey:@"isLinkIncluded"];
-//    bool isLinkIncludedBool = [isLinkIncludedNumber boolValue];
-//    if(isLinkIncludedBool == 0){
-//        linkToContent = @"";
-//    } else {
-//        linkToContent = [NSString stringWithFormat:@"When you have a moment, please take a look at this segment: %@",[self.selectedSegment valueForKey:@"linkToContent"]];
-//    }
-    
-    NSString *pushThoughtFooter = [NSString stringWithFormat:@"Sincerely,"];
-    
-    // Get the isLinkIncluded bool to see if user wants to include link
-    
-    NSString *fullEmailBodyText =[NSString stringWithFormat:@"%@\n\n%@\n\n%@\n\n\n%@", header, body, linkToContent, pushThoughtFooter];
-    
-    // Next step would be to build changes if Local Rep
-    
-    
-    // grab Recipients emails
-    NSMutableArray *toRecipients = [[NSMutableArray alloc]init];
-    for (NSMutableDictionary *dict in self.fedRepList){
-        NSString *email = [dict objectForKey:@"oc_email"];
-        [toRecipients addObject:email];
+        subject = [self.selectedAction valueForKey:@"emailSubject"];
+        if([subject length]==0){
+            subject = @"";
+        }
+        header = [NSString stringWithFormat:@"To those who represent me,"];
+        NSString *body = [self.selectedAction valueForKey:@"emailMessageText"];
+        if([body length]==0){
+            body = @"";
+        }
+        NSString *linkToContent = [NSString stringWithFormat:@"Here is a link I found relevant: %@",[self.selectedSegment valueForKey:@"linkToContent"]];
+        NSString *pushThoughtFooter = [NSString stringWithFormat:@"Sincerely,"];
+        NSString *fullEmailBodyText =[NSString stringWithFormat:@"%@\n\n%@\n\n%@\n\n\n%@", header, body, linkToContent, pushThoughtFooter];
+
+        // grab Recipients emails
+        NSMutableArray *toRecipients = [[NSMutableArray alloc]init];
+        for (NSMutableDictionary *dict in self.fedRepList){
+            NSString *email = [dict objectForKey:@"oc_email"];
+            [toRecipients addObject:email];
+        }
+        
+        // Set values of picker
+        [picker setToRecipients:toRecipients];
+        //[picker setBccRecipients:toRecipients];
+        [picker setSubject:subject];
+        [picker setMessageBody:fullEmailBodyText isHTML:NO];
+        picker.modalPresentationStyle = UIModalPresentationFullScreen;
+        [self presentViewController:picker animated:YES completion:NULL];
+        
+        //Assign text values (subject and body) for saving in sent messages
+        self.sentEmailSubject = subject;
+        self.sentEmailBody = fullEmailBodyText;
+        
+    } else {
+        subject = [self.selectedAction valueForKey:@"emailSubject"];
+        if([subject length]==0){
+            subject = @"";
+        }
+        header = [NSString stringWithFormat:@""];
+        NSString *body = [self.selectedAction valueForKey:@"emailMessageText"];
+        if([body length]==0){
+            body = @"";
+        }
+        
+        //NSString *linkToContent = [NSString stringWithFormat:@": %@",[self.selectedSegment valueForKey:@"linkToContent"]];
+        NSString *pushThoughtFooter = [NSString stringWithFormat:@"Sincerely,"];
+        NSString *fullEmailBodyText =[NSString stringWithFormat:@"%@\n\n%@\n\n\n%@", header, body, pushThoughtFooter];
+        
+        // grab Recipients emails
+        NSMutableArray *toRecipients = [[NSMutableArray alloc]init];
+        for (NSMutableDictionary *dict in self.collectionData){
+            if([[dict valueForKey:@"isSelected"] intValue]){
+                NSString *email = [dict objectForKey:@"email"];
+                [toRecipients addObject:email];
+            } else {
+                // Do not add to recipients if not selected
+            }
+        }
+        
+        // Set values of picker
+        [picker setToRecipients:toRecipients];
+        //[picker setBccRecipients:toRecipients];
+        [picker setSubject:subject];
+        [picker setMessageBody:fullEmailBodyText isHTML:NO];
+        picker.modalPresentationStyle = UIModalPresentationFullScreen;
+        [self presentViewController:picker animated:YES completion:NULL];
+        
+        //Assign text values (subject and body) for saving in sent messages
+        self.sentEmailSubject = subject;
+        self.sentEmailBody = fullEmailBodyText;
     }
-    
-    //CYCLE TO LIST AND PULL EMAILS
-    
-    // Set values of picker
-    [picker setToRecipients:toRecipients];
-    //[picker setBccRecipients:toRecipients];
-    [picker setSubject:subject];
-    [picker setMessageBody:fullEmailBodyText isHTML:NO];
-    picker.modalPresentationStyle = UIModalPresentationFullScreen;
-    [self presentViewController:picker animated:YES completion:NULL];
-    
-    //Assign text values (subject and body) for saving in sent messages
-    self.sentEmailSubject = subject;
-    self.sentEmailBody = fullEmailBodyText;
 }
 
 
@@ -137,9 +165,13 @@
     {
         case MFMailComposeResultCancelled:
             NSLog(@"Result: email canceled");
+            [self dismissViewControllerAnimated:NO completion:NULL];
+            [self.navigationController popViewControllerAnimated:NO];
             break;
         case MFMailComposeResultSaved:
             NSLog(@"Result: Mail saved");
+            [self dismissViewControllerAnimated:NO completion:NULL];
+            [self.navigationController popViewControllerAnimated:NO];
             break;
         case MFMailComposeResultSent:{
             NSLog(@"Result: Mail sent");
@@ -167,18 +199,23 @@
                     NSLog(@"no error, message saved");
                 }
             }];
+            [self dismissViewControllerAnimated:NO completion:NULL];
+            [self.navigationController popViewControllerAnimated:NO];
             break;
         }
             
         case MFMailComposeResultFailed:
             NSLog(@"Result: Mail sending failed");
+            [self dismissViewControllerAnimated:NO completion:NULL];
+            [self.navigationController popViewControllerAnimated:NO];
             break;
         default:
             NSLog(@"Result: Mail not sent");
+            [self dismissViewControllerAnimated:NO completion:NULL];
+            [self.navigationController popViewControllerAnimated:NO];
             break;
     }
-        [self dismissViewControllerAnimated:NO completion:NULL];
-        [self.navigationController popViewControllerAnimated:NO];
+
 }
 /*
 #pragma mark - Navigation

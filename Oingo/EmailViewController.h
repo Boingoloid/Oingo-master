@@ -14,6 +14,7 @@
 @property (nonatomic) NSMutableDictionary *selectedProgram;
 @property (nonatomic) NSMutableDictionary *selectedAction;
 @property (nonatomic) NSMutableArray *fedRepList;
+@property (nonatomic) NSMutableArray *collectionData;
 @property (nonatomic) NSString *sentEmailSubject;
 @property (nonatomic) NSString *sentEmailBody;
 
