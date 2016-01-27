@@ -165,13 +165,13 @@
     {
         case MFMailComposeResultCancelled:
             NSLog(@"Result: email canceled");
-            [self dismissViewControllerAnimated:NO completion:NULL];
-            [self.navigationController popViewControllerAnimated:NO];
+            [self dismissViewControllerAnimated:NO completion:nil];
+            [self.navigationController performSelector:@selector(popViewControllerAnimated:) withObject:@NO afterDelay:0.0];
             break;
         case MFMailComposeResultSaved:
             NSLog(@"Result: Mail saved");
             [self dismissViewControllerAnimated:NO completion:NULL];
-            [self.navigationController popViewControllerAnimated:NO];
+            [self.navigationController performSelector:@selector(popViewControllerAnimated:) withObject:@NO afterDelay:0.0];
             break;
         case MFMailComposeResultSent:{
             NSLog(@"Result: Mail sent");
@@ -200,19 +200,19 @@
                 }
             }];
             [self dismissViewControllerAnimated:NO completion:NULL];
-            [self.navigationController popViewControllerAnimated:NO];
+            [self.navigationController performSelector:@selector(popViewControllerAnimated:) withObject:@NO afterDelay:0.0];
             break;
         }
             
         case MFMailComposeResultFailed:
             NSLog(@"Result: Mail sending failed");
             [self dismissViewControllerAnimated:NO completion:NULL];
-            [self.navigationController popViewControllerAnimated:NO];
+            [self.navigationController performSelector:@selector(popViewControllerAnimated:) withObject:@NO afterDelay:0.0];
             break;
         default:
             NSLog(@"Result: Mail not sent");
             [self dismissViewControllerAnimated:NO completion:NULL];
-            [self.navigationController popViewControllerAnimated:NO];
+            [self.navigationController performSelector:@selector(popViewControllerAnimated:) withObject:@NO afterDelay:0.0];
             break;
     }
 

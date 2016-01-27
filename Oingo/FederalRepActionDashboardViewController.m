@@ -412,12 +412,12 @@ static NSString * const reuseIdentifier = @"Cell";
         if(self.linkState == 1){
             NSInteger lengthNumber = [self.pushthoughtTextView.text length];
             NSInteger countNumber =(int)140-47-lengthNumber;
-            self.characterCount.text = [NSString stringWithFormat:@"%ld",countNumber];
+            self.characterCount.text = [NSString stringWithFormat:@"%ld",(long)countNumber];
 
         } else {
             NSInteger lengthNumber = [self.pushthoughtTextView.text length];
             NSInteger countNumber =(int)140-lengthNumber;
-            self.characterCount.text = [NSString stringWithFormat:@"%ld",countNumber];
+            self.characterCount.text = [NSString stringWithFormat:@"%ld",(long)countNumber];
         }
     }
     

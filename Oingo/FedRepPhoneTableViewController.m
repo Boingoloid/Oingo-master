@@ -364,7 +364,7 @@
             emailVC.fedRepList = self.fedRepList;
             
             [self.navigationController pushViewController:emailVC animated:YES];
-            [self presentViewController:emailVC animated:YES completion:nil];
+            //[self presentViewController:emailVC animated:NO completion:nil];
         }
     }
     
@@ -377,7 +377,8 @@
     emailVC.selectedAction = self.selectedActionDict;
     emailVC.collectionData = self.collectionData;
     NSLog(@"selectedAction:%@", self.selectedActionDict);
-    [self presentViewController:emailVC animated:YES completion:nil];
+    [self.navigationController pushViewController:emailVC animated:YES];
+    //[self presentViewController:emailVC animated:NO completion:nil];
     NSLog(@"Yo Bitch!");
 }
 @end
