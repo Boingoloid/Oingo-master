@@ -17,6 +17,4 @@
 @property (nonatomic,strong) Program *selectedProgram;
 @property (strong, nonatomic) UISearchController *searchController;
 @property (strong, nonatomic) NSMutableArray *filteredList;
-
-
 @end

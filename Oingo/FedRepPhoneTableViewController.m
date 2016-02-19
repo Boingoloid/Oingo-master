@@ -24,7 +24,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    NSLog(@"self:%d",self.segmentedControlValue);
+    NSLog(@"segmented control value FedRepPhone load:%d",self.segmentedControlValue);
     self.segmentedControlCommunicationType.selectedSegmentIndex = self.segmentedControlValue;
     
     if([[self.collectionData firstObject] valueForKey:@"bioguide_id"]){

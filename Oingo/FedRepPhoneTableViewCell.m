@@ -79,6 +79,7 @@
     
     if(![dictionary valueForKey:@"bioguide_id"]){
         self.fedRepPortrait.hidden = YES;
+        self.locationDCLabel.hidden = YES;
         self.squareImageView.hidden = NO;
         
         self.nameLabel.text = [dictionary valueForKey:@"targetName"];

@@ -13,7 +13,6 @@
 
 
 -(FedRepCollectionCell*)configCollectionCell:(NSMutableDictionary*)dictionary{
-    NSLog(@"print dict in cell:%@",dictionary);
     self.selectionHighlightImageView.hidden = YES;
 
     NSNumber *number = [dictionary objectForKey:@"isSelected"];

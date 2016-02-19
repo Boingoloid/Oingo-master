@@ -169,8 +169,7 @@
             NSString *userObjectID = currentUser.objectId;
             [sentMessageItem setObject:userObjectID forKey:@"userObjectID"];
             
-            //if segment then skip
-            
+            // If segment then skip
             if ([self.selectedContact isKindOfClass:[CongressionalMessageItem class]]) {
                 NSLog(@"Congressional Message Item Class");
                 NSString *bioguide_id = [self.selectedContact valueForKey:@"bioguide_id"];

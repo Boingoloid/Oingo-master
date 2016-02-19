@@ -239,8 +239,8 @@ static NSString * const reuseIdentifier = @"Cell";
         if(self.segmentedControlCommunicationType.selectedSegmentIndex == 0){
             // do nothing
         } else if(self.segmentedControlCommunicationType.selectedSegmentIndex == 1) {
-            self.segmentedControlCommunicationType.selectedSegmentIndex = 0;
             [self performSegueWithIdentifier:@"showFedRepPhone" sender:self];
+            self.segmentedControlCommunicationType.selectedSegmentIndex = 0;
         } else {
             self.segmentedControlCommunicationType.selectedSegmentIndex = 0;
             EmailViewController *emailVC = [[EmailViewController alloc]init];
@@ -250,7 +250,6 @@ static NSString * const reuseIdentifier = @"Cell";
             emailVC.fedRepList = self.fedRepList;
             
             [self.navigationController pushViewController:emailVC animated:YES];
-            //[self presentViewController:emailVC animated:YES completion:nil];
         }
     }else {
         if(self.segmentedControlCommunicationType.selectedSegmentIndex == 0){
