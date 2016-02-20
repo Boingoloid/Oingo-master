@@ -28,20 +28,20 @@ bool isUserLinkedToTwitter;
 -(void)shareSegmentTwitterAPI {
 
     
-    NSLog(@"Messageview controller share segment twitter api:%@",self.messageTableViewController);
-    //if statement below
-    //1) logged in?, if not send to sign up screen
-    //2) else if logged in, link account to twitter account, then send tweet
-    //3) else send tweet b/c signed up and linked already.
-    PFUser *currentUser = [PFUser currentUser];
-    if(!currentUser) {
-        [self pushToSignIn];
-    } else if(![PFTwitterUtils isLinkedWithUser:currentUser]){
-        NSLog(@"user account not linked to twitter");
-        [self linkUserToTwitter:currentUser];
-    } else {
-        [self shareSegmentWithTwitterComposer];
-    }
+//    NSLog(@"Messageview controller share segment twitter api:%@",self.messageTableViewController);
+//    //if statement below
+//    //1) logged in?, if not send to sign up screen
+//    //2) else if logged in, link account to twitter account, then send tweet
+//    //3) else send tweet b/c signed up and linked already.
+//    PFUser *currentUser = [PFUser currentUser];
+//    if(!currentUser) {
+//        [self pushToSignIn];
+//    } else if(![PFTwitterUtils isLinkedWithUser:currentUser]){
+//        NSLog(@"user account not linked to twitter");
+//        [self linkUserToTwitter:currentUser];
+//    } else {
+//        [self shareSegmentWithTwitterComposer];
+//    }
 }
 
 -(void)shareSegmentWithTwitterComposer{
@@ -67,26 +67,26 @@ bool isUserLinkedToTwitter;
 
 
 - (void)shareMessageTwitterAPI:(MessageTableViewCell *)cell {
-    //Check if user logged in
-    PFUser *currentUser = [PFUser currentUser];
-    if(!currentUser) {  //if user not logged in, then go to signUpInScreen
-        [self pushToSignIn];
-        //if logged in but not linked
-    } else if(![PFTwitterUtils isLinkedWithUser:currentUser]){
-        NSLog(@"user account not linked to twitter");
-        [PFTwitterUtils linkUser:currentUser block:^(BOOL succeeded, NSError *error) {
-            if(error){
-                NSLog(@"There was an issue linking your twitter account. Please try again.");
-            }
-            else {
-                NSLog(@"twitter account is linked");
-                [self shareMessageWithTwitterComposer];
-            }
-        }];
-    } else {
-        //Send the tweet
-        [self shareMessageWithTwitterComposer];
-    }
+//    //Check if user logged in
+//    PFUser *currentUser = [PFUser currentUser];
+//    if(!currentUser) {  //if user not logged in, then go to signUpInScreen
+//        [self pushToSignIn];
+//        //if logged in but not linked
+//    } else if(![PFTwitterUtils isLinkedWithUser:currentUser]){
+//        NSLog(@"user account not linked to twitter");
+//        [PFTwitterUtils linkUser:currentUser block:^(BOOL succeeded, NSError *error) {
+//            if(error){
+//                NSLog(@"There was an issue linking your twitter account. Please try again.");
+//            }
+//            else {
+//                NSLog(@"twitter account is linked");
+//                [self shareMessageWithTwitterComposer];
+//            }
+//        }];
+//    } else {
+//        //Send the tweet
+//        [self shareMessageWithTwitterComposer];
+//    }
 }
 
 
@@ -287,15 +287,15 @@ bool isUserLinkedToTwitter;
 }
 
 -(void)linkUserToTwitter:currentUser{
-    [PFTwitterUtils linkUser:currentUser block:^(BOOL succeeded, NSError *error) {
-        if(error){
-            NSLog(@"There was an issue linking your twitter account. Please try again.");
-        }
-        else {
-            [self shareSegmentWithTwitterComposer];
-            
-        }
-    }];
+//    [PFTwitterUtils linkUser:currentUser block:^(BOOL succeeded, NSError *error) {
+//        if(error){
+//            NSLog(@"There was an issue linking your twitter account. Please try again.");
+//        }
+//        else {
+//            [self shareSegmentWithTwitterComposer];
+//            
+//        }
+//    }];
 }
 
 

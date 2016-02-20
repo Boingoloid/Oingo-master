@@ -8,10 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		CE035F631BC453D3008977E6 /* EmailItem.m in Sources */ = {isa = PBXBuildFile; fileRef = CE035F621BC453D3008977E6 /* EmailItem.m */; };
-		CE06A2001B31F7C5000D3210 /* Bolts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CE06A1FA1B31F7C5000D3210 /* Bolts.framework */; };
-		CE06A2011B31F7C5000D3210 /* Parse.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CE06A1FB1B31F7C5000D3210 /* Parse.framework */; };
 		CE06A2021B31F7C5000D3210 /* ParseCrashReporting.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CE06A1FC1B31F7C5000D3210 /* ParseCrashReporting.framework */; };
-		CE06A2041B31F7C5000D3210 /* ParseFacebookUtilsV4.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CE06A1FE1B31F7C5000D3210 /* ParseFacebookUtilsV4.framework */; };
 		CE0E80561B9129B80093453D /* MessageTableViewNoZipCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CE0E80551B9129B80093453D /* MessageTableViewNoZipCell.m */; };
 		CE0E805E1B9288070093453D /* settings.png in Resources */ = {isa = PBXBuildFile; fileRef = CE0E805D1B9288070093453D /* settings.png */; };
 		CE12E4211B94DA75001B3E25 /* OAuthCore.m in Sources */ = {isa = PBXBuildFile; fileRef = CE12E4201B94DA75001B3E25 /* OAuthCore.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
@@ -68,6 +65,10 @@
 		CE60732B1B3A88FD007B567C /* phone-gray.png in Resources */ = {isa = PBXBuildFile; fileRef = CE60732A1B3A88FD007B567C /* phone-gray.png */; };
 		CE60732D1B3A8CAC007B567C /* document-xxl.png in Resources */ = {isa = PBXBuildFile; fileRef = CE60732C1B3A8CAC007B567C /* document-xxl.png */; };
 		CE6073331B3AD475007B567C /* CongressPhotoFinderAPI.m in Sources */ = {isa = PBXBuildFile; fileRef = CE6073321B3AD475007B567C /* CongressPhotoFinderAPI.m */; };
+		CE6B8FA21C783957008F816F /* ParseFacebookUtilsV4.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CE6B8FA11C783957008F816F /* ParseFacebookUtilsV4.framework */; };
+		CE6B8FA41C783975008F816F /* ParseTwitterUtils.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CE6B8FA31C783975008F816F /* ParseTwitterUtils.framework */; };
+		CE6B8FA61C783988008F816F /* Parse.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CE6B8FA51C783988008F816F /* Parse.framework */; };
+		CE6B8FA81C783CBD008F816F /* Bolts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CE6B8FA71C783CBD008F816F /* Bolts.framework */; };
 		CE6F71F41B2BCA9E0067E4DA /* SettingsTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CE6F71F31B2BCA9E0067E4DA /* SettingsTableViewController.m */; };
 		CE76D26F1B94E41A00AE3E21 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CE76D26E1B94E41A00AE3E21 /* QuartzCore.framework */; };
 		CE7800C91BDEB142008B9F37 /* LogoGlow-1.png in Resources */ = {isa = PBXBuildFile; fileRef = CE7800C61BDEB142008B9F37 /* LogoGlow-1.png */; };
@@ -188,10 +189,7 @@
 /* Begin PBXFileReference section */
 		CE035F611BC453D3008977E6 /* EmailItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EmailItem.h; sourceTree = "<group>"; };
 		CE035F621BC453D3008977E6 /* EmailItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EmailItem.m; sourceTree = "<group>"; };
-		CE06A1FA1B31F7C5000D3210 /* Bolts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Bolts.framework; sourceTree = "<group>"; };
-		CE06A1FB1B31F7C5000D3210 /* Parse.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Parse.framework; sourceTree = "<group>"; };
 		CE06A1FC1B31F7C5000D3210 /* ParseCrashReporting.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = ParseCrashReporting.framework; sourceTree = "<group>"; };
-		CE06A1FE1B31F7C5000D3210 /* ParseFacebookUtilsV4.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = ParseFacebookUtilsV4.framework; sourceTree = "<group>"; };
 		CE0E80541B9129B80093453D /* MessageTableViewNoZipCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MessageTableViewNoZipCell.h; sourceTree = "<group>"; };
 		CE0E80551B9129B80093453D /* MessageTableViewNoZipCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MessageTableViewNoZipCell.m; sourceTree = "<group>"; };
 		CE0E805D1B9288070093453D /* settings.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = settings.png; path = Images/settings.png; sourceTree = "<group>"; };
@@ -277,6 +275,11 @@
 		CE60732C1B3A8CAC007B567C /* document-xxl.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "document-xxl.png"; path = "Images/document-xxl.png"; sourceTree = "<group>"; };
 		CE6073311B3AD475007B567C /* CongressPhotoFinderAPI.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CongressPhotoFinderAPI.h; sourceTree = "<group>"; };
 		CE6073321B3AD475007B567C /* CongressPhotoFinderAPI.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CongressPhotoFinderAPI.m; sourceTree = "<group>"; };
+		CE6B8FA11C783957008F816F /* ParseFacebookUtilsV4.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = ParseFacebookUtilsV4.framework; sourceTree = "<group>"; };
+		CE6B8FA31C783975008F816F /* ParseTwitterUtils.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = ParseTwitterUtils.framework; sourceTree = "<group>"; };
+		CE6B8FA51C783988008F816F /* Parse.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Parse.framework; sourceTree = "<group>"; };
+		CE6B8FA71C783CBD008F816F /* Bolts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Bolts.framework; sourceTree = "<group>"; };
+		CE6B8FA91C784164008F816F /* PFTwitterUtils.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PFTwitterUtils.h; sourceTree = "<group>"; };
 		CE6F71F21B2BCA9E0067E4DA /* SettingsTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingsTableViewController.h; sourceTree = "<group>"; };
 		CE6F71F31B2BCA9E0067E4DA /* SettingsTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingsTableViewController.m; sourceTree = "<group>"; };
 		CE76D26E1B94E41A00AE3E21 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
@@ -425,17 +428,17 @@
 				CEA042261B9704BB00071518 /* UIKit.framework in Frameworks */,
 				CEB9D5361BFAC2D100A6F565 /* TwitterKit.framework in Frameworks */,
 				CE48FDB81B952C200086349A /* StoreKit.framework in Frameworks */,
+				CE6B8FA61C783988008F816F /* Parse.framework in Frameworks */,
 				CEED9BD51AF4165400402BC2 /* AudioToolbox.framework in Frameworks */,
 				CE76D26F1B94E41A00AE3E21 /* QuartzCore.framework in Frameworks */,
 				CEB9D5381BFAC2D100A6F565 /* TwitterCore.framework in Frameworks */,
 				CE2BF9741B3E595000AB15AC /* MessageUI.framework in Frameworks */,
 				CEB9D4EC1BFABB6500A6F565 /* FBSDKShareKit.framework in Frameworks */,
-				CE06A2001B31F7C5000D3210 /* Bolts.framework in Frameworks */,
 				CEED9BD41AF4160300402BC2 /* Accounts.framework in Frameworks */,
 				CEED9BDB1AF4168E00402BC2 /* Foundation.framework in Frameworks */,
+				CE6B8FA21C783957008F816F /* ParseFacebookUtilsV4.framework in Frameworks */,
+				CE6B8FA81C783CBD008F816F /* Bolts.framework in Frameworks */,
 				CEB9D4EA1BFABB6500A6F565 /* FBSDKLoginKit.framework in Frameworks */,
-				CE06A2011B31F7C5000D3210 /* Parse.framework in Frameworks */,
-				CE06A2041B31F7C5000D3210 /* ParseFacebookUtilsV4.framework in Frameworks */,
 				CEED9BE21AF4168E00402BC2 /* CFNetwork.framework in Frameworks */,
 				CEED9BD91AF4168500402BC2 /* Social.framework in Frameworks */,
 				CEB9D5351BFAC2D100A6F565 /* Fabric.framework in Frameworks */,
@@ -450,6 +453,7 @@
 				CEB9D4E81BFABB6500A6F565 /* FBAudienceNetwork.framework in Frameworks */,
 				CEB9D4E91BFABB6500A6F565 /* FBSDKCoreKit.framework in Frameworks */,
 				CEED9BE31AF4169100402BC2 /* Twitter.framework in Frameworks */,
+				CE6B8FA41C783975008F816F /* ParseTwitterUtils.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -524,6 +528,7 @@
 				CE241A441AEAE45A00F22144 /* AppDelegate.m */,
 				CE44670A1B94C0DF001D46EB /* PFTwitterUtils+NativeTwitter.h */,
 				CE44670B1B94C0DF001D46EB /* PFTwitterUtils+NativeTwitter.m */,
+				CE6B8FA91C784164008F816F /* PFTwitterUtils.h */,
 				CE48FDB41B9527C50086349A /* TWAPIManager.h */,
 				CE48FDB51B9527C50086349A /* TWAPIManager.m */,
 				CE12E4221B94DACE001B3E25 /* OAuth+Additions.h */,
@@ -766,13 +771,14 @@
 		CEA92FBB1AF377600042D0EE /* frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				CE6B8FA71C783CBD008F816F /* Bolts.framework */,
+				CE6B8FA51C783988008F816F /* Parse.framework */,
+				CE6B8FA31C783975008F816F /* ParseTwitterUtils.framework */,
+				CE6B8FA11C783957008F816F /* ParseFacebookUtilsV4.framework */,
 				CE4BD0BE1C1105B000442646 /* Crashlytics.framework */,
 				CEED9BB61AF40A4000402BC2 /* Twitter.framework */,
 				CE76D26E1B94E41A00AE3E21 /* QuartzCore.framework */,
-				CE06A1FA1B31F7C5000D3210 /* Bolts.framework */,
-				CE06A1FB1B31F7C5000D3210 /* Parse.framework */,
 				CE06A1FC1B31F7C5000D3210 /* ParseCrashReporting.framework */,
-				CE06A1FE1B31F7C5000D3210 /* ParseFacebookUtilsV4.framework */,
 				CE40D7FF1AF382A5006F2D2E /* AudioToolbox.framework */,
 				CE395D851AED5422006786C0 /* Accounts.framework */,
 				CEA79FDA1AECA88C00535B06 /* Social.framework */,
@@ -1249,7 +1255,6 @@
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
-					"$(PROJECT_DIR)/parse-library-1.7.2",
 					"$(PROJECT_DIR)",
 					"$(PROJECT_DIR)/oingo",
 				);
@@ -1278,7 +1283,6 @@
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
-					"$(PROJECT_DIR)/parse-library-1.7.2",
 					"$(PROJECT_DIR)",
 					"$(PROJECT_DIR)/oingo",
 				);

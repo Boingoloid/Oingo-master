@@ -8,7 +8,7 @@
 
 #import "AppDelegate.h"
 #import <Parse/Parse.h>
-//#import "PFTwitterUtils+NativeTwitter.h"
+#import "PFTwitterUtils+NativeTwitter.h"
 #import <ParseFacebookUtilsV4/PFFacebookUtils.h>
 #import <TwitterKit/TwitterKit.h>
 #import <Fabric/Fabric.h>
@@ -37,16 +37,36 @@
 
 //    [NSThread sleepForTimeInterval:5];
 
+    
+    
     // Initialize Parse.
     [Parse enableLocalDatastore];
     [Parse setApplicationId:@"lzb0o0wZHxbgyIHSyZLlooijAK9afoyN8RV4XwcM"
                   clientKey:@"x1qJNyQejiaA7q7TskzsiZrWC2OhWCAlRGpVHcxd"];
+    
+    
+    [Parse initializeWithConfiguration:[ParseClientConfiguration configurationWithBlock:^(id<ParseMutableClientConfiguration> configuration) {
+        
+        configuration.applicationId = @"lzb0o0wZHxbgyIHSyZLlooijAK9afoyN8RV4XwcM";
+        configuration.clientKey = @"x1qJNyQejiaA7q7TskzsiZrWC2OhWCAlRGpVHcxd";
+        configuration.server = @"http://localhost:1337/parse";
+        
+
+        
+    }]];
+    
+    
     [PFFacebookUtils initializeFacebookWithApplicationLaunchOptions:launchOptions];
     [PFTwitterUtils initializeWithConsumerKey:@"wFbOMUhdXSwU7WCGzW4V6a9Rn" consumerSecret:@"Y4zH1qR55icmp5eiDhZKbgg3sC7TEvxPxrlKpd7y6NSzzsqfP1"];
 
+    
+    
     //Initialize Twitter
     [[Twitter sharedInstance] startWithConsumerKey:@"2dKhN7TgnxeEWqvQ8m0dcV9TH" consumerSecret:@"Gn0PbCgPa4Vt3WwclEZpu0iceKsHP41vJnCNAVIhEmIaLU8WqK"];
 
+    
+    
+    
     [Fabric with:@[[Twitter class], [Crashlytics class]]];
 
     // [Optional] Track statistics around application opens.
