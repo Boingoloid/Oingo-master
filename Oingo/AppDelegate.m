@@ -39,16 +39,17 @@
 
     
     
-    // Initialize Parse.
-    [Parse enableLocalDatastore];
-    [Parse setApplicationId:@"lzb0o0wZHxbgyIHSyZLlooijAK9afoyN8RV4XwcM"
-                  clientKey:@"x1qJNyQejiaA7q7TskzsiZrWC2OhWCAlRGpVHcxd"];
+//    // Initialize Parse.
+//    [Parse enableLocalDatastore];
+//    [Parse setApplicationId:@"lzb0o0wZHxbgyIHSyZLlooijAK9afoyN8RV4XwcM"
+//                  clientKey:@"x1qJNyQejiaA7q7TskzsiZrWC2OhWCAlRGpVHcxd"];
     
     
     [Parse initializeWithConfiguration:[ParseClientConfiguration configurationWithBlock:^(id<ParseMutableClientConfiguration> configuration) {
         
         configuration.applicationId = @"lzb0o0wZHxbgyIHSyZLlooijAK9afoyN8RV4XwcM";
         configuration.clientKey = @"x1qJNyQejiaA7q7TskzsiZrWC2OhWCAlRGpVHcxd";
+        configuration.server = @"https://ptparse.herokuapp.com/parse";
 //        configuration.server = @"http://localhost:1337/parse";
     }]];
     
