@@ -86,7 +86,7 @@ NSUInteger numberOfRows = 0;
     
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;
-    [self testAPI];
+    //[self testAPI];
 
 }
 
@@ -273,38 +273,38 @@ typedef enum
 //}
 
 -(void)testAPI {
-    // API: Uses URL, gets list of congress people from sunlight labs
-    NSString *urlString = @"http://pushthought.com/snippets";
-    NSString *urlEncodedString = [urlString stringByReplacingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
-    NSURL *url = [NSURL URLWithString:urlEncodedString];
-    
-    //configure the session
-    NSURLSessionConfiguration *sessionConfig = [NSURLSessionConfiguration defaultSessionConfiguration];
-    [sessionConfig setHTTPAdditionalHeaders: @{@"Accept": @"application/json"}];
-    sessionConfig.timeoutIntervalForRequest = 30.0;
-    sessionConfig.timeoutIntervalForResource = 60.0;
-    sessionConfig.HTTPMaximumConnectionsPerHost = 1;
-    
-    //create session with configuration
-    NSURLSession *session = [NSURLSession sessionWithConfiguration:sessionConfig
-                                                          delegate:self
-                                                     delegateQueue:nil];
-    //get congress data using url
-    NSURLSessionDataTask *dataTask = [session dataTaskWithURL:url];
-    [dataTask resume];
-    NSLog(@"url:%@",url);
+//    // API: Uses URL, gets list of congress people from sunlight labs
+//    NSString *urlString = @"http://pushthought.com/snippets";
+//    NSString *urlEncodedString = [urlString stringByReplacingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+//    NSURL *url = [NSURL URLWithString:urlEncodedString];
+//    
+//    //configure the session
+//    NSURLSessionConfiguration *sessionConfig = [NSURLSessionConfiguration defaultSessionConfiguration];
+//    [sessionConfig setHTTPAdditionalHeaders: @{@"Accept": @"application/json"}];
+//    sessionConfig.timeoutIntervalForRequest = 30.0;
+//    sessionConfig.timeoutIntervalForResource = 60.0;
+//    sessionConfig.HTTPMaximumConnectionsPerHost = 1;
+//    
+//    //create session with configuration
+//    NSURLSession *session = [NSURLSession sessionWithConfiguration:sessionConfig
+//                                                          delegate:self
+//                                                     delegateQueue:nil];
+//    //get congress data using url
+//    NSURLSessionDataTask *dataTask = [session dataTaskWithURL:url];
+//    [dataTask resume];
+//    NSLog(@"url:%@",url);
 }
 
 
 # pragma mark - Delegate Methohds
-
--(void)URLSession:(NSURLSession *)session dataTask:(NSURLSessionDataTask *)dataTask didReceiveData:(NSData *)data {
-    //gets the data, makes results array.
-    NSError *error = nil;
-    NSMutableArray *returnedData = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableContainers error:&error];
-    NSArray *resultsArray = returnedData;
-    NSLog(@"results array: %@",resultsArray);
-
-}
+//
+//-(void)URLSession:(NSURLSession *)session dataTask:(NSURLSessionDataTask *)dataTask didReceiveData:(NSData *)data {
+//    //gets the data, makes results array.
+//    NSError *error = nil;
+//    NSMutableArray *returnedData = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableContainers error:&error];
+//    NSArray *resultsArray = returnedData;
+//    NSLog(@"results array: %@",resultsArray);
+//
+//}
 
 @end

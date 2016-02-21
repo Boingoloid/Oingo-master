@@ -49,10 +49,7 @@
         
         configuration.applicationId = @"lzb0o0wZHxbgyIHSyZLlooijAK9afoyN8RV4XwcM";
         configuration.clientKey = @"x1qJNyQejiaA7q7TskzsiZrWC2OhWCAlRGpVHcxd";
-        configuration.server = @"http://localhost:1337/parse";
-        
-
-        
+//        configuration.server = @"http://localhost:1337/parse";
     }]];
     
     
