@@ -32,29 +32,38 @@
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:YES];
+    
+    UIActivityIndicatorView *activityIndicator = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
+    
+    [activityIndicator setCenter:self.view.center];
+    self.activityIndicator = activityIndicator;
+    [self.webView addSubview:self.activityIndicator];
+    
     NSURL *url = [NSURL URLWithString:self.selectedLink];
-    NSLog(@"%@",url);
+    NSLog(@"Web View URL:%@",url);
     NSURLRequest *requestURL = [NSURLRequest requestWithURL:url];
     [self.webView loadRequest:requestURL];
     
-    loadingView = [[UIView alloc]initWithFrame:CGRectMake(100, 100, 80, 80)];
+    NSLog(@"rect:%@",NSStringFromCGRect(self.webView.frame));
+    
+    loadingView = [[UIView alloc]initWithFrame:CGRectMake(self.webView.frame.size.width/2-40, self.webView.frame.size.height/2-40, 80, 80)];
     loadingView.backgroundColor = [UIColor colorWithWhite:0. alpha:0.6];
     loadingView.layer.cornerRadius = 5;
     
     UIActivityIndicatorView *activityView=[[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhiteLarge];
-//    activityView.center = CGPointMake(loadingView.frame.size.width / 2.0, 35);
+    activityView.center = CGPointMake(loadingView.frame.size.width / 2.0, 35);
     [activityView startAnimating];
     activityView.tag = 100;
     [loadingView addSubview:activityView];
     
-    UILabel* lblLoading = [[UILabel alloc]initWithFrame:CGRectMake(0, 48, 80, 30)];
+    UILabel* lblLoading = [[UILabel alloc]initWithFrame:CGRectMake(0, self.webView.frame.size.height/2, 80, 30)];
     lblLoading.text = @"Loading...";
     lblLoading.textColor = [UIColor whiteColor];
     lblLoading.font = [UIFont fontWithName:lblLoading.font.fontName size:15];
     lblLoading.textAlignment = NSTextAlignmentCenter;
     [loadingView addSubview:lblLoading];
     
-    [self.view addSubview:loadingView];
+    [self.webView addSubview:loadingView];
 }
 
 - (void)didReceiveMemoryWarning {

@@ -585,6 +585,8 @@ static NSString * const reuseIdentifier = @"Cell";
     [sentMessageItem setObject:[self.selectedSegment valueForKey:@"segmentID"] forKey:@"segmentID"];
     [sentMessageItem setObject:[self.selectedSegment valueForKey:@"objectId"] forKey:@"segmentObjectId"];
     [sentMessageItem setObject:[self.selectedProgram valueForKey:@"objectId"] forKey:@"programObjectId"];
+    [sentMessageItem setObject:[self.selectedSegment valueForKey:@"segmentTitle"] forKey:@"segmentTitle"];
+    [sentMessageItem setObject:[self.selectedProgram valueForKey:@"programTitle"] forKey:@"programTitle"];
     
     //user info
     [sentMessageItem setObject:currentUser.objectId forKey:@"userObjectId"];

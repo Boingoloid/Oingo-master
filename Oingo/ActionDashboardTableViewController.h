@@ -25,9 +25,10 @@
 // Controls
 @property (weak, nonatomic) IBOutlet UIView *tableHeaderView;
 @property (weak, nonatomic) IBOutlet UILabel *programTitleLabel;
+@property (weak, nonatomic) IBOutlet UILabel *loadingLabel;
 @property (weak, nonatomic) IBOutlet UITextView *textView;
 @property (weak, nonatomic) IBOutlet UIView *tableFooterView;
-@property (weak, nonatomic) IBOutlet UIView *playContentTouchArea;
+
 
 
 // Variables

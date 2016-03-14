@@ -13,4 +13,6 @@
 @property(nonatomic) NSString *selectedLink;
 @property (strong, nonatomic) IBOutlet UIWebView *webView;
 
+@property (strong, nonatomic) UIActivityIndicatorView *activityIndicator;
+
 @end

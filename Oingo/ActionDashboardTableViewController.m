@@ -28,12 +28,18 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    
     // Format the header view
     self.tableHeaderView.layer.borderColor = [[UIColor lightGrayColor] CGColor];
     self.tableHeaderView.layer.borderWidth = .5;
     self.tableHeaderView.layer.backgroundColor = [[UIColor whiteColor] CGColor];
     self.tableHeaderView.layer.cornerRadius = 3;
     self.tableHeaderView.clipsToBounds = YES;
+    
+    // Loading... Label
+    self.loadingLabel.hidden = NO;
+    
+
     
     // Hide separators in table
     self.tableView.separatorColor = [UIColor clearColor];
@@ -81,7 +87,6 @@
         CGPoint p = [tap locationInView:tap.view];
         NSLog(@"tap location:%@",NSStringFromCGPoint(p));
         NSLog(@"tapped view:%@",tap.view);
-        NSLog(@"Rect:%@",NSStringFromCGRect(self.playContentTouchArea.frame));
         if(CGRectContainsPoint(self.tableFooterView.frame, p)){
             [self performSegueWithIdentifier:@"showPlayContentWeb" sender:nil];
         } else if(CGRectContainsPoint(self.tableView.frame, p)) {
@@ -259,6 +264,8 @@
             dispatch_async(dispatch_get_main_queue(), ^{
                 self.actionsForSegment = objects;
                 [self createActionOptionsAndContacts:objects];
+                self.loadingLabel.hidden = YES;
+                //[NSThread sleepForTimeInterval:2];
                 [self.tableView reloadData];
             });
         } else {
@@ -331,6 +338,7 @@
     self.actionOptionsArray = [self reorderActionOptions:self.actionOptionsArray];
     self.contacts = contacts;
 }
+
 
 -(NSMutableArray*)makeActionOptionsUnique:(NSMutableArray*)actionOptions{
     NSMutableArray *uniqueActionOptions = [[NSMutableArray alloc]init];
