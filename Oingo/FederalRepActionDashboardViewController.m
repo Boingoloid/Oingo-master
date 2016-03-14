@@ -49,7 +49,6 @@ static NSString * const reuseIdentifier = @"Cell";
                 [fetchDataFedReps fetchRepsWithZip:[UpdateDefaults getZipFromDefaults]];
                 NSLog(@"Fetching Reps by Zip, zip:%@",[UpdateDefaults getZipFromDefaults]);
             }
-            
         } else {
             NSLog(@"location info shoudld area be there before this page, error");
         }
@@ -64,7 +63,6 @@ static NSString * const reuseIdentifier = @"Cell";
         }
         self.contactsForAction = contactsForAction;
         self.collectionData = contactsForAction;
-        
         
         // Insert twitterID of first Rep in Tweet
 //        NSString *firstTwitterID = [[self.collectionData firstObject] valueForKey:@"twitterID"];
@@ -156,7 +154,28 @@ static NSString * const reuseIdentifier = @"Cell";
     // Set link Checkbox State
     self.linkState = 0;
 
+
     // Format Sent Message Data -----------------------------------------------------------------------------------
+    
+    [self formatSentMessageData];
+    
+    
+    //----------------------------------------------------------------------------------------------------------------
+    
+    // Create gesture recognizer
+    UITapGestureRecognizer *tapRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(respondToTapGesture:)]; //connect recognizer to action method.
+    tapRecognizer.delegate = self;
+    tapRecognizer.numberOfTapsRequired = 1;
+    tapRecognizer.numberOfTouchesRequired = 1;
+    [tapRecognizer setCancelsTouchesInView:NO];
+    [self.view addGestureRecognizer:tapRecognizer];
+    
+
+}
+
+-(void)formatSentMessageData{
+    
+    NSString *category = [self.selectedActionDict valueForKey:@"messageCategory"];
     NSArray *filteredActionList;
     
     //COULD JUST PUT THE CATEGORY BELOW IN THE PREDICATE, THEN IT WOULD FILTER ON WHATEVER
@@ -166,7 +185,7 @@ static NSString * const reuseIdentifier = @"Cell";
     
     NSArray *filteredSentActionList;
     filteredSentActionList = [self.sentActionsForSegment filteredArrayUsingPredicate:[NSPredicate predicateWithFormat:@"actionCategory = %@", category]];
-
+    
     // strip hidden and count
     int count = 0;
     NSMutableArray *filteredSentActionsHiddenRemoved = [[NSMutableArray alloc]init];
@@ -187,45 +206,35 @@ static NSString * const reuseIdentifier = @"Cell";
     self.filteredActionsForSegment = (NSMutableArray*)filteredActionList;
     self.filteredSentActionsForSegment = (NSMutableArray*)filteredSentActionsHiddenRemoved;
     
-//    // Adjust for default count
-//    NSString *defaultMessage =[[self.filteredActionsForSegment objectAtIndex:0] valueForKey:@"messageText"];
-//    NSMutableDictionary *defaultMessageDictionary = [[NSMutableDictionary alloc]initWithObjectsAndKeys:defaultMessage, @"messageText", 0, @"messageCount", nil];
-//    
-//    NSMutableArray *messageArray= [[NSMutableArray alloc]init];
-//    
-//    for(NSDictionary *sentMessageDict in self.filteredSentActionsForSegment){
-//        if([sentMessageDict valueForKey:@"isDefaultMessage"]){
-//            int newCount = [[defaultMessageDictionary valueForKey:@"messageCount"]intValue] +1;
-//            [defaultMessageDictionary setObject:[NSNumber numberWithInt:newCount] forKey:@"messageCount"];
-//        } else {
-//            [sentMessageDict setValue:[NSNumber numberWithInt:0] forKey:@"messageCount"];
-//            [messageArray addObject:(NSDictionary*)sentMessageDict];
-//        }
-//    }
-//    
-//    NSMutableArray *tableDataArray = [[NSMutableArray alloc]init];
-//    [tableDataArray addObject:defaultMessageDictionary];
-//    [tableDataArray addObjectsFromArray:messageArray];
-//    NSLog(@"message Array:%@",messageArray);
-//    self.filteredSentActionsForSegmentWithCount = tableDataArray;
+    //    // Adjust for default count
+    //    NSString *defaultMessage =[[self.filteredActionsForSegment objectAtIndex:0] valueForKey:@"messageText"];
+    //    NSMutableDictionary *defaultMessageDictionary = [[NSMutableDictionary alloc]initWithObjectsAndKeys:defaultMessage, @"messageText", 0, @"messageCount", nil];
+    //
+    //    NSMutableArray *messageArray= [[NSMutableArray alloc]init];
+    //
+    //    for(NSDictionary *sentMessageDict in self.filteredSentActionsForSegment){
+    //        if([sentMessageDict valueForKey:@"isDefaultMessage"]){
+    //            int newCount = [[defaultMessageDictionary valueForKey:@"messageCount"]intValue] +1;
+    //            [defaultMessageDictionary setObject:[NSNumber numberWithInt:newCount] forKey:@"messageCount"];
+    //        } else {
+    //            [sentMessageDict setValue:[NSNumber numberWithInt:0] forKey:@"messageCount"];
+    //            [messageArray addObject:(NSDictionary*)sentMessageDict];
+    //        }
+    //    }
+    //
+    //    NSMutableArray *tableDataArray = [[NSMutableArray alloc]init];
+    //    [tableDataArray addObject:defaultMessageDictionary];
+    //    [tableDataArray addObjectsFromArray:messageArray];
+    //    NSLog(@"message Array:%@",messageArray);
+    //    self.filteredSentActionsForSegmentWithCount = tableDataArray;
     
     // Set self.tableData default to sent messages
-//    self.tableData = self.filteredSentActionsForSegmentWithCount;
+    //    self.tableData = self.filteredSentActionsForSegmentWithCount;
     self.tableData = self.filteredSentActionsForSegment;  //REMOVE THIS LINE when you reinitialize count above
     
     [self.tableView reloadData];
-    
-    //----------------------------------------------------------------------------------------------------------------
-    
-    // Create gesture recognizer
-    UITapGestureRecognizer *tapRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(respondToTapGesture:)]; //connect recognizer to action method.
-    tapRecognizer.delegate = self;
-    tapRecognizer.numberOfTapsRequired = 1;
-    tapRecognizer.numberOfTouchesRequired = 1;
-    [tapRecognizer setCancelsTouchesInView:NO];
-    [self.view addGestureRecognizer:tapRecognizer];
-    
 
+    
 }
 
 - (void)didReceiveMemoryWarning {
@@ -447,7 +456,7 @@ static NSString * const reuseIdentifier = @"Cell";
 
 #pragma mark - Tweeting, Send and Save
 -(void)sendTweetwithComposer{
-    NSLog(@"tweet sent");
+    NSLog(@"tweet send firing");
     
     NSString *tweetText = [NSString stringWithFormat:@"%@", self.pushthoughtTextView.text];
     NSURL *tweetURL = [NSURL URLWithString:[self.selectedSegment valueForKey:@"linkToContent"]];
@@ -468,7 +477,9 @@ static NSString * const reuseIdentifier = @"Cell";
             NSLog(@"Tweet composition cancelled");
         } else {
             NSLog(@"Tweet is sent:%ld",(long)result);
-            [self showTweetDisclosureAlert];
+            
+            // TWEET DISCLOSURE FUNCTION HERE
+            //[self showTweetDisclosureAlert];
             //Need to save tweet result ID in callBack
         }
     }];

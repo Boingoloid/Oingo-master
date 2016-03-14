@@ -38,9 +38,12 @@
     // Hide separators in table
     self.tableView.separatorColor = [UIColor clearColor];
     
+    // Create Breadcrumbs top label
     self.programTitleLabel.text = [NSString stringWithFormat:@"/ %@ / %@",[self.selectedProgram valueForKey:@"programTitle"],[self.selectedSegment valueForKey:@"segmentTitle"]];
-    self.textView.text = [self.selectedSegment valueForKey:@"purposeSummary"];
     
+    // Purpose Summary Text
+    self.textView.text = [NSString stringWithFormat:@"Purpose Summary: %@",[self.selectedSegment valueForKey:@"purposeSummary"]];
+
     // Fetch Action data from Parse!
     [self fetchActionsForSegment];
     
@@ -62,22 +65,27 @@
 
 - (BOOL)gestureRecognizerShouldBegin:(UIGestureRecognizer *)gestureRecognizer
 {
-    UITableView *tableView = (UITableView *)gestureRecognizer.view;
-    CGPoint p = [gestureRecognizer locationInView:gestureRecognizer.view];
-    if ([tableView indexPathForRowAtPoint:p]) {
+    if(!self.actionOptionsArray){
+        return NO;
+    } else {
         return YES;
     }
-    return NO;
 }
 
 - (void)respondToTapGesture:(UITapGestureRecognizer *)tap {
     
     if (UIGestureRecognizerStateEnded == tap.state) {
         // Collect data about tap location
+        
         UITableView *tableView = (UITableView *)tap.view;
         CGPoint p = [tap locationInView:tap.view];
-        
-        if(CGRectContainsPoint(self.tableView.frame, p)) {
+        NSLog(@"tap location:%@",NSStringFromCGPoint(p));
+        NSLog(@"tapped view:%@",tap.view);
+        NSLog(@"Rect:%@",NSStringFromCGRect(self.playContentTouchArea.frame));
+        if(CGRectContainsPoint(self.tableFooterView.frame, p)){
+            [self performSegueWithIdentifier:@"showPlayContentWeb" sender:nil];
+        } else if(CGRectContainsPoint(self.tableView.frame, p)) {
+            
             NSIndexPath* indexPath = [tableView indexPathForRowAtPoint:p];
             self.selectedActionDict = [self.actionOptionsArray objectAtIndex:indexPath.row];
             NSString *category = [self.selectedActionDict valueForKey:@"actionCategory"];
@@ -87,6 +95,8 @@
             
             // Deselect the row
             [self.tableView deselectRowAtIndexPath:indexPath animated:YES];
+            
+            
             
             if([category isEqualToString:@"Local Representative"]){
                 if([UpdateDefaults isLocationInDefaults]){
@@ -268,12 +278,37 @@
                 self.sentActionsForSegment = objects;
                 NSUInteger count = [objects count];
                 NSLog(@"count of sent message:%ld",(unsigned long)count);
+                [self updateFedRepVCIfExists:objects];
             });
         } else {
             NSLog(@"Error: %@ %@", error, [error userInfo]);
         }
     }];
 }
+
+-(void) updateFedRepVCIfExists:(NSArray*)array {
+    NSArray *controllerArray = self.navigationController.viewControllers;
+    //will get all the controllers added to UINavigationController.
+    
+    for (id controller in controllerArray)
+    {
+        // iterate through the array and check for your controller
+        if ([controller isKindOfClass:[FederalRepActionDashboardViewController class]])
+        {
+            //do your stuff here
+            NSLog(@"YES- Fed Rep loaded, send data and update table");
+            FederalRepActionDashboardViewController *fedRepVC = controller;
+            fedRepVC.sentActionsForSegment = array;
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [fedRepVC formatSentMessageData];
+        });
+        }
+    }
+    
+}
+
+
+
 
 
 #pragma mark - Data Manipulation Action Options List
@@ -392,8 +427,6 @@
     return [cell configLocalRepActionCell:(NSMutableDictionary*)actionDict];
 }
 
-
-
 /*
 // Override to support conditional editing of the table view.
 - (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -446,6 +479,9 @@
     } else if ([segue.identifier isEqualToString:@"showChangeORGWebView"]){
         WebViewController *webVC = segue.destinationViewController;
         webVC.selectedLink = [self.selectedActionDict valueForKey:@"petitionURL"];
+    } else if ([segue.identifier isEqualToString:@"showPlayContentWeb"]){
+        WebViewController *webVC = segue.destinationViewController;
+        webVC.selectedLink = [self.selectedSegment valueForKey:@"linkToContent"];
     }
     
     // Get the new view controller using [segue destinationViewController].

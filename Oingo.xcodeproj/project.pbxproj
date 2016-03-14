@@ -70,6 +70,7 @@
 		CE6B8FA61C783988008F816F /* Parse.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CE6B8FA51C783988008F816F /* Parse.framework */; };
 		CE6B8FA81C783CBD008F816F /* Bolts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CE6B8FA71C783CBD008F816F /* Bolts.framework */; };
 		CE6F71F41B2BCA9E0067E4DA /* SettingsTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CE6F71F31B2BCA9E0067E4DA /* SettingsTableViewController.m */; };
+		CE75AF1B1C96351D0088B24A /* play.png in Resources */ = {isa = PBXBuildFile; fileRef = CE75AF1A1C96351D0088B24A /* play.png */; };
 		CE76D26F1B94E41A00AE3E21 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CE76D26E1B94E41A00AE3E21 /* QuartzCore.framework */; };
 		CE7800C91BDEB142008B9F37 /* LogoGlow-1.png in Resources */ = {isa = PBXBuildFile; fileRef = CE7800C61BDEB142008B9F37 /* LogoGlow-1.png */; };
 		CE7800CA1BDEB142008B9F37 /* LogoGlow-2.png in Resources */ = {isa = PBXBuildFile; fileRef = CE7800C71BDEB142008B9F37 /* LogoGlow-2.png */; };
@@ -282,6 +283,7 @@
 		CE6B8FA91C784164008F816F /* PFTwitterUtils.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PFTwitterUtils.h; sourceTree = "<group>"; };
 		CE6F71F21B2BCA9E0067E4DA /* SettingsTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingsTableViewController.h; sourceTree = "<group>"; };
 		CE6F71F31B2BCA9E0067E4DA /* SettingsTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingsTableViewController.m; sourceTree = "<group>"; };
+		CE75AF1A1C96351D0088B24A /* play.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = play.png; path = Images/play.png; sourceTree = "<group>"; };
 		CE76D26E1B94E41A00AE3E21 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		CE7800C61BDEB142008B9F37 /* LogoGlow-1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "LogoGlow-1.png"; path = "Images.xcassets/Image.imageset/LogoGlow-1.png"; sourceTree = "<group>"; };
 		CE7800C71BDEB142008B9F37 /* LogoGlow-2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "LogoGlow-2.png"; path = "Images.xcassets/Image.imageset/LogoGlow-2.png"; sourceTree = "<group>"; };
@@ -573,6 +575,7 @@
 		CE241A6A1AEAF0D300F22144 /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				CE75AF1A1C96351D0088B24A /* play.png */,
 				CE4BFA421C582582000B0EB2 /* phone-green-swirl.png */,
 				CE4BFA401C56DAAF000B0EB2 /* Email-icon.png */,
 				CEE772B31BA8C14D00E45842 /* settingswhite.png */,
@@ -990,6 +993,7 @@
 				CED1A34B1C1E2D3B00BB7D91 /* regulator-flag-icon.png in Resources */,
 				CE0E805E1B9288070093453D /* settings.png in Resources */,
 				CE29AA961B3F2BB400676563 /* boxer.png in Resources */,
+				CE75AF1B1C96351D0088B24A /* play.png in Resources */,
 				CE29AA981B3F2BBD00676563 /* feinstein.png in Resources */,
 				CEB9D54D1BFAD45600A6F565 /* LogoGlow87.png in Resources */,
 				CE35F8801C3A35580089E82C /* darkBlueBorder.png in Resources */,

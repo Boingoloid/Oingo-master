@@ -70,6 +70,7 @@
 
 - (void)textViewDidChange:(UITextView *)textView;
 - (IBAction)segmentedControlCummunicationTypeClick:(id)sender;
+-(void)formatSentMessageData;
 
 
 @end

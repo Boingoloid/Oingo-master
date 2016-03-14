@@ -51,11 +51,11 @@
         // else if bool set to hide
         
         BOOL isHidden = [[actionDict objectForKey:@"isHidden"] boolValue];
-        int randomUserNumber = [self randomNumberBetween:10000000 maxNumber:99999999];
+        //int randomUserNumber = [self randomNumberBetween:10000000 maxNumber:99999999];
         
         if(!isHidden){
-            //self.tableViewNameLabel.text = [actionDict valueForKey:@"twitterId"];
-            self.tableViewNameLabel.text = [NSString stringWithFormat:@"user%d",randomUserNumber];
+            self.tableViewNameLabel.text = [actionDict valueForKey:@"twitterId"];
+            //self.tableViewNameLabel.text = [NSString stringWithFormat:@"user%d",randomUserNumber];
         } else {
             self.tableViewPrimaryLabel.hidden = YES;
             self.tableViewSecondaryLabel.hidden = YES;
