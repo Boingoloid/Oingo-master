@@ -37,12 +37,20 @@
         actionString = [NSString stringWithFormat:@"Federal Representatives"];
         self.actionImageView.image = [UIImage imageNamed:@"regulator-flag-icon.png"];
         
-    }else if ([actionCategory isEqualToString:@"Regulators"]){
-        actionString = actionCategory;
+    }else if ([actionCategory isEqualToString:@"Other Relevant Rep"]){
+        actionString = [NSString stringWithFormat:@"Other Relevant Reps"];
+        self.actionImageView.image = [UIImage imageNamed:@"regulator-flag-icon.png"];
+        
+    }else if ([actionCategory isEqualToString:@"Regulator"]){
+        actionString = [NSString stringWithFormat:@"Regulators"];
         self.actionImageView.image = [UIImage imageNamed:@"scales.png"];
 
-    }else if ([actionCategory isEqualToString:@"Corporations"]){
-        actionString = actionCategory;
+    }else if ([actionCategory isEqualToString:@"Corporation"]){
+        actionString = [NSString stringWithFormat:@"Corporations"];
+        self.actionImageView.image = [UIImage imageNamed:@"corporationIcon.png"];
+    
+    }else if ([actionCategory isEqualToString:@"Organization"]){
+        actionString = [NSString stringWithFormat:@"Organizations"];
         self.actionImageView.image = [UIImage imageNamed:@"corporationIcon.png"];
 
     }else if ([actionCategory isEqualToString:@"Petition"]){

@@ -499,6 +499,12 @@
                                                                         </mask>
                                                                     </variation>
                                                                 </label>
+                                                                <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Date" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NY4-ml-zl0">
+                                                                    <rect key="frame" x="540" y="3" width="31" height="21"/>
+                                                                    <fontDescription key="fontDescription" type="system" weight="ultraLight" pointSize="12"/>
+                                                                    <color key="textColor" red="0.052346804859999999" green="0.31878997590000002" blue="0.71888809970000001" alpha="1" colorSpace="calibratedRGB"/>
+                                                                    <nil key="highlightedColor"/>
+                                                                </label>
                                                             </subviews>
                                                             <constraints>
                                                                 <constraint firstItem="yBQ-mg-4SN" firstAttribute="leading" secondItem="Vlj-eH-lYO" secondAttribute="leadingMargin" constant="-2" id="0zm-Gc-iJD"/>
@@ -506,9 +512,11 @@
                                                                 <constraint firstAttribute="trailingMargin" secondItem="BOC-eB-v7k" secondAttribute="trailing" constant="5" id="1wO-5r-ZX3"/>
                                                                 <constraint firstItem="yBQ-mg-4SN" firstAttribute="leading" secondItem="Yj0-Qi-cGz" secondAttribute="leading" constant="-2" id="2ft-sY-yZ1"/>
                                                                 <constraint firstItem="yBQ-mg-4SN" firstAttribute="top" secondItem="Vlj-eH-lYO" secondAttribute="topMargin" constant="-2" id="3Yy-mE-gIK"/>
+                                                                <constraint firstAttribute="trailingMargin" secondItem="NY4-ml-zl0" secondAttribute="trailing" constant="5" id="5AL-QM-7DD"/>
                                                                 <constraint firstAttribute="bottomMargin" secondItem="Yj0-Qi-cGz" secondAttribute="bottom" constant="5" id="98e-69-SjN"/>
                                                                 <constraint firstItem="BOC-eB-v7k" firstAttribute="centerY" secondItem="Vlj-eH-lYO" secondAttribute="centerY" id="9Wg-AC-bj5"/>
                                                                 <constraint firstItem="yBQ-mg-4SN" firstAttribute="top" secondItem="Vlj-eH-lYO" secondAttribute="top" constant="1" id="DQr-65-4VI"/>
+                                                                <constraint firstItem="NY4-ml-zl0" firstAttribute="centerY" secondItem="yBQ-mg-4SN" secondAttribute="centerY" id="Qsa-pp-d7L"/>
                                                                 <constraint firstAttribute="trailingMargin" secondItem="yBQ-mg-4SN" secondAttribute="trailing" constant="5" id="SPX-gE-mrb"/>
                                                                 <constraint firstItem="BOC-eB-v7k" firstAttribute="centerY" secondItem="Yj0-Qi-cGz" secondAttribute="centerY" id="Sas-Yu-6Eb"/>
                                                                 <constraint firstItem="Yj0-Qi-cGz" firstAttribute="top" secondItem="yBQ-mg-4SN" secondAttribute="bottom" constant="2" id="VOC-se-l1J"/>
@@ -518,6 +526,7 @@
                                                                 <constraint firstAttribute="trailingMargin" secondItem="Yj0-Qi-cGz" secondAttribute="trailing" constant="5" id="gVG-kB-NBb"/>
                                                                 <constraint firstItem="Yj0-Qi-cGz" firstAttribute="centerY" secondItem="Vlj-eH-lYO" secondAttribute="centerY" constant="5" id="hmd-a7-Dc5"/>
                                                                 <constraint firstAttribute="leadingMargin" secondItem="Yj0-Qi-cGz" secondAttribute="leading" id="jRM-Mx-gK0"/>
+                                                                <constraint firstItem="NY4-ml-zl0" firstAttribute="top" secondItem="Vlj-eH-lYO" secondAttribute="topMargin" constant="-5" id="kXY-YY-0PW"/>
                                                             </constraints>
                                                             <variation key="default">
                                                                 <mask key="constraints">
