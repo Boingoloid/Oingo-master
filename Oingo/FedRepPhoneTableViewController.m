@@ -17,8 +17,7 @@
 @implementation FedRepPhoneTableViewController
 
 -(void)viewWillAppear{
-
-
+    NSLog(@"phone view did appear");
 }
 
 - (void)viewDidLoad {

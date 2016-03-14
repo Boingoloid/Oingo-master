@@ -397,11 +397,11 @@
                         <viewControllerLayoutGuide type="bottom" id="V8a-eM-mFe"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="0Oc-R4-RfE">
-                        <rect key="frame" x="0.0" y="64" width="600" height="536"/>
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="e6r-yb-L2Q">
-                                <rect key="frame" x="0.0" y="0.0" width="600" height="536"/>
+                                <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="q2J-IX-Pvd">
                                         <rect key="frame" x="0.0" y="0.0" width="600" height="740"/>
@@ -1075,7 +1075,7 @@ Episode Link</string>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <view key="tableHeaderView" contentMode="scaleToFill" id="M9G-hv-4Z1" userLabel="Header View">
-                            <rect key="frame" x="0.0" y="64" width="600" height="154"/>
+                            <rect key="frame" x="0.0" y="0.0" width="600" height="154"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <subviews>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="/ VICE News / Genetically Modified Foods" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Dkk-za-IhC" userLabel="Breadcrumbs Label">
@@ -1177,8 +1177,8 @@ Draft</string>
                             </variation>
                         </view>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="Cell" rowHeight="127" id="vxg-68-3tz" customClass="FedRepPhoneTableViewCell">
-                                <rect key="frame" x="0.0" y="246" width="600" height="127"/>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="Cell" rowHeight="127" id="vxg-68-3tz" customClass="FedRepPhoneTableViewCell">
+                                <rect key="frame" x="0.0" y="182" width="600" height="127"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="vxg-68-3tz" id="bO7-Hx-FUC">
                                     <rect key="frame" x="0.0" y="0.0" width="600" height="126"/>
@@ -1215,7 +1215,7 @@ Draft</string>
                                             </variation>
                                         </label>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="510-547-9385" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rkw-d3-4kx">
-                                            <rect key="frame" x="410" y="95" width="120" height="22"/>
+                                            <rect key="frame" x="400" y="95" width="120" height="22"/>
                                             <fontDescription key="fontDescription" type="system" weight="thin" pointSize="18"/>
                                             <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                             <nil key="highlightedColor"/>
@@ -1237,23 +1237,23 @@ Draft</string>
                                             </variation>
                                         </label>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Washington, DC" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="glb-QC-tUj">
-                                            <rect key="frame" x="426" y="77" width="104" height="17"/>
+                                            <rect key="frame" x="416" y="67" width="104" height="17"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                             <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="phone-green-swirl.png" translatesAutoresizingMaskIntoConstraints="NO" id="J7V-8f-L0R" userLabel="phone Icon">
-                                            <rect key="frame" x="547" y="80" width="35" height="35"/>
+                                            <rect key="frame" x="542" y="75" width="35" height="35"/>
                                             <constraints>
                                                 <constraint firstAttribute="width" constant="35" id="6LQ-WZ-SVp"/>
                                                 <constraint firstAttribute="height" constant="35" id="rCm-HV-THr"/>
                                             </constraints>
                                         </imageView>
                                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="VoQ-RE-E0r" userLabel="phone Touch Area">
-                                            <rect key="frame" x="544" y="77" width="40" height="40"/>
+                                            <rect key="frame" x="534" y="67" width="50" height="50"/>
                                             <constraints>
-                                                <constraint firstAttribute="height" constant="40" id="ZW4-i4-lWS"/>
-                                                <constraint firstAttribute="width" constant="40" id="cl9-WY-JjR"/>
+                                                <constraint firstAttribute="height" constant="50" id="ZW4-i4-lWS"/>
+                                                <constraint firstAttribute="width" constant="50" id="cl9-WY-JjR"/>
                                             </constraints>
                                         </imageView>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="email" textAlignment="natural" lineBreakMode="characterWrap" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rp5-mm-yWf">
@@ -4142,6 +4142,6 @@ Stay tuned, we are developing as fast as we can.  :D</string>
     <inferredMetricsTieBreakers>
         <segue reference="0rT-qH-uy3"/>
         <segue reference="6qM-wB-jjj"/>
-        <segue reference="AKR-dC-3lw"/>
+        <segue reference="VbF-q2-z6y"/>
     </inferredMetricsTieBreakers>
 </document>
